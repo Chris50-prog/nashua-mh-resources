@@ -14,6 +14,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="stylesheet" href="css/style.css">
+<script src="js/fontsize.js"></script>
 </head>
 <body>
 <script src="js/auth-gate.js"></script>
@@ -28,6 +29,10 @@
     </a>
     <div class="header-actions">
       <button class="search-toggle" onclick="toggleGlobalSearch()" title="Search this page (Ctrl+K)" aria-label="Search this page"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+      <div class="font-size-controls">
+        <button class="font-size-btn" onclick="mhFontDecrease()" title="Decrease font size" aria-label="Decrease font size">A-</button>
+        <button class="font-size-btn" onclick="mhFontIncrease()" title="Increase font size" aria-label="Increase font size">A+</button>
+      </div>
       <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">&#9789;</button>
       <button class="hamburger-btn" onclick="var h=this.closest('.site-header');h.classList.toggle('nav-open');this.setAttribute('aria-expanded',h.classList.contains('nav-open'))" aria-label="Toggle navigation menu" aria-expanded="false">
         <span class="hamburger-bar"></span><span class="hamburger-bar"></span><span class="hamburger-bar"></span>
@@ -103,6 +108,21 @@
     <button class="category-btn" data-target="lgbtq">LGBTQ+ Affirming</button>
     <button class="category-btn" data-target="refugee">Refugee / Immigrant MH</button>
     <button class="category-btn" data-target="vetmh">Veteran MH</button>
+    <button class="category-btn" data-target="dsm">DSM-5-TR Reference</button>
+    <button class="category-btn" data-target="schoolmh">School-Based MH</button>
+    <button class="category-btn" data-target="peersupport">Peer Support Specialist</button>
+    <button class="category-btn" data-target="telehealth">Telehealth Services</button>
+    <button class="category-btn" data-target="disability">Disability Services</button>
+    <button class="category-btn" data-target="faithbased">Faith-Based Counseling</button>
+    <button class="category-btn" data-target="transportres">Transportation Resources</button>
+    <button class="category-btn" data-target="interpreter">Interpreter / Language</button>
+    <button class="category-btn" data-target="stafftraining">Staff Training Hub</button>
+  </div>
+
+  <!-- W74: Expand/Collapse All -->
+  <div class="expand-collapse-bar">
+    <button class="btn btn-sm btn-outline" onclick="document.querySelectorAll('.expandable:not(.open)').forEach(function(e){e.classList.add('open')})">&#9660; Expand All</button>
+    <button class="btn btn-sm btn-outline" onclick="document.querySelectorAll('.expandable.open').forEach(function(e){e.classList.remove('open')})">&#9650; Collapse All</button>
   </div>
 
   <!-- ============================================================ -->
@@ -4165,6 +4185,1354 @@
               <li style="margin-top:4px"><strong>Veterans Treatment Court:</strong> Available through Nashua District Court for veteran defendants.</li>
             </ul>
             <p style="margin-top:10px;font-size:13px;color:var(--text-secondary)"><em>Clinician note: A strong nexus letter from a treating provider linking a mental health condition to military service can significantly impact a disability claim. Document the connection between symptoms and service-related events clearly. The NH State Veterans Council at <a href="tel:+16036249230">(603) 624-9230</a> provides free claims assistance.</em></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- DSM-5-TR QUICK REFERENCE CARDS -->
+  <!-- ============================================================ -->
+  <div class="resource-section" id="dsm">
+    <div class="section-header">
+      <h2>DSM-5-TR Quick Reference Cards</h2>
+      <span class="section-count">11 resources</span>
+    </div>
+    <div class="grid-2">
+
+      <div class="resource-card" data-category="dsm" style="grid-column:1/-1;background:var(--warning-bg, #fff8e1);border-left:4px solid var(--warning-color, #f59e0b)">
+        <h3 style="color:var(--warning-color, #d97706)">Important Disclaimer</h3>
+        <div class="resource-desc"><strong>This section provides abbreviated diagnostic criteria for quick clinical reference only. It does not replace the full DSM-5-TR text.</strong> Always consult the complete diagnostic criteria when making formal diagnoses. Criteria summaries are intended to support &mdash; not substitute for &mdash; clinical training and judgment.</div>
+      </div>
+
+      <!-- MDD -->
+      <div class="resource-card" data-category="dsm">
+        <h3>Major Depressive Disorder (MDD)</h3>
+        <div class="resource-meta">DSM-5-TR Section II | F32.x / F33.x</div>
+        <div class="resource-desc">5+ symptoms during the same 2-week period; at least one must be depressed mood or anhedonia. Additional symptoms: changes in sleep, appetite/weight, energy (fatigue), concentration, psychomotor activity, guilt/worthlessness, suicidal ideation.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Mood Disorder</span>
+          <span class="resource-tag">PHQ-9</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Clinical Details</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Key Diagnostic Criteria:</strong> Five or more of the following during a 2-week period, representing a change from previous functioning: (1) depressed mood most of the day, nearly every day; (2) markedly diminished interest or pleasure (anhedonia); (3) significant weight loss/gain or appetite change; (4) insomnia or hypersomnia; (5) psychomotor agitation or retardation; (6) fatigue or loss of energy; (7) feelings of worthlessness or excessive guilt; (8) diminished concentration or indecisiveness; (9) recurrent thoughts of death or suicidal ideation.</p>
+            <p style="margin-top:8px"><strong>Differential Diagnosis:</strong> Bipolar disorder (screen with MDQ &mdash; always rule out prior manic/hypomanic episodes), bereavement/prolonged grief disorder, medical conditions (hypothyroidism, anemia, vitamin D deficiency), substance-induced depressive disorder.</p>
+            <p style="margin-top:8px"><strong>Common Comorbidities:</strong> Anxiety disorders (50%+ co-occurrence), substance use disorders, chronic pain conditions, insomnia disorder.</p>
+            <p style="margin-top:8px"><strong>Recommended Assessment Tools:</strong> PHQ-9 (severity and monitoring), Columbia Suicide Severity Rating Scale (C-SSRS), Beck Depression Inventory-II (BDI-II).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- GAD -->
+      <div class="resource-card" data-category="dsm">
+        <h3>Generalized Anxiety Disorder (GAD)</h3>
+        <div class="resource-meta">DSM-5-TR Section II | F41.1</div>
+        <div class="resource-desc">Excessive anxiety and worry (apprehensive expectation) occurring more days than not for at least 6 months, about a number of events or activities. Difficult to control the worry. 3+ associated symptoms required.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Anxiety Disorder</span>
+          <span class="resource-tag">GAD-7</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Clinical Details</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Key Diagnostic Criteria:</strong> Excessive worry more days than not for 6+ months, plus 3 or more of: (1) restlessness or feeling keyed up; (2) being easily fatigued; (3) difficulty concentrating or mind going blank; (4) irritability; (5) muscle tension; (6) sleep disturbance (difficulty falling/staying asleep, restless/unsatisfying sleep).</p>
+            <p style="margin-top:8px"><strong>Differential Diagnosis:</strong> Panic disorder, social anxiety disorder, OCD, PTSD, medical conditions (hyperthyroidism, cardiac arrhythmia, pheochromocytoma), substance/caffeine-induced anxiety.</p>
+            <p style="margin-top:8px"><strong>Common Comorbidities:</strong> Major depressive disorder (60%+ co-occurrence), other anxiety disorders, substance use disorders, somatic symptom disorders.</p>
+            <p style="margin-top:8px"><strong>Recommended Assessment Tools:</strong> GAD-7 (screening and severity), Penn State Worry Questionnaire (PSWQ), Beck Anxiety Inventory (BAI).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PTSD -->
+      <div class="resource-card" data-category="dsm">
+        <h3>Post-Traumatic Stress Disorder (PTSD)</h3>
+        <div class="resource-meta">DSM-5-TR Section II | F43.10</div>
+        <div class="resource-desc">Exposure to actual or threatened death, serious injury, or sexual violence. Requires symptoms from four clusters: intrusion, avoidance, negative cognitions/mood, and arousal/reactivity changes. Duration exceeds 1 month.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Trauma-Related</span>
+          <span class="resource-tag">PCL-5</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Clinical Details</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Key Diagnostic Criteria:</strong> Criterion A: Exposure to trauma (direct experience, witnessing, learning about close other, repeated professional exposure). Criterion B: Intrusion symptoms (flashbacks, nightmares, distress at cues). Criterion C: Avoidance of trauma-related stimuli. Criterion D: Negative alterations in cognitions and mood (amnesia, negative beliefs, distorted blame, persistent negative emotions, diminished interest, detachment, inability to experience positive emotions). Criterion E: Marked alterations in arousal/reactivity (irritability, reckless behavior, hypervigilance, exaggerated startle, concentration problems, sleep disturbance). Duration &gt;1 month.</p>
+            <p style="margin-top:8px"><strong>Differential Diagnosis:</strong> Acute stress disorder (duration &lt;1 month), adjustment disorder (non-Criterion A stressor), TBI (overlapping symptoms), dissociative disorders, major depressive disorder.</p>
+            <p style="margin-top:8px"><strong>Common Comorbidities:</strong> Major depressive disorder, substance use disorders, anxiety disorders, traumatic brain injury.</p>
+            <p style="margin-top:8px"><strong>Recommended Assessment Tools:</strong> PCL-5 (PTSD Checklist), CAPS-5 (Clinician-Administered PTSD Scale &mdash; gold standard), Life Events Checklist (LEC-5), Primary Care PTSD Screen (PC-PTSD-5).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bipolar -->
+      <div class="resource-card" data-category="dsm">
+        <h3>Bipolar I and II Disorders</h3>
+        <div class="resource-meta">DSM-5-TR Section II | F31.x</div>
+        <div class="resource-desc">Bipolar I requires at least one manic episode (7+ days or hospitalization). Bipolar II requires hypomanic episode (4+ days, no hospitalization) plus major depressive episode. Both involve distinct periods of abnormally elevated, expansive, or irritable mood with increased energy.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Mood Disorder</span>
+          <span class="resource-tag">MDQ</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Clinical Details</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Key Diagnostic Criteria (Manic Episode):</strong> Elevated, expansive, or irritable mood AND increased goal-directed energy/activity lasting 7+ days (or any duration if hospitalization required), plus 3+ of (4+ if mood is only irritable): (1) inflated self-esteem or grandiosity; (2) decreased need for sleep; (3) more talkative or pressured speech; (4) flight of ideas or racing thoughts; (5) distractibility; (6) increase in goal-directed activity or psychomotor agitation; (7) excessive involvement in risky activities. Hypomanic episode: same criteria, 4+ consecutive days, not severe enough for hospitalization or psychotic features.</p>
+            <p style="margin-top:8px"><strong>Differential Diagnosis:</strong> Major depressive disorder (most common misdiagnosis &mdash; always screen for mania), ADHD (overlapping hyperactivity/impulsivity), borderline personality disorder (mood instability), substance-induced mood disorder, schizoaffective disorder.</p>
+            <p style="margin-top:8px"><strong>Common Comorbidities:</strong> Anxiety disorders, substance use disorders, ADHD, eating disorders.</p>
+            <p style="margin-top:8px"><strong>Recommended Assessment Tools:</strong> Mood Disorder Questionnaire (MDQ), Young Mania Rating Scale (YMRS), mood charting, Bipolar Spectrum Diagnostic Scale (BSDS).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADHD -->
+      <div class="resource-card" data-category="dsm">
+        <h3>Attention-Deficit/Hyperactivity Disorder (ADHD)</h3>
+        <div class="resource-meta">DSM-5-TR Section II | F90.x</div>
+        <div class="resource-desc">Persistent pattern of inattention and/or hyperactivity-impulsivity that interferes with functioning or development. 6+ symptoms (5+ for adults 17+) in one or both domains. Onset before age 12. Present in 2+ settings.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Neurodevelopmental</span>
+          <span class="resource-tag">ASRS</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Clinical Details</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Key Diagnostic Criteria:</strong> Inattention symptoms include: fails to give close attention to details, difficulty sustaining attention, does not seem to listen, fails to finish tasks, difficulty organizing, avoids sustained mental effort, loses things, easily distracted, forgetful. Hyperactivity-impulsivity symptoms include: fidgets, leaves seat, runs/climbs inappropriately, unable to play quietly, &ldquo;on the go,&rdquo; talks excessively, blurts out answers, difficulty waiting turn, interrupts/intrudes. Presentations: combined, predominantly inattentive, predominantly hyperactive-impulsive.</p>
+            <p style="margin-top:8px"><strong>Differential Diagnosis:</strong> Anxiety disorders, depression, bipolar disorder, substance use disorders, sleep disorders, thyroid dysfunction, trauma/PTSD (especially in children).</p>
+            <p style="margin-top:8px"><strong>Common Comorbidities:</strong> Anxiety disorders (25-50%), depression, oppositional defiant disorder/conduct disorder, substance use disorders, learning disabilities.</p>
+            <p style="margin-top:8px"><strong>Recommended Assessment Tools:</strong> ASRS (Adult ADHD Self-Report Scale), Conners scales (child/adult), Vanderbilt Assessment Scale (child), Wender Utah Rating Scale (WURS, retrospective childhood symptoms).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- BPD -->
+      <div class="resource-card" data-category="dsm">
+        <h3>Borderline Personality Disorder (BPD)</h3>
+        <div class="resource-meta">DSM-5-TR Section II | F60.3</div>
+        <div class="resource-desc">Pervasive pattern of instability of interpersonal relationships, self-image, and affects, and marked impulsivity, beginning by early adulthood. 5+ of 9 criteria required.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Personality Disorder</span>
+          <span class="resource-tag">MSI-BPD</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Clinical Details</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Key Diagnostic Criteria (5+ of 9):</strong> (1) Frantic efforts to avoid real or imagined abandonment; (2) pattern of unstable and intense interpersonal relationships (idealization/devaluation); (3) identity disturbance &mdash; markedly unstable self-image or sense of self; (4) impulsivity in 2+ areas that are potentially self-damaging; (5) recurrent suicidal behavior, gestures, threats, or self-mutilating behavior; (6) affective instability &mdash; marked reactivity of mood; (7) chronic feelings of emptiness; (8) inappropriate, intense anger or difficulty controlling anger; (9) transient, stress-related paranoid ideation or severe dissociative symptoms.</p>
+            <p style="margin-top:8px"><strong>Differential Diagnosis:</strong> Bipolar II disorder (episodic mood shifts vs. chronic pattern &mdash; key differentiator is time course), complex PTSD (overlapping symptoms, especially emotional dysregulation), major depressive disorder, histrionic personality disorder.</p>
+            <p style="margin-top:8px"><strong>Common Comorbidities:</strong> Major depressive disorder, substance use disorders, eating disorders (especially bulimia), PTSD, other anxiety disorders.</p>
+            <p style="margin-top:8px"><strong>Recommended Assessment Tools:</strong> MSI-BPD (McLean Screening Instrument for BPD), ZAN-BPD (Zanarini Rating Scale), Structured Clinical Interview for DSM-5 Personality Disorders (SCID-5-PD).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUD -->
+      <div class="resource-card" data-category="dsm">
+        <h3>Substance Use Disorders (General)</h3>
+        <div class="resource-meta">DSM-5-TR Section II | F10-F19 (varies by substance)</div>
+        <div class="resource-desc">Problematic pattern of substance use leading to clinically significant impairment or distress. 2+ of 11 criteria within a 12-month period. Severity: mild (2-3), moderate (4-5), severe (6+).</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">SUD</span>
+          <span class="resource-tag">AUDIT</span>
+          <span class="resource-tag">SBIRT</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Clinical Details</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Key Diagnostic Criteria (2+ of 11):</strong> Impaired Control: (1) taken in larger amounts/longer than intended; (2) persistent desire or unsuccessful efforts to cut down; (3) great deal of time obtaining/using/recovering; (4) craving. Social Impairment: (5) failure to fulfill major role obligations; (6) continued use despite persistent social/interpersonal problems; (7) important activities given up or reduced. Risky Use: (8) recurrent use in physically hazardous situations; (9) continued use despite knowing it causes/exacerbates physical or psychological problems. Pharmacological: (10) tolerance; (11) withdrawal.</p>
+            <p style="margin-top:8px"><strong>Differential Diagnosis:</strong> Recreational/non-pathological use, medication-induced symptoms, other psychiatric disorders with behavioral overlap (e.g., bipolar impulsivity).</p>
+            <p style="margin-top:8px"><strong>Common Comorbidities:</strong> Major depressive disorder, anxiety disorders, PTSD, bipolar disorder, antisocial personality disorder.</p>
+            <p style="margin-top:8px"><strong>Recommended Assessment Tools:</strong> AUDIT (alcohol), DAST-10 (drugs), CAGE questionnaire, SBIRT framework (Screening, Brief Intervention, and Referral to Treatment), CIWA-Ar (alcohol withdrawal), COWS (opioid withdrawal).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Schizophrenia -->
+      <div class="resource-card" data-category="dsm">
+        <h3>Schizophrenia Spectrum Disorders</h3>
+        <div class="resource-meta">DSM-5-TR Section II | F20.x</div>
+        <div class="resource-desc">2+ characteristic symptoms (delusions, hallucinations, disorganized speech, grossly disorganized/catatonic behavior, negative symptoms) for a significant portion of a 1-month period. At least one must be delusions, hallucinations, or disorganized speech. Continuous signs for 6+ months.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Psychotic Disorder</span>
+          <span class="resource-tag">PANSS</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Clinical Details</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Key Diagnostic Criteria:</strong> Two or more of the following, each present for a significant portion of time during a 1-month period (at least one must be 1, 2, or 3): (1) delusions; (2) hallucinations; (3) disorganized speech (e.g., frequent derailment or incoherence); (4) grossly disorganized or catatonic behavior; (5) negative symptoms (diminished emotional expression, avolition, alogia, anhedonia, asociality). Level of functioning markedly below premorbid level. Continuous signs of disturbance for at least 6 months.</p>
+            <p style="margin-top:8px"><strong>Differential Diagnosis:</strong> Brief psychotic disorder (&lt;1 month), schizophreniform disorder (1-6 months), schizoaffective disorder, delusional disorder, substance-induced psychotic disorder, medical conditions (delirium, neurological conditions, autoimmune encephalitis).</p>
+            <p style="margin-top:8px"><strong>Common Comorbidities:</strong> Substance use disorders (50%+ co-occurrence), major depressive disorder, anxiety disorders, metabolic syndrome (often treatment-related).</p>
+            <p style="margin-top:8px"><strong>Recommended Assessment Tools:</strong> PANSS (Positive and Negative Syndrome Scale), BPRS (Brief Psychiatric Rating Scale), CGI-S (Clinical Global Impression &mdash; Severity), MATRICS Consensus Cognitive Battery (cognitive assessment).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Adjustment Disorders -->
+      <div class="resource-card" data-category="dsm">
+        <h3>Adjustment Disorders</h3>
+        <div class="resource-meta">DSM-5-TR Section II | F43.2x</div>
+        <div class="resource-desc">Emotional or behavioral symptoms in response to an identifiable stressor occurring within 3 months of stressor onset. Symptoms are out of proportion to the stressor or cause significant functional impairment. Resolves within 6 months of stressor termination.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Trauma/Stressor-Related</span>
+          <span class="resource-tag">Clinical Interview</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Clinical Details</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Key Diagnostic Criteria:</strong> Development of emotional or behavioral symptoms in response to an identifiable stressor within 3 months of onset of the stressor. Clinically significant as evidenced by either: (1) marked distress out of proportion to the severity of the stressor, or (2) significant impairment in social, occupational, or other areas of functioning. Does not meet criteria for another mental disorder and is not merely an exacerbation of a preexisting condition. Subtypes: with depressed mood, with anxiety, with mixed anxiety and depressed mood, with disturbance of conduct, with mixed disturbance of emotions and conduct, unspecified.</p>
+            <p style="margin-top:8px"><strong>Differential Diagnosis:</strong> Major depressive disorder (duration and severity), generalized anxiety disorder (chronic course), PTSD (requires Criterion A trauma), acute stress disorder, normal stress response/grief.</p>
+            <p style="margin-top:8px"><strong>Common Comorbidities:</strong> Pre-existing mental health conditions may be exacerbated; suicidal ideation can occur even with this &ldquo;less severe&rdquo; diagnosis &mdash; always assess.</p>
+            <p style="margin-top:8px"><strong>Recommended Assessment Tools:</strong> Clinical interview (no widely-used standardized screening instrument), functional assessment, Adjustment Disorder New Module (ADNM-20 where available).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- OCD -->
+      <div class="resource-card" data-category="dsm">
+        <h3>Obsessive-Compulsive Disorder (OCD)</h3>
+        <div class="resource-meta">DSM-5-TR Section II | F42.x</div>
+        <div class="resource-desc">Presence of obsessions (recurrent, persistent, intrusive, unwanted thoughts/urges/images causing marked anxiety) and/or compulsions (repetitive behaviors or mental acts performed to reduce anxiety). Time-consuming (1+ hour/day) or causes clinically significant distress or functional impairment.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">OCD-Related</span>
+          <span class="resource-tag">Y-BOCS</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Clinical Details</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Key Diagnostic Criteria:</strong> Obsessions: recurrent and persistent thoughts, urges, or images experienced as intrusive and unwanted, causing marked anxiety or distress. The individual attempts to ignore/suppress them or neutralize them with another thought or action (i.e., compulsion). Compulsions: repetitive behaviors (hand washing, ordering, checking) or mental acts (praying, counting, repeating words silently) performed in response to an obsession or according to rigid rules, aimed at preventing or reducing anxiety or a dreaded event. Time-consuming (1+ hour/day) or cause significant distress/impairment. Specify if with good/fair insight, poor insight, or absent insight/delusional beliefs.</p>
+            <p style="margin-top:8px"><strong>Differential Diagnosis:</strong> Generalized anxiety disorder (worry vs. intrusive ego-dystonic thoughts), body dysmorphic disorder, hoarding disorder, trichotillomania, excoriation disorder, eating disorders (ritualistic eating), psychotic disorders (delusions vs. obsessions with preserved insight &mdash; key distinction).</p>
+            <p style="margin-top:8px"><strong>Common Comorbidities:</strong> Major depressive disorder, other anxiety disorders, tic disorders (especially in childhood-onset OCD), eating disorders, body dysmorphic disorder.</p>
+            <p style="margin-top:8px"><strong>Recommended Assessment Tools:</strong> Y-BOCS (Yale-Brown Obsessive Compulsive Scale &mdash; gold standard), OCI-R (Obsessive-Compulsive Inventory &mdash; Revised), DOCS (Dimensional Obsessive-Compulsive Scale), CY-BOCS (children/adolescents).</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SCHOOL-BASED MH SERVICES -->
+  <!-- ============================================================ -->
+  <div class="resource-section" id="schoolmh">
+    <div class="section-header">
+      <h2>School-Based MH Services</h2>
+      <span class="section-count">7 resources</span>
+    </div>
+    <div class="grid-2">
+
+      <!-- Nashua School District -->
+      <div class="resource-card" data-category="schoolmh">
+        <h3>Nashua School District Student Support Services</h3>
+        <div class="resource-phone"><a href="tel:+16039665000">(603) 966-5000</a></div>
+        <div class="resource-meta">141 Ledge St, Nashua, NH 03060 | nashua.edu</div>
+        <div class="resource-desc">Comprehensive student support services including school counselors at every building, school psychologists, and school social workers. Services include academic/career planning, psychoeducational assessment, behavioral intervention, crisis response, and family-school coordination.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">School-Based</span>
+          <span class="resource-tag">Nashua</span>
+          <span class="resource-tag">K-12</span>
+        </div>
+      </div>
+
+      <!-- School MH Professional Roles -->
+      <div class="resource-card" data-category="schoolmh">
+        <h3>School MH Professional Roles</h3>
+        <div class="resource-desc">Understanding the distinct roles of school-based mental health professionals and when to consult each one.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Roles</span>
+          <span class="resource-tag">Consultation</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Role Descriptions &amp; Consultation Guide</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>School Counselor:</strong> Academic and career planning, group guidance lessons, brief individual counseling, college/career readiness, crisis response team member, 504 plan coordinator in some districts. Consult for: academic concerns, social-emotional groups, transition planning, college applications.</p>
+            <p style="margin-top:8px"><strong>School Psychologist:</strong> Psychoeducational and cognitive assessment, special education eligibility determination, behavioral consultation with teachers, functional behavior assessments (FBAs), behavioral intervention plans (BIPs), crisis risk assessment. Consult for: learning disability evaluation, ADHD assessment, behavioral concerns, eligibility questions, threat assessments.</p>
+            <p style="margin-top:8px"><strong>School Social Worker:</strong> Family-school liaison, community resource connection, attendance/truancy intervention, home visits, crisis intervention, individual/group counseling with focus on social-emotional barriers. Consult for: attendance issues, family stressors impacting school, housing/food insecurity, DCF involvement, connecting families to community resources.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 504 vs IEP -->
+      <div class="resource-card" data-category="schoolmh">
+        <h3>504 Plans vs. IEPs</h3>
+        <div class="resource-desc">Comparing Section 504 accommodation plans and IDEA-based Individualized Education Programs for students with mental health conditions.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Special Education</span>
+          <span class="resource-tag">504</span>
+          <span class="resource-tag">IEP</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Comparison Guide</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Section 504 Plan:</strong> Broader eligibility &mdash; any disability that substantially limits a major life activity (learning, concentrating, thinking, communicating). Accommodation plan within general education. Less process/paperwork. No specialized instruction &mdash; removes barriers to access. Examples for MH: extended time on tests, preferential seating, check-ins with counselor, modified homework, breaks for anxiety management.</p>
+            <p style="margin-top:8px"><strong>IEP (Individualized Education Program):</strong> IDEA eligibility &mdash; 13 specific disability categories including Other Health Impairment (OHI, often used for ADHD) and Emotional Disturbance (ED). Requires specialized instruction. More procedural protections (prior written notice, stay-put, etc.). Annual review required. Triennial re-evaluation. Transition planning at age 14 in NH.</p>
+            <p style="margin-top:8px"><strong>When MH Conditions Qualify:</strong> ADHD commonly qualifies under OHI for IEP or 504. Anxiety, depression, and other MH conditions may qualify under OHI or ED depending on educational impact. A clinical diagnosis alone is not sufficient &mdash; must demonstrate adverse educational impact. Clinicians can support by documenting functional limitations in school settings.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coordinating with Schools -->
+      <div class="resource-card" data-category="schoolmh">
+        <h3>Coordinating with Schools</h3>
+        <div class="resource-desc">Guidelines for clinical providers coordinating care with school-based teams, including release of information requirements and meeting protocols.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Coordination</span>
+          <span class="resource-tag">FERPA</span>
+          <span class="resource-tag">HIPAA</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Coordination Guide</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Release of Information:</strong> FERPA governs school records; HIPAA governs clinical records. You need a signed release from the parent/guardian (or student if 18+) to exchange information. Schools may share education records with you under FERPA&rsquo;s &ldquo;legitimate educational interest&rdquo; exception, but best practice is to obtain written consent both ways.</p>
+            <p style="margin-top:8px"><strong>Team Meeting Protocols:</strong> PPT (Planning and Placement Team) or IEP team meetings &mdash; clinicians can participate by phone/video with parent consent. Request to be included in the invitation. Prepare a brief written summary of clinical recommendations relevant to the educational setting.</p>
+            <p style="margin-top:8px"><strong>Documentation Tips for Clinicians:</strong> Focus on functional limitations in the school setting, not just diagnosis. Describe observable behaviors and their frequency/duration. Include specific accommodation recommendations tied to clinical findings. Avoid unnecessary disclosure of therapy content.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Crisis Response in Schools -->
+      <div class="resource-card" data-category="schoolmh">
+        <h3>Crisis Response in Schools</h3>
+        <div class="resource-desc">Student Assistance Programs (SAP), threat assessment protocols, suicide prevention laws, and postvention procedures for NH schools.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Crisis</span>
+          <span class="resource-tag">Suicide Prevention</span>
+          <span class="resource-tag">NH Law</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Protocols &amp; Laws</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Student Assistance Program (SAP):</strong> School-based team process for identifying at-risk students. Core team includes administrators, counselors, nurses, and teachers. Referral pathway for students showing signs of substance use, mental health concerns, or behavioral changes.</p>
+            <p style="margin-top:8px"><strong>Threat Assessment:</strong> NH schools use structured threat assessment protocols (often based on the Virginia Student Threat Assessment Guidelines). Multi-disciplinary team evaluates whether a student poses a substantive threat. Distinct from disciplinary action &mdash; focused on prevention and support.</p>
+            <p style="margin-top:8px"><strong>Suicide Prevention &mdash; NH SB2:</strong> NH law requires all school personnel to receive suicide prevention training. Schools must have a suicide prevention, intervention, and postvention plan. Students identified as at risk must be assessed and connected to appropriate services.</p>
+            <p style="margin-top:8px"><strong>Postvention:</strong> Coordinated response after a suicide or crisis event within a school community. Includes notification procedures, crisis counseling availability, memorial guidelines, and ongoing monitoring of at-risk students.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bullying -->
+      <div class="resource-card" data-category="schoolmh">
+        <h3>Bullying / Cyberbullying Resources</h3>
+        <div class="resource-meta">StopBullying.gov | NH RSA 193-F</div>
+        <div class="resource-desc">Resources for addressing bullying and cyberbullying, including NH law requirements, reporting procedures, and clinical considerations for victims and perpetrators.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Bullying</span>
+          <span class="resource-tag">NH Law</span>
+          <span class="resource-tag">Youth</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Details</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>NH RSA 193-F (Pupil Safety and Violence Prevention Act):</strong> Requires all NH schools to have anti-bullying policies. Defines bullying, cyberbullying, and harassment. Mandates reporting and investigation procedures. Schools must complete investigation within 5 school days.</p>
+            <p style="margin-top:8px"><strong>Reporting Procedures:</strong> Students, parents, and staff can report to any school employee. Written reporting forms must be available. Anonymous reporting must be accepted. Schools must notify parents of both the target and the perpetrator.</p>
+            <p style="margin-top:8px"><strong>Clinical Considerations:</strong> Victims: screen for depression, anxiety, PTSD, suicidality, school avoidance. Document impact on functioning. Perpetrators: assess for conduct issues, family stressors, exposure to violence, peer rejection. Both groups benefit from social skills interventions and safety planning.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- NH DOE -->
+      <div class="resource-card" data-category="schoolmh">
+        <h3>NH Department of Education &mdash; Mental Health Initiatives</h3>
+        <div class="resource-phone"><a href="tel:+16032713494">(603) 271-3494</a></div>
+        <div class="resource-meta">education.nh.gov | 101 Pleasant St, Concord, NH 03301</div>
+        <div class="resource-desc">NH DOE oversees school-based mental health initiatives including Multi-Tiered System of Support (MTSS), school-based mental health grants, and the trauma-responsive schools initiative.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">State Agency</span>
+          <span class="resource-tag">MTSS</span>
+          <span class="resource-tag">Grants</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Key Initiatives</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Multi-Tiered System of Support (MTSS):</strong> Framework for providing targeted support at three tiers: Tier 1 (universal prevention for all students), Tier 2 (targeted intervention for at-risk groups), Tier 3 (intensive individualized support). Integrates academic and behavioral health supports.</p>
+            <p style="margin-top:8px"><strong>School-Based Mental Health Grants:</strong> Federal and state funding streams for placing clinicians in schools, expanding counseling services, and building school-community partnerships. Contact NH DOE for current grant opportunities.</p>
+            <p style="margin-top:8px"><strong>Trauma-Responsive Schools Initiative:</strong> Training and technical assistance for schools implementing trauma-informed practices. Focuses on creating safe, supportive learning environments, understanding the impact of adverse childhood experiences (ACEs), and building staff resilience.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PEER SUPPORT SPECIALIST RESOURCES -->
+  <!-- ============================================================ -->
+  <div class="resource-section" id="peersupport">
+    <div class="section-header">
+      <h2>Peer Support Specialist Resources</h2>
+      <span class="section-count">6 resources</span>
+    </div>
+    <div class="grid-2">
+
+      <!-- NH CRSW -->
+      <div class="resource-card" data-category="peersupport">
+        <h3>NH CRSW Certification</h3>
+        <div class="resource-phone"><a href="tel:+16032716762">(603) 271-6762</a></div>
+        <div class="resource-meta">NH Board of Mental Health Practice | oplc.nh.gov</div>
+        <div class="resource-desc">Certified Recovery Support Worker (CRSW) &mdash; NH&rsquo;s peer support certification. Requirements: personal lived experience of recovery, 46 hours of approved training, 500 supervised hours, and passing the IC&amp;RC exam.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Certification</span>
+          <span class="resource-tag">NH</span>
+          <span class="resource-tag">CRSW</span>
+        </div>
+      </div>
+
+      <!-- SAMHSA Toolkit -->
+      <div class="resource-card" data-category="peersupport">
+        <h3>SAMHSA Peer Support Toolkit</h3>
+        <div class="resource-meta">samhsa.gov/brss-tacs | Free resources</div>
+        <div class="resource-desc">Free resources from SAMHSA for developing and strengthening peer support programs. Includes core competency frameworks, program development guides, supervision models, and evidence base for peer support effectiveness.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">SAMHSA</span>
+          <span class="resource-tag">Toolkit</span>
+          <span class="resource-tag">Free</span>
+        </div>
+      </div>
+
+      <!-- Roles and Scope -->
+      <div class="resource-card" data-category="peersupport">
+        <h3>Peer Support Roles &amp; Scope of Practice</h3>
+        <div class="resource-desc">Understanding what peer support specialists can and cannot do within their scope of practice, including ethical guidelines and relationship to clinical teams.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Scope</span>
+          <span class="resource-tag">Ethics</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Scope Details</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>What Peers CAN Do:</strong> Share lived experience to build hope and rapport, provide emotional support, assist with goal setting and recovery planning, help navigate systems and services, model recovery and coping skills, facilitate support groups, advocate alongside (not for) clients, assist with daily living skills.</p>
+            <p style="margin-top:8px"><strong>What Peers CANNOT Do:</strong> Diagnose, prescribe or recommend medication, provide clinical therapy, make clinical decisions, access protected health information beyond their need-to-know, supervise clinical staff, restrain or seclude individuals.</p>
+            <p style="margin-top:8px"><strong>Ethical Guidelines:</strong> Maintain appropriate boundaries (not a friend, not a therapist), protect confidentiality, avoid dual relationships, recognize limits of competence, practice self-care, disclose conflicts of interest, follow organizational policies.</p>
+            <p style="margin-top:8px"><strong>Relationship to Clinical Team:</strong> Peers are integral team members with a unique perspective. Communicate observations to the team (with client knowledge). Participate in treatment planning meetings. Contribute to documentation per organizational requirements.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Training -->
+      <div class="resource-card" data-category="peersupport">
+        <h3>Training Requirements in NH</h3>
+        <div class="resource-desc">IC&amp;RC certification pathway and approved training programs in New Hampshire for aspiring peer support specialists.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Training</span>
+          <span class="resource-tag">IC&amp;RC</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Training Pathway</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>IC&amp;RC Certification Pathway:</strong> The International Certification &amp; Reciprocity Consortium (IC&amp;RC) Peer Recovery credential is the basis for NH&rsquo;s CRSW. The pathway includes: 46 hours of approved education covering core competencies, 500 hours of supervised work experience, and passing the IC&amp;RC written exam.</p>
+            <p style="margin-top:8px"><strong>Approved Training Programs:</strong> Granite Pathways (statewide, offers CRSW prep training), NAMI NH (peer support training programs and support group facilitation), NH community mental health centers (may offer internal training tracks), New England School of Best Practices.</p>
+            <p style="margin-top:8px"><strong>Continuing Education:</strong> CRSWs must complete continuing education hours for renewal. Topics may include ethics, cultural competence, crisis intervention, motivational interviewing, and trauma-informed care.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Employment -->
+      <div class="resource-card" data-category="peersupport">
+        <h3>Employment Opportunities</h3>
+        <div class="resource-desc">Where peer support specialists work in New Hampshire and billing information for peer services.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Employment</span>
+          <span class="resource-tag">Medicaid</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Employment Settings</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Employment Settings:</strong> Community mental health centers (CMHCs), recovery community organizations, substance use disorder treatment programs, hospitals and emergency departments, peer-run respite programs, mobile crisis teams, criminal justice/re-entry programs, housing programs.</p>
+            <p style="margin-top:8px"><strong>Medicaid Billing:</strong> NH Medicaid covers peer support services provided by CRSWs. Billable services include individual peer support, group peer support, and community-based activities. Services must be part of an individualized treatment plan and supervised by a licensed clinician. Check current NH Medicaid provider manual for specific billing codes and rates.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Supervision -->
+      <div class="resource-card" data-category="peersupport">
+        <h3>Supervision Requirements</h3>
+        <div class="resource-desc">Clinical supervision vs. peer supervision models and NH requirements for CRSW supervision.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Supervision</span>
+          <span class="resource-tag">Requirements</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Supervision Models</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Clinical Supervision:</strong> CRSWs work under the supervision of a licensed clinical professional (LICSW, LCMHC, psychologist, or psychiatrist). Supervisors are responsible for ensuring peers work within their scope of practice, reviewing documentation, and supporting professional development.</p>
+            <p style="margin-top:8px"><strong>Peer Supervision:</strong> Distinct from clinical supervision &mdash; focuses on the unique aspects of peer work. Addresses topics like managing boundaries with shared lived experience, self-care, navigating team dynamics, and staying recovery-focused. Ideally provided by an experienced CRSW or peer support supervisor.</p>
+            <p style="margin-top:8px"><strong>NH Requirements:</strong> During the 500-hour supervised experience for CRSW certification, supervision must be provided by a qualified professional. Post-certification, organizations must provide ongoing supervision per Medicaid requirements. Recommended: weekly individual and/or group supervision.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- TELEHEALTH SERVICES DIRECTORY -->
+  <!-- ============================================================ -->
+  <div class="resource-section" id="telehealth">
+    <div class="section-header">
+      <h2>Telehealth Services Directory</h2>
+      <span class="section-count">6 resources</span>
+    </div>
+    <div class="grid-2">
+
+      <!-- NH Telehealth Providers -->
+      <div class="resource-card" data-category="telehealth">
+        <h3>NH Telehealth-Capable Providers</h3>
+        <div class="resource-phone">GNMHC Telehealth: <a href="tel:+16038896147">(603) 889-6147</a> | Riverbend CMHC: <a href="tel:+16032281551">(603) 228-1551</a></div>
+        <div class="resource-meta">Most NH CMHCs now offer telehealth services</div>
+        <div class="resource-desc">Most community mental health centers in NH now offer telehealth for therapy, medication management, and case management. Private practice directories: Psychology Today (filter for &ldquo;telehealth&rdquo;), Open Path Collective (affordable sliding scale with telehealth options), Therapy Den.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Telehealth</span>
+          <span class="resource-tag">CMHC</span>
+          <span class="resource-tag">NH Statewide</span>
+        </div>
+      </div>
+
+      <!-- Platforms and Consent -->
+      <div class="resource-card" data-category="telehealth">
+        <h3>Telehealth Platforms &amp; Consent</h3>
+        <div class="resource-desc">Common HIPAA-compliant platforms, informed consent requirements, documentation standards, and emergency planning for telehealth sessions.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Platforms</span>
+          <span class="resource-tag">Consent</span>
+          <span class="resource-tag">HIPAA</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Platform &amp; Consent Details</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Common HIPAA-Compliant Platforms:</strong> Doxy.me (free tier available, no download required), SimplePractice Telehealth, Zoom for Healthcare (BAA required), VSee, Thera-LINK, TheraPlatform. Key: platform must have a signed Business Associate Agreement (BAA) with the provider.</p>
+            <p style="margin-top:8px"><strong>Informed Consent Requirements:</strong> Must address: risks/benefits of telehealth, technology requirements, privacy limitations, emergency procedures, right to refuse, recording policy, technical failure plan, state-specific requirements. Obtain written consent before first telehealth session and document in the record.</p>
+            <p style="margin-top:8px"><strong>Emergency Planning:</strong> Confirm client&rsquo;s physical location at start of each session. Obtain local emergency contacts and nearest emergency department. Have a plan for loss of connection. Know the local crisis line for the client&rsquo;s location.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- NH Telehealth Laws -->
+      <div class="resource-card" data-category="telehealth">
+        <h3>NH Telehealth Laws</h3>
+        <div class="resource-meta">RSA 329-D (NH Telemedicine Act)</div>
+        <div class="resource-desc">Key NH telehealth provisions: providers must be licensed in NH, first visit can be via telehealth (no in-person required), audio-only sessions are permitted, and NH Medicaid covers telehealth at parity with in-person services.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">NH Law</span>
+          <span class="resource-tag">RSA 329-D</span>
+          <span class="resource-tag">Parity</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Law Details</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Key Provisions of RSA 329-D:</strong> (1) Provider must hold an active NH license for their discipline; (2) no requirement for initial in-person visit &mdash; telehealth-only relationships are permitted; (3) audio-only (telephone) sessions are covered when clinically appropriate; (4) same standard of care applies as in-person; (5) commercial insurers and NH Medicaid must cover telehealth at parity (same reimbursement as in-person).</p>
+            <p style="margin-top:8px"><strong>Medicaid Coverage:</strong> NH Medicaid managed care organizations (MCOs) cover telehealth for behavioral health at the same rates as in-person. Both video and audio-only modalities are reimbursable. Use appropriate telehealth modifier codes (95, GT, or as directed by the MCO).</p>
+            <p style="margin-top:8px"><strong>Cross-State Practice:</strong> Providers must be licensed in the state where the client is physically located at the time of the session. PSYPACT (Psychology Interjurisdictional Compact) and ASWB Mobility provisions may apply for certain disciplines. Verify current interstate compact status.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ryan Haight Act -->
+      <div class="resource-card" data-category="telehealth">
+        <h3>Ryan Haight Act &mdash; Controlled Substances via Telehealth</h3>
+        <div class="resource-meta">DEA Regulation | 21 U.S.C. &sect; 829</div>
+        <div class="resource-desc">DEA requirements for prescribing controlled substances via telehealth, including in-person evaluation requirements and implications for SUD treatment.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">DEA</span>
+          <span class="resource-tag">Prescribing</span>
+          <span class="resource-tag">Controlled Substances</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Regulatory Details</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>General Rule:</strong> The Ryan Haight Online Pharmacy Consumer Protection Act generally requires at least one in-person medical evaluation before prescribing controlled substances via telehealth.</p>
+            <p style="margin-top:8px"><strong>COVID-Era Flexibilities:</strong> During the COVID-19 public health emergency, DEA temporarily waived the in-person requirement. Check current DEA guidance for the status of these flexibilities, as the rules have been updated multiple times. As of 2025-2026, DEA has proposed permanent telehealth prescribing rules &mdash; verify the current status.</p>
+            <p style="margin-top:8px"><strong>Implications for SUD Treatment:</strong> Buprenorphine (Suboxone) prescribing via telehealth has been a critical access point. The X-waiver requirement was eliminated in 2023, expanding access. Verify current DEA rules for initial buprenorphine prescribing via telehealth. Methadone still requires in-person visits at OTPs (Opioid Treatment Programs).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Effective Telehealth -->
+      <div class="resource-card" data-category="telehealth">
+        <h3>Tips for Effective Telehealth Sessions</h3>
+        <div class="resource-desc">Best practices for clinicians delivering behavioral health services via telehealth, including engagement techniques and crisis planning for remote sessions.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Best Practices</span>
+          <span class="resource-tag">Clinical Tips</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Best Practice Guide</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Setting Up the Space:</strong> Neutral, professional background. Good lighting (face the light source). Eye-level camera. Minimize background noise. Use headphones for privacy. Ensure a private, confidential space.</p>
+            <p style="margin-top:8px"><strong>Technology:</strong> Test audio/video before sessions. Have a phone backup plan. Close unnecessary applications to preserve bandwidth. Use a wired connection when possible.</p>
+            <p style="margin-top:8px"><strong>Engagement Techniques:</strong> Look at the camera (not the screen) to simulate eye contact. Use verbal acknowledgment more frequently (client can&rsquo;t see full body language). Name emotions and observations explicitly. Check in on the telehealth experience itself periodically. Use screen sharing for psychoeducation or worksheets.</p>
+            <p style="margin-top:8px"><strong>Crisis Safety Planning:</strong> Confirm physical location at each session start. Have local emergency contacts on file. Identify a person the client can contact locally in crisis. Review the plan for what happens if the connection drops during a crisis. Know the 988 Suicide and Crisis Lifeline and local MCRT dispatch number.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tech Troubleshooting -->
+      <div class="resource-card" data-category="telehealth">
+        <h3>Technology Troubleshooting for Clients</h3>
+        <div class="resource-desc">Common technology issues clients face with telehealth, low-bandwidth alternatives, and community resources for internet access in Greater Nashua.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Technology</span>
+          <span class="resource-tag">Access</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Troubleshooting Guide</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Common Issues:</strong> Bandwidth/slow internet (turn off video, use phone audio), audio echo (use headphones), camera not working (check permissions in browser/device settings), difficulty joining session (send direct link, test link in advance).</p>
+            <p style="margin-top:8px"><strong>Low-Bandwidth Alternatives:</strong> Audio-only phone sessions (covered by NH Medicaid and most insurers post-COVID), platforms with low-bandwidth modes (doxy.me has a low-bandwidth option), asynchronous messaging (for appropriate use cases).</p>
+            <p style="margin-top:8px"><strong>Community Resources for Internet Access:</strong> Nashua Public Library &mdash; free WiFi and computer access (2 Court St, Nashua). FCC Affordable Connectivity Program (ACP) &mdash; check current status as funding has varied. Lifeline Program &mdash; discounted phone/internet for qualifying low-income individuals. School districts may loan hotspots/devices to families.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- DISABILITY SERVICES -->
+  <!-- ============================================================ -->
+  <div class="resource-section" id="disability">
+    <div class="section-header">
+      <h2>Disability Services</h2>
+      <span class="section-count">6 resources</span>
+    </div>
+    <div class="grid-2">
+
+      <!-- NH Vocational Rehabilitation -->
+      <div class="resource-card" data-category="disability">
+        <h3>NH Vocational Rehabilitation</h3>
+        <div class="resource-phone"><a href="tel:+16032713471">(603) 271-3471</a></div>
+        <div class="resource-meta">21 South Fruit St, Suite 20, Concord, NH 03301 | education.nh.gov/career/vocational</div>
+        <div class="resource-desc">State vocational rehabilitation services for individuals with disabilities. Services include career counseling, job training, supported employment, assistive technology, job placement, and post-employment support. Eligibility: physical or mental impairment that constitutes a barrier to employment.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Employment</span>
+          <span class="resource-tag">State Agency</span>
+          <span class="resource-tag">Vocational</span>
+        </div>
+      </div>
+
+      <!-- DRC-NH -->
+      <div class="resource-card" data-category="disability">
+        <h3>Disability Rights Center &ndash; NH</h3>
+        <div class="resource-phone"><a href="tel:+16032280432">(603) 228-0432</a> | Toll-Free: <a href="tel:+18008341721">1-800-834-1721</a></div>
+        <div class="resource-meta">64 N Main St, Suite 2, Concord, NH 03301</div>
+        <div class="resource-desc">NH&rsquo;s designated Protection and Advocacy (P&amp;A) agency. Provides free legal advocacy for eligible NH residents with disabilities. Services include legal representation, rights protection, investigation of abuse/neglect, systemic change advocacy, and information/referral.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Legal Advocacy</span>
+          <span class="resource-tag">Free</span>
+          <span class="resource-tag">Rights Protection</span>
+        </div>
+      </div>
+
+      <!-- ABLE NH -->
+      <div class="resource-card" data-category="disability">
+        <h3>ABLE NH</h3>
+        <div class="resource-phone"><a href="tel:+16032289680">(603) 228-9680</a></div>
+        <div class="resource-meta">ablenh.org</div>
+        <div class="resource-desc">Disability advocacy organization serving all of New Hampshire. Services include information and referral, self-advocacy training, legislative advocacy, peer mentoring, and community education. Focuses on empowering people with disabilities to make informed decisions about their lives.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Advocacy</span>
+          <span class="resource-tag">Self-Advocacy</span>
+          <span class="resource-tag">NH Statewide</span>
+        </div>
+      </div>
+
+      <!-- SSI/SSDI -->
+      <div class="resource-card" data-category="disability">
+        <h3>SSI/SSDI Application Assistance</h3>
+        <div class="resource-desc">Overview of the Social Security disability application process, medical documentation requirements, and resources for assistance in New Hampshire.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">SSI</span>
+          <span class="resource-tag">SSDI</span>
+          <span class="resource-tag">Benefits</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Application Guide</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Process Overview:</strong> Initial application (online at ssa.gov, by phone 1-800-772-1213, or at local SSA office). NH Disability Determination Services reviews medical evidence. Decision typically takes 3-6 months. Denial rate is high at initial application (&sim;65%) &mdash; appeals are common and often successful.</p>
+            <p style="margin-top:8px"><strong>Medical Documentation Requirements:</strong> Comprehensive treatment records, functional capacity evaluation, detailed clinician statements describing diagnoses, symptoms, functional limitations, and prognosis. Longitudinal treatment history is critical &mdash; consistent documentation of impairment over time strengthens claims.</p>
+            <p style="margin-top:8px"><strong>Role of Treating Clinician:</strong> Complete Residual Functional Capacity (RFC) forms thoroughly. Document specific functional limitations (not just diagnoses). Note frequency and duration of symptoms. Describe how impairment affects work-related functions (concentrating, following instructions, interacting with others, maintaining attendance).</p>
+            <p style="margin-top:8px"><strong>Appeal Process:</strong> Reconsideration &rarr; ALJ Hearing &rarr; Appeals Council &rarr; Federal Court. Most successful outcomes occur at the ALJ hearing stage.</p>
+            <p style="margin-top:8px"><strong>Legal Assistance:</strong> NH Legal Assistance: <a href="tel:+16032243333">(603) 224-3333</a> (free for qualifying individuals). SOAR (SSI/SSDI Outreach, Access, and Recovery) &mdash; specialized program to help homeless individuals apply for benefits. Local disability attorneys (contingency fee, capped at 25% of back pay).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reasonable Accommodation -->
+      <div class="resource-card" data-category="disability">
+        <h3>Reasonable Accommodation Guidance</h3>
+        <div class="resource-phone">JAN (Job Accommodation Network): <a href="tel:+18005267234">1-800-526-7234</a></div>
+        <div class="resource-desc">Guidance on reasonable accommodations for mental health conditions in the workplace, the interactive process, and documentation clinicians may be asked to provide.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">ADA</span>
+          <span class="resource-tag">Employment</span>
+          <span class="resource-tag">Accommodation</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Accommodation Details</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>What Constitutes Reasonable Accommodation:</strong> Modified work schedule, flexible break times, quiet workspace, permission to work from home, modified job duties (marginal functions), leave for treatment appointments, job coaching, written (vs. verbal) instructions, reduced distractions, support animal in workplace, modified supervision methods.</p>
+            <p style="margin-top:8px"><strong>The Interactive Process:</strong> Employee discloses need for accommodation (does not need to use specific legal language). Employer engages in good-faith interactive process. Employee and employer collaborate to identify effective accommodations. Employer may request documentation from treating provider.</p>
+            <p style="margin-top:8px"><strong>Documentation Clinicians May Be Asked to Provide:</strong> Confirmation of disability (without requiring specific diagnosis), functional limitations in the work setting, recommended accommodations and their connection to the limitation, expected duration, whether the condition is episodic. Tip: be specific about functional limitations rather than just listing the diagnosis.</p>
+            <p style="margin-top:8px"><strong>JAN (Job Accommodation Network):</strong> Free confidential service from the U.S. DOL. Call <a href="tel:+18005267234">1-800-526-7234</a> for individualized accommodation ideas and guidance for both employers and employees.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADA Protections -->
+      <div class="resource-card" data-category="disability">
+        <h3>ADA Mental Health Protections</h3>
+        <div class="resource-desc">Overview of Americans with Disabilities Act protections for individuals with mental health conditions across employment, government services, and public accommodations.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">ADA</span>
+          <span class="resource-tag">Legal Rights</span>
+          <span class="resource-tag">Protections</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>ADA Title Details</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Title I &mdash; Employment:</strong> Prohibits discrimination against qualified individuals with disabilities in all employment practices (hiring, firing, promotion, compensation). Employers with 15+ employees. Requires reasonable accommodation unless undue hardship. Mental health conditions qualify when they substantially limit a major life activity.</p>
+            <p style="margin-top:8px"><strong>Title II &mdash; Government Services:</strong> State and local government services, programs, and activities must be accessible. Includes courts, public transportation, public schools, social services, law enforcement. &ldquo;Olmstead&rdquo; decision: individuals have the right to receive services in the most integrated setting appropriate.</p>
+            <p style="margin-top:8px"><strong>Title III &mdash; Public Accommodations:</strong> Private entities operating places of public accommodation (hotels, restaurants, healthcare providers, etc.) may not discriminate on the basis of disability. Includes policies, practices, and procedures &mdash; not just physical access.</p>
+            <p style="margin-top:8px"><strong>How MH Conditions Qualify:</strong> Under the ADA Amendments Act (2008), &ldquo;substantially limits&rdquo; is interpreted broadly. Conditions like depression, PTSD, bipolar disorder, schizophrenia, OCD, and anxiety disorders typically qualify. Episodic conditions are evaluated in their active state. Mitigating measures (medication) are not considered when determining eligibility.</p>
+            <p style="margin-top:8px"><strong>Confidentiality:</strong> Employers cannot ask about disability during hiring. Medical information must be kept in separate, confidential files. Supervisors may be told only what they need to know to implement accommodations.</p>
+            <p style="margin-top:8px"><strong>Complaints:</strong> EEOC (employment) &mdash; file within 300 days. OCR (government services/healthcare) &mdash; file within 180 days. DOJ (public accommodations). Disability Rights Center-NH can assist with complaints.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- FAITH-BASED COUNSELING -->
+  <!-- ============================================================ -->
+  <div class="resource-section" id="faithbased">
+    <div class="section-header">
+      <h2>Faith-Based Counseling</h2>
+      <span class="section-count">5 resources</span>
+    </div>
+    <div class="grid-2">
+
+      <!-- Integration of Spirituality -->
+      <div class="resource-card" data-category="faithbased">
+        <h3>Integration of Spirituality in Treatment</h3>
+        <div class="resource-desc">Evidence base and APA guidelines for integrating spirituality and religious considerations into mental health treatment when clinically appropriate.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Evidence-Based</span>
+          <span class="resource-tag">APA Guidelines</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Clinical Integration Guide</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Evidence Base:</strong> Research consistently shows that spirituality/religiosity can be a protective factor for mental health, associated with lower rates of depression, substance use, and suicide. However, certain forms of religious involvement (e.g., punitive religious beliefs, spiritual struggles) can be detrimental. Clinical assessment is essential.</p>
+            <p style="margin-top:8px"><strong>APA Guidelines:</strong> APA recognizes religion and spirituality as aspects of diversity and multicultural competence. Clinicians should: (1) assess spiritual/religious history as part of intake, (2) respect client&rsquo;s spiritual framework, (3) neither impose nor dismiss spiritual beliefs, (4) seek consultation or refer when spiritual issues exceed competence.</p>
+            <p style="margin-top:8px"><strong>Assessment of Spiritual History:</strong> Use structured tools such as FICA (Faith, Importance, Community, Address) or HOPE (sources of Hope, Organized religion, Personal spirituality, Effects on care). Ask open-ended questions about the role of spirituality in the client&rsquo;s life and coping.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Faith-Based Centers -->
+      <div class="resource-card" data-category="faithbased">
+        <h3>Faith-Based Counseling in Greater Nashua</h3>
+        <div class="resource-desc">Faith-based counseling options in the Greater Nashua area, including pastoral counseling services and church-affiliated programs. Pastoral counseling combines spiritual guidance with counseling skills.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Nashua</span>
+          <span class="resource-tag">Pastoral Counseling</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Local Options</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Pastoral Counseling Standards:</strong> AAPC (American Association of Pastoral Counselors) certification requires graduate theological and clinical training. ACPE (Association for Clinical Pastoral Education) provides clinical pastoral education (CPE) training.</p>
+            <p style="margin-top:8px"><strong>Local Resources:</strong> Many Greater Nashua churches, mosques, synagogues, and temples offer pastoral counseling or can connect congregants with faith-informed counselors. Contact individual faith communities directly to inquire about counseling services. Some larger congregations have dedicated counseling ministries or partnerships with licensed clinicians.</p>
+            <p style="margin-top:8px"><strong>Finding Faith-Based Counselors:</strong> Psychology Today directory (filter for &ldquo;Christian counseling,&rdquo; &ldquo;spirituality,&rdquo; etc.), AAPC directory (aapc.org), local faith community referrals, Samaritan Counseling Centers (interfaith, if available in area).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pastoral vs Clinical -->
+      <div class="resource-card" data-category="faithbased">
+        <h3>Pastoral Counseling vs. Clinical Counseling</h3>
+        <div class="resource-desc">Comparison of pastoral and clinical counseling approaches, including training differences, scope of practice, and how they complement each other.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Scope</span>
+          <span class="resource-tag">Training</span>
+          <span class="resource-tag">Comparison</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Comparison Details</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Training Differences:</strong> Clinical counselors (LCMHC, LICSW, psychologists): graduate degree in counseling/psychology/social work, supervised clinical hours, state licensure, evidence-based treatment training. Pastoral counselors: theological education, CPE training, may have additional counseling training (AAPC certification), may or may not be licensed.</p>
+            <p style="margin-top:8px"><strong>Scope of Practice:</strong> Clinical counselors: diagnose, treat mental health disorders, use evidence-based interventions, bound by state licensing laws and ethics codes. Pastoral counselors: spiritual guidance, meaning-making, faith integration, supportive counseling within the faith context. NH does not separately license pastoral counselors &mdash; unlicensed pastoral counselors cannot hold themselves out as mental health practitioners.</p>
+            <p style="margin-top:8px"><strong>When Each Is Appropriate:</strong> Pastoral counseling: spiritual distress, meaning-making, grief within a faith context, religious/spiritual struggles, moral injury. Clinical counseling: diagnosable mental health conditions, moderate-to-severe symptoms, safety concerns, evidence-based treatment needs. Complementary: many clients benefit from both simultaneously.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- When to Refer -->
+      <div class="resource-card" data-category="faithbased">
+        <h3>When to Refer to Faith-Based Support</h3>
+        <div class="resource-desc">Clinical situations where faith-based referral may complement traditional mental health treatment.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Referral</span>
+          <span class="resource-tag">Complementary</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Referral Indications</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Clinical Indications for Faith-Based Referral:</strong></p>
+            <ul>
+              <li><strong>Spiritual distress:</strong> questioning faith, feeling abandoned by God/higher power, spiritual crisis</li>
+              <li><strong>Meaning-making:</strong> searching for purpose, existential concerns, &ldquo;why&rdquo; questions after loss or trauma</li>
+              <li><strong>Grief and loss:</strong> when spiritual beliefs are central to the client&rsquo;s grief processing</li>
+              <li><strong>Moral injury:</strong> transgression of deeply held moral/spiritual beliefs (common in veterans, first responders, healthcare workers)</li>
+              <li><strong>Addiction recovery:</strong> faith-based tracks (Celebrate Recovery, faith-informed 12-step groups) as complement to clinical SUD treatment</li>
+              <li><strong>Religious/spiritual crisis:</strong> loss of faith, conflict between identity and religious teachings, religious trauma</li>
+              <li><strong>Community connection:</strong> social isolation, need for supportive community</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ethical Considerations -->
+      <div class="resource-card" data-category="faithbased">
+        <h3>Ethical Considerations</h3>
+        <div class="resource-desc">Ethical guidelines for navigating the intersection of faith, spirituality, and mental health treatment in clinical practice.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Ethics</span>
+          <span class="resource-tag">NASW</span>
+          <span class="resource-tag">APA</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Ethical Guidelines</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Dual Relationships:</strong> Clergy/pastor who also provides counseling to congregants creates a dual relationship. Power differential concerns. Best practice: separate pastoral care from structured counseling, or refer to an outside clinician.</p>
+            <p style="margin-top:8px"><strong>Religious Countertransference:</strong> Clinicians must be aware of their own spiritual/religious beliefs and biases. Neither imposing beliefs on clients nor dismissing client&rsquo;s faith as pathology. Seek supervision or consultation when spiritual content triggers countertransference.</p>
+            <p style="margin-top:8px"><strong>Client Autonomy:</strong> Respect the client&rsquo;s right to define the role of spirituality in their treatment. Do not assume client&rsquo;s faith is helpful or harmful without assessment. Avoid steering clients toward or away from religious practice based on clinician&rsquo;s beliefs.</p>
+            <p style="margin-top:8px"><strong>Cultural Competence:</strong> Understand diversity within and across faith traditions. Avoid stereotyping. Recognize that spiritual expression varies widely. Consult with religious leaders or cultural brokers when appropriate.</p>
+            <p style="margin-top:8px"><strong>Proselytizing:</strong> Clinicians must never proselytize in a clinical setting. NASW Code of Ethics (6.04d) and APA Ethical Principles (Principle E) both prohibit imposing personal values. Faith-based counselors should disclose their approach upfront so clients can make informed choices.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- TRANSPORTATION RESOURCES -->
+  <!-- ============================================================ -->
+  <div class="resource-section" id="transportres">
+    <div class="section-header">
+      <h2>Transportation Resources</h2>
+      <span class="section-count">6 resources</span>
+    </div>
+    <div class="grid-2">
+
+      <!-- NTS -->
+      <div class="resource-card" data-category="transportres">
+        <h3>Nashua Transit System (NTS)</h3>
+        <div class="resource-phone"><a href="tel:+16038880100">(603) 888-0100</a></div>
+        <div class="resource-meta">ridents.com | Nashua, NH</div>
+        <div class="resource-desc">Public transit serving Greater Nashua. Fixed routes, ADA paratransit service for individuals with disabilities who cannot use fixed routes, and demand-response service. Low fares with discounts for seniors, persons with disabilities, and Medicare cardholders.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Public Transit</span>
+          <span class="resource-tag">ADA Paratransit</span>
+          <span class="resource-tag">Nashua</span>
+        </div>
+      </div>
+
+      <!-- Medicaid Transportation -->
+      <div class="resource-card" data-category="transportres">
+        <h3>NH Medicaid Transportation (ModivCare)</h3>
+        <div class="resource-phone"><a href="tel:+18669570021">1-866-957-0021</a></div>
+        <div class="resource-meta">Schedule 48-72 hours in advance</div>
+        <div class="resource-desc">Non-Emergency Medical Transportation (NEMT) for all NH Medicaid members. Covers transportation to and from all medical and behavioral health appointments. Must schedule 48-72 hours in advance. Includes sedan, wheelchair-accessible vehicles, and public transit passes.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Medicaid</span>
+          <span class="resource-tag">NEMT</span>
+          <span class="resource-tag">Free for Members</span>
+        </div>
+      </div>
+
+      <!-- Easter Seals -->
+      <div class="resource-card" data-category="transportres">
+        <h3>Easter Seals Transportation Services</h3>
+        <div class="resource-phone"><a href="tel:+16036213457">(603) 621-3457</a></div>
+        <div class="resource-meta">Southern NH area</div>
+        <div class="resource-desc">Transportation services for seniors and people with disabilities in the Southern NH area. Provides rides to medical appointments, senior centers, nutrition programs, and other essential destinations. Wheelchair-accessible vehicles available.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Seniors</span>
+          <span class="resource-tag">Disability</span>
+          <span class="resource-tag">Southern NH</span>
+        </div>
+      </div>
+
+      <!-- Uber Health / Lyft -->
+      <div class="resource-card" data-category="transportres">
+        <h3>Uber Health / Lyft Healthcare Partnerships</h3>
+        <div class="resource-desc">How healthcare organizations can arrange rides for clients through healthcare-focused ride-share programs, with HIPAA-compliant booking and no smartphone required for clients.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Ride-Share</span>
+          <span class="resource-tag">HIPAA-Compliant</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Program Details</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>How It Works:</strong> Healthcare organizations set up an Uber Health or Lyft Healthcare account. Staff book rides on behalf of clients through a HIPAA-compliant dashboard. Client receives ride details via text or phone call &mdash; no smartphone app needed. Rides are billed to the organization, not the client.</p>
+            <p style="margin-top:8px"><strong>Benefits:</strong> Reduces no-shows (some studies show 27% reduction), eliminates transportation as a barrier to care, HIPAA-compliant (no PHI shared with drivers), can schedule rides in advance or on-demand, no app or smartphone required for the client.</p>
+            <p style="margin-top:8px"><strong>Considerations:</strong> Organization bears the cost (may be billable for Medicaid populations &mdash; check with MCO), not appropriate for clients needing wheelchair-accessible vehicles (limited availability), availability varies by area (Greater Nashua generally has good coverage).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Volunteer Drivers -->
+      <div class="resource-card" data-category="transportres">
+        <h3>Volunteer Driver Programs</h3>
+        <div class="resource-phone">CareGivers Inc: <a href="tel:+16038952109">(603) 895-2109</a></div>
+        <div class="resource-meta">DAV Transportation (Veterans): <a href="tel:+16036244366">(603) 624-4366</a> | ServiceLink: <a href="tel:+16038896220">(603) 889-6220</a></div>
+        <div class="resource-desc">Volunteer-based transportation programs for seniors, veterans, and individuals who lack access to other transportation. Services vary by organization &mdash; some require advance scheduling, some serve specific populations.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Volunteer</span>
+          <span class="resource-tag">Free</span>
+          <span class="resource-tag">Seniors</span>
+          <span class="resource-tag">Veterans</span>
+        </div>
+      </div>
+
+      <!-- Tips for Helping Clients -->
+      <div class="resource-card" data-category="transportres">
+        <h3>Helping Clients Access Transportation</h3>
+        <div class="resource-desc">Practical tips for clinicians to help clients overcome transportation barriers to care, including advocacy and documentation strategies.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Clinical Tips</span>
+          <span class="resource-tag">Barriers to Care</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Clinician Guide</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Pre-Appointment Planning:</strong> Ask about transportation at intake. Help clients set up Medicaid NEMT (ModivCare) if eligible. Schedule appointments to align with bus routes/schedules. Cluster appointments when possible to reduce trips.</p>
+            <p style="margin-top:8px"><strong>Emergency Transport Alternatives:</strong> If a client needs urgent mental health care and lacks transportation: call 988 or NH Rapid Response (1-833-710-6477) for mobile crisis; for medical emergencies, call 911; Medicaid NEMT can provide same-day transport in urgent (non-emergency) situations with enough notice.</p>
+            <p style="margin-top:8px"><strong>Transportation as a Barrier to Care:</strong> Document transportation barriers in the treatment plan &mdash; it supports authorization for telehealth, home-based services, and longer session intervals. Transportation barriers are a recognized social determinant of health (SDOH) and may be coded using ICD-10 Z codes (Z59.82).</p>
+            <p style="margin-top:8px"><strong>Advocacy:</strong> Advocate for transportation benefits during care coordination meetings. Support applications for ADA paratransit certification. Help clients apply for Medicaid (which includes NEMT). Connect with ServiceLink (<a href="tel:+16038896220">(603) 889-6220</a>) for comprehensive resource navigation.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- INTERPRETER / LANGUAGE SERVICES -->
+  <!-- ============================================================ -->
+  <div class="resource-section" id="interpreter">
+    <div class="section-header">
+      <h2>Interpreter / Language Services</h2>
+      <span class="section-count">6 resources</span>
+    </div>
+    <div class="grid-2">
+
+      <!-- Language Line -->
+      <div class="resource-card" data-category="interpreter">
+        <h3>Language Line Solutions</h3>
+        <div class="resource-phone"><a href="tel:+18005287616">1-800-528-7616</a></div>
+        <div class="resource-meta">Available 24/7 | 240+ languages</div>
+        <div class="resource-desc">Over-the-phone interpretation in 240+ languages, video remote interpretation (VRI), and on-site interpretation services. Available 24/7/365. Used by hospitals, clinics, courts, and social service agencies nationwide. On-demand phone interpretation connects in under 30 seconds.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">24/7</span>
+          <span class="resource-tag">240+ Languages</span>
+          <span class="resource-tag">Phone &amp; Video</span>
+        </div>
+      </div>
+
+      <!-- NH Interpreter Services -->
+      <div class="resource-card" data-category="interpreter">
+        <h3>NH Interpreter Services Directory</h3>
+        <div class="resource-phone">NH Office of Health Equity: <a href="tel:+16032714638">(603) 271-4638</a></div>
+        <div class="resource-meta">NH Coalition for Language Access</div>
+        <div class="resource-desc">NH Office of Health Equity maintains resources for connecting with qualified medical and mental health interpreters. The NH Coalition for Language Access works to improve language access across the state&rsquo;s healthcare and social service systems.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">NH</span>
+          <span class="resource-tag">Medical Interpreter</span>
+          <span class="resource-tag">State Resource</span>
+        </div>
+      </div>
+
+      <!-- Working with Interpreters -->
+      <div class="resource-card" data-category="interpreter">
+        <h3>Working with Interpreters &mdash; Best Practices</h3>
+        <div class="resource-desc">Clinical guidelines for effectively working with interpreters in mental health settings, including pre-session preparation, positioning, and debriefing.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Best Practices</span>
+          <span class="resource-tag">Clinical Guide</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Practice Guide</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Pre-Session Briefing:</strong> Brief the interpreter on the session&rsquo;s purpose, any sensitive topics that may arise, and relevant clinical terminology. Discuss confidentiality expectations. Clarify whether consecutive or simultaneous interpretation will be used.</p>
+            <p style="margin-top:8px"><strong>During the Session:</strong> Speak directly to the client, not the interpreter (&ldquo;How are you feeling?&rdquo; not &ldquo;Ask her how she&rsquo;s feeling&rdquo;). Speak in short segments to allow accurate interpretation. Manage pace &mdash; pause after 2-3 sentences. Avoid jargon, idioms, and metaphors that may not translate. Maintain eye contact with the client.</p>
+            <p style="margin-top:8px"><strong>Positioning:</strong> Triangular seating arrangement with the interpreter slightly behind and to the side of the client, so the client and clinician face each other. For video/phone interpretation, position the device so the client can see the clinician clearly.</p>
+            <p style="margin-top:8px"><strong>Handling Emotional Content:</strong> Allow time for emotional responses. Interpreters may experience secondary trauma &mdash; be attentive. Do not ask the interpreter to comfort the client or provide emotional support.</p>
+            <p style="margin-top:8px"><strong>Post-Session Debriefing:</strong> Debrief with the interpreter, especially after difficult sessions. Check for interpreter well-being. Discuss any cultural context or nuances that may have been relevant. Document that an interpreter was used, the language, and the mode (in-person, phone, video).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cultural Considerations -->
+      <div class="resource-card" data-category="interpreter">
+        <h3>Cultural Considerations in Interpreted Sessions</h3>
+        <div class="resource-desc">Important cultural considerations when providing mental health services through an interpreter, including concepts that may not translate directly.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Cultural Competence</span>
+          <span class="resource-tag">MH Concepts</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Cultural Considerations Guide</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Language and Mental Health Concepts:</strong> Many mental health concepts do not translate directly across languages and cultures. &ldquo;Depression&rdquo; may not have an equivalent word; somatic expressions of distress (headaches, stomach pain) may be more culturally normative than emotional descriptions. &ldquo;Anxiety&rdquo; may be described in terms of physical symptoms or spiritual distress.</p>
+            <p style="margin-top:8px"><strong>Stigma:</strong> Mental health stigma varies significantly across cultures. Some clients may be reluctant to discuss psychological symptoms in front of any interpreter from their community. Consider using phone interpreters for greater anonymity when community size is small.</p>
+            <p style="margin-top:8px"><strong>Family Dynamics:</strong> In many cultures, family involvement in healthcare is expected. Be aware of power dynamics when family members are present. Some family members may attempt to filter or modify what the client says.</p>
+            <p style="margin-top:8px"><strong>Do Not Use Family Members as Interpreters:</strong> Especially children &mdash; this is harmful and unreliable. Family members may filter information, may not have the vocabulary for clinical concepts, and the dynamic distorts the clinical relationship. Use professional interpreters or language line services.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Title VI -->
+      <div class="resource-card" data-category="interpreter">
+        <h3>Right to Interpreter Services &mdash; Title VI</h3>
+        <div class="resource-desc">Federal requirements under Title VI of the Civil Rights Act for providing language access services to individuals with Limited English Proficiency (LEP).</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Title VI</span>
+          <span class="resource-tag">LEP</span>
+          <span class="resource-tag">Civil Rights</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Legal Requirements</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Title VI of the Civil Rights Act:</strong> Any organization receiving federal financial assistance (including Medicaid/Medicare reimbursement) must provide meaningful access to LEP individuals. This includes providing qualified interpreters at no cost to the client.</p>
+            <p style="margin-top:8px"><strong>LEP Requirements:</strong> Organizations must: (1) identify LEP individuals who need language assistance, (2) provide language assistance services at no cost, (3) train staff on LEP policies, (4) provide notice of rights in languages understood by the community served, (5) monitor and update the language access plan.</p>
+            <p style="margin-top:8px"><strong>Organizational Obligations:</strong> Develop a Language Access Plan (LAP). Translate vital documents into frequently encountered languages. Provide interpreter services for all client interactions &mdash; not just clinical sessions (scheduling, intake, billing, crisis). Budget for language services.</p>
+            <p style="margin-top:8px"><strong>Documenting Language Preference:</strong> Record the client&rsquo;s preferred language at intake. Document interpreter use at each encounter. Note if the client declines interpreter services (informed decision).</p>
+            <p style="margin-top:8px"><strong>Complaints:</strong> Office for Civil Rights (OCR), U.S. Department of Health and Human Services. File within 180 days of the discriminatory act. OCR can investigate, mediate, or pursue enforcement action.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ASL -->
+      <div class="resource-card" data-category="interpreter">
+        <h3>ASL Interpreter Resources</h3>
+        <div class="resource-phone">DeafConnect: <a href="tel:+16032241850">(603) 224-1850</a></div>
+        <div class="resource-meta">NH Registry of Interpreters for the Deaf | ZVRS/Sorenson Video Relay</div>
+        <div class="resource-desc">Resources for providing mental health services to Deaf and hard-of-hearing individuals, including ASL interpreter services, video relay options, and ADA requirements for effective communication.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">ASL</span>
+          <span class="resource-tag">Deaf/HoH</span>
+          <span class="resource-tag">ADA</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>ASL Resources &amp; Requirements</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>NH Registry of Interpreters for the Deaf:</strong> Source for finding qualified ASL interpreters in NH. Request interpreters who are NIC (National Interpreter Certification) certified. For mental health settings, request interpreters with experience in mental health interpreting when possible.</p>
+            <p style="margin-top:8px"><strong>Video Relay Services (VRS):</strong> ZVRS and Sorenson offer free video relay services for Deaf individuals to make phone calls through an ASL interpreter. Useful for scheduling, crisis calls, and phone-based clinical contacts.</p>
+            <p style="margin-top:8px"><strong>DeafConnect:</strong> NH-based organization serving Deaf and hard-of-hearing individuals. Phone: <a href="tel:+16032241850">(603) 224-1850</a>. Provides advocacy, information, referral, and support services.</p>
+            <p style="margin-top:8px"><strong>ADA Requirements:</strong> Under Title III and Title II, providers must ensure effective communication with Deaf individuals. This may require qualified ASL interpreters for clinical sessions, written materials in accessible formats, and auxiliary aids. The provider bears the cost &mdash; it cannot be charged to the client. Give &ldquo;primary consideration&rdquo; to the communication method preferred by the individual.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!-- STAFF TRAINING RESOURCE HUB -->
+  <!-- ============================================================ -->
+  <div class="resource-section" id="stafftraining">
+    <div class="section-header">
+      <h2>Staff Training Resource Hub</h2>
+      <span class="section-count">7 categories</span>
+    </div>
+    <div class="grid-2">
+
+      <!-- NH CEU Requirements -->
+      <div class="resource-card" data-category="stafftraining">
+        <h3>NH Licensing &amp; CEU Requirements</h3>
+        <div class="resource-meta">NH Board of Mental Health Practice</div>
+        <div class="resource-desc">Required continuing education for NH mental health professionals. All licensed clinicians must complete CEUs for license renewal.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">NH Required</span>
+          <span class="resource-tag">Licensing</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>CEU Requirements by License</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>LICSW (Licensed Independent Clinical Social Worker):</strong> 40 CEUs per 2-year renewal cycle. Must include 3 hours of ethics. Supervised by LICSW for 3,000 hours post-MSW for initial licensure.</p>
+            <p style="margin-top:8px"><strong>LCMHC (Licensed Clinical Mental Health Counselor):</strong> 40 CEUs per 2-year renewal cycle. Must include 3 hours of ethics. Requires 3,000 hours supervised clinical experience post-master's.</p>
+            <p style="margin-top:8px"><strong>MLADC (Master Licensed Alcohol and Drug Counselor):</strong> 40 CEUs per 2-year renewal cycle. Must include ethics and must include substance use disorder-specific training.</p>
+            <p style="margin-top:8px"><strong>CRSW (Certified Recovery Support Worker):</strong> 40 hours of training for initial certification. 20 CEUs per annual renewal. Must include ethics and recovery-specific content.</p>
+            <p style="margin-top:8px"><strong>CBHCM (Certified Community Behavioral Health Clinician Manager):</strong> Requirements vary; check with the NH Board of Mental Health Practice for current standards.</p>
+            <p style="margin-top:8px"><strong>NH Board of Mental Health Practice:</strong> <a href="tel:+16032713000">(603) 271-3000</a> | <a href="https://www.oplc.nh.gov/mental-health-practice" target="_blank" rel="noopener">oplc.nh.gov/mental-health-practice</a></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free CE Resources -->
+      <div class="resource-card" data-category="stafftraining">
+        <h3>Free CE / Training Resources</h3>
+        <div class="resource-desc">Federal and national organizations offering free continuing education for mental health professionals.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Free</span>
+          <span class="resource-tag">Online</span>
+          <span class="resource-tag">CEUs</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Free Training Sources</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>SAMHSA (Substance Abuse and Mental Health Services Administration):</strong> Free webinars, training events, and self-paced courses on substance use, mental health, and prevention. Many offer free CEs. Visit <a href="https://www.samhsa.gov/training" target="_blank" rel="noopener">samhsa.gov/training</a></p>
+            <p style="margin-top:8px"><strong>VA (Veterans Affairs) TRAIN:</strong> Free clinical training through the VA's mental health resources, including PTSD, military sexual trauma, and evidence-based treatments. Many courses available to non-VA clinicians. Visit <a href="https://www.train.org" target="_blank" rel="noopener">train.org</a></p>
+            <p style="margin-top:8px"><strong>FEMA Emergency Management Institute:</strong> Free courses in crisis response, psychological first aid, disaster behavioral health. Independent study courses at <a href="https://training.fema.gov/is/" target="_blank" rel="noopener">training.fema.gov/is</a></p>
+            <p style="margin-top:8px"><strong>CDC Training &amp; CE:</strong> Free public health and behavioral health training through the CDC Learning Connection. Topics include suicide prevention, opioid response, trauma. Visit <a href="https://www.cdc.gov/learning" target="_blank" rel="noopener">cdc.gov/learning</a></p>
+            <p style="margin-top:8px"><strong>NAADAC (Association for Addiction Professionals):</strong> Select free webinars and training on substance use counseling. <a href="https://www.naadac.org/webinars" target="_blank" rel="noopener">naadac.org/webinars</a></p>
+            <p style="margin-top:8px"><strong>APA (American Psychological Association):</strong> Periodic free CE opportunities, especially during awareness months. <a href="https://www.apa.org/education/ce" target="_blank" rel="noopener">apa.org/education/ce</a></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- NH-Specific Training -->
+      <div class="resource-card" data-category="stafftraining">
+        <h3>NH-Specific Training Providers</h3>
+        <div class="resource-desc">New Hampshire-based organizations offering professional development and training for mental health clinicians.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">NH</span>
+          <span class="resource-tag">In-Person &amp; Online</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>NH Training Providers</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>NH Bureau of Drug and Alcohol Services (BDAS):</strong> Free training for NH SUD providers. Topics include SBIRT, MAT, motivational interviewing, trauma-informed care. <a href="tel:+16032718510">(603) 271-8510</a></p>
+            <p style="margin-top:8px"><strong>Dartmouth Psychiatric Research Center:</strong> Training in evidence-based practices including IPS Supported Employment, integrated dual disorders treatment. Hanover, NH.</p>
+            <p style="margin-top:8px"><strong>NH-Dartmouth Psychiatry Residency:</strong> Grand rounds and CME events periodically open to community clinicians. Contact for schedule.</p>
+            <p style="margin-top:8px"><strong>Antioch University New England:</strong> CEU workshops and certificate programs in counseling, applied psychology, and clinical mental health. Keene, NH.</p>
+            <p style="margin-top:8px"><strong>Rivier University:</strong> Graduate counseling program offers periodic workshops and training open to community clinicians. Nashua, NH.</p>
+            <p style="margin-top:8px"><strong>NH Children's Behavioral Health Collaborative:</strong> Training in child/adolescent mental health, TF-CBT, trauma-informed schools, and systems of care.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Certification Pathways -->
+      <div class="resource-card" data-category="stafftraining">
+        <h3>Certification Pathways</h3>
+        <div class="resource-desc">Step-by-step guidance for pursuing professional certifications and licensure in NH mental health practice.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Licensure</span>
+          <span class="resource-tag">Career Development</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Certification Details</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>LICSW (Licensed Independent Clinical Social Worker):</strong> MSW from CSWE-accredited program, 3,000 hours post-degree supervised clinical experience (minimum 100 hours direct supervision by LICSW), pass ASWB Clinical exam, apply to NH Board.</p>
+            <p style="margin-top:8px"><strong>LCMHC (Licensed Clinical Mental Health Counselor):</strong> Master's in counseling (60 credits from CACREP or equivalent), 3,000 hours post-degree supervised clinical experience (minimum 100 hours direct supervision), pass NCE or NCMHCE, apply to NH Board.</p>
+            <p style="margin-top:8px"><strong>MLADC (Master Licensed Alcohol and Drug Counselor):</strong> Master's degree in counseling or related field, specialized SUD coursework, 3,000 hours supervised SUD experience, pass IC&amp;RC ADC exam, apply to NH Board.</p>
+            <p style="margin-top:8px"><strong>CRSW (Certified Recovery Support Worker):</strong> High school diploma or equivalent, personal recovery experience preferred, 40 hours of initial training (CRSW curriculum), 500 hours supervised experience, apply through NH peer recovery certification body.</p>
+            <p style="margin-top:8px"><strong>CBHCM (Certified Community Behavioral Health Clinician Manager):</strong> Requirements established by employer and state; typically requires clinical licensure plus supervisory/management training. Contact NH DHHS for current requirements.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Professional Associations -->
+      <div class="resource-card" data-category="stafftraining">
+        <h3>Professional Associations</h3>
+        <div class="resource-desc">NH and national professional organizations for mental health clinicians offering networking, advocacy, and professional development.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Networking</span>
+          <span class="resource-tag">Advocacy</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Associations</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>NASW-NH (National Association of Social Workers - NH Chapter):</strong> Professional development, advocacy, networking for social workers in NH. Annual conference, legislative updates, job board. <a href="https://www.nasw-nh.org" target="_blank" rel="noopener">nasw-nh.org</a></p>
+            <p style="margin-top:8px"><strong>NHMHCA (NH Mental Health Counselors Association):</strong> Advocacy and professional development for licensed mental health counselors in NH. CEU events, legislative advocacy, peer consultation groups. <a href="https://www.nhmhca.org" target="_blank" rel="noopener">nhmhca.org</a></p>
+            <p style="margin-top:8px"><strong>NAADAC (Association for Addiction Professionals):</strong> National organization for addiction counselors. Webinars, conferences, advocacy, and certification resources. <a href="https://www.naadac.org" target="_blank" rel="noopener">naadac.org</a></p>
+            <p style="margin-top:8px"><strong>ACA (American Counseling Association):</strong> National organization for professional counselors. Publications, conferences, liability insurance, advocacy. <a href="https://www.counseling.org" target="_blank" rel="noopener">counseling.org</a></p>
+            <p style="margin-top:8px"><strong>AAMFT (American Association for Marriage and Family Therapy):</strong> For licensed marriage and family therapists. Training, conferences, and research resources. <a href="https://www.aamft.org" target="_blank" rel="noopener">aamft.org</a></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Conferences & Events -->
+      <div class="resource-card" data-category="stafftraining">
+        <h3>Conferences &amp; Events</h3>
+        <div class="resource-desc">Annual conferences and training events relevant to NH mental health professionals. Check organization websites for current dates and registration.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Annual Events</span>
+          <span class="resource-tag">CEUs Available</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Upcoming / Annual Events</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Note:</strong> Dates and availability change annually. Check each organization's website for current information.</p>
+            <p style="margin-top:8px"><strong>NASW-NH Annual Conference:</strong> Typically held in spring. Social work practice, ethics, and policy. Multiple CEU tracks. Check nasw-nh.org for dates.</p>
+            <p style="margin-top:8px"><strong>NAMI NH Annual Conference:</strong> Mental health education, lived experience presentations, clinical workshops. Usually fall. Check naminh.org.</p>
+            <p style="margin-top:8px"><strong>NH Governor's Conference on Substance Use Disorders:</strong> Annual conference on SUD treatment, prevention, recovery, and policy. Multiple CEU tracks. Check nhcenterforexcellence.org.</p>
+            <p style="margin-top:8px"><strong>Trauma Informed Care Conference (NH):</strong> Periodic conferences on TIC implementation, ACEs, resilience. Check with NH DHHS for scheduling.</p>
+            <p style="margin-top:8px"><strong>New England Regional Conferences:</strong> Various regional mental health, social work, and counseling conferences throughout New England. Check professional association websites.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Online Training Platforms -->
+      <div class="resource-card" data-category="stafftraining">
+        <h3>Online Training Platforms</h3>
+        <div class="resource-desc">Subscription and pay-per-course online platforms offering CE credits for mental health professionals.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Online</span>
+          <span class="resource-tag">Self-Paced</span>
+          <span class="resource-tag">CEUs</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Platform Details</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>SimplePractice Learning:</strong> CE courses designed for therapists and counselors. Topics include clinical skills, practice management, ethics, and specialized populations. Many free courses available. <a href="https://www.simplepractice.com/learning" target="_blank" rel="noopener">simplepractice.com/learning</a></p>
+            <p style="margin-top:8px"><strong>Psych Hub:</strong> Video-based mental health education platform. Free and premium content covering diagnosis, treatment, and psychoeducation. CE credits available for select courses. <a href="https://www.psychhub.com" target="_blank" rel="noopener">psychhub.com</a></p>
+            <p style="margin-top:8px"><strong>PESI:</strong> Extensive CE course catalog for mental health professionals. Live webinars, on-demand courses, and in-person seminars. Topics across all clinical specialties. <a href="https://www.pesi.com" target="_blank" rel="noopener">pesi.com</a></p>
+            <p style="margin-top:8px"><strong>CEU Learning (NetCE):</strong> Accredited CE courses for multiple disciplines. Affordable per-course or unlimited subscription. <a href="https://www.netce.com" target="_blank" rel="noopener">netce.com</a></p>
+            <p style="margin-top:8px"><strong>Zur Institute:</strong> Ethics, risk management, and clinical courses. Well-regarded for ethics CEUs. <a href="https://www.zurinstitute.com" target="_blank" rel="noopener">zurinstitute.com</a></p>
+            <p style="margin-top:8px"><strong>Beck Institute:</strong> CBT-specific training from the founders of cognitive therapy. Online courses, workshops, and certification programs. <a href="https://www.beckinstitute.org" target="_blank" rel="noopener">beckinstitute.org</a></p>
           </div>
         </div>
       </div>

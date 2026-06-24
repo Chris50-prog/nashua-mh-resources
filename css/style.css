@@ -1226,3 +1226,362 @@ a[href^="tel:"] {
     padding-bottom: calc(24px + env(safe-area-inset-bottom));
   }
 }
+
+/* ============================================================
+   W67 — SCENARIO-BASED NAVIGATION CARDS
+   ============================================================ */
+.scenario-nav-section {
+  margin-bottom: 32px;
+}
+.scenario-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+@media (max-width: 900px) {
+  .scenario-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .scenario-grid { grid-template-columns: 1fr; }
+}
+.scenario-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.scenario-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
+}
+.scenario-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  user-select: none;
+}
+.scenario-card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.scenario-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  flex: 1;
+}
+.scenario-card-arrow {
+  font-size: 12px;
+  color: var(--text-muted);
+  transition: transform 0.2s;
+}
+.scenario-card.open .scenario-card-arrow {
+  transform: rotate(180deg);
+}
+.scenario-card-links {
+  display: none;
+  padding: 0 16px 14px;
+  border-top: 1px solid var(--border);
+}
+.scenario-card.open .scenario-card-links {
+  display: block;
+}
+.scenario-card-links a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  margin-top: 6px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--surface-alt);
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.scenario-card-links a:hover {
+  background: var(--accent-light);
+  color: var(--accent);
+  text-decoration: none;
+}
+.scenario-card-links a .link-arrow {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.scenario-card-links a:hover .link-arrow {
+  color: var(--accent);
+}
+
+/* ============================================================
+   W74 — EXPAND / COLLAPSE ALL BUTTON BAR
+   ============================================================ */
+.expand-collapse-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 8px 0;
+}
+.expand-collapse-bar .btn {
+  padding: 6px 14px;
+  font-size: 13px;
+  min-height: 36px;
+}
+@media (max-width: 768px) {
+  .expand-collapse-bar .btn {
+    padding: 8px 14px;
+    min-height: 44px;
+    font-size: 13px;
+  }
+}
+@media print {
+  .expand-collapse-bar { display: none !important; }
+}
+
+/* ============================================================
+   W77 — CLICK-TO-CALL ENHANCEMENT
+   ============================================================ */
+/* Desktop: phone icon prefix */
+a[href^="tel:"]::before {
+  content: "\260E";
+  margin-right: 4px;
+  font-style: normal;
+}
+/* Mobile: prominent tap-to-call buttons */
+@media (max-width: 768px) {
+  a[href^="tel:"] {
+    background: var(--success);
+    color: white !important;
+    padding: 10px 16px;
+    border-radius: var(--radius);
+    min-height: 48px;
+    font-size: 15px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    transition: background 0.15s;
+    box-shadow: var(--shadow);
+  }
+  a[href^="tel:"]:hover {
+    background: #047857;
+    text-decoration: none;
+  }
+  a[href^="tel:"]::before {
+    content: "\1F4DE";
+    font-size: 16px;
+    margin-right: 4px;
+  }
+  /* Avoid double-styling phone numbers inside table cells — keep them inline */
+  .phone-table a[href^="tel:"] {
+    background: var(--success);
+    color: white !important;
+    padding: 6px 12px;
+    border-radius: var(--radius);
+    min-height: 40px;
+    font-size: 14px;
+  }
+  /* Crisis banner phone links stay inline */
+  .crisis-banner a[href^="tel:"] {
+    background: transparent;
+    color: var(--danger) !important;
+    padding: 2px 4px;
+    box-shadow: none;
+    min-height: auto;
+    font-size: inherit;
+  }
+  .crisis-banner a[href^="tel:"]::before {
+    content: "\260E";
+    font-size: inherit;
+  }
+}
+/* Dark mode adjustments */
+[data-theme="dark"] a[href^="tel:"] {
+  color: var(--success);
+}
+@media (max-width: 768px) {
+  [data-theme="dark"] a[href^="tel:"] {
+    color: white !important;
+  }
+}
+
+/* ============================================================
+   W81 — FONT SIZE / ACCESSIBILITY CONTROLS
+   ============================================================ */
+.font-size-controls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: 4px;
+}
+.font-size-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+  padding: 0;
+  line-height: 1;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+.font-size-btn:hover {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+@media (max-width: 768px) {
+  .font-size-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+}
+@media print {
+  .font-size-controls { display: none !important; }
+}
+
+/* ============================================================
+   W82 — FLOATING TABLE OF CONTENTS
+   ============================================================ */
+.toc-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 190;
+  padding: 10px 18px;
+  border-radius: 24px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  transition: all 0.2s;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+.toc-toggle:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+.toc-toggle--active {
+  background: var(--accent-dark);
+}
+.toc-panel {
+  position: fixed;
+  bottom: 70px;
+  right: 24px;
+  z-index: 189;
+  width: 280px;
+  max-height: 60vh;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  display: none;
+  flex-direction: column;
+}
+.toc-panel--open {
+  display: flex;
+}
+.toc-panel-heading {
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+  flex: 1;
+}
+.toc-item {
+  border-bottom: 1px solid var(--border);
+}
+.toc-item:last-child {
+  border-bottom: none;
+}
+.toc-link {
+  display: block;
+  width: 100%;
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s;
+  font-family: inherit;
+  line-height: 1.4;
+}
+.toc-link:hover {
+  background: var(--surface-alt);
+  color: var(--text);
+}
+.toc-link--active {
+  background: var(--accent-light);
+  color: var(--accent);
+  font-weight: 600;
+}
+/* Highlight flash when scrolling to a section */
+@keyframes tocFlash {
+  0% { box-shadow: inset 4px 0 0 var(--accent), 0 0 0 0 rgba(37, 99, 235, 0.15); }
+  50% { box-shadow: inset 4px 0 0 var(--accent), 0 0 12px 4px rgba(37, 99, 235, 0.10); }
+  100% { box-shadow: none; }
+}
+.toc-highlight {
+  animation: tocFlash 1.2s ease-out;
+}
+@media (max-width: 768px) {
+  .toc-toggle {
+    bottom: 16px;
+    right: 16px;
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+  .toc-panel {
+    bottom: 60px;
+    right: 16px;
+    left: 16px;
+    width: auto;
+    max-height: 50vh;
+  }
+}
+@media print {
+  .toc-toggle, .toc-panel { display: none !important; }
+}
+@supports (padding: env(safe-area-inset-bottom)) {
+  .toc-toggle {
+    bottom: calc(24px + env(safe-area-inset-bottom));
+  }
+  .toc-panel {
+    bottom: calc(70px + env(safe-area-inset-bottom));
+  }
+}

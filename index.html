@@ -14,6 +14,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="stylesheet" href="css/style.css">
+<script src="js/fontsize.js"></script>
 <style>
 /* ===== WAVE 6 — ROLE CARDS, NEWS FEED, REORGANIZED LAYOUT ===== */
 
@@ -304,6 +305,10 @@
     </a>
     <div class="header-actions">
       <button class="search-toggle" onclick="toggleGlobalSearch()" title="Search this page (Ctrl+K)" aria-label="Search this page"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+      <div class="font-size-controls">
+        <button class="font-size-btn" onclick="mhFontDecrease()" title="Decrease font size" aria-label="Decrease font size">A-</button>
+        <button class="font-size-btn" onclick="mhFontIncrease()" title="Increase font size" aria-label="Increase font size">A+</button>
+      </div>
       <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">&#9789;</button>
       <button class="hamburger-btn" onclick="var h=this.closest('.site-header');h.classList.toggle('nav-open');this.setAttribute('aria-expanded',h.classList.contains('nav-open'))" aria-label="Toggle navigation menu" aria-expanded="false">
         <span class="hamburger-bar"></span><span class="hamburger-bar"></span><span class="hamburger-bar"></span>
@@ -406,6 +411,148 @@
             <li><a href="resources.html#legal">&#9878; Legal Aid &amp; Advocacy Resources <span class="link-arrow">&#8250;</span></a></li>
             <li><a href="guide.html#releases">&#9776; Release of Information Guidance <span class="link-arrow">&#8250;</span></a></li>
           </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- W67: Scenario-Based Navigation -->
+  <div class="scenario-nav-section">
+    <div class="section-header">
+      <h2>I need to...</h2>
+      <span class="section-count">Find what you need by situation</span>
+    </div>
+    <div class="scenario-grid">
+
+      <div class="scenario-card" onclick="this.classList.toggle('open')">
+        <div class="scenario-card-header">
+          <div class="scenario-card-icon" style="background:var(--danger-light);color:var(--danger)">&#9888;</div>
+          <div class="scenario-card-title">I have a client in crisis</div>
+          <span class="scenario-card-arrow">&#9660;</span>
+        </div>
+        <div class="scenario-card-links">
+          <a href="guide.html#crisisTree">&#9888; Crisis Decision Tree <span class="link-arrow">&#8250;</span></a>
+          <a href="guide.html#guide-psych-emergency">&#128680; Psychiatric Emergency Workflow <span class="link-arrow">&#8250;</span></a>
+          <a href="tools.html#safety-plan-builder">&#128737; Safety Plan Builder <span class="link-arrow">&#8250;</span></a>
+        </div>
+      </div>
+
+      <div class="scenario-card" onclick="this.classList.toggle('open')">
+        <div class="scenario-card-header">
+          <div class="scenario-card-icon" style="background:var(--warning-light);color:var(--warning)">&#9878;</div>
+          <div class="scenario-card-title">I need to do a risk assessment</div>
+          <span class="scenario-card-arrow">&#9660;</span>
+        </div>
+        <div class="scenario-card-links">
+          <a href="tools.html#screening-tools">&#9776; C-SSRS Screener <span class="link-arrow">&#8250;</span></a>
+          <a href="guide.html#guide-suicide-risk">&#9888; Suicide Risk Assessment Guide <span class="link-arrow">&#8250;</span></a>
+          <a href="tools.html#screening">&#9776; PHQ-9, GAD-7 &amp; Other Screeners <span class="link-arrow">&#8250;</span></a>
+        </div>
+      </div>
+
+      <div class="scenario-card" onclick="this.classList.toggle('open')">
+        <div class="scenario-card-header">
+          <div class="scenario-card-icon" style="background:var(--accent-light);color:var(--accent)">&#9998;</div>
+          <div class="scenario-card-title">I have a new client</div>
+          <span class="scenario-card-arrow">&#9660;</span>
+        </div>
+        <div class="scenario-card-links">
+          <a href="guide.html#guide-intake-template">&#9776; Intake Assessment Template <span class="link-arrow">&#8250;</span></a>
+          <a href="tools.html#goal-bank">&#9733; Treatment Plan Goal Bank <span class="link-arrow">&#8250;</span></a>
+          <a href="tools.html#screening-tools">&#9776; Screening Instruments <span class="link-arrow">&#8250;</span></a>
+        </div>
+      </div>
+
+      <div class="scenario-card" onclick="this.classList.toggle('open')">
+        <div class="scenario-card-header">
+          <div class="scenario-card-icon" style="background:var(--teal-light);color:var(--teal)">&#9993;</div>
+          <div class="scenario-card-title">I need to make a referral</div>
+          <span class="scenario-card-arrow">&#9660;</span>
+        </div>
+        <div class="scenario-card-links">
+          <a href="tools.html#referral-letter">&#9998; Referral Letter Generator <span class="link-arrow">&#8250;</span></a>
+          <a href="resources.html">&#9776; Community Resource Directory <span class="link-arrow">&#8250;</span></a>
+          <a href="guide.html#guide-outpatient">&#9733; Outpatient MH Referral Guide <span class="link-arrow">&#8250;</span></a>
+        </div>
+      </div>
+
+      <div class="scenario-card" onclick="this.classList.toggle('open')">
+        <div class="scenario-card-header">
+          <div class="scenario-card-icon" style="background:var(--purple-light);color:var(--purple)">&#9998;</div>
+          <div class="scenario-card-title">I need to document a session</div>
+          <span class="scenario-card-arrow">&#9660;</span>
+        </div>
+        <div class="scenario-card-links">
+          <a href="tools.html#clinical-note-builder">&#9998; SOAP Note Builder <span class="link-arrow">&#8250;</span></a>
+          <a href="tools.html#doc-best-practices">&#9776; Documentation Best Practices <span class="link-arrow">&#8250;</span></a>
+          <a href="tools.html#group-therapy-note">&#9776; Group Therapy Note Template <span class="link-arrow">&#8250;</span></a>
+        </div>
+      </div>
+
+      <div class="scenario-card" onclick="this.classList.toggle('open')">
+        <div class="scenario-card-header">
+          <div class="scenario-card-icon" style="background:var(--danger-light);color:var(--danger)">&#9888;</div>
+          <div class="scenario-card-title">I need to report abuse</div>
+          <span class="scenario-card-arrow">&#9660;</span>
+        </div>
+        <div class="scenario-card-links">
+          <a href="guide.html#guide-mandated-reporting">&#9888; NH Mandated Reporting Guide <span class="link-arrow">&#8250;</span></a>
+          <a href="guide.html#guide-dcyf">&#9878; File a DCYF Report <span class="link-arrow">&#8250;</span></a>
+          <a href="guide.html#guide-duty-to-warn">&#9878; Duty to Warn / Tarasoff <span class="link-arrow">&#8250;</span></a>
+        </div>
+      </div>
+
+      <div class="scenario-card" onclick="this.classList.toggle('open')">
+        <div class="scenario-card-header">
+          <div class="scenario-card-icon" style="background:var(--success-light);color:var(--success)">&#9733;</div>
+          <div class="scenario-card-title">I'm looking for community resources</div>
+          <span class="scenario-card-arrow">&#9660;</span>
+        </div>
+        <div class="scenario-card-links">
+          <a href="resources.html#housing">&#9750; Housing &amp; Shelters <span class="link-arrow">&#8250;</span></a>
+          <a href="resources.html#food">&#9733; Food Security <span class="link-arrow">&#8250;</span></a>
+          <a href="resources.html#medical">&#9764; Medical / Dental Services <span class="link-arrow">&#8250;</span></a>
+          <a href="resources.html">&#9776; Full Resource Directory <span class="link-arrow">&#8250;</span></a>
+        </div>
+      </div>
+
+      <div class="scenario-card" onclick="this.classList.toggle('open')">
+        <div class="scenario-card-header">
+          <div class="scenario-card-icon" style="background:#dbeafe;color:#1d4ed8">&#9881;</div>
+          <div class="scenario-card-title">I need help with billing</div>
+          <span class="scenario-card-arrow">&#9660;</span>
+        </div>
+        <div class="scenario-card-links">
+          <a href="tools.html#cpt-reference">&#9776; CPT Code Quick Reference <span class="link-arrow">&#8250;</span></a>
+          <a href="tools.html#prior-auth-guide">&#9998; Prior Authorization Guide <span class="link-arrow">&#8250;</span></a>
+          <a href="tools.html#medical-necessity-letter">&#9776; Letter of Medical Necessity <span class="link-arrow">&#8250;</span></a>
+        </div>
+      </div>
+
+      <div class="scenario-card" onclick="this.classList.toggle('open')">
+        <div class="scenario-card-header">
+          <div class="scenario-card-icon" style="background:var(--teal-light);color:var(--teal)">&#9829;</div>
+          <div class="scenario-card-title">I need a client handout</div>
+          <span class="scenario-card-arrow">&#9660;</span>
+        </div>
+        <div class="scenario-card-links">
+          <a href="guide.html#cat-psychoed">&#9776; Psychoeducation Handouts <span class="link-arrow">&#8250;</span></a>
+          <a href="tools.html#dbt">&#9998; DBT Skills Handouts <span class="link-arrow">&#8250;</span></a>
+          <a href="tools.html#safety-plan-builder">&#128737; Safety Plan Template <span class="link-arrow">&#8250;</span></a>
+        </div>
+      </div>
+
+      <div class="scenario-card" onclick="this.classList.toggle('open')">
+        <div class="scenario-card-header">
+          <div class="scenario-card-icon" style="background:#e0e7ff;color:#4338ca">&#9734;</div>
+          <div class="scenario-card-title">I'm preparing for supervision</div>
+          <span class="scenario-card-arrow">&#9660;</span>
+        </div>
+        <div class="scenario-card-links">
+          <a href="tools.html#supervision-templates">&#9776; Supervision &amp; Consultation Templates <span class="link-arrow">&#8250;</span></a>
+          <a href="tools.html#case-conference-note">&#9998; Case Conference Note <span class="link-arrow">&#8250;</span></a>
+          <a href="tools.html#caseload-calculator">&#9881; Caseload Calculator <span class="link-arrow">&#8250;</span></a>
         </div>
       </div>
 
