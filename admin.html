@@ -500,6 +500,7 @@
       <button class="note-tab" data-tab="family">Family Therapy</button>
       <button class="note-tab" data-tab="casemgmt">Case Management</button>
       <button class="note-tab" data-tab="isp">ISP</button>
+      <button class="note-tab" data-tab="staffdir">Staff Directory</button>
     </div>
 
     <!-- ============================================================ -->
@@ -950,6 +951,67 @@
         <button class="btn btn-primary" onclick="generateISP()">Generate &amp; Copy</button>
         <button class="btn btn-outline btn-sm" onclick="downloadNote('isp')">&#128190; Download .txt</button>
         <button class="btn" onclick="clearISP()">Clear Form</button>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- STAFF DIRECTORY PANEL -->
+    <!-- ============================================================ -->
+    <div class="note-panel" id="panel-staffdir">
+
+      <div class="section-card">
+        <h3>Staff Directory</h3>
+        <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px">Template staff directory. Data is not persisted &mdash; this is for session use only.</p>
+
+        <!-- Search/Filter -->
+        <div class="form-row" style="margin-bottom:16px">
+          <div class="form-group">
+            <label>Search</label>
+            <input type="text" id="staffSearch" placeholder="Search by name, role, or specialty..." oninput="filterStaffDirectory()">
+          </div>
+          <div class="form-group" style="max-width:200px">
+            <label>Filter by Role</label>
+            <select id="staffRoleFilter" onchange="filterStaffDirectory()">
+              <option value="">All Roles</option>
+              <option value="Clinician">Clinician</option>
+              <option value="Case Manager">Case Manager</option>
+              <option value="Psychiatrist">Psychiatrist</option>
+              <option value="Supervisor">Supervisor</option>
+              <option value="Admin">Admin</option>
+              <option value="Prescriber">Prescriber</option>
+              <option value="Intake">Intake</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Staff Table -->
+        <div style="overflow-x:auto">
+          <table class="ws-table" id="staffTable">
+            <thead>
+              <tr>
+                <th style="width:16%">Name</th>
+                <th style="width:14%">Role</th>
+                <th style="width:14%">Phone</th>
+                <th style="width:18%">Email</th>
+                <th style="width:16%">Specialty</th>
+                <th style="width:14%">Office Location</th>
+                <th style="width:8%">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="staffTableBody">
+            </tbody>
+          </table>
+        </div>
+
+        <div style="display:flex;gap:8px;margin-top:12px">
+          <button class="add-btn" onclick="addStaffRow()">+ Add Staff Member</button>
+        </div>
+      </div>
+
+      <div class="action-bar">
+        <button class="btn btn-primary" onclick="printStaffDirectory()">Print Directory</button>
+        <button class="btn" onclick="clearStaffDirectory()">Clear All</button>
       </div>
     </div>
 
@@ -2322,6 +2384,11 @@ function initializeAll() {
 
   // Add initial ISP goal
   addISPGoal();
+
+  // Initialize Staff Directory
+  addStaffRow();
+  addStaffRow();
+  addStaffRow();
 }
 
 function toggleTheme() {
@@ -2379,6 +2446,100 @@ function downloadNote(type) {
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
   showToast('Downloaded ' + filename, 'success');
+}
+
+/* ================================================================
+   STAFF DIRECTORY
+   ================================================================ */
+var staffRowCount = 0;
+
+function addStaffRow(name, role, phone, email, specialty, location) {
+  staffRowCount++;
+  var num = staffRowCount;
+  var tbody = document.getElementById('staffTableBody');
+  var tr = document.createElement('tr');
+  tr.id = 'staff-row-' + num;
+  tr.className = 'staff-row';
+  tr.dataset.num = num;
+  tr.innerHTML =
+    '<td><input type="text" id="staff-name-' + num + '" placeholder="Name" value="' + (name || '') + '"></td>' +
+    '<td><select id="staff-role-' + num + '">' +
+    '<option value="">Select...</option>' +
+    '<option value="Clinician"' + (role === 'Clinician' ? ' selected' : '') + '>Clinician</option>' +
+    '<option value="Case Manager"' + (role === 'Case Manager' ? ' selected' : '') + '>Case Manager</option>' +
+    '<option value="Psychiatrist"' + (role === 'Psychiatrist' ? ' selected' : '') + '>Psychiatrist</option>' +
+    '<option value="Supervisor"' + (role === 'Supervisor' ? ' selected' : '') + '>Supervisor</option>' +
+    '<option value="Admin"' + (role === 'Admin' ? ' selected' : '') + '>Admin</option>' +
+    '<option value="Prescriber"' + (role === 'Prescriber' ? ' selected' : '') + '>Prescriber</option>' +
+    '<option value="Intake"' + (role === 'Intake' ? ' selected' : '') + '>Intake</option>' +
+    '<option value="Other"' + (role === 'Other' ? ' selected' : '') + '>Other</option>' +
+    '</select></td>' +
+    '<td><input type="text" id="staff-phone-' + num + '" placeholder="Phone" value="' + (phone || '') + '"></td>' +
+    '<td><input type="text" id="staff-email-' + num + '" placeholder="Email" value="' + (email || '') + '"></td>' +
+    '<td><input type="text" id="staff-specialty-' + num + '" placeholder="Specialty" value="' + (specialty || '') + '"></td>' +
+    '<td><input type="text" id="staff-location-' + num + '" placeholder="Location" value="' + (location || '') + '"></td>' +
+    '<td style="text-align:center"><button class="remove-btn" onclick="removeStaffRow(' + num + ')" title="Remove">&#10005;</button></td>';
+  tbody.appendChild(tr);
+}
+
+function removeStaffRow(num) {
+  var row = document.getElementById('staff-row-' + num);
+  if (row) row.remove();
+}
+
+function filterStaffDirectory() {
+  var search = document.getElementById('staffSearch').value.toLowerCase();
+  var roleFilter = document.getElementById('staffRoleFilter').value;
+  var rows = document.querySelectorAll('#staffTableBody .staff-row');
+  rows.forEach(function(row) {
+    var num = row.dataset.num;
+    var name = (document.getElementById('staff-name-' + num).value || '').toLowerCase();
+    var role = document.getElementById('staff-role-' + num).value;
+    var email = (document.getElementById('staff-email-' + num).value || '').toLowerCase();
+    var specialty = (document.getElementById('staff-specialty-' + num).value || '').toLowerCase();
+    var location = (document.getElementById('staff-location-' + num).value || '').toLowerCase();
+    var matchesSearch = !search || name.indexOf(search) !== -1 || role.toLowerCase().indexOf(search) !== -1 || email.indexOf(search) !== -1 || specialty.indexOf(search) !== -1 || location.indexOf(search) !== -1;
+    var matchesRole = !roleFilter || role === roleFilter;
+    row.style.display = (matchesSearch && matchesRole) ? '' : 'none';
+  });
+}
+
+function printStaffDirectory() {
+  var rows = document.querySelectorAll('#staffTableBody .staff-row');
+  if (rows.length === 0) { showToast('Add staff members first', 'info'); return; }
+  var win = window.open('', '_blank');
+  win.document.write('<html><head><title>Staff Directory</title>');
+  win.document.write('<style>body{font-family:system-ui,sans-serif;padding:24px;font-size:12px}h2{font-size:18px;margin-bottom:4px}table{width:100%;border-collapse:collapse;margin:12px 0}th{text-align:left;padding:6px 8px;border-bottom:2px solid #333;font-size:11px;background:#f5f5f5}td{padding:5px 8px;border-bottom:1px solid #ddd;font-size:11px}.date{font-size:11px;color:#666;margin-bottom:16px}</style>');
+  win.document.write('</head><body>');
+  win.document.write('<h2>Staff Directory</h2>');
+  win.document.write('<div class="date">Generated: ' + new Date().toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'}) + '</div>');
+  win.document.write('<table><thead><tr><th>Name</th><th>Role</th><th>Phone</th><th>Email</th><th>Specialty</th><th>Office</th></tr></thead><tbody>');
+  rows.forEach(function(row) {
+    if (row.style.display === 'none') return;
+    var num = row.dataset.num;
+    var name = document.getElementById('staff-name-' + num).value || '';
+    var role = document.getElementById('staff-role-' + num).value || '';
+    var phone = document.getElementById('staff-phone-' + num).value || '';
+    var email = document.getElementById('staff-email-' + num).value || '';
+    var specialty = document.getElementById('staff-specialty-' + num).value || '';
+    var location = document.getElementById('staff-location-' + num).value || '';
+    win.document.write('<tr><td>' + name + '</td><td>' + role + '</td><td>' + phone + '</td><td>' + email + '</td><td>' + specialty + '</td><td>' + location + '</td></tr>');
+  });
+  win.document.write('</tbody></table>');
+  win.document.write('<div style="margin-top:24px;font-size:10px;color:#999">Confidential - For internal use only</div>');
+  win.document.write('</body></html>');
+  win.document.close();
+  win.print();
+}
+
+function clearStaffDirectory() {
+  if (!confirm('Clear all staff directory entries? This cannot be undone.')) return;
+  document.getElementById('staffTableBody').innerHTML = '';
+  staffRowCount = 0;
+  document.getElementById('staffSearch').value = '';
+  document.getElementById('staffRoleFilter').value = '';
+  showToast('Staff directory cleared', 'info');
+  addStaffRow();
 }
 </script>
 <script>

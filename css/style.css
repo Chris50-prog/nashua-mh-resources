@@ -47,8 +47,13 @@ a:hover { text-decoration: underline; }
   font-size: 14px; font-weight: 600; z-index: 999;
   border-radius: 0 0 var(--radius) 0;
 }
-.skip-link:focus {
-  left: 0; outline: none;
+.skip-link:focus,
+.skip-link:focus-visible {
+  left: 0;
+  top: 0;
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+  z-index: 9999;
 }
 
 /* ===== HEADER / NAV ===== */
@@ -309,6 +314,11 @@ a:hover { text-decoration: underline; }
 .ws-field textarea { min-height: 80px; resize: vertical; }
 .ws-field textarea:focus, .ws-field input:focus, .ws-field select:focus {
   border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+.ws-field textarea:focus-visible, .ws-field input:focus-visible, .ws-field select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
 }
 
 /* ===== BUTTONS ===== */
@@ -741,17 +751,21 @@ textarea:focus-visible,
 }
 
 /* ===== HIGH CONTRAST MODE ===== */
-@media (prefers-contrast: high) {
+@media (prefers-contrast: high), (prefers-contrast: more) {
   :root {
-    --border: #9ca3af;
-    --text-secondary: #374151;
-    --text-muted: #4b5563;
-    --shadow: 0 0 0 1px #6b7280;
-    --shadow-md: 0 0 0 1px #6b7280;
-    --shadow-lg: 0 0 0 2px #6b7280;
+    --border: #6b7280;
+    --text: #000000;
+    --text-secondary: #1f2937;
+    --text-muted: #374151;
+    --shadow: 0 0 0 1px #4b5563;
+    --shadow-md: 0 0 0 2px #4b5563;
+    --shadow-lg: 0 0 0 2px #374151;
   }
-  .card, .resource-card, .triage-card, .tool-card, .worksheet {
+  .card, .resource-card, .triage-card, .tool-card, .worksheet,
+  .expandable-header, .scenario-card, .bulletin-card, .prof-dev-card,
+  .news-card, .seasonal-item {
     border-width: 2px;
+    border-color: #4b5563;
   }
   a { text-decoration: underline; }
   .nav-link.active {
@@ -759,6 +773,28 @@ textarea:focus-visible,
   }
   .category-btn.active {
     border-width: 2px;
+  }
+  .crisis-banner {
+    border-width: 2px;
+    border-color: var(--danger);
+  }
+  .btn {
+    border-width: 2px;
+  }
+  .ws-field textarea,
+  .ws-field input[type="text"],
+  .ws-field select,
+  .search-input,
+  .search-overlay-input {
+    border-width: 2px;
+  }
+}
+@media (prefers-contrast: more) {
+  [data-theme="dark"] {
+    --text: #f3f4f6;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+    --border: #9ca3af;
   }
 }
 

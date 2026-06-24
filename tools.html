@@ -1435,6 +1435,9 @@
         <a href="#client-handout">Client Handout Generator</a>
         <a href="#mileage-tracker">Mileage / Travel Tracker</a>
         <a href="#chart-audit">Chart Audit Tool</a>
+        <a href="#eligibility-screener">Eligibility Pre-Screener</a>
+        <a href="#emergency-card-generator">Emergency Contact Card</a>
+        <a href="#resource-comparison">Resource Comparison Matrix</a>
       </nav>
     </aside>
 
@@ -10223,6 +10226,745 @@ SAMHSA National Helpline: 1-800-662-4357</textarea>
   </div>
 </section>
 
+<!-- ================================================================
+     W93 — SERVICE ELIGIBILITY PRE-SCREENER
+     ================================================================ -->
+<section class="modality-section" id="eligibility-screener">
+  <div class="modality-header">
+    <div class="modality-badge" style="background:#059669">W93</div>
+    <div>
+      <h2>Service Eligibility Pre-Screener</h2>
+      <div class="modality-desc">Answer a few questions to identify services and programs a client may qualify for in the Greater Nashua area. This is a screening aid only — verify eligibility directly with each program.</div>
+    </div>
+  </div>
+
+  <div class="worksheet" id="eligibility-form">
+    <h3>Client Screening Questions</h3>
+    <div class="ws-subtitle">Select the option that best describes the client. All data stays in your browser only.</div>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px">
+      <div class="ws-field" style="flex:1;min-width:200px">
+        <label>1. Age Group</label>
+        <select id="esAge">
+          <option value="">Select...</option>
+          <option value="child">Child (0-12)</option>
+          <option value="adolescent">Adolescent (13-17)</option>
+          <option value="adult">Adult (18-64)</option>
+          <option value="older-adult">Older Adult (65+)</option>
+        </select>
+      </div>
+      <div class="ws-field" style="flex:1;min-width:200px">
+        <label>2. Insurance Type</label>
+        <select id="esInsurance">
+          <option value="">Select...</option>
+          <option value="nh-medicaid">NH Medicaid</option>
+          <option value="medicare">Medicare</option>
+          <option value="private">Private Insurance</option>
+          <option value="uninsured">Uninsured / Self-Pay</option>
+        </select>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px">
+      <div class="ws-field" style="flex:1;min-width:200px">
+        <label>3. Primary Concern</label>
+        <select id="esConcern">
+          <option value="">Select...</option>
+          <option value="mental-health">Mental Health</option>
+          <option value="substance-use">Substance Use</option>
+          <option value="co-occurring">Co-Occurring (MH + SU)</option>
+          <option value="crisis">Crisis</option>
+        </select>
+      </div>
+      <div class="ws-field" style="flex:1;min-width:200px">
+        <label>4. Current Housing Status</label>
+        <select id="esHousing">
+          <option value="">Select...</option>
+          <option value="stable">Stable Housing</option>
+          <option value="unstable">Unstable / At Risk</option>
+          <option value="homeless">Homeless</option>
+        </select>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px">
+      <div class="ws-field" style="flex:1;min-width:200px">
+        <label>5. Veteran Status</label>
+        <select id="esVeteran">
+          <option value="">Select...</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      <div class="ws-field" style="flex:1;min-width:200px">
+        <label>6. Children Involved with DCYF?</label>
+        <select id="esDCYF">
+          <option value="">Select...</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px">
+      <div class="ws-field" style="flex:1;min-width:200px">
+        <label>7. Disability Status</label>
+        <select id="esDisability">
+          <option value="">Select...</option>
+          <option value="none">None</option>
+          <option value="physical">Physical Disability</option>
+          <option value="idd">Intellectual / Developmental</option>
+          <option value="both">Both Physical &amp; I/DD</option>
+        </select>
+      </div>
+      <div class="ws-field" style="flex:1;min-width:200px">
+        <label>8. Income Level</label>
+        <select id="esIncome">
+          <option value="">Select...</option>
+          <option value="below-poverty">Below Poverty Level</option>
+          <option value="100-200">100-200% FPL</option>
+          <option value="200-400">200-400% FPL</option>
+          <option value="above-400">Above 400% FPL</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="ws-actions" style="margin-top:16px">
+      <button class="btn btn-sm btn-primary" onclick="checkEligibility()">Check Eligibility</button>
+      <button class="btn btn-sm" onclick="clearEligibility()">Clear</button>
+    </div>
+
+    <div id="esResults" style="display:none;margin-top:20px">
+      <h3 style="margin-bottom:12px">Eligible Programs &amp; Services</h3>
+      <div id="esResultsList"></div>
+      <div class="ws-actions" style="margin-top:16px">
+        <button class="btn btn-sm" onclick="printEligibilityResults()">Print Results</button>
+        <button class="btn btn-sm" onclick="clearEligibility()">Clear All</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  function checkEligibility() {
+    var age = document.getElementById('esAge').value;
+    var insurance = document.getElementById('esInsurance').value;
+    var concern = document.getElementById('esConcern').value;
+    var housing = document.getElementById('esHousing').value;
+    var veteran = document.getElementById('esVeteran').value;
+    var dcyf = document.getElementById('esDCYF').value;
+    var disability = document.getElementById('esDisability').value;
+    var income = document.getElementById('esIncome').value;
+
+    if (!age && !insurance && !concern && !housing) {
+      alert('Please answer at least the first four screening questions.');
+      return;
+    }
+
+    var programs = [];
+
+    // Insurance-based eligibility
+    if (insurance === 'nh-medicaid') {
+      programs.push({ name: 'GNMHC Full Services', desc: 'Full range of outpatient, community-based, and crisis services covered under NH Medicaid.', contact: '603-889-6147', link: '#' });
+      programs.push({ name: 'Bridges (GNMHC)', desc: 'Assertive Community Treatment and supported employment for adults with SMI. Medicaid covered.', contact: '603-889-6147', link: '#' });
+      programs.push({ name: 'Harbor Homes', desc: 'Permanent supportive housing, behavioral health, and vocational services. Medicaid accepted.', contact: '603-882-3616', link: '#' });
+      programs.push({ name: 'Southern NH Services', desc: 'Fuel assistance, food pantry, housing stabilization, and case management for Medicaid-eligible families.', contact: '603-889-3440', link: '#' });
+    }
+    if (insurance === 'medicare') {
+      programs.push({ name: 'GNMHC Outpatient Services', desc: 'Individual and group therapy, psychiatry, and medication management. Medicare accepted.', contact: '603-889-6147', link: '#' });
+      programs.push({ name: 'Medicare Behavioral Health', desc: 'Outpatient mental health services covered under Medicare Part B with applicable copays.', contact: 'Medicare: 1-800-633-4227', link: '#' });
+    }
+    if (insurance === 'uninsured') {
+      programs.push({ name: 'GNMHC Sliding Scale', desc: 'Income-based sliding scale fees available for uninsured clients. No one turned away for inability to pay.', contact: '603-889-6147', link: '#' });
+      programs.push({ name: 'Community Health Centers', desc: 'Federally Qualified Health Centers provide primary care and behavioral health on sliding scale.', contact: 'Greater Nashua area', link: '#' });
+      programs.push({ name: 'Harbor Homes', desc: 'Services for individuals regardless of insurance status, particularly those experiencing homelessness.', contact: '603-882-3616', link: '#' });
+    }
+
+    // Concern-based
+    if (concern === 'substance-use' || concern === 'co-occurring') {
+      programs.push({ name: 'Keystone Hall', desc: 'Residential and outpatient substance use treatment. Medically monitored detox, IOP, and recovery support.', contact: '603-889-7920', link: '#' });
+      programs.push({ name: 'Farnum Center', desc: 'Comprehensive addiction treatment including residential, outpatient, and MAT services.', contact: '603-263-8498', link: '#' });
+      programs.push({ name: 'Harbor Homes PATH', desc: 'Projects for Assistance in Transition from Homelessness — substance use and mental health outreach.', contact: '603-882-3616', link: '#' });
+    }
+    if (concern === 'crisis') {
+      programs.push({ name: '988 Suicide & Crisis Lifeline', desc: 'Call or text 988 for 24/7 crisis support. Free and confidential.', contact: '988', link: '#' });
+      programs.push({ name: 'NH Rapid Response Access Point', desc: '24/7 crisis line for mental health and substance use emergencies in New Hampshire.', contact: '1-833-710-6477', link: '#' });
+      programs.push({ name: 'GNMHC Crisis Services', desc: 'Local crisis team for Greater Nashua area. Mobile crisis available.', contact: '603-889-6147', link: '#' });
+    }
+
+    // Housing-based
+    if (housing === 'homeless' || housing === 'unstable') {
+      programs.push({ name: 'Harbor Homes Housing', desc: 'Permanent supportive housing, rapid re-housing, and Housing First programs.', contact: '603-882-3616', link: '#' });
+      programs.push({ name: 'Nashua Soup Kitchen & Shelter', desc: 'Emergency shelter, meals, and case management services.', contact: '603-889-7770', link: '#' });
+      programs.push({ name: 'GNMHC Homeless Services', desc: 'Outreach, engagement, and behavioral health services for individuals experiencing homelessness.', contact: '603-889-6147', link: '#' });
+    }
+
+    // Veteran
+    if (veteran === 'yes') {
+      programs.push({ name: 'VA Manchester Medical Center', desc: 'Full VA healthcare services including mental health, substance use, and primary care for eligible veterans.', contact: '603-624-4366', link: '#' });
+      programs.push({ name: 'Easter Seals Veterans Services', desc: 'Military and veterans services including case management, employment, and reintegration support.', contact: '603-621-3520', link: '#' });
+      programs.push({ name: 'Harbor Homes SSVF', desc: 'Supportive Services for Veteran Families — rapid re-housing and homelessness prevention.', contact: '603-882-3616', link: '#' });
+    }
+
+    // DCYF
+    if (dcyf === 'yes') {
+      programs.push({ name: 'GNMHC Child & Family Services', desc: 'Therapy, family support, and case management for children and families involved with child protective services.', contact: '603-889-6147', link: '#' });
+      programs.push({ name: 'Court Diversion Program', desc: 'Alternative-to-court programming for youth with DCYF involvement. Family-centered approach.', contact: '603-889-6147', link: '#' });
+      programs.push({ name: 'Family Resource Center', desc: 'Parenting classes, supervised visitation, family strengthening services for DCYF-involved families.', contact: 'Greater Nashua area', link: '#' });
+    }
+
+    // Age-based
+    if (age === 'child' || age === 'adolescent') {
+      programs.push({ name: 'GNMHC Child & Family Services', desc: 'Comprehensive children\'s mental health services including therapy, home-based, and school-based programs.', contact: '603-889-6147', link: '#' });
+      programs.push({ name: 'Riverbend Community Mental Health (Concord)', desc: 'Children\'s behavioral health services. May serve Greater Nashua area clients by referral.', contact: '603-228-1551', link: '#' });
+      programs.push({ name: 'Nashua Children\'s Home', desc: 'Residential treatment and community-based services for children and adolescents with behavioral health needs.', contact: '603-882-1731', link: '#' });
+    }
+
+    // Disability
+    if (disability === 'physical' || disability === 'idd' || disability === 'both') {
+      programs.push({ name: 'Easter Seals NH', desc: 'Services for individuals with disabilities including autism, developmental delays, and physical disabilities.', contact: '603-621-3520', link: '#' });
+      programs.push({ name: 'Community Bridges', desc: 'Area agency supporting individuals with developmental disabilities — residential, employment, and community services.', contact: '603-225-4153', link: '#' });
+      programs.push({ name: 'GNMHC Disability Services', desc: 'Behavioral health services adapted for individuals with co-occurring disabilities.', contact: '603-889-6147', link: '#' });
+      programs.push({ name: 'ServiceLink', desc: 'Resource center connecting individuals with disabilities and older adults to long-term services and supports.', contact: '1-866-634-9412', link: '#' });
+    }
+
+    // Income-based
+    if (income === 'below-poverty') {
+      programs.push({ name: 'Sliding Scale Services', desc: 'Most community mental health and health centers offer reduced fees based on income verification.', contact: 'Varies by provider', link: '#' });
+      programs.push({ name: 'All Medicaid Services', desc: 'If not already enrolled, may qualify for NH Medicaid Expansion (up to 138% FPL). Apply at DHHS.', contact: 'NH DHHS: 1-844-275-3447', link: '#' });
+      programs.push({ name: '211 NH', desc: 'Statewide resource helpline connecting individuals to food, housing, utility assistance, and social services.', contact: 'Dial 211', link: '#' });
+    }
+
+    // Deduplicate by program name
+    var seen = {};
+    var unique = [];
+    for (var i = 0; i < programs.length; i++) {
+      if (!seen[programs[i].name]) {
+        seen[programs[i].name] = true;
+        unique.push(programs[i]);
+      }
+    }
+
+    var container = document.getElementById('esResultsList');
+    var resultsDiv = document.getElementById('esResults');
+
+    if (unique.length === 0) {
+      container.innerHTML = '<p style="color:var(--text-secondary);font-size:13px">No specific program matches found. Consider contacting <strong>GNMHC (603-889-6147)</strong> or dialing <strong>211</strong> for general resource assistance.</p>';
+      resultsDiv.style.display = 'block';
+      return;
+    }
+
+    var html = '<div style="display:flex;flex-direction:column;gap:10px">';
+    for (var j = 0; j < unique.length; j++) {
+      var p = unique[j];
+      html += '<div style="padding:12px;border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--surface-alt)">';
+      html += '<div style="font-weight:700;font-size:14px;margin-bottom:4px"><a href="' + p.link + '" style="color:var(--accent);text-decoration:none">' + p.name + '</a></div>';
+      html += '<div style="font-size:13px;color:var(--text-secondary);margin-bottom:6px">' + p.desc + '</div>';
+      html += '<div style="font-size:12px;font-weight:600">Contact: ' + p.contact + '</div>';
+      html += '</div>';
+    }
+    html += '</div>';
+    html += '<p style="font-size:12px;color:var(--text-secondary);margin-top:12px;font-style:italic">Found ' + unique.length + ' potential program(s). Always verify current eligibility requirements directly with each program.</p>';
+    container.innerHTML = html;
+    resultsDiv.style.display = 'block';
+  }
+
+  function clearEligibility() {
+    document.getElementById('esAge').value = '';
+    document.getElementById('esInsurance').value = '';
+    document.getElementById('esConcern').value = '';
+    document.getElementById('esHousing').value = '';
+    document.getElementById('esVeteran').value = '';
+    document.getElementById('esDCYF').value = '';
+    document.getElementById('esDisability').value = '';
+    document.getElementById('esIncome').value = '';
+    document.getElementById('esResults').style.display = 'none';
+    document.getElementById('esResultsList').innerHTML = '';
+  }
+
+  function printEligibilityResults() {
+    var content = document.getElementById('esResults').innerHTML;
+    var win = window.open('', '_blank');
+    win.document.write('<html><head><title>Eligibility Screening Results</title>');
+    win.document.write('<style>body{font-family:Arial,sans-serif;padding:20px;font-size:13px}a{color:#2563eb}</style>');
+    win.document.write('</head><body>');
+    win.document.write('<h2>Service Eligibility Pre-Screening Results</h2>');
+    win.document.write('<p style="font-size:12px;color:#666">Generated: ' + new Date().toLocaleDateString() + ' | Screening aid only — verify with each program</p>');
+    win.document.write(content);
+    win.document.write('</body></html>');
+    win.document.close();
+    win.print();
+  }
+  </script>
+</section>
+
+<!-- ================================================================
+     W94 — EMERGENCY CONTACT CARD GENERATOR
+     ================================================================ -->
+<section class="modality-section" id="emergency-card-generator">
+  <div class="modality-header">
+    <div class="modality-badge" style="background:#dc2626">W94</div>
+    <div>
+      <h2>Emergency Contact Card Generator</h2>
+      <div class="modality-desc">Generate printable wallet-sized emergency contact cards for clients. Cards include personal contacts, providers, crisis numbers, medications, and medical info. Print 4 per page in a 2x2 grid.</div>
+    </div>
+  </div>
+
+  <div class="worksheet" id="emergency-card-form">
+    <h3>Card Information</h3>
+    <div class="ws-subtitle">Fill in client information below. Only initials are used on the card for privacy. Data stays in your browser only.</div>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px">
+      <div class="ws-field" style="flex:0 0 120px">
+        <label>Client Initials</label>
+        <input type="text" id="ecInitials" placeholder="e.g., J.D." maxlength="3">
+      </div>
+      <div class="ws-field" style="flex:1;min-width:200px">
+        <label>Insurance Info</label>
+        <input type="text" id="ecInsurance" placeholder="e.g., NH Medicaid ID# 12345">
+      </div>
+      <div class="ws-field" style="flex:1;min-width:200px">
+        <label>Allergies</label>
+        <input type="text" id="ecAllergies" placeholder="e.g., Penicillin, Sulfa">
+      </div>
+    </div>
+
+    <h4 style="font-size:13px;font-weight:700;margin:16px 0 8px">Emergency Contacts</h4>
+    <div id="ecContactRows">
+      <div class="ec-contact-row" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+        <div class="ws-field" style="flex:1;min-width:140px">
+          <label>Name</label>
+          <input type="text" class="ec-name" placeholder="Contact name">
+        </div>
+        <div class="ws-field" style="flex:0 0 120px">
+          <label>Relationship</label>
+          <input type="text" class="ec-relationship" placeholder="e.g., Spouse">
+        </div>
+        <div class="ws-field" style="flex:0 0 140px">
+          <label>Phone</label>
+          <input type="text" class="ec-phone" placeholder="603-555-0100">
+        </div>
+      </div>
+      <div class="ec-contact-row" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+        <div class="ws-field" style="flex:1;min-width:140px">
+          <label>Name</label>
+          <input type="text" class="ec-name" placeholder="Contact name">
+        </div>
+        <div class="ws-field" style="flex:0 0 120px">
+          <label>Relationship</label>
+          <input type="text" class="ec-relationship" placeholder="e.g., Parent">
+        </div>
+        <div class="ws-field" style="flex:0 0 140px">
+          <label>Phone</label>
+          <input type="text" class="ec-phone" placeholder="603-555-0100">
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-sm" onclick="addEmergencyContact()" id="ecAddBtn" style="margin-bottom:16px">+ Add Contact</button>
+
+    <h4 style="font-size:13px;font-weight:700;margin:16px 0 8px">Providers</h4>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:8px">
+      <div class="ws-field" style="flex:1;min-width:180px">
+        <label>Therapist / Case Manager</label>
+        <input type="text" id="ecTherapist" placeholder="Name">
+      </div>
+      <div class="ws-field" style="flex:0 0 140px">
+        <label>Therapist Phone</label>
+        <input type="text" id="ecTherapistPhone" placeholder="603-555-0100">
+      </div>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px">
+      <div class="ws-field" style="flex:1;min-width:180px">
+        <label>Psychiatrist / Prescriber</label>
+        <input type="text" id="ecPsych" placeholder="Name">
+      </div>
+      <div class="ws-field" style="flex:0 0 140px">
+        <label>Prescriber Phone</label>
+        <input type="text" id="ecPsychPhone" placeholder="603-555-0100">
+      </div>
+    </div>
+
+    <h4 style="font-size:13px;font-weight:700;margin:16px 0 8px">Medical Information</h4>
+    <div class="ws-field" style="margin-bottom:8px">
+      <label>Current Medications (brief list)</label>
+      <textarea id="ecMedications" rows="2" placeholder="e.g., Sertraline 100mg daily, Trazodone 50mg PRN"></textarea>
+    </div>
+    <div class="ws-field" style="margin-bottom:16px">
+      <label>Medical Conditions</label>
+      <textarea id="ecConditions" rows="2" placeholder="e.g., Asthma, Diabetes Type 2"></textarea>
+    </div>
+
+    <h4 style="font-size:13px;font-weight:700;margin:16px 0 8px">Crisis Numbers (pre-populated)</h4>
+    <div style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;line-height:1.6">
+      <strong>988</strong> — Suicide &amp; Crisis Lifeline<br>
+      <strong>1-833-710-6477</strong> — NH Rapid Response Access Point<br>
+      <strong>603-889-6147</strong> — Local Crisis (GNMHC)
+    </div>
+
+    <div class="ws-actions">
+      <button class="btn btn-sm btn-primary" onclick="generateEmergencyCard()">Generate Card</button>
+      <button class="btn btn-sm" onclick="clearEmergencyCard()">Clear</button>
+    </div>
+
+    <!-- Card Preview -->
+    <div id="ecPreviewArea" style="display:none;margin-top:20px">
+      <h4 style="font-size:13px;font-weight:700;margin-bottom:10px">Card Preview (wallet size: 3.5" x 2")</h4>
+      <div id="ecCardPreview" style="width:336px;height:192px;border:2px solid var(--border);border-radius:4px;padding:6px 8px;font-family:'Courier New',Courier,monospace;font-size:8px;line-height:1.3;background:var(--surface);overflow:hidden;box-sizing:border-box"></div>
+      <div class="ws-actions" style="margin-top:12px">
+        <button class="btn btn-sm btn-primary" onclick="printEmergencyCards()">Print Cards (4 per page)</button>
+        <button class="btn btn-sm" onclick="clearEmergencyCard()">Clear All</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  var ecContactCount = 2;
+
+  function addEmergencyContact() {
+    if (ecContactCount >= 5) { alert('Maximum 5 emergency contacts.'); return; }
+    ecContactCount++;
+    var row = document.createElement('div');
+    row.className = 'ec-contact-row';
+    row.style.cssText = 'display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px';
+    row.innerHTML = '<div class="ws-field" style="flex:1;min-width:140px"><label>Name</label><input type="text" class="ec-name" placeholder="Contact name"></div>' +
+      '<div class="ws-field" style="flex:0 0 120px"><label>Relationship</label><input type="text" class="ec-relationship" placeholder="Relationship"></div>' +
+      '<div class="ws-field" style="flex:0 0 140px"><label>Phone</label><input type="text" class="ec-phone" placeholder="603-555-0100"></div>';
+    document.getElementById('ecContactRows').appendChild(row);
+  }
+
+  function getEmergencyContacts() {
+    var names = document.querySelectorAll('.ec-name');
+    var rels = document.querySelectorAll('.ec-relationship');
+    var phones = document.querySelectorAll('.ec-phone');
+    var contacts = [];
+    for (var i = 0; i < names.length; i++) {
+      if (names[i].value.trim()) {
+        contacts.push({ name: names[i].value.trim(), rel: rels[i].value.trim(), phone: phones[i].value.trim() });
+      }
+    }
+    return contacts;
+  }
+
+  function generateEmergencyCard() {
+    var initials = document.getElementById('ecInitials').value.trim() || '---';
+    var insurance = document.getElementById('ecInsurance').value.trim();
+    var allergies = document.getElementById('ecAllergies').value.trim();
+    var therapist = document.getElementById('ecTherapist').value.trim();
+    var therapistPh = document.getElementById('ecTherapistPhone').value.trim();
+    var psych = document.getElementById('ecPsych').value.trim();
+    var psychPh = document.getElementById('ecPsychPhone').value.trim();
+    var meds = document.getElementById('ecMedications').value.trim();
+    var conditions = document.getElementById('ecConditions').value.trim();
+    var contacts = getEmergencyContacts();
+
+    var html = '';
+    html += '<div style="font-weight:bold;font-size:9px;text-align:center;border-bottom:1px solid #999;padding-bottom:2px;margin-bottom:3px">EMERGENCY CONTACT CARD &mdash; ' + initials + '</div>';
+
+    // Emergency contacts
+    if (contacts.length > 0) {
+      html += '<div style="font-weight:bold;font-size:7px;margin-bottom:1px">EMERGENCY CONTACTS:</div>';
+      for (var i = 0; i < contacts.length; i++) {
+        html += '<div style="font-size:7.5px">' + contacts[i].name + ' (' + contacts[i].rel + ') ' + contacts[i].phone + '</div>';
+      }
+    }
+
+    // Providers
+    html += '<div style="font-weight:bold;font-size:7px;margin-top:3px;margin-bottom:1px">PROVIDERS:</div>';
+    if (therapist) html += '<div style="font-size:7.5px">Therapist: ' + therapist + ' ' + therapistPh + '</div>';
+    if (psych) html += '<div style="font-size:7.5px">Prescriber: ' + psych + ' ' + psychPh + '</div>';
+
+    // Crisis numbers
+    html += '<div style="font-weight:bold;font-size:7px;margin-top:3px;margin-bottom:1px">CRISIS:</div>';
+    html += '<div style="font-size:7.5px">988 | NH Rapid: 1-833-710-6477 | Local: 603-889-6147</div>';
+
+    // Medical
+    if (meds) {
+      html += '<div style="font-weight:bold;font-size:7px;margin-top:3px;margin-bottom:1px">MEDS:</div>';
+      html += '<div style="font-size:7px">' + meds.substring(0, 80) + (meds.length > 80 ? '...' : '') + '</div>';
+    }
+    if (allergies) {
+      html += '<div style="font-size:7px"><strong>ALLERGIES:</strong> ' + allergies + '</div>';
+    }
+    if (conditions) {
+      html += '<div style="font-size:7px"><strong>DX:</strong> ' + conditions.substring(0, 60) + (conditions.length > 60 ? '...' : '') + '</div>';
+    }
+    if (insurance) {
+      html += '<div style="font-size:7px"><strong>INS:</strong> ' + insurance + '</div>';
+    }
+
+    document.getElementById('ecCardPreview').innerHTML = html;
+    document.getElementById('ecPreviewArea').style.display = 'block';
+  }
+
+  function printEmergencyCards() {
+    var cardHTML = document.getElementById('ecCardPreview').innerHTML;
+    var win = window.open('', '_blank');
+    win.document.write('<html><head><title>Emergency Contact Cards</title>');
+    win.document.write('<style>');
+    win.document.write('@page{size:letter;margin:0.5in}');
+    win.document.write('body{font-family:"Courier New",Courier,monospace;margin:0;padding:0}');
+    win.document.write('.card-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:16px;width:7.5in;height:10in;padding:0}');
+    win.document.write('.card{width:3.5in;height:2in;border:1px solid #000;border-radius:4px;padding:6px 8px;font-size:8px;line-height:1.3;box-sizing:border-box;overflow:hidden}');
+    win.document.write('</style></head><body>');
+    win.document.write('<div class="card-grid">');
+    for (var i = 0; i < 4; i++) {
+      win.document.write('<div class="card">' + cardHTML + '</div>');
+    }
+    win.document.write('</div>');
+    win.document.write('</body></html>');
+    win.document.close();
+    win.print();
+  }
+
+  function clearEmergencyCard() {
+    document.getElementById('ecInitials').value = '';
+    document.getElementById('ecInsurance').value = '';
+    document.getElementById('ecAllergies').value = '';
+    document.getElementById('ecTherapist').value = '';
+    document.getElementById('ecTherapistPhone').value = '';
+    document.getElementById('ecPsych').value = '';
+    document.getElementById('ecPsychPhone').value = '';
+    document.getElementById('ecMedications').value = '';
+    document.getElementById('ecConditions').value = '';
+    // Reset contact rows to 2
+    var container = document.getElementById('ecContactRows');
+    var rows = container.querySelectorAll('.ec-contact-row');
+    for (var i = rows.length - 1; i >= 2; i--) {
+      container.removeChild(rows[i]);
+    }
+    ecContactCount = 2;
+    var names = container.querySelectorAll('.ec-name');
+    var rels = container.querySelectorAll('.ec-relationship');
+    var phones = container.querySelectorAll('.ec-phone');
+    for (var j = 0; j < names.length; j++) {
+      names[j].value = '';
+      rels[j].value = '';
+      phones[j].value = '';
+    }
+    document.getElementById('ecPreviewArea').style.display = 'none';
+  }
+  </script>
+</section>
+
+<!-- ================================================================
+     W96 — RESOURCE COMPARISON MATRIX
+     ================================================================ -->
+<section class="modality-section" id="resource-comparison">
+  <div class="modality-header">
+    <div class="modality-badge" style="background:#2563eb">W96</div>
+    <div>
+      <h2>Resource Comparison Matrix</h2>
+      <div class="modality-desc">Compare local service providers side-by-side to help with referral decisions. Select 2-4 providers and see their services, populations, insurance, wait times, and more in a comparison table.</div>
+    </div>
+  </div>
+
+  <div class="worksheet" id="resource-comparison-form">
+    <h3>Select Providers to Compare</h3>
+    <div class="ws-subtitle">Choose 2 to 4 providers, then click Compare to see a side-by-side matrix. Data stays in your browser only.</div>
+
+    <div id="rcProviderSelectors">
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:8px">
+        <div class="ws-field" style="flex:1;min-width:200px">
+          <label>Provider 1</label>
+          <select class="rc-provider">
+            <option value="">Select provider...</option>
+            <option value="gnmhc">GNMHC</option>
+            <option value="harbor-homes">Harbor Homes</option>
+            <option value="keystone-hall">Keystone Hall</option>
+            <option value="bridges">Bridges</option>
+            <option value="southern-nh">Southern NH Services</option>
+          </select>
+        </div>
+        <div class="ws-field" style="flex:1;min-width:200px">
+          <label>Provider 2</label>
+          <select class="rc-provider">
+            <option value="">Select provider...</option>
+            <option value="gnmhc">GNMHC</option>
+            <option value="harbor-homes">Harbor Homes</option>
+            <option value="keystone-hall">Keystone Hall</option>
+            <option value="bridges">Bridges</option>
+            <option value="southern-nh">Southern NH Services</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-sm" onclick="addProviderSelector()" id="rcAddBtn" style="margin-bottom:16px">+ Add Provider</button>
+
+    <div class="ws-actions">
+      <button class="btn btn-sm btn-primary" onclick="compareProviders()">Compare</button>
+      <button class="btn btn-sm" onclick="clearComparison()">Clear</button>
+    </div>
+
+    <div id="rcResults" style="display:none;margin-top:20px">
+      <h3 style="margin-bottom:12px">Comparison Matrix</h3>
+      <div style="overflow-x:auto">
+        <table class="ws-table" id="rcTable">
+          <thead id="rcTableHead"></thead>
+          <tbody id="rcTableBody"></tbody>
+        </table>
+      </div>
+      <div class="ws-actions" style="margin-top:16px">
+        <button class="btn btn-sm" onclick="printComparison()">Print Comparison</button>
+        <button class="btn btn-sm" onclick="clearComparison()">Clear All</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  var rcProviderCount = 2;
+
+  var rcProviderData = {
+    'gnmhc': {
+      name: 'Greater Nashua Mental Health Center (GNMHC)',
+      services: 'Outpatient therapy (individual, group, family), psychiatry, medication management, crisis services, ACT, emergency services, children\'s services, substance use counseling, homeless outreach',
+      populations: 'All ages; children, adolescents, adults, older adults; individuals with SMI, SED; families',
+      insurance: 'NH Medicaid, Medicare, most private insurers, sliding scale for uninsured',
+      waitTimes: 'Crisis: same day; Urgent: 1-3 days; Routine outpatient: 2-4 weeks; Psychiatry: 4-8 weeks',
+      location: '440 Amherst St, Nashua NH 03063',
+      hours: 'Mon-Fri 8am-5pm; Crisis services 24/7',
+      specialFeatures: '24/7 crisis team, mobile crisis, school-based services, jail diversion, Bridges ACT team, integrated primary care partnerships',
+      contact: '603-889-6147'
+    },
+    'harbor-homes': {
+      name: 'Harbor Homes, Inc.',
+      services: 'Permanent supportive housing, rapid re-housing, behavioral health, vocational rehabilitation, veteran services (SSVF), PATH outreach, peer support, employment services',
+      populations: 'Adults experiencing homelessness, veterans, individuals with SMI, individuals with co-occurring disorders',
+      insurance: 'Medicaid, Medicare, grant-funded (many services free for eligible individuals)',
+      waitTimes: 'Housing: varies by availability (weeks to months); Services: 1-2 weeks; Veteran SSVF: 1-3 days',
+      location: '77 Northeastern Blvd, Nashua NH 03062',
+      hours: 'Mon-Fri 8am-5pm; Some residential programs 24/7',
+      specialFeatures: 'Housing First model, HUD-VASH vouchers, veteran-specific programming, integrated behavioral health + housing, peer support specialists',
+      contact: '603-882-3616'
+    },
+    'keystone-hall': {
+      name: 'Keystone Hall',
+      services: 'Medically monitored detox, residential treatment (short and long-term), intensive outpatient (IOP), outpatient counseling, MAT (Suboxone, Vivitrol), recovery support, relapse prevention',
+      populations: 'Adults 18+ with substance use disorders; co-occurring mental health accepted',
+      insurance: 'NH Medicaid, most private insurers, some self-pay options, state-funded beds available',
+      waitTimes: 'Detox: 0-3 days; Residential: 1-2 weeks; IOP: 1-2 weeks; Outpatient: 1-3 weeks',
+      location: '560 East Dunstable Rd, Nashua NH 03062',
+      hours: 'Residential/Detox: 24/7; Outpatient: Mon-Fri 8am-8pm; Sat groups available',
+      specialFeatures: 'Full continuum of SUD care in one location, gender-specific programming, family education, alumni support, strong recovery community connections',
+      contact: '603-889-7920'
+    },
+    'bridges': {
+      name: 'Bridges (GNMHC ACT Program)',
+      services: 'Assertive Community Treatment (ACT), intensive case management, medication management (in-community), supported employment, skills training, crisis intervention, peer support',
+      populations: 'Adults with serious mental illness (SMI) — typically schizophrenia spectrum, severe bipolar, treatment-resistant depression with functional impairment',
+      insurance: 'NH Medicaid (primary funder), Medicare',
+      waitTimes: 'Referral review: 1-2 weeks; Enrollment: 2-4 weeks (capacity-dependent)',
+      location: 'Community-based (operates out of GNMHC, 440 Amherst St, Nashua)',
+      hours: 'Mon-Fri 8am-5pm with on-call crisis support after hours',
+      specialFeatures: 'Full multidisciplinary team (psychiatrist, nurse, SW, vocational, peer), community-based delivery (goes to client), high-fidelity ACT model, integrated dual-disorder treatment',
+      contact: '603-889-6147 (ask for Bridges/ACT)'
+    },
+    'southern-nh': {
+      name: 'Southern NH Services',
+      services: 'Fuel assistance (LIHEAP), food pantries, WIC, housing stabilization, emergency assistance, Head Start, child care, weatherization, financial literacy, case management',
+      populations: 'Low-income individuals and families in southern NH; all ages; priority for families with children',
+      insurance: 'N/A (grant-funded social services; income eligibility required for most programs)',
+      waitTimes: 'Emergency assistance: 1-5 days; Fuel assistance: seasonal (applications Oct-Apr); Head Start: rolling enrollment',
+      location: 'Multiple locations; Main office: 4 Elm St, Nashua NH 03060',
+      hours: 'Mon-Fri 8:30am-4:30pm',
+      specialFeatures: 'Community Action Agency, federally-funded programs, wraparound family support, connects to state benefit applications, annual holiday assistance programs',
+      contact: '603-889-3440'
+    }
+  };
+
+  function addProviderSelector() {
+    if (rcProviderCount >= 4) { alert('Maximum 4 providers for comparison.'); return; }
+    rcProviderCount++;
+    var wrapper = document.createElement('div');
+    wrapper.style.cssText = 'display:flex;gap:12px;flex-wrap:wrap;margin-bottom:8px';
+    wrapper.innerHTML = '<div class="ws-field" style="flex:1;min-width:200px"><label>Provider ' + rcProviderCount + '</label>' +
+      '<select class="rc-provider"><option value="">Select provider...</option>' +
+      '<option value="gnmhc">GNMHC</option>' +
+      '<option value="harbor-homes">Harbor Homes</option>' +
+      '<option value="keystone-hall">Keystone Hall</option>' +
+      '<option value="bridges">Bridges</option>' +
+      '<option value="southern-nh">Southern NH Services</option></select></div>';
+    document.getElementById('rcProviderSelectors').appendChild(wrapper);
+  }
+
+  function compareProviders() {
+    var selects = document.querySelectorAll('.rc-provider');
+    var selected = [];
+    for (var i = 0; i < selects.length; i++) {
+      if (selects[i].value && selected.indexOf(selects[i].value) === -1) {
+        selected.push(selects[i].value);
+      }
+    }
+    if (selected.length < 2) {
+      alert('Please select at least 2 different providers to compare.');
+      return;
+    }
+
+    var rows = [
+      { label: 'Services Offered', key: 'services' },
+      { label: 'Populations Served', key: 'populations' },
+      { label: 'Insurance Accepted', key: 'insurance' },
+      { label: 'Typical Wait Times', key: 'waitTimes' },
+      { label: 'Location', key: 'location' },
+      { label: 'Hours', key: 'hours' },
+      { label: 'Special Features', key: 'specialFeatures' },
+      { label: 'Contact', key: 'contact' }
+    ];
+
+    // Build header
+    var headHTML = '<tr><th style="width:15%;min-width:120px">Category</th>';
+    for (var s = 0; s < selected.length; s++) {
+      headHTML += '<th>' + rcProviderData[selected[s]].name + '</th>';
+    }
+    headHTML += '</tr>';
+    document.getElementById('rcTableHead').innerHTML = headHTML;
+
+    // Build body
+    var bodyHTML = '';
+    for (var r = 0; r < rows.length; r++) {
+      bodyHTML += '<tr><td style="font-weight:700;font-size:13px;background:var(--surface-alt)">' + rows[r].label + '</td>';
+      for (var p = 0; p < selected.length; p++) {
+        bodyHTML += '<td style="font-size:12px;line-height:1.5">' + rcProviderData[selected[p]][rows[r].key] + '</td>';
+      }
+      bodyHTML += '</tr>';
+    }
+    document.getElementById('rcTableBody').innerHTML = bodyHTML;
+    document.getElementById('rcResults').style.display = 'block';
+  }
+
+  function printComparison() {
+    var table = document.getElementById('rcTable').outerHTML;
+    var win = window.open('', '_blank');
+    win.document.write('<html><head><title>Resource Comparison Matrix</title>');
+    win.document.write('<style>body{font-family:Arial,sans-serif;padding:20px;font-size:12px}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccc;padding:8px;text-align:left;vertical-align:top}th{background:#f0f0f0;font-weight:bold}td:first-child{font-weight:bold;background:#f9f9f9}</style>');
+    win.document.write('</head><body>');
+    win.document.write('<h2>Resource Comparison Matrix</h2>');
+    win.document.write('<p style="font-size:11px;color:#666">Generated: ' + new Date().toLocaleDateString() + ' | Verify current information directly with each provider</p>');
+    win.document.write(table);
+    win.document.write('</body></html>');
+    win.document.close();
+    win.print();
+  }
+
+  function clearComparison() {
+    var selects = document.querySelectorAll('.rc-provider');
+    for (var i = 0; i < selects.length; i++) selects[i].value = '';
+    // Remove extra selectors beyond the original 2
+    var container = document.getElementById('rcProviderSelectors');
+    var wrappers = container.children;
+    while (wrappers.length > 1) {
+      container.removeChild(wrappers[wrappers.length - 1]);
+    }
+    // Reset the first wrapper to have 2 selects
+    var firstWrapper = wrappers[0];
+    var firstSelects = firstWrapper.querySelectorAll('.rc-provider');
+    for (var j = 0; j < firstSelects.length; j++) firstSelects[j].value = '';
+    rcProviderCount = 2;
+    document.getElementById('rcResults').style.display = 'none';
+    document.getElementById('rcTableHead').innerHTML = '';
+    document.getElementById('rcTableBody').innerHTML = '';
+  }
+  </script>
+</section>
+
     </main>
   </div><!-- /tools-layout -->
 
@@ -10231,7 +10973,11 @@ SAMHSA National Helpline: 1-800-662-4357</textarea>
 <footer class="site-footer">
   <p>Greater Nashua Community Mental Health Resources &copy; 2026. For informational purposes only.</p>
   <p>These tools are clinical aids, not a substitute for professional training, supervision, or clinical judgment.</p>
-  <p style="margin-top:8px"><a href="#" id="adminGate" style="color:var(--text-muted);font-size:11px" aria-label="Version 2.0 - Admin access">v2.0</a></p>
+  <div class="last-updated-bar">
+    <span class="last-updated-dot"></span>
+    Content last updated: June 24, 2026 &nbsp;|&nbsp; Wave 100
+  </div>
+  <p style="margin-top:8px"><a href="#" id="adminGate" style="color:var(--text-muted);font-size:11px" aria-label="Version 4.0 - Admin access">v4.0</a></p>
 </footer>
 
 <div class="toast" id="toast"></div>

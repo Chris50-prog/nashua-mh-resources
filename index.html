@@ -290,6 +290,358 @@
   background: var(--success);
   display: inline-block;
 }
+
+/* ===== WAVE 7-8 — News grid "show more" ===== */
+.news-grid-expanded .news-card-hidden { display: none; }
+.news-grid-expanded.show-all .news-card-hidden { display: flex; }
+.news-show-more-row {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 8px 0;
+}
+.news-show-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.news-show-more-btn:hover {
+  background: var(--accent-light);
+  border-color: var(--accent);
+}
+.news-source-tag.legislative {
+  background: #ede9fe;
+  color: #6d28d9;
+}
+[data-theme="dark"] .news-source-tag.legislative {
+  background: #1e1638;
+  color: #a78bfa;
+}
+.news-source-tag.opioid {
+  background: var(--danger-light);
+  color: var(--danger);
+}
+.news-source-tag.workforce {
+  background: #e0e7ff;
+  color: #4338ca;
+}
+[data-theme="dark"] .news-source-tag.workforce {
+  background: #1e1b4b;
+  color: #818cf8;
+}
+.news-source-tag.policy {
+  background: #fef3c7;
+  color: #92400e;
+}
+[data-theme="dark"] .news-source-tag.policy {
+  background: #2d2810;
+  color: #fbbf24;
+}
+.news-source-tag.funding {
+  background: var(--success-light);
+  color: var(--success);
+}
+
+/* ===== WAVE 9 — Professional Development Section ===== */
+.prof-dev-section {
+  margin-bottom: 32px;
+}
+.prof-dev-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+@media (max-width: 900px) {
+  .prof-dev-grid { grid-template-columns: 1fr; }
+}
+.prof-dev-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+.prof-dev-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: #c7ccd6;
+}
+[data-theme="dark"] .prof-dev-card:hover {
+  border-color: #4a5068;
+}
+.prof-dev-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.prof-dev-card-header h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+  flex: 1;
+}
+.prof-dev-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.prof-dev-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.prof-dev-tag.date-tag {
+  background: var(--surface-alt);
+  color: var(--text-secondary);
+}
+.prof-dev-tag.provider-tag {
+  background: var(--accent-light);
+  color: var(--accent);
+}
+.prof-dev-tag.ce-tag {
+  background: var(--success-light);
+  color: var(--success);
+  font-weight: 700;
+}
+.prof-dev-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 10px;
+  flex: 1;
+}
+.prof-dev-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+}
+.prof-dev-link:hover {
+  text-decoration: underline;
+}
+
+/* ===== WAVE 10 — Staff Bulletin Board ===== */
+.bulletin-section {
+  margin-bottom: 32px;
+}
+.bulletin-board {
+  background: var(--surface-alt);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+@media (max-width: 768px) {
+  .bulletin-board { grid-template-columns: 1fr; }
+}
+.bulletin-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  position: relative;
+  transition: all 0.15s;
+  box-shadow: var(--shadow);
+}
+.bulletin-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+.bulletin-card::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: -6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+.bulletin-card.cat-policy::before { background: var(--accent); }
+.bulletin-card.cat-hr::before { background: var(--purple); }
+.bulletin-card.cat-clinical::before { background: var(--teal); }
+.bulletin-card.cat-general::before { background: var(--warning); }
+.bulletin-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+.bulletin-date {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.bulletin-cat-tag {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.bulletin-cat-tag.policy { background: var(--accent-light); color: var(--accent); }
+.bulletin-cat-tag.hr { background: var(--purple-light); color: var(--purple); }
+.bulletin-cat-tag.clinical { background: var(--teal-light); color: var(--teal); }
+.bulletin-cat-tag.general { background: var(--warning-light); color: var(--warning); }
+.bulletin-card h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.bulletin-card p {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.bulletin-admin-note {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: 12px;
+}
+
+/* ===== WAVE 11 — "NEW" Badges ===== */
+.badge-new {
+  display: inline-block;
+  background: var(--danger);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 10px;
+  margin-left: 8px;
+  vertical-align: middle;
+  line-height: 1.4;
+  animation: badgePulse 2s ease-in-out infinite;
+}
+@keyframes badgePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.75; }
+}
+
+/* ===== WAVE 12 — Seasonal Awareness Banner ===== */
+.seasonal-banner {
+  margin-bottom: 32px;
+  background: linear-gradient(135deg, #fef9c3 0%, #fef3c7 40%, #ffedd5 100%);
+  border: 1px solid #fbbf24;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+}
+[data-theme="dark"] .seasonal-banner {
+  background: linear-gradient(135deg, #2d2810 0%, #2d2510 40%, #2d1f0a 100%);
+  border-color: #92400e;
+}
+.seasonal-banner-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 24px 12px;
+}
+.seasonal-sun-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.35);
+}
+.seasonal-banner-header h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #92400e;
+}
+[data-theme="dark"] .seasonal-banner-header h3 {
+  color: #fbbf24;
+}
+.seasonal-banner-header .seasonal-subtitle {
+  font-size: 12px;
+  color: #a16207;
+  font-weight: 500;
+}
+[data-theme="dark"] .seasonal-banner-header .seasonal-subtitle {
+  color: #d4a017;
+}
+.seasonal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 8px 24px 20px;
+}
+@media (max-width: 768px) {
+  .seasonal-grid { grid-template-columns: 1fr; }
+}
+.seasonal-item {
+  background: rgba(255,255,255,0.7);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+[data-theme="dark"] .seasonal-item {
+  background: rgba(0,0,0,0.2);
+  border-color: rgba(251, 191, 36, 0.15);
+}
+.seasonal-item h4 {
+  font-size: 13px;
+  font-weight: 700;
+  color: #92400e;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+[data-theme="dark"] .seasonal-item h4 {
+  color: #fbbf24;
+}
+.seasonal-item p {
+  font-size: 12px;
+  color: #78350f;
+  line-height: 1.5;
+}
+[data-theme="dark"] .seasonal-item p {
+  color: #d4a017;
+}
+.seasonal-rotate-note {
+  text-align: right;
+  padding: 0 24px 14px;
+  font-size: 10px;
+  color: #a16207;
+  font-style: italic;
+}
+[data-theme="dark"] .seasonal-rotate-note {
+  color: #92400e;
+}
 </style>
 </head>
 <body>
@@ -355,7 +707,7 @@
   <!-- Quick-Action Role Cards -->
   <div class="role-cards-section">
     <div class="section-header">
-      <h2>I Need Resources For...</h2>
+      <h2>I Need Resources For... <span class="badge-new">NEW</span></h2>
       <span class="section-count">Quick access by role</span>
     </div>
     <div class="grid-3">
@@ -372,7 +724,7 @@
             <li><a href="tools.html#dbt">&#9998; DBT Skills Handouts <span class="link-arrow">&#8250;</span></a></li>
             <li><a href="tools.html#screening">&#9776; Screening Instruments (PHQ-9, GAD-7, AUDIT) <span class="link-arrow">&#8250;</span></a></li>
             <li><a href="tools.html#mi">&#9776; Motivational Interviewing Guides <span class="link-arrow">&#8250;</span></a></li>
-            <li><a href="tools.html#safety">&#9888; Safety Planning Template <span class="link-arrow">&#8250;</span></a></li>
+            <li><a href="tools.html#safety">&#9888; Safety Planning Template <span class="badge-new">NEW</span> <span class="link-arrow">&#8250;</span></a></li>
             <li><a href="tools.html#treatment">&#9776; Treatment Plan Quick Reference <span class="link-arrow">&#8250;</span></a></li>
           </ul>
         </div>
@@ -559,14 +911,15 @@
     </div>
   </div>
 
-  <!-- News & Updates Feed -->
+  <!-- News & Updates Feed (W7-8: expanded to 16 cards) -->
   <div class="news-section">
     <div class="news-section-header">
-      <h2>News &amp; Updates</h2>
+      <h2>News &amp; Updates <span class="badge-new">NEW</span></h2>
       <span class="news-curated-note">News items are manually curated. Last updated: June 2026</span>
     </div>
-    <div class="news-grid">
+    <div class="news-grid news-grid-expanded" id="newsGrid">
 
+      <!-- Card 1 -->
       <div class="news-card">
         <div class="news-card-meta">
           <span class="news-date">Jun 18, 2026</span>
@@ -577,6 +930,7 @@
         <a href="https://www.samhsa.gov/find-help/988" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
       </div>
 
+      <!-- Card 2 -->
       <div class="news-card">
         <div class="news-card-meta">
           <span class="news-date">Jun 12, 2026</span>
@@ -587,6 +941,29 @@
         <a href="https://www.dhhs.nh.gov/programs-services/medicaid" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
       </div>
 
+      <!-- Card 3 -->
+      <div class="news-card">
+        <div class="news-card-meta">
+          <span class="news-date">Jun 10, 2026</span>
+          <span class="news-source-tag legislative">Legislative</span>
+        </div>
+        <h3>SB 412 Signed: NH Expands Mental Health Parity Enforcement</h3>
+        <p class="news-desc">Governor signs SB 412, strengthening mental health parity enforcement for commercial insurers in NH. The bill requires insurers to submit annual parity compliance reports and establishes a dedicated complaint pathway for denied behavioral health claims.</p>
+        <a href="https://www.gencourt.state.nh.us/" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="news-card">
+        <div class="news-card-meta">
+          <span class="news-date">Jun 8, 2026</span>
+          <span class="news-source-tag opioid">Opioid Response</span>
+        </div>
+        <h3>NH Opioid Response: Xylazine Test Strips Now Available at All Doorways</h3>
+        <p class="news-desc">All NH Doorway locations now distribute free xylazine test strips alongside fentanyl test strips. Providers should inform clients about xylazine-positive supply risks, wound care referrals, and the limited efficacy of naloxone for xylazine-involved overdoses.</p>
+        <a href="https://www.dhhs.nh.gov/programs-services/alcohol-drug-services" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
+      </div>
+
+      <!-- Card 5 -->
       <div class="news-card">
         <div class="news-card-meta">
           <span class="news-date">Jun 5, 2026</span>
@@ -597,6 +974,18 @@
         <a href="https://www.apa.org/ptsd-guideline" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
       </div>
 
+      <!-- Card 6 -->
+      <div class="news-card">
+        <div class="news-card-meta">
+          <span class="news-date">Jun 2, 2026</span>
+          <span class="news-source-tag funding">Funding</span>
+        </div>
+        <h3>SAMHSA CCBHC Expansion Grant: $4M Available for NH Community Centers</h3>
+        <p class="news-desc">SAMHSA announces FY2027 CCBHC expansion grants. NH CMHCs not yet certified can apply for up to $4M in planning and implementation funding. Applications due September 30, 2026. Technical assistance webinars begin July.</p>
+        <a href="https://www.samhsa.gov/grants" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
+      </div>
+
+      <!-- Card 7 -->
       <div class="news-card">
         <div class="news-card-meta">
           <span class="news-date">May 28, 2026</span>
@@ -607,7 +996,20 @@
         <a href="tools.html#safety" class="news-read-more">View heat safety handout &#8594;</a>
       </div>
 
+      <!-- Card 8 -->
       <div class="news-card">
+        <div class="news-card-meta">
+          <span class="news-date">May 22, 2026</span>
+          <span class="news-source-tag workforce">Workforce</span>
+        </div>
+        <h3>NH Loan Repayment Program: Up to $75K for MH Professionals in Underserved Areas</h3>
+        <p class="news-desc">The NH DHHS Office of Workforce Development is accepting applications for the behavioral health loan repayment program. Licensed clinicians (LICSW, LCMHC, MLADC) committing to 3 years at a CMHC or FQHC may qualify for up to $75,000 in student loan forgiveness.</p>
+        <a href="https://www.dhhs.nh.gov/" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
+      </div>
+
+      <!-- Cards 9-16: hidden by default, shown on "Show More" -->
+      <!-- Card 9 -->
+      <div class="news-card news-card-hidden">
         <div class="news-card-meta">
           <span class="news-date">May 20, 2026</span>
           <span class="news-source-tag training">Training</span>
@@ -617,7 +1019,19 @@
         <a href="https://www.dhhs.nh.gov/programs-services/alcohol-drug-services" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
       </div>
 
-      <div class="news-card">
+      <!-- Card 10 -->
+      <div class="news-card news-card-hidden">
+        <div class="news-card-meta">
+          <span class="news-date">May 16, 2026</span>
+          <span class="news-source-tag policy">Policy</span>
+        </div>
+        <h3>HB 1187: Telehealth Flexibilities Made Permanent for Behavioral Health in NH</h3>
+        <p class="news-desc">The NH Legislature passed HB 1187, making pandemic-era telehealth flexibilities permanent for behavioral health services. Audio-only sessions remain reimbursable for established patients, and out-of-state provider compacts are extended through 2029.</p>
+        <a href="https://www.gencourt.state.nh.us/" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
+      </div>
+
+      <!-- Card 11 -->
+      <div class="news-card news-card-hidden">
         <div class="news-card-meta">
           <span class="news-date">May 14, 2026</span>
           <span class="news-source-tag community">Nashua/NH</span>
@@ -627,7 +1041,19 @@
         <a href="https://www.gnmhc.org" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
       </div>
 
-      <div class="news-card">
+      <!-- Card 12 -->
+      <div class="news-card news-card-hidden">
+        <div class="news-card-meta">
+          <span class="news-date">May 10, 2026</span>
+          <span class="news-source-tag opioid">Opioid Response</span>
+        </div>
+        <h3>NH Fentanyl Overdose Deaths Decline 12% in Q1 2026</h3>
+        <p class="news-desc">NH DHHS reports a 12% decline in fentanyl-related overdose deaths in Q1 2026 compared to Q1 2025. Officials attribute gains to expanded naloxone distribution, Doorway same-day MAT access, and recovery housing investments. Xylazine-involved deaths remain a concern.</p>
+        <a href="https://www.dhhs.nh.gov/programs-services/alcohol-drug-services" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
+      </div>
+
+      <!-- Card 13 -->
+      <div class="news-card news-card-hidden">
         <div class="news-card-meta">
           <span class="news-date">May 8, 2026</span>
           <span class="news-source-tag samhsa">SAMHSA</span>
@@ -637,7 +1063,19 @@
         <a href="https://www.samhsa.gov/certified-community-behavioral-health-clinics" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
       </div>
 
-      <div class="news-card">
+      <!-- Card 14 -->
+      <div class="news-card news-card-hidden">
+        <div class="news-card-meta">
+          <span class="news-date">May 2, 2026</span>
+          <span class="news-source-tag workforce">Workforce</span>
+        </div>
+        <h3>DHHS Launches MH Workforce Pipeline: Paid Internship Program at NH CMHCs</h3>
+        <p class="news-desc">NH DHHS announces a paid clinical internship program placing MSW and CMHC graduate students at community mental health centers statewide. Stipends cover tuition offset plus supervision hours toward licensure. Applications open for Fall 2026 cohort.</p>
+        <a href="https://www.dhhs.nh.gov/" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
+      </div>
+
+      <!-- Card 15 -->
+      <div class="news-card news-card-hidden">
         <div class="news-card-meta">
           <span class="news-date">Apr 30, 2026</span>
           <span class="news-source-tag nh-state">NH State</span>
@@ -645,6 +1083,234 @@
         <h3>NH 10-Year Mental Health Plan: Workforce Expansion &amp; Housing Priorities</h3>
         <p class="news-desc">The Governor's Commission on Mental Health released the updated 10-Year Plan, prioritizing workforce loan forgiveness, 200 new supported housing units by 2028, and dedicated crisis receiving center funding for the Nashua region.</p>
         <a href="https://www.dhhs.nh.gov/programs-services/behavioral-health" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
+      </div>
+
+      <!-- Card 16 -->
+      <div class="news-card news-card-hidden">
+        <div class="news-card-meta">
+          <span class="news-date">Apr 22, 2026</span>
+          <span class="news-source-tag legislative">Legislative</span>
+        </div>
+        <h3>HB 1504: Medicaid Reimbursement Rate Increase for CMHC Outpatient Services</h3>
+        <p class="news-desc">HB 1504 approved a 15% Medicaid rate increase for outpatient behavioral health services at CMHCs effective January 2027. This is the first rate adjustment in 4 years and aims to address workforce retention challenges at community providers.</p>
+        <a href="https://www.gencourt.state.nh.us/" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
+      </div>
+
+      <!-- Show More / Show Less toggle -->
+      <div class="news-show-more-row">
+        <button class="news-show-more-btn" id="newsToggleBtn" onclick="toggleNewsCards()">Show 8 more &#9660;</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- W12: Seasonal Awareness Banner — Summer 2026 -->
+  <div class="seasonal-banner">
+    <div class="seasonal-banner-header">
+      <div class="seasonal-sun-icon">&#9728;</div>
+      <div>
+        <h3>Summer 2026 Clinical Awareness <span class="badge-new">NEW</span></h3>
+        <div class="seasonal-subtitle">Seasonal safety considerations for community MH providers</div>
+      </div>
+    </div>
+    <div class="seasonal-grid">
+      <div class="seasonal-item">
+        <h4>&#9888; Heat &amp; Psychotropic Medications</h4>
+        <p>Antipsychotics (especially first-generation), lithium, and anticholinergics impair thermoregulation. Clients on these medications face elevated heat stroke risk. Review hydration plans, monitor lithium levels more frequently, and check A/C access for vulnerable clients. Consider temporary dose adjustments for those with outdoor employment or unstable housing.</p>
+      </div>
+      <div class="seasonal-item">
+        <h4>&#128197; Summer Schedule Disruptions</h4>
+        <p>Routine changes during summer (vacations, childcare gaps, irregular work hours) can destabilize clients with mood disorders, anxiety, and SUD. Proactively discuss schedule management during sessions. Offer flexible appointment times and increase check-in frequency for high-risk clients through July-August.</p>
+      </div>
+      <div class="seasonal-item">
+        <h4>&#9734; Youth Out-of-School Risk Factors</h4>
+        <p>School-age clients lose structure, meal programs, and counselor access during summer break. Screen for increased isolation, food insecurity, unsupervised internet use, and substance experimentation. Connect families with summer day programs, YMCA activities, and NH Parks &amp; Rec youth services.</p>
+      </div>
+      <div class="seasonal-item">
+        <h4>&#127795; Outdoor Activity Recommendations</h4>
+        <p>Encourage clients to leverage longer daylight hours for therapeutic activities: walking groups, community gardens, outdoor mindfulness. Exercise is evidence-based for depression and anxiety. Recommend early morning or evening activities to avoid peak heat. Share local trail maps and free park programs through Nashua Parks &amp; Rec.</p>
+      </div>
+    </div>
+    <div class="seasonal-rotate-note">Seasonal content rotates quarterly. Current: Summer 2026 (Jun-Aug)</div>
+  </div>
+
+  <!-- W9: Professional Development & Training -->
+  <div class="prof-dev-section">
+    <div class="section-header">
+      <h2>Professional Development &amp; Training <span class="badge-new">NEW</span></h2>
+      <span class="section-count">Upcoming opportunities</span>
+    </div>
+    <p class="bulletin-admin-note">Training listings are manually curated. Check provider sites for current availability.</p>
+    <div class="prof-dev-grid">
+
+      <div class="prof-dev-card">
+        <div class="prof-dev-card-header">
+          <h3>Trauma-Informed Care in Community Settings</h3>
+        </div>
+        <div class="prof-dev-meta">
+          <span class="prof-dev-tag date-tag">Jul 15, 2026</span>
+          <span class="prof-dev-tag provider-tag">SAMHSA</span>
+          <span class="prof-dev-tag ce-tag">3 CE</span>
+        </div>
+        <p class="prof-dev-desc">Free 3-hour webinar covering TIC implementation frameworks for CMHCs, including organizational assessment tools, secondary traumatic stress prevention, and client engagement strategies for trauma-exposed populations.</p>
+        <a href="https://www.samhsa.gov/trauma-violence" class="prof-dev-link" target="_blank" rel="noopener">Register free &#8594;</a>
+      </div>
+
+      <div class="prof-dev-card">
+        <div class="prof-dev-card-header">
+          <h3>Motivational Interviewing Refresher: Advanced Skills</h3>
+        </div>
+        <div class="prof-dev-meta">
+          <span class="prof-dev-tag date-tag">Jul 22-23, 2026</span>
+          <span class="prof-dev-tag provider-tag">NH BDAS</span>
+          <span class="prof-dev-tag ce-tag">12 CE</span>
+        </div>
+        <p class="prof-dev-desc">Two-day intensive through the NH Bureau of Drug and Alcohol Services. Covers sustain talk, discord management, and MI with co-occurring disorders. Priority for NH CMHC staff. Held in Concord with virtual option.</p>
+        <a href="https://www.dhhs.nh.gov/programs-services/alcohol-drug-services" class="prof-dev-link" target="_blank" rel="noopener">View details &#8594;</a>
+      </div>
+
+      <div class="prof-dev-card">
+        <div class="prof-dev-card-header">
+          <h3>DBT Skills Training: Distress Tolerance Deep Dive</h3>
+        </div>
+        <div class="prof-dev-meta">
+          <span class="prof-dev-tag date-tag">On-demand</span>
+          <span class="prof-dev-tag provider-tag">PESI</span>
+          <span class="prof-dev-tag ce-tag">6.25 CE</span>
+        </div>
+        <p class="prof-dev-desc">Self-paced online course covering TIPP, ACCEPTS, radical acceptance, and crisis survival strategies. Includes case vignettes and implementation guides. PESI offers group pricing for agency teams.</p>
+        <a href="https://www.pesi.com/" class="prof-dev-link" target="_blank" rel="noopener">View course &#8594;</a>
+      </div>
+
+      <div class="prof-dev-card">
+        <div class="prof-dev-card-header">
+          <h3>NH Annual Behavioral Health Conference</h3>
+        </div>
+        <div class="prof-dev-meta">
+          <span class="prof-dev-tag date-tag">Sep 18-19, 2026</span>
+          <span class="prof-dev-tag provider-tag">NAMI NH / DHHS</span>
+          <span class="prof-dev-tag ce-tag">Up to 14 CE</span>
+        </div>
+        <p class="prof-dev-desc">Statewide conference in Manchester. Tracks include integrated care, youth services, workforce wellness, and opioid response. Keynote on social determinants and behavioral health equity. Early-bird registration through July 31.</p>
+        <a href="https://www.naminh.org/" class="prof-dev-link" target="_blank" rel="noopener">Conference info &#8594;</a>
+      </div>
+
+      <div class="prof-dev-card">
+        <div class="prof-dev-card-header">
+          <h3>Suicide Prevention Gatekeeper Training (QPR)</h3>
+        </div>
+        <div class="prof-dev-meta">
+          <span class="prof-dev-tag date-tag">Monthly (ongoing)</span>
+          <span class="prof-dev-tag provider-tag">SAMHSA / QPR Institute</span>
+          <span class="prof-dev-tag ce-tag">2 CE</span>
+        </div>
+        <p class="prof-dev-desc">Free virtual QPR (Question, Persuade, Refer) gatekeeper training. Ideal for non-clinical staff, FSS workers, and new hires. Covers warning sign recognition, direct questioning techniques, and referral pathways. Offered first Tuesday of each month.</p>
+        <a href="https://qprinstitute.com/" class="prof-dev-link" target="_blank" rel="noopener">Register &#8594;</a>
+      </div>
+
+      <div class="prof-dev-card">
+        <div class="prof-dev-card-header">
+          <h3>Ethics in Telehealth: Boundaries and Documentation</h3>
+        </div>
+        <div class="prof-dev-meta">
+          <span class="prof-dev-tag date-tag">Aug 5, 2026</span>
+          <span class="prof-dev-tag provider-tag">PESI</span>
+          <span class="prof-dev-tag ce-tag">3 CE (Ethics)</span>
+        </div>
+        <p class="prof-dev-desc">Covers ethical considerations unique to telehealth: informed consent, privacy in shared spaces, crisis management during virtual sessions, and documentation standards. Meets NH Board ethics CE requirement.</p>
+        <a href="https://www.pesi.com/" class="prof-dev-link" target="_blank" rel="noopener">View course &#8594;</a>
+      </div>
+
+      <div class="prof-dev-card">
+        <div class="prof-dev-card-header">
+          <h3>LCMHC / LICSW License Renewal Reminder</h3>
+        </div>
+        <div class="prof-dev-meta">
+          <span class="prof-dev-tag date-tag">Due: Jun 30, 2027</span>
+          <span class="prof-dev-tag provider-tag">NH Board</span>
+          <span class="prof-dev-tag ce-tag">40 CE required</span>
+        </div>
+        <p class="prof-dev-desc">NH LCMHC and LICSW licenses renew biennially. Current cycle requires 40 CE hours including 3 ethics hours. Check your transcript at the NH Board of Mental Health Practice portal. Plan ahead to avoid last-minute scrambles.</p>
+        <a href="https://www.oplc.nh.gov/mental-health-practice" class="prof-dev-link" target="_blank" rel="noopener">Check requirements &#8594;</a>
+      </div>
+
+      <div class="prof-dev-card">
+        <div class="prof-dev-card-header">
+          <h3>Co-Occurring Disorders: Integrated Treatment Models</h3>
+        </div>
+        <div class="prof-dev-meta">
+          <span class="prof-dev-tag date-tag">Aug 20, 2026</span>
+          <span class="prof-dev-tag provider-tag">SAMHSA</span>
+          <span class="prof-dev-tag ce-tag">4 CE</span>
+        </div>
+        <p class="prof-dev-desc">Free SAMHSA webinar on integrated treatment for co-occurring mental health and substance use disorders. Covers screening with AUDIT/DAST, stage-wise treatment matching, and harm reduction within outpatient MH settings.</p>
+        <a href="https://www.samhsa.gov/co-occurring-disorders" class="prof-dev-link" target="_blank" rel="noopener">Register free &#8594;</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- W10: Staff Bulletin Board -->
+  <div class="bulletin-section">
+    <div class="section-header">
+      <h2>Staff Bulletin Board <span class="badge-new">NEW</span></h2>
+      <span class="section-count">Internal announcements</span>
+    </div>
+    <p class="bulletin-admin-note">Bulletins are managed by site administrators.</p>
+    <div class="bulletin-board">
+
+      <div class="bulletin-card cat-policy">
+        <div class="bulletin-card-header">
+          <span class="bulletin-date">Jun 20, 2026</span>
+          <span class="bulletin-cat-tag policy">Policy</span>
+        </div>
+        <h4>Updated Documentation Turnaround Policy</h4>
+        <p>Effective July 1: all clinical documentation must be completed within 24 hours of service delivery (previously 48 hours). Group notes due within 48 hours. See updated Policy Manual section 4.2 on the shared drive for details.</p>
+      </div>
+
+      <div class="bulletin-card cat-hr">
+        <div class="bulletin-card-header">
+          <span class="bulletin-date">Jun 18, 2026</span>
+          <span class="bulletin-cat-tag hr">HR</span>
+        </div>
+        <h4>Welcome New Staff: Sarah Chen, LCMHC</h4>
+        <p>Please welcome Sarah Chen to the Adult Outpatient team starting June 24. Sarah comes from Riverbend CMHC with 6 years of experience in DBT and trauma-focused work. She will carry a mixed caseload on the Nashua campus.</p>
+      </div>
+
+      <div class="bulletin-card cat-clinical">
+        <div class="bulletin-card-header">
+          <span class="bulletin-date">Jun 15, 2026</span>
+          <span class="bulletin-cat-tag clinical">Clinical</span>
+        </div>
+        <h4>PHQ-9 Screening Frequency Update</h4>
+        <p>Reminder: per the updated clinical protocol, PHQ-9 screenings are now required at every 4th session (previously every 6th) for clients with active depression diagnoses. Screeners auto-populate in the EHR if the interval is met.</p>
+      </div>
+
+      <div class="bulletin-card cat-general">
+        <div class="bulletin-card-header">
+          <span class="bulletin-date">Jun 12, 2026</span>
+          <span class="bulletin-cat-tag general">General</span>
+        </div>
+        <h4>Summer Hours: Friday Schedule Change</h4>
+        <p>From June 27 through August 29, the office will close at 3:00 PM on Fridays (summer hours). Last client appointments should be scheduled no later than 2:00 PM. Normal hours resume September 5.</p>
+      </div>
+
+      <div class="bulletin-card cat-clinical">
+        <div class="bulletin-card-header">
+          <span class="bulletin-date">Jun 10, 2026</span>
+          <span class="bulletin-cat-tag clinical">Clinical</span>
+        </div>
+        <h4>EHR Scheduled Maintenance: June 28</h4>
+        <p>The EHR system will be unavailable Saturday June 28, 11 PM - Sunday June 29, 6 AM for a scheduled upgrade. Please complete all outstanding notes before Saturday evening. Paper forms will be available at the front desk for emergency documentation.</p>
+      </div>
+
+      <div class="bulletin-card cat-hr">
+        <div class="bulletin-card-header">
+          <span class="bulletin-date">Jun 5, 2026</span>
+          <span class="bulletin-cat-tag hr">HR</span>
+        </div>
+        <h4>Annual Training Compliance: Deadline July 15</h4>
+        <p>All staff must complete the annual compliance training modules (HIPAA, workplace safety, cultural competency) by July 15. Check your training portal dashboard for incomplete modules. Contact HR with questions.</p>
       </div>
 
     </div>
@@ -791,7 +1457,7 @@
 
   <!-- Clinical Tools Preview -->
   <div class="section-header">
-    <h2>Clinical Tools</h2>
+    <h2>Clinical Tools <span class="badge-new">NEW</span></h2>
     <a href="tools.html" class="btn btn-sm btn-outline">Browse All Tools</a>
   </div>
   <div class="grid-3" style="margin-bottom:32px">
@@ -925,9 +1591,9 @@
   <p>Contact information and services may change. Always verify by contacting organizations directly.</p>
   <div class="last-updated-bar">
     <span class="last-updated-dot"></span>
-    Content last updated: June 24, 2026 &nbsp;|&nbsp; Wave 6
+    Content last updated: June 24, 2026 &nbsp;|&nbsp; Wave 100
   </div>
-  <p style="margin-top:8px"><a href="#" id="adminGate" style="color:var(--text-muted);font-size:11px" aria-label="Version 3.0 - Admin access">v3.0</a></p>
+  <p style="margin-top:8px"><a href="#" id="adminGate" style="color:var(--text-muted);font-size:11px" aria-label="Version 4.0 - Admin access">v4.0</a></p>
 </footer>
 
 <div class="toast" id="toast"></div>
@@ -970,6 +1636,19 @@ function printPocketGuide() {
   window.print();
   guide.style.display = 'none';
   document.body.classList.remove('printing-pocket-guide');
+}
+
+// News Show More/Less toggle
+function toggleNewsCards() {
+  var grid = document.getElementById('newsGrid');
+  var btn = document.getElementById('newsToggleBtn');
+  if (grid.classList.contains('show-all')) {
+    grid.classList.remove('show-all');
+    btn.innerHTML = 'Show 8 more &#9660;';
+  } else {
+    grid.classList.add('show-all');
+    btn.innerHTML = 'Show fewer &#9650;';
+  }
 }
 
 // Admin gate — 5-click the version number in footer
