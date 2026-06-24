@@ -1,0 +1,19 @@
+{
+  "name": "Greater Nashua Community MH Resources",
+  "short_name": "MH Resources",
+  "description": "Mental health resources, clinical tools, and documentation for the Greater Nashua, NH community.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f8f9fb",
+  "theme_color": "#2563eb",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["health", "medical"]
+}

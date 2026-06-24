@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+
+# Update sitemap URL after deploying to GitHub Pages

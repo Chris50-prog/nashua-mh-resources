@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found | Greater Nashua Community Mental Health Resources</title>
+<meta name="description" content="The page you're looking for could not be found.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.not-found {
+  text-align: center;
+  padding: 80px 24px;
+  max-width: 560px;
+  margin: 0 auto;
+}
+.not-found h1 {
+  font-size: 64px;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 8px;
+  line-height: 1;
+}
+.not-found h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.not-found p {
+  color: var(--text-secondary);
+  font-size: 15px;
+  margin-bottom: 32px;
+}
+.not-found-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+.not-found-links a {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.not-found-links a.primary {
+  background: var(--accent);
+  color: white;
+}
+.not-found-links a.primary:hover {
+  background: var(--accent-hover);
+}
+.not-found-links a.secondary {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.not-found-links a.secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="site-logo" id="siteLogo">
+      <div class="logo-icon">NH</div>
+      <span>Greater Nashua MH Resources</span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="resources.html" class="nav-link">Resources</a>
+      <a href="tools.html" class="nav-link">Clinical Tools</a>
+      <a href="guide.html" class="nav-link">How-To Guides</a>
+      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">&#9789;</button>
+    </nav>
+  </div>
+</header>
+
+<div class="not-found" id="main-content">
+  <h1>404</h1>
+  <h2>Page Not Found</h2>
+  <p>The page you are looking for may have been moved or no longer exists. Use the links below to find what you need.</p>
+  <div class="not-found-links">
+    <a href="index.html" class="primary">Back to Home</a>
+    <a href="resources.html" class="secondary">Resources</a>
+    <a href="tools.html" class="secondary">Clinical Tools</a>
+    <a href="guide.html" class="secondary">How-To Guides</a>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <p>Greater Nashua Community Mental Health Resources &copy; 2026. For informational purposes only.</p>
+  <p>Contact information and services may change. Always verify by contacting organizations directly.</p>
+  <p style="margin-top:8px"><a href="#" id="adminGate" style="color:var(--text-muted);font-size:11px" aria-label="Version 2.0 - Admin access">v2.0</a></p>
+</footer>
+
+<script>
+let adminClicks = 0;
+let adminTimer = null;
+document.getElementById('adminGate').addEventListener('click', function(e) {
+  e.preventDefault();
+  adminClicks++;
+  clearTimeout(adminTimer);
+  if (adminClicks >= 5) {
+    adminClicks = 0;
+    window.location.href = 'admin.html';
+  }
+  adminTimer = setTimeout(() => { adminClicks = 0; }, 2000);
+});
+
+function toggleTheme() {
+  var html = document.documentElement;
+  var btn = document.querySelector('.theme-toggle');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.removeAttribute('data-theme');
+    btn.textContent = '☽'; // moon
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    btn.textContent = '☀'; // sun
+  }
+}
+// Respect system preference
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.documentElement.setAttribute('data-theme', 'dark');
+  var btn = document.querySelector('.theme-toggle');
+  if (btn) btn.textContent = '☀';
+}
+</script>
+
+</body>
+</html>

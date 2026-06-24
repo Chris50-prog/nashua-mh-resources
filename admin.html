@@ -1,0 +1,2386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clinical Documentation - Admin</title>
+<meta name="description" content="Clinical documentation tools.">
+<meta property="og:title" content="Clinical Documentation">
+<meta property="og:description" content="Clinical documentation tools.">
+<meta property="og:type" content="website">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* ===== AUTH OVERLAY ===== */
+.auth-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 50%, #0d9488 100%);
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.4s;
+}
+.auth-overlay.hidden { opacity: 0; pointer-events: none; }
+.auth-box {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 40px; width: 380px; max-width: 90vw;
+  text-align: center;
+}
+.auth-box .auth-icon {
+  width: 56px; height: 56px; margin: 0 auto 16px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--teal));
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 24px;
+}
+.auth-box h2 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+.auth-box .auth-sub { font-size: 13px; color: var(--text-secondary); margin-bottom: 20px; }
+.auth-input-wrap {
+  display: flex; gap: 8px; margin-bottom: 12px;
+}
+.auth-input-wrap input {
+  flex: 1; padding: 10px 14px; border: 1px solid var(--border);
+  border-radius: var(--radius); font-size: 14px; font-family: inherit;
+  outline: none; transition: border-color 0.2s;
+}
+.auth-input-wrap input:focus { border-color: var(--accent); }
+.auth-error {
+  font-size: 12px; color: var(--danger); min-height: 18px;
+  margin-bottom: 4px;
+}
+
+/* ===== ADMIN PANEL ===== */
+.admin-panel { display: none; }
+.admin-panel.visible { display: block; }
+
+/* ===== NOTE TYPE TABS ===== */
+.note-tabs {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-bottom: 24px;
+}
+.note-tab {
+  padding: 10px 18px; border-radius: var(--radius);
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--surface); color: var(--text-secondary);
+  transition: all 0.15s; white-space: nowrap;
+}
+.note-tab:hover { border-color: var(--accent); color: var(--accent); }
+.note-tab.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+/* ===== NOTE PANELS ===== */
+.note-panel { display: none; }
+.note-panel.active { display: block; }
+
+/* ===== DOMAIN SECTIONS ===== */
+.domain-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  margin-bottom: 16px; overflow: hidden;
+}
+.domain-header {
+  padding: 14px 20px;
+  background: var(--surface-alt);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  cursor: pointer; user-select: none;
+}
+.domain-header h3 { font-size: 14px; font-weight: 700; }
+.domain-header .collapse-arrow {
+  font-size: 11px; color: var(--text-secondary);
+  transition: transform 0.2s;
+}
+.domain-section.collapsed .domain-header .collapse-arrow { transform: rotate(-90deg); }
+.domain-section.collapsed .domain-body { display: none; }
+.domain-body { padding: 16px 20px; }
+
+/* ===== RATING ITEMS ===== */
+.rating-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 0; border-bottom: 1px solid var(--surface-alt);
+  gap: 12px;
+}
+.rating-item:last-child { border-bottom: none; }
+.rating-label { font-size: 13px; font-weight: 500; flex: 1; min-width: 0; }
+.rating-btns { display: flex; gap: 4px; flex-shrink: 0; }
+.rating-btn {
+  width: 32px; height: 32px; border-radius: 6px;
+  border: 1px solid var(--border); background: var(--surface);
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.12s; color: var(--text-secondary);
+}
+.rating-btn:hover { border-color: var(--accent); color: var(--accent); }
+.rating-btn.selected-0 { background: var(--success-light); color: var(--success); border-color: var(--success); }
+.rating-btn.selected-1 { background: #fffbeb; color: #b45309; border-color: #d97706; }
+.rating-btn.selected-2 { background: #fff7ed; color: #c2410c; border-color: #ea580c; }
+.rating-btn.selected-3 { background: var(--danger-light); color: var(--danger); border-color: var(--danger); }
+
+/* ===== RATING LEGEND ===== */
+.rating-legend {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  padding: 10px 16px; background: var(--surface-alt);
+  border-radius: var(--radius); font-size: 11px;
+  color: var(--text-secondary); margin-bottom: 16px;
+}
+.rating-legend span { display: flex; align-items: center; gap: 4px; }
+.rating-legend .dot {
+  width: 8px; height: 8px; border-radius: 50%;
+}
+.rating-legend .dot-0 { background: var(--success); }
+.rating-legend .dot-1 { background: #d97706; }
+.rating-legend .dot-2 { background: #ea580c; }
+.rating-legend .dot-3 { background: var(--danger); }
+
+/* ===== MSE SECTION ===== */
+.mse-group {
+  margin-bottom: 16px;
+}
+.mse-group-title {
+  font-size: 13px; font-weight: 700; margin-bottom: 8px;
+  color: var(--text); text-transform: uppercase; letter-spacing: 0.3px;
+}
+.mse-options {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.mse-chip {
+  padding: 5px 12px; border-radius: 16px;
+  border: 1px solid var(--border); background: var(--surface);
+  font-size: 12px; cursor: pointer; transition: all 0.12s;
+  color: var(--text-secondary); user-select: none;
+}
+.mse-chip:hover { border-color: var(--accent); color: var(--accent); }
+.mse-chip.selected { background: var(--accent); color: white; border-color: var(--accent); }
+
+/* ===== PHRASE BANK ===== */
+.phrase-bank {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-bottom: 12px;
+}
+.phrase-btn {
+  padding: 5px 10px; border-radius: 14px;
+  border: 1px solid var(--border); background: var(--surface-alt);
+  font-size: 11px; cursor: pointer; transition: all 0.12s;
+  color: var(--text-secondary); max-width: 100%;
+  text-align: left; line-height: 1.4;
+}
+.phrase-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+.phrase-btn.used { background: var(--accent-light); color: var(--accent); border-color: var(--accent); opacity: 0.7; }
+
+/* ===== VOICE BUTTON ===== */
+.voice-wrap {
+  position: relative;
+  display: flex; gap: 0;
+}
+.voice-wrap textarea { border-top-right-radius: 0; border-bottom-right-radius: 0; }
+.voice-btn {
+  width: 40px; flex-shrink: 0;
+  border: 1px solid var(--border); border-left: none;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: var(--surface); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; color: var(--text-secondary);
+  transition: all 0.15s;
+}
+.voice-btn:hover { background: var(--surface-alt); color: var(--accent); }
+.voice-btn.recording {
+  background: var(--danger-light); color: var(--danger);
+  border-color: var(--danger); animation: pulse-rec 1s infinite;
+}
+@keyframes pulse-rec {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ===== ISP DYNAMIC SECTIONS ===== */
+.goal-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  margin-bottom: 16px; overflow: hidden;
+}
+.goal-block-header {
+  padding: 14px 20px;
+  background: var(--surface-alt);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.goal-block-header h4 { font-size: 14px; font-weight: 600; }
+.goal-block-body { padding: 16px 20px; }
+
+.objective-row, .intervention-row {
+  background: var(--surface-alt);
+  border-radius: var(--radius);
+  padding: 12px; margin-bottom: 8px;
+}
+
+.add-btn {
+  padding: 6px 14px; border-radius: var(--radius);
+  border: 1px dashed var(--accent);
+  background: transparent; color: var(--accent);
+  font-size: 12px; font-weight: 500; cursor: pointer;
+  transition: all 0.15s; margin-top: 8px;
+}
+.add-btn:hover { background: var(--accent-light); }
+
+.remove-btn {
+  padding: 3px 8px; border-radius: 4px;
+  border: none; background: var(--danger-light);
+  color: var(--danger); font-size: 11px; cursor: pointer;
+  transition: all 0.15s; float: right;
+}
+.remove-btn:hover { background: var(--danger); color: white; }
+
+/* ===== CASE MGMT DOMAINS ===== */
+.cm-domain {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  margin-bottom: 12px; overflow: hidden;
+}
+.cm-domain-header {
+  padding: 12px 16px; background: var(--surface-alt);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  cursor: pointer; user-select: none;
+}
+.cm-domain-header h4 { font-size: 13px; font-weight: 600; }
+.cm-domain.collapsed .cm-domain-body { display: none; }
+.cm-domain.collapsed .cm-collapse-arrow { transform: rotate(-90deg); }
+.cm-collapse-arrow { font-size: 10px; color: var(--text-secondary); transition: transform 0.2s; }
+.cm-domain-body { padding: 12px 16px; }
+.cm-status-row {
+  display: flex; gap: 12px; align-items: center; margin-bottom: 10px;
+}
+.cm-status-row label { font-size: 12px; font-weight: 600; min-width: 50px; }
+.cm-status-row select {
+  padding: 6px 10px; border: 1px solid var(--border);
+  border-radius: var(--radius); font-size: 12px; outline: none;
+}
+
+/* ===== FORM ELEMENTS ===== */
+.form-row {
+  display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;
+}
+.form-group {
+  flex: 1; min-width: 150px;
+}
+.form-group label {
+  display: block; font-size: 12px; font-weight: 600;
+  margin-bottom: 4px; color: var(--text);
+}
+.form-group input, .form-group select {
+  width: 100%; padding: 8px 12px; border: 1px solid var(--border);
+  border-radius: var(--radius); font-size: 13px; font-family: inherit;
+  outline: none; transition: border-color 0.2s;
+}
+.form-group input:focus, .form-group select:focus { border-color: var(--accent); }
+.form-group textarea {
+  width: 100%; padding: 8px 12px; border: 1px solid var(--border);
+  border-radius: var(--radius); font-size: 13px; font-family: inherit;
+  outline: none; transition: border-color 0.2s; min-height: 60px; resize: vertical;
+  line-height: 1.5;
+}
+.form-group textarea:focus { border-color: var(--accent); }
+
+/* ===== ATTENDEES ===== */
+.attendee-row {
+  display: flex; gap: 8px; align-items: center;
+  padding: 6px 0; border-bottom: 1px solid var(--surface-alt);
+}
+.attendee-row:last-child { border-bottom: none; }
+.attendee-row input[type="text"] {
+  width: 80px; padding: 5px 8px; border: 1px solid var(--border);
+  border-radius: var(--radius); font-size: 12px; outline: none;
+}
+.attendee-row label {
+  font-size: 11px; color: var(--text-secondary);
+  display: flex; align-items: center; gap: 3px; cursor: pointer;
+}
+.attendee-row input[type="checkbox"] { cursor: pointer; }
+
+/* ===== ACTION BAR ===== */
+.action-bar {
+  display: flex; gap: 8px; margin-top: 24px;
+  padding-top: 16px; border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+/* ===== TOAST ===== */
+.admin-toast {
+  position: fixed; bottom: 24px; right: 24px;
+  padding: 12px 24px; border-radius: var(--radius);
+  font-size: 13px; font-weight: 500; box-shadow: var(--shadow-lg);
+  opacity: 0; transform: translateY(10px);
+  transition: all 0.3s; z-index: 500;
+  pointer-events: none; color: white;
+}
+.admin-toast.show { opacity: 1; transform: translateY(0); }
+.admin-toast.success { background: var(--success); }
+.admin-toast.error { background: var(--danger); }
+.admin-toast.info { background: var(--accent); }
+
+/* ===== GENERATED NOTE PREVIEW ===== */
+.note-preview {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px; margin-top: 16px;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 12px; line-height: 1.6;
+  white-space: pre-wrap; word-break: break-word;
+  max-height: 400px; overflow-y: auto;
+  display: none;
+}
+.note-preview.visible { display: block; }
+
+/* ===== UTILITY ===== */
+.mb-8 { margin-bottom: 8px; }
+.mb-12 { margin-bottom: 12px; }
+.mb-16 { margin-bottom: 16px; }
+.mb-24 { margin-bottom: 24px; }
+.mt-12 { margin-top: 12px; }
+.text-sm { font-size: 12px; }
+.text-muted { color: var(--text-secondary); }
+.fw-600 { font-weight: 600; }
+.section-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px; margin-bottom: 16px;
+}
+.section-card h3 {
+  font-size: 15px; font-weight: 700; margin-bottom: 12px;
+  padding-bottom: 8px; border-bottom: 1px solid var(--border);
+}
+
+/* ===== SCORING SUMMARY ===== */
+.scoring-summary {
+  margin: 20px 0; padding: 16px; background: var(--surface-alt);
+  border: 1px solid var(--border); border-radius: var(--radius-lg);
+}
+.scoring-progress { margin-bottom: 12px; }
+.scoring-count { font-size: 14px; font-weight: 600; }
+.scoring-bar {
+  display: flex; height: 8px; border-radius: 4px;
+  overflow: hidden; background: var(--border); margin: 8px 0;
+}
+.scoring-segment { transition: width 0.3s; }
+.seg-0 { background: #10b981; }
+.seg-1 { background: #f59e0b; }
+.seg-2 { background: #f97316; }
+.seg-3 { background: #ef4444; }
+.scoring-legend {
+  display: flex; gap: 12px; flex-wrap: wrap; font-size: 11px; color: var(--text-secondary);
+}
+.scoring-legend .legend-item { display: flex; align-items: center; gap: 4px; }
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+.scoring-flags { font-size: 12px; }
+.flag-item {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 8px; margin: 2px; border-radius: 12px;
+  font-weight: 500;
+}
+.flag-2 { background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }
+.flag-3 { background: #fef2f2; color: #dc2626; border: 1px solid #fca5a5; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .note-tabs { gap: 4px; }
+  .note-tab { padding: 8px 12px; font-size: 11px; }
+  .form-row { flex-direction: column; gap: 12px; }
+  .rating-item { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .mse-options { gap: 4px; }
+  .mse-chip { font-size: 11px; padding: 4px 8px; }
+  .auth-box { padding: 24px; }
+}
+@media print {
+  .auth-overlay, .action-bar, .note-tabs, .voice-btn, .admin-toast, .session-timer { display: none !important; }
+  .note-panel { display: block !important; }
+
+/* ===== SESSION TIMER ===== */
+.session-timer {
+  position: fixed; bottom: 20px; left: 20px; z-index: 150;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
+  padding: 8px 14px; display: flex; align-items: center; gap: 10px;
+  font-size: 13px;
+}
+.session-timer .timer-display {
+  font-family: 'Courier New', monospace; font-size: 20px; font-weight: 700;
+  color: var(--accent); min-width: 60px; text-align: center;
+}
+.session-timer .timer-label {
+  font-size: 10px; color: var(--text-muted); text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.session-timer button {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 1px solid var(--border); background: var(--surface-alt);
+  cursor: pointer; font-size: 12px; display: flex;
+  align-items: center; justify-content: center;
+  transition: all 0.15s;
+}
+.session-timer button:hover {
+  background: var(--accent-light); border-color: var(--accent); color: var(--accent);
+}
+.timer-running .timer-display { color: var(--success); }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- AUTH OVERLAY -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-box">
+    <div class="auth-icon">&#128274;</div>
+    <h2>Clinical Documentation</h2>
+    <p class="auth-sub">Authorized access only. Enter passphrase to continue.</p>
+    <div class="auth-input-wrap">
+      <input type="password" id="authInput" placeholder="Passphrase" autocomplete="off" aria-label="Enter passphrase">
+      <button class="btn btn-primary" onclick="attemptAuth()">Unlock</button>
+    </div>
+    <div class="auth-error" id="authError"></div>
+  </div>
+</div>
+
+<!-- MAIN PAGE -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="site-logo">
+      <div class="logo-icon">NH</div>
+      <span>Greater Nashua MH Resources</span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="resources.html" class="nav-link">Resources</a>
+      <a href="tools.html" class="nav-link">Clinical Tools</a>
+      <a href="guide.html" class="nav-link">How-To Guides</a>
+      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">&#9789;</button>
+    </nav>
+  </div>
+</header>
+
+<div class="admin-panel" id="adminPanel">
+
+  <div class="session-timer" id="sessionTimer">
+    <div>
+      <div class="timer-label">Session Timer</div>
+      <div class="timer-display" id="timerDisplay">00:00</div>
+    </div>
+    <button onclick="toggleTimer()" id="timerToggle" title="Start/Pause">&#9654;</button>
+    <button onclick="resetTimer()" title="Reset">&#8634;</button>
+  </div>
+
+  <div class="page-container" id="main-content">
+
+    <!-- Dashboard Header -->
+    <div style="margin-bottom:24px">
+      <h1 style="font-size:22px;font-weight:700;letter-spacing:-0.3px">Clinical Documentation System</h1>
+      <p style="font-size:14px;color:var(--text-secondary);margin-top:4px">Select a note type to begin. All data stays in-memory only &mdash; nothing is saved or transmitted.</p>
+    </div>
+
+    <!-- Note Type Tabs -->
+    <div class="note-tabs" id="noteTabs">
+      <button class="note-tab active" data-tab="ansa">ANSA</button>
+      <button class="note-tab" data-tab="cans">CANS</button>
+      <button class="note-tab" data-tab="individual">Individual Therapy</button>
+      <button class="note-tab" data-tab="family">Family Therapy</button>
+      <button class="note-tab" data-tab="casemgmt">Case Management</button>
+      <button class="note-tab" data-tab="isp">ISP</button>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ANSA PANEL -->
+    <!-- ============================================================ -->
+    <div class="note-panel active" id="panel-ansa">
+      <div class="rating-legend">
+        <span><span class="dot dot-0"></span> 0 = No evidence</span>
+        <span><span class="dot dot-1"></span> 1 = History / mild</span>
+        <span><span class="dot dot-2"></span> 2 = Moderate / current need</span>
+        <span><span class="dot dot-3"></span> 3 = Severe / acute</span>
+      </div>
+
+      <!-- Life Domain Functioning -->
+      <div class="domain-section" id="ansa-life">
+        <div class="domain-header" onclick="toggleDomain(this)">
+          <h3>Life Domain Functioning</h3>
+          <span class="collapse-arrow">&#9660;</span>
+        </div>
+        <div class="domain-body" id="ansa-life-body"></div>
+      </div>
+
+      <!-- Behavioral Health Needs -->
+      <div class="domain-section" id="ansa-bh">
+        <div class="domain-header" onclick="toggleDomain(this)">
+          <h3>Behavioral Health Needs</h3>
+          <span class="collapse-arrow">&#9660;</span>
+        </div>
+        <div class="domain-body" id="ansa-bh-body"></div>
+      </div>
+
+      <!-- Risk Behaviors -->
+      <div class="domain-section" id="ansa-risk">
+        <div class="domain-header" onclick="toggleDomain(this)">
+          <h3>Risk Behaviors</h3>
+          <span class="collapse-arrow">&#9660;</span>
+        </div>
+        <div class="domain-body" id="ansa-risk-body"></div>
+      </div>
+
+      <!-- Strengths -->
+      <div class="domain-section" id="ansa-strengths">
+        <div class="domain-header" onclick="toggleDomain(this)">
+          <h3>Strengths</h3>
+          <span class="collapse-arrow">&#9660;</span>
+        </div>
+        <div class="domain-body" id="ansa-strengths-body"></div>
+      </div>
+
+      <!-- Scoring Summary -->
+      <div class="scoring-summary" id="ansa-scoring">
+        <div class="scoring-progress">
+          <span class="scoring-count"><strong>0</strong> of <strong>42</strong> rated</span>
+          <div class="scoring-bar">
+            <div class="scoring-segment seg-0" style="width:0%"></div>
+            <div class="scoring-segment seg-1" style="width:0%"></div>
+            <div class="scoring-segment seg-2" style="width:0%"></div>
+            <div class="scoring-segment seg-3" style="width:0%"></div>
+          </div>
+          <div class="scoring-legend">
+            <span class="legend-item"><span class="legend-dot" style="background:#10b981"></span> 0: No evidence</span>
+            <span class="legend-item"><span class="legend-dot" style="background:#f59e0b"></span> 1: History/mild</span>
+            <span class="legend-item"><span class="legend-dot" style="background:#f97316"></span> 2: Moderate</span>
+            <span class="legend-item"><span class="legend-dot" style="background:#ef4444"></span> 3: Severe</span>
+          </div>
+        </div>
+        <div class="scoring-flags" id="ansa-flags"></div>
+      </div>
+
+      <div class="note-preview" id="ansa-preview"></div>
+      <div class="action-bar">
+        <button class="btn btn-primary" onclick="generateANSA()">Generate &amp; Copy</button>
+        <button class="btn btn-outline btn-sm" onclick="downloadNote('ansa')">&#128190; Download .txt</button>
+        <button class="btn" onclick="clearANSA()">Clear Form</button>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CANS PANEL -->
+    <!-- ============================================================ -->
+    <div class="note-panel" id="panel-cans">
+      <div class="rating-legend">
+        <span><span class="dot dot-0"></span> 0 = No evidence</span>
+        <span><span class="dot dot-1"></span> 1 = History / mild</span>
+        <span><span class="dot dot-2"></span> 2 = Moderate / current need</span>
+        <span><span class="dot dot-3"></span> 3 = Severe / acute</span>
+      </div>
+
+      <div class="domain-section" id="cans-life">
+        <div class="domain-header" onclick="toggleDomain(this)">
+          <h3>Life Domain Functioning</h3>
+          <span class="collapse-arrow">&#9660;</span>
+        </div>
+        <div class="domain-body" id="cans-life-body"></div>
+      </div>
+
+      <div class="domain-section" id="cans-beh">
+        <div class="domain-header" onclick="toggleDomain(this)">
+          <h3>Behavioral / Emotional Needs</h3>
+          <span class="collapse-arrow">&#9660;</span>
+        </div>
+        <div class="domain-body" id="cans-beh-body"></div>
+      </div>
+
+      <div class="domain-section" id="cans-risk">
+        <div class="domain-header" onclick="toggleDomain(this)">
+          <h3>Risk Behaviors</h3>
+          <span class="collapse-arrow">&#9660;</span>
+        </div>
+        <div class="domain-body" id="cans-risk-body"></div>
+      </div>
+
+      <div class="domain-section" id="cans-strengths">
+        <div class="domain-header" onclick="toggleDomain(this)">
+          <h3>Strengths</h3>
+          <span class="collapse-arrow">&#9660;</span>
+        </div>
+        <div class="domain-body" id="cans-strengths-body"></div>
+      </div>
+
+      <!-- Scoring Summary -->
+      <div class="scoring-summary" id="cans-scoring">
+        <div class="scoring-progress">
+          <span class="scoring-count"><strong>0</strong> of <strong>43</strong> rated</span>
+          <div class="scoring-bar">
+            <div class="scoring-segment seg-0" style="width:0%"></div>
+            <div class="scoring-segment seg-1" style="width:0%"></div>
+            <div class="scoring-segment seg-2" style="width:0%"></div>
+            <div class="scoring-segment seg-3" style="width:0%"></div>
+          </div>
+          <div class="scoring-legend">
+            <span class="legend-item"><span class="legend-dot" style="background:#10b981"></span> 0: No evidence</span>
+            <span class="legend-item"><span class="legend-dot" style="background:#f59e0b"></span> 1: History/mild</span>
+            <span class="legend-item"><span class="legend-dot" style="background:#f97316"></span> 2: Moderate</span>
+            <span class="legend-item"><span class="legend-dot" style="background:#ef4444"></span> 3: Severe</span>
+          </div>
+        </div>
+        <div class="scoring-flags" id="cans-flags"></div>
+      </div>
+
+      <div class="note-preview" id="cans-preview"></div>
+      <div class="action-bar">
+        <button class="btn btn-primary" onclick="generateCANS()">Generate &amp; Copy</button>
+        <button class="btn btn-outline btn-sm" onclick="downloadNote('cans')">&#128190; Download .txt</button>
+        <button class="btn" onclick="clearCANS()">Clear Form</button>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- INDIVIDUAL THERAPY PANEL -->
+    <!-- ============================================================ -->
+    <div class="note-panel" id="panel-individual">
+
+      <!-- Quick Templates -->
+      <div style="margin-bottom:20px; padding:12px 16px; background:var(--accent-light); border-radius:var(--radius); border:1px solid #bfdbfe">
+        <div style="font-size:13px; font-weight:600; color:var(--accent); margin-bottom:8px">Quick Templates</div>
+        <div style="display:flex; gap:6px; flex-wrap:wrap">
+          <button class="btn btn-sm" onclick="applyTemplate('standard')">Standard Session</button>
+          <button class="btn btn-sm" onclick="applyTemplate('crisis')">Crisis Session</button>
+          <button class="btn btn-sm" onclick="applyTemplate('medcheck')">Med Check-in</button>
+          <button class="btn btn-sm" onclick="applyTemplate('intake')">Intake Assessment</button>
+          <button class="btn btn-sm" onclick="applyTemplate('discharge')">Discharge Summary</button>
+        </div>
+      </div>
+
+      <!-- Session Info -->
+      <div class="section-card">
+        <h3>Session Information</h3>
+        <div class="form-row">
+          <div class="form-group" style="max-width:100px">
+            <label>Client Initials</label>
+            <input type="text" id="ind-initials" maxlength="3" placeholder="AB">
+          </div>
+          <div class="form-group">
+            <label>Session Date</label>
+            <input type="date" id="ind-date">
+          </div>
+          <div class="form-group" style="max-width:120px">
+            <label>Start Time</label>
+            <input type="time" id="ind-time">
+          </div>
+          <div class="form-group" style="max-width:120px">
+            <label>Duration (min)</label>
+            <input type="number" id="ind-duration" value="60" min="1" max="480">
+          </div>
+        </div>
+      </div>
+
+      <!-- MSE -->
+      <div class="section-card">
+        <h3>Mental Status Exam (MSE)</h3>
+        <div id="ind-mse"></div>
+      </div>
+
+      <!-- Interventions -->
+      <div class="section-card">
+        <h3>Interventions</h3>
+        <div class="phrase-bank" id="ind-interventions-bank"></div>
+        <div class="form-group">
+          <label>Additional interventions</label>
+          <div class="voice-wrap">
+            <textarea id="ind-interventions-extra" rows="3" placeholder="Type or dictate additional interventions..."></textarea>
+            <button class="voice-btn" aria-label="Voice-to-text" onclick="toggleVoice('ind-interventions-extra', this)" title="Voice-to-text">&#127908;</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Clinical Formulation -->
+      <div class="section-card">
+        <h3>Clinical Formulation</h3>
+        <div class="form-group">
+          <div class="voice-wrap">
+            <textarea id="ind-formulation" rows="5" placeholder="Clinical formulation and conceptualization..."></textarea>
+            <button class="voice-btn" aria-label="Voice-to-text" onclick="toggleVoice('ind-formulation', this)" title="Voice-to-text">&#127908;</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Plan -->
+      <div class="section-card">
+        <h3>Plan / Next Steps</h3>
+        <div class="form-group">
+          <div class="voice-wrap">
+            <textarea id="ind-plan" rows="4" placeholder="Plan and next steps..."></textarea>
+            <button class="voice-btn" aria-label="Voice-to-text" onclick="toggleVoice('ind-plan', this)" title="Voice-to-text">&#127908;</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="note-preview" id="individual-preview"></div>
+      <div class="action-bar">
+        <button class="btn btn-primary" onclick="generateIndividual()">Generate &amp; Copy</button>
+        <button class="btn btn-outline btn-sm" onclick="downloadNote('individual')">&#128190; Download .txt</button>
+        <button class="btn" onclick="clearIndividual()">Clear Form</button>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- FAMILY THERAPY PANEL -->
+    <!-- ============================================================ -->
+    <div class="note-panel" id="panel-family">
+
+      <!-- Session Info -->
+      <div class="section-card">
+        <h3>Session Information</h3>
+        <div class="form-row">
+          <div class="form-group" style="max-width:100px">
+            <label>Client Initials</label>
+            <input type="text" id="fam-initials" maxlength="3" placeholder="AB">
+          </div>
+          <div class="form-group">
+            <label>Session Date</label>
+            <input type="date" id="fam-date">
+          </div>
+          <div class="form-group" style="max-width:120px">
+            <label>Start Time</label>
+            <input type="time" id="fam-time">
+          </div>
+          <div class="form-group" style="max-width:120px">
+            <label>Duration (min)</label>
+            <input type="number" id="fam-duration" value="60" min="1" max="480">
+          </div>
+        </div>
+      </div>
+
+      <!-- Attendees -->
+      <div class="section-card">
+        <h3>Attendees</h3>
+        <div id="fam-attendees">
+          <div class="attendee-row">
+            <input type="text" maxlength="3" placeholder="Initials" class="fam-att-init" aria-label="Attendee initials">
+            <label><input type="checkbox" class="fam-att-role" value="Client" checked> Client</label>
+            <label><input type="checkbox" class="fam-att-role" value="Parent"> Parent</label>
+            <label><input type="checkbox" class="fam-att-role" value="Sibling"> Sibling</label>
+            <label><input type="checkbox" class="fam-att-role" value="Guardian"> Guardian</label>
+            <label><input type="checkbox" class="fam-att-role" value="Other"> Other</label>
+            <button class="remove-btn" onclick="this.closest('.attendee-row').remove()" title="Remove">&#10005;</button>
+          </div>
+        </div>
+        <button class="add-btn" onclick="addAttendee()">+ Add Attendee</button>
+      </div>
+
+      <!-- Family Dynamics -->
+      <div class="section-card">
+        <h3>Family Dynamics Observations</h3>
+        <div class="form-group">
+          <div class="voice-wrap">
+            <textarea id="fam-dynamics" rows="4" placeholder="Observed family dynamics, communication patterns, power structures..."></textarea>
+            <button class="voice-btn" aria-label="Voice-to-text" onclick="toggleVoice('fam-dynamics', this)" title="Voice-to-text">&#127908;</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactional Patterns -->
+      <div class="section-card">
+        <h3>Interactional Patterns</h3>
+        <div class="form-group">
+          <div class="voice-wrap">
+            <textarea id="fam-patterns" rows="4" placeholder="Communication style, conflict resolution, alliances, boundaries..."></textarea>
+            <button class="voice-btn" aria-label="Voice-to-text" onclick="toggleVoice('fam-patterns', this)" title="Voice-to-text">&#127908;</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MSE -->
+      <div class="section-card">
+        <h3>Mental Status Exam (MSE) - Primary Client</h3>
+        <div id="fam-mse"></div>
+      </div>
+
+      <!-- Interventions -->
+      <div class="section-card">
+        <h3>Interventions</h3>
+        <div class="phrase-bank" id="fam-interventions-bank"></div>
+        <div class="form-group">
+          <label>Additional interventions</label>
+          <div class="voice-wrap">
+            <textarea id="fam-interventions-extra" rows="3" placeholder="Type or dictate additional interventions..."></textarea>
+            <button class="voice-btn" aria-label="Voice-to-text" onclick="toggleVoice('fam-interventions-extra', this)" title="Voice-to-text">&#127908;</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Clinical Formulation -->
+      <div class="section-card">
+        <h3>Clinical Formulation</h3>
+        <div class="form-group">
+          <div class="voice-wrap">
+            <textarea id="fam-formulation" rows="5" placeholder="Clinical formulation and conceptualization..."></textarea>
+            <button class="voice-btn" aria-label="Voice-to-text" onclick="toggleVoice('fam-formulation', this)" title="Voice-to-text">&#127908;</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Plan -->
+      <div class="section-card">
+        <h3>Plan / Next Steps</h3>
+        <div class="form-group">
+          <div class="voice-wrap">
+            <textarea id="fam-plan" rows="4" placeholder="Plan and next steps..."></textarea>
+            <button class="voice-btn" aria-label="Voice-to-text" onclick="toggleVoice('fam-plan', this)" title="Voice-to-text">&#127908;</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="note-preview" id="family-preview"></div>
+      <div class="action-bar">
+        <button class="btn btn-primary" onclick="generateFamily()">Generate &amp; Copy</button>
+        <button class="btn btn-outline btn-sm" onclick="downloadNote('family')">&#128190; Download .txt</button>
+        <button class="btn" onclick="clearFamily()">Clear Form</button>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CASE MANAGEMENT PANEL -->
+    <!-- ============================================================ -->
+    <div class="note-panel" id="panel-casemgmt">
+
+      <div class="section-card">
+        <h3>Contact Information</h3>
+        <div class="form-row">
+          <div class="form-group" style="max-width:100px">
+            <label>Client Initials</label>
+            <input type="text" id="cm-initials" maxlength="3" placeholder="AB">
+          </div>
+          <div class="form-group">
+            <label>Session Date</label>
+            <input type="date" id="cm-date">
+          </div>
+          <div class="form-group">
+            <label>Contact Type</label>
+            <select id="cm-contact-type">
+              <option value="In-Person">In-Person</option>
+              <option value="Phone">Phone</option>
+              <option value="Telehealth">Telehealth</option>
+              <option value="Collateral">Collateral</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div id="cm-domains-container"></div>
+
+      <!-- Summary / Plan -->
+      <div class="section-card">
+        <h3>Summary / Plan</h3>
+        <div class="form-group">
+          <div class="voice-wrap">
+            <textarea id="cm-summary" rows="5" placeholder="Overall summary and plan..."></textarea>
+            <button class="voice-btn" aria-label="Voice-to-text" onclick="toggleVoice('cm-summary', this)" title="Voice-to-text">&#127908;</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="note-preview" id="casemgmt-preview"></div>
+      <div class="action-bar">
+        <button class="btn btn-primary" onclick="generateCaseMgmt()">Generate &amp; Copy</button>
+        <button class="btn btn-outline btn-sm" onclick="downloadNote('cm')">&#128190; Download .txt</button>
+        <button class="btn" onclick="clearCaseMgmt()">Clear Form</button>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ISP PANEL -->
+    <!-- ============================================================ -->
+    <div class="note-panel" id="panel-isp">
+
+      <div class="section-card">
+        <h3>Plan Information</h3>
+        <div class="form-row">
+          <div class="form-group" style="max-width:100px">
+            <label>Client Initials</label>
+            <input type="text" id="isp-initials" maxlength="3" placeholder="AB">
+          </div>
+          <div class="form-group">
+            <label>Plan Date</label>
+            <input type="date" id="isp-date">
+          </div>
+          <div class="form-group">
+            <label>Review Period</label>
+            <select id="isp-period">
+              <option value="90-Day Review">90-Day Review</option>
+              <option value="6-Month Review">6-Month Review</option>
+              <option value="Annual Review">Annual Review</option>
+              <option value="Initial Plan">Initial Plan</option>
+              <option value="Plan Update">Plan Update</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div id="isp-goals-container"></div>
+      <button class="add-btn" onclick="addISPGoal()" style="margin-bottom:16px">+ Add Goal</button>
+
+      <!-- Progress Notes -->
+      <div class="section-card">
+        <h3>Progress Notes</h3>
+        <div class="form-group">
+          <div class="voice-wrap">
+            <textarea id="isp-progress" rows="5" placeholder="Progress notes and observations..."></textarea>
+            <button class="voice-btn" aria-label="Voice-to-text" onclick="toggleVoice('isp-progress', this)" title="Voice-to-text">&#127908;</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="note-preview" id="isp-preview"></div>
+      <div class="action-bar">
+        <button class="btn btn-primary" onclick="generateISP()">Generate &amp; Copy</button>
+        <button class="btn btn-outline btn-sm" onclick="downloadNote('isp')">&#128190; Download .txt</button>
+        <button class="btn" onclick="clearISP()">Clear Form</button>
+      </div>
+    </div>
+
+  </div><!-- /.page-container -->
+</div><!-- /.admin-panel -->
+
+<footer class="site-footer">
+  <p>Greater Nashua Community Mental Health Resources &copy; 2026. Clinical documentation system.</p>
+  <p style="margin-top:4px;font-size:11px;color:var(--text-muted)">All data is in-memory only. Nothing is saved, transmitted, or stored. Close the tab to clear all data.</p>
+</footer>
+
+<!-- Toast -->
+<div class="admin-toast" id="adminToast"></div>
+
+<script>
+/* ================================================================
+   SESSION TIMER
+   ================================================================ */
+var timerSeconds = 0;
+var timerInterval = null;
+var timerRunning = false;
+
+function toggleTimer() {
+  if (timerRunning) {
+    clearInterval(timerInterval);
+    timerRunning = false;
+    document.getElementById('timerToggle').innerHTML = '&#9654;';
+    document.getElementById('sessionTimer').classList.remove('timer-running');
+  } else {
+    timerInterval = setInterval(function() {
+      timerSeconds++;
+      var mins = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
+      var secs = (timerSeconds % 60).toString().padStart(2, '0');
+      document.getElementById('timerDisplay').textContent = mins + ':' + secs;
+    }, 1000);
+    timerRunning = true;
+    document.getElementById('timerToggle').innerHTML = '&#9646;&#9646;';
+    document.getElementById('sessionTimer').classList.add('timer-running');
+  }
+}
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+  timerSeconds = 0;
+  document.getElementById('timerDisplay').textContent = '00:00';
+  document.getElementById('timerToggle').innerHTML = '&#9654;';
+  document.getElementById('sessionTimer').classList.remove('timer-running');
+}
+
+/* ================================================================
+   AUTH SYSTEM
+   ================================================================ */
+const AUTH_HASH = '0294388c97bf9af0ffd74b35daf403e0c1d149b08f3f6f52c6bd43800b8de1c6';
+
+async function sha256(str) {
+  const buf = new TextEncoder().encode(str);
+  const hash = await crypto.subtle.digest('SHA-256', buf);
+  return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function attemptAuth() {
+  const input = document.getElementById('authInput').value;
+  if (!input) { document.getElementById('authError').textContent = 'Please enter a passphrase.'; return; }
+  const hash = await sha256(input);
+  if (hash === AUTH_HASH) {
+    document.getElementById('authOverlay').classList.add('hidden');
+    document.getElementById('adminPanel').classList.add('visible');
+    initializeAll();
+  } else {
+    document.getElementById('authError').textContent = 'Incorrect passphrase.';
+    document.getElementById('authInput').value = '';
+    document.getElementById('authInput').focus();
+  }
+}
+document.getElementById('authInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') attemptAuth();
+});
+
+/* ================================================================
+   TOAST NOTIFICATION
+   ================================================================ */
+let toastTimer = null;
+function showToast(msg, type) {
+  type = type || 'success';
+  const t = document.getElementById('adminToast');
+  t.textContent = msg;
+  t.className = 'admin-toast ' + type + ' show';
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function() { t.classList.remove('show'); }, 3000);
+}
+
+/* ================================================================
+   COPY TO CLIPBOARD
+   ================================================================ */
+function copyToClipboard(text) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function() {
+      showToast('Copied to clipboard', 'success');
+    }).catch(function() { fallbackCopy(text); });
+  } else {
+    fallbackCopy(text);
+  }
+}
+function fallbackCopy(text) {
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.cssText = 'position:fixed;left:-9999px';
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand('copy'); showToast('Copied to clipboard', 'success'); }
+  catch(e) { showToast('Copy failed - please select and copy manually', 'error'); }
+  document.body.removeChild(ta);
+}
+
+/* ================================================================
+   TOGGLE DOMAIN COLLAPSE
+   ================================================================ */
+function toggleDomain(header) {
+  header.closest('.domain-section, .cm-domain').classList.toggle('collapsed');
+}
+
+/* ================================================================
+   TAB SWITCHING
+   ================================================================ */
+document.getElementById('noteTabs').addEventListener('click', function(e) {
+  var tab = e.target.closest('.note-tab');
+  if (!tab) return;
+  document.querySelectorAll('.note-tab').forEach(function(t) { t.classList.remove('active'); });
+  document.querySelectorAll('.note-panel').forEach(function(p) { p.classList.remove('active'); });
+  tab.classList.add('active');
+  document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+});
+
+/* ================================================================
+   VOICE-TO-TEXT (Web Speech API)
+   ================================================================ */
+var activeRecognition = null;
+var activeVoiceBtn = null;
+
+function toggleVoice(textareaId, btn) {
+  var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRecognition) { showToast('Speech recognition not supported in this browser', 'error'); return; }
+
+  if (activeRecognition && activeVoiceBtn === btn) {
+    activeRecognition.stop();
+    activeRecognition = null;
+    btn.classList.remove('recording');
+    activeVoiceBtn = null;
+    return;
+  }
+  if (activeRecognition) {
+    activeRecognition.stop();
+    if (activeVoiceBtn) activeVoiceBtn.classList.remove('recording');
+  }
+
+  var recognition = new SpeechRecognition();
+  recognition.continuous = true;
+  recognition.interimResults = false;
+  recognition.lang = 'en-US';
+
+  var textarea = document.getElementById(textareaId);
+  recognition.onresult = function(event) {
+    var transcript = '';
+    for (var i = event.resultIndex; i < event.results.length; i++) {
+      if (event.results[i].isFinal) {
+        transcript += event.results[i][0].transcript;
+      }
+    }
+    if (transcript) {
+      var current = textarea.value;
+      textarea.value = current + (current && !current.endsWith(' ') ? ' ' : '') + transcript;
+    }
+  };
+  recognition.onerror = function(event) {
+    btn.classList.remove('recording');
+    activeRecognition = null;
+    activeVoiceBtn = null;
+    if (event.error !== 'aborted') {
+      showToast('Voice recognition error: ' + event.error, 'error');
+    }
+  };
+  recognition.onend = function() {
+    btn.classList.remove('recording');
+    activeRecognition = null;
+    activeVoiceBtn = null;
+  };
+
+  recognition.start();
+  btn.classList.add('recording');
+  activeRecognition = recognition;
+  activeVoiceBtn = btn;
+}
+
+/* ================================================================
+   DATA DEFINITIONS
+   ================================================================ */
+var ANSA_DOMAINS = {
+  life: {
+    label: 'Life Domain Functioning',
+    items: ['Living Situation','Employment','Social Functioning','Recreational','Residential Stability','ADLs','Transportation','Language','Family','Legal','Medication Compliance','Self-Care']
+  },
+  bh: {
+    label: 'Behavioral Health Needs',
+    items: ['Psychosis','Mood Disturbance','Anxiety','Substance Use','Cognitive/Intellectual','Traumatic Stress','Adjustment to Trauma','Anger Management','Impulse Control','Interpersonal Problems','Medical/Physical','Eating Disturbance','Sexual Behavior']
+  },
+  risk: {
+    label: 'Risk Behaviors',
+    items: ['Danger to Self','Danger to Others','Self-Injurious Behavior','Exploitation Risk','Criminal Behavior','Elopement Risk','Sexually Problematic Behavior']
+  },
+  strengths: {
+    label: 'Strengths',
+    items: ['Family','Social Connectedness','Optimism','Educational/Vocational','Talents/Interests','Spiritual/Religious','Community Involvement','Resilience','Resourcefulness','Cultural Identity']
+  }
+};
+
+var CANS_DOMAINS = {
+  life: {
+    label: 'Life Domain Functioning',
+    items: ['Family','Living Situation','Social Functioning','Recreational','Developmental/Intellectual','Physical/Medical','School Achievement','School Behavior','School Attendance','Sexual Development','Sleep','Medication Compliance']
+  },
+  beh: {
+    label: 'Behavioral / Emotional Needs',
+    items: ['Psychosis','Mood Disturbance','Anxiety','Oppositional','Conduct','Substance Use','Attention/Hyperactivity','Traumatic Stress','Adjustment to Trauma','Attachment','Anger Control']
+  },
+  risk: {
+    label: 'Risk Behaviors',
+    items: ['Danger to Self','Danger to Others','Self-Injurious Behavior','Runaway','Sexually Problematic Behavior','Fire Setting','Intentional Misbehavior','Bullying']
+  },
+  strengths: {
+    label: 'Strengths',
+    items: ['Family','Interpersonal','Educational','Vocational','Well-being','Optimism','Talents/Interests','Spiritual/Religious','Cultural Identity','Resilience','Community Life','Natural Supports']
+  }
+};
+
+var MSE_CATEGORIES = [
+  { title: 'Appearance', options: ['Well-groomed','Disheveled','Appropriate','Inappropriate','Clean','Unkempt'] },
+  { title: 'Behavior', options: ['Cooperative','Guarded','Hostile','Agitated','Psychomotor retardation','Psychomotor agitation','Eye contact good','Eye contact poor'] },
+  { title: 'Speech', options: ['Normal rate','Pressured','Slow','Loud','Soft','Monotone','Tangential','Circumstantial'] },
+  { title: 'Mood (Reported)', options: ['Euthymic','Depressed','Anxious','Irritable','Angry','Hopeful','Fearful'] },
+  { title: 'Affect (Observed)', options: ['Congruent','Incongruent','Flat','Blunted','Labile','Restricted','Appropriate','Tearful'] },
+  { title: 'Thought Process', options: ['Linear','Goal-directed','Tangential','Circumstantial','Flight of ideas','Loose associations'] },
+  { title: 'Thought Content', options: ['Denies SI/HI','Passive SI','Active SI with plan','HI','Paranoia','Delusions','Obsessions'] },
+  { title: 'Perception', options: ['No disturbances','Auditory hallucinations','Visual hallucinations','Other'] },
+  { title: 'Cognition', options: ['Alert','Oriented x3','Oriented x4','Memory intact','Concentration impaired'] },
+  { title: 'Insight', options: ['Good','Fair','Poor','Limited'] },
+  { title: 'Judgment', options: ['Good','Fair','Poor','Impaired'] }
+];
+
+var INTERVENTION_PHRASES = [
+  // CBT / General
+  'Utilized CBT techniques to identify and challenge cognitive distortions',
+  'Explored client\'s emotional responses using reflective listening',
+  'Provided psychoeducation regarding [topic]',
+  'Utilized motivational interviewing to explore ambivalence',
+  'Processed trauma-related material using TF-CBT framework',
+  'Practiced grounding/mindfulness techniques in session',
+  'Conducted safety planning and risk assessment',
+  'Reviewed and reinforced coping skills',
+  'Utilized DBT skills training (specify)',
+  'Supported client in problem-solving regarding [issue]',
+  'Validated client\'s concerns related to ongoing psychosocial stress',
+  'Explored family dynamics and relational patterns',
+  'Assessed medication compliance and side effects',
+  'Coordinated care with [provider/agency]',
+  'Discussed treatment goals and progress',
+  // Trauma-Focused
+  'Engaged in trauma narrative processing using TF-CBT approach',
+  'Implemented relaxation and affective regulation techniques',
+  'Addressed trauma-related cognitive distortions (blame/responsibility/trust)',
+  'Practiced cognitive processing of trauma through guided questions',
+  // Family Systems
+  'Facilitated communication between family members regarding [issue]',
+  'Identified and addressed dysfunctional family interaction patterns',
+  'Implemented structural family therapy techniques (enactment/boundary setting)',
+  'Provided parenting psychoeducation regarding developmental expectations',
+  // Crisis / Safety
+  'Completed comprehensive suicide risk assessment (Columbia/PHQ-9)',
+  'Developed/updated collaborative safety plan with client',
+  'Conducted means restriction counseling',
+  'Implemented crisis stabilization techniques',
+  // Substance Use
+  'Addressed substance use patterns and impact on functioning',
+  'Implemented relapse prevention planning',
+  'Explored stages of change and readiness for recovery',
+  'Provided psychoeducation on substance use and mental health interactions',
+  // Skills-Based
+  'Taught and practiced distress tolerance skills (TIPP/STOP)',
+  'Practiced interpersonal effectiveness skills (DEAR MAN/GIVE/FAST)',
+  'Implemented exposure hierarchy for anxiety/phobia management',
+  'Practiced assertive communication and boundary-setting skills'
+];
+
+var CM_DOMAINS = [
+  'Physical Health','Behavioral Health','Social Services','Legal','Housing',
+  'Dental','Social Supports','Food Security','Employment/Education',
+  'Transportation','Financial/Benefits','Substance Use','Medication Management',
+  'Daily Living','Child Welfare'
+];
+
+var CM_PHRASES = [
+  'Discussed current status and barriers',
+  'Provided referral to [resource]',
+  'Followed up on previous referral',
+  'Linked client with [service]',
+  'Coordinated with [provider]',
+  'Assisted with application/paperwork',
+  'Advocated on behalf of client',
+  'Monitored ongoing services',
+  'Completed benefits application on behalf of client',
+  'Conducted warm handoff to [provider/service]',
+  'Obtained signed release of information for [provider]',
+  'Verified insurance eligibility and coverage',
+  'Scheduled intake appointment at [agency]',
+  'Assisted with completing housing application',
+  'Provided bus passes/transportation assistance',
+  'Accompanied client to appointment at [location]'
+];
+
+var CM_STATUSES = ['Not Addressed','Stable','Progressing','Declining','Referred','Linked'];
+
+/* ================================================================
+   RENDER RATING ITEMS
+   ================================================================ */
+function renderRatingItems(containerId, items, prefix) {
+  var container = document.getElementById(containerId);
+  var html = '';
+  items.forEach(function(item, idx) {
+    var key = prefix + '-' + idx;
+    html += '<div class="rating-item">';
+    html += '<span class="rating-label">' + item + '</span>';
+    html += '<div class="rating-btns">';
+    for (var r = 0; r <= 3; r++) {
+      html += '<button class="rating-btn" data-key="' + key + '" data-val="' + r + '" onclick="selectRating(this)">' + r + '</button>';
+    }
+    html += '</div></div>';
+  });
+  container.innerHTML = html;
+}
+
+var ratings = {};
+function selectRating(btn) {
+  var key = btn.dataset.key;
+  var val = parseInt(btn.dataset.val);
+  ratings[key] = val;
+  var siblings = btn.parentNode.querySelectorAll('.rating-btn');
+  siblings.forEach(function(s) { s.className = 'rating-btn'; });
+  btn.classList.add('selected-' + val);
+  // Determine which assessment this belongs to and update scoring
+  var prefix = key.split('-')[0]; // 'ansa' or 'cans'
+  updateScoring(prefix);
+}
+
+function updateScoring(prefix) {
+  var domainDefs = prefix === 'ansa' ? ANSA_DOMAINS : CANS_DOMAINS;
+  var totalItems = 0;
+  var ratedCount = 0;
+  var counts = {0: 0, 1: 0, 2: 0, 3: 0};
+  var flagged = [];
+
+  Object.keys(domainDefs).forEach(function(domKey) {
+    var domain = domainDefs[domKey];
+    domain.items.forEach(function(item, idx) {
+      totalItems++;
+      var key = prefix + '-' + domKey + '-' + idx;
+      var val = ratings[key];
+      if (val !== undefined) {
+        ratedCount++;
+        counts[val]++;
+        if (val >= 2) {
+          flagged.push({ name: item, level: val });
+        }
+      }
+    });
+  });
+
+  // Update count text
+  var scoringEl = document.getElementById(prefix + '-scoring');
+  if (!scoringEl) return;
+  var countEl = scoringEl.querySelector('.scoring-count');
+  countEl.innerHTML = '<strong>' + ratedCount + '</strong> of <strong>' + totalItems + '</strong> rated';
+
+  // Update bar segments - widths proportional to rated items
+  var segments = scoringEl.querySelectorAll('.scoring-segment');
+  if (ratedCount === 0) {
+    segments.forEach(function(seg) { seg.style.width = '0%'; });
+  } else {
+    segments[0].style.width = (counts[0] / totalItems * 100) + '%';
+    segments[1].style.width = (counts[1] / totalItems * 100) + '%';
+    segments[2].style.width = (counts[2] / totalItems * 100) + '%';
+    segments[3].style.width = (counts[3] / totalItems * 100) + '%';
+  }
+
+  // Update flags
+  var flagsEl = document.getElementById(prefix + '-flags');
+  if (flagged.length === 0) {
+    flagsEl.innerHTML = '';
+  } else {
+    var flagsHtml = '<div style="margin-top:8px;font-weight:600;font-size:12px;color:var(--text-secondary);margin-bottom:4px">Needs Attention:</div>';
+    flagged.forEach(function(f) {
+      flagsHtml += '<span class="flag-item flag-' + f.level + '">' + f.name + ' (' + f.level + ')</span>';
+    });
+    flagsEl.innerHTML = flagsHtml;
+  }
+}
+
+/* ================================================================
+   RENDER MSE
+   ================================================================ */
+function renderMSE(containerId, prefix) {
+  var container = document.getElementById(containerId);
+  var html = '';
+  MSE_CATEGORIES.forEach(function(cat, ci) {
+    html += '<div class="mse-group">';
+    html += '<div class="mse-group-title">' + cat.title + '</div>';
+    html += '<div class="mse-options">';
+    cat.options.forEach(function(opt, oi) {
+      var id = prefix + '-mse-' + ci + '-' + oi;
+      html += '<span class="mse-chip" data-id="' + id + '" onclick="toggleMSE(this)">' + opt + '</span>';
+    });
+    html += '</div></div>';
+  });
+  container.innerHTML = html;
+}
+
+var mseSelections = {};
+function toggleMSE(chip) {
+  var id = chip.dataset.id;
+  if (mseSelections[id]) {
+    delete mseSelections[id];
+    chip.classList.remove('selected');
+  } else {
+    mseSelections[id] = chip.textContent;
+    chip.classList.add('selected');
+  }
+}
+
+/* ================================================================
+   RENDER INTERVENTIONS PHRASE BANK
+   ================================================================ */
+function renderInterventionBank(containerId, prefix) {
+  var container = document.getElementById(containerId);
+  var html = '';
+  INTERVENTION_PHRASES.forEach(function(phrase, i) {
+    var id = prefix + '-phrase-' + i;
+    html += '<button class="phrase-btn" data-id="' + id + '" onclick="togglePhrase(this)" title="' + phrase + '">' + phrase + '</button>';
+  });
+  container.innerHTML = html;
+}
+
+var selectedPhrases = {};
+function togglePhrase(btn) {
+  var id = btn.dataset.id;
+  if (selectedPhrases[id]) {
+    delete selectedPhrases[id];
+    btn.classList.remove('used');
+  } else {
+    selectedPhrases[id] = btn.textContent;
+    btn.classList.add('used');
+  }
+}
+
+/* ================================================================
+   RENDER CASE MANAGEMENT DOMAINS
+   ================================================================ */
+function renderCMDomains() {
+  var container = document.getElementById('cm-domains-container');
+  var html = '';
+  CM_DOMAINS.forEach(function(domain, di) {
+    html += '<div class="cm-domain collapsed">';
+    html += '<div class="cm-domain-header" onclick="toggleDomain(this)">';
+    html += '<h4>' + (di + 1) + '. ' + domain + '</h4>';
+    html += '<span class="cm-collapse-arrow">&#9660;</span>';
+    html += '</div>';
+    html += '<div class="cm-domain-body">';
+    html += '<div class="cm-status-row">';
+    html += '<label>Status:</label>';
+    html += '<select id="cm-status-' + di + '">';
+    CM_STATUSES.forEach(function(s) {
+      html += '<option value="' + s + '">' + s + '</option>';
+    });
+    html += '</select></div>';
+    html += '<div class="phrase-bank mb-8">';
+    CM_PHRASES.forEach(function(phrase, pi) {
+      var id = 'cm-' + di + '-phrase-' + pi;
+      html += '<button class="phrase-btn" data-id="' + id + '" data-target="cm-notes-' + di + '" onclick="appendCMPhrase(this)">' + phrase + '</button>';
+    });
+    html += '</div>';
+    html += '<div class="form-group">';
+    html += '<label>Notes</label>';
+    html += '<div class="voice-wrap">';
+    html += '<textarea id="cm-notes-' + di + '" rows="2" placeholder="Notes for ' + domain + '..."></textarea>';
+    html += '<button class="voice-btn" aria-label="Voice-to-text" onclick="toggleVoice(\'cm-notes-' + di + '\', this)" title="Voice-to-text">&#127908;</button>';
+    html += '</div></div>';
+    html += '</div></div>';
+  });
+  container.innerHTML = html;
+}
+
+function appendCMPhrase(btn) {
+  var targetId = btn.dataset.target;
+  var id = btn.dataset.id;
+  var ta = document.getElementById(targetId);
+  var phrase = btn.textContent;
+  if (btn.classList.contains('used')) {
+    btn.classList.remove('used');
+    selectedPhrases[id] && delete selectedPhrases[id];
+    return;
+  }
+  btn.classList.add('used');
+  selectedPhrases[id] = phrase;
+  var current = ta.value;
+  ta.value = current + (current ? '\n' : '') + '- ' + phrase;
+}
+
+/* ================================================================
+   ISP GOAL MANAGEMENT
+   ================================================================ */
+var ispGoalCount = 0;
+function addISPGoal() {
+  ispGoalCount++;
+  var goalNum = ispGoalCount;
+  var container = document.getElementById('isp-goals-container');
+  var div = document.createElement('div');
+  div.className = 'goal-block';
+  div.id = 'isp-goal-' + goalNum;
+  div.innerHTML =
+    '<div class="goal-block-header">' +
+    '<h4>Goal ' + goalNum + '</h4>' +
+    '<button class="remove-btn" onclick="removeGoal(' + goalNum + ')">Remove Goal</button>' +
+    '</div>' +
+    '<div class="goal-block-body">' +
+    '<div class="form-row">' +
+    '<div class="form-group" style="flex:3"><label>Goal Description</label>' +
+    '<div class="voice-wrap"><textarea id="isp-goal-desc-' + goalNum + '" rows="2" placeholder="Goal description..."></textarea>' +
+    '<button class="voice-btn" aria-label="Voice-to-text" onclick="toggleVoice(\'isp-goal-desc-' + goalNum + '\', this)" title="Voice-to-text">&#127908;</button></div></div>' +
+    '<div class="form-group" style="flex:1"><label>Target Date</label>' +
+    '<input type="date" id="isp-goal-target-' + goalNum + '"></div>' +
+    '<div class="form-group" style="flex:1"><label>Status</label>' +
+    '<select id="isp-goal-status-' + goalNum + '">' +
+    '<option value="Active">Active</option>' +
+    '<option value="In Progress">In Progress</option>' +
+    '<option value="Achieved">Achieved</option>' +
+    '<option value="Discontinued">Discontinued</option>' +
+    '<option value="Modified">Modified</option>' +
+    '</select></div></div>' +
+    '<h5 style="font-size:13px;font-weight:600;margin:12px 0 8px;color:var(--accent)">Objectives</h5>' +
+    '<div id="isp-objectives-' + goalNum + '"></div>' +
+    '<button class="add-btn" onclick="addObjective(' + goalNum + ')">+ Add Objective</button>' +
+    '<h5 style="font-size:13px;font-weight:600;margin:12px 0 8px;color:var(--teal)">Interventions</h5>' +
+    '<div id="isp-interventions-' + goalNum + '"></div>' +
+    '<button class="add-btn" onclick="addIntervention(' + goalNum + ')">+ Add Intervention</button>' +
+    '</div>';
+  container.appendChild(div);
+  addObjective(goalNum);
+  addIntervention(goalNum);
+}
+
+function removeGoal(num) {
+  var el = document.getElementById('isp-goal-' + num);
+  if (el) el.remove();
+}
+
+var objCounts = {};
+function addObjective(goalNum) {
+  if (!objCounts[goalNum]) objCounts[goalNum] = 0;
+  objCounts[goalNum]++;
+  var objNum = objCounts[goalNum];
+  var container = document.getElementById('isp-objectives-' + goalNum);
+  var div = document.createElement('div');
+  div.className = 'objective-row';
+  div.id = 'isp-obj-' + goalNum + '-' + objNum;
+  div.innerHTML =
+    '<button class="remove-btn" onclick="this.closest(\'.objective-row\').remove()">&#10005;</button>' +
+    '<div class="form-row" style="margin-bottom:8px">' +
+    '<div class="form-group" style="flex:2"><label>Objective ' + objNum + '</label>' +
+    '<textarea id="isp-obj-desc-' + goalNum + '-' + objNum + '" rows="2" placeholder="Objective description..."></textarea></div>' +
+    '<div class="form-group" style="flex:1"><label>Measurable Criteria</label>' +
+    '<input type="text" id="isp-obj-criteria-' + goalNum + '-' + objNum + '" placeholder="e.g., 3 out of 5 sessions"></div></div>' +
+    '<div class="form-row">' +
+    '<div class="form-group"><label>Frequency</label>' +
+    '<input type="text" id="isp-obj-freq-' + goalNum + '-' + objNum + '" placeholder="e.g., Weekly"></div>' +
+    '<div class="form-group"><label>Responsible Party</label>' +
+    '<input type="text" id="isp-obj-resp-' + goalNum + '-' + objNum + '" placeholder="e.g., Clinician/Client"></div></div>';
+  container.appendChild(div);
+}
+
+var intCounts = {};
+function addIntervention(goalNum) {
+  if (!intCounts[goalNum]) intCounts[goalNum] = 0;
+  intCounts[goalNum]++;
+  var intNum = intCounts[goalNum];
+  var container = document.getElementById('isp-interventions-' + goalNum);
+  var div = document.createElement('div');
+  div.className = 'intervention-row';
+  div.id = 'isp-int-' + goalNum + '-' + intNum;
+  div.innerHTML =
+    '<button class="remove-btn" onclick="this.closest(\'.intervention-row\').remove()">&#10005;</button>' +
+    '<div class="form-row" style="margin-bottom:8px">' +
+    '<div class="form-group" style="flex:2"><label>Intervention ' + intNum + '</label>' +
+    '<textarea id="isp-int-desc-' + goalNum + '-' + intNum + '" rows="2" placeholder="Intervention description..."></textarea></div>' +
+    '<div class="form-group"><label>Provider</label>' +
+    '<input type="text" id="isp-int-provider-' + goalNum + '-' + intNum + '" placeholder="e.g., LICSW"></div></div>' +
+    '<div class="form-row">' +
+    '<div class="form-group"><label>Frequency</label>' +
+    '<input type="text" id="isp-int-freq-' + goalNum + '-' + intNum + '" placeholder="e.g., Weekly"></div>' +
+    '<div class="form-group"><label>Start Date</label>' +
+    '<input type="date" id="isp-int-start-' + goalNum + '-' + intNum + '"></div></div>';
+  container.appendChild(div);
+}
+
+/* ================================================================
+   FAMILY THERAPY: ATTENDEES
+   ================================================================ */
+function addAttendee() {
+  var container = document.getElementById('fam-attendees');
+  var div = document.createElement('div');
+  div.className = 'attendee-row';
+  div.innerHTML =
+    '<input type="text" maxlength="3" placeholder="Initials" class="fam-att-init" aria-label="Attendee initials">' +
+    '<label><input type="checkbox" class="fam-att-role" value="Client"> Client</label>' +
+    '<label><input type="checkbox" class="fam-att-role" value="Parent"> Parent</label>' +
+    '<label><input type="checkbox" class="fam-att-role" value="Sibling"> Sibling</label>' +
+    '<label><input type="checkbox" class="fam-att-role" value="Guardian"> Guardian</label>' +
+    '<label><input type="checkbox" class="fam-att-role" value="Other"> Other</label>' +
+    '<button class="remove-btn" onclick="this.closest(\'.attendee-row\').remove()" title="Remove">&#10005;</button>';
+  container.appendChild(div);
+}
+
+/* ================================================================
+   GENERATE ANSA
+   ================================================================ */
+function generateAssessmentNarrative(domainDefs, prefix, toolName) {
+  var lines = [];
+  lines.push('='.repeat(60));
+  lines.push(toolName + ' ASSESSMENT');
+  lines.push('Date: ' + new Date().toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' }));
+  lines.push('='.repeat(60));
+
+  var ratingLabels = ['No evidence of need (0)','History/mild concern (1)','Moderate/current need (2)','Severe/acute concern (3)'];
+  var strengthLabels = ['Well-developed strength (0)','Identified strength with some concerns (1)','Strength not well developed (2)','No identified strength (3)'];
+
+  Object.keys(domainDefs).forEach(function(domKey) {
+    var domain = domainDefs[domKey];
+    var isStrengths = domKey === 'strengths';
+    var labels = isStrengths ? strengthLabels : ratingLabels;
+    lines.push('');
+    lines.push('-'.repeat(40));
+    lines.push(domain.label.toUpperCase());
+    lines.push('-'.repeat(40));
+
+    var itemLines = [];
+    var narrativeParts = { '0':[], '1':[], '2':[], '3':[] };
+
+    domain.items.forEach(function(item, idx) {
+      var key = prefix + '-' + domKey + '-' + idx;
+      var val = ratings[key];
+      if (val !== undefined) {
+        itemLines.push('  ' + item + ': ' + val + ' - ' + labels[val]);
+        narrativeParts['' + val].push(item);
+      } else {
+        itemLines.push('  ' + item + ': Not rated');
+      }
+    });
+
+    lines = lines.concat(itemLines);
+
+    // Narrative
+    lines.push('');
+    lines.push('Narrative Summary:');
+    if (isStrengths) {
+      if (narrativeParts['0'].length) lines.push('  Client demonstrates well-developed strengths in: ' + narrativeParts['0'].join(', ') + '.');
+      if (narrativeParts['1'].length) lines.push('  Identified strengths with some concerns: ' + narrativeParts['1'].join(', ') + '.');
+      if (narrativeParts['2'].length) lines.push('  Strengths not yet well-developed: ' + narrativeParts['2'].join(', ') + '.');
+      if (narrativeParts['3'].length) lines.push('  No identified strength in: ' + narrativeParts['3'].join(', ') + '.');
+    } else {
+      if (narrativeParts['0'].length) lines.push('  No evidence of concerns in: ' + narrativeParts['0'].join(', ') + '.');
+      if (narrativeParts['1'].length) lines.push('  Client has history or mild concerns with: ' + narrativeParts['1'].join(', ') + '.');
+      if (narrativeParts['2'].length) lines.push('  Client presents with moderate/current needs in: ' + narrativeParts['2'].join(', ') + '. Active intervention recommended.');
+      if (narrativeParts['3'].length) lines.push('  SEVERE/ACUTE concerns identified: ' + narrativeParts['3'].join(', ') + '. Immediate attention required.');
+    }
+  });
+
+  lines.push('');
+  lines.push('='.repeat(60));
+  lines.push('End of ' + toolName + ' Assessment');
+  lines.push('='.repeat(60));
+  return lines.join('\n');
+}
+
+function generateANSA() {
+  var text = generateAssessmentNarrative(ANSA_DOMAINS, 'ansa', 'ANSA (Adult Needs and Strengths Assessment)');
+  var preview = document.getElementById('ansa-preview');
+  preview.textContent = text;
+  preview.classList.add('visible');
+  copyToClipboard(text);
+}
+
+function clearANSA() {
+  Object.keys(ANSA_DOMAINS).forEach(function(domKey) {
+    ANSA_DOMAINS[domKey].items.forEach(function(item, idx) {
+      delete ratings['ansa-' + domKey + '-' + idx];
+    });
+  });
+  document.querySelectorAll('#panel-ansa .rating-btn').forEach(function(b) { b.className = 'rating-btn'; });
+  document.getElementById('ansa-preview').classList.remove('visible');
+  updateScoring('ansa');
+  showToast('ANSA form cleared', 'info');
+}
+
+/* ================================================================
+   GENERATE CANS
+   ================================================================ */
+function generateCANS() {
+  var text = generateAssessmentNarrative(CANS_DOMAINS, 'cans', 'CANS (Child and Adolescent Needs and Strengths)');
+  var preview = document.getElementById('cans-preview');
+  preview.textContent = text;
+  preview.classList.add('visible');
+  copyToClipboard(text);
+}
+
+function clearCANS() {
+  Object.keys(CANS_DOMAINS).forEach(function(domKey) {
+    CANS_DOMAINS[domKey].items.forEach(function(item, idx) {
+      delete ratings['cans-' + domKey + '-' + idx];
+    });
+  });
+  document.querySelectorAll('#panel-cans .rating-btn').forEach(function(b) { b.className = 'rating-btn'; });
+  document.getElementById('cans-preview').classList.remove('visible');
+  updateScoring('cans');
+  showToast('CANS form cleared', 'info');
+}
+
+/* ================================================================
+   GENERATE INDIVIDUAL THERAPY NOTE
+   ================================================================ */
+function getMSEText(prefix) {
+  var sections = {};
+  MSE_CATEGORIES.forEach(function(cat, ci) {
+    var selected = [];
+    cat.options.forEach(function(opt, oi) {
+      var id = prefix + '-mse-' + ci + '-' + oi;
+      if (mseSelections[id]) selected.push(mseSelections[id]);
+    });
+    if (selected.length) sections[cat.title] = selected;
+  });
+  return sections;
+}
+
+function getSelectedInterventions(prefix) {
+  var result = [];
+  INTERVENTION_PHRASES.forEach(function(phrase, i) {
+    var id = prefix + '-phrase-' + i;
+    if (selectedPhrases[id]) result.push(selectedPhrases[id]);
+  });
+  return result;
+}
+
+function generateIndividual() {
+  var initials = document.getElementById('ind-initials').value.toUpperCase() || '___';
+  var date = document.getElementById('ind-date').value || 'Not specified';
+  var time = document.getElementById('ind-time').value || 'Not specified';
+  var duration = document.getElementById('ind-duration').value || '60';
+  var formulation = document.getElementById('ind-formulation').value;
+  var plan = document.getElementById('ind-plan').value;
+  var extraInterventions = document.getElementById('ind-interventions-extra').value;
+
+  var lines = [];
+  lines.push('='.repeat(60));
+  lines.push('INDIVIDUAL THERAPY NOTE');
+  lines.push('='.repeat(60));
+  lines.push('Client: ' + initials);
+  lines.push('Date: ' + formatDate(date));
+  lines.push('Time: ' + time);
+  lines.push('Duration: ' + duration + ' minutes');
+  lines.push('Service Type: Individual Therapy');
+  lines.push('');
+
+  // MSE
+  lines.push('-'.repeat(40));
+  lines.push('MENTAL STATUS EXAM');
+  lines.push('-'.repeat(40));
+  var mse = getMSEText('ind');
+  if (Object.keys(mse).length === 0) {
+    lines.push('  No MSE items selected.');
+  } else {
+    Object.keys(mse).forEach(function(cat) {
+      lines.push('  ' + cat + ': ' + mse[cat].join(', '));
+    });
+  }
+  lines.push('');
+
+  // Interventions
+  lines.push('-'.repeat(40));
+  lines.push('INTERVENTIONS');
+  lines.push('-'.repeat(40));
+  var interventions = getSelectedInterventions('ind');
+  if (interventions.length === 0 && !extraInterventions) {
+    lines.push('  No interventions documented.');
+  } else {
+    interventions.forEach(function(iv) { lines.push('  - ' + iv); });
+    if (extraInterventions) {
+      extraInterventions.split('\n').forEach(function(line) {
+        if (line.trim()) lines.push('  - ' + line.trim());
+      });
+    }
+  }
+  lines.push('');
+
+  // Formulation
+  lines.push('-'.repeat(40));
+  lines.push('CLINICAL FORMULATION');
+  lines.push('-'.repeat(40));
+  lines.push(formulation || '  No formulation provided.');
+  lines.push('');
+
+  // Plan
+  lines.push('-'.repeat(40));
+  lines.push('PLAN / NEXT STEPS');
+  lines.push('-'.repeat(40));
+  lines.push(plan || '  No plan documented.');
+  lines.push('');
+  lines.push('='.repeat(60));
+  lines.push('End of Individual Therapy Note');
+  lines.push('='.repeat(60));
+
+  var text = lines.join('\n');
+  var preview = document.getElementById('individual-preview');
+  preview.textContent = text;
+  preview.classList.add('visible');
+  copyToClipboard(text);
+}
+
+/* ================================================================
+   QUICK TEMPLATES FOR INDIVIDUAL THERAPY
+   ================================================================ */
+function applyTemplate(templateName) {
+  // 1. Clear current MSE selections for the Individual panel
+  document.querySelectorAll('#ind-mse .mse-chip.selected').forEach(function(c) {
+    delete mseSelections[c.dataset.id];
+    c.classList.remove('selected');
+  });
+  // Clear current intervention selections for the Individual panel
+  document.querySelectorAll('#ind-interventions-bank .phrase-btn.used').forEach(function(b) {
+    delete selectedPhrases[b.dataset.id];
+    b.classList.remove('used');
+  });
+
+  // Define templates as MSE data-id suffixes and intervention phrase indices
+  // MSE data-id format: ind-mse-{categoryIndex}-{optionIndex}
+  // Category indices: 0=Appearance, 1=Behavior, 2=Speech, 3=Mood, 4=Affect,
+  //   5=Thought Process, 6=Thought Content, 7=Perception, 8=Cognition, 9=Insight, 10=Judgment
+  var templates = {
+    standard: {
+      mse: [
+        '0-0',  // Appearance: Well-groomed
+        '1-0',  // Behavior: Cooperative
+        '1-6',  // Behavior: Eye contact good
+        '2-0',  // Speech: Normal rate
+        '4-0',  // Affect: Congruent
+        '4-6',  // Affect: Appropriate
+        '5-0',  // Thought Process: Linear
+        '5-1',  // Thought Process: Goal-directed
+        '6-0',  // Thought Content: Denies SI/HI
+        '8-0',  // Cognition: Alert
+        '8-2',  // Cognition: Oriented x4
+        '9-1',  // Insight: Fair
+        '10-1'  // Judgment: Fair
+      ],
+      phrases: [1, 7, 14]  // Reflective listening, Coping skills, Treatment goals
+    },
+    crisis: {
+      mse: [
+        '1-3',  // Behavior: Agitated
+        '3-2',  // Mood: Anxious
+        '4-4',  // Affect: Labile
+        '6-1',  // Thought Content: Passive SI
+        '8-0'   // Cognition: Alert
+      ],
+      phrases: [6, 24, 26, 23]  // Safety planning, Collaborative safety plan, Crisis stabilization, Columbia/PHQ-9
+    },
+    medcheck: {
+      mse: [
+        '0-2',  // Appearance: Appropriate
+        '1-0',  // Behavior: Cooperative
+        '2-0',  // Speech: Normal rate
+        '3-0',  // Mood: Euthymic
+        '4-0',  // Affect: Congruent
+        '5-0',  // Thought Process: Linear
+        '6-0',  // Thought Content: Denies SI/HI
+        '8-0',  // Cognition: Alert
+        '8-2'   // Cognition: Oriented x4
+      ],
+      phrases: [12, 14]  // Medication compliance, Treatment goals
+    },
+    intake: {
+      mse: [
+        '0-0',  // Appearance: Well-groomed
+        '1-0',  // Behavior: Cooperative
+        '1-6',  // Behavior: Eye contact good
+        '2-0',  // Speech: Normal rate
+        '3-0',  // Mood: Euthymic
+        '4-0',  // Affect: Congruent
+        '4-6',  // Affect: Appropriate
+        '5-0',  // Thought Process: Linear
+        '5-1',  // Thought Process: Goal-directed
+        '6-0',  // Thought Content: Denies SI/HI
+        '7-0',  // Perception: No disturbances
+        '8-0',  // Cognition: Alert
+        '8-2',  // Cognition: Oriented x4
+        '8-3',  // Cognition: Memory intact
+        '9-1',  // Insight: Fair
+        '10-1'  // Judgment: Fair
+      ],
+      phrases: [2, 14, 6]  // Psychoeducation, Treatment goals, Safety planning
+    },
+    discharge: {
+      mse: [
+        '0-0',  // Appearance: Well-groomed
+        '1-0',  // Behavior: Cooperative
+        '1-6',  // Behavior: Eye contact good
+        '2-0',  // Speech: Normal rate
+        '3-0',  // Mood: Euthymic
+        '4-0',  // Affect: Congruent
+        '4-6',  // Affect: Appropriate
+        '5-0',  // Thought Process: Linear
+        '5-1',  // Thought Process: Goal-directed
+        '6-0',  // Thought Content: Denies SI/HI
+        '7-0',  // Perception: No disturbances
+        '8-0',  // Cognition: Alert
+        '8-2',  // Cognition: Oriented x4
+        '9-1',  // Insight: Fair
+        '10-1'  // Judgment: Fair
+      ],
+      phrases: [14, 7, 13]  // Treatment goals, Coping skills, Coordinated care
+    }
+  };
+
+  var tpl = templates[templateName];
+  if (!tpl) return;
+
+  // 2. Apply MSE selections
+  tpl.mse.forEach(function(suffix) {
+    var dataId = 'ind-mse-' + suffix;
+    var chip = document.querySelector('#ind-mse .mse-chip[data-id="' + dataId + '"]');
+    if (chip) {
+      mseSelections[dataId] = chip.textContent;
+      chip.classList.add('selected');
+    }
+  });
+
+  // 3. Apply intervention phrase selections
+  tpl.phrases.forEach(function(phraseIndex) {
+    var dataId = 'ind-phrase-' + phraseIndex;
+    var btn = document.querySelector('#ind-interventions-bank .phrase-btn[data-id="' + dataId + '"]');
+    if (btn) {
+      selectedPhrases[dataId] = btn.textContent;
+      btn.classList.add('used');
+    }
+  });
+
+  showToast('Template applied: ' + templateName.charAt(0).toUpperCase() + templateName.slice(1), 'success');
+}
+
+function clearIndividual() {
+  document.getElementById('ind-initials').value = '';
+  document.getElementById('ind-date').value = '';
+  document.getElementById('ind-time').value = '';
+  document.getElementById('ind-duration').value = '60';
+  document.getElementById('ind-formulation').value = '';
+  document.getElementById('ind-plan').value = '';
+  document.getElementById('ind-interventions-extra').value = '';
+  // Clear MSE
+  document.querySelectorAll('#ind-mse .mse-chip.selected').forEach(function(c) {
+    var id = c.dataset.id;
+    delete mseSelections[id];
+    c.classList.remove('selected');
+  });
+  // Clear phrases
+  document.querySelectorAll('#ind-interventions-bank .phrase-btn.used').forEach(function(b) {
+    var id = b.dataset.id;
+    delete selectedPhrases[id];
+    b.classList.remove('used');
+  });
+  document.getElementById('individual-preview').classList.remove('visible');
+  showToast('Individual Therapy form cleared', 'info');
+}
+
+/* ================================================================
+   GENERATE FAMILY THERAPY NOTE
+   ================================================================ */
+function generateFamily() {
+  var initials = document.getElementById('fam-initials').value.toUpperCase() || '___';
+  var date = document.getElementById('fam-date').value || 'Not specified';
+  var time = document.getElementById('fam-time').value || 'Not specified';
+  var duration = document.getElementById('fam-duration').value || '60';
+  var dynamics = document.getElementById('fam-dynamics').value;
+  var patterns = document.getElementById('fam-patterns').value;
+  var formulation = document.getElementById('fam-formulation').value;
+  var plan = document.getElementById('fam-plan').value;
+  var extraInterventions = document.getElementById('fam-interventions-extra').value;
+
+  // Attendees
+  var attendees = [];
+  document.querySelectorAll('#fam-attendees .attendee-row').forEach(function(row) {
+    var init = row.querySelector('.fam-att-init').value.toUpperCase();
+    var roles = [];
+    row.querySelectorAll('.fam-att-role:checked').forEach(function(cb) { roles.push(cb.value); });
+    if (init || roles.length) {
+      attendees.push((init || '___') + ' (' + (roles.join(', ') || 'role not specified') + ')');
+    }
+  });
+
+  var lines = [];
+  lines.push('='.repeat(60));
+  lines.push('FAMILY THERAPY NOTE');
+  lines.push('='.repeat(60));
+  lines.push('Client: ' + initials);
+  lines.push('Date: ' + formatDate(date));
+  lines.push('Time: ' + time);
+  lines.push('Duration: ' + duration + ' minutes');
+  lines.push('Service Type: Family Therapy');
+  lines.push('');
+
+  // Attendees
+  lines.push('-'.repeat(40));
+  lines.push('ATTENDEES');
+  lines.push('-'.repeat(40));
+  if (attendees.length === 0) {
+    lines.push('  No attendees documented.');
+  } else {
+    attendees.forEach(function(a) { lines.push('  - ' + a); });
+  }
+  lines.push('');
+
+  // Family Dynamics
+  lines.push('-'.repeat(40));
+  lines.push('FAMILY DYNAMICS OBSERVATIONS');
+  lines.push('-'.repeat(40));
+  lines.push(dynamics || '  Not documented.');
+  lines.push('');
+
+  // Interactional Patterns
+  lines.push('-'.repeat(40));
+  lines.push('INTERACTIONAL PATTERNS');
+  lines.push('-'.repeat(40));
+  lines.push(patterns || '  Not documented.');
+  lines.push('');
+
+  // MSE
+  lines.push('-'.repeat(40));
+  lines.push('MENTAL STATUS EXAM (Primary Client)');
+  lines.push('-'.repeat(40));
+  var mse = getMSEText('fam');
+  if (Object.keys(mse).length === 0) {
+    lines.push('  No MSE items selected.');
+  } else {
+    Object.keys(mse).forEach(function(cat) {
+      lines.push('  ' + cat + ': ' + mse[cat].join(', '));
+    });
+  }
+  lines.push('');
+
+  // Interventions
+  lines.push('-'.repeat(40));
+  lines.push('INTERVENTIONS');
+  lines.push('-'.repeat(40));
+  var interventions = getSelectedInterventions('fam');
+  if (interventions.length === 0 && !extraInterventions) {
+    lines.push('  No interventions documented.');
+  } else {
+    interventions.forEach(function(iv) { lines.push('  - ' + iv); });
+    if (extraInterventions) {
+      extraInterventions.split('\n').forEach(function(line) {
+        if (line.trim()) lines.push('  - ' + line.trim());
+      });
+    }
+  }
+  lines.push('');
+
+  // Formulation
+  lines.push('-'.repeat(40));
+  lines.push('CLINICAL FORMULATION');
+  lines.push('-'.repeat(40));
+  lines.push(formulation || '  No formulation provided.');
+  lines.push('');
+
+  // Plan
+  lines.push('-'.repeat(40));
+  lines.push('PLAN / NEXT STEPS');
+  lines.push('-'.repeat(40));
+  lines.push(plan || '  No plan documented.');
+  lines.push('');
+  lines.push('='.repeat(60));
+  lines.push('End of Family Therapy Note');
+  lines.push('='.repeat(60));
+
+  var text = lines.join('\n');
+  var preview = document.getElementById('family-preview');
+  preview.textContent = text;
+  preview.classList.add('visible');
+  copyToClipboard(text);
+}
+
+function clearFamily() {
+  document.getElementById('fam-initials').value = '';
+  document.getElementById('fam-date').value = '';
+  document.getElementById('fam-time').value = '';
+  document.getElementById('fam-duration').value = '60';
+  document.getElementById('fam-dynamics').value = '';
+  document.getElementById('fam-patterns').value = '';
+  document.getElementById('fam-formulation').value = '';
+  document.getElementById('fam-plan').value = '';
+  document.getElementById('fam-interventions-extra').value = '';
+  // Reset attendees to one empty row
+  document.getElementById('fam-attendees').innerHTML =
+    '<div class="attendee-row">' +
+    '<input type="text" maxlength="3" placeholder="Initials" class="fam-att-init" aria-label="Attendee initials">' +
+    '<label><input type="checkbox" class="fam-att-role" value="Client" checked> Client</label>' +
+    '<label><input type="checkbox" class="fam-att-role" value="Parent"> Parent</label>' +
+    '<label><input type="checkbox" class="fam-att-role" value="Sibling"> Sibling</label>' +
+    '<label><input type="checkbox" class="fam-att-role" value="Guardian"> Guardian</label>' +
+    '<label><input type="checkbox" class="fam-att-role" value="Other"> Other</label>' +
+    '<button class="remove-btn" onclick="this.closest(\'.attendee-row\').remove()" title="Remove">&#10005;</button>' +
+    '</div>';
+  // Clear MSE
+  document.querySelectorAll('#fam-mse .mse-chip.selected').forEach(function(c) {
+    delete mseSelections[c.dataset.id];
+    c.classList.remove('selected');
+  });
+  // Clear phrases
+  document.querySelectorAll('#fam-interventions-bank .phrase-btn.used').forEach(function(b) {
+    delete selectedPhrases[b.dataset.id];
+    b.classList.remove('used');
+  });
+  document.getElementById('family-preview').classList.remove('visible');
+  showToast('Family Therapy form cleared', 'info');
+}
+
+/* ================================================================
+   GENERATE CASE MANAGEMENT NOTE
+   ================================================================ */
+function generateCaseMgmt() {
+  var initials = document.getElementById('cm-initials').value.toUpperCase() || '___';
+  var date = document.getElementById('cm-date').value || 'Not specified';
+  var contactType = document.getElementById('cm-contact-type').value;
+  var summary = document.getElementById('cm-summary').value;
+
+  var lines = [];
+  lines.push('='.repeat(60));
+  lines.push('CASE MANAGEMENT NOTE');
+  lines.push('='.repeat(60));
+  lines.push('Client: ' + initials);
+  lines.push('Date: ' + formatDate(date));
+  lines.push('Contact Type: ' + contactType);
+  lines.push('');
+
+  // Domains
+  CM_DOMAINS.forEach(function(domain, di) {
+    var status = document.getElementById('cm-status-' + di).value;
+    var notes = document.getElementById('cm-notes-' + di).value;
+    if (status !== 'Not Addressed' || notes.trim()) {
+      lines.push('-'.repeat(40));
+      lines.push((di + 1) + '. ' + domain.toUpperCase());
+      lines.push('-'.repeat(40));
+      lines.push('  Status: ' + status);
+      if (notes.trim()) {
+        notes.split('\n').forEach(function(line) {
+          if (line.trim()) lines.push('  ' + line.trim());
+        });
+      }
+      lines.push('');
+    }
+  });
+
+  // Summary
+  lines.push('-'.repeat(40));
+  lines.push('SUMMARY / PLAN');
+  lines.push('-'.repeat(40));
+  lines.push(summary || '  No summary provided.');
+  lines.push('');
+  lines.push('='.repeat(60));
+  lines.push('End of Case Management Note');
+  lines.push('='.repeat(60));
+
+  var text = lines.join('\n');
+  var preview = document.getElementById('casemgmt-preview');
+  preview.textContent = text;
+  preview.classList.add('visible');
+  copyToClipboard(text);
+}
+
+function clearCaseMgmt() {
+  document.getElementById('cm-initials').value = '';
+  document.getElementById('cm-date').value = '';
+  document.getElementById('cm-contact-type').value = 'In-Person';
+  document.getElementById('cm-summary').value = '';
+  CM_DOMAINS.forEach(function(domain, di) {
+    document.getElementById('cm-status-' + di).value = 'Not Addressed';
+    document.getElementById('cm-notes-' + di).value = '';
+  });
+  document.querySelectorAll('#cm-domains-container .phrase-btn.used').forEach(function(b) {
+    delete selectedPhrases[b.dataset.id];
+    b.classList.remove('used');
+  });
+  document.getElementById('casemgmt-preview').classList.remove('visible');
+  showToast('Case Management form cleared', 'info');
+}
+
+/* ================================================================
+   GENERATE ISP
+   ================================================================ */
+function generateISP() {
+  var initials = document.getElementById('isp-initials').value.toUpperCase() || '___';
+  var date = document.getElementById('isp-date').value || 'Not specified';
+  var period = document.getElementById('isp-period').value;
+  var progress = document.getElementById('isp-progress').value;
+
+  var lines = [];
+  lines.push('='.repeat(60));
+  lines.push('INDIVIDUAL SERVICE PLAN (ISP)');
+  lines.push('='.repeat(60));
+  lines.push('Client: ' + initials);
+  lines.push('Date: ' + formatDate(date));
+  lines.push('Review Period: ' + period);
+  lines.push('');
+
+  // Goals
+  var goalBlocks = document.querySelectorAll('#isp-goals-container .goal-block');
+  if (goalBlocks.length === 0) {
+    lines.push('No goals documented.');
+  } else {
+    var goalIndex = 0;
+    goalBlocks.forEach(function(block) {
+      goalIndex++;
+      var goalNum = block.id.replace('isp-goal-', '');
+      var desc = document.getElementById('isp-goal-desc-' + goalNum);
+      var target = document.getElementById('isp-goal-target-' + goalNum);
+      var status = document.getElementById('isp-goal-status-' + goalNum);
+
+      lines.push('='.repeat(40));
+      lines.push('GOAL ' + goalIndex);
+      lines.push('='.repeat(40));
+      lines.push('Description: ' + (desc ? desc.value || 'Not specified' : 'Not specified'));
+      lines.push('Target Date: ' + (target && target.value ? formatDate(target.value) : 'Not specified'));
+      lines.push('Status: ' + (status ? status.value : 'Not specified'));
+      lines.push('');
+
+      // Objectives
+      var objectives = block.querySelectorAll('.objective-row');
+      if (objectives.length) {
+        lines.push('  OBJECTIVES:');
+        var objIndex = 0;
+        objectives.forEach(function(obj) {
+          objIndex++;
+          var objId = obj.id;
+          var parts = objId.replace('isp-obj-', '').split('-');
+          var gn = parts[0], on = parts[1];
+          var objDesc = document.getElementById('isp-obj-desc-' + gn + '-' + on);
+          var criteria = document.getElementById('isp-obj-criteria-' + gn + '-' + on);
+          var freq = document.getElementById('isp-obj-freq-' + gn + '-' + on);
+          var resp = document.getElementById('isp-obj-resp-' + gn + '-' + on);
+          lines.push('  ' + objIndex + '. ' + (objDesc ? objDesc.value || 'Not specified' : 'Not specified'));
+          lines.push('     Measurable Criteria: ' + (criteria ? criteria.value || 'Not specified' : 'Not specified'));
+          lines.push('     Frequency: ' + (freq ? freq.value || 'Not specified' : 'Not specified'));
+          lines.push('     Responsible Party: ' + (resp ? resp.value || 'Not specified' : 'Not specified'));
+        });
+        lines.push('');
+      }
+
+      // Interventions
+      var interventions = block.querySelectorAll('.intervention-row');
+      if (interventions.length) {
+        lines.push('  INTERVENTIONS:');
+        var intIndex = 0;
+        interventions.forEach(function(intv) {
+          intIndex++;
+          var intId = intv.id;
+          var parts = intId.replace('isp-int-', '').split('-');
+          var gn = parts[0], inn = parts[1];
+          var intDesc = document.getElementById('isp-int-desc-' + gn + '-' + inn);
+          var provider = document.getElementById('isp-int-provider-' + gn + '-' + inn);
+          var freq = document.getElementById('isp-int-freq-' + gn + '-' + inn);
+          var start = document.getElementById('isp-int-start-' + gn + '-' + inn);
+          lines.push('  ' + intIndex + '. ' + (intDesc ? intDesc.value || 'Not specified' : 'Not specified'));
+          lines.push('     Provider: ' + (provider ? provider.value || 'Not specified' : 'Not specified'));
+          lines.push('     Frequency: ' + (freq ? freq.value || 'Not specified' : 'Not specified'));
+          lines.push('     Start Date: ' + (start && start.value ? formatDate(start.value) : 'Not specified'));
+        });
+        lines.push('');
+      }
+    });
+  }
+
+  // Progress Notes
+  lines.push('-'.repeat(40));
+  lines.push('PROGRESS NOTES');
+  lines.push('-'.repeat(40));
+  lines.push(progress || '  No progress notes documented.');
+  lines.push('');
+  lines.push('='.repeat(60));
+  lines.push('End of Individual Service Plan');
+  lines.push('='.repeat(60));
+
+  var text = lines.join('\n');
+  var preview = document.getElementById('isp-preview');
+  preview.textContent = text;
+  preview.classList.add('visible');
+  copyToClipboard(text);
+}
+
+function clearISP() {
+  document.getElementById('isp-initials').value = '';
+  document.getElementById('isp-date').value = '';
+  document.getElementById('isp-period').value = '90-Day Review';
+  document.getElementById('isp-progress').value = '';
+  document.getElementById('isp-goals-container').innerHTML = '';
+  ispGoalCount = 0;
+  objCounts = {};
+  intCounts = {};
+  document.getElementById('isp-preview').classList.remove('visible');
+  showToast('ISP form cleared', 'info');
+  addISPGoal();
+}
+
+/* ================================================================
+   DATE FORMATTER
+   ================================================================ */
+function formatDate(dateStr) {
+  if (!dateStr || dateStr === 'Not specified') return 'Not specified';
+  try {
+    var parts = dateStr.split('-');
+    if (parts.length === 3) {
+      var d = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+      return d.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+    }
+    return dateStr;
+  } catch(e) { return dateStr; }
+}
+
+/* ================================================================
+   INITIALIZE ALL
+   ================================================================ */
+function initializeAll() {
+  // Set today's date on date fields
+  var today = new Date().toISOString().split('T')[0];
+  var dateFields = document.querySelectorAll('input[type="date"]');
+  dateFields.forEach(function(f) { f.value = today; });
+
+  // Render ANSA
+  Object.keys(ANSA_DOMAINS).forEach(function(domKey) {
+    renderRatingItems('ansa-' + domKey + '-body', ANSA_DOMAINS[domKey].items, 'ansa-' + domKey);
+  });
+
+  // Render CANS
+  Object.keys(CANS_DOMAINS).forEach(function(domKey) {
+    renderRatingItems('cans-' + domKey + '-body', CANS_DOMAINS[domKey].items, 'cans-' + domKey);
+  });
+
+  // Render MSE sections
+  renderMSE('ind-mse', 'ind');
+  renderMSE('fam-mse', 'fam');
+
+  // Render Intervention Banks
+  renderInterventionBank('ind-interventions-bank', 'ind');
+  renderInterventionBank('fam-interventions-bank', 'fam');
+
+  // Render Case Management Domains
+  renderCMDomains();
+
+  // Add initial ISP goal
+  addISPGoal();
+}
+
+function toggleTheme() {
+  var html = document.documentElement;
+  var btn = document.querySelector('.theme-toggle');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.removeAttribute('data-theme');
+    btn.textContent = '☽'; // moon
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    btn.textContent = '☀'; // sun
+  }
+}
+// Respect system preference
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.documentElement.setAttribute('data-theme', 'dark');
+  var btn = document.querySelector('.theme-toggle');
+  if (btn) btn.textContent = '☀';
+}
+
+// ===== DOWNLOAD NOTE AS .TXT =====
+function downloadNote(type) {
+  var previewIds = {
+    ansa: 'ansa-preview',
+    cans: 'cans-preview',
+    individual: 'individual-preview',
+    family: 'family-preview',
+    cm: 'casemgmt-preview',
+    isp: 'isp-preview'
+  };
+  var previewId = previewIds[type];
+  var preview = document.getElementById(previewId);
+  if (!preview || !preview.classList.contains('visible')) {
+    showToast('Generate the note first, then download', 'info');
+    return;
+  }
+  var text = preview.textContent;
+  var date = new Date().toISOString().slice(0,10);
+  var filenames = {
+    ansa: 'ANSA_' + date + '.txt',
+    cans: 'CANS_' + date + '.txt',
+    individual: 'Individual_Note_' + date + '.txt',
+    family: 'Family_Note_' + date + '.txt',
+    cm: 'CaseManagement_Note_' + date + '.txt',
+    isp: 'ISP_' + date + '.txt'
+  };
+  var filename = filenames[type] || 'Note_' + date + '.txt';
+  var blob = new Blob([text], {type: 'text/plain'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('Downloaded ' + filename, 'success');
+}
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(function(){});
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,2235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How-To Guides | Greater Nashua Community Mental Health Resources</title>
+<meta name="description" content="Step-by-step guides for community mental health work — who to call, where to go, what forms to fill out.">
+<meta property="og:title" content="How-To Guides | Greater Nashua Community Mental Health Resources">
+<meta property="og:description" content="Step-by-step guides for community mental health work — who to call, where to go, what forms to fill out.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* ===== GUIDE PAGE LAYOUT ===== */
+.guide-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .guide-layout { grid-template-columns: 1fr; }
+  .guide-sidebar { position: static !important; }
+  .sidebar-category { display: none; }
+  .mobile-jump { display: block !important; }
+}
+.guide-sidebar {
+  position: sticky;
+  top: calc(var(--header-height) + 24px);
+  max-height: calc(100vh - var(--header-height) - 48px);
+  overflow-y: auto;
+}
+.sidebar-section-title {
+  padding: 8px 16px 4px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-muted);
+  background: var(--surface);
+}
+.sidebar-nav {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.sidebar-nav a {
+  display: block;
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  transition: all 0.15s;
+  line-height: 1.4;
+}
+.sidebar-nav a:last-child { border-bottom: none; }
+.sidebar-nav a:hover { background: var(--surface-alt); color: var(--text); text-decoration: none; }
+.sidebar-nav a.active { background: var(--accent-light); color: var(--accent); font-weight: 600; }
+
+/* Mobile jump dropdown */
+.mobile-jump {
+  display: none;
+  margin-bottom: 16px;
+}
+.mobile-jump select {
+  width: 100%; padding: 10px 12px;
+  border: 1px solid var(--border); border-radius: var(--radius);
+  font-size: 14px; font-family: inherit; background: var(--surface);
+  outline: none;
+}
+
+/* ===== GUIDE SECTIONS ===== */
+.guide-category {
+  margin-bottom: 40px;
+  scroll-margin-top: calc(var(--header-height) + 24px);
+}
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--border);
+}
+.category-badge {
+  width: 44px; height: 44px; border-radius: var(--radius);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0; color: white;
+}
+.category-header h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+.category-header .category-desc { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+
+/* ===== GUIDE CARDS ===== */
+.guide-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  margin-bottom: 12px;
+  overflow: hidden;
+  scroll-margin-top: calc(var(--header-height) + 24px);
+}
+.guide-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: background 0.15s;
+  user-select: none;
+}
+.guide-card-header:hover { background: var(--surface-alt); }
+.guide-card-header h3 {
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+.guide-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+  color: white;
+}
+.guide-arrow {
+  font-size: 12px;
+  color: var(--text-secondary);
+  transition: transform 0.2s;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+.guide-card.open .guide-arrow { transform: rotate(180deg); }
+.guide-card-body {
+  display: none;
+  padding: 0 20px 20px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text);
+}
+.guide-card.open .guide-card-body { display: block; }
+
+/* Steps within guides */
+.guide-steps { counter-reset: guidestep; margin: 16px 0; }
+.guide-step {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 14px;
+  padding: 14px 16px;
+  background: var(--surface-alt);
+  border-radius: var(--radius);
+  border-left: 3px solid var(--accent);
+}
+.guide-step::before {
+  counter-increment: guidestep;
+  content: counter(guidestep);
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--accent); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; flex-shrink: 0;
+}
+.guide-step-content { flex: 1; }
+.guide-step-content strong { font-weight: 600; }
+
+/* Info boxes */
+.info-box {
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  margin: 12px 0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.info-box.tip {
+  background: var(--accent-light);
+  border-left: 3px solid var(--accent);
+}
+.info-box.warning {
+  background: var(--warning-light);
+  border-left: 3px solid var(--warning);
+}
+.info-box.crisis {
+  background: var(--danger-light);
+  border-left: 3px solid var(--danger);
+}
+.info-box.success {
+  background: var(--success-light);
+  border-left: 3px solid var(--success);
+}
+.info-box-title {
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-bottom: 4px;
+}
+.info-box.tip .info-box-title { color: var(--accent); }
+.info-box.warning .info-box-title { color: var(--warning); }
+.info-box.crisis .info-box-title { color: var(--danger); }
+.info-box.success .info-box-title { color: var(--success); }
+
+/* Phone callout */
+.phone-callout {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: var(--accent-light);
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 2px 4px 2px 0;
+  white-space: nowrap;
+}
+.phone-callout.crisis-phone {
+  background: var(--danger-light);
+  color: var(--danger);
+}
+
+/* Cross-links */
+.cross-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent);
+  text-decoration: none;
+  margin: 4px 4px 4px 0;
+  transition: all 0.15s;
+}
+.cross-link:hover { background: var(--accent-light); border-color: var(--accent); text-decoration: none; }
+
+/* Sub-sections in guides */
+.guide-subsection {
+  margin: 16px 0 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+.guide-sub-subsection {
+  margin: 12px 0 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Compact list */
+.compact-list {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+.compact-list li {
+  margin-bottom: 6px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.compact-list li strong { font-weight: 600; }
+
+/* Search highlight */
+.search-match { background: #fef08a; padding: 1px 3px; border-radius: 2px; }
+
+/* Quick stats */
+.guide-stats {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.guide-stat {
+  text-align: center;
+}
+.guide-stat-num {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+}
+.guide-stat-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* Decision table */
+.decision-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 12px 0;
+}
+.decision-table th {
+  text-align: left;
+  padding: 8px 12px;
+  background: var(--surface-alt);
+  font-weight: 600;
+  font-size: 12px;
+  border-bottom: 2px solid var(--border);
+}
+.decision-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.decision-table tr:hover { background: var(--surface-alt); }
+
+/* Print */
+@media print {
+  .guide-sidebar, .hero, .mobile-jump, .guide-search-bar { display: none !important; }
+  .guide-layout { grid-template-columns: 1fr !important; }
+  .guide-card-body { display: block !important; }
+  .guide-card { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="site-logo">
+      <div class="logo-icon">NH</div>
+      <span>Greater Nashua MH Resources</span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="resources.html" class="nav-link">Resources</a>
+      <a href="tools.html" class="nav-link">Clinical Tools</a>
+      <a href="guide.html" class="nav-link active">How-To Guides</a>
+      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">&#9789;</button>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>How-To Guides for Community MH Work</h1>
+    <p>Step-by-step processes for every common clinical situation. Who to call, what forms to fill out, what to tell the client.</p>
+    <div class="hero-search">
+      <input type="text" id="guideSearch" placeholder="Search guides... (e.g., housing, crisis, DCYF, ANSA)" autocomplete="off">
+      <button onclick="filterGuides()">Search</button>
+    </div>
+  </div>
+</section>
+
+<div class="page-container" id="main-content">
+
+  <!-- Crisis Banner -->
+  <div class="crisis-banner">
+    <div class="crisis-banner-icon">!</div>
+    <div class="crisis-banner-content">
+      <div class="crisis-banner-title">Crisis? Get Help Now</div>
+      <div class="crisis-banner-numbers">
+        <strong>988</strong> Suicide &amp; Crisis Lifeline &nbsp;|&nbsp;
+        <strong>1-833-710-6477</strong> NH Rapid Response &nbsp;|&nbsp;
+        <strong>(603) 889-6147</strong> GNMHC Crisis &nbsp;|&nbsp;
+        <strong>Text HOME to 741741</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Bar -->
+  <div class="guide-stats">
+    <div class="guide-stat">
+      <div class="guide-stat-num">20</div>
+      <div class="guide-stat-label">How-To Guides</div>
+    </div>
+    <div class="guide-stat">
+      <div class="guide-stat-num">8</div>
+      <div class="guide-stat-label">Categories</div>
+    </div>
+    <div class="guide-stat">
+      <div class="guide-stat-num">150+</div>
+      <div class="guide-stat-label">Phone Numbers</div>
+    </div>
+    <div class="guide-stat">
+      <div class="guide-stat-num">200+</div>
+      <div class="guide-stat-label">Action Steps</div>
+    </div>
+  </div>
+
+  <!-- Mobile Jump -->
+  <div class="mobile-jump">
+    <select id="mobileJump" onchange="jumpToSection(this.value)">
+      <option value="">Jump to a category...</option>
+      <option value="cat-crisis">Crisis &amp; Safety</option>
+      <option value="cat-mh">Mental Health Services</option>
+      <option value="cat-sud">Substance Use</option>
+      <option value="cat-housing">Housing &amp; Basic Needs</option>
+      <option value="cat-benefits">Benefits &amp; Insurance</option>
+      <option value="cat-legal">Legal &amp; Advocacy</option>
+      <option value="cat-special">Special Populations</option>
+      <option value="cat-clinical">Clinical Documentation</option>
+    </select>
+  </div>
+
+  <div class="guide-layout">
+    <!-- Sidebar -->
+    <aside class="guide-sidebar">
+      <nav class="sidebar-nav" id="sidebarNav">
+        <div class="sidebar-section-title">Crisis &amp; Safety</div>
+        <a href="#guide-crisis" data-cat="cat-crisis">Emergency/Crisis Services</a>
+        <a href="#guide-safety-plan" data-cat="cat-crisis">Create a Safety Plan</a>
+        <a href="#guide-dcyf" data-cat="cat-crisis">File a DCYF Report</a>
+        <a href="#guide-dv" data-cat="cat-crisis">DV Situation</a>
+        <div class="sidebar-section-title">Mental Health</div>
+        <a href="#guide-outpatient" data-cat="cat-mh">Outpatient MH Referral</a>
+        <a href="#guide-psych-eval" data-cat="cat-mh">Psychiatric Evaluation</a>
+        <div class="sidebar-section-title">Substance Use</div>
+        <a href="#guide-sud" data-cat="cat-sud">SUD Treatment</a>
+        <div class="sidebar-section-title">Housing &amp; Basic Needs</div>
+        <a href="#guide-housing" data-cat="cat-housing">Find Housing</a>
+        <a href="#guide-food" data-cat="cat-housing">Food Resources</a>
+        <a href="#guide-transport" data-cat="cat-housing">Transportation</a>
+        <div class="sidebar-section-title">Benefits &amp; Insurance</div>
+        <a href="#guide-insurance" data-cat="cat-benefits">Health Insurance</a>
+        <a href="#guide-disability" data-cat="cat-benefits">SSI/SSDI</a>
+        <a href="#guide-medicaid" data-cat="cat-benefits">NH Medicaid System</a>
+        <div class="sidebar-section-title">Legal &amp; Advocacy</div>
+        <a href="#guide-legal" data-cat="cat-legal">Legal Services</a>
+        <a href="#guide-employment" data-cat="cat-legal">Employment/Job Training</a>
+        <div class="sidebar-section-title">Special Populations</div>
+        <a href="#guide-veterans" data-cat="cat-special">Veteran Services</a>
+        <div class="sidebar-section-title">Clinical Documentation</div>
+        <a href="#guide-ansa" data-cat="cat-clinical">ANSA Assessment</a>
+        <a href="#guide-cans" data-cat="cat-clinical">CANS Assessment</a>
+        <a href="#guide-isp" data-cat="cat-clinical">Individual Service Plan</a>
+        <a href="#guide-documentation" data-cat="cat-clinical">Session Documentation</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="guide-content" id="guideContent">
+
+      <!-- ============================================================ -->
+      <!-- CRISIS & SAFETY -->
+      <!-- ============================================================ -->
+      <section class="guide-category" id="cat-crisis">
+        <div class="category-header">
+          <div class="category-badge" style="background:var(--danger)">!</div>
+          <div>
+            <h2>Crisis &amp; Safety</h2>
+            <div class="category-desc">Emergency response, safety planning, mandated reporting, and domestic violence</div>
+          </div>
+        </div>
+
+        <!-- Guide 2: Crisis Services -->
+        <div class="guide-card" id="guide-crisis" data-keywords="crisis emergency 988 rapid response mcrt suicide hospitalization iea involuntary">
+          <div class="guide-card-header" onclick="toggleGuide(this)">
+            <h3><span class="guide-number" style="background:var(--danger)">1</span> How to Access Emergency/Crisis Services</h3>
+            <span class="guide-arrow">&#9660;</span>
+          </div>
+          <div class="guide-card-body">
+            <p>When a client is in psychiatric crisis, knowing the right number to call can be the difference between a safe resolution and an escalation. Here is the complete decision tree.</p>
+
+            <div class="info-box crisis">
+              <div class="info-box-title">Critical Numbers</div>
+              <span class="phone-callout crisis-phone">988</span> Suicide &amp; Crisis Lifeline (call or text)<br>
+              <span class="phone-callout crisis-phone">1-833-710-6477</span> NH Rapid Response Access Point<br>
+              <span class="phone-callout crisis-phone">(603) 889-6147</span> GNMHC Crisis Team<br>
+              <span class="phone-callout crisis-phone">911</span> Immediate danger to life<br>
+              <span class="phone-callout crisis-phone">Text HOME to 741741</span> Crisis Text Line
+            </div>
+
+            <h4 class="guide-subsection">When to Call Which Number</h4>
+            <table class="decision-table">
+              <thead>
+                <tr><th>Situation</th><th>Call</th><th>Why</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Immediate danger to self or others, weapons, medical emergency</td><td><strong>911</strong></td><td>Police/EMS needed for scene safety</td></tr>
+                <tr><td>Active suicidal ideation, psychiatric crisis, need mobile crisis team</td><td><strong>1-833-710-6477</strong> (NH Rapid Response)</td><td>Dispatches the local Mobile Crisis Response Team (MCRT) to the client's location</td></tr>
+                <tr><td>Need GNMHC crisis services directly, already a GNMHC client</td><td><strong>(603) 889-6147</strong></td><td>Direct line to GNMHC crisis team; can also dispatch MCRT</td></tr>
+                <tr><td>Client needs to talk to someone, emotional distress, not imminent danger</td><td><strong>988</strong></td><td>Trained crisis counselors provide de-escalation and safety planning</td></tr>
+                <tr><td>Client prefers texting, youth in distress</td><td><strong>Text HOME to 741741</strong></td><td>Text-based crisis counseling, available 24/7</td></tr>
+              </tbody>
+            </table>
+
+            <h4 class="guide-subsection">Step-by-Step: Accessing Crisis Services</h4>
+            <div class="guide-steps">
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Assess the immediate situation.</strong> Is the client in immediate physical danger? Are there weapons present? Is there a medical emergency (overdose, self-harm requiring medical attention)? If YES to any of these, call <strong>911</strong> first, then crisis services.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Call NH Rapid Response at 1-833-710-6477.</strong> This is the front door to NH's behavioral health crisis system. A trained crisis counselor will assess the situation by phone and determine the appropriate response, which may include dispatching the local MCRT.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Have key information ready.</strong> Client name, age, location, brief description of the crisis, history of mental health treatment, current medications, any weapons or substance use, insurance information, and any safety concerns for the crisis team.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Stay with the client if safe to do so.</strong> Keep the client engaged and away from means. If you called Rapid Response, the MCRT typically arrives within 1-2 hours (varies by demand and location). MCRT can respond to homes, schools, community settings, and ERs.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>If the client needs an emergency psychiatric evaluation:</strong> Direct or transport the client to <strong>Southern NH Medical Center ED</strong> (8 Prospect St, Nashua). Phone: <span class="phone-callout">(603) 577-2540</span> (ED direct). The ACCESS program provides crisis stabilization and psychiatric assessment. You can call ahead to notify the ED.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>If hospitalization is needed:</strong> The ED team will initiate the IEA (Involuntary Emergency Admission) process if the client meets criteria and won't go voluntarily. Bed placement is managed through the statewide psychiatric bed board. SNHMC has an inpatient behavioral health unit at 29 Northwest Blvd (West Building).
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Post-crisis follow-up.</strong> Within 24-48 hours, reconnect with the client. Ensure follow-up appointments are scheduled. If the client was seen by MCRT, they will provide recommendations. If the client was hospitalized, coordinate with the inpatient team for discharge planning. Ensure a safety plan is in place (see Safety Plan guide below).
+                </div>
+              </div>
+            </div>
+
+            <div class="info-box tip">
+              <div class="info-box-title">Clinician Tip</div>
+              GNMHC Crisis Stabilization Apartments offer an alternative to hospitalization for clients who need more than outpatient support but don't require inpatient care. These are short-term (3-7 days) supervised residential settings with structured programming. Access through GNMHC crisis services at (603) 889-6147.
+            </div>
+
+            <div class="info-box warning">
+              <div class="info-box-title">About IEAs in New Hampshire</div>
+              An Involuntary Emergency Admission (IEA) requires a physician or APRN to certify that the person is mentally ill and poses a danger to self or others, or is unable to provide for basic needs. A Probate Court hearing must occur within 3 business days. IEAs can only be initiated at a hospital ED. MCRT clinicians cannot initiate an IEA in the field &mdash; they can recommend the client be transported to the ED for evaluation.
+            </div>
+
+            <a href="resources.html" class="cross-link">See full Crisis Services directory &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Guide 20: Safety Plan -->
+        <div class="guide-card" id="guide-safety-plan" data-keywords="safety plan suicide prevention stanley brown warning signs coping strategies means restriction">
+          <div class="guide-card-header" onclick="toggleGuide(this)">
+            <h3><span class="guide-number" style="background:var(--danger)">2</span> How to Create a Safety Plan</h3>
+            <span class="guide-arrow">&#9660;</span>
+          </div>
+          <div class="guide-card-body">
+            <p>The Stanley-Brown Safety Planning Intervention is an evidence-based, brief intervention for suicidal individuals. It is a prioritized list of coping strategies and resources that the client can use during a suicidal crisis. Complete this collaboratively with the client.</p>
+
+            <h4 class="guide-subsection">Step-by-Step: Building the Safety Plan</h4>
+            <div class="guide-steps">
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Identify Warning Signs.</strong> Ask: "What thoughts, feelings, behaviors, or situations signal that a crisis may be developing?" Help the client identify their personal warning signs. Examples: feeling hopeless, withdrawing from others, increased substance use, thinking "everyone would be better off without me," not sleeping, increased irritability. Write these down in the client's own words.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Internal Coping Strategies.</strong> Ask: "What are things you can do on your own, without contacting anyone, to take your mind off your problems?" These are things the client can do alone to distract or self-soothe. Examples: go for a walk, listen to music, take a shower, exercise, practice deep breathing, watch a favorite show, journal, play with a pet. Write at least 3-5 strategies.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Social Contacts Who Can Help Distract.</strong> List people and social settings that can provide distraction. These are people the client can reach out to for company or conversation, without necessarily telling them about the crisis. Include names and phone numbers. Examples: a friend to go to coffee with, a family member to call, a place to go (coffee shop, gym, library).
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>People to Contact During Crisis.</strong> List family members, friends, or others the client trusts enough to tell they are in crisis. Include names and phone numbers. Also list professionals and agencies:<br>
+                  <span class="phone-callout crisis-phone">988</span> Suicide &amp; Crisis Lifeline<br>
+                  <span class="phone-callout crisis-phone">1-833-710-6477</span> NH Rapid Response<br>
+                  <span class="phone-callout crisis-phone">(603) 889-6147</span> GNMHC Crisis<br>
+                  <span class="phone-callout crisis-phone">Text HOME to 741741</span><br>
+                  Your direct number / on-call number if applicable.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Professional and Agency Contacts.</strong> List the client's therapist, psychiatrist, case manager, PCP. Include:<br>
+                  - Clinician name and phone<br>
+                  - Agency crisis line (if applicable)<br>
+                  - Nearest emergency department: <strong>Southern NH Medical Center ED, 8 Prospect St, Nashua</strong> <span class="phone-callout">(603) 577-2540</span>
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Making the Environment Safe.</strong> Work with the client to reduce access to lethal means. Ask: "Are there things in your environment that could be dangerous during a crisis?" Firearms: remove from the home or lock with a trusted person holding the key. Medications: reduce supply, have someone else manage them. Other means: address as appropriate. This step is the single most evidence-based intervention for preventing suicide completion.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Identify One Reason for Living.</strong> Ask the client to identify at least one thing worth living for. This anchors the plan. It can be a person, a pet, a goal, a value, or anything meaningful to them. Write it at the top or bottom of the plan.
+                </div>
+              </div>
+            </div>
+
+            <div class="info-box tip">
+              <div class="info-box-title">Implementation Tips</div>
+              <ul class="compact-list">
+                <li>Complete the plan <strong>collaboratively</strong> with the client, not for them. Use their words.</li>
+                <li>Give the client a copy. Keep a copy in the chart. Photograph it for their phone.</li>
+                <li>Review and update the plan regularly, especially after any crisis or change in circumstances.</li>
+                <li>The plan is meant to be used <strong>sequentially</strong>: start with step 1, and if that doesn't work, move to step 2, and so on.</li>
+                <li>Means restriction (step 6) is the highest-impact component. Do not skip it.</li>
+                <li>Document the safety plan creation in your clinical note, including the date and that the client received a copy.</li>
+              </ul>
+            </div>
+
+            <a href="tools.html" class="cross-link">See Safety Plan worksheet in Clinical Tools &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Guide 8: DCYF Report -->
+        <div class="guide-card" id="guide-dcyf" data-keywords="dcyf child abuse neglect mandated reporter reporting children youth families protective services">
+          <div class="guide-card-header" onclick="toggleGuide(this)">
+            <h3><span class="guide-number" style="background:var(--danger)">3</span> How to File a DCYF Report (Child Abuse/Neglect)</h3>
+            <span class="guide-arrow">&#9660;</span>
+          </div>
+          <div class="guide-card-body">
+            <p>Under NH RSA 169-C:29, healthcare providers, mental health professionals, teachers, law enforcement, and many others are <strong>mandated reporters</strong>. You must report any suspected child abuse or neglect immediately. You do not need proof &mdash; a reasonable suspicion is sufficient.</p>
+
+            <div class="info-box crisis">
+              <div class="info-box-title">DCYF Central Intake Hotline</div>
+              <span class="phone-callout crisis-phone">1-800-894-5533</span> Available 24/7/365<br>
+              If a child is in immediate danger, call <strong>911</strong> first.
+            </div>
+
+            <h4 class="guide-subsection">When to Report</h4>
+            <ul class="compact-list">
+              <li><strong>Physical abuse:</strong> Unexplained injuries, injuries inconsistent with explanation, pattern injuries, excessive discipline</li>
+              <li><strong>Sexual abuse:</strong> Any disclosure or indicators of sexual contact with a child</li>
+              <li><strong>Neglect:</strong> Failure to provide food, shelter, clothing, medical care, supervision, or education appropriate for the child's age</li>
+              <li><strong>Emotional abuse:</strong> Chronic pattern of behaviors that impair a child's emotional development (often reported alongside other types)</li>
+              <li><strong>Exposure to domestic violence:</strong> A child witnessing domestic violence is considered a form of abuse/neglect in NH</li>
+            </ul>
+
+            <div class="info-box warning">
+              <div class="info-box-title">Reporting Threshold</div>
+              You are required to report when you have <strong>reason to suspect</strong> abuse or neglect. You do NOT need to investigate, confirm, or gather evidence. The investigation is DCYF's job. Failure to report can result in criminal penalties (misdemeanor in NH) and civil liability.
+            </div>
+
+            <h4 class="guide-subsection">Step-by-Step: Filing the Report</h4>
+            <div class="guide-steps">
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Gather available information before calling.</strong> You don't need everything, but have what you can: child's name, age/DOB, address, parent/caregiver names, school, your observations or the disclosure, how you became aware, any immediate safety concerns, and whether the child has disclosed to anyone else.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Call DCYF Central Intake at 1-800-894-5533.</strong> A trained intake worker will take your report. Be prepared to provide all known information about the child, family, and your concerns. Reports can be made anonymously, but identified reporters receive follow-up about whether the report was accepted for investigation. As a mandated reporter, you should identify yourself.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Be specific in your report.</strong> Describe what you observed, what was disclosed to you, and when. Use direct quotes when possible. Describe the child's demeanor and any physical indicators. Avoid clinical jargon &mdash; describe behaviors and observations in plain language.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>The intake worker will determine whether to accept the report.</strong> Reports are categorized as: accepted for assessment, accepted for investigation, or screened out. If screened out and you disagree, you can ask to speak with a supervisor. You can also call back if new information arises.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Document your report.</strong> In your clinical record, note: date and time of the report, the intake worker's name if provided, the report number (ask for one), what you reported, and any instructions the intake worker gave you. This protects you and creates a record.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Support the family through the process.</strong> Unless doing so would endanger the child, maintain your therapeutic relationship with the family. You can let the parent know that a report was made (unless DCYF instructs otherwise). Explain that reporting is required by law and that the goal is to help the family get support, not to punish. Connect the family to resources: family therapy, parenting classes, respite care, substance use treatment if applicable.
+                </div>
+              </div>
+            </div>
+
+            <div class="info-box tip">
+              <div class="info-box-title">Clinician Tips</div>
+              <ul class="compact-list">
+                <li>Do NOT interview the child in detail or conduct your own investigation. A forensic interview by the Child Advocacy Center is the gold standard.</li>
+                <li>Do NOT contact the alleged perpetrator to "verify" the report. This can compromise the investigation and endanger the child.</li>
+                <li>If you are unsure whether something rises to the level of reporting, call DCYF Central Intake and consult with them. They can help you decide.</li>
+                <li>Nashua DCYF Office is located at 137 Temple St (within DHHS building). If you need to coordinate with a DCYF worker on an open case, contact the Nashua office.</li>
+                <li>For adult protective services (elder/vulnerable adult abuse), call <span class="phone-callout">1-800-949-0470</span> (BEAS).</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Guide 12: DV Situation -->
+        <div class="guide-card" id="guide-dv" data-keywords="domestic violence dv abuse safety planning protective order shelter bridges restraining order">
+          <div class="guide-card-header" onclick="toggleGuide(this)">
+            <h3><span class="guide-number" style="background:var(--danger)">4</span> How to Help a Client in a Domestic Violence Situation</h3>
+            <span class="guide-arrow">&#9660;</span>
+          </div>
+          <div class="guide-card-body">
+            <p>Domestic violence requires a specialized response. The primary resource in Greater Nashua is <strong>Bridges: Domestic &amp; Sexual Violence Support</strong>. Their advocates are trained to help with every aspect of the situation. Your role is to connect the client to Bridges and support the process.</p>
+
+            <div class="info-box crisis">
+              <div class="info-box-title">Key DV Numbers</div>
+              <span class="phone-callout crisis-phone">(603) 883-3044</span> Bridges Crisis Line (24/7)<br>
+              <span class="phone-callout crisis-phone">1-800-799-7233</span> National DV Hotline (24/7)<br>
+              <span class="phone-callout crisis-phone">Text START to 88788</span> National DV Hotline text<br>
+              <span class="phone-callout crisis-phone">1-866-644-3574</span> NH DV Hotline (24/7)
+            </div>
+
+            <h4 class="guide-subsection">Step-by-Step: Responding to DV Disclosure</h4>
+            <div class="guide-steps">
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Ensure safety of the conversation.</strong> Before discussing DV, confirm the client is in a safe place to talk and that the abuser is not present or listening. If on the phone, ask: "Is it safe to talk right now?" If not, arrange a safer time/method.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Believe and validate.</strong> Say: "I believe you. This is not your fault. You don't deserve this." Avoid asking "Why don't you just leave?" &mdash; leaving is the most dangerous time for a DV survivor.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Assess immediate danger.</strong> Is the client safe right now? Are there children in the home? Has the violence escalated recently? Has the abuser threatened to kill? Has the abuser used weapons? Has the abuser threatened the children? If the client or children are in immediate danger, call 911.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Connect with Bridges.</strong> Call the Bridges crisis line at <strong>(603) 883-3044</strong> (24/7). Bridges can provide: emergency shelter (confidential location), safety planning, legal advocacy for protective orders, court accompaniment, individual and group counseling, children's services, housing assistance, and community education. The client can call themselves, or with permission, you can call together or on their behalf.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Help create a safety plan.</strong> Even if the client is not ready to leave, a safety plan is critical. Include: a safe place to go in an emergency, a bag packed with essentials (ID, medications, important documents, children's items, some cash), a code word with a trusted friend/family member, the Bridges crisis number memorized, and a plan for the children.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Protective orders.</strong> If the client wants a protective order: go to <strong>Nashua District Court, 25 Walnut St</strong>, phone <span class="phone-callout">(603) 880-3333</span>. Bridges advocates provide free assistance filing. A temporary order can be granted same-day by a judge. A full hearing is scheduled within 30 days. Types: Domestic Violence Protective Order (RSA 173-B) and Stalking Protective Order (RSA 633:3-a).
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Address children's needs.</strong> If there are children involved, remember your mandated reporting obligations (children witnessing DV is reportable). Bridges has children's services. Consider referral to child therapy: GNMHC child services at (603) 889-6147, or Waypoint at (603) 518-4000.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Shelter placement.</strong> If the client needs shelter: Bridges operates a confidential emergency shelter in Nashua. The client will be met at a safe location and transported. If Bridges shelter is full, they can coordinate with other shelters in NH. For non-DV shelter: Nashua Soup Kitchen &amp; Shelter at (603) 889-7770.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Ongoing support.</strong> DV situations rarely resolve quickly. Continue checking in with the client. Respect their timeline and decisions. Provide ongoing access to Bridges and legal resources. Document DV history in the clinical record (with client's awareness), as this can be important for legal proceedings and custody cases.
+                </div>
+              </div>
+            </div>
+
+            <div class="info-box warning">
+              <div class="info-box-title">Safety Considerations for Clinicians</div>
+              <ul class="compact-list">
+                <li>Never contact the abuser to "mediate" or "get the other side of the story."</li>
+                <li>Do not provide couples counseling when DV is present &mdash; this is contraindicated and can be dangerous.</li>
+                <li>Be careful with documentation that the abuser might access (patient portal, shared email).</li>
+                <li>If the abuser accompanies the client to sessions, find a safe way to screen for DV (e.g., separate check-in).</li>
+              </ul>
+            </div>
+
+            <a href="resources.html" class="cross-link">See full Domestic Violence resources &rarr;</a>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- MENTAL HEALTH SERVICES -->
+      <!-- ============================================================ -->
+      <section class="guide-category" id="cat-mh">
+        <div class="category-header">
+          <div class="category-badge" style="background:var(--accent)">&#9829;</div>
+          <div>
+            <h2>Mental Health Services</h2>
+            <div class="category-desc">Outpatient referrals and psychiatric evaluations</div>
+          </div>
+        </div>
+
+        <!-- Guide 1: Outpatient MH Referral -->
+        <div class="guide-card" id="guide-outpatient" data-keywords="outpatient referral mental health therapy counseling gnmhc intake assessment psychiatrist therapist">
+          <div class="guide-card-header" onclick="toggleGuide(this)">
+            <h3><span class="guide-number" style="background:var(--accent)">5</span> How to Refer a Client to Outpatient Mental Health Services</h3>
+            <span class="guide-arrow">&#9660;</span>
+          </div>
+          <div class="guide-card-body">
+            <p>When a client needs mental health treatment beyond what you can provide, knowing where to refer and how to make the referral smooth is essential. The pathway depends on the client's insurance, acuity, and treatment needs.</p>
+
+            <h4 class="guide-subsection">When to Refer</h4>
+            <ul class="compact-list">
+              <li>Client needs ongoing psychotherapy and you are not their therapist</li>
+              <li>Client needs psychiatric medication evaluation or management</li>
+              <li>Client needs a higher level of care (PHP, IOP) than you provide</li>
+              <li>Client has a serious mental illness (SMI) and needs comprehensive services (CSP, ACT)</li>
+              <li>Client needs specialized treatment you don't provide (EMDR, DBT, eating disorders, etc.)</li>
+            </ul>
+
+            <h4 class="guide-subsection">Referral Decision Tree</h4>
+            <table class="decision-table">
+              <thead>
+                <tr><th>Client Situation</th><th>Refer To</th><th>Contact</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Has serious mental illness (SMI), any insurance</td><td>GNMHC (designated CMHC)</td><td><span class="phone-callout">(603) 889-6147</span></td></tr>
+                <tr><td>Has Medicaid, needs outpatient therapy</td><td>GNMHC, Harbor Care, or Medicaid-paneled providers</td><td><span class="phone-callout">(603) 889-6147</span> / <span class="phone-callout">(603) 882-3616</span></td></tr>
+                <tr><td>Has private insurance, needs outpatient therapy</td><td>Check insurance directory; Ellie Mental Health, LifeStance Health, private practices</td><td>Use insurer's provider finder</td></tr>
+                <tr><td>Uninsured, needs therapy</td><td>GNMHC (sliding scale), Harbor Care (FQHC, sliding scale), Open Path Collective ($30-80/session)</td><td><span class="phone-callout">(603) 889-6147</span> / <span class="phone-callout">(603) 882-3616</span></td></tr>
+                <tr><td>Needs PHP or IOP</td><td>Discover Health Group, Southern NH Health</td><td><span class="phone-callout">(603) 402-7551</span></td></tr>
+                <tr><td>Child/adolescent needs PHP or IOP</td><td>Direction Behavioral Health (ages 6-21)</td><td>Check website for current intake</td></tr>
+                <tr><td>Lives in Derry/Salem/Windham/Londonderry area</td><td>Center for Life Management (different CMHC catchment)</td><td><span class="phone-callout">(603) 434-1577</span></td></tr>
+              </tbody>
+            </table>
+
+            <h4 class="guide-subsection">Step-by-Step: Referring to GNMHC</h4>
+            <div class="guide-steps">
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Gather client information.</strong> Before calling, have ready: client's full name, DOB, address, phone number, insurance information (ID number, MCO name), brief clinical summary (presenting concerns, diagnoses, medications, risk factors), and any prior treatment history.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Call GNMHC at (603) 889-6147 and ask for Intake/Access.</strong> Provide the client information and a brief clinical summary. The intake coordinator will schedule an assessment, typically within 1-2 weeks. For urgent needs, request an expedited intake.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Prepare the client for what to expect.</strong> The intake assessment is comprehensive (1-2 hours). The client will be asked about their mental health history, substance use, medical history, social situation, trauma history, and current symptoms. Based on the assessment, GNMHC determines the appropriate level of care and assigns a treatment team.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Send records with a signed release.</strong> If you have clinical records that would help the intake team, send them with a signed ROI (release of information). This is especially important for medication history, prior assessments, and risk documentation.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Follow up.</strong> Check with the client after their intake appointment. Confirm they were connected to services and are scheduled for ongoing treatment. If there were barriers (transportation, no-show, waitlist), help problem-solve.
+                </div>
+              </div>
+            </div>
+
+            <div class="info-box tip">
+              <div class="info-box-title">Key Facts About GNMHC</div>
+              <ul class="compact-list">
+                <li>GNMHC is the designated Community Mental Health Center (CMHC) for Greater Nashua (Nashua, Hudson, Litchfield, Merrimack, Milford, Hollis, Brookline, and surrounding towns).</li>
+                <li>They are mandated by state contract to serve all individuals with serious mental illness (SMI) and cannot refuse service to this population.</li>
+                <li>They accept Medicaid (all NH MCOs), Medicare, most private insurance, and offer sliding-scale fees for uninsured. No one is turned away for inability to pay.</li>
+                <li>Services include: outpatient therapy, psychiatry, Community Support Program (CSP), ACT team, crisis services, supported employment, housing support, integrated dual-disorder treatment, and more.</li>
+              </ul>
+            </div>
+
+            <div class="info-box tip">
+              <div class="info-box-title">What to Tell the Client</div>
+              "I'm going to connect you with [GNMHC / a therapist / etc.] for [therapy / a medication evaluation / etc.]. They'll do an intake assessment where they get to know you and figure out the best way to help. You'll meet with someone within about [timeframe]. Here's what to bring: your insurance card, a list of current medications, and your ID. Do you have any questions or concerns about this?"
+            </div>
+
+            <a href="resources.html" class="cross-link">See full Mental Health Treatment directory &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Guide 9: Psychiatric Evaluation -->
+        <div class="guide-card" id="guide-psych-eval" data-keywords="psychiatric evaluation psychiatrist medication management psych eval telehealth emergency psychiatric">
+          <div class="guide-card-header" onclick="toggleGuide(this)">
+            <h3><span class="guide-number" style="background:var(--accent)">6</span> How to Coordinate a Psychiatric Evaluation</h3>
+            <span class="guide-arrow">&#9660;</span>
+          </div>
+          <div class="guide-card-body">
+            <p>When a client needs a psychiatric evaluation for medication management, diagnosis clarification, or treatment planning, the pathway depends on urgency and current treatment setting.</p>
+
+            <h4 class="guide-subsection">Referral Options by Urgency</h4>
+            <table class="decision-table">
+              <thead>
+                <tr><th>Urgency</th><th>Option</th><th>Contact</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Emergency (active psychosis, mania, severe SI with plan)</td><td>Southern NH Medical Center ED</td><td><span class="phone-callout">(603) 577-2540</span></td></tr>
+                <tr><td>Urgent (within days)</td><td>GNMHC crisis/urgent psychiatric services</td><td><span class="phone-callout">(603) 889-6147</span></td></tr>
+                <tr><td>Routine (within weeks)</td><td>GNMHC psychiatry, private psychiatrists, LifeStance Health</td><td><span class="phone-callout">(603) 889-6147</span></td></tr>
+                <tr><td>Telehealth option</td><td>Various telehealth psychiatry platforms accepting NH patients</td><td>Check insurance directory</td></tr>
+              </tbody>
+            </table>
+
+            <h4 class="guide-subsection">Step-by-Step: Setting Up a Psychiatric Evaluation</h4>
+            <div class="guide-steps">
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Determine what is needed.</strong> Is this for medication initiation, medication adjustment, diagnostic clarification, competency assessment, or a second opinion? This helps identify the right provider.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Document before the evaluation.</strong> Prepare a brief referral summary including: current diagnoses, medication history (what has been tried, responses, side effects), current symptoms and functional impairment, relevant medical history, substance use history, and any specific questions for the psychiatrist. A thorough referral note speeds up the evaluation significantly.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Make the referral.</strong> For GNMHC clients, request psychiatry through the treatment team. For new clients, call GNMHC intake at (603) 889-6147. For private psychiatrists, check the client's insurance directory for providers accepting new patients. Ask about wait times &mdash; psychiatric wait times in NH can be 2-8 weeks or longer.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Consider telehealth.</strong> Telehealth psychiatric services have expanded access significantly. Many psychiatrists see NH patients via video visit. This can reduce wait times and eliminates transportation barriers. Confirm the client has access to a device with video capability and a private space.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Medication management follow-up.</strong> After the evaluation, coordinate with the prescriber for ongoing medication management. Ensure the client understands the medication plan (what, when, expected effects, side effects to watch for). For clients on antipsychotics, ensure metabolic monitoring is being done. Schedule follow-up appointments per the psychiatrist's recommendation.
+                </div>
+              </div>
+            </div>
+
+            <div class="info-box warning">
+              <div class="info-box-title">Neuropsychological Testing</div>
+              If the client needs neuropsych testing (ADHD evaluation, cognitive assessment, learning disability evaluation), be aware that wait times are typically 3-6+ months. Dartmouth-Hitchcock Nashua and Elliot Neuropsychology in Manchester (<span class="phone-callout">(603) 663-8345</span>) both offer neuropsych evaluations. Start the referral process early.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- SUBSTANCE USE -->
+      <!-- ============================================================ -->
+      <section class="guide-category" id="cat-sud">
+        <div class="category-header">
+          <div class="category-badge" style="background:var(--purple)">&#9878;</div>
+          <div>
+            <h2>Substance Use</h2>
+            <div class="category-desc">Screening, treatment access, and levels of care</div>
+          </div>
+        </div>
+
+        <!-- Guide 3: SUD Treatment -->
+        <div class="guide-card" id="guide-sud" data-keywords="substance use treatment detox residential iop outpatient mat suboxone methadone doorway keystone hall recovery sober living alcohol drug">
+          <div class="guide-card-header" onclick="toggleGuide(this)">
+            <h3><span class="guide-number" style="background:var(--purple)">7</span> How to Connect a Client with Substance Use Treatment</h3>
+            <span class="guide-arrow">&#9660;</span>
+          </div>
+          <div class="guide-card-body">
+            <p>New Hampshire has built a robust system for accessing substance use treatment. The key entry point is the NH Doorway system, which provides same-day assessment and can place clients in treatment immediately when beds are available.</p>
+
+            <div class="info-box crisis">
+              <div class="info-box-title">Fastest Path to Treatment</div>
+              <span class="phone-callout crisis-phone">(603) 836-6540</span> NH Doorway (Southern NH, at CMC Manchester) &mdash; 24/7, walk-in or call<br>
+              Doorway staff have real-time access to the statewide treatment bed board.
+            </div>
+
+            <h4 class="guide-subsection">Levels of Care (ASAM Criteria)</h4>
+            <table class="decision-table">
+              <thead>
+                <tr><th>Level</th><th>Description</th><th>Nashua-Area Provider</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>Detox (3.2/3.7)</strong></td><td>Medical or social detoxification, 3-7 days</td><td>Keystone Hall (social detox), Farnum Center (medical detox)</td></tr>
+                <tr><td><strong>Residential (3.1/3.5)</strong></td><td>24/7 residential treatment, typically 28+ days</td><td>Keystone Hall, Farnum Center, Granite Recovery Centers</td></tr>
+                <tr><td><strong>PHP (2.5)</strong></td><td>Partial hospitalization, structured day program</td><td>Discover Health Group</td></tr>
+                <tr><td><strong>IOP (2.1)</strong></td><td>Intensive outpatient, 9+ hours/week</td><td>Keystone Hall, Farnum Center, Harbor Care</td></tr>
+                <tr><td><strong>Outpatient (1.0)</strong></td><td>Individual/group counseling, 1-8 hours/week</td><td>Keystone Hall, Harbor Care, GNMHC, private providers</td></tr>
+                <tr><td><strong>MAT</strong></td><td>Medication-Assisted Treatment (Suboxone, methadone, Vivitrol)</td><td>Harbor Care, GNMHC, private prescribers</td></tr>
+              </tbody>
+            </table>
+
+            <h4 class="guide-subsection">Step-by-Step: Connecting to Treatment</h4>
+            <div class="guide-steps">
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Screen and assess.</strong> Use SBIRT (Screening, Brief Intervention, Referral to Treatment). Tools: AUDIT for alcohol, DAST-10 for drugs, or the single-question screeners. If the screen is positive, discuss treatment options with the client and assess readiness for change.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>For urgent placement (detox/residential), call NH Doorway at (603) 836-6540.</strong> Doorway provides same-day assessment, insurance navigation, and direct placement into treatment beds. Walk-in is available at the CMC Manchester location. This is the fastest path to detox and residential treatment in NH.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>For Nashua-based outpatient/IOP, contact Keystone Hall at (603) 881-4848.</strong> Keystone Hall is the primary SUD treatment facility in Nashua, offering social detox, residential, IOP, outpatient, and transitional living. Walk-ins are accepted for detox when beds are available.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>For MAT (Suboxone/Vivitrol), contact Harbor Care at (603) 882-3616.</strong> Harbor Care offers MAT programs including Suboxone and Vivitrol. GNMHC can also prescribe buprenorphine through their psychiatric services. For methadone clinics, the nearest are in Manchester and Lowell, MA &mdash; there is no methadone clinic in Nashua. Use the SAMHSA treatment locator at findtreatment.gov for additional MAT prescribers.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Address insurance and funding.</strong> Medicaid covers all levels of SUD treatment. Private insurance has parity requirements. For uninsured clients, the <strong>NH Alcohol Fund</strong> covers treatment at participating facilities &mdash; apply through the treatment facility or Doorway. Doorway staff can help navigate insurance and funding options on the spot.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Arrange recovery housing.</strong> If the client needs sober living after treatment: Harbor Care Recovery Housing at (603) 882-3616 manages multiple properties in Nashua. Oxford Houses (self-governed recovery housing) &mdash; find listings at oxfordhouse.org. Hope for NH Recovery provides peer-led recovery community support.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Connect to peer support.</strong> AA meetings: aanashua.org or aa.org/find-a-meeting. NA meetings: na.org/meetingsearch. SMART Recovery (science-based alternative): smartrecovery.org. Al-Anon/Nar-Anon for family members. Multiple meetings daily in the Nashua area.
+                </div>
+              </div>
+            </div>
+
+            <div class="info-box tip">
+              <div class="info-box-title">Harm Reduction Resources</div>
+              <ul class="compact-list">
+                <li><strong>Naloxone (Narcan):</strong> Available free through NH Doorways, many pharmacies (standing order), and community organizations. Every client with opioid use should have naloxone and know how to use it.</li>
+                <li><strong>Fentanyl test strips:</strong> Available through harm reduction programs. NH Harm Reduction Coalition: nhhrc.org</li>
+                <li><strong>Syringe services:</strong> Available through NH Harm Reduction Coalition and some pharmacies.</li>
+              </ul>
+            </div>
+
+            <div class="info-box tip">
+              <div class="info-box-title">Co-Occurring Disorders</div>
+              For clients with both mental health and substance use disorders, GNMHC offers integrated dual-disorder treatment through their intake process at (603) 889-6147. Harbor Care also provides integrated MH/SUD treatment. Avoid referring to separate MH and SUD providers when integrated treatment is available.
+            </div>
+
+            <a href="resources.html" class="cross-link">See full Substance Use Treatment directory &rarr;</a>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- HOUSING & BASIC NEEDS -->
+      <!-- ============================================================ -->
+      <section class="guide-category" id="cat-housing">
+        <div class="category-header">
+          <div class="category-badge" style="background:var(--warning)">&#9750;</div>
+          <div>
+            <h2>Housing &amp; Basic Needs</h2>
+            <div class="category-desc">Shelter, housing, food resources, and transportation</div>
+          </div>
+        </div>
+
+        <!-- Guide 4: Housing -->
+        <div class="guide-card" id="guide-housing" data-keywords="housing homeless shelter section 8 voucher rapid rehousing harbor homes coordinated entry transitional supportive">
+          <div class="guide-card-header" onclick="toggleGuide(this)">
+            <h3><span class="guide-number" style="background:var(--warning)">8</span> How to Help a Client Find Housing</h3>
+            <span class="guide-arrow">&#9660;</span>
+          </div>
+          <div class="guide-card-body">
+            <p>Housing is the foundation that makes everything else possible. The Greater Nashua area has a range of options from emergency shelter to permanent supportive housing, but the system requires knowing the right pathway to access each type.</p>
+
+            <h4 class="guide-subsection">If the Client Needs Shelter TONIGHT</h4>
+            <div class="guide-steps">
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Call 2-1-1 for coordinated entry.</strong> This is the primary pathway into the housing system. A trained specialist will assess the client's needs and connect them to available resources.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Direct to emergency shelters:</strong><br>
+                  <span class="phone-callout">(603) 889-7770</span> <strong>Nashua Soup Kitchen &amp; Shelter</strong>, 2 Quincy St &mdash; men and women, check in typically 4-6 PM<br>
+                  <span class="phone-callout">(603) 882-1412</span> <strong>Tolles Street Mission</strong>, 28 Tolles St &mdash; men only<br>
+                  <span class="phone-callout">(603) 882-8472</span> <strong>Southern NH Rescue Mission</strong>, 300 Main St<br>
+                  <span class="phone-callout">(603) 889-3211</span> <strong>Salvation Army</strong>, 34 Lake St &mdash; families and individuals<br>
+                  For DV situations: <span class="phone-callout crisis-phone">(603) 883-3044</span> <strong>Bridges</strong> (confidential shelter)
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Know the check-in times.</strong> Shelters have specific check-in windows (usually late afternoon). Beds are limited and often first-come, first-served. Call ahead to confirm availability and times.
+                </div>
+              </div>
+            </div>
+
+            <h4 class="guide-subsection">For Longer-Term Housing</h4>
+            <div class="guide-steps">
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Start with coordinated entry through 2-1-1.</strong> The client will complete a <strong>VI-SPDAT</strong> (Vulnerability Index) assessment. The score determines priority for HUD-funded housing programs (rapid rehousing, permanent supportive housing, transitional housing). Higher scores = higher priority. Chronic homelessness (1+ year or 4 episodes in 3 years) with a disability gets highest priority for permanent supportive housing.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Contact Harbor Care at (603) 882-3616.</strong> Harbor Care is the largest provider of supportive housing in Greater Nashua. They manage hundreds of units and offer: permanent supportive housing for individuals with mental illness/SUD, transitional housing, rapid rehousing, Housing First programs, PATH outreach, and case management. Most programs require coordinated entry assessment first.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Apply for Section 8 / Housing Choice Voucher.</strong> <strong>Nashua Housing Authority</strong>, 40 East Pearl St, <span class="phone-callout">(603) 883-5661</span>. Applications accepted when the waitlist is open (often closed). Wait times can be years. Apply to multiple housing authorities simultaneously (Hudson, Merrimack, Milford, statewide).
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>For veterans:</strong> HUD-VASH vouchers (joint VA/HUD program) are available through Harbor Care in partnership with Manchester VA. Call Harbor Care at (603) 882-3616 or Manchester VA social work at (603) 624-4366. SSVF (Supportive Services for Veteran Families) provides rapid rehousing and homelessness prevention.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>For emergency rental assistance:</strong> NH Housing Finance Authority (NHHFA) administers the state's Emergency Rental Assistance Program (ERAP) when funded. Phone: <span class="phone-callout">(603) 472-8623</span>. Also check: City of Nashua General Assistance at (603) 589-4510, Salvation Army at (603) 889-3211, Catholic Charities at (603) 669-3030, and Southern NH Services at (603) 889-3440.
+                </div>
+              </div>
+            </div>
+
+            <div class="info-box warning">
+              <div class="info-box-title">Common Barriers and Workarounds</div>
+              <ul class="compact-list">
+                <li><strong>Criminal record:</strong> Housing First programs (Harbor Care) are more flexible. Some landlords accept clients through rapid rehousing programs who they wouldn't accept directly.</li>
+                <li><strong>Eviction history:</strong> Work with case manager on landlord negotiation. Some programs provide security deposits and first/last month rent.</li>
+                <li><strong>No income:</strong> Apply for SSI/SSDI (see Benefits guide). General Assistance can bridge the gap. Some programs house clients before income is established.</li>
+                <li><strong>Pets:</strong> Many shelters do not allow pets. Harbor Care and some other programs may accommodate service/emotional support animals with documentation.</li>
+                <li><strong>Families with children:</strong> Salvation Army and Families in Transition (Manchester, (603) 641-9441) can shelter families. Children experiencing homelessness have special education rights under McKinney-Vento Act.</li>
+              </ul>
+            </div>
+
+            <a href="resources.html" class="cross-link">See full Housing directory &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Guide 5: Food Resources -->
+        <div class="guide-card" id="guide-food" data-keywords="food snap ebt food stamps pantry meals wic nutrition hunger soup kitchen">
+          <div class="guide-card-header" onclick="toggleGuide(this)">
+            <h3><span class="guide-number" style="background:var(--warning)">9</span> How to Connect a Client with Food Resources</h3>
+            <span class="guide-arrow">&#9660;</span>
+          </div>
+          <div class="guide-card-body">
+            <p>Food insecurity is common among MH clients and directly impacts treatment engagement. Here's every pathway to food resources in Greater Nashua.</p>
+
+            <h4 class="guide-subsection">If the Client Needs Food TODAY</h4>
+            <div class="info-box success">
+              <div class="info-box-title">No-Questions-Asked Meals</div>
+              <strong>Nashua Soup Kitchen &amp; Shelter</strong>, 2 Quincy St &mdash; daily meals (breakfast ~7-8 AM, lunch ~11:30 AM-1 PM, dinner ~4-5:30 PM). No ID, no documentation, no questions asked. Call <span class="phone-callout">(603) 889-7770</span> to confirm times.<br><br>
+              <strong>Tolles Street Mission</strong>, 28 Tolles St &mdash; daily meals. <span class="phone-callout">(603) 882-1412</span>
+            </div>
+
+            <h4 class="guide-subsection">Food Pantries</h4>
+            <ul class="compact-list">
+              <li><strong>Corpus Christi Food Pantry</strong>, 3 Crown St &mdash; <span class="phone-callout">(603) 880-2653</span>. Bring ID and proof of address.</li>
+              <li><strong>Salvation Army Food Pantry</strong>, 34 Lake St &mdash; <span class="phone-callout">(603) 889-3211</span></li>
+              <li><strong>Grace Lutheran Church Food Pantry</strong>, 9 Weston Rd &mdash; monthly distribution, call for schedule</li>
+              <li><strong>United Way Pop-Up Food Pantries</strong> &mdash; <span class="phone-callout">(603) 882-4011</span>, check website for rotating locations</li>
+              <li><strong>NH Food Bank Mobile Pantry</strong> &mdash; check nhfoodbank.org for Nashua-area schedule. No ID required.</li>
+            </ul>
+
+            <h4 class="guide-subsection">SNAP (Food Stamps) Application</h4>
+            <div class="guide-steps">
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Check eligibility.</strong> SNAP eligibility is based on income (generally below 185% FPL for gross income). NH has expanded eligibility for elderly and disabled individuals. Most MH clients with limited income qualify.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Apply online at nheasy.nh.gov</strong> OR visit <strong>NH DHHS Nashua office at 137 Temple St</strong> OR call <span class="phone-callout">1-844-275-3447</span>. Help the client create an account and complete the application if they need assistance.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Gather documentation:</strong> ID, proof of income (pay stubs, SSI/SSDI letter, unemployment), proof of address, bank statements, proof of expenses (rent, utilities, child care). If the client is homeless, they can use a shelter address or case manager's address for mail.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Interview is scheduled within 30 days.</strong> For expedited SNAP (within 7 days), the client qualifies if they have very low income/resources or are homeless. Flag this when applying. Phone interviews are typically available.
+                </div>
+              </div>
+            </div>
+
+            <h4 class="guide-subsection">Other Food Programs</h4>
+            <ul class="compact-list">
+              <li><strong>WIC:</strong> For pregnant/postpartum women, infants, and children under 5. Income below 185% FPL. Call <span class="phone-callout">1-800-942-4321</span> for appointment.</li>
+              <li><strong>Meals on Wheels:</strong> Home-delivered meals for homebound seniors (60+) and individuals with disabilities. <span class="phone-callout">(603) 889-3230</span> (Nashua Senior Center).</li>
+              <li><strong>School meals:</strong> Free/reduced lunch for income-eligible families. Apply through the child's school.</li>
+              <li><strong>Summer meals:</strong> June-August, free meals for children 18 and under at various locations. Text FOOD to 304-304 or call 2-1-1.</li>
+              <li><strong>CSFP:</strong> Monthly USDA commodity boxes for adults 60+ below 130% FPL. Call NH Food Bank at <span class="phone-callout">(603) 669-9725</span>.</li>
+            </ul>
+
+            <a href="resources.html" class="cross-link">See full Food Security directory &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Guide 11: Transportation -->
+        <div class="guide-card" id="guide-transport" data-keywords="transportation bus transit nts paratransit medicaid rides ada volunteer driver">
+          <div class="guide-card-header" onclick="toggleGuide(this)">
+            <h3><span class="guide-number" style="background:var(--warning)">10</span> How to Set Up Transportation for a Client</h3>
+            <span class="guide-arrow">&#9660;</span>
+          </div>
+          <div class="guide-card-body">
+            <p>Transportation is one of the most common barriers to treatment engagement. Fortunately, there are multiple options in the Nashua area, including a dramatically underused Medicaid benefit.</p>
+
+            <h4 class="guide-subsection">Quick Decision Guide</h4>
+            <table class="decision-table">
+              <thead>
+                <tr><th>Client Situation</th><th>Best Option</th><th>Contact</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Has Medicaid, needs ride to medical/MH/SUD appointment</td><td><strong>Medicaid NEMT (free!)</strong></td><td>Call MCO member services (see below)</td></tr>
+                <tr><td>Can use public transit in Nashua</td><td>NTS CityBus</td><td><span class="phone-callout">(603) 888-0100</span></td></tr>
+                <tr><td>Has disability, can't use fixed-route bus</td><td>NTS ADA Paratransit</td><td><span class="phone-callout">(603) 888-0100</span></td></tr>
+                <tr><td>Senior (60+) in Nashua</td><td>NTS Senior Demand Response</td><td><span class="phone-callout">(603) 888-0100</span></td></tr>
+                <tr><td>Senior or disabled, needs medical ride</td><td>Easter Seals, CareGivers volunteer drivers</td><td><span class="phone-callout">(603) 621-3457</span> / <span class="phone-callout">(603) 895-2109</span></td></tr>
+                <tr><td>Veteran, needs ride to VA</td><td>DAV Transportation (free)</td><td><span class="phone-callout">(603) 624-4366</span> (Manchester VA)</td></tr>
+              </tbody>
+            </table>
+
+            <h4 class="guide-subsection">Medicaid Non-Emergency Medical Transportation (NEMT)</h4>
+            <div class="info-box tip">
+              <div class="info-box-title">Most Underused Medicaid Benefit</div>
+              Every Medicaid member gets free rides to ALL medical appointments &mdash; including behavioral health, substance use treatment, pharmacy, and dental. Many clients don't know about this benefit. Each MCO provides it through their transportation broker.
+            </div>
+
+            <div class="guide-steps">
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Identify the client's MCO and call their transportation line:</strong><br>
+                  <span class="phone-callout">1-866-769-3085</span> NH Healthy Families (Centene)<br>
+                  <span class="phone-callout">1-877-957-1300</span> Well Sense Health Plan (BMC HealthNet)<br>
+                  <span class="phone-callout">1-833-709-7390</span> AmeriHealth Caritas NH<br>
+                  Check the back of the client's Medicaid card for the MCO name.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Schedule rides 48-72 hours before the appointment.</strong> Provide: client name and Medicaid ID, pickup address, appointment address, appointment date and time, and any special needs (wheelchair, escort). Some MCOs use brokers like ModivCare.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>For recurring appointments</strong> (weekly therapy, daily IOP), set up a standing order so the rides are automatically scheduled. Call the MCO to arrange this.
+                </div>
+              </div>
+            </div>
+
+            <h4 class="guide-subsection">NTS CityBus</h4>
+            <ul class="compact-list">
+              <li>Fixed routes covering Nashua: Main St, Amherst St, Daniel Webster Hwy, Broad St corridors</li>
+              <li>Fare: ~$1.50/ride (exact fare, no change). Day passes and monthly passes available.</li>
+              <li>Hours: approximately 6 AM - 7 PM Monday-Saturday. Limited Sunday service.</li>
+              <li>Reduced fares for seniors and persons with disabilities.</li>
+              <li>For ADA Paratransit: must apply through NTS with medical documentation. Door-to-door service for those who cannot use fixed routes. Schedule rides 1-3 days in advance.</li>
+            </ul>
+
+            <div class="info-box tip">
+              <div class="info-box-title">Tips for Rural Areas</div>
+              Clients in outlying towns (Milford, Hollis, Brookline, etc.) have fewer transit options. Solutions: Medicaid NEMT covers rides from any address. Easter Seals and CareGivers volunteer drivers serve some southern NH communities. ServiceLink at (603) 889-6220 can help coordinate transportation for seniors and disabled individuals. Some treatment programs offer their own transportation &mdash; ask when scheduling intake.
+            </div>
+
+            <a href="resources.html" class="cross-link">See full Transportation directory &rarr;</a>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- BENEFITS & INSURANCE -->
+      <!-- ============================================================ -->
+      <section class="guide-category" id="cat-benefits">
+        <div class="category-header">
+          <div class="category-badge" style="background:var(--teal)">$</div>
+          <div>
+            <h2>Benefits &amp; Insurance</h2>
+            <div class="category-desc">Health insurance, disability benefits, and Medicaid navigation</div>
+          </div>
+        </div>
+
+        <!-- Guide 7: Health Insurance -->
+        <div class="guide-card" id="guide-insurance" data-keywords="health insurance medicaid granite advantage marketplace uninsured enrollment mcO financial assistance free care">
+          <div class="guide-card-header" onclick="toggleGuide(this)">
+            <h3><span class="guide-number" style="background:var(--teal)">11</span> How to Connect a Client with Health Insurance</h3>
+            <span class="guide-arrow">&#9660;</span>
+          </div>
+          <div class="guide-card-body">
+            <p>Many MH clients are uninsured or underinsured. Getting them connected to coverage unlocks access to treatment. Here are the pathways.</p>
+
+            <h4 class="guide-subsection">Quick Insurance Decision Guide</h4>
+            <table class="decision-table">
+              <thead>
+                <tr><th>Client Profile</th><th>Best Option</th><th>How to Apply</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Adult 19-64, income up to 138% FPL (~$20,783/yr individual)</td><td><strong>Granite Advantage (Medicaid Expansion)</strong></td><td>nheasy.nh.gov or DHHS 137 Temple St</td></tr>
+                <tr><td>Children, income up to 318% FPL</td><td><strong>CHIP</strong></td><td>nheasy.nh.gov</td></tr>
+                <tr><td>Pregnant women</td><td><strong>Medicaid (presumptive eligibility)</strong></td><td>Can get same-day temp coverage at participating providers</td></tr>
+                <tr><td>Elderly (65+) or disabled</td><td><strong>Traditional Medicaid + Medicare</strong></td><td>SSA for Medicare; DHHS for Medicaid</td></tr>
+                <tr><td>Income above Medicaid limits</td><td><strong>Health Insurance Marketplace</strong></td><td>healthcare.gov (substantial subsidies available)</td></tr>
+                <tr><td>Uninsured, not eligible for anything</td><td><strong>Harbor Care (FQHC sliding scale)</strong></td><td><span class="phone-callout">(603) 882-3616</span></td></tr>
+              </tbody>
+            </table>
+
+            <h4 class="guide-subsection">Step-by-Step: NH Medicaid Application</h4>
+            <div class="guide-steps">
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Apply online at nheasy.nh.gov</strong> (fastest method). Help the client create an account and complete the application. OR visit DHHS Nashua office at <strong>137 Temple St</strong>. OR call <span class="phone-callout">1-844-275-3447</span>.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Provide required information:</strong> income, household size, citizenship/immigration status, and current resources. Upload verification documents: ID, pay stubs, bank statements.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Processing takes 30-45 days.</strong> Faster for pregnant women and children. Once approved, the client is assigned to a Managed Care Organization (MCO): NH Healthy Families, Well Sense, or AmeriHealth Caritas. They can choose an MCO or one is auto-assigned.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>For clients presenting to the ED uninsured:</strong> Hospital financial counselors can help start a Medicaid application on the spot. Southern NH Medical Center and all NH hospitals have financial assistance programs for uninsured patients.
+                </div>
+              </div>
+            </div>
+
+            <h4 class="guide-subsection">Marketplace Insurance</h4>
+            <ul class="compact-list">
+              <li><strong>Open Enrollment:</strong> Typically November-January (check healthcare.gov for exact dates)</li>
+              <li><strong>Special Enrollment:</strong> Available for qualifying life events (job loss, move, marriage, baby, loss of other coverage)</li>
+              <li><strong>Subsidies:</strong> A single adult earning up to ~$58,000/yr may qualify for premium tax credits</li>
+              <li><strong>Free help enrolling:</strong> Call 2-1-1 for the nearest navigator or certified application counselor</li>
+            </ul>
+
+            <h4 class="guide-subsection">Medication Assistance</h4>
+            <ul class="compact-list">
+              <li><strong>NeedyMeds</strong> (needymeds.org): Database of patient assistance programs from drug manufacturers</li>
+              <li><strong>RxAssist</strong> (rxassist.org): Comprehensive PAP database</li>
+              <li><strong>Manufacturer PAPs:</strong> Most major pharmaceutical companies offer free medications to qualifying patients</li>
+              <li><strong>340B Drug Pricing:</strong> FQHCs like Harbor Care can access deeply discounted medications</li>
+              <li><strong>Walmart $4 Generics:</strong> Many common medications at Walmart pharmacies for $4/month</li>
+            </ul>
+
+            <a href="resources.html" class="cross-link">See full Insurance &amp; Benefits directory &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Guide 6: SSI/SSDI -->
+        <div class="guide-card" id="guide-disability" data-keywords="ssi ssdi disability social security application appeal functional capacity assessment supplemental income">
+          <div class="guide-card-header" onclick="toggleGuide(this)">
+            <h3><span class="guide-number" style="background:var(--teal)">12</span> How to Help a Client Apply for Disability (SSI/SSDI)</h3>
+            <span class="guide-arrow">&#9660;</span>
+          </div>
+          <div class="guide-card-body">
+            <p>The disability application process is notoriously complex and slow. Your support as a clinician &mdash; especially in providing functional documentation &mdash; can make or break a claim. Here's how to navigate it.</p>
+
+            <h4 class="guide-subsection">SSI vs. SSDI</h4>
+            <table class="decision-table">
+              <thead>
+                <tr><th></th><th>SSI</th><th>SSDI</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>Who qualifies</strong></td><td>Aged, blind, or disabled individuals with limited income/resources. No work history required.</td><td>Individuals who worked and paid into Social Security but can no longer work due to disability.</td></tr>
+                <tr><td><strong>Amount</strong></td><td>~$943/month (2026 federal benefit; NH does not add a state supplement)</td><td>Based on work history (average ~$1,500/month)</td></tr>
+                <tr><td><strong>Health insurance</strong></td><td>Automatic Medicaid in NH</td><td>Medicare after 24-month waiting period</td></tr>
+                <tr><td><strong>Can apply for both?</strong></td><td colspan="2">Yes. Many clients apply for both simultaneously.</td></tr>
+              </tbody>
+            </table>
+
+            <h4 class="guide-subsection">Step-by-Step: The Application Process</h4>
+            <div class="guide-steps">
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Help the client apply.</strong> Contact Social Security Administration: <span class="phone-callout">1-800-772-1213</span> or visit the Nashua SSA office at <strong>70 Commercial St, Nashua, NH 03060</strong>. Appointments are recommended. The client can start the application online at ssa.gov. Applications can be filed for SSI, SSDI, or both simultaneously.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Gather medical documentation.</strong> The application requires a list of all medical providers, hospitals, clinics, and treatment dates. The more complete the medical record, the better. Include: diagnoses, treatment history, hospitalizations, medications (current and past), and any functional assessments.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Write a detailed functional assessment letter.</strong> This is where YOU, as the clinician, make the biggest impact. SSA cares about <strong>functional limitations</strong>, not just diagnoses. Focus on:<br>
+                  <ul class="compact-list">
+                    <li>How the disability limits ability to work &mdash; not just diagnosis</li>
+                    <li>Specific functional limitations: "Client cannot concentrate for more than 15 minutes," "Client misses 3+ days per month due to symptoms," "Client cannot stand for more than 10 minutes," "Client's paranoia prevents them from being around coworkers"</li>
+                    <li>Impact on Activities of Daily Living (ADLs)</li>
+                    <li>Number and duration of hospitalizations</li>
+                    <li>Medication side effects that affect functioning</li>
+                    <li>Persistence of symptoms despite treatment</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>SSA sends the case to Disability Determination Services (DDS).</strong> DDS reviews the medical evidence and makes a decision. This takes 3-6 months, often longer. The client may be sent for a consultative examination (CE) with an SSA-contracted examiner.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>If denied (most initial claims are denied), appeal within 60 days.</strong> The appeal process has four levels: (1) Reconsideration, (2) Hearing before an Administrative Law Judge (ALJ), (3) Appeals Council review, (4) Federal Court. Most cases are won at the ALJ hearing stage.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Consider a disability attorney or advocate.</strong> Private disability attorneys work on contingency (25% of back benefits, max $7,200 fee). They are especially valuable at the ALJ hearing stage. Also:<br>
+                  <span class="phone-callout">(603) 228-0432</span> Disability Rights Center - NH (free advocacy)<br>
+                  <span class="phone-callout">1-800-639-5290</span> NH Legal Assistance (can help with denied claims)
+                </div>
+              </div>
+            </div>
+
+            <div class="info-box tip">
+              <div class="info-box-title">Clinician Tips for Supporting the Claim</div>
+              <ul class="compact-list">
+                <li>Use specific, measurable language in your letters. "Severely impaired" is vague. "Cannot maintain attention for more than 10 minutes, would be off-task 25%+ of the workday" is actionable.</li>
+                <li>Respond promptly to records requests from DDS. Delayed records = delayed decisions.</li>
+                <li>If the client has a CE scheduled, provide them with any records they should bring.</li>
+                <li>Continue treating and documenting. Gaps in treatment weaken claims. If the client misses appointments due to symptoms, document that too.</li>
+                <li>For clients under 50, the bar for disability is higher. SSA evaluates whether the client can do ANY work, not just their prior work.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Guide 15: NH Medicaid System -->
+        <div class="guide-card" id="guide-medicaid" data-keywords="medicaid managed care mco prior authorization appeal denied claim provider enrollment covered services">
+          <div class="guide-card-header" onclick="toggleGuide(this)">
+            <h3><span class="guide-number" style="background:var(--teal)">13</span> How to Navigate the NH Medicaid System</h3>
+            <span class="guide-arrow">&#9660;</span>
+          </div>
+          <div class="guide-card-body">
+            <p>NH Medicaid is delivered through Managed Care Organizations (MCOs). Understanding how to work within this system &mdash; prior authorizations, covered services, and appeals &mdash; is essential for community MH work.</p>
+
+            <h4 class="guide-subsection">The Three MCOs</h4>
+            <table class="decision-table">
+              <thead>
+                <tr><th>MCO</th><th>Phone</th><th>Website</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>NH Healthy Families</strong> (Centene)</td><td><span class="phone-callout">1-866-769-3085</span></td><td>nhhealthyfamilies.com</td></tr>
+                <tr><td><strong>Well Sense Health Plan</strong> (BMC HealthNet)</td><td><span class="phone-callout">1-877-957-1300</span></td><td>wellsense.org</td></tr>
+                <tr><td><strong>AmeriHealth Caritas NH</strong></td><td><span class="phone-callout">1-833-709-7390</span></td><td>amerihealthcaritasnh.com</td></tr>
+              </tbody>
+            </table>
+
+            <h4 class="guide-subsection">Covered Mental Health Services</h4>
+            <ul class="compact-list">
+              <li>Outpatient individual, group, and family therapy</li>
+              <li>Psychiatric evaluation and medication management</li>
+              <li>Community Support Program (CSP) / intensive case management</li>
+              <li>ACT (Assertive Community Treatment)</li>
+              <li>PHP (Partial Hospitalization) and IOP (Intensive Outpatient)</li>
+              <li>Inpatient psychiatric hospitalization</li>
+              <li>Crisis services</li>
+              <li>Substance use treatment (all levels of care)</li>
+              <li>Peer support services</li>
+              <li>Applied Behavior Analysis (ABA) for autism</li>
+              <li>Neuropsychological testing (with prior authorization)</li>
+            </ul>
+
+            <h4 class="guide-subsection">Prior Authorizations for MH Services</h4>
+            <div class="guide-steps">
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Know what requires prior authorization.</strong> Most outpatient therapy (individual, group) does NOT require prior auth for the initial visits. PHP, IOP, inpatient, neuropsych testing, and extended treatment episodes typically DO require prior auth. Check the specific MCO's provider manual.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Submit the authorization request.</strong> Call the MCO's behavioral health line (number on member's card) or submit through the MCO's provider portal. Include: diagnosis, clinical justification (symptoms, functional impairment, prior treatment), and the requested service (type, frequency, duration).
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>If authorization is denied, appeal immediately.</strong> You have the right to appeal on behalf of the client. Request a peer-to-peer review with the MCO's medical director. This is a phone call where you present the clinical case directly. Peer-to-peer reviews overturn many denials. Written appeals can also be filed within the MCO's timeframe (typically 30-60 days).
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>External appeal.</strong> If the MCO denies the internal appeal, the client can request an external review through NH Insurance Department or a fair hearing through DHHS. NH Legal Assistance (<span class="phone-callout">1-800-639-5290</span>) can help with denied claims.
+                </div>
+              </div>
+            </div>
+
+            <div class="info-box tip">
+              <div class="info-box-title">Provider Enrollment</div>
+              To bill Medicaid, you must be enrolled with EACH MCO separately. Enrollment forms are available on each MCO's website. The process can take 30-90 days. GNMHC is enrolled with all MCOs. If referring to a private practice provider, verify they are paneled with the client's MCO before referring.
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- LEGAL & ADVOCACY -->
+      <!-- ============================================================ -->
+      <section class="guide-category" id="cat-legal">
+        <div class="category-header">
+          <div class="category-badge" style="background:#6b7280">&#9878;</div>
+          <div>
+            <h2>Legal &amp; Advocacy</h2>
+            <div class="category-desc">Legal aid, employment services, and advocacy resources</div>
+          </div>
+        </div>
+
+        <!-- Guide 10: Legal Services -->
+        <div class="guide-card" id="guide-legal" data-keywords="legal aid attorney lawyer court eviction guardianship immigration expungement protective order victim advocacy disability rights">
+          <div class="guide-card-header" onclick="toggleGuide(this)">
+            <h3><span class="guide-number" style="background:#6b7280">14</span> How to Help a Client Access Legal Services</h3>
+            <span class="guide-arrow">&#9660;</span>
+          </div>
+          <div class="guide-card-body">
+            <p>Many MH clients face legal issues &mdash; eviction, custody, benefits denials, criminal charges, immigration. Here's how to connect them with the right legal resource.</p>
+
+            <h4 class="guide-subsection">Legal Resource Decision Guide</h4>
+            <table class="decision-table">
+              <thead>
+                <tr><th>Legal Issue</th><th>Resource</th><th>Contact</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Any civil legal issue (housing, family, benefits, consumer)</td><td><strong>603 Legal Aid</strong> (first call)</td><td><span class="phone-callout">1-800-639-5290</span></td></tr>
+                <tr><td>Housing, public benefits, immigration, disability, elder law</td><td><strong>NH Legal Assistance</strong></td><td><span class="phone-callout">(603) 206-2777</span> (Nashua)</td></tr>
+                <tr><td>Criminal defense (cannot afford attorney)</td><td><strong>NH Public Defender</strong> (appointed by court)</td><td>Request at arraignment</td></tr>
+                <tr><td>Disability rights, discrimination, access to services</td><td><strong>Disability Rights Center - NH</strong></td><td><span class="phone-callout">(603) 228-0432</span></td></tr>
+                <tr><td>Immigration legal services</td><td><strong>Catholic Charities NH</strong></td><td><span class="phone-callout">(603) 669-3030</span></td></tr>
+                <tr><td>DV protective orders</td><td><strong>Bridges</strong> (free assistance filing)</td><td><span class="phone-callout">(603) 883-3044</span></td></tr>
+                <tr><td>Need a private attorney (referral)</td><td><strong>NH Bar Association Referral</strong></td><td><span class="phone-callout">(603) 229-0002</span></td></tr>
+              </tbody>
+            </table>
+
+            <h4 class="guide-subsection">Step-by-Step: Connecting to Free Legal Help</h4>
+            <div class="guide-steps">
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Start with 603 Legal Aid at 1-800-639-5290.</strong> This is the single best first call for any civil legal issue for a low-income client. Staff screens for eligibility (generally below 200% FPL) and the legal issue. If accepted, the client is assigned to a staff attorney or volunteer lawyer. They cover: housing/eviction, family law, consumer protection, public benefits, disability, education, and elder law. They cannot help with criminal cases.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>If 603 Legal Aid can't help, try NH Legal Assistance at (603) 206-2777.</strong> NHLA specializes in housing, public benefits, immigration (limited), disability, elder law, and health law. Income limits are typically 125-200% FPL depending on the program.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>For disability rights issues:</strong> Contact Disability Rights Center - NH at <span class="phone-callout">(603) 228-0432</span> or 1-800-834-1721. They provide free legal advocacy for access to services, discrimination, abuse/neglect in institutions, special education, housing, and employment issues related to disability.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>For immigration issues:</strong> Catholic Charities NH at <span class="phone-callout">(603) 669-3030</span> is the primary immigration legal resource in southern NH. Services include visa applications, DACA renewals, asylum, family petitions, and naturalization. Fees are on a sliding scale. Wait times can be significant &mdash; refer early.
+                </div>
+              </div>
+            </div>
+
+            <h4 class="guide-subsection">Treatment Courts (Diversion Programs)</h4>
+            <ul class="compact-list">
+              <li><strong>Drug Court:</strong> Alternative to incarceration for substance-related offenses. Through Nashua District Court.</li>
+              <li><strong>Mental Health Court:</strong> Diversion program for defendants with mental illness. Through Nashua District Court.</li>
+              <li><strong>Veterans Treatment Court:</strong> For veterans facing criminal charges.</li>
+              <li>Access: Defense attorney or public defender petitions the court. Clinicians can provide supporting documentation.</li>
+            </ul>
+
+            <div class="info-box tip">
+              <div class="info-box-title">Key Court Contacts</div>
+              <strong>Nashua District Court:</strong> 25 Walnut St, <span class="phone-callout">(603) 880-3333</span><br>
+              <strong>Hillsborough County Superior Court South:</strong> 30 Spring St, <span class="phone-callout">(603) 879-3306</span>
+            </div>
+
+            <a href="resources.html" class="cross-link">See full Legal Services directory &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Guide 14: Employment -->
+        <div class="guide-card" id="guide-employment" data-keywords="employment job training vocational rehabilitation nh works resume supported employment goodwill easter seals ged">
+          <div class="guide-card-header" onclick="toggleGuide(this)">
+            <h3><span class="guide-number" style="background:#6b7280">15</span> How to Help with Employment &amp; Job Training</h3>
+            <span class="guide-arrow">&#9660;</span>
+          </div>
+          <div class="guide-card-body">
+            <p>Employment is a major factor in mental health recovery. There are more resources than most people realize, from basic job search help to intensive supported employment for people with disabilities.</p>
+
+            <h4 class="guide-subsection">Employment Resource Decision Guide</h4>
+            <table class="decision-table">
+              <thead>
+                <tr><th>Client Need</th><th>Resource</th><th>Contact</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>General job search, resume help, interview prep</td><td><strong>NH Works (NH Employment Security)</strong></td><td><span class="phone-callout">(603) 882-5177</span></td></tr>
+                <tr><td>Has a disability that is a barrier to employment</td><td><strong>NH Vocational Rehabilitation</strong></td><td><span class="phone-callout">(603) 889-6511</span></td></tr>
+                <tr><td>Has SMI, wants to work (GNMHC client)</td><td><strong>GNMHC Supported Employment (IPS)</strong></td><td><span class="phone-callout">(603) 889-6147</span></td></tr>
+                <tr><td>Needs GED/HiSET, ESL, basic skills</td><td><strong>Nashua Adult Learning Center</strong></td><td><span class="phone-callout">(603) 882-9080</span></td></tr>
+                <tr><td>Needs job training, vocational skills</td><td><strong>Nashua Community College</strong></td><td><span class="phone-callout">(603) 578-8900</span></td></tr>
+                <tr><td>Person with disability, needs assistive technology</td><td><strong>Easter Seals NH</strong></td><td><span class="phone-callout">(603) 621-3457</span></td></tr>
+                <tr><td>Young adult (16-24), needs education + training</td><td><strong>Job Corps</strong></td><td><span class="phone-callout">1-800-733-5627</span></td></tr>
+              </tbody>
+            </table>
+
+            <h4 class="guide-subsection">Step-by-Step: NH Vocational Rehabilitation</h4>
+            <div class="info-box tip">
+              <div class="info-box-title">Dramatically Underutilized</div>
+              NH VR is one of the most underutilized resources for MH clients. Many individuals with mental illness qualify but never apply. VR provides: vocational counseling, job training, assistive technology, job placement, supported employment, and job coaching &mdash; all free to eligible clients.
+            </div>
+
+            <div class="guide-steps">
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Contact NH VR Nashua office at (603) 889-6511.</strong> The client can call or visit. You can help initiate the referral by providing a letter documenting the disability and how it affects employment.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Eligibility determination.</strong> The client must have a physical, mental, or learning disability that is a barrier to employment and must be able to benefit from VR services. A letter from you documenting the disability and its functional impact on work is very helpful.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Develop an Individualized Plan for Employment (IPE).</strong> Once eligible, a VR counselor works with the client to create a plan that outlines vocational goals, services needed, and timeline. Services can include job skills training, education funding, assistive technology, job coaching, and more.
+                </div>
+              </div>
+            </div>
+
+            <h4 class="guide-subsection">Other Key Resources</h4>
+            <ul class="compact-list">
+              <li><strong>NH Works (6 Townsend West, Nashua):</strong> Walk-in center with job listings, workshops, resume help, veterans employment services, and WIOA training funds. Open to everyone.</li>
+              <li><strong>GNMHC Supported Employment:</strong> Individual Placement and Support (IPS) model for GNMHC clients with SMI who want to work. Includes job development, coaching, and ongoing support.</li>
+              <li><strong>Goodwill Industries:</strong> Job training, placement, and career services. goodwillnne.org</li>
+              <li><strong>Nashua Adult Learning Center:</strong> Free GED/HiSET prep, ESL, digital literacy, and workforce readiness for NH residents. Walk-in for orientation.</li>
+              <li><strong>Criminal record:</strong> NH Works serves all job seekers regardless of criminal history. NH has "Ban the Box" for public employers. NH Second Chance Act programs provide reentry employment support.</li>
+            </ul>
+
+            <a href="resources.html" class="cross-link">See full Employment directory &rarr;</a>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- SPECIAL POPULATIONS -->
+      <!-- ============================================================ -->
+      <section class="guide-category" id="cat-special">
+        <div class="category-header">
+          <div class="category-badge" style="background:#4f46e5">&#9733;</div>
+          <div>
+            <h2>Special Populations</h2>
+            <div class="category-desc">Veterans and population-specific services</div>
+          </div>
+        </div>
+
+        <!-- Guide 13: Veterans -->
+        <div class="guide-card" id="guide-veterans" data-keywords="veteran va manchester vet center vash housing crisis line military service benefits claims">
+          <div class="guide-card-header" onclick="toggleGuide(this)">
+            <h3><span class="guide-number" style="background:#4f46e5">16</span> How to Connect a Veteran with Services</h3>
+            <span class="guide-arrow">&#9660;</span>
+          </div>
+          <div class="guide-card-body">
+            <p>Veterans have access to a separate system of services through the VA and state veterans programs. The key is connecting them to the right entry point. Many veterans are not aware of all the benefits they've earned.</p>
+
+            <div class="info-box crisis">
+              <div class="info-box-title">Veterans Crisis Line</div>
+              <span class="phone-callout crisis-phone">988, then press 1</span> (24/7)<br>
+              <span class="phone-callout crisis-phone">Text 838255</span><br>
+              <strong>Chat:</strong> VeteransCrisisLine.net
+            </div>
+
+            <h4 class="guide-subsection">Veteran Services Decision Guide</h4>
+            <table class="decision-table">
+              <thead>
+                <tr><th>Need</th><th>Resource</th><th>Contact</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Medical/mental health care</td><td><strong>Manchester VA Medical Center</strong></td><td><span class="phone-callout">(603) 624-4366</span></td></tr>
+                <tr><td>PTSD/MST counseling (no VA enrollment needed)</td><td><strong>Vet Center, Hooksett</strong></td><td><span class="phone-callout">(603) 668-7060</span></td></tr>
+                <tr><td>VA enrollment</td><td>VA Enrollment Center</td><td><span class="phone-callout">1-800-827-1000</span> or va.gov/health-care/apply</td></tr>
+                <tr><td>Homeless/housing</td><td><strong>Harbor Care veterans programs</strong></td><td><span class="phone-callout">(603) 882-3616</span></td></tr>
+                <tr><td>Benefits claims assistance</td><td><strong>NH State Veterans Council</strong></td><td><span class="phone-callout">(603) 624-9230</span></td></tr>
+                <tr><td>Transportation to VA</td><td><strong>DAV Transportation</strong></td><td>Through Manchester VA</td></tr>
+                <tr><td>Long-term care</td><td><strong>NH Veterans Home (Tilton)</strong></td><td><span class="phone-callout">(603) 527-4400</span></td></tr>
+              </tbody>
+            </table>
+
+            <h4 class="guide-subsection">Step-by-Step: Connecting a Veteran to Care</h4>
+            <div class="guide-steps">
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Determine VA enrollment status.</strong> Ask if the veteran is enrolled in VA healthcare. Many veterans are eligible but not enrolled. To enroll: call <span class="phone-callout">1-800-827-1000</span> or apply online at va.gov/health-care/apply. Enrollment is based on service-connected disability rating, income, and other factors.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>For mental health care:</strong> Manchester VA Medical Center at <span class="phone-callout">(603) 624-4366</span> provides full mental health services including therapy, psychiatry, PTSD programs, substance use treatment, and inpatient psychiatry. The VA also has telehealth options. For combat veterans or MST survivors not enrolled in VA, the <strong>Vet Center in Hooksett</strong> at <span class="phone-callout">(603) 668-7060</span> provides free readjustment counseling with no VA enrollment required.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>For housing:</strong> Harbor Care operates veterans housing programs in Nashua including Liberty House (transitional housing), HUD-VASH (permanent supportive housing vouchers in partnership with VA), and SSVF (Supportive Services for Veteran Families for rapid rehousing and homelessness prevention). Contact Harbor Care at (603) 882-3616 or Manchester VA social work for referral.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>For benefits claims:</strong> NH State Veterans Council at <span class="phone-callout">(603) 624-9230</span> provides free claims assistance from veterans service officers. They help with: VA disability compensation, pension, education benefits (GI Bill), and other state and federal benefits. American Legion Post 79 in Nashua (603-882-7273) also has service officers who can help.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>For transportation:</strong> DAV provides free transportation to VA medical appointments through the Manchester VA. Call (603) 624-4366 to schedule.
+                </div>
+              </div>
+            </div>
+
+            <div class="info-box tip">
+              <div class="info-box-title">Important Notes</div>
+              <ul class="compact-list">
+                <li>The Vet Center is often more accessible than the VA Medical Center. Walk-in, no VA enrollment needed, evening hours available. Great for combat veterans reluctant to engage with the VA system.</li>
+                <li>Veterans Crisis Line (988 press 1) is available to ALL veterans, service members, and their families &mdash; regardless of VA enrollment or discharge status.</li>
+                <li>Many NH state benefits are available to veterans independently of federal VA benefits. The NH State Veterans Council can help identify all applicable benefits.</li>
+              </ul>
+            </div>
+
+            <a href="resources.html" class="cross-link">See full Veterans Services directory &rarr;</a>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- CLINICAL DOCUMENTATION -->
+      <!-- ============================================================ -->
+      <section class="guide-category" id="cat-clinical">
+        <div class="category-header">
+          <div class="category-badge" style="background:var(--success)">&#9998;</div>
+          <div>
+            <h2>Clinical Documentation</h2>
+            <div class="category-desc">ANSA, CANS, ISP, session notes, and clinical processes</div>
+          </div>
+        </div>
+
+        <!-- Guide 16: ANSA -->
+        <div class="guide-card" id="guide-ansa" data-keywords="ansa assessment adult needs strengths rating 0 1 2 3 domain scoring treatment planning functional">
+          <div class="guide-card-header" onclick="toggleGuide(this)">
+            <h3><span class="guide-number" style="background:var(--success)">17</span> How to Complete an ANSA Assessment</h3>
+            <span class="guide-arrow">&#9660;</span>
+          </div>
+          <div class="guide-card-body">
+            <p>The Adult Needs and Strengths Assessment (ANSA) is the standardized assessment tool used in the NH community mental health system. It drives treatment planning and helps determine level of care. Here is a practical guide to completing it well.</p>
+
+            <h4 class="guide-subsection">Purpose and Timing</h4>
+            <ul class="compact-list">
+              <li>Completed at intake, at every treatment plan review (typically every 6 months), and at discharge</li>
+              <li>Measures the client's needs and strengths across multiple domains</li>
+              <li>Scores directly inform treatment planning and level-of-care decisions</li>
+              <li>Used statewide to track outcomes and inform system planning</li>
+            </ul>
+
+            <h4 class="guide-subsection">The Rating Scale (0-3)</h4>
+            <table class="decision-table">
+              <thead>
+                <tr><th>Rating</th><th>For NEEDS Items</th><th>For STRENGTHS Items</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>0</strong></td><td>No evidence of need. No action needed.</td><td>Well-developed strength. Can be used in treatment planning.</td></tr>
+                <tr><td><strong>1</strong></td><td>History or mild need. Monitor/watchful waiting. Preventive action may be appropriate.</td><td>Useful strength but needs development. Include in treatment plan to build.</td></tr>
+                <tr><td><strong>2</strong></td><td>Moderate need. Action required. Should be addressed in the treatment plan.</td><td>Identified but not useful yet. Strength-building efforts needed.</td></tr>
+                <tr><td><strong>3</strong></td><td>Severe/acute need. Immediate or intensive action required. Crisis-level.</td><td>No strength identified. Strength-building is a priority.</td></tr>
+              </tbody>
+            </table>
+
+            <div class="info-box warning">
+              <div class="info-box-title">Critical Distinction</div>
+              For NEEDS: higher = worse (more need). For STRENGTHS: higher = worse (less strength). This is counter-intuitive and a common error. A "3" on a needs item means CRISIS-LEVEL need. A "3" on a strengths item means NO strength in that area.
+            </div>
+
+            <h4 class="guide-subsection">Domain-by-Domain Tips</h4>
+            <div class="guide-steps">
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Life Domain Functioning.</strong> Rate housing, daily living, employment/education, social functioning, legal involvement, and medical/physical health. Be specific: "client is couch-surfing and has no lease" = housing need of 2 or 3, not 1.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Behavioral/Emotional Needs.</strong> Rate psychiatric symptoms, substance use, trauma, impulse control, anger management, etc. Use the rating period (typically last 30 days). Don't rate a historical issue as current unless it's still active.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Risk Behaviors.</strong> Rate suicidality, self-harm, danger to others, legal involvement. Be honest &mdash; underrating risk items to avoid triggering additional requirements is dangerous and clinically irresponsible.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Strengths.</strong> Don't skip strengths. Rate family support, social connectedness, resilience, spiritual/cultural, vocational, educational, and other strengths. Strengths are critical for treatment planning. A client with strong family support (0) has a different treatment path than one with no supports (3).
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Use all available information.</strong> Don't rate based only on the clinical interview. Use collateral sources, records, and observations. Talk to the treatment team. A client may deny substance use to you but have a positive drug screen in their medical record.
+                </div>
+              </div>
+            </div>
+
+            <h4 class="guide-subsection">Common Scoring Errors</h4>
+            <ul class="compact-list">
+              <li><strong>Central tendency bias:</strong> Rating everything as 1 or 2 to avoid extremes. Use the full scale.</li>
+              <li><strong>Confusing history with current:</strong> Rate the current period, not lifetime. A past hospitalization doesn't mean current SI is a 3.</li>
+              <li><strong>Underrating risk items:</strong> This is the most dangerous error. Rate honestly.</li>
+              <li><strong>Ignoring strengths:</strong> Strengths are not optional. A strength profile of all 3s is a red flag for reviewers.</li>
+              <li><strong>Not updating:</strong> The ANSA should change over time. If every review looks identical, you're not tracking progress.</li>
+            </ul>
+
+            <div class="info-box success">
+              <div class="info-box-title">Using ANSA Results for Treatment Planning</div>
+              Items rated 2 or 3 should be addressed in the treatment plan. Items rated 0 or 1 on strengths should be leveraged as resources. The ANSA is a direct bridge to the ISP (Individual Service Plan). Map each 2/3 need to a treatment goal, and each 0/1 strength to a resource.
+            </div>
+
+            <a href="tools.html" class="cross-link">See Clinical Tools for worksheets &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Guide 17: CANS -->
+        <div class="guide-card" id="guide-cans" data-keywords="cans child adolescent needs strengths assessment youth children school caregiver pediatric developmental">
+          <div class="guide-card-header" onclick="toggleGuide(this)">
+            <h3><span class="guide-number" style="background:var(--success)">18</span> How to Complete a CANS Assessment</h3>
+            <span class="guide-arrow">&#9660;</span>
+          </div>
+          <div class="guide-card-body">
+            <p>The Child and Adolescent Needs and Strengths (CANS) is the companion to the ANSA, used for children and adolescents in the NH community mental health system. The same 0-3 rating system applies, but there are important age-specific considerations.</p>
+
+            <h4 class="guide-subsection">Same Rating System, Different Context</h4>
+            <p>The 0-3 scale works the same as the ANSA (see guide above). For NEEDS: 0 = no need, 3 = severe/crisis. For STRENGTHS: 0 = well-developed, 3 = none identified.</p>
+
+            <h4 class="guide-subsection">Age-Specific Considerations</h4>
+            <div class="guide-steps">
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Young children (0-5):</strong> Focus on developmental milestones, attachment, caregiver capacity, and early childhood trauma. Behavioral concerns at this age often reflect the caregiving environment more than the child's internal state. Rate developmental domains carefully &mdash; use developmental screening tools (ASQ, MCHAT) to inform ratings.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>School-age children (6-12):</strong> School functioning is a critical domain. Obtain information from teachers and school staff. Rate behavioral issues in context &mdash; a child acting out at school may be responding to instability at home. Include peer relationships, academic performance, and special education status.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Adolescents (13-17):</strong> Increased emphasis on risk behaviors (substance use, sexual behavior, legal involvement, self-harm). Adolescents may minimize or deny issues. Use collateral sources. Rate developmental tasks: identity, independence, peer relationships. Consider transition planning for youth approaching 18.
+                </div>
+              </div>
+            </div>
+
+            <h4 class="guide-subsection">Caregiver Involvement</h4>
+            <ul class="compact-list">
+              <li>The CANS includes a Caregiver domain. Rate caregiver strengths and needs separately.</li>
+              <li>A child's functioning cannot be understood apart from the caregiving environment.</li>
+              <li>Caregiver needs (substance use, mental health, DV, financial stress) directly impact the child's treatment plan.</li>
+              <li>Involving caregivers in the assessment process (when safe and appropriate) improves accuracy and buy-in.</li>
+            </ul>
+
+            <h4 class="guide-subsection">School Coordination</h4>
+            <ul class="compact-list">
+              <li>With a signed release, obtain information from school counselors, teachers, and special education staff.</li>
+              <li>The CANS school domain should reflect actual school performance and behavior, not just the parent's or child's report.</li>
+              <li>For children with IEPs, coordinate CANS findings with IEP goals when possible.</li>
+              <li>If a child needs school-based MH services, GNMHC has embedded school-based clinicians in some Nashua schools. Call (603) 889-6147 to inquire.</li>
+            </ul>
+
+            <div class="info-box tip">
+              <div class="info-box-title">Transition Planning for Youth Approaching 18</div>
+              Start transition planning well before the 18th birthday. Key issues: will the youth qualify for adult MH services (GNMHC adult system)? SSI application if applicable (can apply at age 18 based on their own income, not parent's). Health insurance transition (can stay on parent's plan to 26 if applicable, or Medicaid). Housing if leaving the family home. Education and employment planning.
+            </div>
+          </div>
+        </div>
+
+        <!-- Guide 18: ISP -->
+        <div class="guide-card" id="guide-isp" data-keywords="isp individual service plan treatment plan goals objectives smart person centered planning interventions review">
+          <div class="guide-card-header" onclick="toggleGuide(this)">
+            <h3><span class="guide-number" style="background:var(--success)">19</span> How to Write an Individual Service Plan (ISP)</h3>
+            <span class="guide-arrow">&#9660;</span>
+          </div>
+          <div class="guide-card-body">
+            <p>The Individual Service Plan (ISP) is the central document that guides treatment. In NH's CMHC system, the ISP must be person-centered, based on the ANSA/CANS assessment, and reviewed at least every six months. Here is how to write one that is both clinically useful and compliant.</p>
+
+            <h4 class="guide-subsection">Person-Centered Planning Principles</h4>
+            <ul class="compact-list">
+              <li>The client is the primary author of their plan. Their goals, in their words.</li>
+              <li>Ask: "What do you want your life to look like?" not "What do you think you need to work on?"</li>
+              <li>The plan addresses what matters TO the client, not just what matters ABOUT the client.</li>
+              <li>Include the client's strengths, preferences, and cultural considerations.</li>
+              <li>The client signs the plan, indicating they participated in its development and agree with its contents.</li>
+            </ul>
+
+            <h4 class="guide-subsection">Step-by-Step: Building the ISP</h4>
+            <div class="guide-steps">
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Start with the ANSA/CANS results.</strong> Every item rated 2 or 3 on needs should potentially be addressed in the plan. Prioritize with the client &mdash; you don't have to address everything at once. Items rated 0 or 1 on strengths should be leveraged as resources in the plan.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Write SMART goals.</strong> Each goal should be:<br>
+                  <strong>S</strong>pecific &mdash; clearly defined<br>
+                  <strong>M</strong>easurable &mdash; you can tell when it's achieved<br>
+                  <strong>A</strong>chievable &mdash; realistic given the client's situation<br>
+                  <strong>R</strong>elevant &mdash; meaningful to the client<br>
+                  <strong>T</strong>ime-bound &mdash; has a target date<br><br>
+                  <strong>Bad example:</strong> "Client will improve mental health."<br>
+                  <strong>Good example:</strong> "Within 6 months, Chris will report a reduction in panic attacks from 4x/week to 1x/week or less, as evidenced by self-report and clinician observation."
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Link needs to goals to interventions.</strong> Each goal should have: (1) the identified need from the ANSA/CANS, (2) the client's goal in their own words, (3) specific measurable objectives, and (4) the interventions that will be used to achieve it (therapy modality, case management activities, medication, referrals, etc.).
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Select appropriate interventions.</strong> Be specific: not just "therapy" but "weekly individual CBT focused on cognitive restructuring of anxious thoughts." Include who will provide the intervention, frequency, and modality. If referring to outside services, name them. If the client needs a resource (housing application, SNAP, legal aid), include it as a case management intervention.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Set review timelines.</strong> NH requires ISP review at least every 6 months. Set the review date. At review: update the ANSA/CANS, assess progress on each goal, modify goals as needed, discharge goals that are met, add new goals as appropriate.
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <strong>Get client signature and provide a copy.</strong> The client must sign the plan indicating participation and agreement. Provide a copy to the client. If the client declines to sign, document why and continue working together on revisions.
+                </div>
+              </div>
+            </div>
+
+            <div class="info-box tip">
+              <div class="info-box-title">NH-Specific Requirements</div>
+              <ul class="compact-list">
+                <li>CMHCs have specific ISP templates and requirements. Use the one your agency provides.</li>
+                <li>The ISP must include: identified needs (from ANSA/CANS), client strengths, goals, objectives, interventions, responsible providers, frequency of services, and review date.</li>
+                <li>For clients receiving CSP or ACT services, the ISP is typically more detailed and includes rehabilitation goals.</li>
+                <li>If the client has co-occurring MH/SUD, the ISP should address both in an integrated fashion, not in separate plans.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Guide 19: Session Documentation -->
+        <div class="guide-card" id="guide-documentation" data-keywords="documentation session notes soap progress note mse mental status exam clinical note intervention risk assessment">
+          <div class="guide-card-header" onclick="toggleGuide(this)">
+            <h3><span class="guide-number" style="background:var(--success)">20</span> How to Document Clinical Sessions</h3>
+            <span class="guide-arrow">&#9660;</span>
+          </div>
+          <div class="guide-card-body">
+            <p>Good clinical documentation protects the client, protects you, supports treatment, and meets regulatory requirements. Here is a practical guide to writing notes that are both clinically useful and defensible.</p>
+
+            <h4 class="guide-subsection">SOAP Format</h4>
+            <table class="decision-table">
+              <thead>
+                <tr><th>Section</th><th>What to Include</th><th>Examples</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>S (Subjective)</strong></td>
+                  <td>Client's self-report. What they tell you in their own words. Their perception of symptoms, mood, events, progress.</td>
+                  <td>"Client reported feeling 'much less anxious this week' and stated she practiced deep breathing daily. Denied SI/HI."</td>
+                </tr>
+                <tr>
+                  <td><strong>O (Objective)</strong></td>
+                  <td>Your clinical observations. Mental Status Exam (MSE) findings. Behavioral observations. Test results. Collateral information.</td>
+                  <td>"Client was alert, oriented x4, with euthymic affect and normal speech. Appeared well-groomed. Made appropriate eye contact. No psychomotor agitation noted."</td>
+                </tr>
+                <tr>
+                  <td><strong>A (Assessment)</strong></td>
+                  <td>Your clinical formulation. Current diagnostic impressions. Progress toward treatment goals. Risk assessment. New developments.</td>
+                  <td>"Client demonstrates improvement in managing anxiety (Goal 1). Panic attacks reduced from 4x/week to 2x/week since implementing CBT breathing techniques. Low risk at this time."</td>
+                </tr>
+                <tr>
+                  <td><strong>P (Plan)</strong></td>
+                  <td>Next steps. Continued interventions. Referrals. Homework/between-session tasks. Next appointment. Any changes to treatment plan.</td>
+                  <td>"Continue weekly CBT. Introduce cognitive restructuring next session. Client will practice thought records daily. Next appointment: 7/1/26. Referral to psychiatry for medication evaluation initiated."</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h4 class="guide-subsection">Mental Status Exam (MSE) Documentation</h4>
+            <ul class="compact-list">
+              <li><strong>Appearance:</strong> grooming, hygiene, dress, age appearance, notable features</li>
+              <li><strong>Behavior:</strong> psychomotor activity, eye contact, cooperation, agitation, restlessness</li>
+              <li><strong>Speech:</strong> rate, volume, tone, spontaneity, coherence</li>
+              <li><strong>Mood:</strong> client's stated mood (subjective, use their words in quotes)</li>
+              <li><strong>Affect:</strong> observed emotional expression (flat, blunted, constricted, full, labile). Congruence with mood.</li>
+              <li><strong>Thought process:</strong> logical, linear, tangential, circumstantial, loosened, flight of ideas</li>
+              <li><strong>Thought content:</strong> SI/HI (always document), delusions, obsessions, phobias, paranoia</li>
+              <li><strong>Perception:</strong> hallucinations (auditory, visual), illusions</li>
+              <li><strong>Cognition:</strong> orientation (person, place, time, situation), attention, memory, concentration</li>
+              <li><strong>Insight:</strong> awareness of illness and need for treatment</li>
+              <li><strong>Judgment:</strong> ability to make appropriate decisions</li>
+            </ul>
+
+            <h4 class="guide-subsection">What to Include and What NOT to Include</h4>
+            <div class="info-box success">
+              <div class="info-box-title">DO Include</div>
+              <ul class="compact-list">
+                <li>Specific interventions used (name the technique: "cognitive restructuring," "motivational interviewing," "skills coaching")</li>
+                <li>Client's response to interventions</li>
+                <li>Progress toward ISP goals (reference the specific goal)</li>
+                <li>Risk assessment at every session (even if brief: "Denied SI/HI. Low risk at this time.")</li>
+                <li>Any changes to medication, referrals made, or coordination of care</li>
+                <li>Client's own words (in quotes) when clinically significant</li>
+                <li>Any safety concerns or plans</li>
+              </ul>
+            </div>
+
+            <div class="info-box warning">
+              <div class="info-box-title">Do NOT Include</div>
+              <ul class="compact-list">
+                <li>Your personal opinions or judgments about the client's character</li>
+                <li>Vague statements without clinical basis ("client seems manipulative")</li>
+                <li>Information about third parties not relevant to treatment</li>
+                <li>Detailed content of therapy that could harm the client if the record is subpoenaed (process notes can be kept separately)</li>
+                <li>Countertransference reactions (process these in supervision, not in the chart)</li>
+                <li>Speculative diagnoses without clinical evidence</li>
+              </ul>
+            </div>
+
+            <h4 class="guide-subsection">Risk Documentation</h4>
+            <p>Document risk assessment at every clinical contact, even if brief. At minimum:</p>
+            <ul class="compact-list">
+              <li>Suicidal ideation: present or denied. If present: passive vs. active, plan, intent, means, timeline.</li>
+              <li>Homicidal ideation: present or denied. If present: target, plan, intent, means.</li>
+              <li>Self-harm: recent or denied.</li>
+              <li>Risk level: low, moderate, or high &mdash; with rationale.</li>
+              <li>Protective factors: reasons for living, social support, engagement in treatment.</li>
+              <li>Action taken: safety plan reviewed, crisis numbers provided, hospitalization considered, etc.</li>
+            </ul>
+
+            <div class="info-box tip">
+              <div class="info-box-title">Golden Rule of Documentation</div>
+              Write every note as if it will be read by: (1) a new clinician taking over the case tomorrow, (2) a judge in a malpractice case, (3) the client themselves (they have a right to their records). If the note makes sense to all three audiences, it's good documentation.
+            </div>
+
+            <a href="tools.html" class="cross-link">See Clinical Tools for documentation templates &rarr;</a>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+  </div><!-- /guide-layout -->
+
+</div><!-- /page-container -->
+
+<footer class="site-footer">
+  <p>Greater Nashua Community Mental Health Resources &copy; 2026. For informational purposes only.</p>
+  <p>Contact information and services may change. Always verify by contacting organizations directly.</p>
+  <p style="margin-top:8px"><a href="#" id="adminGate" style="color:var(--text-muted);font-size:11px" aria-label="Version 2.0 - Admin access">v2.0</a></p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== GUIDE TOGGLE =====
+function toggleGuide(header) {
+  const card = header.closest('.guide-card');
+  card.classList.toggle('open');
+  // Update sidebar active state
+  const id = card.id;
+  document.querySelectorAll('#sidebarNav a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + id && card.classList.contains('open'));
+  });
+}
+
+// ===== SIDEBAR CLICK =====
+document.querySelectorAll('#sidebarNav a').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const targetId = this.getAttribute('href').substring(1);
+    const card = document.getElementById(targetId);
+    if (card) {
+      // Open the card if not already open
+      if (!card.classList.contains('open')) {
+        card.classList.add('open');
+      }
+      // Scroll to it
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Update sidebar active
+      document.querySelectorAll('#sidebarNav a').forEach(a => a.classList.remove('active'));
+      this.classList.add('active');
+    }
+  });
+});
+
+// ===== MOBILE JUMP =====
+function jumpToSection(id) {
+  if (!id) return;
+  const section = document.getElementById(id);
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+// ===== SEARCH / FILTER =====
+function filterGuides() {
+  const query = document.getElementById('guideSearch').value.trim().toLowerCase();
+  if (!query) {
+    // Show all
+    document.querySelectorAll('.guide-card').forEach(card => {
+      card.style.display = '';
+      card.classList.remove('open');
+    });
+    document.querySelectorAll('.guide-category').forEach(cat => cat.style.display = '');
+    clearHighlights();
+    return;
+  }
+
+  let anyVisible = false;
+  document.querySelectorAll('.guide-card').forEach(card => {
+    const keywords = (card.getAttribute('data-keywords') || '').toLowerCase();
+    const title = card.querySelector('h3').textContent.toLowerCase();
+    const body = card.querySelector('.guide-card-body').textContent.toLowerCase();
+    const match = keywords.includes(query) || title.includes(query) || body.includes(query);
+    card.style.display = match ? '' : 'none';
+    if (match) {
+      card.classList.add('open');
+      anyVisible = true;
+    } else {
+      card.classList.remove('open');
+    }
+  });
+
+  // Hide empty categories
+  document.querySelectorAll('.guide-category').forEach(cat => {
+    const visibleCards = cat.querySelectorAll('.guide-card[style=""], .guide-card:not([style])');
+    let hasVisible = false;
+    visibleCards.forEach(c => { if (c.style.display !== 'none') hasVisible = true; });
+    // Recount properly
+    const allCards = cat.querySelectorAll('.guide-card');
+    let catHasVisible = false;
+    allCards.forEach(c => { if (c.style.display !== 'none') catHasVisible = true; });
+    cat.style.display = catHasVisible ? '' : 'none';
+  });
+
+  // Show toast if no results
+  if (!anyVisible) {
+    showToast('No guides match "' + query + '". Try different keywords.');
+  }
+}
+
+function clearHighlights() {
+  document.querySelectorAll('.search-match').forEach(el => {
+    el.outerHTML = el.textContent;
+  });
+}
+
+// Search on Enter
+document.getElementById('guideSearch').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') filterGuides();
+});
+
+// Clear search when input is emptied
+document.getElementById('guideSearch').addEventListener('input', function() {
+  if (this.value === '') filterGuides();
+});
+
+// ===== EXPAND ALL / COLLAPSE ALL with keyboard shortcuts =====
+document.addEventListener('keydown', function(e) {
+  // Ctrl+Shift+E = expand all
+  if (e.ctrlKey && e.shiftKey && e.key === 'E') {
+    e.preventDefault();
+    document.querySelectorAll('.guide-card').forEach(card => card.classList.add('open'));
+  }
+  // Ctrl+Shift+C = collapse all
+  if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+    e.preventDefault();
+    document.querySelectorAll('.guide-card').forEach(card => card.classList.remove('open'));
+  }
+});
+
+// ===== TOAST =====
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+// ===== ADMIN GATE =====
+let adminClicks = 0;
+let adminTimer = null;
+document.getElementById('adminGate').addEventListener('click', function(e) {
+  e.preventDefault();
+  adminClicks++;
+  clearTimeout(adminTimer);
+  if (adminClicks >= 5) {
+    adminClicks = 0;
+    window.location.href = 'admin.html';
+  }
+  adminTimer = setTimeout(() => { adminClicks = 0; }, 2000);
+});
+
+// ===== SCROLL SPY for sidebar =====
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      const link = document.querySelector('#sidebarNav a[href="#' + id + '"]');
+      if (link && entry.target.classList.contains('open')) {
+        document.querySelectorAll('#sidebarNav a').forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
+      }
+    }
+  });
+}, {
+  rootMargin: '-80px 0px -70% 0px',
+  threshold: 0
+});
+
+document.querySelectorAll('.guide-card').forEach(card => {
+  observer.observe(card);
+});
+
+function toggleTheme() {
+  var html = document.documentElement;
+  var btn = document.querySelector('.theme-toggle');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.removeAttribute('data-theme');
+    btn.textContent = '☽'; // moon
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    btn.textContent = '☀'; // sun
+  }
+}
+// Respect system preference
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.documentElement.setAttribute('data-theme', 'dark');
+  var btn = document.querySelector('.theme-toggle');
+  if (btn) btn.textContent = '☀';
+}
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(function(){});
+}
+</script>
+
+</body>
+</html>

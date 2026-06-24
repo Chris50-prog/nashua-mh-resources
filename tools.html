@@ -1,0 +1,2229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clinical Tools | Greater Nashua Community Mental Health Resources</title>
+<meta name="description" content="Interactive clinical worksheets for CBT, DBT, TF-CBT, MI, and SFBT therapy modalities.">
+<meta property="og:title" content="Clinical Tools | Greater Nashua Community Mental Health Resources">
+<meta property="og:description" content="Interactive clinical worksheets for CBT, DBT, TF-CBT, MI, and SFBT therapy modalities.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* ===== TOOLS PAGE ADDITIONS ===== */
+.tools-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .tools-layout { grid-template-columns: 1fr; }
+  .tools-sidebar { position: static !important; }
+}
+.tools-sidebar {
+  position: sticky;
+  top: calc(var(--header-height) + 24px);
+}
+.sidebar-nav {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.sidebar-nav a {
+  display: block;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  transition: all 0.15s;
+}
+.sidebar-nav a:last-child { border-bottom: none; }
+.sidebar-nav a:hover { background: var(--surface-alt); color: var(--text); }
+.sidebar-nav a.active { background: var(--accent-light); color: var(--accent); font-weight: 600; }
+
+.modality-section {
+  margin-bottom: 48px;
+  scroll-margin-top: calc(var(--header-height) + 24px);
+}
+.modality-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--border);
+}
+.modality-badge {
+  width: 48px; height: 48px; border-radius: var(--radius);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 800; flex-shrink: 0; color: white;
+}
+.modality-header h2 { font-size: 22px; font-weight: 700; letter-spacing: -0.3px; }
+.modality-header .modality-desc { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+
+/* Worksheet extras */
+.ws-row { display: flex; gap: 12px; }
+.ws-row > .ws-field { flex: 1; }
+.ws-actions {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-top: 16px; padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.ws-table {
+  width: 100%; border-collapse: collapse; font-size: 13px;
+  margin-bottom: 12px;
+}
+.ws-table th {
+  text-align: left; padding: 8px 10px;
+  background: var(--surface-alt); font-weight: 600; font-size: 12px;
+  border-bottom: 2px solid var(--border);
+}
+.ws-table td {
+  padding: 8px 10px; border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.ws-table input, .ws-table textarea, .ws-table select {
+  width: 100%; padding: 6px 8px;
+  border: 1px solid var(--border); border-radius: 4px;
+  font-size: 13px; font-family: inherit;
+  outline: none; resize: vertical;
+}
+.ws-table input:focus, .ws-table textarea:focus, .ws-table select:focus {
+  border-color: var(--accent);
+}
+.ws-table textarea { min-height: 50px; }
+
+/* Range slider */
+.range-row { display: flex; align-items: center; gap: 8px; }
+.range-row input[type="range"] { flex: 1; accent-color: var(--accent); }
+.range-val {
+  min-width: 36px; text-align: center; font-weight: 700;
+  font-size: 14px; color: var(--accent);
+}
+
+/* Distortion card */
+.distortion-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 12px; }
+.distortion-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px; font-size: 13px;
+}
+.distortion-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; color: var(--text); }
+.distortion-card .def { color: var(--text-secondary); margin-bottom: 6px; }
+.distortion-card .ex { color: var(--text-muted); font-style: italic; margin-bottom: 6px; }
+.distortion-card .challenge { color: var(--accent); font-weight: 500; }
+
+/* Activity grid */
+.activity-grid {
+  display: grid;
+  grid-template-columns: 90px repeat(7, 1fr);
+  gap: 2px; font-size: 12px;
+}
+.activity-grid .ag-header {
+  padding: 6px 4px; font-weight: 600; text-align: center;
+  background: var(--surface-alt); border-radius: 4px;
+}
+.activity-grid .ag-time {
+  padding: 6px 4px; font-weight: 500; text-align: right;
+  background: var(--surface-alt); border-radius: 4px;
+  display: flex; align-items: center; justify-content: flex-end;
+}
+.activity-grid .ag-cell {
+  padding: 2px;
+}
+.activity-grid .ag-cell input {
+  width: 100%; padding: 4px; border: 1px solid var(--border);
+  border-radius: 3px; font-size: 11px; font-family: inherit; outline: none;
+}
+.activity-grid .ag-cell input:focus { border-color: var(--accent); }
+
+/* PRACTICE cards */
+.practice-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px; margin-bottom: 12px;
+}
+.practice-card h4 {
+  font-size: 15px; font-weight: 700; margin-bottom: 2px;
+}
+.practice-card .practice-letter {
+  display: inline-block; width: 28px; height: 28px;
+  background: var(--teal); color: white; border-radius: 50%;
+  text-align: center; line-height: 28px; font-weight: 700;
+  font-size: 14px; margin-right: 6px; vertical-align: middle;
+}
+.practice-card .practice-desc { font-size: 13px; color: var(--text-secondary); margin: 8px 0; line-height: 1.6; }
+.practice-card .practice-techniques { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+.practice-card .practice-prompts { font-size: 13px; color: var(--text-muted); font-style: italic; }
+
+/* Skill card */
+.skill-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px; margin-bottom: 10px;
+}
+.skill-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+.skill-acronym {
+  font-weight: 700; color: var(--accent); letter-spacing: 1px;
+  font-size: 15px; margin-bottom: 6px;
+}
+.skill-letter { color: var(--accent); font-weight: 700; }
+
+/* Safety plan steps */
+.safety-step {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px; margin-bottom: 10px;
+}
+.safety-step-num {
+  display: inline-flex; width: 28px; height: 28px;
+  background: var(--danger); color: white; border-radius: 50%;
+  align-items: center; justify-content: center;
+  font-weight: 700; font-size: 13px; margin-right: 8px;
+  vertical-align: middle;
+}
+.safety-step h4 { display: inline; font-size: 15px; font-weight: 600; vertical-align: middle; }
+
+/* Readiness ruler */
+.ruler-container { display: flex; align-items: stretch; gap: 0; margin: 16px 0; }
+.ruler-num {
+  flex: 1; text-align: center; padding: 10px 2px;
+  border: 1px solid var(--border); font-size: 15px; font-weight: 600;
+  cursor: pointer; transition: all 0.15s;
+  background: var(--surface); color: var(--text-secondary);
+}
+.ruler-num:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+.ruler-num:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
+.ruler-num:hover { background: var(--accent-light); color: var(--accent); }
+.ruler-num.selected { background: var(--accent); color: white; border-color: var(--accent); }
+.ruler-labels { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+/* Decisional balance 2x2 */
+.db-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; border: 1px solid var(--border);
+  border-radius: var(--radius-lg); overflow: hidden;
+}
+.db-cell {
+  padding: 16px; min-height: 120px;
+}
+.db-cell:nth-child(1) { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.db-cell:nth-child(2) { border-bottom: 1px solid var(--border); }
+.db-cell:nth-child(3) { border-right: 1px solid var(--border); }
+.db-cell h4 { font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+.db-cell textarea {
+  width: 100%; min-height: 80px; padding: 8px;
+  border: 1px solid var(--border); border-radius: 4px;
+  font-size: 13px; font-family: inherit; resize: vertical; outline: none;
+}
+.db-cell textarea:focus { border-color: var(--accent); }
+
+/* Voice button */
+.voice-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 50%;
+  border: 1px solid var(--border); background: var(--surface);
+  color: var(--text-muted); cursor: pointer; font-size: 14px;
+  transition: all 0.15s; flex-shrink: 0;
+  vertical-align: middle; margin-left: 4px;
+}
+.voice-btn:hover { border-color: var(--accent); color: var(--accent); }
+.voice-btn.recording { background: var(--danger); color: white; border-color: var(--danger); animation: pulse-voice 1.2s infinite; }
+@keyframes pulse-voice { 0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.3); } 50% { box-shadow: 0 0 0 6px rgba(220,38,38,0); } }
+
+/* Role play */
+.roleplay-box {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px; margin-bottom: 10px; font-size: 13px;
+}
+.roleplay-box .rp-label { font-weight: 600; color: var(--accent); margin-bottom: 4px; }
+
+/* Print */
+@media print {
+  .tools-sidebar, .ws-actions, .voice-btn, .category-nav, .toast { display: none; }
+  .tools-layout { grid-template-columns: 1fr; }
+  .modality-section { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="site-logo" id="siteLogo">
+      <div class="logo-icon">NH</div>
+      <span>Greater Nashua MH Resources</span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="resources.html" class="nav-link">Resources</a>
+      <a href="tools.html" class="nav-link active">Clinical Tools</a>
+      <a href="guide.html" class="nav-link">How-To Guides</a>
+      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">&#9789;</button>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>Clinical Tools &amp; Worksheets</h1>
+    <p>Interactive exercises, worksheets, and reference materials organized by therapeutic modality. Fill in, copy, print, or use during sessions.</p>
+  </div>
+</section>
+
+<div class="page-container" id="main-content">
+
+  <!-- Crisis Banner -->
+  <div class="crisis-banner">
+    <div class="crisis-banner-icon">!</div>
+    <div class="crisis-banner-content">
+      <div class="crisis-banner-title">Crisis? Get Help Now</div>
+      <div class="crisis-banner-numbers">
+        <strong>988</strong> Suicide &amp; Crisis Lifeline &nbsp;|&nbsp;
+        <strong>1-833-710-6477</strong> NH Rapid Response &nbsp;|&nbsp;
+        <strong>(603) 889-6147</strong> GNMHC Crisis &nbsp;|&nbsp;
+        <strong>Text HOME to 741741</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modality Quick Nav (mobile top) -->
+  <div class="category-nav" id="modalityNav">
+    <a href="#cbt" class="category-btn active">CBT</a>
+    <a href="#tfcbt" class="category-btn">TF-CBT</a>
+    <a href="#dbt" class="category-btn">DBT</a>
+    <a href="#mi" class="category-btn">Motivational Interviewing</a>
+    <a href="#sfbt" class="category-btn">SFBT</a>
+    <a href="#crisis-tools" class="category-btn">Crisis Intervention</a>
+  </div>
+
+  <div class="tools-layout">
+
+    <!-- Sidebar -->
+    <aside class="tools-sidebar">
+      <nav class="sidebar-nav" id="sidebarNav">
+        <a href="#cbt" class="active">Cognitive Behavioral Therapy</a>
+        <a href="#tfcbt">Trauma-Focused CBT</a>
+        <a href="#dbt">Dialectical Behavior Therapy</a>
+        <a href="#mi">Motivational Interviewing</a>
+        <a href="#sfbt">Solution-Focused Brief</a>
+        <a href="#crisis-tools">Crisis Intervention</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main>
+
+<!-- ================================================================
+     1. CBT
+     ================================================================ -->
+<section class="modality-section" id="cbt">
+  <div class="modality-header">
+    <div class="modality-badge" style="background:var(--accent)">CBT</div>
+    <div>
+      <h2>Cognitive Behavioral Therapy</h2>
+      <div class="modality-desc">Thought records, cognitive distortions, behavioral activation, and Socratic questioning</div>
+    </div>
+  </div>
+
+  <!-- 1a. Thought Record -->
+  <div class="worksheet" id="thought-record">
+    <h3>Thought Record Worksheet</h3>
+    <div class="ws-subtitle">Use this form to identify and challenge automatic thoughts. Complete each column working left to right.</div>
+
+    <div id="thoughtRecordRows">
+      <table class="ws-table" id="thoughtRecordTable">
+        <thead>
+          <tr>
+            <th style="width:14%">Situation</th>
+            <th style="width:14%">Automatic Thought</th>
+            <th style="width:12%">Emotion (0-100)</th>
+            <th style="width:15%">Evidence For</th>
+            <th style="width:15%">Evidence Against</th>
+            <th style="width:16%">Alternative Thought</th>
+            <th style="width:14%">New Emotion (0-100)</th>
+          </tr>
+        </thead>
+        <tbody id="trBody">
+          <tr>
+            <td><textarea placeholder="What happened? Where? When? Who?"></textarea></td>
+            <td><textarea placeholder="What went through your mind?"></textarea></td>
+            <td>
+              <input type="text" placeholder="e.g., Anxious 75">
+            </td>
+            <td><textarea placeholder="What supports this thought?"></textarea></td>
+            <td><textarea placeholder="What contradicts it?"></textarea></td>
+            <td><textarea placeholder="A more balanced thought..."></textarea></td>
+            <td>
+              <input type="text" placeholder="e.g., Anxious 40">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ws-actions">
+      <button class="btn btn-sm" onclick="addThoughtRecordRow()">+ Add Row</button>
+      <button class="btn btn-sm btn-primary" onclick="copyWorksheet('thought-record', formatThoughtRecord)">Copy as Text</button>
+      <button class="btn btn-sm" onclick="clearWorksheet('thoughtRecordTable')">Clear All</button>
+    </div>
+  </div>
+
+  <!-- 1b. Cognitive Distortions -->
+  <div class="worksheet" id="cog-distortions">
+    <h3>Cognitive Distortions Reference</h3>
+    <div class="ws-subtitle">15 common thinking errors. Use during session to help clients identify patterns. Click any card to expand the challenging question.</div>
+
+    <div class="distortion-grid">
+      <div class="distortion-card">
+        <h4>1. All-or-Nothing Thinking</h4>
+        <div class="def">Seeing things in black-and-white categories. If performance falls short of perfect, it's total failure.</div>
+        <div class="ex">"If I don't get an A, I'm a complete failure."</div>
+        <div class="challenge">Ask: "Is there a middle ground? Can something be partly successful?"</div>
+      </div>
+      <div class="distortion-card">
+        <h4>2. Overgeneralization</h4>
+        <div class="def">Seeing a single negative event as a never-ending pattern of defeat, using words like "always" or "never."</div>
+        <div class="ex">"I always mess up interviews. I'll never get a job."</div>
+        <div class="challenge">Ask: "Has there ever been a time this wasn't true? What are the exceptions?"</div>
+      </div>
+      <div class="distortion-card">
+        <h4>3. Mental Filter</h4>
+        <div class="def">Picking out a single negative detail and dwelling on it exclusively, filtering out all positive aspects.</div>
+        <div class="ex">"My supervisor mentioned one typo in my 20-page report. The whole thing was terrible."</div>
+        <div class="challenge">Ask: "What positives might you be filtering out? What would someone else notice?"</div>
+      </div>
+      <div class="distortion-card">
+        <h4>4. Disqualifying the Positive</h4>
+        <div class="def">Rejecting positive experiences by insisting they "don't count" for some reason.</div>
+        <div class="ex">"She only said something nice because she felt sorry for me."</div>
+        <div class="challenge">Ask: "What evidence is there that this positive feedback isn't genuine?"</div>
+      </div>
+      <div class="distortion-card">
+        <h4>5. Jumping to Conclusions</h4>
+        <div class="def">Making negative interpretations without evidence. Includes mind reading and fortune telling.</div>
+        <div class="ex">"He didn't text back. He must be angry at me."</div>
+        <div class="challenge">Ask: "What are other possible explanations? Do you have actual evidence?"</div>
+      </div>
+      <div class="distortion-card">
+        <h4>6. Magnification / Minimization</h4>
+        <div class="def">Exaggerating the importance of negatives or shrinking the importance of positives (the "binocular trick").</div>
+        <div class="ex">"Making one mistake at work is catastrophic" but "The raise I got is no big deal."</div>
+        <div class="challenge">Ask: "If a friend told you this, would you see it the same way?"</div>
+      </div>
+      <div class="distortion-card">
+        <h4>7. Emotional Reasoning</h4>
+        <div class="def">Assuming that negative feelings reflect the way things really are: "I feel it, therefore it must be true."</div>
+        <div class="ex">"I feel stupid, so I must actually be stupid."</div>
+        <div class="challenge">Ask: "Is there a difference between how you feel and what the facts show?"</div>
+      </div>
+      <div class="distortion-card">
+        <h4>8. Should Statements</h4>
+        <div class="def">Using "should," "must," or "ought to" in ways that create guilt when directed at self, anger at others.</div>
+        <div class="ex">"I should be able to handle this without help."</div>
+        <div class="challenge">Ask: "What would happen if you replaced 'should' with 'I would prefer'?"</div>
+      </div>
+      <div class="distortion-card">
+        <h4>9. Labeling</h4>
+        <div class="def">An extreme form of overgeneralization. Attaching a fixed label instead of describing the specific behavior.</div>
+        <div class="ex">"I'm a loser" instead of "I made a mistake on that task."</div>
+        <div class="challenge">Ask: "Is this label accurate all the time? What would a fairer description be?"</div>
+      </div>
+      <div class="distortion-card">
+        <h4>10. Personalization</h4>
+        <div class="def">Seeing yourself as the cause of some external negative event for which you were not primarily responsible.</div>
+        <div class="ex">"The team lost because I wasn't good enough."</div>
+        <div class="challenge">Ask: "What other factors contributed? Was this really all about you?"</div>
+      </div>
+      <div class="distortion-card">
+        <h4>11. Fortune Telling</h4>
+        <div class="def">Predicting that things will turn out badly and treating the prediction as established fact.</div>
+        <div class="ex">"I just know the presentation will go terribly."</div>
+        <div class="challenge">Ask: "How many times have your predictions actually come true?"</div>
+      </div>
+      <div class="distortion-card">
+        <h4>12. Mind Reading</h4>
+        <div class="def">Concluding that someone is reacting negatively to you without checking or asking.</div>
+        <div class="ex">"She thinks I'm incompetent. I can tell."</div>
+        <div class="challenge">Ask: "Have you checked this out directly? What else might explain their behavior?"</div>
+      </div>
+      <div class="distortion-card">
+        <h4>13. Catastrophizing</h4>
+        <div class="def">Expecting disaster. "What if" thinking that escalates to the worst possible outcome.</div>
+        <div class="ex">"What if I make a mistake and get fired and lose my house?"</div>
+        <div class="challenge">Ask: "What is the most likely outcome? How have you coped with similar situations before?"</div>
+      </div>
+      <div class="distortion-card">
+        <h4>14. Blame</h4>
+        <div class="def">Holding others entirely responsible for your pain, or the reverse: blaming yourself for others' problems.</div>
+        <div class="ex">"It's all her fault I feel this way" or "Everything is my fault."</div>
+        <div class="challenge">Ask: "How much of this is within your control? How much is within theirs?"</div>
+      </div>
+      <div class="distortion-card">
+        <h4>15. Always Being Right</h4>
+        <div class="def">Needing to prove that your opinions and actions are correct at the expense of others' feelings.</div>
+        <div class="ex">"I don't care if it hurts her. I was right and she needs to know it."</div>
+        <div class="challenge">Ask: "What matters more here: being right, or maintaining the relationship?"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1c. Behavioral Activation Planner -->
+  <div class="worksheet" id="ba-planner">
+    <h3>Behavioral Activation Planner</h3>
+    <div class="ws-subtitle">Schedule activities and rate your mood before and after (0 = worst, 10 = best). Plan both mastery and pleasure activities.</div>
+
+    <div style="overflow-x:auto">
+      <div class="activity-grid" id="baGrid">
+        <div class="ag-header"></div>
+        <div class="ag-header">Mon</div>
+        <div class="ag-header">Tue</div>
+        <div class="ag-header">Wed</div>
+        <div class="ag-header">Thu</div>
+        <div class="ag-header">Fri</div>
+        <div class="ag-header">Sat</div>
+        <div class="ag-header">Sun</div>
+      </div>
+    </div>
+
+    <div class="ws-actions">
+      <button class="btn btn-sm btn-primary" onclick="copyWorksheet('ba-planner', formatBAPlanner)">Copy as Text</button>
+      <button class="btn btn-sm" onclick="clearBAGrid()">Clear All</button>
+    </div>
+  </div>
+
+  <!-- 1d. Socratic Questioning Guide -->
+  <div class="worksheet" id="socratic-questions">
+    <h3>Socratic Questioning Guide</h3>
+    <div class="ws-subtitle">Use these questions during session to help clients examine and challenge their automatic thoughts.</div>
+
+    <div class="expandable open" onclick="toggleExpand(this)">
+      <div class="expandable-header">
+        <h3>Clarifying the Thought</h3>
+        <span class="expandable-arrow">&#9660;</span>
+      </div>
+      <div class="expandable-body">
+        <ul style="font-size:14px;line-height:2;padding-left:20px;color:var(--text-secondary)">
+          <li>"What exactly do you mean when you say ___?"</li>
+          <li>"Can you tell me more about that thought?"</li>
+          <li>"When you say ___, what picture comes to mind?"</li>
+          <li>"How strongly do you believe that right now, on a 0-100 scale?"</li>
+          <li>"Is this a thought, a feeling, or both?"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="expandable" onclick="toggleExpand(this)">
+      <div class="expandable-header">
+        <h3>Examining the Evidence</h3>
+        <span class="expandable-arrow">&#9660;</span>
+      </div>
+      <div class="expandable-body">
+        <ul style="font-size:14px;line-height:2;padding-left:20px;color:var(--text-secondary)">
+          <li>"What evidence supports this thought?"</li>
+          <li>"What evidence goes against it?"</li>
+          <li>"Are you basing this on facts or feelings?"</li>
+          <li>"Have you had experiences that show this thought is not always true?"</li>
+          <li>"If your best friend had this thought, what evidence would you point out to them?"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="expandable" onclick="toggleExpand(this)">
+      <div class="expandable-header">
+        <h3>Considering Alternatives</h3>
+        <span class="expandable-arrow">&#9660;</span>
+      </div>
+      <div class="expandable-body">
+        <ul style="font-size:14px;line-height:2;padding-left:20px;color:var(--text-secondary)">
+          <li>"Is there another way to look at this situation?"</li>
+          <li>"What would you tell a friend who had this thought?"</li>
+          <li>"What are all the possible explanations?"</li>
+          <li>"If you weren't feeling ___, how might you interpret this differently?"</li>
+          <li>"Are there any positives in this situation that you might be overlooking?"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="expandable" onclick="toggleExpand(this)">
+      <div class="expandable-header">
+        <h3>Examining the Impact</h3>
+        <span class="expandable-arrow">&#9660;</span>
+      </div>
+      <div class="expandable-body">
+        <ul style="font-size:14px;line-height:2;padding-left:20px;color:var(--text-secondary)">
+          <li>"What happens when you believe this thought?"</li>
+          <li>"How does this thought affect your behavior?"</li>
+          <li>"Does this thought help you or hold you back?"</li>
+          <li>"What would change if you didn't hold this belief?"</li>
+          <li>"What's the worst that could happen? How likely is that? Could you cope with it?"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="expandable" onclick="toggleExpand(this)">
+      <div class="expandable-header">
+        <h3>Testing the Thought</h3>
+        <span class="expandable-arrow">&#9660;</span>
+      </div>
+      <div class="expandable-body">
+        <ul style="font-size:14px;line-height:2;padding-left:20px;color:var(--text-secondary)">
+          <li>"How could we test whether this thought is accurate?"</li>
+          <li>"What would convince you this thought was wrong?"</li>
+          <li>"What has happened in the past when you thought this way?"</li>
+          <li>"If this thought is true, what's the next step? If it's not, what's the next step?"</li>
+          <li>"What's a small experiment you could try this week?"</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     2. TF-CBT
+     ================================================================ -->
+<section class="modality-section" id="tfcbt">
+  <div class="modality-header">
+    <div class="modality-badge" style="background:var(--teal)">TF</div>
+    <div>
+      <h2>Trauma-Focused CBT</h2>
+      <div class="modality-desc">PRACTICE components, relaxation techniques, and safety planning for trauma treatment</div>
+    </div>
+  </div>
+
+  <!-- 2a. PRACTICE Components -->
+  <div class="worksheet" id="practice-components">
+    <h3>PRACTICE Components Reference</h3>
+    <div class="ws-subtitle">The eight core components of TF-CBT. Sessions typically follow this sequence, though clinical judgment guides pacing.</div>
+
+    <div class="practice-card">
+      <h4><span class="practice-letter">P</span> Psychoeducation</h4>
+      <div class="practice-desc">Normalizing trauma responses for the child and caregiver. Providing information about the specific type of trauma, prevalence, and common reactions. Helps reduce shame and self-blame.</div>
+      <div class="practice-techniques"><strong>Key techniques:</strong> Age-appropriate trauma education, handouts, books, normalizing statements, caregiver parallel sessions</div>
+      <div class="practice-prompts"><strong>Sample prompts:</strong> "Many kids who have been through what you experienced have similar feelings." / "It's not unusual to feel scared or angry after something like that." / "Your body was trying to protect you."</div>
+    </div>
+    <div class="practice-card">
+      <h4><span class="practice-letter">R</span> Relaxation Skills</h4>
+      <div class="practice-desc">Teaching the child and caregiver specific techniques to manage physiological stress responses. These skills are used throughout treatment and especially during trauma narrative work.</div>
+      <div class="practice-techniques"><strong>Key techniques:</strong> Focused breathing, progressive muscle relaxation, guided imagery, mindfulness, yoga-based movements</div>
+      <div class="practice-prompts"><strong>Sample prompts:</strong> "Let's practice our balloon breathing." / "Tighten your fists really tight... now let them go like spaghetti." / "Picture your safe place."</div>
+    </div>
+    <div class="practice-card">
+      <h4><span class="practice-letter">A</span> Affective Modulation</h4>
+      <div class="practice-desc">Building the child's ability to identify, express, and manage difficult emotions. Essential foundation before trauma narrative work begins.</div>
+      <div class="practice-techniques"><strong>Key techniques:</strong> Feeling identification, affect rating scales, positive self-talk, thought interruption, problem-solving, anger management</div>
+      <div class="practice-prompts"><strong>Sample prompts:</strong> "What does your body feel like when you're angry?" / "On a scale of 1-10, how strong is that feeling?" / "What could you say to yourself when you notice that feeling coming?"</div>
+    </div>
+    <div class="practice-card">
+      <h4><span class="practice-letter">C</span> Cognitive Coping</h4>
+      <div class="practice-desc">Introducing the cognitive triangle (thoughts-feelings-behaviors) and helping the child understand how thoughts influence emotions and actions. Not yet trauma-specific.</div>
+      <div class="practice-techniques"><strong>Key techniques:</strong> Cognitive triangle exercises, thought-feeling-behavior connections, accurate vs. inaccurate thoughts, best friend role-play</div>
+      <div class="practice-prompts"><strong>Sample prompts:</strong> "If you thought 'this test will be easy,' how would you feel? What if you thought 'I'll definitely fail'?" / "Are there other ways to think about that?"</div>
+    </div>
+    <div class="practice-card">
+      <h4><span class="practice-letter">T</span> Trauma Narrative</h4>
+      <div class="practice-desc">Gradual exposure through creating a detailed account of the traumatic experience(s). This is the central component. The narrative is developed over multiple sessions with increasing detail.</div>
+      <div class="practice-techniques"><strong>Key techniques:</strong> Gradual exposure, narrative writing/drawing/dictation, cognitive processing of trauma-specific thoughts, chapters approach</div>
+      <div class="practice-prompts"><strong>Sample prompts:</strong> "We're going to write your story together, at your pace." / "What happened next?" / "What were you thinking right at that moment?" / "What do you know now that you didn't know then?"</div>
+    </div>
+    <div class="practice-card">
+      <h4><span class="practice-letter">I</span> In Vivo Mastery</h4>
+      <div class="practice-desc">Gradual real-world exposure to trauma reminders that are objectively safe but currently avoided. Uses a fear hierarchy. Not always needed if avoidance is minimal.</div>
+      <div class="practice-techniques"><strong>Key techniques:</strong> Fear hierarchy construction, graduated exposure tasks, in-session and between-session practice, parent coaching for support</div>
+      <div class="practice-prompts"><strong>Sample prompts:</strong> "Let's make a list of things that remind you of what happened, from least scary to most." / "You practiced going to the park this week. What was that like?"</div>
+    </div>
+    <div class="practice-card">
+      <h4><span class="practice-letter">C</span> Conjoint Sessions</h4>
+      <div class="practice-desc">Bringing the child and caregiver together to share the trauma narrative and practice communication skills. Prepares both parties separately before conjoint work.</div>
+      <div class="practice-techniques"><strong>Key techniques:</strong> Caregiver preparation, narrative sharing, therapeutic communication practice, praise and validation coaching</div>
+      <div class="practice-prompts"><strong>Sample prompts:</strong> (To caregiver) "Your child has been working hard on their story and wants to share it with you." / (To child) "You get to decide how much to share."</div>
+    </div>
+    <div class="practice-card">
+      <h4><span class="practice-letter">E</span> Enhancing Safety</h4>
+      <div class="practice-desc">Safety planning, body safety skills, and relapse prevention. Addresses real safety concerns and empowers the child to recognize and respond to unsafe situations.</div>
+      <div class="practice-techniques"><strong>Key techniques:</strong> Safety planning, assertiveness training, body safety education, identifying safe adults, bullying prevention, digital safety</div>
+      <div class="practice-prompts"><strong>Sample prompts:</strong> "Who are three adults you could go to if you felt unsafe?" / "What's the difference between a safe touch and an unsafe touch?" / "Let's practice what you could say."</div>
+    </div>
+  </div>
+
+  <!-- 2b. Relaxation Techniques -->
+  <div class="worksheet" id="relaxation-techniques">
+    <h3>Relaxation Techniques</h3>
+    <div class="ws-subtitle">Scripts and guides for teaching relaxation skills. Can be used in session or sent home as practice assignments.</div>
+
+    <div class="expandable open" onclick="toggleExpand(this)">
+      <div class="expandable-header">
+        <h3>Progressive Muscle Relaxation Script</h3>
+        <span class="expandable-arrow">&#9660;</span>
+      </div>
+      <div class="expandable-body" style="line-height:1.8;font-size:14px;color:var(--text-secondary)">
+        <p style="margin-bottom:12px"><strong>Instructions:</strong> Read slowly in a calm, steady voice. Pause 5-10 seconds at each "..." mark. The full exercise takes approximately 15 minutes.</p>
+        <p><strong>Hands and Arms:</strong> "Make a fist with both hands. Squeeze tight... feel the tension in your hands and forearms... hold it... and now release. Let your hands go completely limp. Notice the difference between tension and relaxation..."</p>
+        <p style="margin-top:8px"><strong>Arms and Shoulders:</strong> "Now stretch your arms out straight and push your hands toward the ceiling... feel the pull in your arms and shoulders... hold it... and let them drop. Let your arms feel heavy and loose..."</p>
+        <p style="margin-top:8px"><strong>Shoulders and Neck:</strong> "Shrug your shoulders up to your ears as high as they'll go... hold that tension... feel it in your neck and shoulders... and release. Let your shoulders drop all the way down..."</p>
+        <p style="margin-top:8px"><strong>Face:</strong> "Scrunch up your whole face like you just bit into a lemon... squeeze your eyes, nose, mouth... hold it... and relax. Let your face go smooth and soft..."</p>
+        <p style="margin-top:8px"><strong>Stomach:</strong> "Tighten your stomach muscles like you're bracing for something... make them hard as a board... hold... and relax. Let your stomach go soft..."</p>
+        <p style="margin-top:8px"><strong>Legs and Feet:</strong> "Press your toes down and tighten your calves and thighs... feel the tension all through your legs... hold it... and release. Let your legs feel heavy..."</p>
+        <p style="margin-top:8px"><strong>Full Body:</strong> "Now just notice your whole body... from your head all the way down to your toes... feeling heavy, warm, and relaxed... Take a few slow breaths and enjoy this feeling..."</p>
+      </div>
+    </div>
+
+    <div class="expandable" onclick="toggleExpand(this)">
+      <div class="expandable-header">
+        <h3>Deep Breathing Exercises</h3>
+        <span class="expandable-arrow">&#9660;</span>
+      </div>
+      <div class="expandable-body" style="font-size:14px;color:var(--text-secondary);line-height:1.8">
+        <p style="margin-bottom:12px"><strong>Balloon Breathing (ages 5-10):</strong> "Imagine your belly is a balloon. Put your hands on your belly. Breathe in slowly through your nose and fill the balloon... 1... 2... 3... 4. Now slowly let the air out through your mouth like you're blowing through a straw... 1... 2... 3... 4... 5... 6. Watch the balloon get smaller."</p>
+        <p style="margin-bottom:12px"><strong>4-7-8 Breathing (ages 10+):</strong> "Breathe in through your nose for 4 counts... Hold your breath for 7 counts... Exhale completely through your mouth for 8 counts. Repeat 4 times."</p>
+        <p style="margin-bottom:12px"><strong>Box Breathing (all ages):</strong> "Breathe in for 4 counts... Hold for 4 counts... Breathe out for 4 counts... Hold for 4 counts. Imagine tracing a square with each side."</p>
+        <p><strong>5-Finger Breathing (all ages):</strong> "Hold one hand up with fingers spread. With the pointer finger of your other hand, trace up the outside of your thumb while breathing in... trace down the other side while breathing out. Continue for each finger."</p>
+      </div>
+    </div>
+
+    <div class="expandable" onclick="toggleExpand(this)">
+      <div class="expandable-header">
+        <h3>Guided Imagery Prompts</h3>
+        <span class="expandable-arrow">&#9660;</span>
+      </div>
+      <div class="expandable-body" style="font-size:14px;color:var(--text-secondary);line-height:1.8">
+        <p style="margin-bottom:12px"><strong>Safe Place:</strong> "Close your eyes and imagine a place where you feel completely safe and calm. It can be real or imaginary... Look around your safe place. What do you see?... What do you hear?... What do you feel under your feet or hands?... What does the air smell like?... Take a deep breath and let yourself feel how safe this place is..."</p>
+        <p style="margin-bottom:12px"><strong>Container Exercise:</strong> "Imagine a strong container with a very secure lid. It can be anything: a safe, a treasure chest, a vault, a box. Make it any size you need... Now imagine taking the difficult thoughts or memories and placing them into the container, one at a time... Close the lid firmly. Lock it... You can come back and open this whenever you choose."</p>
+        <p><strong>Light Stream:</strong> "Imagine a warm beam of light above you, any color you like... Let it slowly pour over the top of your head like warm honey... Feel it moving down through your body, bringing warmth and relaxation to every muscle it touches... Wherever there's tension or pain, the light dissolves it..."</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2c. Safety Plan Template -->
+  <div class="worksheet" id="tfcbt-safety-plan">
+    <h3>Safety Plan Template</h3>
+    <div class="ws-subtitle">Complete collaboratively with the child and caregiver. Review and update regularly.</div>
+
+    <div class="ws-field">
+      <label>Child's Name / Initials</label>
+      <input type="text" id="tfSafetyName" placeholder="Initials only for documentation">
+    </div>
+    <div class="ws-field">
+      <label>Date</label>
+      <input type="text" id="tfSafetyDate" placeholder="MM/DD/YYYY">
+    </div>
+    <div class="ws-field">
+      <label>Warning Signs (How do I know I'm starting to feel unsafe or upset?)</label>
+      <div style="display:flex;align-items:start;gap:4px">
+        <textarea id="tfSafetyWarning" placeholder="Body feelings, thoughts, situations, people, places..." rows="3"></textarea>
+        <button class="voice-btn" aria-label="Voice input" onclick="voiceInput('tfSafetyWarning', this)" title="Voice input">&#127908;</button>
+      </div>
+    </div>
+    <div class="ws-field">
+      <label>Things I Can Do to Feel Better (Coping strategies I've learned)</label>
+      <div style="display:flex;align-items:start;gap:4px">
+        <textarea id="tfSafetyCoping" placeholder="Breathing, safe place imagery, calling a friend, drawing, music..." rows="3"></textarea>
+        <button class="voice-btn" aria-label="Voice input" onclick="voiceInput('tfSafetyCoping', this)" title="Voice input">&#127908;</button>
+      </div>
+    </div>
+    <div class="ws-field">
+      <label>People I Can Talk To</label>
+      <div style="display:flex;align-items:start;gap:4px">
+        <textarea id="tfSafetyPeople" placeholder="Name and phone number for each person..." rows="3"></textarea>
+        <button class="voice-btn" aria-label="Voice input" onclick="voiceInput('tfSafetyPeople', this)" title="Voice input">&#127908;</button>
+      </div>
+    </div>
+    <div class="ws-field">
+      <label>Safe Adults at School</label>
+      <input type="text" id="tfSafetySchool" placeholder="Teacher, counselor, coach...">
+    </div>
+    <div class="ws-field">
+      <label>Safe Adults at Home</label>
+      <input type="text" id="tfSafetyHome" placeholder="Parent, guardian, other family...">
+    </div>
+    <div class="ws-field">
+      <label>Emergency Numbers</label>
+      <div style="display:flex;align-items:start;gap:4px">
+        <textarea id="tfSafetyEmergency" placeholder="911, Crisis line, therapist..." rows="2"></textarea>
+        <button class="voice-btn" aria-label="Voice input" onclick="voiceInput('tfSafetyEmergency', this)" title="Voice input">&#127908;</button>
+      </div>
+    </div>
+
+    <div class="ws-actions">
+      <button class="btn btn-sm btn-primary" onclick="copyWorksheet('tfcbt-safety-plan', formatTFSafetyPlan)">Copy as Text</button>
+      <button class="btn btn-sm" onclick="clearInputs('tfcbt-safety-plan')">Clear All</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     3. DBT
+     ================================================================ -->
+<section class="modality-section" id="dbt">
+  <div class="modality-header">
+    <div class="modality-badge" style="background:var(--purple)">DBT</div>
+    <div>
+      <h2>Dialectical Behavior Therapy</h2>
+      <div class="modality-desc">Mindfulness, distress tolerance, emotion regulation, and interpersonal effectiveness skills</div>
+    </div>
+  </div>
+
+  <!-- 3a. Mindfulness -->
+  <div class="worksheet" id="dbt-mindfulness">
+    <h3>Mindfulness Skills</h3>
+    <div class="ws-subtitle">Core mindfulness teaches "What" skills (Observe, Describe, Participate) and "How" skills (Non-judgmentally, One-mindfully, Effectively).</div>
+
+    <div class="skill-card">
+      <h4>Observe</h4>
+      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:8px">Pay attention on purpose, to the present moment. Just notice without getting caught up in the experience.</p>
+      <div class="expandable" onclick="toggleExpand(this);event.stopPropagation()">
+        <div class="expandable-header">
+          <h3 style="font-size:14px">Guided Exercise</h3>
+          <span class="expandable-arrow">&#9660;</span>
+        </div>
+        <div class="expandable-body" style="font-size:13px;color:var(--text-secondary)">
+          <p><strong>5-4-3-2-1 Grounding:</strong> Notice 5 things you can see. 4 things you can touch. 3 things you can hear. 2 things you can smell. 1 thing you can taste. Simply notice each one without judging.</p>
+          <p style="margin-top:8px"><strong>Body Scan:</strong> Starting from the top of your head, slowly scan down through your body. Notice any sensations: warmth, coolness, tension, tingling, numbness. Don't try to change anything. Just observe.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <h4>Describe</h4>
+      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:8px">Put words on the experience. Label what you observe. "I notice a thought that..." or "I'm feeling a sensation of..."</p>
+      <div class="expandable" onclick="toggleExpand(this);event.stopPropagation()">
+        <div class="expandable-header">
+          <h3 style="font-size:14px">Guided Exercise</h3>
+          <span class="expandable-arrow">&#9660;</span>
+        </div>
+        <div class="expandable-body" style="font-size:13px;color:var(--text-secondary)">
+          <p><strong>Thought Labeling:</strong> For 2 minutes, notice each thought that arises and label it: "There's a worry thought." "There's a memory." "There's a planning thought." Don't follow the thought, just label and let it pass.</p>
+          <p style="margin-top:8px"><strong>Emotion Labeling:</strong> When you notice an emotion, describe it factually: "I notice tightness in my chest. My breathing is faster. I would call this anxiety." Stick to observable facts.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <h4>Participate</h4>
+      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:8px">Throw yourself completely into the current activity. Become one with the experience. Act intuitively from wise mind.</p>
+      <div class="expandable" onclick="toggleExpand(this);event.stopPropagation()">
+        <div class="expandable-header">
+          <h3 style="font-size:14px">Guided Exercise</h3>
+          <span class="expandable-arrow">&#9660;</span>
+        </div>
+        <div class="expandable-body" style="font-size:13px;color:var(--text-secondary)">
+          <p><strong>Mindful Activity:</strong> Choose any routine activity (washing dishes, walking, eating). Do it with full attention. When your mind wanders, gently bring it back. Notice every sensation, movement, and moment.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <h4>Non-Judgmentally</h4>
+      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:8px">See but don't evaluate. Take a nonjudgmental stance. Acknowledge the helpful and harmful without judging as "good" or "bad."</p>
+      <div class="expandable" onclick="toggleExpand(this);event.stopPropagation()">
+        <div class="expandable-header">
+          <h3 style="font-size:14px">Guided Exercise</h3>
+          <span class="expandable-arrow">&#9660;</span>
+        </div>
+        <div class="expandable-body" style="font-size:13px;color:var(--text-secondary)">
+          <p><strong>Judgment Catching:</strong> For the next hour, notice every time you make a judgment (good/bad, right/wrong, should/shouldn't). Each time, rephrase it as a fact: "This is bad weather" becomes "It is raining." Count how many judgments you catch.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <h4>One-Mindfully</h4>
+      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:8px">Do one thing at a time. When eating, eat. When worrying, worry. When planning, plan. Do each thing with full attention.</p>
+      <div class="expandable" onclick="toggleExpand(this);event.stopPropagation()">
+        <div class="expandable-header">
+          <h3 style="font-size:14px">Guided Exercise</h3>
+          <span class="expandable-arrow">&#9660;</span>
+        </div>
+        <div class="expandable-body" style="font-size:13px;color:var(--text-secondary)">
+          <p><strong>Single-Tasking:</strong> Choose one task you normally multitask during. Do only that one thing for 10 minutes. Each time you start to do something else, notice it and return to the single task.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <h4>Effectively</h4>
+      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:8px">Focus on what works. Do what needs to be done in each situation. Play by the rules. Act as skillfully as you can.</p>
+      <div class="expandable" onclick="toggleExpand(this);event.stopPropagation()">
+        <div class="expandable-header">
+          <h3 style="font-size:14px">Guided Exercise</h3>
+          <span class="expandable-arrow">&#9660;</span>
+        </div>
+        <div class="expandable-body" style="font-size:13px;color:var(--text-secondary)">
+          <p><strong>Effectiveness Check:</strong> Before reacting to a situation, ask yourself: "What is my goal here? Will what I'm about to do get me closer to or further from that goal?" Choose the effective path, even if it means letting go of being "right."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3b. Distress Tolerance -->
+  <div class="worksheet" id="dbt-distress">
+    <h3>Distress Tolerance Skills</h3>
+    <div class="ws-subtitle">Crisis survival strategies for when you cannot change the situation and need to get through it without making it worse.</div>
+
+    <div class="skill-card">
+      <div class="skill-acronym">T - I - P - P</div>
+      <h4>TIPP Skills (Rapid Physiological Change)</h4>
+      <p style="font-size:13px;color:var(--text-secondary);margin:8px 0">Use when emotional arousal is extremely high (7+ out of 10). These change body chemistry fast.</p>
+      <ul style="font-size:13px;color:var(--text-secondary);padding-left:20px;line-height:1.8">
+        <li><span class="skill-letter">T</span>emperature: Hold ice cubes, splash cold water on face, or hold a cold pack on eyes/cheeks for 30 seconds. Activates the dive reflex.</li>
+        <li><span class="skill-letter">I</span>ntense Exercise: Sprint, do jumping jacks, push-ups, or run stairs for 10-20 minutes. Burns off adrenaline.</li>
+        <li><span class="skill-letter">P</span>aced Breathing: Breathe out slower than you breathe in (e.g., in for 4, out for 8). Activates the parasympathetic nervous system.</li>
+        <li><span class="skill-letter">P</span>rogressive (Paired) Muscle Relaxation: Tense and release muscle groups while breathing out, saying "relax" with each release.</li>
+      </ul>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-acronym">S - T - O - P</div>
+      <h4>STOP Skill</h4>
+      <ul style="font-size:13px;color:var(--text-secondary);padding-left:20px;line-height:1.8;margin-top:8px">
+        <li><span class="skill-letter">S</span>top: Freeze. Don't react. Don't move a muscle.</li>
+        <li><span class="skill-letter">T</span>ake a step back: Take a breath. Don't let yourself act impulsively. Give yourself time.</li>
+        <li><span class="skill-letter">O</span>bserve: Notice what's happening inside and around you. What are the facts?</li>
+        <li><span class="skill-letter">P</span>roceed mindfully: Act with awareness. Consider your goals. What will be effective?</li>
+      </ul>
+    </div>
+
+    <div class="skill-card">
+      <h4>Pros and Cons</h4>
+      <p style="font-size:13px;color:var(--text-secondary);margin:8px 0">When tempted to act on crisis urges, list pros and cons of both acting on the urge AND resisting the urge.</p>
+      <div class="db-grid" style="margin-top:12px">
+        <div class="db-cell" style="background:var(--danger-light)">
+          <h4>Pros of Acting on Urge</h4>
+          <textarea placeholder="What would be good about giving in to the urge?"></textarea>
+        </div>
+        <div class="db-cell" style="background:var(--success-light)">
+          <h4>Pros of Resisting Urge</h4>
+          <textarea placeholder="What would be good about tolerating the distress?"></textarea>
+        </div>
+        <div class="db-cell" style="background:var(--danger-light)">
+          <h4>Cons of Acting on Urge</h4>
+          <textarea placeholder="What are the costs of giving in?"></textarea>
+        </div>
+        <div class="db-cell" style="background:var(--success-light)">
+          <h4>Cons of Resisting Urge</h4>
+          <textarea placeholder="What's hard about tolerating it?"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-acronym">I - M - P - R - O - V - E</div>
+      <h4>IMPROVE the Moment</h4>
+      <ul style="font-size:13px;color:var(--text-secondary);padding-left:20px;line-height:1.8;margin-top:8px">
+        <li><span class="skill-letter">I</span>magery: Imagine relaxing scenes, a safe place, or coping well.</li>
+        <li><span class="skill-letter">M</span>eaning: Find purpose or meaning in the pain.</li>
+        <li><span class="skill-letter">P</span>rayer: Open yourself to a higher power, the universe, or wise mind.</li>
+        <li><span class="skill-letter">R</span>elaxation: Progressive muscle relaxation, hot bath, deep breathing.</li>
+        <li><span class="skill-letter">O</span>ne thing in the moment: Focus entirely on one task right now.</li>
+        <li><span class="skill-letter">V</span>acation (brief): Give yourself a brief mental vacation. Take an hour off from adulting.</li>
+        <li><span class="skill-letter">E</span>ncouragement: Cheerleading statements. "I can do this." "This will pass."</li>
+      </ul>
+    </div>
+
+    <div class="skill-card">
+      <h4>Self-Soothe with Five Senses</h4>
+      <p style="font-size:13px;color:var(--text-secondary);margin:8px 0">Use each sense to comfort yourself. Plan these in advance so they're ready during crisis.</p>
+      <div class="ws-field" style="margin-top:8px"><label>Vision</label><input type="text" placeholder="e.g., Look at nature, art, candle flame, favorite photos..."></div>
+      <div class="ws-field"><label>Hearing</label><input type="text" placeholder="e.g., Music, nature sounds, wind chimes, white noise..."></div>
+      <div class="ws-field"><label>Smell</label><input type="text" placeholder="e.g., Essential oils, fresh air, favorite lotion, baking..."></div>
+      <div class="ws-field"><label>Taste</label><input type="text" placeholder="e.g., Hot tea, mint, chocolate, favorite meal..."></div>
+      <div class="ws-field"><label>Touch</label><input type="text" placeholder="e.g., Soft blanket, warm bath, pet fur, cool water..."></div>
+    </div>
+
+    <div class="skill-card">
+      <h4>Radical Acceptance</h4>
+      <p style="font-size:13px;color:var(--text-secondary);margin:8px 0">Accepting reality as it is, completely and totally, in this moment. Acceptance does not mean approval. It means acknowledging what is.</p>
+      <div class="ws-field" style="margin-top:8px">
+        <label>What is the reality I need to accept?</label>
+        <div style="display:flex;align-items:start;gap:4px">
+          <textarea id="raAccept" placeholder="Describe the situation as it is, without judgment..." rows="3"></textarea>
+          <button class="voice-btn" aria-label="Voice input" onclick="voiceInput('raAccept', this)" title="Voice input">&#127908;</button>
+        </div>
+      </div>
+      <div class="ws-field">
+        <label>What led up to this reality? (the causes)</label>
+        <textarea placeholder="What chain of events brought this about?" rows="2"></textarea>
+      </div>
+      <div class="ws-field">
+        <label>What can I do now? (Turning the Mind)</label>
+        <textarea placeholder="I choose to accept this and move forward by..." rows="2"></textarea>
+      </div>
+    </div>
+
+    <div class="ws-actions">
+      <button class="btn btn-sm btn-primary" onclick="copyWorksheet('dbt-distress', formatDBTDistress)">Copy Distress Tolerance Notes</button>
+    </div>
+  </div>
+
+  <!-- 3c. Emotion Regulation -->
+  <div class="worksheet" id="dbt-emotion">
+    <h3>Emotion Regulation Skills</h3>
+    <div class="ws-subtitle">Skills for understanding and managing emotions, reducing vulnerability, and building positive experiences.</div>
+
+    <div class="skill-card">
+      <div class="skill-acronym">P - L - E - A - S - E</div>
+      <h4>PLEASE Skills (Reducing Vulnerability)</h4>
+      <p style="font-size:13px;color:var(--text-secondary);margin:8px 0">Take care of your body to reduce emotional vulnerability:</p>
+      <ul style="font-size:13px;color:var(--text-secondary);padding-left:20px;line-height:1.8">
+        <li><span class="skill-letter">P</span>hysical i<span class="skill-letter">L</span>lness: Treat physical illness. See a doctor when needed.</li>
+        <li><span class="skill-letter">E</span>ating: Eat balanced meals. Not too much, not too little.</li>
+        <li><span class="skill-letter">A</span>void mood-altering substances: Stay off non-prescribed drugs and limit alcohol.</li>
+        <li><span class="skill-letter">S</span>leep: Get adequate sleep. Keep a consistent sleep schedule.</li>
+        <li><span class="skill-letter">E</span>xercise: Get regular exercise. 20+ minutes most days.</li>
+      </ul>
+      <div class="ws-field" style="margin-top:12px">
+        <label>My PLEASE plan for this week:</label>
+        <div style="display:flex;align-items:start;gap:4px">
+          <textarea id="pleasePlan" placeholder="What specific steps will you take for each area?" rows="3"></textarea>
+          <button class="voice-btn" aria-label="Voice input" onclick="voiceInput('pleasePlan', this)" title="Voice input">&#127908;</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <h4>Opposite Action</h4>
+      <p style="font-size:13px;color:var(--text-secondary);margin:8px 0">When the emotion doesn't fit the facts, or acting on the emotion isn't effective, do the opposite of the emotional urge. Do it ALL THE WAY.</p>
+      <div class="ws-field" style="margin-top:8px">
+        <label>Emotion</label>
+        <select style="max-width:300px">
+          <option value="">-- Select an emotion --</option>
+          <option>Fear / Anxiety (urge: avoid) -> Approach</option>
+          <option>Sadness / Depression (urge: withdraw) -> Get Active</option>
+          <option>Anger (urge: attack) -> Gently Avoid / Be Kind</option>
+          <option>Shame (urge: hide) -> Make It Public</option>
+          <option>Guilt (urge: avoid) -> Repair / Apologize</option>
+        </select>
+      </div>
+      <div class="ws-field">
+        <label>Does my emotion fit the facts?</label>
+        <textarea placeholder="Check: Is there a real threat? Is the intensity justified by the facts?" rows="2"></textarea>
+      </div>
+      <div class="ws-field">
+        <label>What is the opposite action I will take?</label>
+        <div style="display:flex;align-items:start;gap:4px">
+          <textarea id="oppAction" placeholder="Be specific. How will you do it all the way?" rows="2"></textarea>
+          <button class="voice-btn" aria-label="Voice input" onclick="voiceInput('oppAction', this)" title="Voice input">&#127908;</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-acronym">A - B - C</div>
+      <h4>ABC Skills (Building Positive Emotions)</h4>
+      <ul style="font-size:13px;color:var(--text-secondary);padding-left:20px;line-height:1.8;margin-top:8px">
+        <li><span class="skill-letter">A</span>ccumulate positives: Do pleasant things that are possible now. Plan for long-term values-based goals.</li>
+        <li><span class="skill-letter">B</span>uild mastery: Do things that make you feel competent and effective. Gradually increase difficulty.</li>
+        <li><span class="skill-letter">C</span>ope ahead: Rehearse a plan ahead of time for handling difficult situations.</li>
+      </ul>
+      <div class="ws-field" style="margin-top:12px">
+        <label>A: One pleasant activity I'll do today:</label>
+        <input type="text" placeholder="e.g., Walk in the park, call a friend, read a chapter...">
+      </div>
+      <div class="ws-field">
+        <label>B: One mastery activity I'll do this week:</label>
+        <input type="text" placeholder="e.g., Cook a new recipe, finish a task, learn something...">
+      </div>
+      <div class="ws-field">
+        <label>C: An upcoming difficult situation to cope ahead for:</label>
+        <div style="display:flex;align-items:start;gap:4px">
+          <textarea id="copeAhead" placeholder="Describe the situation and your step-by-step plan..." rows="3"></textarea>
+          <button class="voice-btn" aria-label="Voice input" onclick="voiceInput('copeAhead', this)" title="Voice input">&#127908;</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ws-actions">
+      <button class="btn btn-sm btn-primary" onclick="copyWorksheet('dbt-emotion', formatDBTEmotion)">Copy Emotion Regulation Notes</button>
+    </div>
+  </div>
+
+  <!-- 3d. Interpersonal Effectiveness -->
+  <div class="worksheet" id="dbt-interpersonal">
+    <h3>Interpersonal Effectiveness Skills</h3>
+    <div class="ws-subtitle">Skills for asking for what you want, saying no, and maintaining relationships and self-respect.</div>
+
+    <div class="skill-card">
+      <div class="skill-acronym">D - E - A - R &nbsp; M - A - N</div>
+      <h4>DEAR MAN (Getting What You Want)</h4>
+      <p style="font-size:13px;color:var(--text-secondary);margin:8px 0">Use when your priority is the OBJECTIVE (getting what you want or saying no).</p>
+      <ul style="font-size:13px;color:var(--text-secondary);padding-left:20px;line-height:1.8">
+        <li><span class="skill-letter">D</span>escribe: Describe the current situation. Stick to the facts.</li>
+        <li><span class="skill-letter">E</span>xpress: Express your feelings and opinions about the situation. Use "I" statements.</li>
+        <li><span class="skill-letter">A</span>ssert: Assert yourself by asking for what you want or saying no clearly.</li>
+        <li><span class="skill-letter">R</span>einforce: Reinforce (reward) the person ahead of time by explaining the positive effects.</li>
+        <li><span class="skill-letter">M</span>indful: Keep your focus on your objective. Don't be distracted.</li>
+        <li><span class="skill-letter">A</span>ppear confident: Use a confident tone and posture. No stammering, whispering, looking down.</li>
+        <li><span class="skill-letter">N</span>egotiate: Be willing to give to get. Offer alternatives. Ask for input.</li>
+      </ul>
+
+      <div class="roleplay-box" style="margin-top:12px">
+        <div class="rp-label">Practice Scenario:</div>
+        <p>"Your coworker keeps interrupting you in meetings. You want them to stop, but you also need to maintain a good working relationship. Script your DEAR MAN below:"</p>
+      </div>
+      <div class="ws-field" style="margin-top:8px">
+        <label>My DEAR MAN Script:</label>
+        <div style="display:flex;align-items:start;gap:4px">
+          <textarea id="dearManScript" placeholder="D: &quot;In the last three meetings, I was interrupted while presenting...&quot;&#10;E: &quot;I feel frustrated and unheard when...&quot;&#10;A: &quot;I'd like to finish my points before...&quot;&#10;R: &quot;This would help our team meetings run smoother...&quot;" rows="6"></textarea>
+          <button class="voice-btn" aria-label="Voice input" onclick="voiceInput('dearManScript', this)" title="Voice input">&#127908;</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-acronym">G - I - V - E</div>
+      <h4>GIVE (Maintaining the Relationship)</h4>
+      <p style="font-size:13px;color:var(--text-secondary);margin:8px 0">Use when your priority is the RELATIONSHIP.</p>
+      <ul style="font-size:13px;color:var(--text-secondary);padding-left:20px;line-height:1.8">
+        <li><span class="skill-letter">G</span>entle: Be gentle. No attacks, threats, or judging. No sneering or eye-rolling.</li>
+        <li><span class="skill-letter">I</span>nterested: Act interested. Listen. Don't interrupt. Be patient.</li>
+        <li><span class="skill-letter">V</span>alidate: Validate the other person's feelings, wants, difficulties, and opinions.</li>
+        <li><span class="skill-letter">E</span>asy manner: Use a little humor. Smile. Be light-hearted. Ease the person.</li>
+      </ul>
+
+      <div class="roleplay-box" style="margin-top:12px">
+        <div class="rp-label">Practice Scenario:</div>
+        <p>"A friend is upset that you cancelled plans last minute. They're expressing frustration. Use GIVE to respond while maintaining the friendship."</p>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-acronym">F - A - S - T</div>
+      <h4>FAST (Maintaining Self-Respect)</h4>
+      <p style="font-size:13px;color:var(--text-secondary);margin:8px 0">Use when your priority is SELF-RESPECT.</p>
+      <ul style="font-size:13px;color:var(--text-secondary);padding-left:20px;line-height:1.8">
+        <li><span class="skill-letter">F</span>air: Be fair to yourself AND the other person.</li>
+        <li><span class="skill-letter">A</span>pologies (no unnecessary): Don't over-apologize. Don't apologize for being alive, having an opinion, or disagreeing.</li>
+        <li><span class="skill-letter">S</span>tick to values: Don't sell out your values or integrity for short-term gain.</li>
+        <li><span class="skill-letter">T</span>ruthful: Don't lie, act helpless, or exaggerate. Stick to the truth.</li>
+      </ul>
+
+      <div class="roleplay-box" style="margin-top:12px">
+        <div class="rp-label">Practice Scenario:</div>
+        <p>"Someone is pressuring you to lend them money again, and you've decided you can't keep doing it. Use FAST to maintain your self-respect while responding."</p>
+      </div>
+    </div>
+
+    <div class="ws-actions">
+      <button class="btn btn-sm btn-primary" onclick="copyWorksheet('dbt-interpersonal', formatDBTInterpersonal)">Copy Interpersonal Notes</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     4. MOTIVATIONAL INTERVIEWING
+     ================================================================ -->
+<section class="modality-section" id="mi">
+  <div class="modality-header">
+    <div class="modality-badge" style="background:#d97706">MI</div>
+    <div>
+      <h2>Motivational Interviewing</h2>
+      <div class="modality-desc">OARS, change talk, decisional balance, readiness rulers, and common traps</div>
+    </div>
+  </div>
+
+  <!-- 4a. OARS -->
+  <div class="worksheet" id="mi-oars">
+    <h3>OARS Quick Reference</h3>
+    <div class="ws-subtitle">The four core skills of Motivational Interviewing. Use throughout the conversation to evoke change talk.</div>
+
+    <div class="skill-card">
+      <h4>O - Open Questions</h4>
+      <p style="font-size:13px;color:var(--text-secondary);margin:8px 0">Questions that can't be answered with "yes" or "no." They invite the client to elaborate and explore.</p>
+      <div style="font-size:13px;color:var(--text-secondary);line-height:1.8;padding-left:16px;border-left:3px solid var(--accent);margin-top:8px">
+        <p>"What brings you in today?"</p>
+        <p>"How would you like things to be different?"</p>
+        <p>"What concerns do you have about your [drinking/use/behavior]?"</p>
+        <p>"What would your life look like if you made this change?"</p>
+        <p>"Help me understand what a typical day looks like for you."</p>
+        <p>"What have you tried before?"</p>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <h4>A - Affirmations</h4>
+      <p style="font-size:13px;color:var(--text-secondary);margin:8px 0">Statements that recognize client strengths, effort, and values. They build confidence and reinforce change talk.</p>
+      <div style="font-size:13px;color:var(--text-secondary);line-height:1.8;padding-left:16px;border-left:3px solid var(--success);margin-top:8px">
+        <p>"It took a lot of courage to come here today."</p>
+        <p>"You've been through a lot, and you're still here working on this."</p>
+        <p>"The fact that you're thinking about change shows real strength."</p>
+        <p>"You clearly care a lot about your family."</p>
+        <p>"You showed real determination when you [specific example]."</p>
+        <p>"That's a creative solution you came up with."</p>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <h4>R - Reflections</h4>
+      <p style="font-size:13px;color:var(--text-secondary);margin:8px 0">Reflecting back what the client says to show understanding. Simple reflections repeat/rephrase; complex reflections add meaning or feeling. Aim for 2:1 reflections to questions.</p>
+      <div style="font-size:13px;color:var(--text-secondary);line-height:1.8;padding-left:16px;border-left:3px solid var(--purple);margin-top:8px">
+        <p><strong>Simple:</strong> "So you're saying that mornings are the hardest."</p>
+        <p><strong>Amplified:</strong> "So there's absolutely nothing good about your current situation."</p>
+        <p><strong>Double-sided:</strong> "On one hand you enjoy drinking with friends, and on the other hand you're worried about your health."</p>
+        <p><strong>Feeling:</strong> "It sounds like you feel stuck."</p>
+        <p><strong>Reframe:</strong> "So your stubbornness is actually determination."</p>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <h4>S - Summaries</h4>
+      <p style="font-size:13px;color:var(--text-secondary);margin:8px 0">Collecting reflections together. Linking, transitional, or recap summaries. They demonstrate listening and organize themes.</p>
+      <div style="font-size:13px;color:var(--text-secondary);line-height:1.8;padding-left:16px;border-left:3px solid var(--warning);margin-top:8px">
+        <p><strong>Collecting:</strong> "Let me see if I've got this right. You've mentioned..."</p>
+        <p><strong>Linking:</strong> "What you said today connects to something you mentioned last week about..."</p>
+        <p><strong>Transitional:</strong> "We've covered a lot today. You talked about... and... Where does that leave you?"</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4b. Change Talk Recognition -->
+  <div class="worksheet" id="mi-change-talk">
+    <h3>Change Talk Recognition: DARN-CAT</h3>
+    <div class="ws-subtitle">Listen for and reinforce these types of change talk. Earlier stages (DARN) lead to later commitment (CAT).</div>
+
+    <div class="grid-2" style="margin-bottom:16px">
+      <div style="padding:16px;background:var(--warning-light);border-radius:var(--radius-lg)">
+        <h4 style="font-size:14px;font-weight:700;margin-bottom:8px;color:var(--warning)">Preparatory Change Talk (DARN)</h4>
+        <div style="font-size:13px;color:var(--text);line-height:1.8">
+          <p><strong>Desire:</strong> "I want to..." "I wish I could..." "I'd like to..."</p>
+          <p style="color:var(--text-muted);font-style:italic;margin-bottom:6px">"I wish I could stop smoking."</p>
+          <p><strong>Ability:</strong> "I can..." "I could..." "I might be able to..."</p>
+          <p style="color:var(--text-muted);font-style:italic;margin-bottom:6px">"I was able to quit for 3 months before."</p>
+          <p><strong>Reason:</strong> "I need to because..." "It would help if..."</p>
+          <p style="color:var(--text-muted);font-style:italic;margin-bottom:6px">"My kids need me to be healthy."</p>
+          <p><strong>Need:</strong> "I have to..." "I must..." "Something has to change..."</p>
+          <p style="color:var(--text-muted);font-style:italic">"I can't keep living like this."</p>
+        </div>
+      </div>
+      <div style="padding:16px;background:var(--success-light);border-radius:var(--radius-lg)">
+        <h4 style="font-size:14px;font-weight:700;margin-bottom:8px;color:var(--success)">Mobilizing Change Talk (CAT)</h4>
+        <div style="font-size:13px;color:var(--text);line-height:1.8">
+          <p><strong>Commitment:</strong> "I will..." "I'm going to..." "I promise..."</p>
+          <p style="color:var(--text-muted);font-style:italic;margin-bottom:6px">"I'm going to call the clinic tomorrow."</p>
+          <p><strong>Activation:</strong> "I'm ready to..." "I'm willing to..." "I'm prepared to..."</p>
+          <p style="color:var(--text-muted);font-style:italic;margin-bottom:6px">"I'm ready to try medication."</p>
+          <p><strong>Taking Steps:</strong> "I already..." "I started..." "This week I..."</p>
+          <p style="color:var(--text-muted);font-style:italic">"I threw away the bottles last night."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4c. Decisional Balance -->
+  <div class="worksheet" id="mi-decisional-balance">
+    <h3>Decisional Balance Worksheet</h3>
+    <div class="ws-subtitle">Explore the client's ambivalence by examining both sides of the change decision. Fill out all four quadrants together.</div>
+
+    <div class="ws-field">
+      <label>The behavior or change being considered:</label>
+      <input type="text" id="dbBehavior" placeholder="e.g., Reducing alcohol use, starting exercise, attending treatment...">
+    </div>
+
+    <div class="db-grid" style="margin:16px 0">
+      <div class="db-cell" style="background:var(--success-light)">
+        <h4 style="color:var(--success)">Benefits of Changing</h4>
+        <textarea id="dbProChange" placeholder="What would be good about making this change?"></textarea>
+      </div>
+      <div class="db-cell" style="background:var(--danger-light)">
+        <h4 style="color:var(--danger)">Costs of Changing</h4>
+        <textarea id="dbConChange" placeholder="What would be hard or bad about making this change?"></textarea>
+      </div>
+      <div class="db-cell" style="background:var(--danger-light)">
+        <h4 style="color:var(--danger)">Benefits of NOT Changing</h4>
+        <textarea id="dbProStay" placeholder="What is good about the way things are now?"></textarea>
+      </div>
+      <div class="db-cell" style="background:var(--success-light)">
+        <h4 style="color:var(--success)">Costs of NOT Changing</h4>
+        <textarea id="dbConStay" placeholder="What are the risks of staying the same?"></textarea>
+      </div>
+    </div>
+
+    <div class="ws-actions">
+      <button class="btn btn-sm btn-primary" onclick="copyWorksheet('mi-decisional-balance', formatDecisionalBalance)">Copy as Text</button>
+      <button class="btn btn-sm" onclick="clearInputs('mi-decisional-balance')">Clear All</button>
+    </div>
+  </div>
+
+  <!-- 4d. Readiness Ruler -->
+  <div class="worksheet" id="mi-readiness">
+    <h3>Readiness Ruler</h3>
+    <div class="ws-subtitle">Click a number to indicate how ready/important/confident the client feels. Then explore with follow-up questions.</div>
+
+    <div class="ws-field">
+      <label>Question: "On a scale of 0 to 10, how important is it for you to make this change?"</label>
+      <div class="ruler-container" id="importanceRuler">
+        <div class="ruler-num" onclick="selectRuler('importanceRuler',0)">0</div>
+        <div class="ruler-num" onclick="selectRuler('importanceRuler',1)">1</div>
+        <div class="ruler-num" onclick="selectRuler('importanceRuler',2)">2</div>
+        <div class="ruler-num" onclick="selectRuler('importanceRuler',3)">3</div>
+        <div class="ruler-num" onclick="selectRuler('importanceRuler',4)">4</div>
+        <div class="ruler-num" onclick="selectRuler('importanceRuler',5)">5</div>
+        <div class="ruler-num" onclick="selectRuler('importanceRuler',6)">6</div>
+        <div class="ruler-num" onclick="selectRuler('importanceRuler',7)">7</div>
+        <div class="ruler-num" onclick="selectRuler('importanceRuler',8)">8</div>
+        <div class="ruler-num" onclick="selectRuler('importanceRuler',9)">9</div>
+        <div class="ruler-num" onclick="selectRuler('importanceRuler',10)">10</div>
+      </div>
+      <div class="ruler-labels"><span>Not at all important</span><span>Extremely important</span></div>
+    </div>
+
+    <div class="ws-field" style="margin-top:20px">
+      <label>Question: "On a scale of 0 to 10, how confident are you that you could make this change?"</label>
+      <div class="ruler-container" id="confidenceRuler">
+        <div class="ruler-num" onclick="selectRuler('confidenceRuler',0)">0</div>
+        <div class="ruler-num" onclick="selectRuler('confidenceRuler',1)">1</div>
+        <div class="ruler-num" onclick="selectRuler('confidenceRuler',2)">2</div>
+        <div class="ruler-num" onclick="selectRuler('confidenceRuler',3)">3</div>
+        <div class="ruler-num" onclick="selectRuler('confidenceRuler',4)">4</div>
+        <div class="ruler-num" onclick="selectRuler('confidenceRuler',5)">5</div>
+        <div class="ruler-num" onclick="selectRuler('confidenceRuler',6)">6</div>
+        <div class="ruler-num" onclick="selectRuler('confidenceRuler',7)">7</div>
+        <div class="ruler-num" onclick="selectRuler('confidenceRuler',8)">8</div>
+        <div class="ruler-num" onclick="selectRuler('confidenceRuler',9)">9</div>
+        <div class="ruler-num" onclick="selectRuler('confidenceRuler',10)">10</div>
+      </div>
+      <div class="ruler-labels"><span>Not at all confident</span><span>Extremely confident</span></div>
+    </div>
+
+    <div style="margin-top:20px;padding:16px;background:var(--surface-alt);border-radius:var(--radius);font-size:14px">
+      <strong>Follow-up questions after the client rates:</strong>
+      <ul style="margin-top:8px;padding-left:20px;line-height:2;color:var(--text-secondary)">
+        <li>"Why did you choose a <em>[number]</em> and not a <em>[lower number]</em>?" (Evokes change talk)</li>
+        <li>"What would it take to move from a <em>[number]</em> to a <em>[number+1 or +2]</em>?"</li>
+        <li>"What would be different at a 10?"</li>
+        <li>"You said a 6. I'm curious what makes it that high already."</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 4e. MI Traps -->
+  <div class="worksheet" id="mi-traps">
+    <h3>Common MI Traps to Avoid</h3>
+    <div class="ws-subtitle">Patterns that increase resistance and work against the MI spirit. Recognizing them is the first step to avoiding them.</div>
+
+    <div class="distortion-grid">
+      <div class="distortion-card">
+        <h4>The Righting Reflex</h4>
+        <div class="def">The natural desire to fix what seems wrong with people. Telling clients why and how they should change. This is the most common trap.</div>
+        <div class="ex">"You really should cut back on drinking. It's clearly causing problems."</div>
+        <div class="challenge">Instead: "What role does drinking play in your life right now?"</div>
+      </div>
+      <div class="distortion-card">
+        <h4>The Expert Trap</h4>
+        <div class="def">Positioning yourself as the expert with all the answers. This puts the client in a passive role and undermines autonomy.</div>
+        <div class="ex">"What you need to do is go to 90 meetings in 90 days."</div>
+        <div class="challenge">Instead: "What do you think might work for you?"</div>
+      </div>
+      <div class="distortion-card">
+        <h4>The Labeling Trap</h4>
+        <div class="def">Insisting on diagnostic labels. Arguing about whether someone "is an alcoholic" generates sustain talk and discord.</div>
+        <div class="ex">"Until you admit you're an addict, we can't make progress."</div>
+        <div class="challenge">Instead: "Labels aren't important to me. What matters is how you feel about things."</div>
+      </div>
+      <div class="distortion-card">
+        <h4>The Question-Answer Trap</h4>
+        <div class="def">Asking too many questions in a row, creating an interrogation feel. Client gives short answers and disengages.</div>
+        <div class="ex">"How much do you drink? How often? When did you start? Does it run in your family?"</div>
+        <div class="challenge">Instead: Use more reflections. Aim for a 2:1 reflection-to-question ratio.</div>
+      </div>
+      <div class="distortion-card">
+        <h4>The Premature Focus Trap</h4>
+        <div class="def">Jumping to the "problem" before the client is ready. Focusing on your agenda rather than theirs.</div>
+        <div class="ex">"Let's talk about your drug use." (in the first 5 minutes)</div>
+        <div class="challenge">Instead: "What would you most like to talk about today?"</div>
+      </div>
+      <div class="distortion-card">
+        <h4>The Blaming Trap</h4>
+        <div class="def">Spending time figuring out whose fault the problem is. Clients become defensive regardless of who is being blamed.</div>
+        <div class="ex">"Your parents' drinking is what caused your problems."</div>
+        <div class="challenge">Instead: "Blame isn't really useful here. What would you like to do going forward?"</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     5. SFBT
+     ================================================================ -->
+<section class="modality-section" id="sfbt">
+  <div class="modality-header">
+    <div class="modality-badge" style="background:var(--success)">SF</div>
+    <div>
+      <h2>Solution-Focused Brief Therapy</h2>
+      <div class="modality-desc">Miracle question, scaling questions, and exception finding techniques</div>
+    </div>
+  </div>
+
+  <!-- 5a. Miracle Question -->
+  <div class="worksheet" id="sfbt-miracle">
+    <h3>Miracle Question Guide</h3>
+    <div class="ws-subtitle">The miracle question helps clients envision a preferred future. Deliver it slowly and with genuine curiosity.</div>
+
+    <div style="padding:20px;background:var(--accent-light);border-radius:var(--radius-lg);font-size:14px;line-height:1.8;margin-bottom:16px;border-left:4px solid var(--accent)">
+      <strong>The Miracle Question:</strong><br>
+      "I'm going to ask you a strange question. Suppose tonight, while you're sleeping, a miracle happens. The miracle is that the problems that brought you here today are solved. But you don't know the miracle has happened because you were asleep. When you wake up tomorrow morning, what would be the <em>first small sign</em> that tells you something is different?"
+    </div>
+
+    <div style="font-size:14px;color:var(--text-secondary);margin-bottom:16px">
+      <strong>Follow-up probes (ask with curiosity, not interrogation):</strong>
+      <ul style="padding-left:20px;line-height:2;margin-top:8px">
+        <li>"What would you notice first?"</li>
+        <li>"What would be different about how you feel?"</li>
+        <li>"Who else would notice the miracle happened? What would they see different about you?"</li>
+        <li>"What would your [partner/child/friend] say is different?"</li>
+        <li>"What would you be doing differently?"</li>
+        <li>"On a scale of 0-10, where 10 is the miracle day, where are you now?"</li>
+        <li>"Are there any pieces of the miracle that are already happening, even a little?"</li>
+        <li>"What would be the very next thing you'd notice?"</li>
+      </ul>
+    </div>
+
+    <div class="ws-field">
+      <label>Client's Miracle Day Description:</label>
+      <div style="display:flex;align-items:start;gap:4px">
+        <textarea id="miracleDesc" rows="4" placeholder="Record the client's description of their miracle day..."></textarea>
+        <button class="voice-btn" aria-label="Voice input" onclick="voiceInput('miracleDesc', this)" title="Voice input">&#127908;</button>
+      </div>
+    </div>
+    <div class="ws-field">
+      <label>Pieces of the Miracle Already Happening:</label>
+      <div style="display:flex;align-items:start;gap:4px">
+        <textarea id="miraclePieces" rows="3" placeholder="What elements of the miracle day are already present?"></textarea>
+        <button class="voice-btn" aria-label="Voice input" onclick="voiceInput('miraclePieces', this)" title="Voice input">&#127908;</button>
+      </div>
+    </div>
+
+    <div class="ws-actions">
+      <button class="btn btn-sm btn-primary" onclick="copyWorksheet('sfbt-miracle', formatMiracle)">Copy as Text</button>
+      <button class="btn btn-sm" onclick="clearInputs('sfbt-miracle')">Clear All</button>
+    </div>
+  </div>
+
+  <!-- 5b. Scaling Questions -->
+  <div class="worksheet" id="sfbt-scaling">
+    <h3>Scaling Questions</h3>
+    <div class="ws-subtitle">Scaling questions make abstract concepts concrete and measurable. Adapt the template for different domains.</div>
+
+    <div class="expandable open" onclick="toggleExpand(this)">
+      <div class="expandable-header">
+        <h3>Overall Progress</h3>
+        <span class="expandable-arrow">&#9660;</span>
+      </div>
+      <div class="expandable-body" style="font-size:14px;color:var(--text-secondary);line-height:1.8">
+        <p>"On a scale of 0 to 10, where 10 is when the problems that brought you here are resolved, and 0 is the worst it's ever been, where would you say you are today?"</p>
+        <p style="margin-top:8px"><strong>Follow-ups:</strong></p>
+        <ul style="padding-left:20px">
+          <li>"What tells you it's a [number] and not a 0?"</li>
+          <li>"What would one step higher look like?"</li>
+          <li>"What would you be doing differently at a [number+1]?"</li>
+          <li>"What have you done to get to a [number]?"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="expandable" onclick="toggleExpand(this)">
+      <div class="expandable-header">
+        <h3>Coping / Safety</h3>
+        <span class="expandable-arrow">&#9660;</span>
+      </div>
+      <div class="expandable-body" style="font-size:14px;color:var(--text-secondary);line-height:1.8">
+        <p>"On a scale of 0 to 10, where 10 means you're confident you can stay safe this week, where are you?"</p>
+        <p style="margin-top:8px"><strong>Follow-ups:</strong></p>
+        <ul style="padding-left:20px">
+          <li>"What's keeping you at a [number] rather than lower?"</li>
+          <li>"What resources do you have that help you cope?"</li>
+          <li>"If something happened to lower that number, what would you do?"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="expandable" onclick="toggleExpand(this)">
+      <div class="expandable-header">
+        <h3>Motivation</h3>
+        <span class="expandable-arrow">&#9660;</span>
+      </div>
+      <div class="expandable-body" style="font-size:14px;color:var(--text-secondary);line-height:1.8">
+        <p>"On a scale of 0 to 10, how motivated are you to work on this right now?"</p>
+        <p style="margin-top:8px"><strong>Follow-ups:</strong></p>
+        <ul style="padding-left:20px">
+          <li>"What makes it a [number] and not lower?"</li>
+          <li>"What would need to happen for your motivation to go up?"</li>
+          <li>"When was the last time it was higher?"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="expandable" onclick="toggleExpand(this)">
+      <div class="expandable-header">
+        <h3>Relationship Satisfaction</h3>
+        <span class="expandable-arrow">&#9660;</span>
+      </div>
+      <div class="expandable-body" style="font-size:14px;color:var(--text-secondary);line-height:1.8">
+        <p>"On a scale of 0 to 10, where 10 is the best your relationship could be, where would you place it today?"</p>
+        <p style="margin-top:8px"><strong>Follow-ups:</strong></p>
+        <ul style="padding-left:20px">
+          <li>"Where would your partner/friend/family member rate it?"</li>
+          <li>"What's one thing that would move it up half a point?"</li>
+          <li>"What was it at its highest? What was different then?"</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5c. Exception Finding -->
+  <div class="worksheet" id="sfbt-exceptions">
+    <h3>Exception Finding</h3>
+    <div class="ws-subtitle">Identify times when the problem doesn't occur or is less severe. Exceptions contain the seeds of solutions.</div>
+
+    <div style="font-size:14px;color:var(--text-secondary);line-height:1.8;margin-bottom:16px">
+      <strong>Exception-finding questions:</strong>
+      <ul style="padding-left:20px;margin-top:8px">
+        <li>"Are there times when the problem doesn't happen or is less intense?"</li>
+        <li>"What's different about those times?"</li>
+        <li>"Tell me about a recent time when things went well."</li>
+        <li>"What were you doing differently then?"</li>
+        <li>"Who was around? Where were you?"</li>
+        <li>"What did you do to make that happen?"</li>
+        <li>"How did you manage to do that?"</li>
+        <li>"What would it take to make that happen more often?"</li>
+        <li>"What would [important person] say you did differently?"</li>
+        <li>"On a scale of 0-10, how often do these exceptions happen now?"</li>
+      </ul>
+    </div>
+
+    <div class="ws-field">
+      <label>Exceptions Identified:</label>
+      <div style="display:flex;align-items:start;gap:4px">
+        <textarea id="exceptionsFound" rows="4" placeholder="Record exceptions the client identifies: when the problem wasn't there, what was different, what they did..."></textarea>
+        <button class="voice-btn" aria-label="Voice input" onclick="voiceInput('exceptionsFound', this)" title="Voice input">&#127908;</button>
+      </div>
+    </div>
+    <div class="ws-field">
+      <label>Client Strengths / Resources Revealed:</label>
+      <div style="display:flex;align-items:start;gap:4px">
+        <textarea id="clientStrengths" rows="3" placeholder="What skills, supports, or strengths emerged from exception discussions?"></textarea>
+        <button class="voice-btn" aria-label="Voice input" onclick="voiceInput('clientStrengths', this)" title="Voice input">&#127908;</button>
+      </div>
+    </div>
+
+    <div class="ws-actions">
+      <button class="btn btn-sm btn-primary" onclick="copyWorksheet('sfbt-exceptions', formatExceptions)">Copy as Text</button>
+      <button class="btn btn-sm" onclick="clearInputs('sfbt-exceptions')">Clear All</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     6. CRISIS INTERVENTION
+     ================================================================ -->
+<section class="modality-section" id="crisis-tools">
+  <div class="modality-header">
+    <div class="modality-badge" style="background:var(--danger)">&#9888;</div>
+    <div>
+      <h2>Crisis Intervention</h2>
+      <div class="modality-desc">Safety planning, suicide risk screening, risk assessment documentation</div>
+    </div>
+  </div>
+
+  <!-- 6a. Stanley-Brown Safety Plan -->
+  <div class="worksheet" id="safety-plan-sb">
+    <h3>Safety Plan (Stanley-Brown Model)</h3>
+    <div class="ws-subtitle">Complete collaboratively with the client. The plan should be in the client's own words. Review and update regularly. Provide the client with a copy.</div>
+
+    <div class="ws-field">
+      <label>Client Name / Initials</label>
+      <input type="text" id="spName" placeholder="Initials for documentation">
+    </div>
+    <div class="ws-field">
+      <label>Date Created / Updated</label>
+      <input type="text" id="spDate" placeholder="MM/DD/YYYY">
+    </div>
+
+    <div class="safety-step">
+      <span class="safety-step-num">1</span>
+      <h4>Warning Signs</h4>
+      <p style="font-size:13px;color:var(--text-secondary);margin:8px 0">Thoughts, moods, situations, images, behaviors that indicate a crisis may be developing:</p>
+      <div style="display:flex;align-items:start;gap:4px">
+        <textarea id="spStep1" rows="3" placeholder="e.g., Feeling hopeless, isolating from friends, not sleeping, thinking 'everyone would be better off without me'..."></textarea>
+        <button class="voice-btn" aria-label="Voice input" onclick="voiceInput('spStep1', this)" title="Voice input">&#127908;</button>
+      </div>
+    </div>
+
+    <div class="safety-step">
+      <span class="safety-step-num">2</span>
+      <h4>Internal Coping Strategies</h4>
+      <p style="font-size:13px;color:var(--text-secondary);margin:8px 0">Things I can do to take my mind off my problems without contacting another person:</p>
+      <div style="display:flex;align-items:start;gap:4px">
+        <textarea id="spStep2" rows="3" placeholder="e.g., Go for a walk, listen to music, exercise, deep breathing, take a shower, play with my pet, journal..."></textarea>
+        <button class="voice-btn" aria-label="Voice input" onclick="voiceInput('spStep2', this)" title="Voice input">&#127908;</button>
+      </div>
+    </div>
+
+    <div class="safety-step">
+      <span class="safety-step-num">3</span>
+      <h4>People and Social Settings That Provide Distraction</h4>
+      <p style="font-size:13px;color:var(--text-secondary);margin:8px 0">People and places that provide a healthy distraction (without necessarily talking about the crisis):</p>
+      <div style="display:flex;align-items:start;gap:4px">
+        <textarea id="spStep3" rows="3" placeholder="Name: _____________ Phone: _____________&#10;Name: _____________ Phone: _____________&#10;Place: _____________"></textarea>
+        <button class="voice-btn" aria-label="Voice input" onclick="voiceInput('spStep3', this)" title="Voice input">&#127908;</button>
+      </div>
+    </div>
+
+    <div class="safety-step">
+      <span class="safety-step-num">4</span>
+      <h4>People I Can Ask for Help</h4>
+      <p style="font-size:13px;color:var(--text-secondary);margin:8px 0">People I can tell I'm in crisis and ask for help:</p>
+      <div style="display:flex;align-items:start;gap:4px">
+        <textarea id="spStep4" rows="3" placeholder="Name: _____________ Phone: _____________&#10;Name: _____________ Phone: _____________&#10;Name: _____________ Phone: _____________"></textarea>
+        <button class="voice-btn" aria-label="Voice input" onclick="voiceInput('spStep4', this)" title="Voice input">&#127908;</button>
+      </div>
+    </div>
+
+    <div class="safety-step">
+      <span class="safety-step-num">5</span>
+      <h4>Professionals and Agencies I Can Contact</h4>
+      <p style="font-size:13px;color:var(--text-secondary);margin:8px 0">Clinician, clinic, crisis lines, emergency services:</p>
+      <div style="display:flex;align-items:start;gap:4px">
+        <textarea id="spStep5" rows="4" placeholder="Clinician: _____________ Phone: _____________&#10;Clinic/Agency: _____________ Phone: _____________&#10;988 Suicide & Crisis Lifeline: 988&#10;NH Rapid Response: 1-833-710-6477&#10;Local Emergency: 911"></textarea>
+        <button class="voice-btn" aria-label="Voice input" onclick="voiceInput('spStep5', this)" title="Voice input">&#127908;</button>
+      </div>
+    </div>
+
+    <div class="safety-step">
+      <span class="safety-step-num">6</span>
+      <h4>Making the Environment Safe</h4>
+      <p style="font-size:13px;color:var(--text-secondary);margin:8px 0">Steps to reduce access to lethal means:</p>
+      <div style="display:flex;align-items:start;gap:4px">
+        <textarea id="spStep6" rows="3" placeholder="e.g., Give medications to trusted person, lock firearms with someone else keeping the key, remove sharp objects..."></textarea>
+        <button class="voice-btn" aria-label="Voice input" onclick="voiceInput('spStep6', this)" title="Voice input">&#127908;</button>
+      </div>
+    </div>
+
+    <div style="padding:16px;background:var(--accent-light);border-radius:var(--radius);margin-top:16px;font-size:14px;line-height:1.6">
+      <strong>My reason for living:</strong>
+      <div style="display:flex;align-items:start;gap:4px;margin-top:8px">
+        <textarea id="spReason" rows="2" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:4px;font-size:14px;font-family:inherit;outline:none" placeholder="The most important thing that keeps me going..."></textarea>
+        <button class="voice-btn" aria-label="Voice input" onclick="voiceInput('spReason', this)" title="Voice input">&#127908;</button>
+      </div>
+    </div>
+
+    <div class="ws-actions">
+      <button class="btn btn-sm btn-primary" onclick="copyWorksheet('safety-plan-sb', formatSafetyPlan)">Copy as Text</button>
+      <button class="btn btn-sm" onclick="clearInputs('safety-plan-sb')">Clear All</button>
+    </div>
+  </div>
+
+  <!-- 6b. C-SSRS Reference -->
+  <div class="worksheet" id="cssrs-reference">
+    <h3>Columbia Suicide Severity Rating Scale (C-SSRS) &mdash; Key Screening Questions</h3>
+    <div class="ws-subtitle">These are the triage screening questions from the C-SSRS. For full administration, use the complete validated instrument. This is a reference aid, not a replacement for training.</div>
+
+    <div style="padding:12px 16px;background:var(--warning-light);border-radius:var(--radius);font-size:13px;color:var(--warning);margin-bottom:16px;font-weight:500">
+      Important: Any "yes" to questions 3-5 requires immediate clinical assessment and action. Any "yes" to questions 4 or 5 is considered high risk.
+    </div>
+
+    <table class="ws-table">
+      <thead>
+        <tr>
+          <th style="width:5%">#</th>
+          <th style="width:60%">Question</th>
+          <th style="width:15%">Response</th>
+          <th style="width:20%">Risk Level</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><strong>Wish to be Dead:</strong> "Have you wished you were dead or wished you could go to sleep and not wake up?"</td>
+          <td>
+            <select id="cssrs1">
+              <option value="">--</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </td>
+          <td style="font-size:12px;color:var(--text-secondary)">If yes, ask Q2</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><strong>Suicidal Thoughts:</strong> "Have you actually had any thoughts of killing yourself?"</td>
+          <td>
+            <select id="cssrs2">
+              <option value="">--</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </td>
+          <td style="font-size:12px;color:var(--text-secondary)">If yes, ask Q3-5</td>
+        </tr>
+        <tr style="background:var(--warning-light)">
+          <td>3</td>
+          <td><strong>Suicidal Thoughts with Method:</strong> "Have you been thinking about how you might do this?"</td>
+          <td>
+            <select id="cssrs3">
+              <option value="">--</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </td>
+          <td style="font-size:12px;color:var(--warning);font-weight:600">Moderate risk</td>
+        </tr>
+        <tr style="background:var(--danger-light)">
+          <td>4</td>
+          <td><strong>Suicidal Intent (without plan):</strong> "Have you had these thoughts and had some intention of acting on them?"</td>
+          <td>
+            <select id="cssrs4">
+              <option value="">--</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </td>
+          <td style="font-size:12px;color:var(--danger);font-weight:600">High risk</td>
+        </tr>
+        <tr style="background:var(--danger-light)">
+          <td>5</td>
+          <td><strong>Suicidal Intent with Plan:</strong> "Have you started to work out or worked out the details of how to kill yourself? Do you intend to carry out this plan?"</td>
+          <td>
+            <select id="cssrs5">
+              <option value="">--</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </td>
+          <td style="font-size:12px;color:var(--danger);font-weight:600">High risk</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><strong>Suicidal Behavior (Lifetime):</strong> "Have you ever done anything, started to do anything, or prepared to do anything to end your life?"</td>
+          <td>
+            <select id="cssrs6">
+              <option value="">--</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </td>
+          <td style="font-size:12px;color:var(--text-secondary)">If yes, inquire about recency</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ws-field" style="margin-top:12px">
+      <label>Clinical Notes / Assessment Summary:</label>
+      <div style="display:flex;align-items:start;gap:4px">
+        <textarea id="cssrsNotes" rows="3" placeholder="Document frequency, duration, controllability, deterrents, reasons for ideation..."></textarea>
+        <button class="voice-btn" aria-label="Voice input" onclick="voiceInput('cssrsNotes', this)" title="Voice input">&#127908;</button>
+      </div>
+    </div>
+
+    <div class="ws-actions">
+      <button class="btn btn-sm btn-primary" onclick="copyWorksheet('cssrs-reference', formatCSSRS)">Copy as Text</button>
+      <button class="btn btn-sm" onclick="clearInputs('cssrs-reference')">Clear All</button>
+    </div>
+  </div>
+
+  <!-- 6c. Risk Assessment Guide -->
+  <div class="worksheet" id="risk-assessment">
+    <h3>Risk Assessment Quick Guide</h3>
+    <div class="ws-subtitle">Use this as a documentation aid. Clinical judgment always takes precedence over any checklist.</div>
+
+    <div class="grid-2" style="margin-bottom:16px">
+      <div style="padding:16px;background:var(--danger-light);border-radius:var(--radius-lg)">
+        <h4 style="font-size:14px;font-weight:700;margin-bottom:8px;color:var(--danger)">Risk Factors</h4>
+        <div style="font-size:13px;line-height:1.8;color:var(--text)">
+          <label style="display:block"><input type="checkbox" class="risk-check"> Prior suicide attempt(s)</label>
+          <label style="display:block"><input type="checkbox" class="risk-check"> Current suicidal ideation with plan</label>
+          <label style="display:block"><input type="checkbox" class="risk-check"> Access to lethal means (firearms, medications)</label>
+          <label style="display:block"><input type="checkbox" class="risk-check"> Recent loss or significant stressor</label>
+          <label style="display:block"><input type="checkbox" class="risk-check"> Substance use / intoxication</label>
+          <label style="display:block"><input type="checkbox" class="risk-check"> Psychiatric diagnosis (esp. depression, bipolar, psychosis)</label>
+          <label style="display:block"><input type="checkbox" class="risk-check"> History of self-harm</label>
+          <label style="display:block"><input type="checkbox" class="risk-check"> Social isolation / lack of support</label>
+          <label style="display:block"><input type="checkbox" class="risk-check"> Hopelessness / perceived burdensomeness</label>
+          <label style="display:block"><input type="checkbox" class="risk-check"> Family history of suicide</label>
+          <label style="display:block"><input type="checkbox" class="risk-check"> Recent discharge from inpatient care</label>
+          <label style="display:block"><input type="checkbox" class="risk-check"> Chronic pain / medical illness</label>
+          <label style="display:block"><input type="checkbox" class="risk-check"> Agitation / insomnia</label>
+          <label style="display:block"><input type="checkbox" class="risk-check"> Giving away possessions / saying goodbye</label>
+        </div>
+      </div>
+      <div style="padding:16px;background:var(--success-light);border-radius:var(--radius-lg)">
+        <h4 style="font-size:14px;font-weight:700;margin-bottom:8px;color:var(--success)">Protective Factors</h4>
+        <div style="font-size:13px;line-height:1.8;color:var(--text)">
+          <label style="display:block"><input type="checkbox" class="protect-check"> Strong social support / connectedness</label>
+          <label style="display:block"><input type="checkbox" class="protect-check"> Children in the home / sense of responsibility</label>
+          <label style="display:block"><input type="checkbox" class="protect-check"> Religious or spiritual beliefs</label>
+          <label style="display:block"><input type="checkbox" class="protect-check"> Engaged in treatment / therapeutic alliance</label>
+          <label style="display:block"><input type="checkbox" class="protect-check"> Reasons for living (identified and articulated)</label>
+          <label style="display:block"><input type="checkbox" class="protect-check"> Future-oriented thinking / plans</label>
+          <label style="display:block"><input type="checkbox" class="protect-check"> Problem-solving skills</label>
+          <label style="display:block"><input type="checkbox" class="protect-check"> Willingness to seek help in crisis</label>
+          <label style="display:block"><input type="checkbox" class="protect-check"> Restricted access to lethal means</label>
+          <label style="display:block"><input type="checkbox" class="protect-check"> Stable housing</label>
+          <label style="display:block"><input type="checkbox" class="protect-check"> Employment / meaningful activities</label>
+          <label style="display:block"><input type="checkbox" class="protect-check"> Fear of death or pain</label>
+          <label style="display:block"><input type="checkbox" class="protect-check"> Cultural or moral objections to suicide</label>
+          <label style="display:block"><input type="checkbox" class="protect-check"> Pet ownership / animal bond</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="ws-field">
+      <label>Overall Risk Level Assessment</label>
+      <select id="riskLevel" style="max-width:300px">
+        <option value="">-- Select --</option>
+        <option value="low">Low: No current ideation, identifiable protective factors, no recent attempt</option>
+        <option value="moderate">Moderate: Ideation without intent/plan, some risk factors, some protective factors</option>
+        <option value="high">High: Ideation with intent/plan, recent attempt, limited protective factors</option>
+        <option value="imminent">Imminent: Active intent, plan, access to means, stated intent to act</option>
+      </select>
+    </div>
+
+    <div class="ws-field">
+      <label>Clinical Reasoning / Justification:</label>
+      <div style="display:flex;align-items:start;gap:4px">
+        <textarea id="riskReasoning" rows="4" placeholder="Document your clinical reasoning for the assessed risk level, including key factors weighed, ambivalence noted, and rationale for the disposition decision..."></textarea>
+        <button class="voice-btn" aria-label="Voice input" onclick="voiceInput('riskReasoning', this)" title="Voice input">&#127908;</button>
+      </div>
+    </div>
+
+    <div class="ws-field">
+      <label>Plan / Disposition:</label>
+      <div style="display:flex;align-items:start;gap:4px">
+        <textarea id="riskPlan" rows="3" placeholder="e.g., Safety plan completed, lethal means restriction discussed, follow-up scheduled for [date], crisis resources provided..."></textarea>
+        <button class="voice-btn" aria-label="Voice input" onclick="voiceInput('riskPlan', this)" title="Voice input">&#127908;</button>
+      </div>
+    </div>
+
+    <div class="ws-actions">
+      <button class="btn btn-sm btn-primary" onclick="copyWorksheet('risk-assessment', formatRiskAssessment)">Copy as Text</button>
+      <button class="btn btn-sm" onclick="clearInputs('risk-assessment')">Clear All</button>
+    </div>
+  </div>
+</section>
+
+    </main>
+  </div><!-- /tools-layout -->
+
+</div><!-- /page-container -->
+
+<footer class="site-footer">
+  <p>Greater Nashua Community Mental Health Resources &copy; 2026. For informational purposes only.</p>
+  <p>These tools are clinical aids, not a substitute for professional training, supervision, or clinical judgment.</p>
+  <p style="margin-top:8px"><a href="#" id="adminGate" style="color:var(--text-muted);font-size:11px" aria-label="Version 2.0 - Admin access">v2.0</a></p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===== EXPANDABLE SECTIONS ===== */
+function toggleExpand(el) {
+  el.classList.toggle('open');
+}
+
+/* ===== SIDEBAR ACTIVE STATE ===== */
+(function() {
+  const sections = document.querySelectorAll('.modality-section');
+  const sideLinks = document.querySelectorAll('#sidebarNav a');
+  const topLinks = document.querySelectorAll('#modalityNav .category-btn');
+
+  function updateActive() {
+    let current = '';
+    sections.forEach(s => {
+      const top = s.getBoundingClientRect().top;
+      if (top < 150) current = s.id;
+    });
+    sideLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+    topLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
+})();
+
+/* ===== TOAST ===== */
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+/* ===== COPY TO CLIPBOARD ===== */
+function copyText(text) {
+  navigator.clipboard.writeText(text).then(() => showToast('Copied to clipboard'));
+}
+
+/* ===== WORKSHEET COPY FRAMEWORK ===== */
+function copyWorksheet(id, formatter) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const text = formatter(el);
+  copyText(text);
+}
+
+/* ===== CLEAR HELPERS ===== */
+function clearInputs(parentId) {
+  const el = document.getElementById(parentId);
+  if (!el) return;
+  el.querySelectorAll('input[type="text"], textarea').forEach(i => i.value = '');
+  el.querySelectorAll('select').forEach(s => s.selectedIndex = 0);
+  el.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false);
+  showToast('Cleared');
+}
+
+function clearWorksheet(tableId) {
+  const tbl = document.getElementById(tableId);
+  if (!tbl) return;
+  tbl.querySelectorAll('input, textarea').forEach(i => i.value = '');
+  showToast('Cleared');
+}
+
+/* ===== THOUGHT RECORD ===== */
+function addThoughtRecordRow() {
+  const tbody = document.getElementById('trBody');
+  const row = document.createElement('tr');
+  row.innerHTML = `
+    <td><textarea placeholder="What happened?"></textarea></td>
+    <td><textarea placeholder="What went through your mind?"></textarea></td>
+    <td><input type="text" placeholder="e.g., Anxious 75"></td>
+    <td><textarea placeholder="What supports this thought?"></textarea></td>
+    <td><textarea placeholder="What contradicts it?"></textarea></td>
+    <td><textarea placeholder="A more balanced thought..."></textarea></td>
+    <td><input type="text" placeholder="e.g., Anxious 40"></td>`;
+  tbody.appendChild(row);
+}
+
+function formatThoughtRecord(el) {
+  const rows = el.querySelectorAll('#trBody tr');
+  let text = 'THOUGHT RECORD\n' + '='.repeat(50) + '\n\n';
+  rows.forEach((row, i) => {
+    const cells = row.querySelectorAll('textarea, input');
+    const vals = Array.from(cells).map(c => c.value.trim());
+    if (vals.some(v => v)) {
+      text += `Entry ${i + 1}:\n`;
+      text += `  Situation: ${vals[0] || '—'}\n`;
+      text += `  Automatic Thought: ${vals[1] || '—'}\n`;
+      text += `  Emotion/Intensity: ${vals[2] || '—'}\n`;
+      text += `  Evidence For: ${vals[3] || '—'}\n`;
+      text += `  Evidence Against: ${vals[4] || '—'}\n`;
+      text += `  Alternative Thought: ${vals[5] || '—'}\n`;
+      text += `  New Emotion Rating: ${vals[6] || '—'}\n\n`;
+    }
+  });
+  return text.trim() || 'No entries recorded.';
+}
+
+/* ===== BEHAVIORAL ACTIVATION GRID ===== */
+(function() {
+  const grid = document.getElementById('baGrid');
+  const times = ['Morning\n(6-9am)', 'Late Morning\n(9-12pm)', 'Afternoon\n(12-3pm)', 'Late Afternoon\n(3-6pm)', 'Evening\n(6-9pm)', 'Night\n(9pm+)'];
+  times.forEach(t => {
+    const label = document.createElement('div');
+    label.className = 'ag-time';
+    label.textContent = t.split('\n')[0];
+    label.title = t;
+    grid.appendChild(label);
+    for (let d = 0; d < 7; d++) {
+      const cell = document.createElement('div');
+      cell.className = 'ag-cell';
+      cell.innerHTML = '<input type="text" placeholder="Activity / Mood" title="Enter activity and mood rating (0-10)">';
+      grid.appendChild(cell);
+    }
+  });
+})();
+
+function clearBAGrid() {
+  document.querySelectorAll('#baGrid .ag-cell input').forEach(i => i.value = '');
+  showToast('Cleared');
+}
+
+function formatBAPlanner(el) {
+  const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const times = ['Morning (6-9am)','Late Morning (9-12pm)','Afternoon (12-3pm)','Late Afternoon (3-6pm)','Evening (6-9pm)','Night (9pm+)'];
+  const inputs = el.querySelectorAll('#baGrid .ag-cell input');
+  let text = 'BEHAVIORAL ACTIVATION PLANNER\n' + '='.repeat(50) + '\n\n';
+  let idx = 0;
+  times.forEach(t => {
+    text += t + ':\n';
+    days.forEach(d => {
+      const val = inputs[idx] ? inputs[idx].value.trim() : '';
+      if (val) text += `  ${d}: ${val}\n`;
+      idx++;
+    });
+    text += '\n';
+  });
+  return text.trim();
+}
+
+/* ===== TF-CBT SAFETY PLAN FORMAT ===== */
+function formatTFSafetyPlan(el) {
+  let text = 'TF-CBT SAFETY PLAN\n' + '='.repeat(50) + '\n\n';
+  text += `Name/Initials: ${document.getElementById('tfSafetyName').value || '—'}\n`;
+  text += `Date: ${document.getElementById('tfSafetyDate').value || '—'}\n\n`;
+  text += `Warning Signs:\n${document.getElementById('tfSafetyWarning').value || '—'}\n\n`;
+  text += `Coping Strategies:\n${document.getElementById('tfSafetyCoping').value || '—'}\n\n`;
+  text += `People I Can Talk To:\n${document.getElementById('tfSafetyPeople').value || '—'}\n\n`;
+  text += `Safe Adults at School: ${document.getElementById('tfSafetySchool').value || '—'}\n`;
+  text += `Safe Adults at Home: ${document.getElementById('tfSafetyHome').value || '—'}\n\n`;
+  text += `Emergency Numbers:\n${document.getElementById('tfSafetyEmergency').value || '—'}\n`;
+  return text;
+}
+
+/* ===== DBT FORMATTERS ===== */
+function formatDBTDistress(el) {
+  let text = 'DBT DISTRESS TOLERANCE NOTES\n' + '='.repeat(50) + '\n\n';
+  const textareas = el.querySelectorAll('textarea');
+  const selfSoothe = el.querySelectorAll('.skill-card:nth-of-type(5) input');
+  text += 'Pros/Cons of Urge:\n';
+  if (textareas[0]) text += `  Pros of Acting: ${textareas[0].value || '—'}\n`;
+  if (textareas[1]) text += `  Pros of Resisting: ${textareas[1].value || '—'}\n`;
+  if (textareas[2]) text += `  Cons of Acting: ${textareas[2].value || '—'}\n`;
+  if (textareas[3]) text += `  Cons of Resisting: ${textareas[3].value || '—'}\n\n`;
+  text += 'Self-Soothe Plan:\n';
+  const senses = ['Vision','Hearing','Smell','Taste','Touch'];
+  selfSoothe.forEach((inp, i) => {
+    if (inp.value.trim()) text += `  ${senses[i] || ''}: ${inp.value}\n`;
+  });
+  text += '\nRadical Acceptance:\n';
+  if (textareas[4]) text += `  Reality to Accept: ${textareas[4].value || '—'}\n`;
+  if (textareas[5]) text += `  Causes: ${textareas[5].value || '—'}\n`;
+  if (textareas[6]) text += `  What I Can Do Now: ${textareas[6].value || '—'}\n`;
+  return text;
+}
+
+function formatDBTEmotion(el) {
+  let text = 'DBT EMOTION REGULATION NOTES\n' + '='.repeat(50) + '\n\n';
+  const textareas = el.querySelectorAll('textarea');
+  const inputs = el.querySelectorAll('input[type="text"]');
+  const selects = el.querySelectorAll('select');
+  text += `PLEASE Plan: ${textareas[0] ? textareas[0].value || '—' : '—'}\n\n`;
+  text += `Opposite Action:\n`;
+  text += `  Emotion: ${selects[0] ? selects[0].value || '—' : '—'}\n`;
+  text += `  Fits Facts: ${textareas[1] ? textareas[1].value || '—' : '—'}\n`;
+  text += `  Opposite Action: ${textareas[2] ? textareas[2].value || '—' : '—'}\n\n`;
+  text += `ABC Skills:\n`;
+  text += `  Pleasant Activity: ${inputs[0] ? inputs[0].value || '—' : '—'}\n`;
+  text += `  Mastery Activity: ${inputs[1] ? inputs[1].value || '—' : '—'}\n`;
+  text += `  Cope Ahead: ${textareas[3] ? textareas[3].value || '—' : '—'}\n`;
+  return text;
+}
+
+function formatDBTInterpersonal(el) {
+  let text = 'DBT INTERPERSONAL EFFECTIVENESS NOTES\n' + '='.repeat(50) + '\n\n';
+  const ta = document.getElementById('dearManScript');
+  text += `DEAR MAN Script:\n${ta ? ta.value || '—' : '—'}\n`;
+  return text;
+}
+
+/* ===== MI FORMATTERS ===== */
+function formatDecisionalBalance(el) {
+  let text = 'DECISIONAL BALANCE\n' + '='.repeat(50) + '\n\n';
+  text += `Behavior/Change: ${document.getElementById('dbBehavior').value || '—'}\n\n`;
+  text += `Benefits of Changing: ${document.getElementById('dbProChange').value || '—'}\n\n`;
+  text += `Costs of Changing: ${document.getElementById('dbConChange').value || '—'}\n\n`;
+  text += `Benefits of NOT Changing: ${document.getElementById('dbProStay').value || '—'}\n\n`;
+  text += `Costs of NOT Changing: ${document.getElementById('dbConStay').value || '—'}\n`;
+  return text;
+}
+
+/* ===== SFBT FORMATTERS ===== */
+function formatMiracle(el) {
+  let text = 'MIRACLE QUESTION\n' + '='.repeat(50) + '\n\n';
+  text += `Miracle Day Description:\n${document.getElementById('miracleDesc').value || '—'}\n\n`;
+  text += `Pieces Already Happening:\n${document.getElementById('miraclePieces').value || '—'}\n`;
+  return text;
+}
+
+function formatExceptions(el) {
+  let text = 'EXCEPTION FINDING\n' + '='.repeat(50) + '\n\n';
+  text += `Exceptions Identified:\n${document.getElementById('exceptionsFound').value || '—'}\n\n`;
+  text += `Client Strengths/Resources:\n${document.getElementById('clientStrengths').value || '—'}\n`;
+  return text;
+}
+
+/* ===== SAFETY PLAN FORMAT ===== */
+function formatSafetyPlan(el) {
+  let text = 'SAFETY PLAN (Stanley-Brown)\n' + '='.repeat(50) + '\n\n';
+  text += `Client: ${document.getElementById('spName').value || '—'}\n`;
+  text += `Date: ${document.getElementById('spDate').value || '—'}\n\n`;
+  text += `Step 1 - Warning Signs:\n${document.getElementById('spStep1').value || '—'}\n\n`;
+  text += `Step 2 - Internal Coping Strategies:\n${document.getElementById('spStep2').value || '—'}\n\n`;
+  text += `Step 3 - People/Social Settings for Distraction:\n${document.getElementById('spStep3').value || '—'}\n\n`;
+  text += `Step 4 - People I Can Ask for Help:\n${document.getElementById('spStep4').value || '—'}\n\n`;
+  text += `Step 5 - Professionals/Agencies:\n${document.getElementById('spStep5').value || '—'}\n\n`;
+  text += `Step 6 - Making Environment Safe:\n${document.getElementById('spStep6').value || '—'}\n\n`;
+  text += `Reason for Living:\n${document.getElementById('spReason').value || '—'}\n`;
+  return text;
+}
+
+/* ===== C-SSRS FORMAT ===== */
+function formatCSSRS(el) {
+  let text = 'C-SSRS SCREENING REFERENCE\n' + '='.repeat(50) + '\n\n';
+  const questions = [
+    'Wish to be Dead',
+    'Suicidal Thoughts',
+    'Thoughts with Method',
+    'Intent without Plan',
+    'Intent with Plan',
+    'Suicidal Behavior (Lifetime)'
+  ];
+  for (let i = 1; i <= 6; i++) {
+    const sel = document.getElementById('cssrs' + i);
+    text += `Q${i} - ${questions[i-1]}: ${sel && sel.value ? sel.value.toUpperCase() : '—'}\n`;
+  }
+  text += `\nClinical Notes:\n${document.getElementById('cssrsNotes').value || '—'}\n`;
+  return text;
+}
+
+/* ===== RISK ASSESSMENT FORMAT ===== */
+function formatRiskAssessment(el) {
+  let text = 'RISK ASSESSMENT\n' + '='.repeat(50) + '\n\n';
+  const riskChecks = el.querySelectorAll('.risk-check');
+  const protectChecks = el.querySelectorAll('.protect-check');
+  text += 'Risk Factors Present:\n';
+  let riskCount = 0;
+  riskChecks.forEach(c => {
+    if (c.checked) {
+      text += `  [X] ${c.parentElement.textContent.trim()}\n`;
+      riskCount++;
+    }
+  });
+  if (!riskCount) text += '  None checked\n';
+  text += `\nProtective Factors Present:\n`;
+  let protCount = 0;
+  protectChecks.forEach(c => {
+    if (c.checked) {
+      text += `  [X] ${c.parentElement.textContent.trim()}\n`;
+      protCount++;
+    }
+  });
+  if (!protCount) text += '  None checked\n';
+  const level = document.getElementById('riskLevel');
+  text += `\nOverall Risk Level: ${level && level.value ? level.options[level.selectedIndex].text : '—'}\n`;
+  text += `\nClinical Reasoning:\n${document.getElementById('riskReasoning').value || '—'}\n`;
+  text += `\nPlan/Disposition:\n${document.getElementById('riskPlan').value || '—'}\n`;
+  return text;
+}
+
+/* ===== READINESS RULER ===== */
+function selectRuler(rulerId, value) {
+  const container = document.getElementById(rulerId);
+  if (!container) return;
+  container.querySelectorAll('.ruler-num').forEach((el, i) => {
+    el.classList.toggle('selected', i === value);
+  });
+  container.dataset.value = value;
+}
+
+/* ===== VOICE INPUT (Web Speech API) ===== */
+function voiceInput(targetId, btn) {
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+    showToast('Voice input not supported in this browser');
+    return;
+  }
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (btn.classList.contains('recording')) {
+    if (btn._recognition) btn._recognition.stop();
+    btn.classList.remove('recording');
+    return;
+  }
+
+  const recognition = new SpeechRecognition();
+  recognition.continuous = true;
+  recognition.interimResults = true;
+  recognition.lang = 'en-US';
+  btn._recognition = recognition;
+  btn.classList.add('recording');
+
+  const target = document.getElementById(targetId);
+  const startVal = target.value;
+
+  recognition.onresult = function(e) {
+    let interim = '';
+    let final = '';
+    for (let i = e.resultIndex; i < e.results.length; i++) {
+      if (e.results[i].isFinal) {
+        final += e.results[i][0].transcript;
+      } else {
+        interim += e.results[i][0].transcript;
+      }
+    }
+    if (final) {
+      target.value = (startVal ? startVal + ' ' : '') + final;
+    }
+  };
+
+  recognition.onerror = function() {
+    btn.classList.remove('recording');
+    showToast('Voice input error');
+  };
+
+  recognition.onend = function() {
+    btn.classList.remove('recording');
+  };
+
+  recognition.start();
+
+  // Auto-stop after 60 seconds
+  setTimeout(() => {
+    if (btn.classList.contains('recording')) {
+      recognition.stop();
+    }
+  }, 60000);
+}
+
+/* ===== ADMIN GATE ===== */
+(function() {
+  let clicks = 0;
+  let timer = null;
+  document.getElementById('adminGate').addEventListener('click', function(e) {
+    e.preventDefault();
+    clicks++;
+    clearTimeout(timer);
+    if (clicks >= 5) {
+      clicks = 0;
+      window.location.href = 'admin.html';
+    }
+    timer = setTimeout(() => { clicks = 0; }, 2000);
+  });
+})();
+
+function toggleTheme() {
+  var html = document.documentElement;
+  var btn = document.querySelector('.theme-toggle');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.removeAttribute('data-theme');
+    btn.textContent = '☽'; // moon
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    btn.textContent = '☀'; // sun
+  }
+}
+// Respect system preference
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.documentElement.setAttribute('data-theme', 'dark');
+  var btn = document.querySelector('.theme-toggle');
+  if (btn) btn.textContent = '☀';
+}
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(function(){});
+}
+</script>
+
+</body>
+</html>

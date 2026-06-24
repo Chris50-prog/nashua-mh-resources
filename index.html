@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Greater Nashua Community Mental Health Resources</title>
+<meta name="description" content="Comprehensive mental health resources, services, and clinical tools for the Greater Nashua, NH community.">
+<meta property="og:title" content="Greater Nashua Community Mental Health Resources">
+<meta property="og:description" content="Comprehensive mental health resources, services, and clinical tools for the Greater Nashua, NH community.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="site-logo" id="siteLogo">
+      <div class="logo-icon">NH</div>
+      <span>Greater Nashua MH Resources</span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="resources.html" class="nav-link">Resources</a>
+      <a href="tools.html" class="nav-link">Clinical Tools</a>
+      <a href="guide.html" class="nav-link">How-To Guides</a>
+      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">&#9789;</button>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>Greater Nashua Community Mental Health Resources</h1>
+    <p>A comprehensive guide for clinicians, case managers, and community members. Find services, learn processes, access clinical tools.</p>
+    <div class="hero-search">
+      <input type="text" id="heroSearch" placeholder="Search resources, services, phone numbers..." autocomplete="off">
+      <button onclick="performSearch()">Search</button>
+    </div>
+  </div>
+</section>
+
+<div class="page-container" id="main-content">
+
+  <!-- Crisis Banner -->
+  <div class="crisis-banner">
+    <div class="crisis-banner-icon">!</div>
+    <div class="crisis-banner-content">
+      <div class="crisis-banner-title">Crisis? Get Help Now</div>
+      <div class="crisis-banner-numbers">
+        <strong>988</strong> Suicide & Crisis Lifeline &nbsp;|&nbsp;
+        <strong>1-833-710-6477</strong> NH Rapid Response &nbsp;|&nbsp;
+        <strong>(603) 889-6147</strong> GNMHC Crisis &nbsp;|&nbsp;
+        <strong>Text HOME to 741741</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Triage Guide -->
+  <div class="section-header">
+    <h2>Quick Triage Guide</h2>
+    <span class="section-count">What's the situation?</span>
+  </div>
+  <div class="grid-3" style="margin-bottom:32px">
+    <div class="triage-card">
+      <div class="triage-scenario">Client in psychiatric crisis</div>
+      <div class="triage-action">Call <strong>NH Rapid Response 1-833-710-6477</strong> for MCRT dispatch. Immediate danger? Call 911. Already in ED? Request ACCESS psychiatric assessment.</div>
+    </div>
+    <div class="triage-card">
+      <div class="triage-scenario">Client needs MH treatment</div>
+      <div class="triage-action">Call <strong>GNMHC (603) 889-6147</strong> for intake. For PHP/IOP: <strong>Discover Health Group (603) 402-7551</strong> or Southern NH Health.</div>
+    </div>
+    <div class="triage-card">
+      <div class="triage-scenario">Client needs SUD treatment now</div>
+      <div class="triage-action">Call <strong>NH Doorway (603) 836-6540</strong> for same-day assessment and bed placement. They access the statewide treatment bed board.</div>
+    </div>
+    <div class="triage-card">
+      <div class="triage-scenario">Client is homeless tonight</div>
+      <div class="triage-action">Call <strong>2-1-1</strong> for coordinated entry. Direct to <strong>Nashua Soup Kitchen & Shelter (603) 889-7770</strong>. DV? <strong>Bridges (603) 883-3044</strong>.</div>
+    </div>
+    <div class="triage-card">
+      <div class="triage-scenario">Client needs food today</div>
+      <div class="triage-action"><strong>Nashua Soup Kitchen & Shelter, 2 Quincy St</strong> — daily meals, no questions asked. SNAP: apply at <strong>nheasy.nh.gov</strong> or DHHS 137 Temple St.</div>
+    </div>
+    <div class="triage-card">
+      <div class="triage-scenario">Client is uninsured</div>
+      <div class="triage-action"><strong>Harbor Care (603) 882-3616</strong> for medical/dental/BH (FQHC, sliding-scale). Insurance: apply at <strong>nheasy.nh.gov</strong> or visit DHHS.</div>
+    </div>
+    <div class="triage-card">
+      <div class="triage-scenario">Client is undocumented</div>
+      <div class="triage-action"><strong>Harbor Care</strong> serves everyone regardless of status. <strong>Catholic Charities (603) 669-3030</strong> for immigration legal help.</div>
+    </div>
+    <div class="triage-card">
+      <div class="triage-scenario">Client needs SSI/SSDI</div>
+      <div class="triage-action"><strong>SSA 1-800-772-1213</strong> or visit 70 Commercial St, Nashua. Provide detailed functional assessment letter. Consider disability attorney if denied.</div>
+    </div>
+    <div class="triage-card">
+      <div class="triage-scenario">Client is a DV survivor</div>
+      <div class="triage-action"><strong>Bridges crisis line (603) 883-3044</strong>, 24/7. Coordinates shelter, safety planning, legal advocacy, and all related needs.</div>
+    </div>
+    <div class="triage-card">
+      <div class="triage-scenario">Client is a veteran</div>
+      <div class="triage-action"><strong>Manchester VA (603) 624-4366</strong>. Housing: Harbor Care veteran programs. Crisis: <strong>988, press 1</strong>.</div>
+    </div>
+    <div class="triage-card">
+      <div class="triage-scenario">Elderly client needs services</div>
+      <div class="triage-action"><strong>ServiceLink (603) 889-6220</strong> — one-stop shop for all aging and disability services, benefits, and care coordination.</div>
+    </div>
+    <div class="triage-card">
+      <div class="triage-scenario">Don't know where to start?</div>
+      <div class="triage-action">Call <strong>2-1-1</strong>. Available 24/7, specialists search the entire NH resource database. They'll connect you to the right place.</div>
+    </div>
+  </div>
+
+  <!-- Resource Categories -->
+  <div class="section-header">
+    <h2>Browse by Category</h2>
+    <a href="resources.html" class="btn btn-sm btn-outline">View All Resources</a>
+  </div>
+  <div class="grid-4" style="margin-bottom:32px">
+    <a href="resources.html#crisis" class="card" style="text-decoration:none">
+      <div class="card-header">
+        <div class="card-icon" style="background:var(--danger-light);color:var(--danger)">&#9888;</div>
+        <div><div class="card-title">Crisis Services</div><div class="card-subtitle">988, MCRT, Emergency Psych</div></div>
+      </div>
+    </a>
+    <a href="resources.html#mentalhealth" class="card" style="text-decoration:none">
+      <div class="card-header">
+        <div class="card-icon" style="background:var(--accent-light);color:var(--accent)">&#9829;</div>
+        <div><div class="card-title">Mental Health</div><div class="card-subtitle">Outpatient, PHP, Psychiatry</div></div>
+      </div>
+    </a>
+    <a href="resources.html#substance" class="card" style="text-decoration:none">
+      <div class="card-header">
+        <div class="card-icon" style="background:var(--purple-light);color:var(--purple)">&#9883;</div>
+        <div><div class="card-title">Substance Use</div><div class="card-subtitle">Detox, MAT, Recovery</div></div>
+      </div>
+    </a>
+    <a href="resources.html#housing" class="card" style="text-decoration:none">
+      <div class="card-header">
+        <div class="card-icon" style="background:var(--warning-light);color:var(--warning)">&#9750;</div>
+        <div><div class="card-title">Housing</div><div class="card-subtitle">Shelters, Section 8, PSH</div></div>
+      </div>
+    </a>
+    <a href="resources.html#food" class="card" style="text-decoration:none">
+      <div class="card-header">
+        <div class="card-icon" style="background:var(--success-light);color:var(--success)">&#9733;</div>
+        <div><div class="card-title">Food Security</div><div class="card-subtitle">Pantries, SNAP, Meals</div></div>
+      </div>
+    </a>
+    <a href="resources.html#medical" class="card" style="text-decoration:none">
+      <div class="card-header">
+        <div class="card-icon" style="background:var(--teal-light);color:var(--teal)">&#9764;</div>
+        <div><div class="card-title">Medical / Dental</div><div class="card-subtitle">FQHCs, Free Clinics</div></div>
+      </div>
+    </a>
+    <a href="resources.html#legal" class="card" style="text-decoration:none">
+      <div class="card-header">
+        <div class="card-icon" style="background:#fef3c7;color:#92400e">&#9878;</div>
+        <div><div class="card-title">Legal Services</div><div class="card-subtitle">Legal Aid, Advocacy</div></div>
+      </div>
+    </a>
+    <a href="resources.html#employment" class="card" style="text-decoration:none">
+      <div class="card-header">
+        <div class="card-icon" style="background:#e0e7ff;color:#4338ca">&#9881;</div>
+        <div><div class="card-title">Employment</div><div class="card-subtitle">Job Training, Vocational Rehab</div></div>
+      </div>
+    </a>
+    <a href="resources.html#insurance" class="card" style="text-decoration:none">
+      <div class="card-header">
+        <div class="card-icon" style="background:#dbeafe;color:#1d4ed8">&#9993;</div>
+        <div><div class="card-title">Health Insurance</div><div class="card-subtitle">Medicaid, Marketplace</div></div>
+      </div>
+    </a>
+    <a href="resources.html#transport" class="card" style="text-decoration:none">
+      <div class="card-header">
+        <div class="card-icon" style="background:#fce7f3;color:#be185d">&#9992;</div>
+        <div><div class="card-title">Transportation</div><div class="card-subtitle">Transit, Medical Transport</div></div>
+      </div>
+    </a>
+    <a href="resources.html#youth" class="card" style="text-decoration:none">
+      <div class="card-header">
+        <div class="card-icon" style="background:#fef9c3;color:#a16207">&#9786;</div>
+        <div><div class="card-title">Youth Services</div><div class="card-subtitle">Youth MH, Mentoring</div></div>
+      </div>
+    </a>
+    <a href="resources.html#veterans" class="card" style="text-decoration:none">
+      <div class="card-header">
+        <div class="card-icon" style="background:#ecfdf5;color:#047857">&#9734;</div>
+        <div><div class="card-title">Veterans</div><div class="card-subtitle">VA, Vet Programs</div></div>
+      </div>
+    </a>
+  </div>
+
+  <!-- Clinical Tools Preview -->
+  <div class="section-header">
+    <h2>Clinical Tools</h2>
+    <a href="tools.html" class="btn btn-sm btn-outline">Browse All Tools</a>
+  </div>
+  <div class="grid-3" style="margin-bottom:32px">
+    <a href="tools.html#cbt" class="tool-card" style="text-decoration:none;color:inherit">
+      <div class="tool-card-color" style="background:var(--accent)"></div>
+      <div class="tool-card-body">
+        <h3>CBT Worksheets</h3>
+        <p>Thought records, cognitive distortions, behavioral activation, Socratic questioning guides</p>
+        <div class="tool-tags">
+          <span class="resource-tag">Interactive</span>
+          <span class="resource-tag">Printable</span>
+        </div>
+      </div>
+    </a>
+    <a href="tools.html#dbt" class="tool-card" style="text-decoration:none;color:inherit">
+      <div class="tool-card-color" style="background:var(--teal)"></div>
+      <div class="tool-card-body">
+        <h3>DBT Skills</h3>
+        <p>Mindfulness, distress tolerance, emotion regulation, interpersonal effectiveness exercises</p>
+        <div class="tool-tags">
+          <span class="resource-tag">Interactive</span>
+          <span class="resource-tag">Client Handout</span>
+        </div>
+      </div>
+    </a>
+    <a href="tools.html#mi" class="tool-card" style="text-decoration:none;color:inherit">
+      <div class="tool-card-color" style="background:var(--purple)"></div>
+      <div class="tool-card-body">
+        <h3>Motivational Interviewing</h3>
+        <p>OARS techniques, change talk recognition, decisional balance, readiness rulers</p>
+        <div class="tool-tags">
+          <span class="resource-tag">Prompts</span>
+          <span class="resource-tag">Quick Reference</span>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <!-- Key Phone Directory -->
+  <button class="btn btn-primary" onclick="printPocketGuide()" style="margin-bottom:16px">&#128424; Print Pocket Reference Card</button>
+  <div class="section-header">
+    <h2>Key Phone Numbers</h2>
+  </div>
+  <div class="card" style="margin-bottom:32px">
+    <div class="card-body" style="padding:0">
+      <table class="phone-table">
+        <thead>
+          <tr><th>Service</th><th>Phone</th><th>Hours</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>988 Suicide & Crisis Lifeline</td><td class="phone-number">988</td><td>24/7</td></tr>
+          <tr><td>NH Rapid Response (Crisis/MCRT)</td><td class="phone-number">1-833-710-6477</td><td>24/7</td></tr>
+          <tr><td>GNMHC Crisis Line</td><td class="phone-number">(603) 889-6147</td><td>24/7</td></tr>
+          <tr><td>211 NH (all resource referrals)</td><td class="phone-number">2-1-1</td><td>24/7</td></tr>
+          <tr><td>Harbor Care (health/housing/recovery)</td><td class="phone-number">(603) 882-3616</td><td>M-F</td></tr>
+          <tr><td>NH Doorway (substance use)</td><td class="phone-number">(603) 836-6540</td><td>24/7</td></tr>
+          <tr><td>ServiceLink (aging/disability)</td><td class="phone-number">(603) 889-6220</td><td>M-F</td></tr>
+          <tr><td>Bridges DV Crisis</td><td class="phone-number">(603) 883-3044</td><td>24/7</td></tr>
+          <tr><td>NH DHHS (Medicaid/SNAP/TANF)</td><td class="phone-number">1-844-275-3447</td><td>M-F</td></tr>
+          <tr><td>Southern NH Medical Center</td><td class="phone-number">(603) 577-2000</td><td>24/7 ED</td></tr>
+          <tr><td>Nashua Housing Authority</td><td class="phone-number">(603) 883-5661</td><td>M-F</td></tr>
+          <tr><td>Manchester VA</td><td class="phone-number">(603) 624-4366</td><td>M-F</td></tr>
+          <tr><td>NAMI NH</td><td class="phone-number">(603) 225-5359</td><td>M-F</td></tr>
+          <tr><td>Crisis Text Line</td><td class="phone-number">Text HOME to 741741</td><td>24/7</td></tr>
+          <tr><td>Child Abuse Reporting</td><td class="phone-number">1-800-894-5533</td><td>24/7</td></tr>
+          <tr><td>Adult Protective Services</td><td class="phone-number">1-800-949-0470</td><td>24/7</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Pocket Guide (hidden, shown only when printing) -->
+  <div id="pocketGuide" style="display:none">
+    <div class="pg-header">
+      <h1>Greater Nashua MH Quick Reference</h1>
+    </div>
+
+    <div class="pg-crisis">
+      <strong>CRISIS LINES</strong>
+      <span><b>988</b> Suicide &amp; Crisis Lifeline</span> &bull;
+      <span><b>1-833-710-6477</b> NH Rapid Response</span> &bull;
+      <span><b>(603) 889-6147</b> GNMHC Crisis</span> &bull;
+      <span><b>Text HOME to 741741</b></span>
+    </div>
+
+    <h2 class="pg-section-title">Phone Directory</h2>
+    <div class="pg-phones">
+      <table>
+        <tr><td>988 Suicide &amp; Crisis Lifeline</td><td><b>988</b></td><td>24/7</td></tr>
+        <tr><td>NH Rapid Response (MCRT)</td><td><b>1-833-710-6477</b></td><td>24/7</td></tr>
+        <tr><td>GNMHC Crisis Line</td><td><b>(603) 889-6147</b></td><td>24/7</td></tr>
+        <tr><td>211 NH (referrals)</td><td><b>2-1-1</b></td><td>24/7</td></tr>
+        <tr><td>Harbor Care</td><td><b>(603) 882-3616</b></td><td>M-F</td></tr>
+        <tr><td>NH Doorway (SUD)</td><td><b>(603) 836-6540</b></td><td>24/7</td></tr>
+        <tr><td>ServiceLink (aging)</td><td><b>(603) 889-6220</b></td><td>M-F</td></tr>
+        <tr><td>Bridges DV Crisis</td><td><b>(603) 883-3044</b></td><td>24/7</td></tr>
+        <tr><td>NH DHHS</td><td><b>1-844-275-3447</b></td><td>M-F</td></tr>
+        <tr><td>Southern NH Medical Ctr</td><td><b>(603) 577-2000</b></td><td>24/7 ED</td></tr>
+        <tr><td>Nashua Housing Auth.</td><td><b>(603) 883-5661</b></td><td>M-F</td></tr>
+        <tr><td>Manchester VA</td><td><b>(603) 624-4366</b></td><td>M-F</td></tr>
+        <tr><td>NAMI NH</td><td><b>(603) 225-5359</b></td><td>M-F</td></tr>
+        <tr><td>Crisis Text Line</td><td><b>Text HOME to 741741</b></td><td>24/7</td></tr>
+        <tr><td>Child Abuse Reporting</td><td><b>1-800-894-5533</b></td><td>24/7</td></tr>
+        <tr><td>Adult Protective Svcs</td><td><b>1-800-949-0470</b></td><td>24/7</td></tr>
+      </table>
+    </div>
+
+    <h2 class="pg-section-title">Quick Triage</h2>
+    <div class="pg-triage">
+      <div class="pg-triage-item"><b>Psychiatric crisis</b> &mdash; NH Rapid Response 1-833-710-6477; danger? 911; in ED? Request ACCESS assessment</div>
+      <div class="pg-triage-item"><b>MH treatment</b> &mdash; GNMHC (603) 889-6147 intake; PHP/IOP: Discover Health (603) 402-7551</div>
+      <div class="pg-triage-item"><b>SUD treatment now</b> &mdash; NH Doorway (603) 836-6540 same-day assessment &amp; bed placement</div>
+      <div class="pg-triage-item"><b>Homeless tonight</b> &mdash; 2-1-1 coordinated entry; Nashua Soup Kitchen (603) 889-7770; DV: Bridges (603) 883-3044</div>
+      <div class="pg-triage-item"><b>Food today</b> &mdash; Nashua Soup Kitchen, 2 Quincy St (daily meals); SNAP: nheasy.nh.gov</div>
+      <div class="pg-triage-item"><b>Uninsured</b> &mdash; Harbor Care (603) 882-3616 (FQHC, sliding-scale); insurance: nheasy.nh.gov</div>
+      <div class="pg-triage-item"><b>Undocumented</b> &mdash; Harbor Care (all welcome); Catholic Charities (603) 669-3030 immigration legal</div>
+      <div class="pg-triage-item"><b>SSI/SSDI</b> &mdash; SSA 1-800-772-1213 or 70 Commercial St; provide functional assessment letter</div>
+      <div class="pg-triage-item"><b>DV survivor</b> &mdash; Bridges (603) 883-3044 24/7; shelter, safety planning, legal advocacy</div>
+      <div class="pg-triage-item"><b>Veteran</b> &mdash; Manchester VA (603) 624-4366; housing: Harbor Care; crisis: 988 press 1</div>
+      <div class="pg-triage-item"><b>Elderly services</b> &mdash; ServiceLink (603) 889-6220; aging, disability, benefits, care coordination</div>
+      <div class="pg-triage-item"><b>Don't know where to start?</b> &mdash; Call 2-1-1 (24/7), specialists search entire NH resource database</div>
+    </div>
+
+    <div class="pg-footer">Last updated: June 2026 &nbsp;|&nbsp; Greater Nashua Community Mental Health Resources</div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <p>Greater Nashua Community Mental Health Resources &copy; 2026. For informational purposes only.</p>
+  <p>Contact information and services may change. Always verify by contacting organizations directly.</p>
+  <p style="margin-top:8px"><a href="#" id="adminGate" style="color:var(--text-muted);font-size:11px" aria-label="Version 2.0 - Admin access">v2.0</a></p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// Search
+function performSearch() {
+  const q = document.getElementById('heroSearch').value.trim();
+  if (q) window.location.href = 'resources.html?q=' + encodeURIComponent(q);
+}
+document.getElementById('heroSearch').addEventListener('keydown', e => { if(e.key==='Enter') performSearch(); });
+
+// Pocket Guide print
+function printPocketGuide() {
+  var guide = document.getElementById('pocketGuide');
+  guide.style.display = 'block';
+  document.body.classList.add('printing-pocket-guide');
+  window.print();
+  guide.style.display = 'none';
+  document.body.classList.remove('printing-pocket-guide');
+}
+
+// Admin gate — triple-click the version number in footer
+let adminClicks = 0;
+let adminTimer = null;
+document.getElementById('adminGate').addEventListener('click', function(e) {
+  e.preventDefault();
+  adminClicks++;
+  clearTimeout(adminTimer);
+  if (adminClicks >= 5) {
+    adminClicks = 0;
+    window.location.href = 'admin.html';
+  }
+  adminTimer = setTimeout(() => { adminClicks = 0; }, 2000);
+});
+
+function toggleTheme() {
+  var html = document.documentElement;
+  var btn = document.querySelector('.theme-toggle');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.removeAttribute('data-theme');
+    btn.textContent = '☽'; // moon
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    btn.textContent = '☀'; // sun
+  }
+}
+// Respect system preference
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.documentElement.setAttribute('data-theme', 'dark');
+  var btn = document.querySelector('.theme-toggle');
+  if (btn) btn.textContent = '☀';
+}
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(function(){});
+}
+</script>
+
+</body>
+</html>
