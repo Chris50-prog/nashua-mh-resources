@@ -73,12 +73,17 @@
       <div class="logo-icon">NH</div>
       <span>Greater Nashua MH Resources</span>
     </a>
-    <nav class="nav-links">
+    <div class="header-actions">
+      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">&#9789;</button>
+      <button class="hamburger-btn" onclick="var h=this.closest('.site-header');h.classList.toggle('nav-open');this.setAttribute('aria-expanded',h.classList.contains('nav-open'))" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="hamburger-bar"></span><span class="hamburger-bar"></span><span class="hamburger-bar"></span>
+      </button>
+    </div>
+    <nav class="nav-links" id="navLinks">
       <a href="index.html" class="nav-link">Home</a>
       <a href="resources.html" class="nav-link">Resources</a>
       <a href="tools.html" class="nav-link">Clinical Tools</a>
       <a href="guide.html" class="nav-link">How-To Guides</a>
-      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">&#9789;</button>
     </nav>
   </div>
 </header>

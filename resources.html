@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<script src="js/auth-gate.js"></script>
 
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
@@ -25,12 +26,18 @@
       <div class="logo-icon">NH</div>
       <span>Greater Nashua MH Resources</span>
     </a>
-    <nav class="nav-links">
+    <div class="header-actions">
+      <button class="search-toggle" onclick="toggleGlobalSearch()" title="Search this page (Ctrl+K)" aria-label="Search this page"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">&#9789;</button>
+      <button class="hamburger-btn" onclick="var h=this.closest('.site-header');h.classList.toggle('nav-open');this.setAttribute('aria-expanded',h.classList.contains('nav-open'))" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="hamburger-bar"></span><span class="hamburger-bar"></span><span class="hamburger-bar"></span>
+      </button>
+    </div>
+    <nav class="nav-links" id="navLinks">
       <a href="index.html" class="nav-link">Home</a>
       <a href="resources.html" class="nav-link active">Resources</a>
       <a href="tools.html" class="nav-link">Clinical Tools</a>
       <a href="guide.html" class="nav-link">How-To Guides</a>
-      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">&#9789;</button>
     </nav>
   </div>
 </header>
@@ -89,6 +96,13 @@
     <button class="category-btn" data-target="benefits">Benefits / Financial</button>
     <button class="category-btn" data-target="peer">Peer Support</button>
     <button class="category-btn" data-target="immigration">Immigration</button>
+    <button class="category-btn" data-target="medicaid">Medicaid / Insurance Nav</button>
+    <button class="category-btn" data-target="medication">Medication Reference</button>
+    <button class="category-btn" data-target="wraparound">Wraparound Services</button>
+    <button class="category-btn" data-target="geriatric">Geriatric MH</button>
+    <button class="category-btn" data-target="lgbtq">LGBTQ+ Affirming</button>
+    <button class="category-btn" data-target="refugee">Refugee / Immigrant MH</button>
+    <button class="category-btn" data-target="vetmh">Veteran MH</button>
   </div>
 
   <!-- ============================================================ -->
@@ -2937,6 +2951,1227 @@
     </div>
   </div>
 
+  <!-- ============================================================ -->
+  <!-- 19. NH MEDICAID / INSURANCE NAVIGATION (W21) -->
+  <!-- ============================================================ -->
+  <div class="resource-section" id="medicaid">
+    <div class="section-header">
+      <h2>NH Medicaid / Insurance Navigation</h2>
+      <span class="section-count">7 resources</span>
+    </div>
+    <div class="grid-2">
+
+      <!-- Medicaid Enrollment -->
+      <div class="resource-card" data-category="medicaid">
+        <h3>NH Medicaid Enrollment (NH Easy)</h3>
+        <div class="resource-phone"><a href="tel:+18442753447">1-844-275-3447</a></div>
+        <div class="resource-meta">Apply: <a href="https://nheasy.nh.gov" target="_blank" rel="noopener">nheasy.nh.gov</a> | DHHS: 137 Temple St, Nashua, NH 03060 | Mon-Fri 8 AM - 4:30 PM</div>
+        <div class="resource-desc"><strong>Traditional Medicaid:</strong> children, pregnant women, elderly, disabled. <strong>Granite Advantage (Medicaid expansion):</strong> adults 19-64 with income up to 138% FPL (~$20,783/yr individual in 2026). <strong>CHIP:</strong> children in families up to 318% FPL. Presumptive eligibility available for pregnant women (same-day temporary coverage).</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Medicaid</span>
+          <span class="resource-tag">Granite Advantage</span>
+          <span class="resource-tag">CHIP</span>
+          <span class="resource-tag">Apply Online</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Step-by-Step Enrollment Process</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <div class="steps">
+              <div class="step"><div class="step-content">Go to <strong><a href="https://nheasy.nh.gov" target="_blank" rel="noopener">nheasy.nh.gov</a></strong> and create an account (or visit DHHS at 137 Temple St, Nashua)</div></div>
+              <div class="step"><div class="step-content">Complete application: household size, income, citizenship/immigration status, disability information</div></div>
+              <div class="step"><div class="step-content">Upload verification documents: ID, proof of income (pay stubs, tax return), proof of residency, Social Security numbers</div></div>
+              <div class="step"><div class="step-content">Processing: typically 30-45 days; faster for pregnant women and children</div></div>
+              <div class="step"><div class="step-content">Once approved, choose a Managed Care Organization (MCO): NH Healthy Families, Well Sense, or AmeriHealth Caritas</div></div>
+              <div class="step"><div class="step-content">If not chosen within 30 days, auto-assigned to an MCO (can switch within 90 days)</div></div>
+            </div>
+            <p style="margin-top:10px;font-size:13px;color:var(--text-secondary)"><em>Clinician note: Many clients need hands-on help with the application. Harbor Care and ServiceLink can assist with enrollment. Homeless clients can use a shelter address or care-of address.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Managed Care Organizations -->
+      <div class="resource-card" data-category="medicaid">
+        <h3>NH Medicaid Managed Care Organizations (MCOs)</h3>
+        <div class="resource-phone">NH Healthy Families: <a href="tel:+18667693085">1-866-769-3085</a> | Well Sense: <a href="tel:+18779571300">1-877-957-1300</a> | AmeriHealth Caritas: <a href="tel:+18337097390">1-833-709-7390</a></div>
+        <div class="resource-meta"><a href="https://nhhealthyfamilies.com" target="_blank" rel="noopener">nhhealthyfamilies.com</a> | <a href="https://wellsense.org" target="_blank" rel="noopener">wellsense.org</a> | <a href="https://amerihealthcaritasnh.com" target="_blank" rel="noopener">amerihealthcaritasnh.com</a></div>
+        <div class="resource-desc">All three MCOs cover: outpatient MH therapy, psychiatric medication management, PHP/IOP, inpatient psychiatric, substance use treatment, MAT, non-emergency medical transportation (NEMT). Key differences exist in provider networks, prior authorization requirements, and care coordination programs. Each MCO has a behavioral health member services line for provider questions.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">MCO</span>
+          <span class="resource-tag">Well Sense</span>
+          <span class="resource-tag">AmeriHealth</span>
+          <span class="resource-tag">NH Healthy Families</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>MCO Comparison Notes</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>NH Healthy Families (Centene):</strong> Largest MCO in NH. Behavioral health managed through Centurion. Generally broad provider network.</p>
+            <p style="margin-top:6px"><strong>Well Sense (BMC HealthNet):</strong> Strong in integrated care. Care management programs for high-need members. Good behavioral health network.</p>
+            <p style="margin-top:6px"><strong>AmeriHealth Caritas:</strong> Newest NH MCO. Focus on social determinants. Community health worker programs available.</p>
+            <p style="margin-top:10px;font-size:13px;color:var(--text-secondary)"><em>Clinician note: If a client is having trouble finding an in-network provider, call the MCO's behavioral health line. They are required to help with provider access. Document all access problems for potential single-case agreements.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prior Authorization -->
+      <div class="resource-card" data-category="medicaid">
+        <h3>Prior Authorization for MH Services</h3>
+        <div class="resource-phone">Call client's MCO (see above)</div>
+        <div class="resource-meta">Requirements vary by MCO and service level</div>
+        <div class="resource-desc"><strong>Typically NO prior auth needed:</strong> outpatient therapy (initial sessions), psychiatric evaluation, crisis services, medication management. <strong>Typically REQUIRES prior auth:</strong> PHP, IOP, residential treatment, neuropsychological testing, extended outpatient beyond session limits, ABA therapy, some specialized therapies. Auth turnaround: urgent 24-72 hours, standard 5-14 days.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Prior Auth</span>
+          <span class="resource-tag">MCO Requirements</span>
+          <span class="resource-tag">Clinician Resource</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Prior Auth Tips for Clinicians</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <div class="steps">
+              <div class="step"><div class="step-content">Always verify current auth requirements by calling the MCO provider line &mdash; requirements change frequently</div></div>
+              <div class="step"><div class="step-content">Include diagnosis (ICD-10), current GAF/WHODAS score, treatment history, and medical necessity justification</div></div>
+              <div class="step"><div class="step-content">For urgent requests, specify &ldquo;urgent&rdquo; and provide clinical justification (risk of hospitalization, safety concerns)</div></div>
+              <div class="step"><div class="step-content">Document all prior auth request dates and reference numbers</div></div>
+              <div class="step"><div class="step-content">If denied, you have 30 days to appeal; request peer-to-peer review immediately</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Appeals Process -->
+      <div class="resource-card" data-category="medicaid">
+        <h3>Insurance Denial Appeals Process</h3>
+        <div class="resource-phone">NH Insurance Dept: <a href="tel:+16032713305">603-271-3305</a> | <a href="tel:+18008520401">1-800-852-0401</a></div>
+        <div class="resource-meta"><a href="https://nh.gov/insurance" target="_blank" rel="noopener">nh.gov/insurance</a></div>
+        <div class="resource-desc">All members have the right to appeal any denial. Medicaid members also have the right to a fair hearing through DHHS. Private insurance denials can be escalated to the NH Insurance Department for external review.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Appeals</span>
+          <span class="resource-tag">Denials</span>
+          <span class="resource-tag">Fair Hearing</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Step-by-Step Appeals Process</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <div class="steps">
+              <div class="step"><div class="step-content"><strong>Step 1 &mdash; Peer-to-Peer Review:</strong> Request immediately upon denial. Your clinician speaks directly with the MCO's reviewing clinician. Often resolves quickly.</div></div>
+              <div class="step"><div class="step-content"><strong>Step 2 &mdash; Internal Appeal:</strong> Submit in writing within 30 days of denial. Include clinical documentation, treatment plan, and letter of medical necessity from treating provider.</div></div>
+              <div class="step"><div class="step-content"><strong>Step 3 &mdash; Medicaid Fair Hearing:</strong> If internal appeal fails, request a fair hearing through NH DHHS within 30 days. Hearings are before an administrative officer. Client and provider can testify.</div></div>
+              <div class="step"><div class="step-content"><strong>Step 4 &mdash; External Review (private insurance):</strong> File complaint with NH Insurance Department at <a href="tel:+16032713305">603-271-3305</a>. Independent review by physicians not affiliated with the insurer.</div></div>
+            </div>
+            <p style="margin-top:10px;font-size:13px;color:var(--text-secondary)"><em>Clinician note: Many denials are overturned on appeal. The Mental Health Parity and Addiction Equity Act (MHPAEA) requires that MH/SUD benefits are no more restrictive than medical/surgical benefits. If you suspect a parity violation, contact NAMI NH or the NH Insurance Department.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- NAMI Insurance Advocacy -->
+      <div class="resource-card" data-category="medicaid">
+        <h3>NAMI NH Insurance Advocacy</h3>
+        <div class="resource-phone"><a href="tel:+16032255359">(603) 225-5359</a> | <a href="tel:+18002426264">1-800-242-6264</a></div>
+        <div class="resource-meta"><a href="https://naminh.org" target="_blank" rel="noopener">naminh.org</a></div>
+        <div class="resource-desc">NAMI NH provides free assistance navigating insurance denials, filing appeals, understanding mental health parity rights, and connecting with legal resources for insurance disputes. Their helpline staff can walk families through the appeals process and provide template letters.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">NAMI</span>
+          <span class="resource-tag">Insurance Advocacy</span>
+          <span class="resource-tag">Parity</span>
+          <span class="resource-tag">Free</span>
+        </div>
+      </div>
+
+      <!-- Medicare MH Coverage -->
+      <div class="resource-card" data-category="medicaid">
+        <h3>Medicare Mental Health Coverage</h3>
+        <div class="resource-phone"><a href="tel:+18007721213">1-800-772-1213</a> (Medicare) | SHINE: <a href="tel:+18666349412">1-866-634-9412</a></div>
+        <div class="resource-meta"><a href="https://medicare.gov" target="_blank" rel="noopener">medicare.gov</a> | ServiceLink SHINE counselors for free help</div>
+        <div class="resource-desc"><strong>Part B covers:</strong> outpatient MH therapy (20% coinsurance after deductible), psychiatric medication management, PHP, annual depression screening, annual wellness visit with MH component. <strong>Part A covers:</strong> inpatient psychiatric (190 lifetime days in psych hospitals). <strong>Part D:</strong> most psychiatric medications (check formulary). Medicare Advantage (Part C) plans may have different networks and prior auth requirements.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Medicare</span>
+          <span class="resource-tag">Part B</span>
+          <span class="resource-tag">SHINE</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Key Medicare MH Details</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Finding a provider:</strong> Many MH providers do not accept Medicare due to low reimbursement rates. GNMHC accepts Medicare. Use <a href="https://medicare.gov/care-compare" target="_blank" rel="noopener">medicare.gov/care-compare</a> to search. ServiceLink SHINE counselors (<a href="tel:+18666349412">1-866-634-9412</a>) provide free insurance counseling.</p>
+            <p style="margin-top:6px"><strong>Dual-eligible (Medicare + Medicaid):</strong> Medicaid covers Medicare copays and deductibles. Some dual-eligible individuals qualify for Medicare Savings Programs that pay premiums.</p>
+            <p style="margin-top:10px;font-size:13px;color:var(--text-secondary)"><em>Clinician note: ServiceLink SHINE program offers free one-on-one Medicare counseling. Extremely helpful for elderly clients confused by Medicare coverage. Call <a href="tel:+18666349412">1-866-634-9412</a>.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sliding Scale / Uninsured -->
+      <div class="resource-card" data-category="medicaid">
+        <h3>Sliding Scale &amp; Uninsured Patient Options</h3>
+        <div class="resource-phone">Harbor Care: <a href="tel:+16038823616">(603) 882-3616</a> | GNMHC: <a href="tel:+16038896147">(603) 889-6147</a></div>
+        <div class="resource-meta">Multiple providers accept uninsured clients</div>
+        <div class="resource-desc"><strong>GNMHC:</strong> Sliding-scale fees based on income; no one turned away for inability to pay (mandated as CMHC). <strong>Harbor Care (FQHC):</strong> Sliding-scale as low as $0; serves all regardless of insurance or immigration status. <strong>Open Path Collective:</strong> $30-$80/session for therapy (<a href="https://openpathcollective.org" target="_blank" rel="noopener">openpathcollective.org</a>). <strong>Psychology Today:</strong> Filter by &ldquo;sliding scale&rdquo; and &ldquo;Nashua, NH.&rdquo; <strong>Hospital charity care:</strong> All NH hospitals must offer financial assistance to uninsured patients.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Sliding Scale</span>
+          <span class="resource-tag">Uninsured</span>
+          <span class="resource-tag">Low Cost</span>
+          <span class="resource-tag">FQHC</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- 20. MEDICATION QUICK REFERENCE (W22) -->
+  <!-- ============================================================ -->
+  <div class="resource-section" id="medication">
+    <div class="section-header">
+      <h2>Medication Quick Reference</h2>
+      <span class="section-count">7 resources</span>
+    </div>
+    <div class="grid-2">
+
+      <div class="resource-card" data-category="medication" style="grid-column:1/-1;background:var(--warning-bg, #fff8e1);border-left:4px solid var(--warning-color, #f59e0b)">
+        <h3 style="color:var(--warning-color, #d97706)">Important Disclaimer</h3>
+        <div class="resource-desc"><strong>This section is for quick reference only &mdash; always verify with current prescribing information, package inserts, and clinical pharmacology resources before making medication decisions.</strong> Dosing ranges reflect common adult outpatient use; individual patient factors (age, renal/hepatic function, comorbidities, drug interactions) require clinical judgment. This does not replace consultation with a psychiatrist or pharmacist.</div>
+      </div>
+
+      <!-- SSRIs/SNRIs -->
+      <div class="resource-card" data-category="medication">
+        <h3>SSRIs / SNRIs</h3>
+        <div class="resource-phone">Prescribing info: <a href="https://dailymed.nlm.nih.gov" target="_blank" rel="noopener">dailymed.nlm.nih.gov</a></div>
+        <div class="resource-meta">First-line for depression, anxiety disorders, OCD, PTSD</div>
+        <div class="resource-desc">Selective Serotonin Reuptake Inhibitors (SSRIs) and Serotonin-Norepinephrine Reuptake Inhibitors (SNRIs) are typically first-line pharmacotherapy for depression and most anxiety disorders.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Antidepressant</span>
+          <span class="resource-tag">First-Line</span>
+          <span class="resource-tag">Depression</span>
+          <span class="resource-tag">Anxiety</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Common SSRIs / SNRIs Reference</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>SSRIs:</strong></p>
+            <ul style="margin:6px 0 10px 20px;font-size:14px">
+              <li><strong>Sertraline (Zoloft):</strong> 25-200 mg/day. First-line for many conditions. Generally well tolerated. Common: GI upset, sexual dysfunction, insomnia. FDA-approved for MDD, OCD, panic, PTSD, social anxiety, PMDD.</li>
+              <li style="margin-top:4px"><strong>Escitalopram (Lexapro):</strong> 5-20 mg/day. Clean side-effect profile. Common: nausea, headache, sexual dysfunction. Fewer drug interactions than some SSRIs.</li>
+              <li style="margin-top:4px"><strong>Fluoxetine (Prozac):</strong> 10-80 mg/day. Long half-life (good if adherence is an issue, less withdrawal). Activating. Can be disruptive to sleep. More drug interactions (CYP2D6 inhibitor).</li>
+              <li style="margin-top:4px"><strong>Paroxetine (Paxil):</strong> 10-60 mg/day. More sedating. Significant withdrawal if stopped abruptly. Higher anticholinergic effects. Avoid in pregnancy (Category D). Weight gain common.</li>
+              <li style="margin-top:4px"><strong>Fluvoxamine (Luvox):</strong> 50-300 mg/day. Primarily used for OCD. Significant drug interactions (CYP1A2 inhibitor).</li>
+              <li style="margin-top:4px"><strong>Citalopram (Celexa):</strong> 10-40 mg/day. Max 20 mg in patients over 60 (QTc prolongation risk). Similar to escitalopram but more side effects.</li>
+            </ul>
+            <p><strong>SNRIs:</strong></p>
+            <ul style="margin:6px 0 10px 20px;font-size:14px">
+              <li><strong>Venlafaxine (Effexor XR):</strong> 37.5-225 mg/day. Also helps neuropathic pain. Monitor blood pressure at higher doses. Significant withdrawal if stopped abruptly (taper slowly). Common: nausea, dizziness, sweating.</li>
+              <li style="margin-top:4px"><strong>Duloxetine (Cymbalta):</strong> 30-120 mg/day. Also approved for neuropathic pain, fibromyalgia. Avoid in hepatic impairment. Common: nausea, dry mouth, constipation.</li>
+              <li style="margin-top:4px"><strong>Desvenlafaxine (Pristiq):</strong> 50 mg/day (fixed dose). Active metabolite of venlafaxine. Fewer drug interactions.</li>
+            </ul>
+            <p style="margin-top:6px;font-size:13px;color:var(--text-secondary)"><em>All SSRIs/SNRIs carry a <strong>Black Box Warning</strong> for increased suicidality in children, adolescents, and young adults (under 25). Monitor closely during initiation and dose changes. Serotonin syndrome risk if combined with MAOIs, triptans, or other serotonergic agents.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Antipsychotics -->
+      <div class="resource-card" data-category="medication">
+        <h3>Antipsychotics (First &amp; Second Generation)</h3>
+        <div class="resource-phone">Prescribing info: <a href="https://dailymed.nlm.nih.gov" target="_blank" rel="noopener">dailymed.nlm.nih.gov</a></div>
+        <div class="resource-meta">Schizophrenia, bipolar, treatment-resistant depression, agitation</div>
+        <div class="resource-desc">First-generation (typical) antipsychotics primarily block D2 receptors. Second-generation (atypical) antipsychotics block both D2 and 5-HT2A receptors, generally with lower EPS risk but higher metabolic risk.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Antipsychotic</span>
+          <span class="resource-tag">Metabolic Monitoring</span>
+          <span class="resource-tag">EPS Risk</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Antipsychotic Reference &amp; Monitoring</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Second-Generation (Atypical) &mdash; most commonly prescribed:</strong></p>
+            <ul style="margin:6px 0 10px 20px;font-size:14px">
+              <li><strong>Risperidone (Risperdal):</strong> 0.5-6 mg/day. EPS risk increases above 4 mg. Prolactin elevation common. Available as LAI (Risperdal Consta).</li>
+              <li style="margin-top:4px"><strong>Quetiapine (Seroquel):</strong> 25-800 mg/day. Sedating (often used for sleep at low doses). Weight gain, metabolic syndrome. Low EPS risk. Also used for bipolar depression.</li>
+              <li style="margin-top:4px"><strong>Olanzapine (Zyprexa):</strong> 5-20 mg/day. Effective but highest weight gain and metabolic risk. Monitor glucose and lipids closely. Available as LAI (Zyprexa Relprevv &mdash; requires REMS).</li>
+              <li style="margin-top:4px"><strong>Aripiprazole (Abilify):</strong> 2-30 mg/day. Partial D2 agonist. Less weight gain and metabolic effects. Can be activating/akathisia. Available as LAI (Abilify Maintena, Aristada).</li>
+              <li style="margin-top:4px"><strong>Paliperidone (Invega):</strong> 3-12 mg/day. Active metabolite of risperidone. Available as monthly LAI (Invega Sustenna) and 3-month LAI (Invega Trinza).</li>
+              <li style="margin-top:4px"><strong>Clozapine (Clozaril):</strong> 150-900 mg/day. Gold standard for treatment-resistant schizophrenia. REQUIRES REMS: mandatory ANC monitoring (weekly x 6 months, then biweekly x 6 months, then monthly). Risk of agranulocytosis, myocarditis, seizures, metabolic syndrome.</li>
+            </ul>
+            <p><strong>First-Generation (Typical):</strong></p>
+            <ul style="margin:6px 0 10px 20px;font-size:14px">
+              <li><strong>Haloperidol (Haldol):</strong> 0.5-20 mg/day. High EPS risk. Available IM for acute agitation. Decanoate (LAI) for maintenance.</li>
+              <li style="margin-top:4px"><strong>Chlorpromazine (Thorazine):</strong> 50-800 mg/day. More sedating. Higher anticholinergic effects. Orthostatic hypotension.</li>
+              <li style="margin-top:4px"><strong>Fluphenazine (Prolixin):</strong> 1-20 mg/day. Available as decanoate (LAI).</li>
+            </ul>
+            <p style="margin-top:8px"><strong>Metabolic Monitoring Protocol (ADA/APA consensus):</strong></p>
+            <ul style="margin:6px 0 10px 20px;font-size:14px">
+              <li>Baseline: weight/BMI, waist circumference, blood pressure, fasting glucose, fasting lipid panel</li>
+              <li>4 weeks: weight/BMI</li>
+              <li>8 weeks: weight/BMI</li>
+              <li>12 weeks: weight/BMI, blood pressure, fasting glucose, fasting lipid panel</li>
+              <li>Annually: all of the above</li>
+              <li>Every 5 years (or sooner if risk factors): fasting lipids</li>
+            </ul>
+            <p style="margin-top:6px;font-size:13px;color:var(--text-secondary)"><em>All antipsychotics carry a <strong>Black Box Warning</strong> for increased mortality in elderly patients with dementia-related psychosis. Not FDA-approved for this use. Monitor for tardive dyskinesia (AIMS exam at baseline and every 6-12 months).</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mood Stabilizers -->
+      <div class="resource-card" data-category="medication">
+        <h3>Mood Stabilizers</h3>
+        <div class="resource-phone">Prescribing info: <a href="https://dailymed.nlm.nih.gov" target="_blank" rel="noopener">dailymed.nlm.nih.gov</a></div>
+        <div class="resource-meta">Bipolar disorder, mood dysregulation, impulse control</div>
+        <div class="resource-desc">Lithium and anticonvulsant mood stabilizers require regular lab monitoring. Narrow therapeutic indices mean drug levels must be checked routinely.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Mood Stabilizer</span>
+          <span class="resource-tag">Bipolar</span>
+          <span class="resource-tag">Lab Monitoring</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Mood Stabilizer Reference &amp; Labs</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <ul style="margin:6px 0 10px 20px;font-size:14px">
+              <li><strong>Lithium (Lithobid):</strong> 600-1800 mg/day. Therapeutic level: 0.6-1.2 mEq/L (acute mania up to 1.5). <strong>Labs:</strong> lithium level (trough, 12h post-dose), renal function (BUN/Cr), thyroid (TSH) &mdash; at baseline, every 1-2 weeks during titration, then every 3-6 months. Toxicity risk with dehydration, NSAIDs, ACE inhibitors, diuretics. Signs of toxicity: tremor, GI distress, confusion, ataxia. Requires reliable hydration.</li>
+              <li style="margin-top:6px"><strong>Valproic Acid / Divalproex (Depakote):</strong> 500-2500 mg/day. Therapeutic level: 50-125 mcg/mL. <strong>Labs:</strong> drug level, CBC with platelets, LFTs &mdash; at baseline, frequently during titration, then every 6-12 months. Hepatotoxicity risk (higher in children under 2). Teratogenic &mdash; <strong>avoid in women of childbearing potential</strong> (neural tube defects). Weight gain, hair loss, tremor, GI upset common.</li>
+              <li style="margin-top:6px"><strong>Lamotrigine (Lamictal):</strong> 25-400 mg/day. <strong>Must titrate very slowly</strong> (risk of Stevens-Johnson Syndrome, especially with rapid titration or valproate co-administration). Typical titration: 25 mg/day x 2 weeks, then 50 mg/day x 2 weeks, then increase by 50 mg every 1-2 weeks. Better for bipolar depression than mania. Generally well tolerated (less weight gain, less sedation). No routine lab monitoring required.</li>
+              <li style="margin-top:6px"><strong>Carbamazepine (Tegretol):</strong> 400-1600 mg/day. Therapeutic level: 4-12 mcg/mL. <strong>Labs:</strong> drug level, CBC, LFTs, electrolytes (hyponatremia risk) &mdash; at baseline and periodically. Potent CYP3A4 inducer (many drug interactions, reduces effectiveness of oral contraceptives). HLA-B*1502 screening recommended for patients of Asian descent (SJS risk).</li>
+            </ul>
+            <p style="margin-top:6px;font-size:13px;color:var(--text-secondary)"><em>Clinician note: Lithium and valproate both require pregnancy testing before initiation in women of childbearing age. Lamotrigine is the preferred mood stabilizer in pregnancy (Category C, lower teratogenic risk than valproate or lithium).</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Anxiolytics/Benzodiazepines -->
+      <div class="resource-card" data-category="medication">
+        <h3>Anxiolytics / Benzodiazepines</h3>
+        <div class="resource-phone">Prescribing info: <a href="https://dailymed.nlm.nih.gov" target="_blank" rel="noopener">dailymed.nlm.nih.gov</a></div>
+        <div class="resource-meta">Anxiety, panic, insomnia, acute agitation, seizures, alcohol withdrawal</div>
+        <div class="resource-desc">Benzodiazepines are effective but carry significant risks of dependence, tolerance, and withdrawal. Generally recommended for short-term or PRN use only. SSRIs/SNRIs are first-line for chronic anxiety disorders.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag" style="background:var(--danger-bg, #fef2f2);color:var(--danger-color, #dc2626)">Addiction Risk</span>
+          <span class="resource-tag">Anxiolytic</span>
+          <span class="resource-tag">Controlled</span>
+          <span class="resource-tag">Schedule IV</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Benzodiazepine Reference &amp; Warnings</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p style="color:var(--danger-color, #dc2626);font-weight:600">Black Box Warning: Concomitant use of benzodiazepines and opioids may result in profound sedation, respiratory depression, coma, and death.</p>
+            <ul style="margin:10px 0 10px 20px;font-size:14px">
+              <li><strong>Alprazolam (Xanax):</strong> 0.25-4 mg/day. Short-acting. High abuse potential. Difficult to discontinue. Avoid if possible.</li>
+              <li style="margin-top:4px"><strong>Lorazepam (Ativan):</strong> 0.5-6 mg/day. Intermediate-acting. No active metabolites (safer in hepatic impairment). Available IM. Commonly used in acute settings.</li>
+              <li style="margin-top:4px"><strong>Clonazepam (Klonopin):</strong> 0.25-4 mg/day. Longer-acting (less interdose rebound anxiety). Often used for panic disorder, social anxiety.</li>
+              <li style="margin-top:4px"><strong>Diazepam (Valium):</strong> 2-40 mg/day. Long-acting with active metabolites. Used in alcohol withdrawal protocols (CIWA). Accumulates in elderly.</li>
+            </ul>
+            <p style="margin-top:8px"><strong>Non-Benzodiazepine Anxiolytics (preferred for chronic use):</strong></p>
+            <ul style="margin:6px 0 10px 20px;font-size:14px">
+              <li><strong>Buspirone (Buspar):</strong> 10-60 mg/day (divided BID-TID). Takes 2-4 weeks for effect. No dependence risk. First-line non-SSRI for GAD. Does not work PRN.</li>
+              <li style="margin-top:4px"><strong>Hydroxyzine (Vistaril/Atarax):</strong> 25-100 mg PRN. Antihistamine with anxiolytic properties. Sedating. No dependence. Alternative to benzodiazepines for PRN anxiety.</li>
+              <li style="margin-top:4px"><strong>Gabapentin (Neurontin):</strong> 300-2400 mg/day. Used off-label for anxiety. Some abuse potential (now Schedule V in some states). Renal dosing required.</li>
+            </ul>
+            <p style="margin-top:6px;font-size:13px;color:var(--text-secondary)"><em>Clinician note: Before prescribing benzodiazepines, check the NH PDMP (Prescription Drug Monitoring Program). Taper benzodiazepines gradually &mdash; abrupt discontinuation can cause seizures. Generally reduce by 10-25% every 1-2 weeks. Elderly patients: increased fall risk, cognitive impairment, paradoxical agitation. Avoid if possible in patients with SUD history.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Drug Interactions -->
+      <div class="resource-card" data-category="medication">
+        <h3>Common Drug Interactions to Watch</h3>
+        <div class="resource-phone">Interaction checker: <a href="https://drugs.com/interactions.html" target="_blank" rel="noopener">drugs.com/interactions</a></div>
+        <div class="resource-meta">Always verify with pharmacy or clinical pharmacology resource</div>
+        <div class="resource-desc">Critical interactions in psychiatric prescribing that clinicians should be aware of during treatment planning and medication reconciliation.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Drug Interactions</span>
+          <span class="resource-tag">Safety</span>
+          <span class="resource-tag">Clinician Resource</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>High-Risk Interaction Pairs</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <ul style="margin:6px 0 10px 20px;font-size:14px">
+              <li><strong>SSRIs/SNRIs + MAOIs:</strong> Serotonin syndrome (potentially fatal). Minimum 14-day washout between MAOIs and most SSRIs. 5 weeks for fluoxetine (long half-life).</li>
+              <li style="margin-top:4px"><strong>SSRIs/SNRIs + Triptans:</strong> Serotonin syndrome risk. Monitor if co-prescribed.</li>
+              <li style="margin-top:4px"><strong>Benzodiazepines + Opioids:</strong> Respiratory depression, death. Black box warning on both classes.</li>
+              <li style="margin-top:4px"><strong>Lithium + NSAIDs:</strong> Increased lithium levels (toxicity risk). Monitor levels if NSAIDs required.</li>
+              <li style="margin-top:4px"><strong>Lithium + ACE inhibitors/ARBs:</strong> Increased lithium levels. Monitor closely.</li>
+              <li style="margin-top:4px"><strong>Lithium + Diuretics (especially thiazides):</strong> Increased lithium levels. Loop diuretics safer but still require monitoring.</li>
+              <li style="margin-top:4px"><strong>Carbamazepine + oral contraceptives:</strong> Reduced contraceptive effectiveness (enzyme induction). Counsel patients.</li>
+              <li style="margin-top:4px"><strong>Fluvoxamine + clozapine:</strong> Dramatically increased clozapine levels (CYP1A2 inhibition). Avoid combination or reduce clozapine dose significantly.</li>
+              <li style="margin-top:4px"><strong>Valproate + lamotrigine:</strong> Doubled lamotrigine levels. Must use slower titration schedule and lower target dose.</li>
+              <li style="margin-top:4px"><strong>QTc-prolonging combinations:</strong> Citalopram/escitalopram + antipsychotics + methadone &mdash; additive QTc prolongation. ECG monitoring recommended.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Black Box Warnings -->
+      <div class="resource-card" data-category="medication">
+        <h3>Black Box Warnings Summary</h3>
+        <div class="resource-phone">FDA: <a href="https://fda.gov/drugs" target="_blank" rel="noopener">fda.gov/drugs</a></div>
+        <div class="resource-meta">Highest-level FDA safety warnings</div>
+        <div class="resource-desc">Summary of the most clinically relevant black box warnings in psychiatric medications.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag" style="background:var(--danger-bg, #fef2f2);color:var(--danger-color, #dc2626)">Black Box</span>
+          <span class="resource-tag">Safety</span>
+          <span class="resource-tag">FDA Warnings</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Key Black Box Warnings</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <ul style="margin:6px 0 10px 20px;font-size:14px">
+              <li><strong>Antidepressants (all):</strong> Increased risk of suicidal thinking and behavior in children, adolescents, and young adults (under 25) during initial treatment. Monitor closely for worsening, suicidality, or unusual behavior changes.</li>
+              <li style="margin-top:4px"><strong>Antipsychotics (all):</strong> Increased risk of death in elderly patients with dementia-related psychosis. Not approved for this indication.</li>
+              <li style="margin-top:4px"><strong>Benzodiazepines + Opioids:</strong> Concomitant use risks profound sedation, respiratory depression, coma, death.</li>
+              <li style="margin-top:4px"><strong>Valproate:</strong> Hepatotoxicity (especially children under 2), pancreatitis, and teratogenicity (neural tube defects). Contraindicated in pregnancy for migraine prevention.</li>
+              <li style="margin-top:4px"><strong>Carbamazepine:</strong> Serious dermatologic reactions including Stevens-Johnson Syndrome and toxic epidermal necrolysis. Aplastic anemia, agranulocytosis.</li>
+              <li style="margin-top:4px"><strong>Clozapine:</strong> Severe neutropenia (agranulocytosis). Requires REMS program with mandatory ANC monitoring. Also: seizures, myocarditis, cardiomyopathy.</li>
+              <li style="margin-top:4px"><strong>Bupropion (Wellbutrin):</strong> Seizure risk (dose-dependent). Max 450 mg/day. Contraindicated in seizure disorders, bulimia, anorexia.</li>
+              <li style="margin-top:4px"><strong>Atomoxetine (Strattera):</strong> Suicidal ideation in children and adolescents.</li>
+              <li style="margin-top:4px"><strong>Stimulants (amphetamines, methylphenidate):</strong> High potential for abuse. Cardiovascular risks (sudden death reported). Not for patients with structural cardiac abnormalities.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- 21. WRAPAROUND SERVICES DIRECTORY (W24) -->
+  <!-- ============================================================ -->
+  <div class="resource-section" id="wraparound">
+    <div class="section-header">
+      <h2>Wraparound Services Directory</h2>
+      <span class="section-count">7 resources</span>
+    </div>
+    <div class="grid-2">
+
+      <!-- DCYF -->
+      <div class="resource-card" data-category="wraparound">
+        <h3>DCYF (Division for Children, Youth and Families)</h3>
+        <div class="resource-phone"><a href="tel:+18008945533">1-800-894-5533</a> (24/7 abuse/neglect hotline)</div>
+        <div class="resource-meta">137 Temple St, Nashua, NH 03060 | <a href="https://dhhs.nh.gov/dcyf" target="_blank" rel="noopener">dhhs.nh.gov/dcyf</a></div>
+        <div class="resource-desc">Child protective services, foster care, adoption, juvenile justice services, family preservation, family reunification. DCYF also funds and coordinates wraparound services including in-home supports, family-centered treatment, and intensive case management for involved families. Nashua District Office handles Hillsborough County South cases.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag crisis">24/7 Hotline</span>
+          <span class="resource-tag">Child Welfare</span>
+          <span class="resource-tag">Family Preservation</span>
+          <span class="resource-tag">Mandated Reporting</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Key DCYF Services &amp; Contacts</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Reporting:</strong> All clinicians are mandated reporters (RSA 169-C:29). Call <a href="tel:+18008945533">1-800-894-5533</a> immediately for suspected abuse or neglect.</p>
+            <p style="margin-top:6px"><strong>Nashua District Office:</strong> <a href="tel:+18442753447">1-844-275-3447</a> (DHHS general line), 137 Temple St, Nashua</p>
+            <p style="margin-top:6px"><strong>Wraparound services coordinated by DCYF:</strong> Family-centered treatment, therapeutic foster care, in-home family support, family reunification services, independent living for youth aging out, permanency planning.</p>
+            <p style="margin-top:10px;font-size:13px;color:var(--text-secondary)"><em>Clinician note: DCYF caseworkers can authorize wraparound services for involved families. Build collaborative relationships with assigned caseworkers for coordinated treatment planning.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Court MH Resources -->
+      <div class="resource-card" data-category="wraparound">
+        <h3>NH Court System Mental Health Resources</h3>
+        <div class="resource-phone">Nashua District Court: <a href="tel:+16038803333">(603) 880-3333</a></div>
+        <div class="resource-meta">25 Walnut St, Nashua, NH 03060 | <a href="https://courts.nh.gov" target="_blank" rel="noopener">courts.nh.gov</a></div>
+        <div class="resource-desc"><strong>Mental Health Court:</strong> Diversion program for defendants with mental illness (alternative to incarceration). <strong>Drug Court:</strong> Supervised treatment for SUD-related offenses. <strong>Veterans Treatment Court:</strong> For veteran defendants. <strong>Court Diversion Program</strong> (through GNMHC): pre-arraignment diversion for qualifying misdemeanors. <strong>Guardian ad Litem</strong> services for family court matters involving MH concerns.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Mental Health Court</span>
+          <span class="resource-tag">Drug Court</span>
+          <span class="resource-tag">Diversion</span>
+          <span class="resource-tag">Veterans Court</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>How Treatment Courts Work</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <div class="steps">
+              <div class="step"><div class="step-content">Defense attorney petitions the court for treatment court placement</div></div>
+              <div class="step"><div class="step-content">Clinical assessment determines eligibility and treatment plan</div></div>
+              <div class="step"><div class="step-content">Participant agrees to treatment conditions (therapy, medication, drug testing, regular court appearances)</div></div>
+              <div class="step"><div class="step-content">Supervised by treatment court team (judge, prosecutor, defense, case manager, treatment providers)</div></div>
+              <div class="step"><div class="step-content">Successful completion may result in reduced charges or dismissal</div></div>
+            </div>
+            <p style="margin-top:10px;font-size:13px;color:var(--text-secondary)"><em>Clinician note: Provide supporting clinical documentation early. Courts rely heavily on provider input for placement decisions. Include diagnosis, treatment needs, prognosis, and how structured supervision benefits recovery.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Probation/Parole -->
+      <div class="resource-card" data-category="wraparound">
+        <h3>Probation / Parole MH Coordination</h3>
+        <div class="resource-phone">NH Probation &amp; Parole (Nashua): <a href="tel:+16038830066">(603) 883-0066</a></div>
+        <div class="resource-meta">70 Commercial St, Nashua, NH 03060 | <a href="https://doc.nh.gov" target="_blank" rel="noopener">doc.nh.gov</a></div>
+        <div class="resource-desc">NH Department of Corrections probation/parole officers coordinate with MH providers for clients on community supervision. Many conditions of probation require mental health treatment compliance. Officers can facilitate access to services and provide collateral information. NH DOC Transitional Housing and Reentry Services available for individuals returning to community.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Probation</span>
+          <span class="resource-tag">Parole</span>
+          <span class="resource-tag">Reentry</span>
+          <span class="resource-tag">Coordination</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Coordination Tips for Clinicians</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p>When working with clients on probation or parole, obtain a signed release of information to communicate with the supervising officer. Key coordination areas:</p>
+            <ul style="margin:6px 0 10px 20px;font-size:14px">
+              <li>Treatment compliance reporting (attendance, engagement &mdash; not clinical content)</li>
+              <li>Safety concerns or risk changes</li>
+              <li>Housing and employment barriers</li>
+              <li>Substance use monitoring coordination</li>
+              <li>Medication adherence (especially for court-ordered treatment)</li>
+            </ul>
+            <p style="margin-top:10px;font-size:13px;color:var(--text-secondary)"><em>Clinician note: Be clear with clients about what information is shared with supervision officers and what remains confidential. Document the boundaries of your reporting obligations in the treatment plan.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- School-Based MH -->
+      <div class="resource-card" data-category="wraparound">
+        <h3>School-Based Mental Health &mdash; Greater Nashua</h3>
+        <div class="resource-phone">Nashua School District: <a href="tel:+16039665000">(603) 966-5000</a></div>
+        <div class="resource-meta"><a href="https://nashua.edu" target="_blank" rel="noopener">nashua.edu</a> | Student Support Services</div>
+        <div class="resource-desc">Nashua School District employs school counselors, school psychologists, and social workers across all schools. GNMHC embeds clinicians in some Nashua schools providing on-site therapy. Students can be referred for Section 504 plans or IEPs with emotional/behavioral components. SAP (Student Assistance Program) teams identify at-risk students. Schools in Hollis, Brookline, Merrimack, Milford, and Hudson have similar programs.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">School-Based</span>
+          <span class="resource-tag">K-12</span>
+          <span class="resource-tag">Nashua Schools</span>
+          <span class="resource-tag">504/IEP</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Connecting Students to Services</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <div class="steps">
+              <div class="step"><div class="step-content">Contact the school counselor or student support team at the child's school</div></div>
+              <div class="step"><div class="step-content">Parents can request a referral to embedded MH clinician (if available) or external services</div></div>
+              <div class="step"><div class="step-content">For IEP/504 accommodations: submit written request to the school's special education coordinator</div></div>
+              <div class="step"><div class="step-content">School must respond within 15 school days to evaluation request</div></div>
+            </div>
+            <p style="margin-top:10px;font-size:13px;color:var(--text-secondary)"><em>Clinician note: With parent consent, coordinate directly with school counselors. School-based services can reach children who may not access community-based care. Nashua School District Student Support: <a href="tel:+16039665000">(603) 966-5000</a>.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SNHS / Community Action -->
+      <div class="resource-card" data-category="wraparound">
+        <h3>Southern NH Services (Community Action Program)</h3>
+        <div class="resource-phone"><a href="tel:+16038893440">(603) 889-3440</a></div>
+        <div class="resource-meta">80 Pine St, Nashua, NH 03060 | <a href="https://snhs.org" target="_blank" rel="noopener">snhs.org</a></div>
+        <div class="resource-desc">Comprehensive anti-poverty agency serving Greater Nashua: fuel assistance (LIHEAP), electric assistance, weatherization, Head Start/Early Head Start, food pantry, emergency financial assistance, housing counseling, family development, VITA free tax preparation, workforce development, and community-based family support. Often the critical wraparound partner for stabilizing basic needs while MH treatment proceeds.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Community Action</span>
+          <span class="resource-tag">LIHEAP</span>
+          <span class="resource-tag">Head Start</span>
+          <span class="resource-tag">Emergency Aid</span>
+        </div>
+      </div>
+
+      <!-- Bridges DV -->
+      <div class="resource-card" data-category="wraparound">
+        <h3>Bridges: Domestic &amp; Sexual Violence Support</h3>
+        <div class="resource-phone"><a href="tel:+16038833044">(603) 883-3044</a> (24/7 crisis line)</div>
+        <div class="resource-meta"><a href="https://bridgesnh.org" target="_blank" rel="noopener">bridgesnh.org</a> | Nashua, NH (shelter location confidential)</div>
+        <div class="resource-desc">24/7 crisis line, emergency shelter, individual and group counseling, legal advocacy (protective orders, court accompaniment), safety planning, children's services, support groups, housing advocacy, transitional housing. All genders served. Bridges is THE primary DV resource in Greater Nashua and a critical wraparound partner for clients experiencing domestic violence.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag crisis">24/7 Crisis Line</span>
+          <span class="resource-tag">DV Shelter</span>
+          <span class="resource-tag">Legal Advocacy</span>
+          <span class="resource-tag">All Genders</span>
+        </div>
+      </div>
+
+      <!-- 2-1-1 -->
+      <div class="resource-card" data-category="wraparound">
+        <h3>2-1-1 NH &mdash; Statewide Resource Hub</h3>
+        <div class="resource-phone"><a href="tel:211">2-1-1</a></div>
+        <div class="resource-meta"><a href="https://211nh.org" target="_blank" rel="noopener">211nh.org</a> | 24/7 | Also text your zip code to 898-211</div>
+        <div class="resource-desc">Statewide information and referral service connecting people to health and human services. Operators can identify local resources for housing, food, childcare, transportation, MH/SUD treatment, utilities, legal aid, and more. Also serves as coordinated entry point for homeless services (VI-SPDAT assessment). Multilingual services available.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag crisis">24/7</span>
+          <span class="resource-tag">Referral Hub</span>
+          <span class="resource-tag">Statewide</span>
+          <span class="resource-tag">Multilingual</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- 22. GERIATRIC MH RESOURCES (W26) -->
+  <!-- ============================================================ -->
+  <div class="resource-section" id="geriatric">
+    <div class="section-header">
+      <h2>Geriatric Mental Health Resources</h2>
+      <span class="section-count">7 resources</span>
+    </div>
+    <div class="grid-2">
+
+      <!-- BEAS -->
+      <div class="resource-card" data-category="geriatric">
+        <h3>Bureau of Elderly and Adult Services (BEAS)</h3>
+        <div class="resource-phone"><a href="tel:+18009490470">1-800-949-0470</a> (abuse/neglect) | <a href="tel:+18003511888">1-800-351-1888</a> (general)</div>
+        <div class="resource-meta"><a href="https://dhhs.nh.gov/programs-services/adult-aging-care" target="_blank" rel="noopener">dhhs.nh.gov/programs-services/adult-aging-care</a></div>
+        <div class="resource-desc">NH's primary state agency for older adults (60+) and adults with disabilities. Services include: Adult Protective Services (APS) investigations, Choices for Independence Medicaid waiver (home and community-based services as alternative to nursing facility), personal care, homemaker, adult day, respite care, assisted living coordination, nursing facility services, guardianship proceedings.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag crisis">24/7 APS</span>
+          <span class="resource-tag">Elderly</span>
+          <span class="resource-tag">Medicaid Waiver</span>
+          <span class="resource-tag">Home Care</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Key BEAS Programs</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Adult Protective Services (APS):</strong> Investigates abuse, neglect, exploitation, and self-neglect of adults 60+ and incapacitated adults 18+. Call <a href="tel:+18009490470">1-800-949-0470</a>. Clinicians are mandated reporters. Self-neglect (hoarding, refusing medical care, unsafe living conditions) is a valid reporting category.</p>
+            <p style="margin-top:6px"><strong>Choices for Independence (CFI) Waiver:</strong> Medicaid waiver providing home and community-based services to individuals who would otherwise require nursing facility care. Covers personal care, homemaker, adult day, home modifications, assistive technology, emergency response systems. Apply through ServiceLink.</p>
+            <p style="margin-top:10px;font-size:13px;color:var(--text-secondary)"><em>Clinician note: For elderly clients with cognitive decline who may be self-neglecting, an APS referral can trigger a comprehensive assessment and connection to services. This is often the pathway to getting resistant clients connected to support.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ServiceLink -->
+      <div class="resource-card" data-category="geriatric">
+        <h3>ServiceLink Resource Center</h3>
+        <div class="resource-phone"><a href="tel:+18666349412">1-866-634-9412</a> (statewide) | <a href="tel:+16038896220">(603) 889-6220</a> (Nashua)</div>
+        <div class="resource-meta">137 Temple St, Nashua, NH 03060 | <a href="https://servicelink.nh.gov" target="_blank" rel="noopener">servicelink.nh.gov</a> | Mon-Fri 8 AM - 4:30 PM</div>
+        <div class="resource-desc">NH's Aging and Disability Resource Center (ADRC). Free information, referral, and options counseling for older adults, adults with disabilities, and caregivers. SHINE program provides free Medicare/Medicaid insurance counseling. Benefits screening, long-term care options counseling, transition assistance (hospital to home), transportation coordination, caregiver support resources.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">ADRC</span>
+          <span class="resource-tag">SHINE</span>
+          <span class="resource-tag">Free Counseling</span>
+          <span class="resource-tag">All Incomes</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>How ServiceLink Helps</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <div class="steps">
+              <div class="step"><div class="step-content">Call <a href="tel:+18666349412">1-866-634-9412</a> or walk in to Nashua office at 137 Temple St</div></div>
+              <div class="step"><div class="step-content">Specialist conducts comprehensive needs assessment</div></div>
+              <div class="step"><div class="step-content">Options counseling: reviews all available services and helps create a plan</div></div>
+              <div class="step"><div class="step-content">SHINE counselors provide free, unbiased Medicare Part D plan comparisons (especially important during Open Enrollment Oct-Dec)</div></div>
+              <div class="step"><div class="step-content">Can initiate CFI waiver applications, caregiver support, and other BEAS services</div></div>
+            </div>
+            <p style="margin-top:10px;font-size:13px;color:var(--text-secondary)"><em>Clinician note: ServiceLink is the single best starting point for ANY elderly client needing services. No income requirement for information services. Their SHINE program is invaluable during Medicare Open Enrollment.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Medicare MH -->
+      <div class="resource-card" data-category="geriatric">
+        <h3>Medicare Mental Health Coverage for Seniors</h3>
+        <div class="resource-phone"><a href="tel:+18007721213">1-800-772-1213</a> (Medicare) | <a href="tel:+18006336227">1-800-633-6227</a> (TTY)</div>
+        <div class="resource-meta"><a href="https://medicare.gov/coverage/mental-health-care" target="_blank" rel="noopener">medicare.gov/coverage/mental-health-care</a></div>
+        <div class="resource-desc"><strong>Part B (outpatient):</strong> Individual/group therapy, psychiatric evaluations, medication management, PHP, annual depression screening (no copay), telehealth MH visits. 20% coinsurance after deductible. <strong>Part A (inpatient):</strong> 190 lifetime days in psychiatric hospitals; general hospital psychiatric units covered under standard Part A rules. <strong>Part D:</strong> Covers most psychiatric medications (check plan formulary). <strong>Medicare Advantage:</strong> May have different networks and prior auth requirements.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Medicare</span>
+          <span class="resource-tag">Seniors</span>
+          <span class="resource-tag">Coverage Details</span>
+        </div>
+      </div>
+
+      <!-- Dementia/Alzheimer's -->
+      <div class="resource-card" data-category="geriatric">
+        <h3>Dementia / Alzheimer's Resources</h3>
+        <div class="resource-phone">Alzheimer's Association (MA/NH): <a href="tel:+18002723900">1-800-272-3900</a> (24/7 helpline)</div>
+        <div class="resource-meta"><a href="https://alz.org/manh" target="_blank" rel="noopener">alz.org/manh</a> | Local office: Manchester, NH</div>
+        <div class="resource-desc">Alzheimer's Association MA/NH Chapter provides: 24/7 helpline with clinician consultation, care planning, support groups (in-person and virtual across NH), educational programs, MedicAlert + Wandering Safety Program, early-stage engagement programs, respite grant programs. Also: NH Dementia-Friendly Communities initiative, Memory Cafe programs in some communities.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag crisis">24/7 Helpline</span>
+          <span class="resource-tag">Dementia</span>
+          <span class="resource-tag">Alzheimer's</span>
+          <span class="resource-tag">Support Groups</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Local Dementia Resources</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <ul style="margin:6px 0 10px 20px;font-size:14px">
+              <li><strong>Alzheimer's Association 24/7 Helpline:</strong> <a href="tel:+18002723900">1-800-272-3900</a> &mdash; clinicians can call for consultation on behavioral management, caregiver support, or care planning</li>
+              <li style="margin-top:4px"><strong>NH Bureau of Elderly &amp; Adult Services:</strong> <a href="tel:+18003511888">1-800-351-1888</a> &mdash; home care, respite, day programs</li>
+              <li style="margin-top:4px"><strong>Southern NH Medical Center:</strong> Neurology department for diagnosis and management</li>
+              <li style="margin-top:4px"><strong>Dartmouth-Hitchcock Memory &amp; Aging Program:</strong> Comprehensive neuropsychological evaluation and diagnosis (Lebanon, NH; long wait)</li>
+              <li style="margin-top:4px"><strong>Adult day programs:</strong> Contact ServiceLink at <a href="tel:+16038896220">(603) 889-6220</a> for Nashua-area options</li>
+            </ul>
+            <p style="margin-top:10px;font-size:13px;color:var(--text-secondary)"><em>Clinician note: Depression in elderly clients can mimic dementia (&ldquo;pseudodementia&rdquo;). Always screen for depression. Neuropsych testing can differentiate. For behavioral symptoms of dementia, non-pharmacological interventions are first-line; antipsychotics carry a black box warning for increased mortality in elderly dementia patients.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Elder Abuse Reporting -->
+      <div class="resource-card" data-category="geriatric">
+        <h3>Elder Abuse Reporting</h3>
+        <div class="resource-phone"><a href="tel:+18009490470">1-800-949-0470</a> (24/7 for emergencies)</div>
+        <div class="resource-meta">BEAS Adult Protective Services | <a href="https://dhhs.nh.gov/programs-services/adult-aging-care/protective-services" target="_blank" rel="noopener">dhhs.nh.gov</a></div>
+        <div class="resource-desc">Report suspected abuse, neglect, exploitation, or self-neglect of adults 60+ and incapacitated adults 18+. NH RSA 161-F:46 mandates reporting by healthcare providers. Categories include: physical abuse, emotional abuse, sexual abuse, financial exploitation, neglect by caregiver, and self-neglect (hoarding, refusing care, unsafe conditions). Reports can be made anonymously but identified reporters receive follow-up.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag crisis">24/7</span>
+          <span class="resource-tag">Mandated Reporting</span>
+          <span class="resource-tag">Elder Abuse</span>
+          <span class="resource-tag">APS</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>How to Report</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <div class="steps">
+              <div class="step"><div class="step-content">Call <strong><a href="tel:+18009490470">1-800-949-0470</a></strong> (24/7 for emergencies; business hours for non-emergencies)</div></div>
+              <div class="step"><div class="step-content">Provide: victim's name, age, address; description of concern; reporter's name and contact (can be anonymous)</div></div>
+              <div class="step"><div class="step-content">APS screener determines if report meets criteria for investigation</div></div>
+              <div class="step"><div class="step-content">If accepted, APS investigator contacts the alleged victim within timeframe based on urgency</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Geriatric Psychiatry Referrals -->
+      <div class="resource-card" data-category="geriatric">
+        <h3>Geriatric Psychiatry Referral Pathways</h3>
+        <div class="resource-phone">GNMHC Geriatric Services: <a href="tel:+16038896147">(603) 889-6147</a></div>
+        <div class="resource-meta">Multiple referral options</div>
+        <div class="resource-desc"><strong>GNMHC:</strong> Geriatric mental health services including home-based assessments. <strong>Southern NH Medical Center:</strong> Psychiatry department accepts geriatric referrals. <strong>Dartmouth-Hitchcock Nashua:</strong> Psychiatry and neurology referrals. <strong>Elliot Hospital (Manchester):</strong> Geriatric psychiatry services. Telehealth options increasingly available for homebound elderly. Primary care physicians can initiate geriatric psych referrals through most insurance plans.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Geriatric Psychiatry</span>
+          <span class="resource-tag">Home-Based</span>
+          <span class="resource-tag">Referrals</span>
+        </div>
+      </div>
+
+      <!-- Caregiver Support -->
+      <div class="resource-card" data-category="geriatric">
+        <h3>Caregiver Support Resources</h3>
+        <div class="resource-phone">ServiceLink: <a href="tel:+18666349412">1-866-634-9412</a> | Easter Seals NH: <a href="tel:+16036213457">(603) 621-3457</a></div>
+        <div class="resource-meta">Multiple programs</div>
+        <div class="resource-desc"><strong>ServiceLink:</strong> Caregiver information and referral, respite options. <strong>BEAS:</strong> National Family Caregiver Support Program (respite, supplemental services, counseling). <strong>Alzheimer's Association:</strong> Caregiver support groups, education, respite grants. <strong>Easter Seals NH:</strong> Adult day programs providing daytime supervision and activities (caregiver respite). <strong>NH Respite Care Network:</strong> Coordinates volunteer and paid respite across NH.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Caregiver</span>
+          <span class="resource-tag">Respite</span>
+          <span class="resource-tag">Support Groups</span>
+          <span class="resource-tag">Adult Day</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Note for Clinicians</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p>Caregiver burnout is a major clinical concern. Screen caregivers for depression and anxiety. Many caregivers neglect their own health. Key interventions:</p>
+            <ul style="margin:6px 0 10px 20px;font-size:14px">
+              <li>Connect to ServiceLink for comprehensive options counseling</li>
+              <li>Encourage use of respite services (many caregivers feel guilt about &ldquo;leaving&rdquo; their loved one)</li>
+              <li>Suggest Alzheimer's Association caregiver support groups</li>
+              <li>Consider individual therapy referral for the caregiver</li>
+              <li>Assess for financial strain &mdash; BEAS and ServiceLink can identify financial assistance programs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- 23. LGBTQ+ AFFIRMING RESOURCES (W27) -->
+  <!-- ============================================================ -->
+  <div class="resource-section" id="lgbtq">
+    <div class="section-header">
+      <h2>LGBTQ+ Affirming Resources</h2>
+      <span class="section-count">7 resources</span>
+    </div>
+    <div class="grid-2">
+
+      <!-- Affirming Provider Search -->
+      <div class="resource-card" data-category="lgbtq">
+        <h3>Affirming Provider Search Tools</h3>
+        <div class="resource-phone">See directories below</div>
+        <div class="resource-meta">Multiple national and local directories</div>
+        <div class="resource-desc"><strong><a href="https://psychologytoday.com" target="_blank" rel="noopener">Psychology Today:</a></strong> Filter by &ldquo;LGBTQ+&rdquo; specialty and &ldquo;Nashua, NH.&rdquo; <strong><a href="https://outlist.lgbthealtheducation.org" target="_blank" rel="noopener">National LGBTQIA+ Health Education Center OutList:</a></strong> Directory of LGBTQ-affirming providers. <strong><a href="https://glma.org" target="_blank" rel="noopener">GLMA (Health Professionals Advancing LGBTQ Equality):</a></strong> Provider directory. <strong>GNMHC:</strong> Has clinicians with LGBTQ+ affirming practice experience. <strong>Harbor Care:</strong> Affirming primary and behavioral health care.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">LGBTQ+</span>
+          <span class="resource-tag">Provider Directory</span>
+          <span class="resource-tag">Affirming Care</span>
+        </div>
+      </div>
+
+      <!-- Trevor Project -->
+      <div class="resource-card" data-category="lgbtq">
+        <h3>The Trevor Project</h3>
+        <div class="resource-phone"><a href="tel:+18664887386">1-866-488-7386</a></div>
+        <div class="resource-meta">Text START to 678-678 | Chat: <a href="https://thetrevorproject.org/get-help" target="_blank" rel="noopener">TheTrevorProject.org/get-help</a> | 24/7</div>
+        <div class="resource-desc">Crisis intervention and suicide prevention for LGBTQ+ young people ages 13-24. Trained counselors provide immediate support via phone, text, and chat. Also offers TrevorSpace, a monitored social networking site for LGBTQ+ youth, and educational resources for families and allies.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag crisis">24/7</span>
+          <span class="resource-tag crisis">Crisis</span>
+          <span class="resource-tag">LGBTQ+ Youth</span>
+          <span class="resource-tag">Ages 13-24</span>
+        </div>
+      </div>
+
+      <!-- NH Pride Organizations -->
+      <div class="resource-card" data-category="lgbtq">
+        <h3>NH Pride Organizations</h3>
+        <div class="resource-phone">See individual organizations</div>
+        <div class="resource-meta">Multiple organizations across NH</div>
+        <div class="resource-desc"><strong>Nashua Pride:</strong> Local LGBTQ+ community organization hosting events, education, and community-building in Greater Nashua. <strong>NH Pride:</strong> Statewide organization coordinating Pride events and advocacy. <strong>Seacoast Outright:</strong> Youth LGBTQ+ support, social activities, and mentoring (Seacoast region; check for Nashua programming). <strong>New Hampshire Freedom to Marry Coalition / NH advocacy orgs:</strong> Policy advocacy and community support.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Community</span>
+          <span class="resource-tag">Pride</span>
+          <span class="resource-tag">Events</span>
+          <span class="resource-tag">Advocacy</span>
+        </div>
+      </div>
+
+      <!-- Trans Lifeline -->
+      <div class="resource-card" data-category="lgbtq">
+        <h3>Trans Lifeline</h3>
+        <div class="resource-phone"><a href="tel:+18775658860">877-565-8860</a></div>
+        <div class="resource-meta"><a href="https://translifeline.org" target="_blank" rel="noopener">translifeline.org</a> | Hours vary (check website)</div>
+        <div class="resource-desc">Peer support hotline run by and for transgender people. Provides emotional support, crisis intervention, and resource referrals. Will not contact authorities without explicit consent (important trust factor for trans callers). Also operates a Microgrants program to help with legal name changes and updated IDs.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag crisis">Crisis Line</span>
+          <span class="resource-tag">Transgender</span>
+          <span class="resource-tag">Peer-Run</span>
+          <span class="resource-tag">Microgrants</span>
+        </div>
+      </div>
+
+      <!-- PFLAG -->
+      <div class="resource-card" data-category="lgbtq">
+        <h3>PFLAG Chapters in NH</h3>
+        <div class="resource-phone">PFLAG Nashua: Check <a href="https://pflag.org" target="_blank" rel="noopener">pflag.org</a> for current chapter info</div>
+        <div class="resource-meta"><a href="https://pflag.org/find-a-chapter" target="_blank" rel="noopener">pflag.org/find-a-chapter</a></div>
+        <div class="resource-desc">PFLAG (formerly Parents and Friends of Lesbians and Gays) provides support, education, and advocacy for LGBTQ+ individuals and their families. NH chapters include Nashua area, Concord, Seacoast, and others. Monthly meetings offer a safe space for families to share experiences and receive support. Especially valuable for parents of newly out youth.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Family Support</span>
+          <span class="resource-tag">PFLAG</span>
+          <span class="resource-tag">Monthly Meetings</span>
+          <span class="resource-tag">Free</span>
+        </div>
+      </div>
+
+      <!-- Gender-Affirming Care -->
+      <div class="resource-card" data-category="lgbtq">
+        <h3>Gender-Affirming Care Navigation</h3>
+        <div class="resource-phone">Harbor Care: <a href="tel:+16038823616">(603) 882-3616</a> | Fenway Health: <a href="tel:+16179276460">(617) 927-6460</a></div>
+        <div class="resource-meta">Multiple providers</div>
+        <div class="resource-desc"><strong>Harbor Care (Nashua):</strong> Affirming primary care including hormone therapy. <strong>Dartmouth-Hitchcock:</strong> Gender medicine program (Lebanon, NH; telehealth available). <strong>Fenway Health (Boston):</strong> National leader in LGBTQ+ health; accessible via telehealth. <strong>NH Medicaid:</strong> Covers medically necessary gender-affirming care including hormone therapy and some surgical procedures with prior authorization. <strong>Legal name/gender marker change:</strong> NH allows name change through Probate Court; gender marker change on birth certificate and driver's license available.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Gender-Affirming</span>
+          <span class="resource-tag">HRT</span>
+          <span class="resource-tag">Medicaid Covered</span>
+          <span class="resource-tag">Telehealth</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Navigation Steps</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <div class="steps">
+              <div class="step"><div class="step-content">Establish care with an affirming primary care provider (Harbor Care accepts all insurance including Medicaid)</div></div>
+              <div class="step"><div class="step-content">Provider follows informed consent model or WPATH guidelines for hormone therapy</div></div>
+              <div class="step"><div class="step-content">For surgical referrals, provider can refer to Dartmouth-Hitchcock or Boston-area gender surgery programs</div></div>
+              <div class="step"><div class="step-content">For legal name change: file petition in Hillsborough County Probate Court, Nashua (filing fee ~$25)</div></div>
+              <div class="step"><div class="step-content">For NH driver's license gender marker: updated at DMV with documentation</div></div>
+            </div>
+            <p style="margin-top:10px;font-size:13px;color:var(--text-secondary)"><em>Trans Lifeline Microgrants may help cover legal name change costs. NHLA may provide legal assistance for name/gender marker changes for low-income individuals.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cultural Competency Notes -->
+      <div class="resource-card" data-category="lgbtq">
+        <h3>Cultural Competency Notes for Clinicians</h3>
+        <div class="resource-phone">Training: <a href="https://lgbthealtheducation.org" target="_blank" rel="noopener">lgbthealtheducation.org</a></div>
+        <div class="resource-meta">Clinician resource</div>
+        <div class="resource-desc">Key considerations for providing affirming mental health care to LGBTQ+ clients in the Greater Nashua area.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Clinician Resource</span>
+          <span class="resource-tag">Cultural Competency</span>
+          <span class="resource-tag">Training</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Clinical Practice Considerations</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <ul style="margin:6px 0 10px 20px;font-size:14px">
+              <li><strong>Use correct names and pronouns.</strong> Ask and document preferred name and pronouns. Use them consistently. Correct yourself and move on if you make a mistake.</li>
+              <li style="margin-top:4px"><strong>Do not assume sexual orientation or gender identity.</strong> Use open-ended questions. Do not conflate sexual orientation with gender identity.</li>
+              <li style="margin-top:4px"><strong>Understand minority stress.</strong> LGBTQ+ individuals face higher rates of depression, anxiety, suicidality, and substance use due to stigma, discrimination, and victimization &mdash; not because of their identity.</li>
+              <li style="margin-top:4px"><strong>Conversion therapy is illegal in NH for minors</strong> (RSA 332-L). It is considered harmful and unethical by all major mental health professional organizations.</li>
+              <li style="margin-top:4px"><strong>Family rejection is a major risk factor.</strong> Family therapy and PFLAG can help. Family rejection of LGBTQ+ youth is associated with 8.4x higher rates of suicide attempts.</li>
+              <li style="margin-top:4px"><strong>Rural/suburban NH context:</strong> Some LGBTQ+ individuals in the Greater Nashua area may face isolation, especially in surrounding smaller towns. Telehealth and online communities can supplement in-person support.</li>
+              <li style="margin-top:4px"><strong>Free training:</strong> <a href="https://lgbthealtheducation.org" target="_blank" rel="noopener">National LGBTQIA+ Health Education Center</a> offers free CME/CEU courses on affirming care.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- 24. REFUGEE / IMMIGRANT MH SERVICES (W28) -->
+  <!-- ============================================================ -->
+  <div class="resource-section" id="refugee">
+    <div class="section-header">
+      <h2>Refugee / Immigrant Mental Health Services</h2>
+      <span class="section-count">6 resources</span>
+    </div>
+    <div class="grid-2">
+
+      <!-- Language Line -->
+      <div class="resource-card" data-category="refugee">
+        <h3>Interpreter Services for Clinical Sessions</h3>
+        <div class="resource-phone">Language Line Solutions: <a href="tel:+18005287616">1-800-528-7616</a></div>
+        <div class="resource-meta"><a href="https://languageline.com" target="_blank" rel="noopener">languageline.com</a> | Also: Telelanguage, CyraCom</div>
+        <div class="resource-desc"><strong>Language Line Solutions:</strong> On-demand phone and video interpretation in 240+ languages. Most healthcare organizations have accounts. <strong>Telelanguage:</strong> Alternative on-demand interpretation. <strong>NH DHHS:</strong> Provides interpreters for DHHS appointments at no cost. <strong>Title VI requirement:</strong> Any provider receiving federal funds (including Medicaid) MUST provide language access services at no cost to the patient. <strong>In-person interpreters:</strong> IINE and Ascentria can sometimes arrange in-person interpreters for clinical appointments.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Interpreter</span>
+          <span class="resource-tag">240+ Languages</span>
+          <span class="resource-tag">Title VI</span>
+          <span class="resource-tag">On-Demand</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Best Practices for Using Interpreters</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <ul style="margin:6px 0 10px 20px;font-size:14px">
+              <li><strong>Always use professional interpreters</strong> for clinical sessions. Do not use family members (especially children) as interpreters &mdash; clinical accuracy and confidentiality are compromised.</li>
+              <li style="margin-top:4px">Request interpreters trained in mental health terminology when possible.</li>
+              <li style="margin-top:4px">Speak directly to the client, not the interpreter. Use short sentences.</li>
+              <li style="margin-top:4px">Allow extra time &mdash; interpreted sessions take roughly twice as long.</li>
+              <li style="margin-top:4px">Brief the interpreter before the session on topics to be covered and any sensitive content.</li>
+              <li style="margin-top:4px">For Nashua-area sessions: Portuguese and Spanish interpreters are most commonly needed, followed by Bhutanese/Nepali, Swahili, Arabic, and French/Haitian Creole.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ascentria -->
+      <div class="resource-card" data-category="refugee">
+        <h3>Ascentria Care Alliance (Refugee Resettlement)</h3>
+        <div class="resource-phone"><a href="tel:+16032248111">(603) 224-8111</a></div>
+        <div class="resource-meta"><a href="https://ascentria.org" target="_blank" rel="noopener">ascentria.org</a> | Concord, NH (serves statewide)</div>
+        <div class="resource-desc">One of NH's primary refugee resettlement agencies. Services include: initial resettlement support (housing, orientation, benefits enrollment), employment services, case management, cultural adjustment support, English language referrals, school enrollment assistance, medical appointment coordination. Ascentria staff understand the refugee experience and can facilitate warm referrals to MH providers with cultural context.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Refugee</span>
+          <span class="resource-tag">Resettlement</span>
+          <span class="resource-tag">Case Management</span>
+          <span class="resource-tag">Employment</span>
+        </div>
+      </div>
+
+      <!-- Cultural Considerations -->
+      <div class="resource-card" data-category="refugee">
+        <h3>Cultural Considerations for Nashua-Area Populations</h3>
+        <div class="resource-phone">Clinician resource</div>
+        <div class="resource-meta">Nashua has significant Brazilian, Bhutanese/Nepali, African, and other immigrant communities</div>
+        <div class="resource-desc">Greater Nashua has one of NH's most diverse populations. Clinicians should be aware of cultural factors affecting mental health engagement and treatment.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Cultural Competency</span>
+          <span class="resource-tag">Clinician Resource</span>
+          <span class="resource-tag">Nashua</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Key Cultural Considerations</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <ul style="margin:6px 0 10px 20px;font-size:14px">
+              <li><strong>Brazilian community:</strong> Large Portuguese-speaking population in Nashua. Mental health stigma may be significant. Somatic complaints may be primary presenting concern. Church communities are important supports. Many community members may have uncertain immigration status &mdash; assure confidentiality.</li>
+              <li style="margin-top:6px"><strong>Bhutanese/Nepali refugee community:</strong> Resettled Bhutanese refugees are a significant population in the Nashua-Manchester corridor. High rates of PTSD and depression from camp experiences. Suicide rate in Bhutanese refugee community has been elevated nationally. Culturally, mental illness may be attributed to spiritual causes. Interpreter services in Nepali critical.</li>
+              <li style="margin-top:6px"><strong>African refugee communities:</strong> Diverse populations from multiple countries (Democratic Republic of Congo, Somalia, Burundi, others). Experiences of war, displacement, sexual violence. Mental health concepts may not translate directly. Community elders and religious leaders are important cultural brokers.</li>
+              <li style="margin-top:6px"><strong>General considerations:</strong> Many refugee/immigrant clients have experienced torture, war, sexual violence, family separation, and/or detention. Immigration enforcement anxiety affects help-seeking behavior. Build trust slowly. Explain confidentiality protections clearly and repeatedly. Use trauma-informed care approaches.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Immigration-Related Trauma -->
+      <div class="resource-card" data-category="refugee">
+        <h3>Immigration-Related Trauma Considerations</h3>
+        <div class="resource-phone">National Immigrant Women's Advocacy Project: <a href="https://niwap.org" target="_blank" rel="noopener">niwap.org</a></div>
+        <div class="resource-meta">Clinician resource</div>
+        <div class="resource-desc">Immigration-related stressors including detention, family separation, deportation fear, PTSD from journey, exploitation, and acculturative stress compound pre-existing trauma. <strong>Key clinical considerations:</strong> Hypervigilance about authorities may look like paranoia; avoidance of healthcare systems is adaptive behavior; immigration court proceedings create chronic stress; children may experience developmental impacts of family separation and parental stress.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Trauma</span>
+          <span class="resource-tag">Immigration</span>
+          <span class="resource-tag">Clinician Resource</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Clinical Considerations</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <ul style="margin:6px 0 10px 20px;font-size:14px">
+              <li>Screen for torture history using a culturally sensitive screening tool</li>
+              <li style="margin-top:4px">Explain confidentiality in concrete terms: &ldquo;I will not share information with immigration, police, or government agencies&rdquo;</li>
+              <li style="margin-top:4px">HIPAA protects patient records from immigration enforcement requests (except with a court order)</li>
+              <li style="margin-top:4px">Consider <strong>psychological evaluations for asylum cases</strong> &mdash; clinicians can provide forensic-style evaluations documenting trauma. Contact Catholic Charities NH (<a href="tel:+16036693030">(603) 669-3030</a>) for asylum case coordination.</li>
+              <li style="margin-top:4px"><strong>U-visa certifications:</strong> Victims of qualifying crimes can apply for immigration relief. Clinicians may be asked to provide supporting documentation.</li>
+              <li style="margin-top:4px"><strong>T-visa:</strong> For trafficking victims. Similar clinical documentation may be requested.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Asylum-Seeker Resources -->
+      <div class="resource-card" data-category="refugee">
+        <h3>Asylum-Seeker Specific Resources</h3>
+        <div class="resource-phone">Catholic Charities NH: <a href="tel:+16036693030">(603) 669-3030</a> | NHLA: <a href="tel:+16032062777">(603) 206-2777</a></div>
+        <div class="resource-meta"><a href="https://cc-nh.org" target="_blank" rel="noopener">cc-nh.org</a> | <a href="https://nhla.org" target="_blank" rel="noopener">nhla.org</a></div>
+        <div class="resource-desc"><strong>Catholic Charities NH:</strong> Primary asylum legal representation in NH (sliding-scale). <strong>NH Legal Assistance:</strong> Limited immigration legal services. <strong>ACLU-NH:</strong> May take asylum cases with civil rights dimensions. <strong>Healthcare access:</strong> Asylum seekers are eligible for Emergency Medicaid, can access FQHCs (Harbor Care) regardless of status, and may qualify for refugee health screenings if recently arrived. <strong>Work authorization:</strong> Available after asylum application pending for 180 days.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Asylum</span>
+          <span class="resource-tag">Legal</span>
+          <span class="resource-tag">Healthcare Access</span>
+        </div>
+      </div>
+
+      <!-- UNHCR / Clinical Guidelines -->
+      <div class="resource-card" data-category="refugee">
+        <h3>Refugee MH Clinical Guidelines</h3>
+        <div class="resource-phone">UNHCR: <a href="https://unhcr.org/mental-health" target="_blank" rel="noopener">unhcr.org/mental-health</a></div>
+        <div class="resource-meta">Clinician resource &mdash; evidence-based frameworks</div>
+        <div class="resource-desc"><strong>UNHCR Mental Health Guidelines:</strong> Multi-layered support framework (basic services &rarr; community supports &rarr; focused non-specialized &rarr; specialized). <strong>WHO mhGAP Intervention Guide:</strong> Evidence-based mental health care in non-specialist settings (<a href="https://who.int/publications/i/item/mhgap-intervention-guide" target="_blank" rel="noopener">who.int</a>). <strong>National Child Traumatic Stress Network:</strong> Refugee-specific trauma resources (<a href="https://nctsn.org" target="_blank" rel="noopener">nctsn.org</a>). <strong>Key evidence:</strong> Narrative Exposure Therapy (NET) and Culturally Adapted CBT have strong evidence for refugee PTSD. Group-based interventions are effective and culturally congruent for many populations.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">UNHCR</span>
+          <span class="resource-tag">WHO</span>
+          <span class="resource-tag">Evidence-Based</span>
+          <span class="resource-tag">Clinician Resource</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- 25. VETERAN MH RESOURCES (W29) -->
+  <!-- ============================================================ -->
+  <div class="resource-section" id="vetmh">
+    <div class="section-header">
+      <h2>Veteran Mental Health Resources</h2>
+      <span class="section-count">7 resources</span>
+    </div>
+    <div class="grid-2">
+
+      <!-- Manchester VA MH -->
+      <div class="resource-card" data-category="vetmh">
+        <h3>Manchester VA Medical Center &mdash; Mental Health</h3>
+        <div class="resource-phone"><a href="tel:+16036244366">(603) 624-4366</a> | <a href="tel:+18008928384">1-800-892-8384</a></div>
+        <div class="resource-meta">718 Smyth Rd, Manchester, NH 03104 | <a href="https://va.gov/manchester-health-care" target="_blank" rel="noopener">va.gov/manchester-health-care</a></div>
+        <div class="resource-desc">Comprehensive VA mental health services: outpatient individual and group therapy, psychiatric medication management, PTSD clinical team (PCT), substance use treatment program, residential rehabilitation (domiciliary), compensated work therapy (CWT), homeless veteran programs (HCHV), military sexual trauma (MST) treatment, telehealth mental health, peer support specialists, integrated primary care behavioral health.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">VA Medical</span>
+          <span class="resource-tag">PTSD</span>
+          <span class="resource-tag">SUD Treatment</span>
+          <span class="resource-tag">MST</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>How to Access VA Mental Health</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <div class="steps">
+              <div class="step"><div class="step-content">Enroll in VA healthcare: Apply online at <a href="https://va.gov/health-care/apply" target="_blank" rel="noopener">va.gov/health-care/apply</a>, call <a href="tel:+18772228387">1-877-222-8387</a>, or visit the Manchester VA enrollment office</div></div>
+              <div class="step"><div class="step-content">Eligibility: Most veterans who served in active military, naval, or air service and were not dishonorably discharged are eligible</div></div>
+              <div class="step"><div class="step-content">Once enrolled, request mental health referral through primary care or call the MH clinic directly</div></div>
+              <div class="step"><div class="step-content"><strong>Emergency exception:</strong> Veterans in crisis can receive emergency MH care at any VA facility regardless of enrollment status</div></div>
+              <div class="step"><div class="step-content"><strong>Combat veterans:</strong> Free VA healthcare for 5 years after discharge for any condition (including MH), regardless of service-connection</div></div>
+            </div>
+            <p style="margin-top:10px;font-size:13px;color:var(--text-secondary)"><em>Clinician note: Many veterans are eligible for VA care but are not enrolled. The 5-year post-discharge window is especially important for recently separated service members. Veterans with Other Than Honorable (OTH) discharges may still access some MH services &mdash; contact the VA to verify.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Veterans Crisis Line -->
+      <div class="resource-card" data-category="vetmh">
+        <h3>Veterans Crisis Line</h3>
+        <div class="resource-phone"><a href="tel:988">988, then press 1</a></div>
+        <div class="resource-meta">Text 838255 | Chat: <a href="https://veteranscrisisline.net" target="_blank" rel="noopener">VeteransCrisisLine.net</a> | 24/7/365</div>
+        <div class="resource-desc">Immediate crisis support for veterans, active-duty service members, National Guard/Reserve, and their family members and friends. Responders are trained in veteran-specific issues including combat trauma, military sexual trauma, transition stress, and moral injury. Can dispatch emergency services if needed. Confidential &mdash; will not contact command unless imminent danger.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag crisis">24/7</span>
+          <span class="resource-tag crisis">Crisis</span>
+          <span class="resource-tag">Veterans</span>
+          <span class="resource-tag">Families</span>
+        </div>
+      </div>
+
+      <!-- Vet Centers -->
+      <div class="resource-card" data-category="vetmh">
+        <h3>NH Vet Centers (Readjustment Counseling Service)</h3>
+        <div class="resource-phone">Manchester Vet Center: <a href="tel:+16036687060">(603) 668-7060</a> | Vet Center Call Center: <a href="tel:+18779278387">1-877-927-8387</a></div>
+        <div class="resource-meta">1461 Hooksett Rd, Hooksett, NH 03106 | <a href="https://vetcenter.va.gov" target="_blank" rel="noopener">vetcenter.va.gov</a> | Mon-Fri + evening hours</div>
+        <div class="resource-desc">Free readjustment counseling in a non-clinical, community-based setting. <strong>Eligibility:</strong> combat veterans (any era), military sexual trauma survivors, bereaved family members, veterans who served in areas of hostility. <strong>NO VA enrollment required.</strong> Services: individual, group, couples, and family counseling, PTSD treatment, substance use counseling, transition assistance, bereavement counseling, employment referrals. Walk-ins welcome. Mobile Vet Center visits NH communities.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Free</span>
+          <span class="resource-tag">No VA Enrollment</span>
+          <span class="resource-tag">Community-Based</span>
+          <span class="resource-tag">Walk-In</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Why Vet Centers Matter</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p>Vet Centers are separate from the VA hospital system and maintain their own confidential records. Many veterans who distrust or avoid the VA system are willing to use Vet Centers because of their community-based, non-bureaucratic approach.</p>
+            <p style="margin-top:6px">Key advantages:</p>
+            <ul style="margin:6px 0 10px 20px;font-size:14px">
+              <li>No VA enrollment or service-connection required for eligible populations</li>
+              <li>Evening and some Saturday hours available</li>
+              <li>Records are separate from VA medical records (important for some veterans)</li>
+              <li>More informal, less clinical setting</li>
+              <li>Counselors are often veterans themselves</li>
+            </ul>
+            <p style="margin-top:10px;font-size:13px;color:var(--text-secondary)"><em>Clinician note: For veterans resistant to VA care, Vet Centers are often the best entry point. The 24/7 Vet Center Call Center (<a href="tel:+18779278387">1-877-927-8387</a>) can also connect veterans to support after hours.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Peer Support for Veterans -->
+      <div class="resource-card" data-category="vetmh">
+        <h3>Peer Support for Veterans</h3>
+        <div class="resource-phone">American Legion Post 79 (Nashua): <a href="tel:+16038827273">(603) 882-7273</a></div>
+        <div class="resource-meta">Multiple organizations</div>
+        <div class="resource-desc"><strong>American Legion Post 79 (Nashua):</strong> Community, service officer assistance, emergency aid. <strong>VFW posts:</strong> Nashua-area posts provide veteran community and claims assistance. <strong>Team Red White &amp; Blue:</strong> Physical and social activities for veterans. <strong>Manchester VA Peer Support:</strong> VA-employed peer support specialists (veterans in recovery helping other veterans). <strong>Hope for NH Recovery:</strong> Some peer recovery coaches have veteran-specific experience.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">Peer Support</span>
+          <span class="resource-tag">Community</span>
+          <span class="resource-tag">Service Officers</span>
+        </div>
+      </div>
+
+      <!-- PTSD Treatment -->
+      <div class="resource-card" data-category="vetmh">
+        <h3>PTSD-Specific Treatment Resources</h3>
+        <div class="resource-phone">Manchester VA PTSD Team: <a href="tel:+16036244366">(603) 624-4366</a></div>
+        <div class="resource-meta"><a href="https://ptsd.va.gov" target="_blank" rel="noopener">ptsd.va.gov</a> | National Center for PTSD resources</div>
+        <div class="resource-desc"><strong>VA evidence-based PTSD treatments:</strong> Cognitive Processing Therapy (CPT), Prolonged Exposure (PE), EMDR, Written Exposure Therapy. <strong>Manchester VA PTSD Clinical Team (PCT):</strong> Specialized PTSD treatment programs. <strong>GNMHC:</strong> Offers EMDR and CPT through community-based clinicians. <strong>National Center for PTSD:</strong> Free patient education and self-help tools at <a href="https://ptsd.va.gov" target="_blank" rel="noopener">ptsd.va.gov</a>. <strong>PTSD Coach app:</strong> Free VA-developed app for managing PTSD symptoms.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">PTSD</span>
+          <span class="resource-tag">CPT</span>
+          <span class="resource-tag">PE</span>
+          <span class="resource-tag">EMDR</span>
+          <span class="resource-tag">Evidence-Based</span>
+        </div>
+      </div>
+
+      <!-- MST Resources -->
+      <div class="resource-card" data-category="vetmh">
+        <h3>Military Sexual Trauma (MST) Resources</h3>
+        <div class="resource-phone">Manchester VA MST Coordinator: <a href="tel:+16036244366">(603) 624-4366</a> (ask for MST coordinator)</div>
+        <div class="resource-meta"><a href="https://mentalhealth.va.gov/msthome" target="_blank" rel="noopener">mentalhealth.va.gov/msthome</a></div>
+        <div class="resource-desc">Every VA facility has a designated MST Coordinator. <strong>MST-related care is free</strong> &mdash; veterans do not need to be enrolled in VA healthcare, do not need service-connection, and do not need to have reported the incident at the time. Both men and women are eligible. Services include individual therapy, group therapy, residential PTSD programs, and medication management. Veterans can also receive MST-related care at Vet Centers.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">MST</span>
+          <span class="resource-tag">Free</span>
+          <span class="resource-tag">No Enrollment Needed</span>
+          <span class="resource-tag">All Genders</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Accessing MST Services</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <div class="steps">
+              <div class="step"><div class="step-content">Call the Manchester VA at <a href="tel:+16036244366">(603) 624-4366</a> and ask for the MST Coordinator</div></div>
+              <div class="step"><div class="step-content">No documentation of the MST event is required &mdash; veteran's self-report is sufficient</div></div>
+              <div class="step"><div class="step-content">Treatment options discussed and initiated &mdash; often rapidly connected to therapy</div></div>
+              <div class="step"><div class="step-content">Alternative: contact the Vet Center at <a href="tel:+16036687060">(603) 668-7060</a> for community-based MST counseling</div></div>
+            </div>
+            <p style="margin-top:10px;font-size:13px;color:var(--text-secondary)"><em>Clinician note: MST affects approximately 1 in 3 women veterans and 1 in 50 men veterans (likely underreported). Screen sensitively. Many veterans do not disclose MST for years. VA MST services are among the most accessible veteran benefits &mdash; no enrollment, no documentation, no cost.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- DD-214 / Benefits Navigation -->
+      <div class="resource-card" data-category="vetmh">
+        <h3>DD-214 &amp; VA Benefits Navigation</h3>
+        <div class="resource-phone">NH State Veterans Council: <a href="tel:+16036249230">(603) 624-9230</a> | VA Benefits: <a href="tel:+18008271000">1-800-827-1000</a></div>
+        <div class="resource-meta"><a href="https://nh.gov/nhveterans" target="_blank" rel="noopener">nh.gov/nhveterans</a> | <a href="https://va.gov/records" target="_blank" rel="noopener">va.gov/records</a></div>
+        <div class="resource-desc"><strong>DD-214:</strong> Certificate of discharge that documents military service history. Required for most VA benefits. Lost copies can be requested from the National Personnel Records Center at <a href="https://archives.gov/veterans" target="_blank" rel="noopener">archives.gov/veterans</a> or through eVetRecs. <strong>NH State Veterans Council:</strong> Free benefits counseling and claims assistance for NH veterans &mdash; helps navigate VA disability claims, pension, healthcare enrollment, education benefits (GI Bill), home loans, burial benefits.</div>
+        <div style="margin-top:8px">
+          <span class="resource-tag">DD-214</span>
+          <span class="resource-tag">Benefits</span>
+          <span class="resource-tag">Claims</span>
+          <span class="resource-tag">Free Assistance</span>
+        </div>
+        <div class="expandable" style="margin-top:10px">
+          <div class="expandable-header" onclick="toggleExpand(this)">
+            <h3>Benefits Navigation Tips</h3>
+            <span class="expandable-arrow">&#9660;</span>
+          </div>
+          <div class="expandable-body">
+            <p><strong>Key VA benefits relevant to MH clients:</strong></p>
+            <ul style="margin:6px 0 10px 20px;font-size:14px">
+              <li><strong>VA Disability Compensation:</strong> Tax-free monthly payment for service-connected conditions (including PTSD, depression, TBI). Rating 0-100%. Higher ratings = higher payment. File with help from NH State Veterans Council or accredited VSO.</li>
+              <li style="margin-top:4px"><strong>VA Pension:</strong> For wartime veterans with limited income. Need-based. Can include Aid &amp; Attendance supplement for those requiring assistance with daily activities.</li>
+              <li style="margin-top:4px"><strong>Vocational Rehabilitation (Chapter 31):</strong> Education and job training for veterans with service-connected disabilities that create employment barriers.</li>
+              <li style="margin-top:4px"><strong>Caregiver Support Program:</strong> Stipend and support for caregivers of severely disabled veterans.</li>
+              <li style="margin-top:4px"><strong>Veterans Treatment Court:</strong> Available through Nashua District Court for veteran defendants.</li>
+            </ul>
+            <p style="margin-top:10px;font-size:13px;color:var(--text-secondary)"><em>Clinician note: A strong nexus letter from a treating provider linking a mental health condition to military service can significantly impact a disability claim. Document the connection between symptoms and service-related events clearly. The NH State Veterans Council at <a href="tel:+16036249230">(603) 624-9230</a> provides free claims assistance.</em></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </div><!-- end page-container -->
 
 <footer class="site-footer">
@@ -3103,6 +4338,7 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').match
   if (btn) btn.textContent = '☀';
 }
 </script>
+<script src="js/search.js"></script>
 <script>
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js').catch(function(){});
