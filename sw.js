@@ -1,7 +1,7 @@
 // Service Worker — Greater Nashua Community MH Resources
 // Caches all pages for offline access at air-gapped facilities
 
-const CACHE_NAME = 'mh-resources-v9';
+const CACHE_NAME = 'mh-resources-v10';
 const ASSETS = [
   './',
   './index.html',
@@ -32,6 +32,10 @@ const ASSETS = [
   './pdfs/dbt-diary-card.pdf',
   './pdfs/self-care-plan.pdf',
   './pdfs/relapse-prevention.pdf',
+  './pdfs/handouts/understanding-depression.pdf',
+  './pdfs/handouts/understanding-anxiety.pdf',
+  './pdfs/handouts/understanding-ptsd.pdf',
+  './pdfs/handouts/understanding-grief.pdf',
   './pdfs/coloring/mandala-calm.pdf',
   './pdfs/coloring/feelings-faces.pdf',
   './pdfs/coloring/nature-scene.pdf',
