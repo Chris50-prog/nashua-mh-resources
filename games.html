@@ -1,0 +1,2595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Therapeutic Games | Greater Nashua Community Mental Health Resources</title>
+<meta name="description" content="Interactive browser-based therapeutic games for emotional learning, coping skills practice, and therapeutic engagement. No internet required.">
+<meta property="og:title" content="Therapeutic Games | Greater Nashua Community Mental Health Resources">
+<meta property="og:description" content="Interactive browser-based therapeutic games for emotional learning, coping skills practice, and therapeutic engagement.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2d6f59">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="css/design-system.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/fontsize.js"></script>
+<style>
+/* ================================================================
+   Therapeutic Games Page — Layout & Component Overrides
+   Page-specific styles only. Everything else from design-system.css.
+   ================================================================ */
+
+/* ---- Nav ---- */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: var(--ds-z-sticky);
+  background: rgba(253, 252, 250, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--ds-border-subtle);
+  height: var(--ds-header-height);
+}
+[data-theme="dark"] .site-nav {
+  background: rgba(26, 25, 22, 0.85);
+}
+.site-nav__inner {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+}
+.site-nav__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  text-decoration: none;
+  flex-shrink: 0;
+  margin-right: auto;
+}
+.site-nav__logo-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-primary-600);
+  color: var(--ds-text-inverse);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-bold);
+  letter-spacing: var(--ds-tracking-tight);
+}
+.site-nav__logo-text {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  white-space: nowrap;
+}
+.site-nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+}
+.site-nav__link {
+  padding: var(--ds-space-2) var(--ds-space-3);
+  border-radius: var(--ds-radius-md);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default),
+              background-color var(--ds-duration-fast) var(--ds-ease-default);
+  white-space: nowrap;
+}
+.site-nav__link:hover {
+  color: var(--ds-text-primary);
+  background: var(--ds-surface-hover);
+  text-decoration: none;
+}
+.site-nav__link--active {
+  color: var(--ds-primary-700);
+  background: var(--ds-primary-50);
+}
+[data-theme="dark"] .site-nav__link--active {
+  color: var(--ds-primary-300);
+  background: var(--ds-interactive-subtle);
+}
+.site-nav__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  margin-left: var(--ds-space-2);
+}
+.site-nav__icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ds-radius-md);
+  border: none;
+  background: transparent;
+  color: var(--ds-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color var(--ds-duration-fast) var(--ds-ease-default),
+              color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.site-nav__icon-btn:hover {
+  background: var(--ds-surface-hover);
+  color: var(--ds-text-primary);
+}
+.site-nav__font-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-0-5);
+}
+.site-nav__font-btn {
+  padding: var(--ds-space-1) var(--ds-space-2);
+  border-radius: var(--ds-radius-sm);
+  border: 1px solid var(--ds-border);
+  background: var(--ds-surface);
+  color: var(--ds-text-secondary);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-medium);
+  cursor: pointer;
+  transition: background-color var(--ds-duration-fast) var(--ds-ease-default),
+              color var(--ds-duration-fast) var(--ds-ease-default);
+  line-height: 1;
+}
+.site-nav__font-btn:hover {
+  background: var(--ds-surface-hover);
+  color: var(--ds-text-primary);
+}
+.site-nav__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--ds-radius-md);
+  padding: 0;
+}
+.site-nav__hamburger span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--ds-text-secondary);
+  border-radius: 2px;
+  transition: transform var(--ds-duration-normal) var(--ds-ease-default),
+              opacity var(--ds-duration-normal) var(--ds-ease-default);
+}
+.site-nav__mobile-panel {
+  display: none;
+  position: fixed;
+  top: var(--ds-header-height);
+  left: 0;
+  right: 0;
+  background: var(--ds-surface);
+  border-bottom: 1px solid var(--ds-border);
+  padding: var(--ds-space-4) var(--ds-space-6);
+  z-index: calc(var(--ds-z-sticky) - 1);
+  flex-direction: column;
+  gap: var(--ds-space-1);
+  box-shadow: var(--ds-shadow-lg);
+}
+.site-nav__mobile-panel.is-open {
+  display: flex;
+}
+.site-nav__mobile-link {
+  padding: var(--ds-space-3) var(--ds-space-4);
+  border-radius: var(--ds-radius-lg);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-primary);
+  text-decoration: none;
+  transition: background-color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.site-nav__mobile-link:hover {
+  background: var(--ds-surface-hover);
+  text-decoration: none;
+}
+.site-nav__mobile-link--active {
+  color: var(--ds-primary-700);
+  background: var(--ds-primary-50);
+}
+[data-theme="dark"] .site-nav__mobile-link--active {
+  color: var(--ds-primary-300);
+  background: var(--ds-interactive-subtle);
+}
+
+/* ---- Hero ---- */
+.hero {
+  background: linear-gradient(170deg, var(--ds-primary-50) 0%, var(--ds-cream) 50%, var(--ds-warm-gray-50) 100%);
+  padding: var(--ds-space-20) 0 var(--ds-space-16);
+}
+[data-theme="dark"] .hero {
+  background: linear-gradient(170deg, rgba(61, 139, 112, 0.08) 0%, var(--ds-page-bg) 50%, var(--ds-page-bg) 100%);
+}
+.hero__inner {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6);
+  text-align: center;
+}
+.hero__overline {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  margin-bottom: var(--ds-space-5);
+}
+.hero__overline-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ds-success-500);
+}
+.hero__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-4xl);
+  font-weight: var(--ds-weight-bold);
+  line-height: var(--ds-leading-tight);
+  letter-spacing: var(--ds-tracking-tight);
+  color: var(--ds-text-primary);
+  max-width: 720px;
+  margin: 0 auto var(--ds-space-5);
+}
+.hero__subtitle {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-regular);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--ds-text-secondary);
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* ---- Intro Section ---- */
+.intro-section {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: var(--ds-space-12) var(--ds-space-6) var(--ds-space-8);
+}
+.intro-card {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border-subtle);
+  border-radius: var(--ds-radius-xl);
+  padding: var(--ds-space-8);
+  max-width: 800px;
+  margin: 0 auto;
+}
+.intro-card h2 {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xl);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  margin: 0 0 var(--ds-space-3);
+}
+.intro-card p {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+  margin: 0;
+}
+
+/* ---- Games Grid ---- */
+.games-grid {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: var(--ds-space-4) var(--ds-space-6) var(--ds-space-12);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--ds-space-6);
+}
+
+/* ---- Game Card ---- */
+.game-card {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border-subtle);
+  border-radius: var(--ds-radius-xl);
+  padding: var(--ds-space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-4);
+  transition: box-shadow var(--ds-duration-normal) var(--ds-ease-default),
+              transform var(--ds-duration-normal) var(--ds-ease-default);
+}
+.game-card:hover {
+  box-shadow: var(--ds-shadow-lg);
+  transform: translateY(-2px);
+}
+.game-card__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--ds-radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  flex-shrink: 0;
+}
+.game-card__icon--memory { background: rgba(244, 162, 97, 0.15); }
+.game-card__icon--spinner { background: rgba(42, 157, 143, 0.15); }
+.game-card__icon--thought { background: rgba(128, 113, 181, 0.15); }
+.game-card__icon--breathing { background: rgba(76, 145, 200, 0.15); }
+.game-card__icon--checkin { background: rgba(233, 120, 141, 0.15); }
+.game-card__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  margin: 0;
+}
+.game-card__desc {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+  margin: 0;
+  flex: 1;
+}
+.game-card__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  flex-wrap: wrap;
+}
+.game-card__badge {
+  padding: var(--ds-space-1) var(--ds-space-2-5);
+  border-radius: var(--ds-radius-full);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-medium);
+  white-space: nowrap;
+}
+.game-card__badge--age {
+  background: var(--ds-primary-50);
+  color: var(--ds-primary-700);
+}
+[data-theme="dark"] .game-card__badge--age {
+  background: var(--ds-interactive-subtle);
+  color: var(--ds-primary-300);
+}
+.game-card__badge--purpose {
+  background: rgba(128, 113, 181, 0.1);
+  color: #6b5fa5;
+}
+[data-theme="dark"] .game-card__badge--purpose {
+  background: rgba(128, 113, 181, 0.15);
+  color: #b0a5d4;
+}
+.game-card__play-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-2-5) var(--ds-space-5);
+  border-radius: var(--ds-radius-lg);
+  border: none;
+  background: var(--ds-primary-600);
+  color: var(--ds-text-inverse);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  cursor: pointer;
+  transition: background-color var(--ds-duration-fast) var(--ds-ease-default),
+              transform var(--ds-duration-fast) var(--ds-ease-default);
+  width: 100%;
+}
+.game-card__play-btn:hover {
+  background: var(--ds-primary-700);
+  transform: scale(1.02);
+}
+.game-card__play-btn:active {
+  transform: scale(0.98);
+}
+.game-card__play-btn svg {
+  flex-shrink: 0;
+}
+
+/* ---- Game Modal ---- */
+.game-modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: var(--ds-space-6);
+  overflow-y: auto;
+}
+.game-modal-overlay.is-open {
+  display: flex;
+}
+.game-modal {
+  background: var(--ds-surface);
+  border-radius: var(--ds-radius-xl);
+  width: 100%;
+  max-width: 720px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--ds-shadow-xl);
+  position: relative;
+}
+.game-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--ds-space-5) var(--ds-space-6);
+  border-bottom: 1px solid var(--ds-border-subtle);
+  position: sticky;
+  top: 0;
+  background: var(--ds-surface);
+  z-index: 1;
+  border-radius: var(--ds-radius-xl) var(--ds-radius-xl) 0 0;
+}
+.game-modal__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  margin: 0;
+}
+.game-modal__close {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ds-radius-md);
+  border: none;
+  background: transparent;
+  color: var(--ds-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color var(--ds-duration-fast) var(--ds-ease-default);
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.game-modal__close:hover {
+  background: var(--ds-surface-hover);
+  color: var(--ds-text-primary);
+}
+.game-modal__body {
+  padding: var(--ds-space-6);
+}
+
+/* ---- Memory Match Game ---- */
+.memory-board {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--ds-space-2);
+  max-width: 540px;
+  margin: 0 auto var(--ds-space-4);
+}
+.memory-card {
+  aspect-ratio: 1;
+  border-radius: var(--ds-radius-lg);
+  border: 2px solid var(--ds-border);
+  background: var(--ds-primary-50);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+}
+[data-theme="dark"] .memory-card {
+  background: var(--ds-interactive-subtle);
+}
+.memory-card:hover:not(.flipped):not(.matched) {
+  border-color: var(--ds-primary-400);
+  transform: scale(1.05);
+}
+.memory-card .card-back {
+  font-size: 20px;
+  color: var(--ds-primary-600);
+}
+.memory-card .card-front {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.memory-card .card-front .emotion-label {
+  font-family: var(--ds-font-sans);
+  font-size: 9px;
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-secondary);
+  text-align: center;
+  line-height: 1.1;
+}
+.memory-card.flipped .card-back,
+.memory-card.matched .card-back {
+  display: none;
+}
+.memory-card.flipped .card-front,
+.memory-card.matched .card-front {
+  display: flex;
+}
+.memory-card.flipped {
+  background: var(--ds-surface);
+  border-color: var(--ds-primary-500);
+}
+.memory-card.matched {
+  background: rgba(42, 157, 143, 0.1);
+  border-color: var(--ds-success-500);
+  cursor: default;
+  opacity: 0.85;
+}
+.memory-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-6);
+  margin-bottom: var(--ds-space-4);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+}
+.memory-stats strong {
+  color: var(--ds-text-primary);
+}
+.memory-prompt {
+  text-align: center;
+  padding: var(--ds-space-4);
+  background: var(--ds-primary-50);
+  border-radius: var(--ds-radius-lg);
+  margin-top: var(--ds-space-4);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-primary-700);
+  line-height: var(--ds-leading-relaxed);
+  display: none;
+}
+[data-theme="dark"] .memory-prompt {
+  background: var(--ds-interactive-subtle);
+  color: var(--ds-primary-300);
+}
+.memory-prompt.visible {
+  display: block;
+  animation: fadeSlideIn 0.3s ease;
+}
+.memory-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--ds-space-4);
+}
+
+/* ---- Coping Spinner ---- */
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ds-space-6);
+}
+.spinner-wheel-wrap {
+  position: relative;
+  width: 320px;
+  height: 320px;
+}
+.spinner-wheel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+  box-shadow: var(--ds-shadow-lg);
+}
+.spinner-pointer {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-top: 24px solid var(--ds-primary-700);
+  z-index: 2;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+.spinner-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--ds-surface);
+  border: 3px solid var(--ds-primary-600);
+  z-index: 2;
+}
+.spinner-result {
+  text-align: center;
+  max-width: 400px;
+  min-height: 80px;
+}
+.spinner-result__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xl);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-primary-700);
+  margin: 0 0 var(--ds-space-2);
+}
+[data-theme="dark"] .spinner-result__title {
+  color: var(--ds-primary-300);
+}
+.spinner-result__desc {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+  margin: 0;
+}
+.spinner-btn {
+  padding: var(--ds-space-3) var(--ds-space-8);
+  border-radius: var(--ds-radius-full);
+  border: none;
+  background: var(--ds-primary-600);
+  color: var(--ds-text-inverse);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-semibold);
+  cursor: pointer;
+  transition: background-color var(--ds-duration-fast) var(--ds-ease-default),
+              transform var(--ds-duration-fast) var(--ds-ease-default);
+}
+.spinner-btn:hover {
+  background: var(--ds-primary-700);
+  transform: scale(1.05);
+}
+.spinner-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ---- Thought Challenger ---- */
+.thought-challenger {
+  max-width: 560px;
+  margin: 0 auto;
+}
+.tc-progress {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  margin-bottom: var(--ds-space-6);
+}
+.tc-progress__bar {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--ds-surface-hover);
+  overflow: hidden;
+}
+.tc-progress__fill {
+  height: 100%;
+  background: var(--ds-primary-600);
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+.tc-progress__text {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+  white-space: nowrap;
+}
+.tc-thought-bubble {
+  background: var(--ds-warm-gray-50);
+  border: 1px solid var(--ds-border-subtle);
+  border-radius: var(--ds-radius-xl);
+  padding: var(--ds-space-5);
+  text-align: center;
+  margin-bottom: var(--ds-space-6);
+  position: relative;
+}
+[data-theme="dark"] .tc-thought-bubble {
+  background: var(--ds-interactive-subtle);
+}
+.tc-thought-bubble__label {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--ds-tracking-widest);
+  color: var(--ds-text-muted);
+  margin: 0 0 var(--ds-space-2);
+}
+.tc-thought-bubble__text {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-primary);
+  font-style: italic;
+  margin: 0;
+}
+.tc-step {
+  display: none;
+}
+.tc-step.active {
+  display: block;
+  animation: fadeSlideIn 0.3s ease;
+}
+.tc-step__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  margin: 0 0 var(--ds-space-4);
+}
+.tc-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: var(--ds-space-3) var(--ds-space-4);
+  border-radius: var(--ds-radius-lg);
+  border: 1px solid var(--ds-border);
+  background: var(--ds-surface);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-primary);
+  cursor: pointer;
+  margin-bottom: var(--ds-space-2);
+  transition: border-color var(--ds-duration-fast) var(--ds-ease-default),
+              background-color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.tc-option:hover {
+  border-color: var(--ds-primary-400);
+  background: var(--ds-primary-50);
+}
+[data-theme="dark"] .tc-option:hover {
+  background: var(--ds-interactive-subtle);
+}
+.tc-option.correct {
+  border-color: var(--ds-success-500);
+  background: rgba(42, 157, 143, 0.1);
+}
+.tc-option.incorrect {
+  border-color: var(--ds-danger-400);
+  background: rgba(220, 95, 95, 0.08);
+}
+.tc-slider-group {
+  margin-bottom: var(--ds-space-4);
+}
+.tc-slider-label {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+  margin-bottom: var(--ds-space-2);
+}
+.tc-slider {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--ds-surface-hover);
+  outline: none;
+}
+.tc-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--ds-primary-600);
+  cursor: pointer;
+  box-shadow: var(--ds-shadow-sm);
+}
+.tc-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--ds-primary-600);
+  cursor: pointer;
+  border: none;
+  box-shadow: var(--ds-shadow-sm);
+}
+.tc-slider-value {
+  text-align: center;
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-2xl);
+  font-weight: var(--ds-weight-bold);
+  color: var(--ds-primary-600);
+  margin-top: var(--ds-space-2);
+}
+.tc-textarea {
+  width: 100%;
+  min-height: 80px;
+  border-radius: var(--ds-radius-lg);
+  border: 1px solid var(--ds-border);
+  background: var(--ds-surface);
+  padding: var(--ds-space-3) var(--ds-space-4);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-primary);
+  line-height: var(--ds-leading-relaxed);
+  resize: vertical;
+  outline: none;
+  transition: border-color var(--ds-duration-fast) var(--ds-ease-default);
+  box-sizing: border-box;
+}
+.tc-textarea:focus {
+  border-color: var(--ds-primary-500);
+}
+.tc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-2-5) var(--ds-space-5);
+  border-radius: var(--ds-radius-lg);
+  border: none;
+  background: var(--ds-primary-600);
+  color: var(--ds-text-inverse);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  cursor: pointer;
+  transition: background-color var(--ds-duration-fast) var(--ds-ease-default);
+  margin-top: var(--ds-space-4);
+}
+.tc-btn:hover { background: var(--ds-primary-700); }
+.tc-comparison {
+  display: flex;
+  align-items: stretch;
+  gap: var(--ds-space-4);
+  margin-top: var(--ds-space-4);
+}
+.tc-comparison__col {
+  flex: 1;
+  padding: var(--ds-space-4);
+  border-radius: var(--ds-radius-lg);
+  text-align: center;
+}
+.tc-comparison__col--before {
+  background: rgba(220, 95, 95, 0.08);
+  border: 1px solid rgba(220, 95, 95, 0.2);
+}
+.tc-comparison__col--after {
+  background: rgba(42, 157, 143, 0.08);
+  border: 1px solid rgba(42, 157, 143, 0.2);
+}
+.tc-comparison__label {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--ds-tracking-widest);
+  color: var(--ds-text-muted);
+  margin-bottom: var(--ds-space-1);
+}
+.tc-comparison__value {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-2xl);
+  font-weight: var(--ds-weight-bold);
+  color: var(--ds-text-primary);
+}
+
+/* ---- Breathing Guide ---- */
+.breathing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ds-space-6);
+}
+.breathing-options {
+  display: flex;
+  gap: var(--ds-space-2);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.breathing-opt {
+  padding: var(--ds-space-2) var(--ds-space-4);
+  border-radius: var(--ds-radius-full);
+  border: 1px solid var(--ds-border);
+  background: var(--ds-surface);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+}
+.breathing-opt:hover {
+  border-color: var(--ds-primary-400);
+}
+.breathing-opt.active {
+  background: var(--ds-primary-600);
+  color: var(--ds-text-inverse);
+  border-color: var(--ds-primary-600);
+}
+.breathing-timer-options {
+  display: flex;
+  gap: var(--ds-space-2);
+  justify-content: center;
+}
+.breathing-timer-opt {
+  padding: var(--ds-space-1-5) var(--ds-space-3);
+  border-radius: var(--ds-radius-full);
+  border: 1px solid var(--ds-border);
+  background: var(--ds-surface);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+}
+.breathing-timer-opt.active {
+  background: var(--ds-primary-100);
+  color: var(--ds-primary-700);
+  border-color: var(--ds-primary-300);
+}
+[data-theme="dark"] .breathing-timer-opt.active {
+  background: var(--ds-interactive-subtle);
+  color: var(--ds-primary-300);
+}
+.breathing-circle-wrap {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.breathing-circle-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid var(--ds-border-subtle);
+}
+.breathing-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6bb5a0, #4a90a0);
+  transition: width 0.8s ease-in-out, height 0.8s ease-in-out, background 1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: 0 0 40px rgba(42, 157, 143, 0.2);
+}
+.breathing-circle.inhale {
+  width: 220px;
+  height: 220px;
+  background: linear-gradient(135deg, #6bb5a0, #82c9b8);
+  box-shadow: 0 0 60px rgba(42, 157, 143, 0.35);
+}
+.breathing-circle.hold {
+  box-shadow: 0 0 50px rgba(42, 157, 143, 0.3);
+}
+.breathing-circle.exhale {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #4a8090, #6bb5a0);
+  box-shadow: 0 0 30px rgba(42, 157, 143, 0.15);
+}
+.breathing-label {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-semibold);
+  color: white;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  text-align: center;
+  pointer-events: none;
+}
+.breathing-count {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: rgba(255,255,255,0.85);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  pointer-events: none;
+}
+.breathing-time-left {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-muted);
+  margin-top: var(--ds-space-2);
+}
+
+/* ---- Feelings Check-In ---- */
+.checkin-container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+.checkin-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--ds-space-3);
+  margin-bottom: var(--ds-space-6);
+}
+.checkin-emotion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ds-space-1);
+  padding: var(--ds-space-3);
+  border-radius: var(--ds-radius-lg);
+  border: 2px solid var(--ds-border-subtle);
+  background: var(--ds-surface);
+  cursor: pointer;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+}
+.checkin-emotion:hover {
+  border-color: var(--ds-primary-400);
+  transform: scale(1.05);
+}
+.checkin-emotion.selected {
+  border-color: var(--ds-primary-600);
+  background: var(--ds-primary-50);
+  transform: scale(1.05);
+}
+[data-theme="dark"] .checkin-emotion.selected {
+  background: var(--ds-interactive-subtle);
+}
+.checkin-emotion__face {
+  font-size: 32px;
+  line-height: 1;
+}
+.checkin-emotion__label {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-secondary);
+  text-align: center;
+}
+.checkin-detail {
+  display: none;
+  animation: fadeSlideIn 0.3s ease;
+}
+.checkin-detail.visible {
+  display: block;
+}
+.checkin-intensity {
+  margin-bottom: var(--ds-space-5);
+}
+.checkin-intensity__label {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  margin-bottom: var(--ds-space-2);
+}
+.checkin-stars {
+  display: flex;
+  gap: var(--ds-space-1);
+}
+.checkin-star {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 24px;
+  transition: transform var(--ds-duration-fast) var(--ds-ease-default);
+  padding: 0;
+  color: var(--ds-text-muted);
+}
+.checkin-star:hover { transform: scale(1.2); }
+.checkin-star.filled { color: #f4a261; }
+.checkin-notes {
+  margin-bottom: var(--ds-space-5);
+}
+.checkin-notes__label {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  margin-bottom: var(--ds-space-2);
+}
+.checkin-textarea {
+  width: 100%;
+  min-height: 70px;
+  border-radius: var(--ds-radius-lg);
+  border: 1px solid var(--ds-border);
+  background: var(--ds-surface);
+  padding: var(--ds-space-3) var(--ds-space-4);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-primary);
+  resize: vertical;
+  outline: none;
+  box-sizing: border-box;
+}
+.checkin-textarea:focus { border-color: var(--ds-primary-500); }
+.checkin-suggestion {
+  padding: var(--ds-space-4);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-primary-50);
+  border: 1px solid var(--ds-primary-100);
+}
+[data-theme="dark"] .checkin-suggestion {
+  background: var(--ds-interactive-subtle);
+  border-color: transparent;
+}
+.checkin-suggestion__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-primary-700);
+  margin: 0 0 var(--ds-space-1);
+}
+[data-theme="dark"] .checkin-suggestion__title {
+  color: var(--ds-primary-300);
+}
+.checkin-suggestion__text {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+  margin: 0;
+}
+
+/* ---- Clinician Section ---- */
+.clinician-section {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6) var(--ds-space-16);
+}
+.clinician-card {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border-subtle);
+  border-radius: var(--ds-radius-xl);
+  padding: var(--ds-space-8);
+}
+.clinician-card h2 {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-2xl);
+  font-weight: var(--ds-weight-bold);
+  color: var(--ds-text-primary);
+  margin: 0 0 var(--ds-space-6);
+}
+.clinician-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--ds-space-6);
+}
+.clinician-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-3);
+}
+.clinician-item h3 {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+}
+.clinician-item p,
+.clinician-item ul {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+  margin: 0;
+}
+.clinician-item ul {
+  padding-left: var(--ds-space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-1-5);
+}
+
+/* ---- Footer ---- */
+.site-footer {
+  background: var(--ds-surface);
+  border-top: 1px solid var(--ds-border);
+  padding: var(--ds-space-16) 0 var(--ds-space-8);
+  margin-top: 0;
+}
+.footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--ds-space-10);
+  margin-bottom: var(--ds-space-10);
+}
+.footer__brand-desc {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+  margin-top: var(--ds-space-3);
+  max-width: 320px;
+}
+.footer__col-title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--ds-tracking-widest);
+  margin-bottom: var(--ds-space-4);
+}
+.footer__links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2-5);
+}
+.footer__links a {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.footer__links a:hover {
+  color: var(--ds-text-primary);
+}
+.footer__crisis-box {
+  background: var(--ds-status-danger-bg);
+  border: 1px solid var(--ds-danger-200);
+  border-radius: var(--ds-radius-lg);
+  padding: var(--ds-space-4);
+  margin-top: var(--ds-space-4);
+}
+[data-theme="dark"] .footer__crisis-box {
+  border-color: rgba(220, 95, 95, 0.2);
+}
+.footer__crisis-title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-status-danger-text);
+  margin-bottom: var(--ds-space-2);
+}
+.footer__crisis-numbers {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+}
+.footer__crisis-numbers strong {
+  color: var(--ds-text-primary);
+}
+.footer__bottom {
+  border-top: 1px solid var(--ds-border-subtle);
+  padding-top: var(--ds-space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--ds-space-4);
+}
+.footer__disclaimer {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+  line-height: var(--ds-leading-relaxed);
+  max-width: 560px;
+}
+.footer__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-4);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+}
+.footer__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ds-success-500);
+  display: inline-block;
+}
+
+/* ---- Generic Button ---- */
+.btn-reset {
+  padding: var(--ds-space-2) var(--ds-space-5);
+  border-radius: var(--ds-radius-lg);
+  border: 1px solid var(--ds-border);
+  background: var(--ds-surface);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+}
+.btn-reset:hover {
+  border-color: var(--ds-primary-400);
+  color: var(--ds-text-primary);
+}
+
+/* ---- Animation ---- */
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1023px) {
+  .games-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .clinician-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ds-space-8);
+  }
+}
+@media (max-width: 639px) {
+  .site-nav__links,
+  .site-nav__font-controls {
+    display: none;
+  }
+  .site-nav__hamburger {
+    display: flex;
+  }
+  .hero {
+    padding: var(--ds-space-12) 0 var(--ds-space-10);
+  }
+  .hero__title {
+    font-size: var(--ds-text-3xl);
+  }
+  .hero__subtitle {
+    font-size: var(--ds-text-base);
+  }
+  .games-grid {
+    grid-template-columns: 1fr;
+  }
+  .clinician-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: var(--ds-space-8);
+  }
+  .footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .memory-board {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .checkin-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .spinner-wheel-wrap {
+    width: 260px;
+    height: 260px;
+  }
+  .tc-comparison {
+    flex-direction: column;
+  }
+}
+</style>
+</head>
+
+<body>
+<script src="js/auth-gate.js"></script>
+
+<a href="#main-content" class="ds-sr-only" style="position:absolute;top:-40px;left:0;background:var(--ds-surface);padding:8px 16px;z-index:100;font-size:14px;transition:top 0.2s" onfocus="this.style.top='0'" onblur="this.style.top='-40px'">Skip to main content</a>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav class="site-nav" role="navigation" aria-label="Main navigation">
+  <div class="site-nav__inner">
+
+    <a href="index.html" class="site-nav__logo" id="siteLogo">
+      <div class="site-nav__logo-mark">NH</div>
+      <span class="site-nav__logo-text">MH Resources</span>
+    </a>
+
+    <div class="site-nav__links">
+      <a href="index.html" class="site-nav__link">Home</a>
+      <a href="resources.html" class="site-nav__link">Resources</a>
+      <a href="tools.html" class="site-nav__link">Clinical Tools</a>
+      <a href="guide.html" class="site-nav__link">Guides</a>
+      <a href="neurobiology.html" class="site-nav__link">Brain &amp; Neuro</a>
+      <a href="worksheets.html" class="site-nav__link">Worksheets</a>
+      <a href="activities.html" class="site-nav__link">Activities</a>
+      <a href="games.html" class="site-nav__link site-nav__link--active">Games</a>
+    </div>
+
+    <div class="site-nav__controls">
+      <button class="site-nav__icon-btn" onclick="toggleGlobalSearch()" title="Search (Ctrl+K)" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+
+      <div class="site-nav__font-controls">
+        <button class="site-nav__font-btn" onclick="mhFontDecrease()" title="Decrease font size" aria-label="Decrease font size">A-</button>
+        <button class="site-nav__font-btn" onclick="mhFontIncrease()" title="Increase font size" aria-label="Increase font size">A+</button>
+      </div>
+
+      <button class="site-nav__icon-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+
+      <button class="site-nav__hamburger" id="hamburgerBtn" onclick="toggleMobileNav()" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </div>
+</nav>
+
+<!-- Mobile slide-out panel -->
+<div class="site-nav__mobile-panel" id="mobileNavPanel">
+  <a href="index.html" class="site-nav__mobile-link">Home</a>
+  <a href="resources.html" class="site-nav__mobile-link">Resources</a>
+  <a href="tools.html" class="site-nav__mobile-link">Clinical Tools</a>
+  <a href="guide.html" class="site-nav__mobile-link">Guides</a>
+  <a href="neurobiology.html" class="site-nav__mobile-link">Brain &amp; Neuro</a>
+  <a href="worksheets.html" class="site-nav__mobile-link">Worksheets</a>
+  <a href="activities.html" class="site-nav__mobile-link">Activities</a>
+  <a href="games.html" class="site-nav__mobile-link site-nav__mobile-link--active">Games</a>
+</div>
+
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero">
+  <div class="hero__inner">
+    <div class="hero__overline">
+      <div class="hero__overline-dot"></div>
+      <span style="font-family:var(--ds-font-sans);font-size:var(--ds-text-sm);font-weight:var(--ds-weight-medium);color:var(--ds-text-secondary)">Interactive Therapeutic Tools</span>
+    </div>
+    <h1 class="hero__title">Therapeutic Games</h1>
+    <p class="hero__subtitle">Interactive tools for emotional learning, coping skills practice, and therapeutic engagement</p>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     MAIN CONTENT
+     ============================================================ -->
+<main id="main-content">
+
+
+<!-- ---- Intro ---- -->
+<div class="intro-section">
+  <div class="intro-card">
+    <h2>Using Games in Therapy</h2>
+    <p>Games offer a low-pressure way to explore emotions, practice coping strategies, and build therapeutic rapport. These browser-based tools require no downloads or internet connection and can be used during sessions, assigned as between-session activities, or integrated into group work. Each game targets specific therapeutic skills and includes age recommendations to guide clinical use.</p>
+  </div>
+</div>
+
+
+<!-- ---- Game Cards Grid ---- -->
+<div class="games-grid">
+
+  <!-- Card 1: Feelings Memory Match -->
+  <div class="game-card">
+    <div class="game-card__icon game-card__icon--memory">&#127183;</div>
+    <h3 class="game-card__title">Feelings Memory Match</h3>
+    <p class="game-card__desc">Classic memory card game with 12 emotion pairs. Match faces and reflect on personal experiences with each emotion as you play.</p>
+    <div class="game-card__meta">
+      <span class="game-card__badge game-card__badge--age">Ages 5-12</span>
+      <span class="game-card__badge game-card__badge--purpose">Emotion Identification</span>
+    </div>
+    <button class="game-card__play-btn" onclick="openGame('memory')" aria-label="Play Feelings Memory Match">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Play
+    </button>
+  </div>
+
+  <!-- Card 2: Coping Skills Spinner -->
+  <div class="game-card">
+    <div class="game-card__icon game-card__icon--spinner">&#127922;</div>
+    <h3 class="game-card__title">Coping Skills Spinner</h3>
+    <p class="game-card__desc">Spin the colorful wheel to discover coping strategies. Each spin lands on a technique with a brief explanation of how to practice it.</p>
+    <div class="game-card__meta">
+      <span class="game-card__badge game-card__badge--age">All Ages</span>
+      <span class="game-card__badge game-card__badge--purpose">Coping Skill Exploration</span>
+    </div>
+    <button class="game-card__play-btn" onclick="openGame('spinner')" aria-label="Play Coping Skills Spinner">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Play
+    </button>
+  </div>
+
+  <!-- Card 3: Thought Challenger -->
+  <div class="game-card">
+    <div class="game-card__icon game-card__icon--thought">&#129504;</div>
+    <h3 class="game-card__title">Thought Challenger</h3>
+    <p class="game-card__desc">Interactive CBT exercise. Identify cognitive distortions, rate belief strength, and practice writing balanced alternative thoughts.</p>
+    <div class="game-card__meta">
+      <span class="game-card__badge game-card__badge--age">Ages 13+</span>
+      <span class="game-card__badge game-card__badge--purpose">Cognitive Restructuring</span>
+    </div>
+    <button class="game-card__play-btn" onclick="openGame('thought')" aria-label="Play Thought Challenger">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Play
+    </button>
+  </div>
+
+  <!-- Card 4: Breathing Guide -->
+  <div class="game-card">
+    <div class="game-card__icon game-card__icon--breathing">&#127788;&#65039;</div>
+    <h3 class="game-card__title">Breathing Guide</h3>
+    <p class="game-card__desc">Guided breathing with an animated circle. Choose from Box Breathing, 4-7-8, or Simple Deep Breathing with calming visual transitions.</p>
+    <div class="game-card__meta">
+      <span class="game-card__badge game-card__badge--age">All Ages</span>
+      <span class="game-card__badge game-card__badge--purpose">Relaxation &amp; Regulation</span>
+    </div>
+    <button class="game-card__play-btn" onclick="openGame('breathing')" aria-label="Play Breathing Guide">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Play
+    </button>
+  </div>
+
+  <!-- Card 5: Feelings Check-In -->
+  <div class="game-card">
+    <div class="game-card__icon game-card__icon--checkin">&#128151;</div>
+    <h3 class="game-card__title">Feelings Check-In</h3>
+    <p class="game-card__desc">Quick mood check-in tool. Select your current feeling, rate its intensity, and receive a tailored coping suggestion. Great for session openers.</p>
+    <div class="game-card__meta">
+      <span class="game-card__badge game-card__badge--age">All Ages</span>
+      <span class="game-card__badge game-card__badge--purpose">Emotional Awareness</span>
+    </div>
+    <button class="game-card__play-btn" onclick="openGame('checkin')" aria-label="Play Feelings Check-In">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Play
+    </button>
+  </div>
+
+</div>
+
+
+<!-- ---- For Clinicians Section ---- -->
+<div class="clinician-section">
+  <div class="clinician-card">
+    <h2>For Clinicians</h2>
+    <div class="clinician-grid">
+
+      <div class="clinician-item">
+        <h3>&#128218; Integrating Games Into Sessions</h3>
+        <ul>
+          <li>Use Feelings Memory Match as a warm-up to build emotional vocabulary before deeper work</li>
+          <li>The Coping Skills Spinner works well as a session closer to identify a take-home strategy</li>
+          <li>Thought Challenger pairs naturally with CBT psychoeducation on cognitive distortions</li>
+          <li>Breathing Guide can anchor regulation practice at any point in a session</li>
+          <li>Open sessions with a Feelings Check-In to set the therapeutic agenda</li>
+        </ul>
+      </div>
+
+      <div class="clinician-item">
+        <h3>&#128221; Documentation Tips</h3>
+        <ul>
+          <li>Note which emotions the client could and could not identify in Memory Match</li>
+          <li>Record the client's preferred coping strategies from the Spinner for treatment planning</li>
+          <li>Track belief rating changes in Thought Challenger as a measure of cognitive flexibility</li>
+          <li>Document breathing pattern tolerance and duration for progress monitoring</li>
+          <li>Use Check-In responses to track mood trends across sessions</li>
+        </ul>
+      </div>
+
+      <div class="clinician-item">
+        <h3>&#127919; Suggested Populations</h3>
+        <ul>
+          <li><strong>Memory Match:</strong> Children with alexithymia, ASD, or limited emotional vocabulary</li>
+          <li><strong>Spinner:</strong> Clients new to therapy or building a coping toolkit</li>
+          <li><strong>Thought Challenger:</strong> Adolescents and adults with anxiety, depression, or negative self-talk</li>
+          <li><strong>Breathing Guide:</strong> Anxiety, PTSD, panic, or any client learning regulation skills</li>
+          <li><strong>Check-In:</strong> All clients; especially helpful for those who struggle to verbalize feelings</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+</main>
+
+
+<!-- ============================================================
+     GAME MODALS
+     ============================================================ -->
+
+<!-- ---- Memory Match Modal ---- -->
+<div class="game-modal-overlay" id="modal-memory" role="dialog" aria-modal="true" aria-label="Feelings Memory Match">
+  <div class="game-modal">
+    <div class="game-modal__header">
+      <h2 class="game-modal__title">Feelings Memory Match</h2>
+      <button class="game-modal__close" onclick="closeGame('memory')" aria-label="Close">&times;</button>
+    </div>
+    <div class="game-modal__body">
+      <div class="memory-stats">
+        <span>Moves: <strong id="memoryMoves">0</strong></span>
+        <span>Matches: <strong id="memoryMatches">0</strong> / 12</span>
+        <span>Time: <strong id="memoryTime">0:00</strong></span>
+      </div>
+      <div class="memory-board" id="memoryBoard"></div>
+      <div class="memory-prompt" id="memoryPrompt"></div>
+      <div class="memory-actions">
+        <button class="btn-reset" onclick="initMemoryGame()">New Game</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ---- Coping Spinner Modal ---- -->
+<div class="game-modal-overlay" id="modal-spinner" role="dialog" aria-modal="true" aria-label="Coping Skills Spinner">
+  <div class="game-modal">
+    <div class="game-modal__header">
+      <h2 class="game-modal__title">Coping Skills Spinner</h2>
+      <button class="game-modal__close" onclick="closeGame('spinner')" aria-label="Close">&times;</button>
+    </div>
+    <div class="game-modal__body">
+      <div class="spinner-container">
+        <div class="spinner-wheel-wrap">
+          <div class="spinner-pointer"></div>
+          <canvas id="spinnerCanvas" width="320" height="320" class="spinner-wheel"></canvas>
+          <div class="spinner-center"></div>
+        </div>
+        <button class="spinner-btn" id="spinBtn" onclick="spinWheel()">Spin!</button>
+        <div class="spinner-result" id="spinnerResult">
+          <p class="spinner-result__desc">Click the button to spin the wheel and discover a coping strategy!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ---- Thought Challenger Modal ---- -->
+<div class="game-modal-overlay" id="modal-thought" role="dialog" aria-modal="true" aria-label="Thought Challenger">
+  <div class="game-modal">
+    <div class="game-modal__header">
+      <h2 class="game-modal__title">Thought Challenger</h2>
+      <button class="game-modal__close" onclick="closeGame('thought')" aria-label="Close">&times;</button>
+    </div>
+    <div class="game-modal__body">
+      <div class="thought-challenger" id="thoughtChallenger"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ---- Breathing Guide Modal ---- -->
+<div class="game-modal-overlay" id="modal-breathing" role="dialog" aria-modal="true" aria-label="Breathing Guide">
+  <div class="game-modal">
+    <div class="game-modal__header">
+      <h2 class="game-modal__title">Breathing Guide</h2>
+      <button class="game-modal__close" onclick="closeGame('breathing')" aria-label="Close">&times;</button>
+    </div>
+    <div class="game-modal__body">
+      <div class="breathing-container" id="breathingContainer">
+        <div class="breathing-options" role="radiogroup" aria-label="Breathing pattern">
+          <button class="breathing-opt active" onclick="selectBreathingPattern(this, 'box')" role="radio" aria-checked="true">Box Breathing (4-4-4-4)</button>
+          <button class="breathing-opt" onclick="selectBreathingPattern(this, '478')" role="radio" aria-checked="false">4-7-8 Breathing</button>
+          <button class="breathing-opt" onclick="selectBreathingPattern(this, 'simple')" role="radio" aria-checked="false">Simple Deep (4-6)</button>
+        </div>
+        <div class="breathing-timer-options" role="radiogroup" aria-label="Duration">
+          <button class="breathing-timer-opt active" onclick="selectBreathingDuration(this, 60)" role="radio" aria-checked="true">1 min</button>
+          <button class="breathing-timer-opt" onclick="selectBreathingDuration(this, 180)" role="radio" aria-checked="false">3 min</button>
+          <button class="breathing-timer-opt" onclick="selectBreathingDuration(this, 300)" role="radio" aria-checked="false">5 min</button>
+        </div>
+        <div class="breathing-circle-wrap">
+          <div class="breathing-circle-bg"></div>
+          <div class="breathing-circle" id="breathingCircle">
+            <span class="breathing-label" id="breathingLabel">Ready</span>
+            <span class="breathing-count" id="breathingCount"></span>
+          </div>
+        </div>
+        <div class="breathing-time-left" id="breathingTimeLeft"></div>
+        <button class="spinner-btn" id="breathingStartBtn" onclick="toggleBreathing()">Start</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ---- Feelings Check-In Modal ---- -->
+<div class="game-modal-overlay" id="modal-checkin" role="dialog" aria-modal="true" aria-label="Feelings Check-In">
+  <div class="game-modal">
+    <div class="game-modal__header">
+      <h2 class="game-modal__title">Feelings Check-In</h2>
+      <button class="game-modal__close" onclick="closeGame('checkin')" aria-label="Close">&times;</button>
+    </div>
+    <div class="game-modal__body">
+      <div class="checkin-container">
+        <p style="font-family:var(--ds-font-sans);font-size:var(--ds-text-sm);color:var(--ds-text-secondary);text-align:center;margin:0 0 var(--ds-space-5)">How are you feeling right now? Tap the emotion that fits best.</p>
+        <div class="checkin-grid" id="checkinGrid"></div>
+        <div class="checkin-detail" id="checkinDetail">
+          <div class="checkin-intensity">
+            <div class="checkin-intensity__label">How strong is this feeling?</div>
+            <div class="checkin-stars" id="checkinStars" role="radiogroup" aria-label="Intensity rating"></div>
+          </div>
+          <div class="checkin-notes">
+            <div class="checkin-notes__label">What's going on? (optional)</div>
+            <textarea class="checkin-textarea" id="checkinNotes" placeholder="Describe what's happening or what's on your mind..." aria-label="Notes about your feelings"></textarea>
+          </div>
+          <div class="checkin-suggestion" id="checkinSuggestion">
+            <div class="checkin-suggestion__title" id="checkinSuggestionTitle"></div>
+            <p class="checkin-suggestion__text" id="checkinSuggestionText"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="ds-container">
+
+    <div class="footer__grid">
+
+      <!-- Brand column -->
+      <div>
+        <a href="index.html" class="site-nav__logo" style="text-decoration:none">
+          <div class="site-nav__logo-mark">NH</div>
+          <span class="site-nav__logo-text">MH Resources</span>
+        </a>
+        <p class="footer__brand-desc">A comprehensive resource hub for clinicians, case managers, and community members in the Greater Nashua area.</p>
+
+        <div class="footer__crisis-box">
+          <div class="footer__crisis-title">Crisis? Get help now.</div>
+          <div class="footer__crisis-numbers">
+            <strong>988</strong> Suicide &amp; Crisis Lifeline<br>
+            <strong>1-833-710-6477</strong> NH Rapid Response<br>
+            <strong>(603) 889-6147</strong> GNMHC Crisis<br>
+            <strong>Text HOME to 741741</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigate -->
+      <div>
+        <div class="footer__col-title">Navigate</div>
+        <ul class="footer__links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="tools.html">Clinical Tools</a></li>
+          <li><a href="guide.html">Guides</a></li>
+          <li><a href="neurobiology.html">Brain &amp; Neuro</a></li>
+          <li><a href="worksheets.html">Worksheets</a></li>
+          <li><a href="activities.html">Activities</a></li>
+          <li><a href="games.html">Games</a></li>
+        </ul>
+      </div>
+
+      <!-- Quick Access -->
+      <div>
+        <div class="footer__col-title">Quick Access</div>
+        <ul class="footer__links">
+          <li><a href="tools.html#screening-tools">Screening Tools</a></li>
+          <li><a href="tools.html#clinical-note-builder">Note Builder</a></li>
+          <li><a href="guide.html#crisisTree">Crisis Tree</a></li>
+          <li><a href="resources.html#housing">Housing Resources</a></li>
+        </ul>
+      </div>
+
+      <!-- Clinical -->
+      <div>
+        <div class="footer__col-title">Clinical</div>
+        <ul class="footer__links">
+          <li><a href="tools.html#cbt">CBT Worksheets</a></li>
+          <li><a href="tools.html#dbt">DBT Handouts</a></li>
+          <li><a href="tools.html#cpt-reference">CPT Codes</a></li>
+          <li><a href="tools.html#safety-plan-builder">Safety Planning</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <div class="footer__disclaimer">
+        For informational purposes only. This resource does not replace clinical judgment, supervision, or direct consultation. Contact information and services may change; always verify by contacting organizations directly.
+      </div>
+      <div class="footer__meta">
+        <span><span class="footer__status-dot"></span> Updated Jun 24, 2026</span>
+        <span>v4.0</span>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ============================================================
+     TOAST
+     ============================================================ -->
+<div class="ds-toast" id="toast"></div>
+
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script>
+// ---- Theme toggle ----
+function toggleTheme() {
+  var html = document.documentElement;
+  var btn = document.getElementById('themeToggleBtn');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.removeAttribute('data-theme');
+    localStorage.setItem('theme', 'light');
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+  }
+}
+
+// Respect saved preference, then system preference
+(function() {
+  var saved = localStorage.getItem('theme');
+  var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (saved === 'dark' || (!saved && prefersDark)) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    var btn = document.getElementById('themeToggleBtn');
+    if (btn) btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+  }
+})();
+
+// ---- Mobile nav toggle ----
+function toggleMobileNav() {
+  var panel = document.getElementById('mobileNavPanel');
+  var btn = document.getElementById('hamburgerBtn');
+  var isOpen = panel.classList.toggle('is-open');
+  btn.setAttribute('aria-expanded', isOpen);
+}
+
+// ---- Modal management ----
+function openGame(id) {
+  var modal = document.getElementById('modal-' + id);
+  modal.classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+  if (id === 'memory') initMemoryGame();
+  if (id === 'spinner') initSpinner();
+  if (id === 'thought') initThoughtChallenger();
+  if (id === 'checkin') initCheckin();
+  // Trap focus
+  modal.querySelector('.game-modal__close').focus();
+}
+
+function closeGame(id) {
+  var modal = document.getElementById('modal-' + id);
+  modal.classList.remove('is-open');
+  document.body.style.overflow = '';
+  if (id === 'breathing') stopBreathing();
+}
+
+// Close on overlay click
+document.querySelectorAll('.game-modal-overlay').forEach(function(overlay) {
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) {
+      var id = overlay.id.replace('modal-', '');
+      closeGame(id);
+    }
+  });
+});
+
+// Close on Escape
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.game-modal-overlay.is-open').forEach(function(m) {
+      var id = m.id.replace('modal-', '');
+      closeGame(id);
+    });
+  }
+});
+
+
+// ============================================================
+// GAME 1: FEELINGS MEMORY MATCH
+// ============================================================
+var memoryEmotions = [
+  { emoji: '\u{1F60A}', name: 'Happy' },
+  { emoji: '\u{1F622}', name: 'Sad' },
+  { emoji: '\u{1F621}', name: 'Angry' },
+  { emoji: '\u{1F628}', name: 'Scared' },
+  { emoji: '\u{1F632}', name: 'Surprised' },
+  { emoji: '\u{1F922}', name: 'Disgusted' },
+  { emoji: '\u{1F630}', name: 'Anxious' },
+  { emoji: '\u{1F60C}', name: 'Calm' },
+  { emoji: '\u{1F60E}', name: 'Proud' },
+  { emoji: '\u{1F633}', name: 'Embarrassed' },
+  { emoji: '\u{1F624}', name: 'Frustrated' },
+  { emoji: '\u{1F31F}', name: 'Hopeful' }
+];
+
+var memoryCards = [];
+var memoryFlipped = [];
+var memoryMatchCount = 0;
+var memoryMoveCount = 0;
+var memoryLocked = false;
+var memoryTimerInterval = null;
+var memoryStartTime = null;
+
+function initMemoryGame() {
+  memoryFlipped = [];
+  memoryMatchCount = 0;
+  memoryMoveCount = 0;
+  memoryLocked = false;
+  clearInterval(memoryTimerInterval);
+  memoryStartTime = null;
+  document.getElementById('memoryMoves').textContent = '0';
+  document.getElementById('memoryMatches').textContent = '0';
+  document.getElementById('memoryTime').textContent = '0:00';
+  var prompt = document.getElementById('memoryPrompt');
+  prompt.classList.remove('visible');
+  prompt.textContent = '';
+
+  // Create pairs
+  var pairs = [];
+  memoryEmotions.forEach(function(e, i) {
+    pairs.push({ id: i, emoji: e.emoji, name: e.name });
+    pairs.push({ id: i, emoji: e.emoji, name: e.name });
+  });
+
+  // Shuffle
+  for (var i = pairs.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = pairs[i];
+    pairs[i] = pairs[j];
+    pairs[j] = temp;
+  }
+
+  memoryCards = pairs;
+  var board = document.getElementById('memoryBoard');
+  board.innerHTML = '';
+
+  pairs.forEach(function(card, index) {
+    var el = document.createElement('button');
+    el.className = 'memory-card';
+    el.setAttribute('data-index', index);
+    el.setAttribute('data-id', card.id);
+    el.setAttribute('aria-label', 'Card ' + (index + 1));
+    el.innerHTML = '<span class="card-back">?</span>' +
+      '<div class="card-front"><span style="font-size:28px;line-height:1">' + card.emoji + '</span>' +
+      '<span class="emotion-label">' + card.name + '</span></div>';
+    el.addEventListener('click', function() { flipCard(el); });
+    board.appendChild(el);
+  });
+}
+
+function flipCard(el) {
+  if (memoryLocked) return;
+  if (el.classList.contains('flipped') || el.classList.contains('matched')) return;
+
+  // Start timer on first flip
+  if (!memoryStartTime) {
+    memoryStartTime = Date.now();
+    memoryTimerInterval = setInterval(updateMemoryTimer, 1000);
+  }
+
+  el.classList.add('flipped');
+  memoryFlipped.push(el);
+
+  if (memoryFlipped.length === 2) {
+    memoryMoveCount++;
+    document.getElementById('memoryMoves').textContent = memoryMoveCount;
+    memoryLocked = true;
+
+    var id1 = memoryFlipped[0].getAttribute('data-id');
+    var id2 = memoryFlipped[1].getAttribute('data-id');
+
+    if (id1 === id2) {
+      // Match!
+      memoryFlipped[0].classList.add('matched');
+      memoryFlipped[1].classList.add('matched');
+      memoryMatchCount++;
+      document.getElementById('memoryMatches').textContent = memoryMatchCount;
+
+      var emotionName = memoryCards[parseInt(memoryFlipped[0].getAttribute('data-index'))].name;
+      var prompt = document.getElementById('memoryPrompt');
+      prompt.textContent = 'Match! Can you think of a time you felt ' + emotionName.toLowerCase() + '?';
+      prompt.classList.add('visible');
+
+      memoryFlipped = [];
+      memoryLocked = false;
+
+      if (memoryMatchCount === 12) {
+        clearInterval(memoryTimerInterval);
+        setTimeout(function() {
+          prompt.textContent = 'Congratulations! You matched all 12 emotions in ' + memoryMoveCount + ' moves and ' + document.getElementById('memoryTime').textContent + '!';
+          prompt.classList.add('visible');
+        }, 600);
+      }
+    } else {
+      // No match
+      setTimeout(function() {
+        memoryFlipped[0].classList.remove('flipped');
+        memoryFlipped[1].classList.remove('flipped');
+        memoryFlipped = [];
+        memoryLocked = false;
+        document.getElementById('memoryPrompt').classList.remove('visible');
+      }, 1000);
+    }
+  }
+}
+
+function updateMemoryTimer() {
+  if (!memoryStartTime) return;
+  var elapsed = Math.floor((Date.now() - memoryStartTime) / 1000);
+  var mins = Math.floor(elapsed / 60);
+  var secs = elapsed % 60;
+  document.getElementById('memoryTime').textContent = mins + ':' + (secs < 10 ? '0' : '') + secs;
+}
+
+
+// ============================================================
+// GAME 2: COPING SKILLS SPINNER
+// ============================================================
+var copingStrategies = [
+  { name: 'Deep Breathing', color: '#2a9d8f', desc: 'Breathe in slowly through your nose for 4 counts, hold for 4 counts, then exhale through your mouth for 4 counts. Repeat 3-5 times to activate your body\'s relaxation response.' },
+  { name: 'Draw or Color', color: '#e9c46a', desc: 'Grab some paper and colors and let yourself create freely. Focus on the colors, shapes, and movements. You don\'t need to make anything specific — the process itself is calming.' },
+  { name: 'Talk to Someone', color: '#f4a261', desc: 'Reach out to a trusted friend, family member, or counselor. Sharing what you\'re feeling can help you feel less alone and gain a new perspective on what\'s bothering you.' },
+  { name: 'Go for a Walk', color: '#e76f51', desc: 'Step outside and take a walk, even just for 5 minutes. Notice what you see, hear, and feel around you. Physical movement helps release tension and clear your mind.' },
+  { name: 'Listen to Music', color: '#8071b5', desc: 'Put on a song that matches or gently shifts your mood. Music can help you process emotions, boost your energy, or find calm. Try making a playlist for different feelings.' },
+  { name: 'Write in Journal', color: '#4a90a0', desc: 'Write down what you\'re thinking and feeling without judgment. You can write freely, make a list, or answer a prompt like "Right now I feel... because..."' },
+  { name: 'Count to 10', color: '#6bb5a0', desc: 'When emotions feel overwhelming, slowly count to 10. With each number, take a deep breath. This creates a pause between the feeling and your reaction, giving you time to choose your response.' },
+  { name: 'Squeeze a Stress Ball', color: '#d4815e', desc: 'If you have a stress ball, squeeze it firmly for 5 seconds, then release. Repeat several times. If you don\'t have one, clench and release your fists. This releases physical tension from your body.' }
+];
+
+var spinnerAngle = 0;
+var spinnerSpinning = false;
+
+function initSpinner() {
+  var canvas = document.getElementById('spinnerCanvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var size = canvas.width;
+  var center = size / 2;
+  var radius = center - 4;
+  var sliceAngle = (2 * Math.PI) / copingStrategies.length;
+
+  ctx.clearRect(0, 0, size, size);
+
+  copingStrategies.forEach(function(strategy, i) {
+    var startAngle = i * sliceAngle - Math.PI / 2;
+    var endAngle = startAngle + sliceAngle;
+
+    // Draw slice
+    ctx.beginPath();
+    ctx.moveTo(center, center);
+    ctx.arc(center, center, radius, startAngle, endAngle);
+    ctx.closePath();
+    ctx.fillStyle = strategy.color;
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,0.4)';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Draw text
+    ctx.save();
+    ctx.translate(center, center);
+    ctx.rotate(startAngle + sliceAngle / 2);
+    ctx.textAlign = 'right';
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 11px system-ui, sans-serif';
+    ctx.shadowColor = 'rgba(0,0,0,0.3)';
+    ctx.shadowBlur = 2;
+
+    var text = strategy.name;
+    var words = text.split(' ');
+    if (words.length > 1) {
+      ctx.fillText(words[0], radius - 14, -4);
+      ctx.fillText(words.slice(1).join(' '), radius - 14, 10);
+    } else {
+      ctx.fillText(text, radius - 14, 3);
+    }
+    ctx.restore();
+  });
+}
+
+function spinWheel() {
+  if (spinnerSpinning) return;
+  spinnerSpinning = true;
+  var btn = document.getElementById('spinBtn');
+  btn.disabled = true;
+  btn.textContent = 'Spinning...';
+
+  var canvas = document.getElementById('spinnerCanvas');
+  var extraSpins = 5 + Math.floor(Math.random() * 5);
+  var randomAngle = Math.random() * 360;
+  var totalRotation = extraSpins * 360 + randomAngle;
+
+  spinnerAngle += totalRotation;
+  canvas.style.transition = 'transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99)';
+  canvas.style.transform = 'rotate(' + spinnerAngle + 'deg)';
+
+  setTimeout(function() {
+    spinnerSpinning = false;
+    btn.disabled = false;
+    btn.textContent = 'Spin Again!';
+
+    // Determine which segment is at the top (pointer position)
+    var normalizedAngle = spinnerAngle % 360;
+    var sliceAngle = 360 / copingStrategies.length;
+    var index = Math.floor(((360 - normalizedAngle) % 360) / sliceAngle);
+    if (index < 0) index += copingStrategies.length;
+    index = index % copingStrategies.length;
+
+    var strategy = copingStrategies[index];
+    var resultEl = document.getElementById('spinnerResult');
+    resultEl.innerHTML = '<div class="spinner-result__title">' + strategy.name + '</div>' +
+      '<p class="spinner-result__desc">' + strategy.desc + '</p>';
+  }, 4200);
+}
+
+
+// ============================================================
+// GAME 3: THOUGHT CHALLENGER
+// ============================================================
+var tcThoughts = [
+  {
+    thought: 'Nobody likes me.',
+    distortion: 'Overgeneralization',
+    options: ['Overgeneralization', 'Catastrophizing', 'Mind Reading', 'Personalization'],
+    correct: 0
+  },
+  {
+    thought: 'I always mess everything up.',
+    distortion: 'All-or-Nothing Thinking',
+    options: ['Emotional Reasoning', 'All-or-Nothing Thinking', 'Fortune Telling', 'Labeling'],
+    correct: 1
+  },
+  {
+    thought: 'Things will never get better.',
+    distortion: 'Fortune Telling',
+    options: ['Mental Filter', 'Personalization', 'Fortune Telling', 'Should Statements'],
+    correct: 2
+  },
+  {
+    thought: 'I should be able to handle this without help.',
+    distortion: 'Should Statements',
+    options: ['Catastrophizing', 'Overgeneralization', 'Emotional Reasoning', 'Should Statements'],
+    correct: 3
+  },
+  {
+    thought: 'They looked at me funny, they must hate me.',
+    distortion: 'Mind Reading',
+    options: ['Mind Reading', 'Labeling', 'Mental Filter', 'All-or-Nothing Thinking'],
+    correct: 0
+  },
+  {
+    thought: 'I feel stupid, so I must be stupid.',
+    distortion: 'Emotional Reasoning',
+    options: ['Fortune Telling', 'Overgeneralization', 'Emotional Reasoning', 'Personalization'],
+    correct: 2
+  },
+  {
+    thought: 'If I fail this test, my whole life is ruined.',
+    distortion: 'Catastrophizing',
+    options: ['Should Statements', 'Catastrophizing', 'Mind Reading', 'Mental Filter'],
+    correct: 1
+  },
+  {
+    thought: 'My friend cancelled plans. I must have done something wrong.',
+    distortion: 'Personalization',
+    options: ['All-or-Nothing Thinking', 'Fortune Telling', 'Labeling', 'Personalization'],
+    correct: 3
+  },
+  {
+    thought: 'I got one question wrong, so the whole presentation was terrible.',
+    distortion: 'Mental Filter',
+    options: ['Mental Filter', 'Catastrophizing', 'Emotional Reasoning', 'Should Statements'],
+    correct: 0
+  },
+  {
+    thought: 'I am a complete failure as a person.',
+    distortion: 'Labeling',
+    options: ['Overgeneralization', 'Mind Reading', 'Fortune Telling', 'Labeling'],
+    correct: 3
+  }
+];
+
+var tcCurrentIndex = 0;
+var tcCurrentStep = 0;
+var tcBeliefBefore = 50;
+var tcBeliefAfter = 50;
+
+function initThoughtChallenger() {
+  tcCurrentIndex = 0;
+  tcCurrentStep = 0;
+  renderThoughtChallenger();
+}
+
+function renderThoughtChallenger() {
+  var container = document.getElementById('thoughtChallenger');
+  var t = tcThoughts[tcCurrentIndex];
+  var progress = ((tcCurrentIndex) / tcThoughts.length) * 100;
+
+  var html = '<div class="tc-progress">' +
+    '<div class="tc-progress__bar"><div class="tc-progress__fill" style="width:' + progress + '%"></div></div>' +
+    '<span class="tc-progress__text">' + (tcCurrentIndex + 1) + ' / ' + tcThoughts.length + '</span></div>';
+
+  html += '<div class="tc-thought-bubble">' +
+    '<div class="tc-thought-bubble__label">Automatic Thought</div>' +
+    '<p class="tc-thought-bubble__text">"' + t.thought + '"</p></div>';
+
+  // Step 1: Identify distortion
+  html += '<div class="tc-step' + (tcCurrentStep === 0 ? ' active' : '') + '" id="tcStep1">';
+  html += '<div class="tc-step__title">Step 1: What type of thinking trap is this?</div>';
+  t.options.forEach(function(opt, i) {
+    html += '<button class="tc-option" onclick="tcSelectDistortion(this, ' + i + ', ' + t.correct + ')">' + opt + '</button>';
+  });
+  html += '</div>';
+
+  // Step 2: Rate belief
+  html += '<div class="tc-step' + (tcCurrentStep === 1 ? ' active' : '') + '" id="tcStep2">';
+  html += '<div class="tc-step__title">Step 2: How much do you believe this thought?</div>';
+  html += '<div class="tc-slider-group">';
+  html += '<div class="tc-slider-label"><span>Not at all</span><span>Completely</span></div>';
+  html += '<input type="range" class="tc-slider" id="tcBeforeSlider" min="0" max="100" value="50" oninput="tcUpdateBeforeValue(this.value)">';
+  html += '<div class="tc-slider-value" id="tcBeforeValue">50%</div>';
+  html += '</div>';
+  html += '<button class="tc-btn" onclick="tcGoToStep3()">Next</button>';
+  html += '</div>';
+
+  // Step 3: Alternative thought
+  html += '<div class="tc-step' + (tcCurrentStep === 2 ? ' active' : '') + '" id="tcStep3">';
+  html += '<div class="tc-step__title">Step 3: Write a more balanced thought</div>';
+  html += '<p style="font-family:var(--ds-font-sans);font-size:var(--ds-text-sm);color:var(--ds-text-muted);margin:0 0 var(--ds-space-3)">The thinking trap here is <strong>' + t.distortion + '</strong>. Can you come up with a more realistic and balanced way to think about this?</p>';
+  html += '<textarea class="tc-textarea" id="tcAlternative" placeholder="Write your balanced alternative thought here..."></textarea>';
+  html += '<div class="tc-slider-group" style="margin-top:var(--ds-space-4)">';
+  html += '<div class="tc-step__title" style="font-size:var(--ds-text-sm)">Now how much do you believe the original thought?</div>';
+  html += '<div class="tc-slider-label"><span>Not at all</span><span>Completely</span></div>';
+  html += '<input type="range" class="tc-slider" id="tcAfterSlider" min="0" max="100" value="50" oninput="tcUpdateAfterValue(this.value)">';
+  html += '<div class="tc-slider-value" id="tcAfterValue">50%</div>';
+  html += '</div>';
+  html += '<button class="tc-btn" onclick="tcShowComparison()">See Results</button>';
+  html += '</div>';
+
+  // Step 4: Comparison
+  html += '<div class="tc-step' + (tcCurrentStep === 3 ? ' active' : '') + '" id="tcStep4">';
+  html += '<div class="tc-step__title">Your progress on this thought:</div>';
+  html += '<div class="tc-comparison" id="tcComparison"></div>';
+  if (tcCurrentIndex < tcThoughts.length - 1) {
+    html += '<button class="tc-btn" onclick="tcNextThought()" style="width:100%;justify-content:center">Next Thought</button>';
+  } else {
+    html += '<button class="tc-btn" onclick="initThoughtChallenger()" style="width:100%;justify-content:center">Start Over</button>';
+  }
+  html += '</div>';
+
+  container.innerHTML = html;
+}
+
+function tcSelectDistortion(btn, selected, correct) {
+  var options = btn.parentElement.querySelectorAll('.tc-option');
+  options.forEach(function(o, i) {
+    o.disabled = true;
+    if (i === correct) o.classList.add('correct');
+    if (i === selected && selected !== correct) o.classList.add('incorrect');
+  });
+  setTimeout(function() {
+    tcCurrentStep = 1;
+    document.getElementById('tcStep1').classList.remove('active');
+    document.getElementById('tcStep2').classList.add('active');
+  }, 1200);
+}
+
+function tcUpdateBeforeValue(val) {
+  document.getElementById('tcBeforeValue').textContent = val + '%';
+  tcBeliefBefore = parseInt(val);
+}
+
+function tcGoToStep3() {
+  tcCurrentStep = 2;
+  document.getElementById('tcStep2').classList.remove('active');
+  document.getElementById('tcStep3').classList.add('active');
+}
+
+function tcUpdateAfterValue(val) {
+  document.getElementById('tcAfterValue').textContent = val + '%';
+  tcBeliefAfter = parseInt(val);
+}
+
+function tcShowComparison() {
+  tcCurrentStep = 3;
+  document.getElementById('tcStep3').classList.remove('active');
+  document.getElementById('tcStep4').classList.add('active');
+
+  var compEl = document.getElementById('tcComparison');
+  compEl.innerHTML = '<div class="tc-comparison__col tc-comparison__col--before">' +
+    '<div class="tc-comparison__label">Before</div>' +
+    '<div class="tc-comparison__value">' + tcBeliefBefore + '%</div></div>' +
+    '<div class="tc-comparison__col tc-comparison__col--after">' +
+    '<div class="tc-comparison__label">After</div>' +
+    '<div class="tc-comparison__value">' + tcBeliefAfter + '%</div></div>';
+}
+
+function tcNextThought() {
+  tcCurrentIndex++;
+  tcCurrentStep = 0;
+  tcBeliefBefore = 50;
+  tcBeliefAfter = 50;
+  renderThoughtChallenger();
+}
+
+
+// ============================================================
+// GAME 4: BREATHING GUIDE
+// ============================================================
+var breathingPatterns = {
+  box: { name: 'Box Breathing', phases: [
+    { label: 'Inhale', duration: 4 },
+    { label: 'Hold', duration: 4 },
+    { label: 'Exhale', duration: 4 },
+    { label: 'Hold', duration: 4 }
+  ]},
+  '478': { name: '4-7-8 Breathing', phases: [
+    { label: 'Inhale', duration: 4 },
+    { label: 'Hold', duration: 7 },
+    { label: 'Exhale', duration: 8 }
+  ]},
+  simple: { name: 'Simple Deep', phases: [
+    { label: 'Inhale', duration: 4 },
+    { label: 'Exhale', duration: 6 }
+  ]}
+};
+
+var breathingCurrentPattern = 'box';
+var breathingDuration = 60;
+var breathingRunning = false;
+var breathingTimer = null;
+var breathingPhaseTimer = null;
+var breathingTimeRemaining = 0;
+
+function selectBreathingPattern(btn, pattern) {
+  if (breathingRunning) stopBreathing();
+  breathingCurrentPattern = pattern;
+  btn.parentElement.querySelectorAll('.breathing-opt').forEach(function(b) {
+    b.classList.remove('active');
+    b.setAttribute('aria-checked', 'false');
+  });
+  btn.classList.add('active');
+  btn.setAttribute('aria-checked', 'true');
+}
+
+function selectBreathingDuration(btn, seconds) {
+  if (breathingRunning) stopBreathing();
+  breathingDuration = seconds;
+  btn.parentElement.querySelectorAll('.breathing-timer-opt').forEach(function(b) {
+    b.classList.remove('active');
+    b.setAttribute('aria-checked', 'false');
+  });
+  btn.classList.add('active');
+  btn.setAttribute('aria-checked', 'true');
+}
+
+function toggleBreathing() {
+  if (breathingRunning) {
+    stopBreathing();
+  } else {
+    startBreathing();
+  }
+}
+
+function startBreathing() {
+  breathingRunning = true;
+  breathingTimeRemaining = breathingDuration;
+  document.getElementById('breathingStartBtn').textContent = 'Stop';
+  updateBreathingTimeDisplay();
+
+  // Main countdown
+  breathingTimer = setInterval(function() {
+    breathingTimeRemaining--;
+    updateBreathingTimeDisplay();
+    if (breathingTimeRemaining <= 0) {
+      stopBreathing();
+      document.getElementById('breathingLabel').textContent = 'Done';
+      document.getElementById('breathingCount').textContent = '';
+      var circle = document.getElementById('breathingCircle');
+      circle.className = 'breathing-circle';
+    }
+  }, 1000);
+
+  // Start phase cycle
+  runBreathingPhase(0);
+}
+
+function runBreathingPhase(phaseIndex) {
+  if (!breathingRunning) return;
+  var pattern = breathingPatterns[breathingCurrentPattern];
+  var phase = pattern.phases[phaseIndex % pattern.phases.length];
+  var circle = document.getElementById('breathingCircle');
+  var label = document.getElementById('breathingLabel');
+  var count = document.getElementById('breathingCount');
+
+  // Set circle class based on phase
+  circle.className = 'breathing-circle';
+  if (phase.label === 'Inhale') {
+    circle.classList.add('inhale');
+    // Transition duration matches phase duration
+    circle.style.transitionDuration = phase.duration + 's';
+  } else if (phase.label === 'Exhale') {
+    circle.classList.add('exhale');
+    circle.style.transitionDuration = phase.duration + 's';
+  } else {
+    circle.classList.add('hold');
+    circle.style.transitionDuration = '0.3s';
+    // Keep size from previous phase
+    var prevPhase = pattern.phases[(phaseIndex - 1 + pattern.phases.length) % pattern.phases.length];
+    if (prevPhase.label === 'Inhale') circle.classList.add('inhale');
+  }
+
+  label.textContent = phase.label;
+
+  var remaining = phase.duration;
+  count.textContent = remaining;
+
+  var countInterval = setInterval(function() {
+    if (!breathingRunning) {
+      clearInterval(countInterval);
+      return;
+    }
+    remaining--;
+    if (remaining > 0) {
+      count.textContent = remaining;
+    } else {
+      clearInterval(countInterval);
+      count.textContent = '';
+      // Next phase
+      runBreathingPhase(phaseIndex + 1);
+    }
+  }, 1000);
+
+  breathingPhaseTimer = countInterval;
+}
+
+function stopBreathing() {
+  breathingRunning = false;
+  clearInterval(breathingTimer);
+  clearInterval(breathingPhaseTimer);
+  document.getElementById('breathingStartBtn').textContent = 'Start';
+  document.getElementById('breathingLabel').textContent = 'Ready';
+  document.getElementById('breathingCount').textContent = '';
+  document.getElementById('breathingTimeLeft').textContent = '';
+  var circle = document.getElementById('breathingCircle');
+  circle.className = 'breathing-circle';
+  circle.style.transitionDuration = '0.8s';
+}
+
+function updateBreathingTimeDisplay() {
+  var mins = Math.floor(breathingTimeRemaining / 60);
+  var secs = breathingTimeRemaining % 60;
+  document.getElementById('breathingTimeLeft').textContent = mins + ':' + (secs < 10 ? '0' : '') + secs + ' remaining';
+}
+
+
+// ============================================================
+// GAME 5: FEELINGS CHECK-IN
+// ============================================================
+var checkinEmotions = [
+  { emoji: '\u{1F60A}', name: 'Happy', suggestion: { title: 'Keep the momentum going!', text: 'When you\'re feeling happy, it can help to notice what contributed to this feeling. Consider writing down what went well today so you can revisit it during harder moments.' }},
+  { emoji: '\u{1F622}', name: 'Sad', suggestion: { title: 'Be gentle with yourself', text: 'Sadness is a normal and important emotion. Allow yourself to feel it without judgment. Reach out to someone you trust, or try journaling about what\'s weighing on you.' }},
+  { emoji: '\u{1F621}', name: 'Angry', suggestion: { title: 'Find a healthy release', text: 'Anger is energy in your body that needs somewhere to go. Try physical movement, deep breathing, or squeezing something soft. Once you\'re calmer, explore what need isn\'t being met.' }},
+  { emoji: '\u{1F628}', name: 'Scared', suggestion: { title: 'Ground yourself in the present', text: 'When fear takes over, try the 5-4-3-2-1 technique: name 5 things you see, 4 you can touch, 3 you hear, 2 you smell, and 1 you taste. This brings you back to the here and now.' }},
+  { emoji: '\u{1F630}', name: 'Anxious', suggestion: { title: 'Slow down and breathe', text: 'Anxiety often comes from worrying about the future. Try box breathing (in for 4, hold for 4, out for 4, hold for 4) to calm your nervous system. Focus on what you can control right now.' }},
+  { emoji: '\u{1F60C}', name: 'Calm', suggestion: { title: 'Notice this moment', text: 'Feeling calm is worth savoring. Take a moment to notice what it feels like in your body and mind. What helped you get to this place? That awareness can guide you back here later.' }},
+  { emoji: '\u{1F60E}', name: 'Proud', suggestion: { title: 'Celebrate yourself!', text: 'You deserve to feel proud. Take a moment to really acknowledge what you\'ve accomplished or handled well. Consider sharing this win with someone who supports you.' }},
+  { emoji: '\u{1F614}', name: 'Lonely', suggestion: { title: 'Connection is a basic need', text: 'Loneliness signals that you need connection. Even a small step counts: text a friend, call a family member, or spend time in a public space. You matter to people even when it doesn\'t feel that way.' }},
+  { emoji: '\u{1F624}', name: 'Frustrated', suggestion: { title: 'Step back, then step forward', text: 'Frustration often means something matters to you. Take a short break from whatever\'s frustrating you. When you return, try breaking the problem into smaller, more manageable pieces.' }},
+  { emoji: '\u{1F31F}', name: 'Hopeful', suggestion: { title: 'Hold onto this feeling', text: 'Hope is powerful. Write down what you\'re hopeful about and what small step you can take toward it today. Having something to look forward to builds resilience.' }},
+  { emoji: '\u{1F616}', name: 'Overwhelmed', suggestion: { title: 'One thing at a time', text: 'When everything feels like too much, pick just one small task you can do right now. Make a list, then tackle items one at a time. It\'s okay to ask for help or say no to things.' }},
+  { emoji: '\u{1F971}', name: 'Bored', suggestion: { title: 'Explore what you need', text: 'Boredom can be a signal that you need stimulation, meaning, or connection. Try something creative, learn something new, or reach out to a friend. Sometimes boredom is your mind asking for a change.' }}
+];
+
+var checkinSelectedEmotion = null;
+var checkinIntensity = 0;
+
+function initCheckin() {
+  checkinSelectedEmotion = null;
+  checkinIntensity = 0;
+  var grid = document.getElementById('checkinGrid');
+  grid.innerHTML = '';
+
+  checkinEmotions.forEach(function(e, i) {
+    var el = document.createElement('button');
+    el.className = 'checkin-emotion';
+    el.setAttribute('data-index', i);
+    el.setAttribute('aria-label', e.name);
+    el.innerHTML = '<span class="checkin-emotion__face">' + e.emoji + '</span>' +
+      '<span class="checkin-emotion__label">' + e.name + '</span>';
+    el.addEventListener('click', function() { selectCheckinEmotion(el, i); });
+    grid.appendChild(el);
+  });
+
+  document.getElementById('checkinDetail').classList.remove('visible');
+
+  // Build stars
+  var starsEl = document.getElementById('checkinStars');
+  starsEl.innerHTML = '';
+  for (var s = 1; s <= 5; s++) {
+    var star = document.createElement('button');
+    star.className = 'checkin-star';
+    star.setAttribute('data-value', s);
+    star.setAttribute('role', 'radio');
+    star.setAttribute('aria-label', s + ' stars');
+    star.textContent = '☆';
+    star.addEventListener('click', function() {
+      var val = parseInt(this.getAttribute('data-value'));
+      setCheckinIntensity(val);
+    });
+    starsEl.appendChild(star);
+  }
+}
+
+function selectCheckinEmotion(el, index) {
+  checkinSelectedEmotion = checkinEmotions[index];
+
+  // Update selection visual
+  document.querySelectorAll('.checkin-emotion').forEach(function(e) {
+    e.classList.remove('selected');
+  });
+  el.classList.add('selected');
+
+  // Show detail section
+  document.getElementById('checkinDetail').classList.add('visible');
+
+  // Reset intensity
+  setCheckinIntensity(0);
+  document.getElementById('checkinNotes').value = '';
+
+  // Show suggestion
+  var suggestion = checkinSelectedEmotion.suggestion;
+  document.getElementById('checkinSuggestionTitle').textContent = suggestion.title;
+  document.getElementById('checkinSuggestionText').textContent = suggestion.text;
+}
+
+function setCheckinIntensity(val) {
+  checkinIntensity = val;
+  document.querySelectorAll('.checkin-star').forEach(function(star) {
+    var sv = parseInt(star.getAttribute('data-value'));
+    if (sv <= val) {
+      star.classList.add('filled');
+      star.textContent = '★';
+      star.setAttribute('aria-checked', 'true');
+    } else {
+      star.classList.remove('filled');
+      star.textContent = '☆';
+      star.setAttribute('aria-checked', 'false');
+    }
+  });
+}
+</script>
+
+<script src="js/search.js"></script>
+<script src="js/toc.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(function(){});
+}
+</script>
+
+</body>
+</html>
