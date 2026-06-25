@@ -360,11 +360,315 @@
   display: inline-block;
 }
 
+/* ===== RESOURCES HERO ===== */
+.resources-hero {
+  background: linear-gradient(170deg, var(--ds-primary-50) 0%, var(--ds-cream) 50%, var(--ds-warm-gray-50) 100%);
+  padding: var(--ds-space-20) 0 var(--ds-space-16);
+}
+[data-theme="dark"] .resources-hero {
+  background: linear-gradient(170deg, rgba(61, 139, 112, 0.08) 0%, var(--ds-page-bg) 50%, var(--ds-page-bg) 100%);
+}
+.resources-hero__inner {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6);
+  text-align: center;
+}
+.resources-hero__overline {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  margin-bottom: var(--ds-space-5);
+}
+.resources-hero__overline-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ds-success-500);
+}
+.resources-hero__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-4xl);
+  font-weight: var(--ds-weight-bold);
+  line-height: var(--ds-leading-tight);
+  letter-spacing: var(--ds-tracking-tight);
+  color: var(--ds-text-primary);
+  max-width: 720px;
+  margin: 0 auto var(--ds-space-5);
+}
+.resources-hero__subtitle {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-regular);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--ds-text-secondary);
+  max-width: 640px;
+  margin: 0 auto var(--ds-space-8);
+}
+.resources-hero__stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-3);
+  flex-wrap: wrap;
+}
+.resources-hero__stat {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-2) var(--ds-space-4);
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-full);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  box-shadow: var(--ds-shadow-sm);
+}
+.resources-hero__stat strong {
+  color: var(--ds-primary-600);
+  font-weight: var(--ds-weight-bold);
+}
+
+/* Hide old hero */
+.hero { display: none !important; }
+
+/* Hide old-style category pill nav and expand/collapse bar */
+.category-nav,
+.expand-collapse-bar {
+  display: none !important;
+}
+
+/* ===== RESOURCES CATEGORY GRID ===== */
+.resources-category-grid {
+  max-width: var(--ds-container-xl);
+  margin: calc(-1 * var(--ds-space-8)) auto var(--ds-space-10);
+  padding: 0 var(--ds-space-6);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--ds-space-4);
+}
+.resources-category-card {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-xl);
+  padding: var(--ds-space-5) var(--ds-space-4);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--ds-transition-shadow), var(--ds-transition-transform), border-color var(--ds-duration-fast) var(--ds-ease-default);
+  box-shadow: var(--ds-shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ds-space-2);
+}
+.resources-category-card:hover {
+  box-shadow: var(--ds-shadow-lg);
+  transform: translateY(-3px);
+  border-color: var(--ds-primary-300);
+  text-decoration: none;
+}
+.resources-category-card:active {
+  transform: translateY(-1px);
+  box-shadow: var(--ds-shadow-md);
+}
+.resources-category-card.is-active {
+  border-color: var(--ds-primary-400);
+  box-shadow: var(--ds-shadow-md), 0 0 0 1px var(--ds-primary-200);
+  background: var(--ds-primary-50);
+}
+[data-theme="dark"] .resources-category-card.is-active {
+  background: var(--ds-interactive-subtle);
+  border-color: var(--ds-primary-400);
+}
+.resources-category-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--ds-radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.resources-category-card__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+}
+.resources-category-card__count {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+  line-height: var(--ds-leading-relaxed);
+}
+
+/* ===== RESOURCES LAYOUT (sidebar + content) ===== */
+.resources-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: var(--ds-space-8);
+  align-items: start;
+}
+
+/* ===== RESOURCES SIDEBAR ===== */
+.resources-sidebar {
+  position: sticky;
+  top: calc(var(--ds-header-height) + var(--ds-space-6));
+  max-height: calc(100vh - var(--ds-header-height) - var(--ds-space-12));
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ds-warm-gray-300) transparent;
+}
+.resources-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+.resources-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.resources-sidebar::-webkit-scrollbar-thumb {
+  background: var(--ds-warm-gray-300);
+  border-radius: 2px;
+}
+.resources-sidebar-nav {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-xl);
+  overflow: hidden;
+  box-shadow: var(--ds-shadow-sm);
+}
+.resources-sidebar-nav__title {
+  display: block;
+  padding: var(--ds-space-3) var(--ds-space-4);
+  font-family: var(--ds-font-sans);
+  font-size: 10px;
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--ds-tracking-widest);
+  background: var(--ds-surface-sunken);
+  border-bottom: 1px solid var(--ds-border-subtle);
+}
+.resources-sidebar-nav__links {
+  display: flex;
+  flex-direction: column;
+}
+.resources-sidebar-nav a {
+  display: block;
+  padding: var(--ds-space-2) var(--ds-space-4) var(--ds-space-2) var(--ds-space-5);
+  font-family: var(--ds-font-sans);
+  font-size: 13px;
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.resources-sidebar-nav a:hover {
+  background: var(--ds-surface-hover);
+  color: var(--ds-text-primary);
+  text-decoration: none;
+}
+.resources-sidebar-nav a.active {
+  background: var(--ds-primary-50);
+  color: var(--ds-primary-700);
+  font-weight: var(--ds-weight-semibold);
+  border-left-color: var(--ds-primary-600);
+}
+[data-theme="dark"] .resources-sidebar-nav a.active {
+  background: var(--ds-interactive-subtle);
+  color: var(--ds-primary-300);
+  border-left-color: var(--ds-primary-400);
+}
+
+/* Mobile sidebar toggle */
+.resources-sidebar-toggle {
+  display: none;
+  position: fixed;
+  bottom: var(--ds-space-6);
+  left: var(--ds-space-6);
+  z-index: var(--ds-z-overlay);
+  width: 48px;
+  height: 48px;
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-primary-600);
+  color: var(--ds-text-inverse);
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--ds-shadow-lg);
+  font-size: 20px;
+  transition: background var(--ds-duration-fast) var(--ds-ease-default);
+}
+.resources-sidebar-toggle:hover {
+  background: var(--ds-primary-700);
+}
+.resources-sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--ds-surface-overlay);
+  z-index: var(--ds-z-overlay);
+}
+.resources-sidebar-overlay.is-open {
+  display: block;
+}
+
+/* Scroll margin for resource sections when sidebar present */
+.resource-section {
+  scroll-margin-top: calc(var(--ds-header-height, 64px) + 24px);
+}
+
 /* ---- Responsive ---- */
+@media (max-width: 1023px) {
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ds-space-8);
+  }
+}
 @media (max-width: 900px) {
   .footer__grid {
     grid-template-columns: 1fr 1fr;
     gap: var(--ds-space-8);
+  }
+  .resources-layout {
+    grid-template-columns: 1fr;
+  }
+  .resources-sidebar {
+    position: static !important;
+    max-height: none;
+    display: none;
+  }
+  .resources-sidebar-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .resources-sidebar.mobile-open {
+    display: block;
+    position: fixed;
+    top: var(--ds-header-height);
+    left: 0;
+    bottom: 0;
+    width: 280px;
+    z-index: calc(var(--ds-z-overlay) + 1);
+    background: var(--ds-page-bg);
+    padding: var(--ds-space-4);
+    overflow-y: auto;
+    max-height: none;
+    box-shadow: var(--ds-shadow-2xl);
+  }
+  .resources-category-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--ds-space-3);
+    margin-bottom: var(--ds-space-6);
   }
 }
 @media (max-width: 639px) {
@@ -375,14 +679,18 @@
   .site-nav__hamburger {
     display: flex;
   }
-  .hero {
-    padding: var(--ds-space-12) 0 var(--ds-space-10);
+  .resources-hero {
+    padding: var(--ds-space-14) 0 var(--ds-space-10);
   }
-  .hero__title {
+  .resources-hero__title {
     font-size: var(--ds-text-3xl);
   }
-  .hero__subtitle {
+  .resources-hero__subtitle {
     font-size: var(--ds-text-base);
+  }
+  .resources-category-grid {
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: calc(-1 * var(--ds-space-5));
   }
   .footer__grid {
     grid-template-columns: 1fr;
@@ -392,6 +700,11 @@
     flex-direction: column;
     align-items: flex-start;
   }
+}
+
+/* Print: hide nav chrome */
+@media print {
+  .resources-hero, .resources-category-grid, .resources-sidebar, .resources-sidebar-toggle, .resources-sidebar-overlay { display: none !important; }
 }
 </style>
 </head>
@@ -446,16 +759,116 @@
   <a href="games.html" class="site-nav__mobile-link">Games</a>
 </div>
 
-<section class="hero">
-  <div class="hero__inner">
-    <div class="hero__overline">
-      <span class="hero__overline-dot"></span>
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="resources-hero">
+  <div class="resources-hero__inner">
+
+    <div class="resources-hero__overline">
+      <span class="resources-hero__overline-dot"></span>
       <span class="ds-overline">Greater Nashua, NH</span>
     </div>
-    <h1 class="hero__title">Community Resources</h1>
-    <p class="hero__subtitle">Services, programs, and support for the Greater Nashua area</p>
+
+    <h1 class="resources-hero__title">Community Resource Directory</h1>
+
+    <p class="resources-hero__subtitle">Housing, food, insurance, crisis services, substance use treatment, legal aid, and more -- a comprehensive guide to support services across the Greater Nashua area.</p>
+
+    <div class="resources-hero__stats">
+      <div class="resources-hero__stat">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span><strong>200+</strong> resources</span>
+      </div>
+      <div class="resources-hero__stat">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <span><strong>34</strong> categories</span>
+      </div>
+      <div class="resources-hero__stat">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Nashua &amp; Southern NH</span>
+      </div>
+    </div>
+
   </div>
 </section>
+
+<!-- ============================================================
+     CATEGORY QUICK-NAV GRID
+     ============================================================ -->
+<div class="resources-category-grid" id="resourcesCategoryGrid">
+  <a href="#crisis" class="resources-category-card" data-category-target="crisis" onclick="smoothScrollToResource(event, 'crisis')">
+    <div class="resources-category-card__icon" style="background: var(--ds-status-danger-bg); color: var(--ds-danger-600);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    <div class="resources-category-card__title">Crisis Services</div>
+  </a>
+  <a href="#mentalhealth" class="resources-category-card" data-category-target="mentalhealth" onclick="smoothScrollToResource(event, 'mentalhealth')">
+    <div class="resources-category-card__icon" style="background: var(--ds-primary-50); color: var(--ds-primary-600);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    </div>
+    <div class="resources-category-card__title">Mental Health</div>
+  </a>
+  <a href="#substance" class="resources-category-card" data-category-target="substance" onclick="smoothScrollToResource(event, 'substance')">
+    <div class="resources-category-card__icon" style="background: var(--ds-accent-50); color: var(--ds-accent-600);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+    </div>
+    <div class="resources-category-card__title">Substance Use</div>
+  </a>
+  <a href="#housing" class="resources-category-card" data-category-target="housing" onclick="smoothScrollToResource(event, 'housing')">
+    <div class="resources-category-card__icon" style="background: var(--ds-status-warning-bg); color: var(--ds-warning-600);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </div>
+    <div class="resources-category-card__title">Housing</div>
+  </a>
+  <a href="#food" class="resources-category-card" data-category-target="food" onclick="smoothScrollToResource(event, 'food')">
+    <div class="resources-category-card__icon" style="background: var(--ds-status-success-bg); color: var(--ds-success-600);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+    </div>
+    <div class="resources-category-card__title">Food Security</div>
+  </a>
+  <a href="#insurance" class="resources-category-card" data-category-target="insurance" onclick="smoothScrollToResource(event, 'insurance')">
+    <div class="resources-category-card__icon" style="background: var(--ds-status-info-bg); color: var(--ds-info-600);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <div class="resources-category-card__title">Health Insurance</div>
+  </a>
+  <a href="#medical" class="resources-category-card" data-category-target="medical" onclick="smoothScrollToResource(event, 'medical')">
+    <div class="resources-category-card__icon" style="background: var(--ds-coral-50); color: var(--ds-coral-600);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+    </div>
+    <div class="resources-category-card__title">Medical / Dental</div>
+  </a>
+  <a href="#legal" class="resources-category-card" data-category-target="legal" onclick="smoothScrollToResource(event, 'legal')">
+    <div class="resources-category-card__icon" style="background: var(--ds-primary-50); color: var(--ds-primary-700);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="14.31" y1="8" x2="20.05" y2="17.94"/><line x1="9.69" y1="8" x2="21.17" y2="8"/><line x1="7.38" y1="12" x2="13.12" y2="2.06"/><line x1="9.69" y1="16" x2="3.95" y2="6.06"/><line x1="14.31" y1="16" x2="2.83" y2="16"/><line x1="16.62" y1="12" x2="10.88" y2="21.94"/></svg>
+    </div>
+    <div class="resources-category-card__title">Legal Services</div>
+  </a>
+  <a href="#employment" class="resources-category-card" data-category-target="employment" onclick="smoothScrollToResource(event, 'employment')">
+    <div class="resources-category-card__icon" style="background: var(--ds-accent-50); color: var(--ds-accent-700);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+    </div>
+    <div class="resources-category-card__title">Employment</div>
+  </a>
+  <a href="#dv" class="resources-category-card" data-category-target="dv" onclick="smoothScrollToResource(event, 'dv')">
+    <div class="resources-category-card__icon" style="background: var(--ds-status-danger-bg); color: var(--ds-danger-500);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <div class="resources-category-card__title">Domestic Violence</div>
+  </a>
+  <a href="#youth" class="resources-category-card" data-category-target="youth" onclick="smoothScrollToResource(event, 'youth')">
+    <div class="resources-category-card__icon" style="background: var(--ds-status-info-bg); color: var(--ds-info-500);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+    <div class="resources-category-card__title">Youth / Adolescent</div>
+  </a>
+  <a href="#veterans" class="resources-category-card" data-category-target="veterans" onclick="smoothScrollToResource(event, 'veterans')">
+    <div class="resources-category-card__icon" style="background: var(--ds-status-success-bg); color: var(--ds-success-700);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    </div>
+    <div class="resources-category-card__title">Veterans</div>
+  </a>
+</div>
 
 <div class="page-container" id="main-content">
 
@@ -527,6 +940,61 @@
     <button class="btn btn-sm btn-outline" onclick="document.querySelectorAll('.expandable:not(.open)').forEach(function(e){e.classList.add('open')})">&#9660; Expand All</button>
     <button class="btn btn-sm btn-outline" onclick="document.querySelectorAll('.expandable.open').forEach(function(e){e.classList.remove('open')})">&#9650; Collapse All</button>
   </div>
+
+  <div class="resources-layout">
+
+    <!-- Sidebar -->
+    <aside class="resources-sidebar" id="resourcesSidebar">
+      <nav class="resources-sidebar-nav" id="resourcesSidebarNav">
+        <span class="resources-sidebar-nav__title">Categories</span>
+        <div class="resources-sidebar-nav__links">
+          <a href="#crisis">Crisis Services</a>
+          <a href="#mentalhealth">Mental Health</a>
+          <a href="#substance">Substance Use</a>
+          <a href="#housing">Housing</a>
+          <a href="#food">Food Security</a>
+          <a href="#insurance">Health Insurance</a>
+          <a href="#medical">Medical / Dental</a>
+          <a href="#legal">Legal Services</a>
+          <a href="#employment">Employment</a>
+          <a href="#transport">Transportation</a>
+          <a href="#social">Social Services</a>
+          <a href="#dv">Domestic Violence</a>
+          <a href="#veterans">Veterans</a>
+          <a href="#youth">Youth / Adolescent</a>
+          <a href="#education">Education</a>
+          <a href="#benefits">Benefits / Financial</a>
+          <a href="#peer">Peer Support</a>
+          <a href="#immigration">Immigration</a>
+          <a href="#medicaid">Medicaid / Insurance Nav</a>
+          <a href="#medication">Medication Reference</a>
+          <a href="#wraparound">Wraparound Services</a>
+          <a href="#geriatric">Geriatric MH</a>
+          <a href="#lgbtq">LGBTQ+ Affirming</a>
+          <a href="#refugee">Refugee / Immigrant MH</a>
+          <a href="#vetmh">Veteran MH</a>
+          <a href="#dsm">DSM-5-TR Reference</a>
+          <a href="#schoolmh">School-Based MH</a>
+          <a href="#peersupport">Peer Support Specialist</a>
+          <a href="#telehealth">Telehealth Services</a>
+          <a href="#disability">Disability Services</a>
+          <a href="#faithbased">Faith-Based Counseling</a>
+          <a href="#transportres">Transportation Resources</a>
+          <a href="#interpreter">Interpreter / Language</a>
+          <a href="#stafftraining">Staff Training Hub</a>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Mobile sidebar toggle button -->
+    <button class="resources-sidebar-toggle" id="resourcesSidebarToggle" onclick="toggleResourcesSidebar()" aria-label="Toggle sidebar navigation" title="Open navigation">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <!-- Mobile sidebar overlay -->
+    <div class="resources-sidebar-overlay" id="resourcesSidebarOverlay" onclick="toggleResourcesSidebar()"></div>
+
+    <!-- Main Content -->
+    <main>
 
   <!-- ============================================================ -->
   <!-- 1. CRISIS SERVICES -->
@@ -5943,6 +6411,9 @@
     </div>
   </div>
 
+    </main>
+  </div><!-- end resources-layout -->
+
 </div><!-- end page-container -->
 
 <footer class="site-footer">
@@ -6182,6 +6653,70 @@ function toggleMobileNav() {
   var isOpen = panel.classList.toggle('is-open');
   btn.setAttribute('aria-expanded', isOpen);
 }
+
+// ========== RESOURCES SIDEBAR TOGGLE ==========
+function toggleResourcesSidebar() {
+  var sidebar = document.getElementById('resourcesSidebar');
+  var overlay = document.getElementById('resourcesSidebarOverlay');
+  sidebar.classList.toggle('mobile-open');
+  overlay.classList.toggle('is-open');
+}
+
+// ========== SMOOTH SCROLL FOR CATEGORY CARDS ==========
+function smoothScrollToResource(e, id) {
+  e.preventDefault();
+  var el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Close mobile sidebar if open
+    var sidebar = document.getElementById('resourcesSidebar');
+    if (sidebar && sidebar.classList.contains('mobile-open')) {
+      toggleResourcesSidebar();
+    }
+  }
+}
+
+// ========== SIDEBAR SCROLL-SPY + CATEGORY GRID ACTIVE STATE ==========
+(function() {
+  var sections = document.querySelectorAll('.resource-section');
+  var sideLinks = document.querySelectorAll('#resourcesSidebarNav a');
+  var categoryCards = document.querySelectorAll('#resourcesCategoryGrid .resources-category-card');
+
+  // Add click handlers to sidebar links for smooth scroll + mobile close
+  sideLinks.forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var targetId = this.getAttribute('href').replace('#', '');
+      var targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      // Close mobile sidebar if open
+      var sidebar = document.getElementById('resourcesSidebar');
+      if (sidebar && sidebar.classList.contains('mobile-open')) {
+        toggleResourcesSidebar();
+      }
+    });
+  });
+
+  function updateActive() {
+    var current = '';
+    sections.forEach(function(s) {
+      var top = s.getBoundingClientRect().top;
+      if (top < 150) current = s.id;
+    });
+    sideLinks.forEach(function(a) {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+    /* Highlight the category card whose target matches the current section */
+    categoryCards.forEach(function(card) {
+      var target = card.getAttribute('data-category-target') || '';
+      card.classList.toggle('is-active', target === current);
+    });
+  }
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
+})();
 </script>
 <script src="js/search.js"></script>
 <script>
