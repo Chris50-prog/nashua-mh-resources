@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="css/design-system.css">
 <link rel="stylesheet" href="css/style.css">
 <script src="js/fontsize.js"></script>
+<script src="js/a11y.js" defer></script>
 <style>
 /* ================================================================
    Screening Tools Page — Layout & Component Overrides
@@ -1821,7 +1822,7 @@ function renderQuestion(index, direction) {
     if (tool.type !== 'yesno_risk') {
       scoreDisplay = '<span class="wizard__option-score">' + qOptions[i].value + ' pt' + (qOptions[i].value !== 1 ? 's' : '') + '</span>';
     }
-    optionsHTML += '<div class="wizard__option' + selectedClass + '" data-option-index="' + i + '" onclick="selectOption(' + index + ',' + i + ')" tabindex="0" role="button" aria-label="' + escapeHtml(qOptions[i].label) + '">' +
+    optionsHTML += '<div class="wizard__option' + selectedClass + '" data-option-index="' + i + '" onclick="selectOption(' + index + ',' + i + ')" tabindex="0" role="radio" aria-checked="' + (isSelected ? 'true' : 'false') + '" aria-label="' + escapeHtml(qOptions[i].label) + '">' +
       '<div class="wizard__option-fill"></div>' +
       '<span class="wizard__option-key">' + keyNum + '</span>' +
       '<span class="wizard__option-label">' + escapeHtml(qOptions[i].label) + '</span>' +
@@ -1833,7 +1834,7 @@ function renderQuestion(index, direction) {
     '<div class="wizard__question-number">Question ' + (index + 1) + ' of ' + numQ + '</div>' +
     timeframeHTML +
     '<div class="wizard__question-text">' + escapeHtml(qText) + '</div>' +
-    '<div class="wizard__options">' + optionsHTML + '</div>' +
+    '<div class="wizard__options" role="radiogroup" aria-label="' + escapeHtml(qText) + '">' + optionsHTML + '</div>' +
   '</div>';
 
   if (direction === 'none') {
@@ -1878,9 +1879,11 @@ function selectOption(questionIndex, optionIndex) {
   var options = document.querySelectorAll('#wizardSlide .wizard__option');
   for (var i = 0; i < options.length; i++) {
     options[i].classList.remove('is-selected', 'is-advancing');
+    options[i].setAttribute('aria-checked', 'false');
   }
   if (options[optionIndex]) {
     options[optionIndex].classList.add('is-selected');
+    options[optionIndex].setAttribute('aria-checked', 'true');
   }
 
   updateNav();

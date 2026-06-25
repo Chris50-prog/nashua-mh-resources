@@ -738,6 +738,22 @@ textarea:focus-visible,
   text-decoration: none;
 }
 
+/* ===== TOUCH TARGETS (WCAG 2.5.5 — 44x44 minimum) =====
+   Higher-specificity overrides so they win over the equal-specificity
+   nav rules duplicated inline in each page's <style> block. */
+.site-header .site-nav__icon-btn {
+  width: 44px;
+  height: 44px;
+}
+.site-header .site-nav__font-btn {
+  min-height: 44px;
+  min-width: 44px;
+}
+.site-header .hamburger-btn {
+  width: 44px;
+  height: 44px;
+}
+
 /* ===== REDUCED MOTION ===== */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

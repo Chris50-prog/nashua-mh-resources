@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="css/design-system.css">
 <link rel="stylesheet" href="css/style.css">
 <script src="js/fontsize.js"></script>
+<script src="js/a11y.js" defer></script>
 <style>
 /* ================================================================
    Therapeutic Games Page — Layout & Component Overrides
@@ -2258,7 +2259,7 @@ function renderThoughtChallenger() {
   html += '<div class="tc-step__title">Step 2: How much do you believe this thought?</div>';
   html += '<div class="tc-slider-group">';
   html += '<div class="tc-slider-label"><span>Not at all</span><span>Completely</span></div>';
-  html += '<input type="range" class="tc-slider" id="tcBeforeSlider" min="0" max="100" value="50" oninput="tcUpdateBeforeValue(this.value)">';
+  html += '<input type="range" class="tc-slider" id="tcBeforeSlider" min="0" max="100" value="50" aria-label="How much do you believe this thought, 0 to 100 percent" oninput="tcUpdateBeforeValue(this.value)">';
   html += '<div class="tc-slider-value" id="tcBeforeValue">50%</div>';
   html += '</div>';
   html += '<button class="tc-btn" onclick="tcGoToStep3()">Next</button>';
@@ -2272,7 +2273,7 @@ function renderThoughtChallenger() {
   html += '<div class="tc-slider-group" style="margin-top:var(--ds-space-4)">';
   html += '<div class="tc-step__title" style="font-size:var(--ds-text-sm)">Now how much do you believe the original thought?</div>';
   html += '<div class="tc-slider-label"><span>Not at all</span><span>Completely</span></div>';
-  html += '<input type="range" class="tc-slider" id="tcAfterSlider" min="0" max="100" value="50" oninput="tcUpdateAfterValue(this.value)">';
+  html += '<input type="range" class="tc-slider" id="tcAfterSlider" min="0" max="100" value="50" aria-label="Now how much do you believe the original thought, 0 to 100 percent" oninput="tcUpdateAfterValue(this.value)">';
   html += '<div class="tc-slider-value" id="tcAfterValue">50%</div>';
   html += '</div>';
   html += '<button class="tc-btn" onclick="tcShowComparison()">See Results</button>';

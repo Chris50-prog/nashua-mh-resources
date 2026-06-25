@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="css/design-system.css">
 <link rel="stylesheet" href="css/style.css">
 <script src="js/fontsize.js"></script>
+<script src="js/a11y.js" defer></script>
 <style>
 /* ===== TOOLS PAGE LAYOUT ===== */
 .tools-layout {
@@ -4498,7 +4499,7 @@
 
   <div class="goalbank-controls">
     <input type="text" class="goalbank-search" id="gbSearch" placeholder="Search goals by keyword (e.g., coping, sleep, relapse, anger)..." oninput="filterGoalBank()">
-    <select class="goalbank-filter" id="gbFilter" onchange="filterGoalBank()">
+    <select class="goalbank-filter" id="gbFilter" onchange="filterGoalBank()" aria-label="Filter goals by category">
       <option value="all">All Diagnostic Categories</option>
       <option value="mdd">Major Depressive Disorder</option>
       <option value="gad">Generalized Anxiety Disorder</option>
@@ -15221,7 +15222,7 @@ function renderMileageTable() {
     html += '<td>' + escapeHtml(e.purpose) + '</td>';
     html += '<td>' + e.miles.toFixed(1) + '</td>';
     html += '<td>$' + e.reimbursement.toFixed(2) + '</td>';
-    html += '<td><button class="btn btn-sm" onclick="removeMileageEntry(' + e.id + ')" style="padding:2px 8px;font-size:11px;color:var(--ds-danger-600)">&times;</button></td>';
+    html += '<td><button class="btn btn-sm" onclick="removeMileageEntry(' + e.id + ')" aria-label="Remove mileage entry" title="Remove" style="padding:2px 8px;font-size:11px;color:var(--ds-danger-600)">&times;</button></td>';
     html += '</tr>';
   });
   tbody.innerHTML = html;
@@ -15308,7 +15309,7 @@ function printMileageLog() {
   var totalM = mileageEntries.reduce(function(s, e) { return s + e.miles; }, 0);
   var totalR = mileageEntries.reduce(function(s, e) { return s + e.reimbursement; }, 0);
   win.document.write('</tbody><tfoot><tr><td colspan="5" style="text-align:right">Totals:</td><td>' + totalM.toFixed(1) + '</td><td>$' + totalR.toFixed(2) + '</td></tr></tfoot></table>');
-  win.document.write('<div style="margin-top:24px;font-size:10px;color:#999">Signature: ____________________________  Date: ____________</div>');
+  win.document.write('<div style="margin-top:24px;font-size:10px;color:#595959">Signature: ____________________________  Date: ____________</div>');
   win.document.write('</body></html>');
   win.document.close();
   win.print();
@@ -15516,7 +15517,7 @@ function printAuditResults() {
     win.document.write('</div>');
   }
 
-  win.document.write('<div style="margin-top:24px;font-size:10px;color:#999">Auditor Signature: ____________________________  Date: ____________</div>');
+  win.document.write('<div style="margin-top:24px;font-size:10px;color:#595959">Auditor Signature: ____________________________  Date: ____________</div>');
   win.document.write('</body></html>');
   win.document.close();
   win.print();

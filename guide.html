@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="css/design-system.css">
 <link rel="stylesheet" href="css/style.css">
 <script src="js/fontsize.js"></script>
+<script src="js/a11y.js" defer></script>
 <style>
 /* ---- Nav ---- */
 .site-nav {
@@ -2655,7 +2656,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
 
   <!-- Mobile Jump -->
   <div class="mobile-jump">
-    <select id="mobileJump" onchange="jumpToSection(this.value)">
+    <select id="mobileJump" onchange="jumpToSection(this.value)" aria-label="Jump to section">
       <option value="">Jump to a category...</option>
       <option value="cat-crisis">Crisis &amp; Safety</option>
       <option value="cat-mh">Mental Health Services</option>

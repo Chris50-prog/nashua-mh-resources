@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="css/design-system.css">
 <link rel="stylesheet" href="css/style.css">
 <script src="js/fontsize.js"></script>
+<script src="js/a11y.js" defer></script>
 <style>
 /* ================================================================
    Landing Page — Layout & Component Overrides
@@ -805,7 +806,7 @@
       <div class="hero__search-icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       </div>
-      <input type="text" id="heroSearch" class="hero__search-input" placeholder="Search resources, services, phone numbers..." autocomplete="off">
+      <input type="text" id="heroSearch" class="hero__search-input" placeholder="Search resources, services, phone numbers..." autocomplete="off" aria-label="Search resources, services, and phone numbers">
       <kbd class="hero__search-kbd">Ctrl K</kbd>
     </div>
 
@@ -1024,7 +1025,7 @@
           </div>
           <div class="news-card__title">SAMHSA Updates 988 Best Practices for Community Mental Health Centers</div>
           <div class="news-card__excerpt">New guidance for CMHCs on 988 warm-handoff protocols, including updated follow-up timelines and documentation requirements for crisis callers referred to outpatient services.</div>
-          <a href="https://www.samhsa.gov/find-help/988" class="news-card__link" target="_blank" rel="noopener">Read more <span>&rarr;</span></a>
+          <a href="https://www.samhsa.gov/find-help/988" class="news-card__link" target="_blank" rel="noopener" aria-label="Read more about SAMHSA Updates 988 Best Practices for Community Mental Health Centers (opens in new tab)">Read more <span aria-hidden="true">&rarr;</span></a>
         </div>
 
         <!-- News 2 -->
@@ -1035,7 +1036,7 @@
           </div>
           <div class="news-card__title">NH DHHS Expands Medicaid Coverage for Peer Support Services</div>
           <div class="news-card__excerpt">Effective July 1, NH Medicaid will reimburse Certified Recovery Support Workers for individual peer support sessions, expanding access for SUD and co-occurring disorder clients.</div>
-          <a href="https://www.dhhs.nh.gov/programs-services/medicaid" class="news-card__link" target="_blank" rel="noopener">Read more <span>&rarr;</span></a>
+          <a href="https://www.dhhs.nh.gov/programs-services/medicaid" class="news-card__link" target="_blank" rel="noopener" aria-label="Read more about NH DHHS Expands Medicaid Coverage for Peer Support Services (opens in new tab)">Read more <span aria-hidden="true">&rarr;</span></a>
         </div>
 
         <!-- News 3 -->
@@ -1046,7 +1047,7 @@
           </div>
           <div class="news-card__title">SB 412 Signed: NH Expands Mental Health Parity Enforcement</div>
           <div class="news-card__excerpt">Governor signs SB 412, strengthening mental health parity enforcement for commercial insurers. Requires annual compliance reports and establishes a dedicated complaint pathway.</div>
-          <a href="https://www.gencourt.state.nh.us/" class="news-card__link" target="_blank" rel="noopener">Read more <span>&rarr;</span></a>
+          <a href="https://www.gencourt.state.nh.us/" class="news-card__link" target="_blank" rel="noopener" aria-label="Read more about SB 412 Signed: NH Expands Mental Health Parity Enforcement (opens in new tab)">Read more <span aria-hidden="true">&rarr;</span></a>
         </div>
 
         <!-- News 4 -->
@@ -1057,7 +1058,7 @@
           </div>
           <div class="news-card__title">Xylazine Test Strips Now Available at All NH Doorway Locations</div>
           <div class="news-card__excerpt">All NH Doorway locations now distribute free xylazine test strips. Providers should inform clients about xylazine-positive supply risks and the limited efficacy of naloxone.</div>
-          <a href="https://www.dhhs.nh.gov/programs-services/alcohol-drug-services" class="news-card__link" target="_blank" rel="noopener">Read more <span>&rarr;</span></a>
+          <a href="https://www.dhhs.nh.gov/programs-services/alcohol-drug-services" class="news-card__link" target="_blank" rel="noopener" aria-label="Read more about Xylazine Test Strips Now Available at All NH Doorway Locations (opens in new tab)">Read more <span aria-hidden="true">&rarr;</span></a>
         </div>
 
         <!-- News 5 -->
@@ -1068,7 +1069,7 @@
           </div>
           <div class="news-card__title">APA Updates PTSD Practice Guidelines: First-Line Interventions</div>
           <div class="news-card__excerpt">Strengthened recommendations for CPT and PE as first-line, with new evidence supporting written exposure therapy and EMDR as equally effective alternatives.</div>
-          <a href="https://www.apa.org/ptsd-guideline" class="news-card__link" target="_blank" rel="noopener">Read more <span>&rarr;</span></a>
+          <a href="https://www.apa.org/ptsd-guideline" class="news-card__link" target="_blank" rel="noopener" aria-label="Read more about APA Updates PTSD Practice Guidelines: First-Line Interventions (opens in new tab)">Read more <span aria-hidden="true">&rarr;</span></a>
         </div>
 
         <!-- News 6 -->
@@ -1079,7 +1080,7 @@
           </div>
           <div class="news-card__title">SAMHSA CCBHC Expansion Grant: $4M Available for NH Centers</div>
           <div class="news-card__excerpt">FY2027 CCBHC expansion grants announced. NH CMHCs not yet certified can apply for up to $4M in planning and implementation funding. Applications due September 30.</div>
-          <a href="https://www.samhsa.gov/grants" class="news-card__link" target="_blank" rel="noopener">Read more <span>&rarr;</span></a>
+          <a href="https://www.samhsa.gov/grants" class="news-card__link" target="_blank" rel="noopener" aria-label="Read more about SAMHSA CCBHC Expansion Grant: $4M Available for NH Centers (opens in new tab)">Read more <span aria-hidden="true">&rarr;</span></a>
         </div>
 
       </div>
@@ -1178,7 +1179,7 @@
      ============================================================ -->
 <div id="pocketGuide">
   <div class="pg-header">
-    <h1>Greater Nashua MH Quick Reference</h1>
+    <h2 class="pg-title">Greater Nashua MH Quick Reference</h2>
   </div>
   <div class="pg-crisis">
     <strong>CRISIS LINES</strong>
@@ -1187,7 +1188,7 @@
     <span><b>(603) 889-6147</b> GNMHC Crisis</span> &bull;
     <span><b>Text HOME to 741741</b></span>
   </div>
-  <h2 class="pg-section-title">Phone Directory</h2>
+  <h3 class="pg-section-title">Phone Directory</h3>
   <div class="pg-phones">
     <table>
       <tr><td>988 Suicide &amp; Crisis Lifeline</td><td><b>988</b></td><td>24/7</td></tr>
@@ -1208,7 +1209,7 @@
       <tr><td>Adult Protective Svcs</td><td><b>1-800-949-0470</b></td><td>24/7</td></tr>
     </table>
   </div>
-  <h2 class="pg-section-title">Quick Triage</h2>
+  <h3 class="pg-section-title">Quick Triage</h3>
   <div class="pg-triage">
     <div class="pg-triage-item"><b>Psychiatric crisis</b> &mdash; NH Rapid Response 1-833-710-6477; danger? 911; in ED? Request ACCESS assessment</div>
     <div class="pg-triage-item"><b>MH treatment</b> &mdash; GNMHC (603) 889-6147 intake; PHP/IOP: Discover Health (603) 402-7551</div>
