@@ -10,1625 +10,1169 @@
 <meta property="og:type" content="website">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#2563eb">
+<meta name="theme-color" content="#2d6f59">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="css/design-system.css">
 <link rel="stylesheet" href="css/style.css">
 <script src="js/fontsize.js"></script>
 <style>
-/* ===== WAVE 6 — ROLE CARDS, NEWS FEED, REORGANIZED LAYOUT ===== */
+/* ================================================================
+   Landing Page — Layout & Component Overrides
+   Minimal inline styles that are page-specific only.
+   Everything else comes from design-system.css.
+   ================================================================ */
 
-/* Role Cards Section */
-.role-cards-section {
-  margin-bottom: 32px;
+/* ---- Nav ---- */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: var(--ds-z-sticky);
+  background: rgba(253, 252, 250, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--ds-border-subtle);
+  height: var(--ds-header-height);
 }
-.role-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  transition: all 0.2s;
+[data-theme="dark"] .site-nav {
+  background: rgba(26, 25, 22, 0.85);
+}
+.site-nav__inner {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6);
+  height: 100%;
   display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+}
+.site-nav__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  text-decoration: none;
+  flex-shrink: 0;
+  margin-right: auto;
+}
+.site-nav__logo-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-primary-600);
+  color: var(--ds-text-inverse);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-bold);
+  letter-spacing: var(--ds-tracking-tight);
+}
+.site-nav__logo-text {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  white-space: nowrap;
+}
+.site-nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+}
+.site-nav__link {
+  padding: var(--ds-space-2) var(--ds-space-3);
+  border-radius: var(--ds-radius-md);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default),
+              background-color var(--ds-duration-fast) var(--ds-ease-default);
+  white-space: nowrap;
+}
+.site-nav__link:hover {
+  color: var(--ds-text-primary);
+  background: var(--ds-surface-hover);
+  text-decoration: none;
+}
+.site-nav__link--active {
+  color: var(--ds-primary-700);
+  background: var(--ds-primary-50);
+}
+[data-theme="dark"] .site-nav__link--active {
+  color: var(--ds-primary-300);
+  background: var(--ds-interactive-subtle);
+}
+.site-nav__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  margin-left: var(--ds-space-2);
+}
+.site-nav__icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ds-radius-md);
+  border: none;
+  background: transparent;
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default),
+              background-color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.site-nav__icon-btn:hover {
+  background: var(--ds-surface-hover);
+  color: var(--ds-text-primary);
+}
+.site-nav__font-controls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.site-nav__font-btn {
+  padding: var(--ds-space-1) var(--ds-space-2);
+  border-radius: var(--ds-radius-sm);
+  border: 1px solid var(--ds-border);
+  background: var(--ds-surface);
+  color: var(--ds-text-secondary);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  cursor: pointer;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+  line-height: 1;
+  min-height: 28px;
+}
+.site-nav__font-btn:hover {
+  background: var(--ds-surface-hover);
+  border-color: var(--ds-border-strong);
+}
+
+/* Hamburger */
+.site-nav__hamburger {
+  display: none;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 8px;
   flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  align-items: center;
 }
-.role-card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+.site-nav__hamburger span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--ds-text-secondary);
+  border-radius: 1px;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
 }
-.role-card-banner {
-  height: 6px;
+
+/* Mobile nav overlay */
+.site-nav__mobile-panel {
+  display: none;
+  position: fixed;
+  top: var(--ds-header-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--ds-surface);
+  z-index: var(--ds-z-overlay);
+  padding: var(--ds-space-6);
+  flex-direction: column;
+  gap: var(--ds-space-2);
+  overflow-y: auto;
+}
+.site-nav__mobile-panel.is-open {
+  display: flex;
+}
+.site-nav__mobile-link {
+  display: block;
+  padding: var(--ds-space-3) var(--ds-space-4);
+  border-radius: var(--ds-radius-lg);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-primary);
+  text-decoration: none;
+  transition: background-color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.site-nav__mobile-link:hover {
+  background: var(--ds-surface-hover);
+  text-decoration: none;
+}
+.site-nav__mobile-link--active {
+  color: var(--ds-primary-700);
+  background: var(--ds-primary-50);
+}
+[data-theme="dark"] .site-nav__mobile-link--active {
+  color: var(--ds-primary-300);
+  background: var(--ds-interactive-subtle);
+}
+
+/* ---- Hero ---- */
+.hero {
+  background: linear-gradient(170deg, var(--ds-primary-50) 0%, var(--ds-cream) 50%, var(--ds-warm-gray-50) 100%);
+  padding: var(--ds-space-20) 0 var(--ds-space-16);
+}
+[data-theme="dark"] .hero {
+  background: linear-gradient(170deg, rgba(61, 139, 112, 0.08) 0%, var(--ds-page-bg) 50%, var(--ds-page-bg) 100%);
+}
+.hero__inner {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6);
+  text-align: center;
+}
+.hero__overline {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  margin-bottom: var(--ds-space-5);
+}
+.hero__overline-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ds-success-500);
+}
+.hero__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-4xl);
+  font-weight: var(--ds-weight-bold);
+  line-height: var(--ds-leading-tight);
+  letter-spacing: var(--ds-tracking-tight);
+  color: var(--ds-text-primary);
+  max-width: 720px;
+  margin: 0 auto var(--ds-space-5);
+}
+.hero__subtitle {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-regular);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--ds-text-secondary);
+  max-width: 560px;
+  margin: 0 auto var(--ds-space-8);
+}
+.hero__search {
+  max-width: 560px;
+  margin: 0 auto;
+  position: relative;
+}
+.hero__search-icon {
+  position: absolute;
+  left: var(--ds-space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ds-text-muted);
+  pointer-events: none;
+}
+.hero__search-input {
   width: 100%;
+  padding: var(--ds-space-3-5) var(--ds-space-4) var(--ds-space-3-5) var(--ds-space-12);
+  min-height: 52px;
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  color: var(--ds-text-primary);
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-xl);
+  box-shadow: var(--ds-shadow-md);
+  outline: none;
+  transition: var(--ds-transition-shadow), border-color var(--ds-duration-fast) var(--ds-ease-default);
+  -webkit-appearance: none;
 }
-.role-card-body {
-  padding: 24px;
-  flex: 1;
+.hero__search-input::placeholder {
+  color: var(--ds-text-muted);
+}
+.hero__search-input:focus {
+  border-color: var(--ds-border-focus);
+  box-shadow: var(--ds-focus-ring), var(--ds-shadow-md);
+}
+.hero__search-kbd {
+  position: absolute;
+  right: var(--ds-space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  padding: var(--ds-space-0-5) var(--ds-space-2);
+  background: var(--ds-warm-gray-100);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-sm);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-muted);
+  line-height: 1.5;
+  pointer-events: none;
+}
+
+/* ---- "What do you need?" cards ---- */
+.needs__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--ds-space-5);
+}
+.need-card {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-xl);
+  padding: var(--ds-space-6);
+  text-decoration: none;
   display: flex;
   flex-direction: column;
+  gap: var(--ds-space-3);
+  transition: box-shadow var(--ds-duration-normal) var(--ds-ease-default),
+              transform var(--ds-duration-normal) var(--ds-ease-default),
+              border-color var(--ds-duration-fast) var(--ds-ease-default);
+  cursor: pointer;
 }
-.role-card-icon {
+.need-card:hover {
+  box-shadow: var(--ds-shadow-lg);
+  transform: translateY(-3px);
+  text-decoration: none;
+}
+.need-card__icon {
   width: 48px;
   height: 48px;
-  border-radius: var(--radius-lg);
+  border-radius: var(--ds-radius-lg);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 22px;
-  margin-bottom: 14px;
   flex-shrink: 0;
 }
-.role-card-body h3 {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 6px;
-  color: var(--text);
+.need-card__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  line-height: var(--ds-leading-snug);
 }
-.role-card-body .role-desc {
-  font-size: 13px;
-  color: var(--text-secondary);
-  margin-bottom: 16px;
-  line-height: 1.5;
+.need-card__desc {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
 }
-.role-links {
+.need-card__arrow {
+  margin-top: auto;
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  transition: color var(--ds-duration-fast) var(--ds-ease-default),
+              gap var(--ds-duration-fast) var(--ds-ease-default);
+}
+.need-card:hover .need-card__arrow {
+  color: var(--ds-primary-600);
+  gap: var(--ds-space-2);
+}
+[data-theme="dark"] .need-card:hover .need-card__arrow {
+  color: var(--ds-primary-300);
+}
+
+/* Need card color accents on hover */
+.need-card--crisis:hover   { border-color: var(--ds-danger-300); }
+.need-card--screen:hover   { border-color: var(--ds-info-300); }
+.need-card--notes:hover    { border-color: var(--ds-accent-300); }
+.need-card--resources:hover { border-color: var(--ds-primary-300); }
+.need-card--print:hover    { border-color: var(--ds-success-300); }
+.need-card--billing:hover  { border-color: var(--ds-warm-gray-400); }
+.need-card--learn:hover    { border-color: #818cf8; }
+.need-card--supervise:hover { border-color: var(--ds-secondary-400); }
+
+/* ---- Stats bar ---- */
+.stats-bar {
+  display: flex;
+  justify-content: center;
+  gap: var(--ds-space-10);
+  flex-wrap: wrap;
+}
+.stat {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ds-space-1);
+}
+.stat__number {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-3xl);
+  font-weight: var(--ds-weight-bold);
+  color: var(--ds-primary-600);
+  line-height: var(--ds-leading-none);
+  letter-spacing: var(--ds-tracking-tight);
+}
+[data-theme="dark"] .stat__number {
+  color: var(--ds-primary-400);
+}
+.stat__label {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-secondary);
+}
+
+/* ---- News cards ---- */
+.news__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--ds-space-5);
+}
+.news-card {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-xl);
+  padding: var(--ds-space-5) var(--ds-space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-3);
+  transition: box-shadow var(--ds-duration-normal) var(--ds-ease-default),
+              border-color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.news-card:hover {
+  box-shadow: var(--ds-shadow-md);
+  border-color: var(--ds-border-strong);
+}
+.news-card__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  flex-wrap: wrap;
+}
+.news-card__date {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-muted);
+}
+.news-card__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  line-height: var(--ds-leading-snug);
+}
+.news-card__excerpt {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.news-card__link {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-link);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  margin-top: auto;
+}
+.news-card__link:hover {
+  color: var(--ds-text-link-hover);
+  text-decoration: underline;
+}
+
+/* ---- Footer ---- */
+.site-footer {
+  background: var(--ds-surface);
+  border-top: 1px solid var(--ds-border);
+  padding: var(--ds-space-16) 0 var(--ds-space-8);
+  margin-top: 0;
+}
+.footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--ds-space-10);
+  margin-bottom: var(--ds-space-10);
+}
+.footer__brand-desc {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+  margin-top: var(--ds-space-3);
+  max-width: 320px;
+}
+.footer__col-title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--ds-tracking-widest);
+  margin-bottom: var(--ds-space-4);
+}
+.footer__links {
   list-style: none;
   padding: 0;
   margin: 0;
-  flex: 1;
-}
-.role-links li {
-  margin-bottom: 8px;
-}
-.role-links a {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border-radius: var(--radius);
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text);
-  background: var(--surface-alt);
-  transition: all 0.15s;
+  flex-direction: column;
+  gap: var(--ds-space-2-5);
+}
+.footer__links a {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
   text-decoration: none;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default);
 }
-.role-links a:hover {
-  background: var(--accent-light);
-  color: var(--accent);
-  text-decoration: none;
+.footer__links a:hover {
+  color: var(--ds-text-primary);
 }
-.role-links .link-arrow {
-  margin-left: auto;
-  font-size: 11px;
-  color: var(--text-muted);
-  transition: color 0.15s;
+.footer__crisis-box {
+  background: var(--ds-status-danger-bg);
+  border: 1px solid var(--ds-danger-200);
+  border-radius: var(--ds-radius-lg);
+  padding: var(--ds-space-4);
+  margin-top: var(--ds-space-4);
 }
-.role-links a:hover .link-arrow {
-  color: var(--accent);
+[data-theme="dark"] .footer__crisis-box {
+  border-color: rgba(220, 95, 95, 0.2);
 }
-
-/* News Feed Section */
-.news-section {
-  margin-bottom: 32px;
+.footer__crisis-title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-status-danger-text);
+  margin-bottom: var(--ds-space-2);
 }
-.news-section-header {
+.footer__crisis-numbers {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+}
+.footer__crisis-numbers strong {
+  color: var(--ds-text-primary);
+}
+.footer__bottom {
+  border-top: 1px solid var(--ds-border-subtle);
+  padding-top: var(--ds-space-6);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: var(--ds-space-4);
 }
-.news-section-header h2 {
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: -0.2px;
+.footer__disclaimer {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+  line-height: var(--ds-leading-relaxed);
+  max-width: 560px;
 }
-.news-curated-note {
-  font-size: 11px;
-  color: var(--text-muted);
-  font-style: italic;
-}
-.news-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-}
-@media (max-width: 900px) {
-  .news-grid { grid-template-columns: 1fr; }
-}
-.news-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 20px;
-  transition: all 0.2s;
-  display: flex;
-  flex-direction: column;
-}
-.news-card:hover {
-  box-shadow: var(--shadow-md);
-  border-color: #c7ccd6;
-}
-[data-theme="dark"] .news-card:hover {
-  border-color: #4a5068;
-}
-.news-card-meta {
+.footer__meta {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-  flex-wrap: wrap;
+  gap: var(--ds-space-4);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
 }
-.news-date {
-  font-size: 12px;
-  color: var(--text-muted);
-  font-weight: 500;
-}
-.news-source-tag {
-  display: inline-block;
-  padding: 2px 8px;
-  border-radius: 12px;
-  font-size: 10px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-}
-.news-source-tag.samhsa {
-  background: var(--accent-light);
-  color: var(--accent);
-}
-.news-source-tag.nh-state {
-  background: var(--teal-light);
-  color: var(--teal);
-}
-.news-source-tag.clinical {
-  background: var(--purple-light);
-  color: var(--purple);
-}
-.news-source-tag.training {
-  background: var(--warning-light);
-  color: var(--warning);
-}
-.news-source-tag.community {
-  background: var(--success-light);
-  color: var(--success);
-}
-.news-source-tag.seasonal {
-  background: #fef9c3;
-  color: #a16207;
-}
-[data-theme="dark"] .news-source-tag.seasonal {
-  background: #2d2810;
-  color: #fbbf24;
-}
-.news-card h3 {
-  font-size: 15px;
-  font-weight: 600;
-  margin-bottom: 6px;
-  color: var(--text);
-  line-height: 1.4;
-}
-.news-card .news-desc {
-  font-size: 13px;
-  color: var(--text-secondary);
-  line-height: 1.5;
-  margin-bottom: 12px;
-  flex: 1;
-}
-.news-card .news-read-more {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--accent);
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  text-decoration: none;
-}
-.news-card .news-read-more:hover {
-  text-decoration: underline;
-}
-
-/* Compact triage — collapsible on Wave 6 */
-.triage-section {
-  margin-bottom: 32px;
-}
-.triage-section .section-header {
-  cursor: pointer;
-  user-select: none;
-}
-.triage-toggle-hint {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-left: auto;
-}
-.triage-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-@media (max-width: 900px) {
-  .triage-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 600px) {
-  .triage-grid { grid-template-columns: 1fr; }
-}
-.triage-compact {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 12px 16px;
-  transition: all 0.15s;
-}
-.triage-compact:hover {
-  box-shadow: var(--shadow);
-}
-.triage-compact .triage-scenario {
-  font-size: 13px;
-  font-weight: 600;
-  margin-bottom: 4px;
-  color: var(--text);
-}
-.triage-compact .triage-action {
-  font-size: 12px;
-  color: var(--text-secondary);
-  line-height: 1.45;
-}
-
-/* Footer update indicator */
-.site-footer .last-updated-bar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  margin-top: 10px;
-  font-size: 11px;
-  color: var(--text-muted);
-}
-.last-updated-dot {
+.footer__status-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--success);
+  background: var(--ds-success-500);
   display: inline-block;
 }
 
-/* ===== WAVE 7-8 — News grid "show more" ===== */
-.news-grid-expanded .news-card-hidden { display: none; }
-.news-grid-expanded.show-all .news-card-hidden { display: flex; }
-.news-show-more-row {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 8px 0;
-}
-.news-show-more-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 24px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface);
-  color: var(--accent);
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.news-show-more-btn:hover {
-  background: var(--accent-light);
-  border-color: var(--accent);
-}
-.news-source-tag.legislative {
-  background: #ede9fe;
-  color: #6d28d9;
-}
-[data-theme="dark"] .news-source-tag.legislative {
-  background: #1e1638;
-  color: #a78bfa;
-}
-.news-source-tag.opioid {
-  background: var(--danger-light);
-  color: var(--danger);
-}
-.news-source-tag.workforce {
-  background: #e0e7ff;
-  color: #4338ca;
-}
-[data-theme="dark"] .news-source-tag.workforce {
-  background: #1e1b4b;
-  color: #818cf8;
-}
-.news-source-tag.policy {
-  background: #fef3c7;
-  color: #92400e;
-}
-[data-theme="dark"] .news-source-tag.policy {
-  background: #2d2810;
-  color: #fbbf24;
-}
-.news-source-tag.funding {
-  background: var(--success-light);
-  color: var(--success);
-}
+/* ---- Pocket Guide (print only) ---- */
+#pocketGuide { display: none; }
 
-/* ===== WAVE 9 — Professional Development Section ===== */
-.prof-dev-section {
-  margin-bottom: 32px;
-}
-.prof-dev-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
-}
-@media (max-width: 900px) {
-  .prof-dev-grid { grid-template-columns: 1fr; }
-}
-.prof-dev-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 18px 20px;
-  transition: all 0.2s;
+/* ---- Section Header ---- */
+.section-header {
   display: flex;
-  flex-direction: column;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ds-space-4);
+  margin-bottom: var(--ds-space-6);
 }
-.prof-dev-card:hover {
-  box-shadow: var(--shadow-md);
-  border-color: #c7ccd6;
+.section-header__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-2xl);
+  font-weight: var(--ds-weight-bold);
+  color: var(--ds-text-primary);
+  letter-spacing: var(--ds-tracking-tight);
 }
-[data-theme="dark"] .prof-dev-card:hover {
-  border-color: #4a5068;
-}
-.prof-dev-card-header {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  margin-bottom: 8px;
-}
-.prof-dev-card-header h3 {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text);
-  line-height: 1.4;
-  flex: 1;
-}
-.prof-dev-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 8px;
-}
-.prof-dev-tag {
-  display: inline-block;
-  padding: 2px 8px;
-  border-radius: 12px;
-  font-size: 10px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-}
-.prof-dev-tag.date-tag {
-  background: var(--surface-alt);
-  color: var(--text-secondary);
-}
-.prof-dev-tag.provider-tag {
-  background: var(--accent-light);
-  color: var(--accent);
-}
-.prof-dev-tag.ce-tag {
-  background: var(--success-light);
-  color: var(--success);
-  font-weight: 700;
-}
-.prof-dev-desc {
-  font-size: 12px;
-  color: var(--text-secondary);
-  line-height: 1.5;
-  margin-bottom: 10px;
-  flex: 1;
-}
-.prof-dev-link {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--accent);
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
+.section-header__link {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-link);
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  flex-shrink: 0;
 }
-.prof-dev-link:hover {
+.section-header__link:hover {
+  color: var(--ds-text-link-hover);
   text-decoration: underline;
 }
 
-/* ===== WAVE 10 — Staff Bulletin Board ===== */
-.bulletin-section {
-  margin-bottom: 32px;
+/* ---- Responsive ---- */
+@media (max-width: 1023px) {
+  .needs__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ds-space-8);
+  }
 }
-.bulletin-board {
-  background: var(--surface-alt);
-  border: 2px dashed var(--border);
-  border-radius: var(--radius-lg);
-  padding: 20px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
-}
-@media (max-width: 768px) {
-  .bulletin-board { grid-template-columns: 1fr; }
-}
-.bulletin-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px;
-  position: relative;
-  transition: all 0.15s;
-  box-shadow: var(--shadow);
-}
-.bulletin-card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
-}
-.bulletin-card::before {
-  content: '';
-  position: absolute;
-  top: 12px;
-  left: -6px;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
-}
-.bulletin-card.cat-policy::before { background: var(--accent); }
-.bulletin-card.cat-hr::before { background: var(--purple); }
-.bulletin-card.cat-clinical::before { background: var(--teal); }
-.bulletin-card.cat-general::before { background: var(--warning); }
-.bulletin-card-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 6px;
-  flex-wrap: wrap;
-}
-.bulletin-date {
-  font-size: 11px;
-  color: var(--text-muted);
-  font-weight: 500;
-}
-.bulletin-cat-tag {
-  display: inline-block;
-  padding: 1px 8px;
-  border-radius: 10px;
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-}
-.bulletin-cat-tag.policy { background: var(--accent-light); color: var(--accent); }
-.bulletin-cat-tag.hr { background: var(--purple-light); color: var(--purple); }
-.bulletin-cat-tag.clinical { background: var(--teal-light); color: var(--teal); }
-.bulletin-cat-tag.general { background: var(--warning-light); color: var(--warning); }
-.bulletin-card h4 {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 4px;
-}
-.bulletin-card p {
-  font-size: 12px;
-  color: var(--text-secondary);
-  line-height: 1.5;
-}
-.bulletin-admin-note {
-  font-size: 11px;
-  color: var(--text-muted);
-  font-style: italic;
-  margin-bottom: 12px;
+@media (max-width: 639px) {
+  .site-nav__links,
+  .site-nav__font-controls {
+    display: none;
+  }
+  .site-nav__hamburger {
+    display: flex;
+  }
+  .hero {
+    padding: var(--ds-space-12) 0 var(--ds-space-10);
+  }
+  .hero__title {
+    font-size: var(--ds-text-3xl);
+  }
+  .hero__subtitle {
+    font-size: var(--ds-text-base);
+  }
+  .needs__grid {
+    grid-template-columns: 1fr;
+    gap: var(--ds-space-3);
+  }
+  .need-card {
+    padding: var(--ds-space-4) var(--ds-space-5);
+    flex-direction: row;
+    align-items: center;
+    gap: var(--ds-space-4);
+  }
+  .need-card__icon {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+  .need-card__content {
+    flex: 1;
+    min-width: 0;
+  }
+  .need-card__desc {
+    display: none;
+  }
+  .need-card__arrow {
+    display: none;
+  }
+  .stats-bar {
+    gap: var(--ds-space-6);
+  }
+  .stat__number {
+    font-size: var(--ds-text-2xl);
+  }
+  .news__grid {
+    grid-template-columns: 1fr;
+  }
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: var(--ds-space-8);
+  }
+  .footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .section-header {
+    flex-direction: column;
+    gap: var(--ds-space-2);
+  }
 }
 
-/* ===== WAVE 11 — "NEW" Badges ===== */
-.badge-new {
-  display: inline-block;
-  background: var(--danger);
-  color: #fff;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  padding: 2px 7px;
-  border-radius: 10px;
-  margin-left: 8px;
-  vertical-align: middle;
-  line-height: 1.4;
-  animation: badgePulse 2s ease-in-out infinite;
-}
-@keyframes badgePulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.75; }
-}
-
-/* ===== WAVE 12 — Seasonal Awareness Banner ===== */
-.seasonal-banner {
-  margin-bottom: 32px;
-  background: linear-gradient(135deg, #fef9c3 0%, #fef3c7 40%, #ffedd5 100%);
-  border: 1px solid #fbbf24;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  position: relative;
-}
-[data-theme="dark"] .seasonal-banner {
-  background: linear-gradient(135deg, #2d2810 0%, #2d2510 40%, #2d1f0a 100%);
-  border-color: #92400e;
-}
-.seasonal-banner-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 20px 24px 12px;
-}
-.seasonal-sun-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #f59e0b, #ef4444);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  flex-shrink: 0;
-  box-shadow: 0 0 12px rgba(245, 158, 11, 0.35);
-}
-.seasonal-banner-header h3 {
-  font-size: 18px;
-  font-weight: 700;
-  color: #92400e;
-}
-[data-theme="dark"] .seasonal-banner-header h3 {
-  color: #fbbf24;
-}
-.seasonal-banner-header .seasonal-subtitle {
-  font-size: 12px;
-  color: #a16207;
-  font-weight: 500;
-}
-[data-theme="dark"] .seasonal-banner-header .seasonal-subtitle {
-  color: #d4a017;
-}
-.seasonal-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  padding: 8px 24px 20px;
-}
-@media (max-width: 768px) {
-  .seasonal-grid { grid-template-columns: 1fr; }
-}
-.seasonal-item {
-  background: rgba(255,255,255,0.7);
-  border-radius: var(--radius);
-  padding: 14px 16px;
-  border: 1px solid rgba(251, 191, 36, 0.3);
-}
-[data-theme="dark"] .seasonal-item {
-  background: rgba(0,0,0,0.2);
-  border-color: rgba(251, 191, 36, 0.15);
-}
-.seasonal-item h4 {
-  font-size: 13px;
-  font-weight: 700;
-  color: #92400e;
-  margin-bottom: 4px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-[data-theme="dark"] .seasonal-item h4 {
-  color: #fbbf24;
-}
-.seasonal-item p {
-  font-size: 12px;
-  color: #78350f;
-  line-height: 1.5;
-}
-[data-theme="dark"] .seasonal-item p {
-  color: #d4a017;
-}
-.seasonal-rotate-note {
-  text-align: right;
-  padding: 0 24px 14px;
-  font-size: 10px;
-  color: #a16207;
-  font-style: italic;
-}
-[data-theme="dark"] .seasonal-rotate-note {
-  color: #92400e;
+/* ---- Print support for pocket guide ---- */
+@media print {
+  body.printing-pocket-guide * { display: none !important; }
+  body.printing-pocket-guide #pocketGuide,
+  body.printing-pocket-guide #pocketGuide * { display: block !important; }
 }
 </style>
 </head>
 <body>
 <script src="js/auth-gate.js"></script>
 
-<a href="#main-content" class="skip-link">Skip to main content</a>
+<a href="#main-content" class="ds-sr-only" style="position:absolute;top:-40px;left:0;background:var(--ds-surface);padding:8px 16px;z-index:100;font-size:14px;transition:top 0.2s" onfocus="this.style.top='0'" onblur="this.style.top='-40px'">Skip to main content</a>
 
-<header class="site-header">
-  <div class="header-inner">
-    <a href="index.html" class="site-logo" id="siteLogo">
-      <div class="logo-icon">NH</div>
-      <span>Greater Nashua MH Resources</span>
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav class="site-nav" role="navigation" aria-label="Main navigation">
+  <div class="site-nav__inner">
+
+    <a href="index.html" class="site-nav__logo" id="siteLogo">
+      <div class="site-nav__logo-mark">NH</div>
+      <span class="site-nav__logo-text">MH Resources</span>
     </a>
-    <div class="header-actions">
-      <button class="search-toggle" onclick="toggleGlobalSearch()" title="Search this page (Ctrl+K)" aria-label="Search this page"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
-      <div class="font-size-controls">
-        <button class="font-size-btn" onclick="mhFontDecrease()" title="Decrease font size" aria-label="Decrease font size">A-</button>
-        <button class="font-size-btn" onclick="mhFontIncrease()" title="Increase font size" aria-label="Increase font size">A+</button>
+
+    <div class="site-nav__links">
+      <a href="index.html" class="site-nav__link site-nav__link--active">Home</a>
+      <a href="resources.html" class="site-nav__link">Resources</a>
+      <a href="tools.html" class="site-nav__link">Clinical Tools</a>
+      <a href="guide.html" class="site-nav__link">Guides</a>
+    </div>
+
+    <div class="site-nav__controls">
+      <button class="site-nav__icon-btn" onclick="toggleGlobalSearch()" title="Search (Ctrl+K)" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+
+      <div class="site-nav__font-controls">
+        <button class="site-nav__font-btn" onclick="mhFontDecrease()" title="Decrease font size" aria-label="Decrease font size">A-</button>
+        <button class="site-nav__font-btn" onclick="mhFontIncrease()" title="Increase font size" aria-label="Increase font size">A+</button>
       </div>
-      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">&#9789;</button>
-      <button class="hamburger-btn" onclick="var h=this.closest('.site-header');h.classList.toggle('nav-open');this.setAttribute('aria-expanded',h.classList.contains('nav-open'))" aria-label="Toggle navigation menu" aria-expanded="false">
-        <span class="hamburger-bar"></span><span class="hamburger-bar"></span><span class="hamburger-bar"></span>
+
+      <button class="site-nav__icon-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+
+      <button class="site-nav__hamburger" id="hamburgerBtn" onclick="toggleMobileNav()" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
       </button>
     </div>
-    <nav class="nav-links" id="navLinks">
-      <a href="index.html" class="nav-link active">Home</a>
-      <a href="resources.html" class="nav-link">Resources</a>
-      <a href="tools.html" class="nav-link">Clinical Tools</a>
-      <a href="guide.html" class="nav-link">How-To Guides</a>
-    </nav>
-  </div>
-</header>
 
-<!-- Crisis Banner — always at top, before all other content -->
-<div class="page-container" style="padding-bottom:0">
-  <div class="crisis-banner">
-    <div class="crisis-banner-icon">!</div>
-    <div class="crisis-banner-content">
-      <div class="crisis-banner-title">Crisis? Get Help Now</div>
-      <div class="crisis-banner-numbers">
-        <strong>988</strong> Suicide &amp; Crisis Lifeline &nbsp;|&nbsp;
-        <strong>1-833-710-6477</strong> NH Rapid Response &nbsp;|&nbsp;
-        <strong>(603) 889-6147</strong> GNMHC Crisis &nbsp;|&nbsp;
-        <strong>Text HOME to 741741</strong>
-      </div>
-    </div>
   </div>
+</nav>
+
+<!-- Mobile slide-out panel -->
+<div class="site-nav__mobile-panel" id="mobileNavPanel">
+  <a href="index.html" class="site-nav__mobile-link site-nav__mobile-link--active">Home</a>
+  <a href="resources.html" class="site-nav__mobile-link">Resources</a>
+  <a href="tools.html" class="site-nav__mobile-link">Clinical Tools</a>
+  <a href="guide.html" class="site-nav__mobile-link">Guides</a>
 </div>
 
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
 <section class="hero">
-  <div class="hero-content">
-    <h1>Greater Nashua Community Mental Health Resources</h1>
-    <p>A comprehensive guide for clinicians, case managers, and community members. Find services, learn processes, access clinical tools.</p>
-    <div class="hero-search">
-      <input type="text" id="heroSearch" placeholder="Search resources, services, phone numbers..." autocomplete="off">
-      <button onclick="performSearch()">Search</button>
+  <div class="hero__inner">
+
+    <div class="hero__overline">
+      <span class="hero__overline-dot"></span>
+      <span class="ds-overline">Greater Nashua, NH</span>
     </div>
+
+    <h1 class="hero__title">Community Mental Health Resources</h1>
+
+    <p class="hero__subtitle">Clinical tools, community resources, and practice guides -- all in one place.</p>
+
+    <div class="hero__search">
+      <div class="hero__search-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      <input type="text" id="heroSearch" class="hero__search-input" placeholder="Search resources, services, phone numbers..." autocomplete="off">
+      <kbd class="hero__search-kbd">Ctrl K</kbd>
+    </div>
+
   </div>
 </section>
 
-<div class="page-container" id="main-content">
 
-  <!-- Quick-Action Role Cards -->
-  <div class="role-cards-section">
-    <div class="section-header">
-      <h2>I Need Resources For... <span class="badge-new">NEW</span></h2>
-      <span class="section-count">Quick access by role</span>
-    </div>
-    <div class="grid-3">
+<!-- ============================================================
+     MAIN CONTENT
+     ============================================================ -->
+<main id="main-content">
 
-      <!-- Therapist -->
-      <div class="role-card">
-        <div class="role-card-banner" style="background: linear-gradient(90deg, var(--accent), var(--purple))"></div>
-        <div class="role-card-body">
-          <div class="role-card-icon" style="background:var(--accent-light);color:var(--accent)">&#9829;</div>
-          <h3>I'm a Therapist</h3>
-          <p class="role-desc">Clinical tools, screening instruments, and treatment planning resources for direct-service clinicians.</p>
-          <ul class="role-links">
-            <li><a href="tools.html#cbt">&#9998; CBT Worksheets &amp; Thought Records <span class="link-arrow">&#8250;</span></a></li>
-            <li><a href="tools.html#dbt">&#9998; DBT Skills Handouts <span class="link-arrow">&#8250;</span></a></li>
-            <li><a href="tools.html#screening">&#9776; Screening Instruments (PHQ-9, GAD-7, AUDIT) <span class="link-arrow">&#8250;</span></a></li>
-            <li><a href="tools.html#mi">&#9776; Motivational Interviewing Guides <span class="link-arrow">&#8250;</span></a></li>
-            <li><a href="tools.html#safety">&#9888; Safety Planning Template <span class="badge-new">NEW</span> <span class="link-arrow">&#8250;</span></a></li>
-            <li><a href="tools.html#treatment">&#9776; Treatment Plan Quick Reference <span class="link-arrow">&#8250;</span></a></li>
-          </ul>
-        </div>
+
+  <!-- ---- What do you need? ---- -->
+  <section class="ds-section" style="background: var(--ds-page-bg);">
+    <div class="ds-container">
+
+      <div class="section-header">
+        <h2 class="section-header__title">What do you need?</h2>
       </div>
 
-      <!-- FSS Staff -->
-      <div class="role-card">
-        <div class="role-card-banner" style="background: linear-gradient(90deg, var(--teal), var(--success))"></div>
-        <div class="role-card-body">
-          <div class="role-card-icon" style="background:var(--teal-light);color:var(--teal)">&#9733;</div>
-          <h3>I'm FSS Staff</h3>
-          <p class="role-desc">Community resources, housing navigation, benefits assistance, and referral pathways for Family Self-Sufficiency workers.</p>
-          <ul class="role-links">
-            <li><a href="resources.html#housing">&#9750; Housing Resources &amp; Section 8 <span class="link-arrow">&#8250;</span></a></li>
-            <li><a href="resources.html#food">&#9733; Food Security &amp; SNAP Navigation <span class="link-arrow">&#8250;</span></a></li>
-            <li><a href="resources.html#insurance">&#9993; Insurance Enrollment Help <span class="link-arrow">&#8250;</span></a></li>
-            <li><a href="resources.html#employment">&#9881; Employment &amp; Vocational Rehab <span class="link-arrow">&#8250;</span></a></li>
-            <li><a href="resources.html#transport">&#9992; Transportation Options <span class="link-arrow">&#8250;</span></a></li>
-            <li><a href="guide.html#benefits">&#9776; Benefits Application Walkthroughs <span class="link-arrow">&#8250;</span></a></li>
-          </ul>
-        </div>
-      </div>
+      <div class="needs__grid ds-stagger">
 
-      <!-- Case Manager -->
-      <div class="role-card">
-        <div class="role-card-banner" style="background: linear-gradient(90deg, var(--warning), #dc7706)"></div>
-        <div class="role-card-body">
-          <div class="role-card-icon" style="background:var(--warning-light);color:var(--warning)">&#9888;</div>
-          <h3>I'm a Case Manager</h3>
-          <p class="role-desc">Service coordination, crisis protocols, documentation guides, and cross-agency referral tools.</p>
-          <ul class="role-links">
-            <li><a href="resources.html#crisis">&#9888; Crisis Intervention Procedures <span class="link-arrow">&#8250;</span></a></li>
-            <li><a href="guide.html#coordination">&#9776; Service Coordination Checklists <span class="link-arrow">&#8250;</span></a></li>
-            <li><a href="guide.html#referrals">&#9998; Referral Templates &amp; Pathways <span class="link-arrow">&#8250;</span></a></li>
-            <li><a href="guide.html#documentation">&#9776; Documentation Best Practices <span class="link-arrow">&#8250;</span></a></li>
-            <li><a href="resources.html#legal">&#9878; Legal Aid &amp; Advocacy Resources <span class="link-arrow">&#8250;</span></a></li>
-            <li><a href="guide.html#releases">&#9776; Release of Information Guidance <span class="link-arrow">&#8250;</span></a></li>
-          </ul>
-        </div>
-      </div>
+        <!-- Handle a Crisis -->
+        <a href="guide.html#crisisTree" class="need-card need-card--crisis ds-animate-fade-up">
+          <div class="need-card__icon" style="background: var(--ds-status-danger-bg); color: var(--ds-danger-600);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div class="need-card__content">
+            <div class="need-card__title">Handle a Crisis</div>
+            <div class="need-card__desc">Crisis decision tree, psychiatric emergency workflows, and safety planning tools.</div>
+          </div>
+          <div class="need-card__arrow">Explore <span>&rarr;</span></div>
+        </a>
 
-    </div>
-  </div>
+        <!-- Screen a Client -->
+        <a href="tools.html#screening-tools" class="need-card need-card--screen ds-animate-fade-up">
+          <div class="need-card__icon" style="background: var(--ds-status-info-bg); color: var(--ds-info-600);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <div class="need-card__content">
+            <div class="need-card__title">Screen a Client</div>
+            <div class="need-card__desc">PHQ-9, GAD-7, C-SSRS, AUDIT, and other validated screening instruments.</div>
+          </div>
+          <div class="need-card__arrow">Explore <span>&rarr;</span></div>
+        </a>
 
-  <!-- W67: Scenario-Based Navigation -->
-  <div class="scenario-nav-section">
-    <div class="section-header">
-      <h2>I need to...</h2>
-      <span class="section-count">Find what you need by situation</span>
-    </div>
-    <div class="scenario-grid">
+        <!-- Write Clinical Notes -->
+        <a href="tools.html#clinical-note-builder" class="need-card need-card--notes ds-animate-fade-up">
+          <div class="need-card__icon" style="background: var(--ds-accent-50); color: var(--ds-accent-700);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </div>
+          <div class="need-card__content">
+            <div class="need-card__title">Write Clinical Notes</div>
+            <div class="need-card__desc">SOAP note builder, group therapy templates, and documentation best practices.</div>
+          </div>
+          <div class="need-card__arrow">Explore <span>&rarr;</span></div>
+        </a>
 
-      <div class="scenario-card" onclick="this.classList.toggle('open')">
-        <div class="scenario-card-header">
-          <div class="scenario-card-icon" style="background:var(--danger-light);color:var(--danger)">&#9888;</div>
-          <div class="scenario-card-title">I have a client in crisis</div>
-          <span class="scenario-card-arrow">&#9660;</span>
-        </div>
-        <div class="scenario-card-links">
-          <a href="guide.html#crisisTree">&#9888; Crisis Decision Tree <span class="link-arrow">&#8250;</span></a>
-          <a href="guide.html#guide-psych-emergency">&#128680; Psychiatric Emergency Workflow <span class="link-arrow">&#8250;</span></a>
-          <a href="tools.html#safety-plan-builder">&#128737; Safety Plan Builder <span class="link-arrow">&#8250;</span></a>
-        </div>
-      </div>
+        <!-- Find Resources -->
+        <a href="resources.html" class="need-card need-card--resources ds-animate-fade-up">
+          <div class="need-card__icon" style="background: var(--ds-primary-50); color: var(--ds-primary-700);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <div class="need-card__content">
+            <div class="need-card__title">Find Resources</div>
+            <div class="need-card__desc">Housing, food security, medical care, legal aid, and transportation options.</div>
+          </div>
+          <div class="need-card__arrow">Explore <span>&rarr;</span></div>
+        </a>
 
-      <div class="scenario-card" onclick="this.classList.toggle('open')">
-        <div class="scenario-card-header">
-          <div class="scenario-card-icon" style="background:var(--warning-light);color:var(--warning)">&#9878;</div>
-          <div class="scenario-card-title">I need to do a risk assessment</div>
-          <span class="scenario-card-arrow">&#9660;</span>
-        </div>
-        <div class="scenario-card-links">
-          <a href="tools.html#screening-tools">&#9776; C-SSRS Screener <span class="link-arrow">&#8250;</span></a>
-          <a href="guide.html#guide-suicide-risk">&#9888; Suicide Risk Assessment Guide <span class="link-arrow">&#8250;</span></a>
-          <a href="tools.html#screening">&#9776; PHQ-9, GAD-7 &amp; Other Screeners <span class="link-arrow">&#8250;</span></a>
-        </div>
-      </div>
+        <!-- Get a Printable -->
+        <a href="tools.html#dbt" class="need-card need-card--print ds-animate-fade-up">
+          <div class="need-card__icon" style="background: var(--ds-status-success-bg); color: var(--ds-success-600);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          </div>
+          <div class="need-card__content">
+            <div class="need-card__title">Get a Printable</div>
+            <div class="need-card__desc">Client handouts, CBT worksheets, DBT skills sheets, and safety plan templates.</div>
+          </div>
+          <div class="need-card__arrow">Explore <span>&rarr;</span></div>
+        </a>
 
-      <div class="scenario-card" onclick="this.classList.toggle('open')">
-        <div class="scenario-card-header">
-          <div class="scenario-card-icon" style="background:var(--accent-light);color:var(--accent)">&#9998;</div>
-          <div class="scenario-card-title">I have a new client</div>
-          <span class="scenario-card-arrow">&#9660;</span>
-        </div>
-        <div class="scenario-card-links">
-          <a href="guide.html#guide-intake-template">&#9776; Intake Assessment Template <span class="link-arrow">&#8250;</span></a>
-          <a href="tools.html#goal-bank">&#9733; Treatment Plan Goal Bank <span class="link-arrow">&#8250;</span></a>
-          <a href="tools.html#screening-tools">&#9776; Screening Instruments <span class="link-arrow">&#8250;</span></a>
-        </div>
-      </div>
+        <!-- Look Up Billing -->
+        <a href="tools.html#cpt-reference" class="need-card need-card--billing ds-animate-fade-up">
+          <div class="need-card__icon" style="background: var(--ds-warm-gray-100); color: var(--ds-warm-gray-700);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          </div>
+          <div class="need-card__content">
+            <div class="need-card__title">Look Up Billing</div>
+            <div class="need-card__desc">CPT code reference, prior authorization guides, and medical necessity letters.</div>
+          </div>
+          <div class="need-card__arrow">Explore <span>&rarr;</span></div>
+        </a>
 
-      <div class="scenario-card" onclick="this.classList.toggle('open')">
-        <div class="scenario-card-header">
-          <div class="scenario-card-icon" style="background:var(--teal-light);color:var(--teal)">&#9993;</div>
-          <div class="scenario-card-title">I need to make a referral</div>
-          <span class="scenario-card-arrow">&#9660;</span>
-        </div>
-        <div class="scenario-card-links">
-          <a href="tools.html#referral-letter">&#9998; Referral Letter Generator <span class="link-arrow">&#8250;</span></a>
-          <a href="resources.html">&#9776; Community Resource Directory <span class="link-arrow">&#8250;</span></a>
-          <a href="guide.html#guide-outpatient">&#9733; Outpatient MH Referral Guide <span class="link-arrow">&#8250;</span></a>
-        </div>
-      </div>
+        <!-- Learn a Technique -->
+        <a href="tools.html#cbt" class="need-card need-card--learn ds-animate-fade-up">
+          <div class="need-card__icon" style="background: #eef2ff; color: #4338ca;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <div class="need-card__content">
+            <div class="need-card__title">Learn a Technique</div>
+            <div class="need-card__desc">CBT, DBT, motivational interviewing guides, and evidence-based practice resources.</div>
+          </div>
+          <div class="need-card__arrow">Explore <span>&rarr;</span></div>
+        </a>
 
-      <div class="scenario-card" onclick="this.classList.toggle('open')">
-        <div class="scenario-card-header">
-          <div class="scenario-card-icon" style="background:var(--purple-light);color:var(--purple)">&#9998;</div>
-          <div class="scenario-card-title">I need to document a session</div>
-          <span class="scenario-card-arrow">&#9660;</span>
-        </div>
-        <div class="scenario-card-links">
-          <a href="tools.html#clinical-note-builder">&#9998; SOAP Note Builder <span class="link-arrow">&#8250;</span></a>
-          <a href="tools.html#doc-best-practices">&#9776; Documentation Best Practices <span class="link-arrow">&#8250;</span></a>
-          <a href="tools.html#group-therapy-note">&#9776; Group Therapy Note Template <span class="link-arrow">&#8250;</span></a>
-        </div>
-      </div>
+        <!-- Prepare for Supervision -->
+        <a href="tools.html#supervision-templates" class="need-card need-card--supervise ds-animate-fade-up">
+          <div class="need-card__icon" style="background: var(--ds-secondary-100); color: var(--ds-secondary-700);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="need-card__content">
+            <div class="need-card__title">Prepare for Supervision</div>
+            <div class="need-card__desc">Supervision templates, case conference notes, and caseload management tools.</div>
+          </div>
+          <div class="need-card__arrow">Explore <span>&rarr;</span></div>
+        </a>
 
-      <div class="scenario-card" onclick="this.classList.toggle('open')">
-        <div class="scenario-card-header">
-          <div class="scenario-card-icon" style="background:var(--danger-light);color:var(--danger)">&#9888;</div>
-          <div class="scenario-card-title">I need to report abuse</div>
-          <span class="scenario-card-arrow">&#9660;</span>
-        </div>
-        <div class="scenario-card-links">
-          <a href="guide.html#guide-mandated-reporting">&#9888; NH Mandated Reporting Guide <span class="link-arrow">&#8250;</span></a>
-          <a href="guide.html#guide-dcyf">&#9878; File a DCYF Report <span class="link-arrow">&#8250;</span></a>
-          <a href="guide.html#guide-duty-to-warn">&#9878; Duty to Warn / Tarasoff <span class="link-arrow">&#8250;</span></a>
-        </div>
-      </div>
-
-      <div class="scenario-card" onclick="this.classList.toggle('open')">
-        <div class="scenario-card-header">
-          <div class="scenario-card-icon" style="background:var(--success-light);color:var(--success)">&#9733;</div>
-          <div class="scenario-card-title">I'm looking for community resources</div>
-          <span class="scenario-card-arrow">&#9660;</span>
-        </div>
-        <div class="scenario-card-links">
-          <a href="resources.html#housing">&#9750; Housing &amp; Shelters <span class="link-arrow">&#8250;</span></a>
-          <a href="resources.html#food">&#9733; Food Security <span class="link-arrow">&#8250;</span></a>
-          <a href="resources.html#medical">&#9764; Medical / Dental Services <span class="link-arrow">&#8250;</span></a>
-          <a href="resources.html">&#9776; Full Resource Directory <span class="link-arrow">&#8250;</span></a>
-        </div>
-      </div>
-
-      <div class="scenario-card" onclick="this.classList.toggle('open')">
-        <div class="scenario-card-header">
-          <div class="scenario-card-icon" style="background:#dbeafe;color:#1d4ed8">&#9881;</div>
-          <div class="scenario-card-title">I need help with billing</div>
-          <span class="scenario-card-arrow">&#9660;</span>
-        </div>
-        <div class="scenario-card-links">
-          <a href="tools.html#cpt-reference">&#9776; CPT Code Quick Reference <span class="link-arrow">&#8250;</span></a>
-          <a href="tools.html#prior-auth-guide">&#9998; Prior Authorization Guide <span class="link-arrow">&#8250;</span></a>
-          <a href="tools.html#medical-necessity-letter">&#9776; Letter of Medical Necessity <span class="link-arrow">&#8250;</span></a>
-        </div>
-      </div>
-
-      <div class="scenario-card" onclick="this.classList.toggle('open')">
-        <div class="scenario-card-header">
-          <div class="scenario-card-icon" style="background:var(--teal-light);color:var(--teal)">&#9829;</div>
-          <div class="scenario-card-title">I need a client handout</div>
-          <span class="scenario-card-arrow">&#9660;</span>
-        </div>
-        <div class="scenario-card-links">
-          <a href="guide.html#cat-psychoed">&#9776; Psychoeducation Handouts <span class="link-arrow">&#8250;</span></a>
-          <a href="tools.html#dbt">&#9998; DBT Skills Handouts <span class="link-arrow">&#8250;</span></a>
-          <a href="tools.html#safety-plan-builder">&#128737; Safety Plan Template <span class="link-arrow">&#8250;</span></a>
-        </div>
-      </div>
-
-      <div class="scenario-card" onclick="this.classList.toggle('open')">
-        <div class="scenario-card-header">
-          <div class="scenario-card-icon" style="background:#e0e7ff;color:#4338ca">&#9734;</div>
-          <div class="scenario-card-title">I'm preparing for supervision</div>
-          <span class="scenario-card-arrow">&#9660;</span>
-        </div>
-        <div class="scenario-card-links">
-          <a href="tools.html#supervision-templates">&#9776; Supervision &amp; Consultation Templates <span class="link-arrow">&#8250;</span></a>
-          <a href="tools.html#case-conference-note">&#9998; Case Conference Note <span class="link-arrow">&#8250;</span></a>
-          <a href="tools.html#caseload-calculator">&#9881; Caseload Calculator <span class="link-arrow">&#8250;</span></a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- News & Updates Feed (W7-8: expanded to 16 cards) -->
-  <div class="news-section">
-    <div class="news-section-header">
-      <h2>News &amp; Updates <span class="badge-new">NEW</span></h2>
-      <span class="news-curated-note">News items are manually curated. Last updated: June 2026</span>
-    </div>
-    <div class="news-grid news-grid-expanded" id="newsGrid">
-
-      <!-- Card 1 -->
-      <div class="news-card">
-        <div class="news-card-meta">
-          <span class="news-date">Jun 18, 2026</span>
-          <span class="news-source-tag samhsa">SAMHSA</span>
-        </div>
-        <h3>SAMHSA Updates 988 Best Practices for Community Mental Health Centers</h3>
-        <p class="news-desc">New guidance released for CMHCs on 988 warm-handoff protocols, including updated follow-up timelines and documentation requirements for crisis callers referred to local outpatient services.</p>
-        <a href="https://www.samhsa.gov/find-help/988" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="news-card">
-        <div class="news-card-meta">
-          <span class="news-date">Jun 12, 2026</span>
-          <span class="news-source-tag nh-state">NH State</span>
-        </div>
-        <h3>NH DHHS Expands Medicaid Coverage for Peer Support Services</h3>
-        <p class="news-desc">Effective July 1, 2026, NH Medicaid will reimburse Certified Recovery Support Workers for individual peer support sessions. This expands access for SUD and co-occurring disorder clients across all 10 CMHCs.</p>
-        <a href="https://www.dhhs.nh.gov/programs-services/medicaid" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="news-card">
-        <div class="news-card-meta">
-          <span class="news-date">Jun 10, 2026</span>
-          <span class="news-source-tag legislative">Legislative</span>
-        </div>
-        <h3>SB 412 Signed: NH Expands Mental Health Parity Enforcement</h3>
-        <p class="news-desc">Governor signs SB 412, strengthening mental health parity enforcement for commercial insurers in NH. The bill requires insurers to submit annual parity compliance reports and establishes a dedicated complaint pathway for denied behavioral health claims.</p>
-        <a href="https://www.gencourt.state.nh.us/" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
-      </div>
-
-      <!-- Card 4 -->
-      <div class="news-card">
-        <div class="news-card-meta">
-          <span class="news-date">Jun 8, 2026</span>
-          <span class="news-source-tag opioid">Opioid Response</span>
-        </div>
-        <h3>NH Opioid Response: Xylazine Test Strips Now Available at All Doorways</h3>
-        <p class="news-desc">All NH Doorway locations now distribute free xylazine test strips alongside fentanyl test strips. Providers should inform clients about xylazine-positive supply risks, wound care referrals, and the limited efficacy of naloxone for xylazine-involved overdoses.</p>
-        <a href="https://www.dhhs.nh.gov/programs-services/alcohol-drug-services" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
-      </div>
-
-      <!-- Card 5 -->
-      <div class="news-card">
-        <div class="news-card-meta">
-          <span class="news-date">Jun 5, 2026</span>
-          <span class="news-source-tag clinical">Evidence-Based</span>
-        </div>
-        <h3>APA Practice Guidelines Updated: First-Line Interventions for PTSD</h3>
-        <p class="news-desc">The APA updated its PTSD treatment guidelines, strengthening recommendations for CPT and PE as first-line interventions, with new evidence supporting written exposure therapy and EMDR as equally effective alternatives.</p>
-        <a href="https://www.apa.org/ptsd-guideline" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
-      </div>
-
-      <!-- Card 6 -->
-      <div class="news-card">
-        <div class="news-card-meta">
-          <span class="news-date">Jun 2, 2026</span>
-          <span class="news-source-tag funding">Funding</span>
-        </div>
-        <h3>SAMHSA CCBHC Expansion Grant: $4M Available for NH Community Centers</h3>
-        <p class="news-desc">SAMHSA announces FY2027 CCBHC expansion grants. NH CMHCs not yet certified can apply for up to $4M in planning and implementation funding. Applications due September 30, 2026. Technical assistance webinars begin July.</p>
-        <a href="https://www.samhsa.gov/grants" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
-      </div>
-
-      <!-- Card 7 -->
-      <div class="news-card">
-        <div class="news-card-meta">
-          <span class="news-date">May 28, 2026</span>
-          <span class="news-source-tag seasonal">Seasonal Reminder</span>
-        </div>
-        <h3>Summer Safety: Heat-Related Risks for Clients on Psychotropic Medications</h3>
-        <p class="news-desc">Reminder for prescribers and case managers: antipsychotics, anticholinergics, and lithium increase heat vulnerability. Review medications for clients with limited A/C access, outdoor employment, or homelessness. Share the heat safety handout with clients.</p>
-        <a href="tools.html#safety" class="news-read-more">View heat safety handout &#8594;</a>
-      </div>
-
-      <!-- Card 8 -->
-      <div class="news-card">
-        <div class="news-card-meta">
-          <span class="news-date">May 22, 2026</span>
-          <span class="news-source-tag workforce">Workforce</span>
-        </div>
-        <h3>NH Loan Repayment Program: Up to $75K for MH Professionals in Underserved Areas</h3>
-        <p class="news-desc">The NH DHHS Office of Workforce Development is accepting applications for the behavioral health loan repayment program. Licensed clinicians (LICSW, LCMHC, MLADC) committing to 3 years at a CMHC or FQHC may qualify for up to $75,000 in student loan forgiveness.</p>
-        <a href="https://www.dhhs.nh.gov/" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
-      </div>
-
-      <!-- Cards 9-16: hidden by default, shown on "Show More" -->
-      <!-- Card 9 -->
-      <div class="news-card news-card-hidden">
-        <div class="news-card-meta">
-          <span class="news-date">May 20, 2026</span>
-          <span class="news-source-tag training">Training</span>
-        </div>
-        <h3>Free CRSW Training: NH Bureau of Drug and Alcohol Services Fall Cohort</h3>
-        <p class="news-desc">Applications open for the Fall 2026 Certified Recovery Support Worker training through NH BDAS. 75-hour program, free for NH residents. Deadline: August 15, 2026. Ideal for case managers and FSS staff expanding into SUD support.</p>
-        <a href="https://www.dhhs.nh.gov/programs-services/alcohol-drug-services" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
-      </div>
-
-      <!-- Card 10 -->
-      <div class="news-card news-card-hidden">
-        <div class="news-card-meta">
-          <span class="news-date">May 16, 2026</span>
-          <span class="news-source-tag policy">Policy</span>
-        </div>
-        <h3>HB 1187: Telehealth Flexibilities Made Permanent for Behavioral Health in NH</h3>
-        <p class="news-desc">The NH Legislature passed HB 1187, making pandemic-era telehealth flexibilities permanent for behavioral health services. Audio-only sessions remain reimbursable for established patients, and out-of-state provider compacts are extended through 2029.</p>
-        <a href="https://www.gencourt.state.nh.us/" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
-      </div>
-
-      <!-- Card 11 -->
-      <div class="news-card news-card-hidden">
-        <div class="news-card-meta">
-          <span class="news-date">May 14, 2026</span>
-          <span class="news-source-tag community">Nashua/NH</span>
-        </div>
-        <h3>Greater Nashua MHC Opens New Walk-In Access Center on Main Street</h3>
-        <p class="news-desc">GNMHC expanded its walk-in behavioral health access at 100 West Pearl Street. Same-day psychiatric evaluations, crisis counseling, and warm referrals now available M-F 8am-6pm. No appointment needed for assessments.</p>
-        <a href="https://www.gnmhc.org" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
-      </div>
-
-      <!-- Card 12 -->
-      <div class="news-card news-card-hidden">
-        <div class="news-card-meta">
-          <span class="news-date">May 10, 2026</span>
-          <span class="news-source-tag opioid">Opioid Response</span>
-        </div>
-        <h3>NH Fentanyl Overdose Deaths Decline 12% in Q1 2026</h3>
-        <p class="news-desc">NH DHHS reports a 12% decline in fentanyl-related overdose deaths in Q1 2026 compared to Q1 2025. Officials attribute gains to expanded naloxone distribution, Doorway same-day MAT access, and recovery housing investments. Xylazine-involved deaths remain a concern.</p>
-        <a href="https://www.dhhs.nh.gov/programs-services/alcohol-drug-services" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
-      </div>
-
-      <!-- Card 13 -->
-      <div class="news-card news-card-hidden">
-        <div class="news-card-meta">
-          <span class="news-date">May 8, 2026</span>
-          <span class="news-source-tag samhsa">SAMHSA</span>
-        </div>
-        <h3>SAMHSA CCBHC Expansion: New Certification Requirements for FY2027</h3>
-        <p class="news-desc">Certified Community Behavioral Health Clinics must meet updated staffing and data reporting requirements by October 2026. Key changes include mandatory SDOH screening, expanded crisis staffing ratios, and new quality metrics.</p>
-        <a href="https://www.samhsa.gov/certified-community-behavioral-health-clinics" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
-      </div>
-
-      <!-- Card 14 -->
-      <div class="news-card news-card-hidden">
-        <div class="news-card-meta">
-          <span class="news-date">May 2, 2026</span>
-          <span class="news-source-tag workforce">Workforce</span>
-        </div>
-        <h3>DHHS Launches MH Workforce Pipeline: Paid Internship Program at NH CMHCs</h3>
-        <p class="news-desc">NH DHHS announces a paid clinical internship program placing MSW and CMHC graduate students at community mental health centers statewide. Stipends cover tuition offset plus supervision hours toward licensure. Applications open for Fall 2026 cohort.</p>
-        <a href="https://www.dhhs.nh.gov/" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
-      </div>
-
-      <!-- Card 15 -->
-      <div class="news-card news-card-hidden">
-        <div class="news-card-meta">
-          <span class="news-date">Apr 30, 2026</span>
-          <span class="news-source-tag nh-state">NH State</span>
-        </div>
-        <h3>NH 10-Year Mental Health Plan: Workforce Expansion &amp; Housing Priorities</h3>
-        <p class="news-desc">The Governor's Commission on Mental Health released the updated 10-Year Plan, prioritizing workforce loan forgiveness, 200 new supported housing units by 2028, and dedicated crisis receiving center funding for the Nashua region.</p>
-        <a href="https://www.dhhs.nh.gov/programs-services/behavioral-health" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
-      </div>
-
-      <!-- Card 16 -->
-      <div class="news-card news-card-hidden">
-        <div class="news-card-meta">
-          <span class="news-date">Apr 22, 2026</span>
-          <span class="news-source-tag legislative">Legislative</span>
-        </div>
-        <h3>HB 1504: Medicaid Reimbursement Rate Increase for CMHC Outpatient Services</h3>
-        <p class="news-desc">HB 1504 approved a 15% Medicaid rate increase for outpatient behavioral health services at CMHCs effective January 2027. This is the first rate adjustment in 4 years and aims to address workforce retention challenges at community providers.</p>
-        <a href="https://www.gencourt.state.nh.us/" class="news-read-more" target="_blank" rel="noopener">Read more &#8594;</a>
-      </div>
-
-      <!-- Show More / Show Less toggle -->
-      <div class="news-show-more-row">
-        <button class="news-show-more-btn" id="newsToggleBtn" onclick="toggleNewsCards()">Show 8 more &#9660;</button>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- W12: Seasonal Awareness Banner — Summer 2026 -->
-  <div class="seasonal-banner">
-    <div class="seasonal-banner-header">
-      <div class="seasonal-sun-icon">&#9728;</div>
-      <div>
-        <h3>Summer 2026 Clinical Awareness <span class="badge-new">NEW</span></h3>
-        <div class="seasonal-subtitle">Seasonal safety considerations for community MH providers</div>
       </div>
     </div>
-    <div class="seasonal-grid">
-      <div class="seasonal-item">
-        <h4>&#9888; Heat &amp; Psychotropic Medications</h4>
-        <p>Antipsychotics (especially first-generation), lithium, and anticholinergics impair thermoregulation. Clients on these medications face elevated heat stroke risk. Review hydration plans, monitor lithium levels more frequently, and check A/C access for vulnerable clients. Consider temporary dose adjustments for those with outdoor employment or unstable housing.</p>
-      </div>
-      <div class="seasonal-item">
-        <h4>&#128197; Summer Schedule Disruptions</h4>
-        <p>Routine changes during summer (vacations, childcare gaps, irregular work hours) can destabilize clients with mood disorders, anxiety, and SUD. Proactively discuss schedule management during sessions. Offer flexible appointment times and increase check-in frequency for high-risk clients through July-August.</p>
-      </div>
-      <div class="seasonal-item">
-        <h4>&#9734; Youth Out-of-School Risk Factors</h4>
-        <p>School-age clients lose structure, meal programs, and counselor access during summer break. Screen for increased isolation, food insecurity, unsupervised internet use, and substance experimentation. Connect families with summer day programs, YMCA activities, and NH Parks &amp; Rec youth services.</p>
-      </div>
-      <div class="seasonal-item">
-        <h4>&#127795; Outdoor Activity Recommendations</h4>
-        <p>Encourage clients to leverage longer daylight hours for therapeutic activities: walking groups, community gardens, outdoor mindfulness. Exercise is evidence-based for depression and anxiety. Recommend early morning or evening activities to avoid peak heat. Share local trail maps and free park programs through Nashua Parks &amp; Rec.</p>
+  </section>
+
+
+  <!-- ---- Quick Stats Bar ---- -->
+  <section class="ds-section--sm" style="background: var(--ds-page-bg-alt);">
+    <div class="ds-container">
+      <div class="stats-bar">
+        <div class="stat">
+          <div class="stat__number">200+</div>
+          <div class="stat__label">Resources</div>
+        </div>
+        <div class="stat">
+          <div class="stat__number">15</div>
+          <div class="stat__label">Screening Tools</div>
+        </div>
+        <div class="stat">
+          <div class="stat__number">50+</div>
+          <div class="stat__label">Templates</div>
+        </div>
+        <div class="stat">
+          <div class="stat__number">30+</div>
+          <div class="stat__label">Practice Guides</div>
+        </div>
       </div>
     </div>
-    <div class="seasonal-rotate-note">Seasonal content rotates quarterly. Current: Summer 2026 (Jun-Aug)</div>
-  </div>
+  </section>
 
-  <!-- W9: Professional Development & Training -->
-  <div class="prof-dev-section">
-    <div class="section-header">
-      <h2>Professional Development &amp; Training <span class="badge-new">NEW</span></h2>
-      <span class="section-count">Upcoming opportunities</span>
-    </div>
-    <p class="bulletin-admin-note">Training listings are manually curated. Check provider sites for current availability.</p>
-    <div class="prof-dev-grid">
 
-      <div class="prof-dev-card">
-        <div class="prof-dev-card-header">
-          <h3>Trauma-Informed Care in Community Settings</h3>
-        </div>
-        <div class="prof-dev-meta">
-          <span class="prof-dev-tag date-tag">Jul 15, 2026</span>
-          <span class="prof-dev-tag provider-tag">SAMHSA</span>
-          <span class="prof-dev-tag ce-tag">3 CE</span>
-        </div>
-        <p class="prof-dev-desc">Free 3-hour webinar covering TIC implementation frameworks for CMHCs, including organizational assessment tools, secondary traumatic stress prevention, and client engagement strategies for trauma-exposed populations.</p>
-        <a href="https://www.samhsa.gov/trauma-violence" class="prof-dev-link" target="_blank" rel="noopener">Register free &#8594;</a>
+  <!-- ---- News & Updates ---- -->
+  <section class="ds-section" style="background: var(--ds-page-bg);">
+    <div class="ds-container">
+
+      <div class="section-header">
+        <h2 class="section-header__title">News &amp; Updates</h2>
+        <a href="resources.html#news" class="section-header__link">View all <span>&rarr;</span></a>
       </div>
 
-      <div class="prof-dev-card">
-        <div class="prof-dev-card-header">
-          <h3>Motivational Interviewing Refresher: Advanced Skills</h3>
-        </div>
-        <div class="prof-dev-meta">
-          <span class="prof-dev-tag date-tag">Jul 22-23, 2026</span>
-          <span class="prof-dev-tag provider-tag">NH BDAS</span>
-          <span class="prof-dev-tag ce-tag">12 CE</span>
-        </div>
-        <p class="prof-dev-desc">Two-day intensive through the NH Bureau of Drug and Alcohol Services. Covers sustain talk, discord management, and MI with co-occurring disorders. Priority for NH CMHC staff. Held in Concord with virtual option.</p>
-        <a href="https://www.dhhs.nh.gov/programs-services/alcohol-drug-services" class="prof-dev-link" target="_blank" rel="noopener">View details &#8594;</a>
-      </div>
+      <p style="font-family: var(--ds-font-sans); font-size: var(--ds-text-xs); color: var(--ds-text-muted); margin-bottom: var(--ds-space-5); margin-top: calc(-1 * var(--ds-space-3));">Manually curated. Last reviewed June 2026.</p>
 
-      <div class="prof-dev-card">
-        <div class="prof-dev-card-header">
-          <h3>DBT Skills Training: Distress Tolerance Deep Dive</h3>
-        </div>
-        <div class="prof-dev-meta">
-          <span class="prof-dev-tag date-tag">On-demand</span>
-          <span class="prof-dev-tag provider-tag">PESI</span>
-          <span class="prof-dev-tag ce-tag">6.25 CE</span>
-        </div>
-        <p class="prof-dev-desc">Self-paced online course covering TIPP, ACCEPTS, radical acceptance, and crisis survival strategies. Includes case vignettes and implementation guides. PESI offers group pricing for agency teams.</p>
-        <a href="https://www.pesi.com/" class="prof-dev-link" target="_blank" rel="noopener">View course &#8594;</a>
-      </div>
+      <div class="news__grid">
 
-      <div class="prof-dev-card">
-        <div class="prof-dev-card-header">
-          <h3>NH Annual Behavioral Health Conference</h3>
+        <!-- News 1 -->
+        <div class="news-card">
+          <div class="news-card__meta">
+            <span class="ds-badge ds-badge--primary ds-badge--sm">SAMHSA</span>
+            <span class="news-card__date">Jun 18, 2026</span>
+          </div>
+          <div class="news-card__title">SAMHSA Updates 988 Best Practices for Community Mental Health Centers</div>
+          <div class="news-card__excerpt">New guidance for CMHCs on 988 warm-handoff protocols, including updated follow-up timelines and documentation requirements for crisis callers referred to outpatient services.</div>
+          <a href="https://www.samhsa.gov/find-help/988" class="news-card__link" target="_blank" rel="noopener">Read more <span>&rarr;</span></a>
         </div>
-        <div class="prof-dev-meta">
-          <span class="prof-dev-tag date-tag">Sep 18-19, 2026</span>
-          <span class="prof-dev-tag provider-tag">NAMI NH / DHHS</span>
-          <span class="prof-dev-tag ce-tag">Up to 14 CE</span>
-        </div>
-        <p class="prof-dev-desc">Statewide conference in Manchester. Tracks include integrated care, youth services, workforce wellness, and opioid response. Keynote on social determinants and behavioral health equity. Early-bird registration through July 31.</p>
-        <a href="https://www.naminh.org/" class="prof-dev-link" target="_blank" rel="noopener">Conference info &#8594;</a>
-      </div>
 
-      <div class="prof-dev-card">
-        <div class="prof-dev-card-header">
-          <h3>Suicide Prevention Gatekeeper Training (QPR)</h3>
+        <!-- News 2 -->
+        <div class="news-card">
+          <div class="news-card__meta">
+            <span class="ds-badge ds-badge--success ds-badge--sm">NH State</span>
+            <span class="news-card__date">Jun 12, 2026</span>
+          </div>
+          <div class="news-card__title">NH DHHS Expands Medicaid Coverage for Peer Support Services</div>
+          <div class="news-card__excerpt">Effective July 1, NH Medicaid will reimburse Certified Recovery Support Workers for individual peer support sessions, expanding access for SUD and co-occurring disorder clients.</div>
+          <a href="https://www.dhhs.nh.gov/programs-services/medicaid" class="news-card__link" target="_blank" rel="noopener">Read more <span>&rarr;</span></a>
         </div>
-        <div class="prof-dev-meta">
-          <span class="prof-dev-tag date-tag">Monthly (ongoing)</span>
-          <span class="prof-dev-tag provider-tag">SAMHSA / QPR Institute</span>
-          <span class="prof-dev-tag ce-tag">2 CE</span>
-        </div>
-        <p class="prof-dev-desc">Free virtual QPR (Question, Persuade, Refer) gatekeeper training. Ideal for non-clinical staff, FSS workers, and new hires. Covers warning sign recognition, direct questioning techniques, and referral pathways. Offered first Tuesday of each month.</p>
-        <a href="https://qprinstitute.com/" class="prof-dev-link" target="_blank" rel="noopener">Register &#8594;</a>
-      </div>
 
-      <div class="prof-dev-card">
-        <div class="prof-dev-card-header">
-          <h3>Ethics in Telehealth: Boundaries and Documentation</h3>
+        <!-- News 3 -->
+        <div class="news-card">
+          <div class="news-card__meta">
+            <span class="ds-badge ds-badge--info ds-badge--sm">Legislative</span>
+            <span class="news-card__date">Jun 10, 2026</span>
+          </div>
+          <div class="news-card__title">SB 412 Signed: NH Expands Mental Health Parity Enforcement</div>
+          <div class="news-card__excerpt">Governor signs SB 412, strengthening mental health parity enforcement for commercial insurers. Requires annual compliance reports and establishes a dedicated complaint pathway.</div>
+          <a href="https://www.gencourt.state.nh.us/" class="news-card__link" target="_blank" rel="noopener">Read more <span>&rarr;</span></a>
         </div>
-        <div class="prof-dev-meta">
-          <span class="prof-dev-tag date-tag">Aug 5, 2026</span>
-          <span class="prof-dev-tag provider-tag">PESI</span>
-          <span class="prof-dev-tag ce-tag">3 CE (Ethics)</span>
+
+        <!-- News 4 -->
+        <div class="news-card">
+          <div class="news-card__meta">
+            <span class="ds-badge ds-badge--danger ds-badge--sm">Opioid Response</span>
+            <span class="news-card__date">Jun 8, 2026</span>
+          </div>
+          <div class="news-card__title">Xylazine Test Strips Now Available at All NH Doorway Locations</div>
+          <div class="news-card__excerpt">All NH Doorway locations now distribute free xylazine test strips. Providers should inform clients about xylazine-positive supply risks and the limited efficacy of naloxone.</div>
+          <a href="https://www.dhhs.nh.gov/programs-services/alcohol-drug-services" class="news-card__link" target="_blank" rel="noopener">Read more <span>&rarr;</span></a>
         </div>
-        <p class="prof-dev-desc">Covers ethical considerations unique to telehealth: informed consent, privacy in shared spaces, crisis management during virtual sessions, and documentation standards. Meets NH Board ethics CE requirement.</p>
-        <a href="https://www.pesi.com/" class="prof-dev-link" target="_blank" rel="noopener">View course &#8594;</a>
-      </div>
 
-      <div class="prof-dev-card">
-        <div class="prof-dev-card-header">
-          <h3>LCMHC / LICSW License Renewal Reminder</h3>
+        <!-- News 5 -->
+        <div class="news-card">
+          <div class="news-card__meta">
+            <span class="ds-badge ds-badge--accent ds-badge--sm">Evidence-Based</span>
+            <span class="news-card__date">Jun 5, 2026</span>
+          </div>
+          <div class="news-card__title">APA Updates PTSD Practice Guidelines: First-Line Interventions</div>
+          <div class="news-card__excerpt">Strengthened recommendations for CPT and PE as first-line, with new evidence supporting written exposure therapy and EMDR as equally effective alternatives.</div>
+          <a href="https://www.apa.org/ptsd-guideline" class="news-card__link" target="_blank" rel="noopener">Read more <span>&rarr;</span></a>
         </div>
-        <div class="prof-dev-meta">
-          <span class="prof-dev-tag date-tag">Due: Jun 30, 2027</span>
-          <span class="prof-dev-tag provider-tag">NH Board</span>
-          <span class="prof-dev-tag ce-tag">40 CE required</span>
+
+        <!-- News 6 -->
+        <div class="news-card">
+          <div class="news-card__meta">
+            <span class="ds-badge ds-badge--success ds-badge--sm">Funding</span>
+            <span class="news-card__date">Jun 2, 2026</span>
+          </div>
+          <div class="news-card__title">SAMHSA CCBHC Expansion Grant: $4M Available for NH Centers</div>
+          <div class="news-card__excerpt">FY2027 CCBHC expansion grants announced. NH CMHCs not yet certified can apply for up to $4M in planning and implementation funding. Applications due September 30.</div>
+          <a href="https://www.samhsa.gov/grants" class="news-card__link" target="_blank" rel="noopener">Read more <span>&rarr;</span></a>
         </div>
-        <p class="prof-dev-desc">NH LCMHC and LICSW licenses renew biennially. Current cycle requires 40 CE hours including 3 ethics hours. Check your transcript at the NH Board of Mental Health Practice portal. Plan ahead to avoid last-minute scrambles.</p>
-        <a href="https://www.oplc.nh.gov/mental-health-practice" class="prof-dev-link" target="_blank" rel="noopener">Check requirements &#8594;</a>
-      </div>
 
-      <div class="prof-dev-card">
-        <div class="prof-dev-card-header">
-          <h3>Co-Occurring Disorders: Integrated Treatment Models</h3>
-        </div>
-        <div class="prof-dev-meta">
-          <span class="prof-dev-tag date-tag">Aug 20, 2026</span>
-          <span class="prof-dev-tag provider-tag">SAMHSA</span>
-          <span class="prof-dev-tag ce-tag">4 CE</span>
-        </div>
-        <p class="prof-dev-desc">Free SAMHSA webinar on integrated treatment for co-occurring mental health and substance use disorders. Covers screening with AUDIT/DAST, stage-wise treatment matching, and harm reduction within outpatient MH settings.</p>
-        <a href="https://www.samhsa.gov/co-occurring-disorders" class="prof-dev-link" target="_blank" rel="noopener">Register free &#8594;</a>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- W10: Staff Bulletin Board -->
-  <div class="bulletin-section">
-    <div class="section-header">
-      <h2>Staff Bulletin Board <span class="badge-new">NEW</span></h2>
-      <span class="section-count">Internal announcements</span>
-    </div>
-    <p class="bulletin-admin-note">Bulletins are managed by site administrators.</p>
-    <div class="bulletin-board">
-
-      <div class="bulletin-card cat-policy">
-        <div class="bulletin-card-header">
-          <span class="bulletin-date">Jun 20, 2026</span>
-          <span class="bulletin-cat-tag policy">Policy</span>
-        </div>
-        <h4>Updated Documentation Turnaround Policy</h4>
-        <p>Effective July 1: all clinical documentation must be completed within 24 hours of service delivery (previously 48 hours). Group notes due within 48 hours. See updated Policy Manual section 4.2 on the shared drive for details.</p>
-      </div>
-
-      <div class="bulletin-card cat-hr">
-        <div class="bulletin-card-header">
-          <span class="bulletin-date">Jun 18, 2026</span>
-          <span class="bulletin-cat-tag hr">HR</span>
-        </div>
-        <h4>Welcome New Staff: Sarah Chen, LCMHC</h4>
-        <p>Please welcome Sarah Chen to the Adult Outpatient team starting June 24. Sarah comes from Riverbend CMHC with 6 years of experience in DBT and trauma-focused work. She will carry a mixed caseload on the Nashua campus.</p>
-      </div>
-
-      <div class="bulletin-card cat-clinical">
-        <div class="bulletin-card-header">
-          <span class="bulletin-date">Jun 15, 2026</span>
-          <span class="bulletin-cat-tag clinical">Clinical</span>
-        </div>
-        <h4>PHQ-9 Screening Frequency Update</h4>
-        <p>Reminder: per the updated clinical protocol, PHQ-9 screenings are now required at every 4th session (previously every 6th) for clients with active depression diagnoses. Screeners auto-populate in the EHR if the interval is met.</p>
-      </div>
-
-      <div class="bulletin-card cat-general">
-        <div class="bulletin-card-header">
-          <span class="bulletin-date">Jun 12, 2026</span>
-          <span class="bulletin-cat-tag general">General</span>
-        </div>
-        <h4>Summer Hours: Friday Schedule Change</h4>
-        <p>From June 27 through August 29, the office will close at 3:00 PM on Fridays (summer hours). Last client appointments should be scheduled no later than 2:00 PM. Normal hours resume September 5.</p>
-      </div>
-
-      <div class="bulletin-card cat-clinical">
-        <div class="bulletin-card-header">
-          <span class="bulletin-date">Jun 10, 2026</span>
-          <span class="bulletin-cat-tag clinical">Clinical</span>
-        </div>
-        <h4>EHR Scheduled Maintenance: June 28</h4>
-        <p>The EHR system will be unavailable Saturday June 28, 11 PM - Sunday June 29, 6 AM for a scheduled upgrade. Please complete all outstanding notes before Saturday evening. Paper forms will be available at the front desk for emergency documentation.</p>
-      </div>
-
-      <div class="bulletin-card cat-hr">
-        <div class="bulletin-card-header">
-          <span class="bulletin-date">Jun 5, 2026</span>
-          <span class="bulletin-cat-tag hr">HR</span>
-        </div>
-        <h4>Annual Training Compliance: Deadline July 15</h4>
-        <p>All staff must complete the annual compliance training modules (HIPAA, workplace safety, cultural competency) by July 15. Check your training portal dashboard for incomplete modules. Contact HR with questions.</p>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Quick Triage Guide (compact) -->
-  <div class="triage-section">
-    <div class="section-header" id="triageToggle" onclick="toggleTriage()" role="button" aria-expanded="true" aria-controls="triageContent" tabindex="0">
-      <h2>Quick Triage Guide</h2>
-      <span class="section-count">What's the situation?</span>
-      <span class="triage-toggle-hint" id="triageHint">&#9660; Collapse</span>
-    </div>
-    <div id="triageContent" class="triage-grid">
-      <div class="triage-compact">
-        <div class="triage-scenario">Client in psychiatric crisis</div>
-        <div class="triage-action">Call <strong>NH Rapid Response 1-833-710-6477</strong> for MCRT dispatch. Immediate danger? Call 911. In ED? Request ACCESS assessment.</div>
-      </div>
-      <div class="triage-compact">
-        <div class="triage-scenario">Client needs MH treatment</div>
-        <div class="triage-action">Call <strong>GNMHC (603) 889-6147</strong> for intake. PHP/IOP: <strong>Discover Health Group (603) 402-7551</strong>.</div>
-      </div>
-      <div class="triage-compact">
-        <div class="triage-scenario">Client needs SUD treatment now</div>
-        <div class="triage-action">Call <strong>NH Doorway (603) 836-6540</strong> for same-day assessment and bed placement.</div>
-      </div>
-      <div class="triage-compact">
-        <div class="triage-scenario">Client is homeless tonight</div>
-        <div class="triage-action">Call <strong>2-1-1</strong> for coordinated entry. <strong>Nashua Soup Kitchen (603) 889-7770</strong>. DV? <strong>Bridges (603) 883-3044</strong>.</div>
-      </div>
-      <div class="triage-compact">
-        <div class="triage-scenario">Client needs food today</div>
-        <div class="triage-action"><strong>Nashua Soup Kitchen, 2 Quincy St</strong> — daily meals. SNAP: <strong>nheasy.nh.gov</strong> or DHHS 137 Temple St.</div>
-      </div>
-      <div class="triage-compact">
-        <div class="triage-scenario">Client is uninsured</div>
-        <div class="triage-action"><strong>Harbor Care (603) 882-3616</strong> (FQHC, sliding-scale). Insurance: <strong>nheasy.nh.gov</strong>.</div>
-      </div>
-      <div class="triage-compact">
-        <div class="triage-scenario">Client is undocumented</div>
-        <div class="triage-action"><strong>Harbor Care</strong> serves all regardless of status. <strong>Catholic Charities (603) 669-3030</strong> for immigration legal.</div>
-      </div>
-      <div class="triage-compact">
-        <div class="triage-scenario">Client needs SSI/SSDI</div>
-        <div class="triage-action"><strong>SSA 1-800-772-1213</strong> or 70 Commercial St, Nashua. Provide functional assessment letter.</div>
-      </div>
-      <div class="triage-compact">
-        <div class="triage-scenario">Client is a DV survivor</div>
-        <div class="triage-action"><strong>Bridges crisis line (603) 883-3044</strong>, 24/7. Shelter, safety planning, legal advocacy.</div>
-      </div>
-      <div class="triage-compact">
-        <div class="triage-scenario">Client is a veteran</div>
-        <div class="triage-action"><strong>Manchester VA (603) 624-4366</strong>. Housing: Harbor Care. Crisis: <strong>988, press 1</strong>.</div>
-      </div>
-      <div class="triage-compact">
-        <div class="triage-scenario">Elderly client needs services</div>
-        <div class="triage-action"><strong>ServiceLink (603) 889-6220</strong> — aging and disability services, benefits, care coordination.</div>
-      </div>
-      <div class="triage-compact">
-        <div class="triage-scenario">Don't know where to start?</div>
-        <div class="triage-action">Call <strong>2-1-1</strong>. Available 24/7 — specialists search the entire NH resource database.</div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Resource Categories -->
-  <div class="section-header">
-    <h2>Browse by Category</h2>
-    <a href="resources.html" class="btn btn-sm btn-outline">View All Resources</a>
-  </div>
-  <div class="grid-4" style="margin-bottom:32px">
-    <a href="resources.html#crisis" class="card" style="text-decoration:none">
-      <div class="card-header">
-        <div class="card-icon" style="background:var(--danger-light);color:var(--danger)">&#9888;</div>
-        <div><div class="card-title">Crisis Services</div><div class="card-subtitle">988, MCRT, Emergency Psych</div></div>
-      </div>
-    </a>
-    <a href="resources.html#mentalhealth" class="card" style="text-decoration:none">
-      <div class="card-header">
-        <div class="card-icon" style="background:var(--accent-light);color:var(--accent)">&#9829;</div>
-        <div><div class="card-title">Mental Health</div><div class="card-subtitle">Outpatient, PHP, Psychiatry</div></div>
-      </div>
-    </a>
-    <a href="resources.html#substance" class="card" style="text-decoration:none">
-      <div class="card-header">
-        <div class="card-icon" style="background:var(--purple-light);color:var(--purple)">&#9883;</div>
-        <div><div class="card-title">Substance Use</div><div class="card-subtitle">Detox, MAT, Recovery</div></div>
-      </div>
-    </a>
-    <a href="resources.html#housing" class="card" style="text-decoration:none">
-      <div class="card-header">
-        <div class="card-icon" style="background:var(--warning-light);color:var(--warning)">&#9750;</div>
-        <div><div class="card-title">Housing</div><div class="card-subtitle">Shelters, Section 8, PSH</div></div>
-      </div>
-    </a>
-    <a href="resources.html#food" class="card" style="text-decoration:none">
-      <div class="card-header">
-        <div class="card-icon" style="background:var(--success-light);color:var(--success)">&#9733;</div>
-        <div><div class="card-title">Food Security</div><div class="card-subtitle">Pantries, SNAP, Meals</div></div>
-      </div>
-    </a>
-    <a href="resources.html#medical" class="card" style="text-decoration:none">
-      <div class="card-header">
-        <div class="card-icon" style="background:var(--teal-light);color:var(--teal)">&#9764;</div>
-        <div><div class="card-title">Medical / Dental</div><div class="card-subtitle">FQHCs, Free Clinics</div></div>
-      </div>
-    </a>
-    <a href="resources.html#legal" class="card" style="text-decoration:none">
-      <div class="card-header">
-        <div class="card-icon" style="background:#fef3c7;color:#92400e">&#9878;</div>
-        <div><div class="card-title">Legal Services</div><div class="card-subtitle">Legal Aid, Advocacy</div></div>
-      </div>
-    </a>
-    <a href="resources.html#employment" class="card" style="text-decoration:none">
-      <div class="card-header">
-        <div class="card-icon" style="background:#e0e7ff;color:#4338ca">&#9881;</div>
-        <div><div class="card-title">Employment</div><div class="card-subtitle">Job Training, Vocational Rehab</div></div>
-      </div>
-    </a>
-    <a href="resources.html#insurance" class="card" style="text-decoration:none">
-      <div class="card-header">
-        <div class="card-icon" style="background:#dbeafe;color:#1d4ed8">&#9993;</div>
-        <div><div class="card-title">Health Insurance</div><div class="card-subtitle">Medicaid, Marketplace</div></div>
-      </div>
-    </a>
-    <a href="resources.html#transport" class="card" style="text-decoration:none">
-      <div class="card-header">
-        <div class="card-icon" style="background:#fce7f3;color:#be185d">&#9992;</div>
-        <div><div class="card-title">Transportation</div><div class="card-subtitle">Transit, Medical Transport</div></div>
-      </div>
-    </a>
-    <a href="resources.html#youth" class="card" style="text-decoration:none">
-      <div class="card-header">
-        <div class="card-icon" style="background:#fef9c3;color:#a16207">&#9786;</div>
-        <div><div class="card-title">Youth Services</div><div class="card-subtitle">Youth MH, Mentoring</div></div>
-      </div>
-    </a>
-    <a href="resources.html#veterans" class="card" style="text-decoration:none">
-      <div class="card-header">
-        <div class="card-icon" style="background:#ecfdf5;color:#047857">&#9734;</div>
-        <div><div class="card-title">Veterans</div><div class="card-subtitle">VA, Vet Programs</div></div>
-      </div>
-    </a>
-  </div>
 
-  <!-- Clinical Tools Preview -->
-  <div class="section-header">
-    <h2>Clinical Tools <span class="badge-new">NEW</span></h2>
-    <a href="tools.html" class="btn btn-sm btn-outline">Browse All Tools</a>
-  </div>
-  <div class="grid-3" style="margin-bottom:32px">
-    <a href="tools.html#cbt" class="tool-card" style="text-decoration:none;color:inherit">
-      <div class="tool-card-color" style="background:var(--accent)"></div>
-      <div class="tool-card-body">
-        <h3>CBT Worksheets</h3>
-        <p>Thought records, cognitive distortions, behavioral activation, Socratic questioning guides</p>
-        <div class="tool-tags">
-          <span class="resource-tag">Interactive</span>
-          <span class="resource-tag">Printable</span>
-        </div>
-      </div>
-    </a>
-    <a href="tools.html#dbt" class="tool-card" style="text-decoration:none;color:inherit">
-      <div class="tool-card-color" style="background:var(--teal)"></div>
-      <div class="tool-card-body">
-        <h3>DBT Skills</h3>
-        <p>Mindfulness, distress tolerance, emotion regulation, interpersonal effectiveness exercises</p>
-        <div class="tool-tags">
-          <span class="resource-tag">Interactive</span>
-          <span class="resource-tag">Client Handout</span>
-        </div>
-      </div>
-    </a>
-    <a href="tools.html#mi" class="tool-card" style="text-decoration:none;color:inherit">
-      <div class="tool-card-color" style="background:var(--purple)"></div>
-      <div class="tool-card-body">
-        <h3>Motivational Interviewing</h3>
-        <p>OARS techniques, change talk recognition, decisional balance, readiness rulers</p>
-        <div class="tool-tags">
-          <span class="resource-tag">Prompts</span>
-          <span class="resource-tag">Quick Reference</span>
-        </div>
-      </div>
-    </a>
-  </div>
+</main>
 
-  <!-- Key Phone Directory -->
-  <button class="btn btn-primary" onclick="printPocketGuide()" style="margin-bottom:16px">&#128424; Print Pocket Reference Card</button>
-  <div class="section-header">
-    <h2>Key Phone Numbers</h2>
-  </div>
-  <div class="card" style="margin-bottom:32px">
-    <div class="card-body" style="padding:0">
-      <table class="phone-table">
-        <thead>
-          <tr><th>Service</th><th>Phone</th><th>Hours</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>988 Suicide & Crisis Lifeline</td><td class="phone-number">988</td><td>24/7</td></tr>
-          <tr><td>NH Rapid Response (Crisis/MCRT)</td><td class="phone-number">1-833-710-6477</td><td>24/7</td></tr>
-          <tr><td>GNMHC Crisis Line</td><td class="phone-number">(603) 889-6147</td><td>24/7</td></tr>
-          <tr><td>211 NH (all resource referrals)</td><td class="phone-number">2-1-1</td><td>24/7</td></tr>
-          <tr><td>Harbor Care (health/housing/recovery)</td><td class="phone-number">(603) 882-3616</td><td>M-F</td></tr>
-          <tr><td>NH Doorway (substance use)</td><td class="phone-number">(603) 836-6540</td><td>24/7</td></tr>
-          <tr><td>ServiceLink (aging/disability)</td><td class="phone-number">(603) 889-6220</td><td>M-F</td></tr>
-          <tr><td>Bridges DV Crisis</td><td class="phone-number">(603) 883-3044</td><td>24/7</td></tr>
-          <tr><td>NH DHHS (Medicaid/SNAP/TANF)</td><td class="phone-number">1-844-275-3447</td><td>M-F</td></tr>
-          <tr><td>Southern NH Medical Center</td><td class="phone-number">(603) 577-2000</td><td>24/7 ED</td></tr>
-          <tr><td>Nashua Housing Authority</td><td class="phone-number">(603) 883-5661</td><td>M-F</td></tr>
-          <tr><td>Manchester VA</td><td class="phone-number">(603) 624-4366</td><td>M-F</td></tr>
-          <tr><td>NAMI NH</td><td class="phone-number">(603) 225-5359</td><td>M-F</td></tr>
-          <tr><td>Crisis Text Line</td><td class="phone-number">Text HOME to 741741</td><td>24/7</td></tr>
-          <tr><td>Child Abuse Reporting</td><td class="phone-number">1-800-894-5533</td><td>24/7</td></tr>
-          <tr><td>Adult Protective Services</td><td class="phone-number">1-800-949-0470</td><td>24/7</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
 
-  <!-- Pocket Guide (hidden, shown only when printing) -->
-  <div id="pocketGuide" style="display:none">
-    <div class="pg-header">
-      <h1>Greater Nashua MH Quick Reference</h1>
-    </div>
-
-    <div class="pg-crisis">
-      <strong>CRISIS LINES</strong>
-      <span><b>988</b> Suicide &amp; Crisis Lifeline</span> &bull;
-      <span><b>1-833-710-6477</b> NH Rapid Response</span> &bull;
-      <span><b>(603) 889-6147</b> GNMHC Crisis</span> &bull;
-      <span><b>Text HOME to 741741</b></span>
-    </div>
-
-    <h2 class="pg-section-title">Phone Directory</h2>
-    <div class="pg-phones">
-      <table>
-        <tr><td>988 Suicide &amp; Crisis Lifeline</td><td><b>988</b></td><td>24/7</td></tr>
-        <tr><td>NH Rapid Response (MCRT)</td><td><b>1-833-710-6477</b></td><td>24/7</td></tr>
-        <tr><td>GNMHC Crisis Line</td><td><b>(603) 889-6147</b></td><td>24/7</td></tr>
-        <tr><td>211 NH (referrals)</td><td><b>2-1-1</b></td><td>24/7</td></tr>
-        <tr><td>Harbor Care</td><td><b>(603) 882-3616</b></td><td>M-F</td></tr>
-        <tr><td>NH Doorway (SUD)</td><td><b>(603) 836-6540</b></td><td>24/7</td></tr>
-        <tr><td>ServiceLink (aging)</td><td><b>(603) 889-6220</b></td><td>M-F</td></tr>
-        <tr><td>Bridges DV Crisis</td><td><b>(603) 883-3044</b></td><td>24/7</td></tr>
-        <tr><td>NH DHHS</td><td><b>1-844-275-3447</b></td><td>M-F</td></tr>
-        <tr><td>Southern NH Medical Ctr</td><td><b>(603) 577-2000</b></td><td>24/7 ED</td></tr>
-        <tr><td>Nashua Housing Auth.</td><td><b>(603) 883-5661</b></td><td>M-F</td></tr>
-        <tr><td>Manchester VA</td><td><b>(603) 624-4366</b></td><td>M-F</td></tr>
-        <tr><td>NAMI NH</td><td><b>(603) 225-5359</b></td><td>M-F</td></tr>
-        <tr><td>Crisis Text Line</td><td><b>Text HOME to 741741</b></td><td>24/7</td></tr>
-        <tr><td>Child Abuse Reporting</td><td><b>1-800-894-5533</b></td><td>24/7</td></tr>
-        <tr><td>Adult Protective Svcs</td><td><b>1-800-949-0470</b></td><td>24/7</td></tr>
-      </table>
-    </div>
-
-    <h2 class="pg-section-title">Quick Triage</h2>
-    <div class="pg-triage">
-      <div class="pg-triage-item"><b>Psychiatric crisis</b> &mdash; NH Rapid Response 1-833-710-6477; danger? 911; in ED? Request ACCESS assessment</div>
-      <div class="pg-triage-item"><b>MH treatment</b> &mdash; GNMHC (603) 889-6147 intake; PHP/IOP: Discover Health (603) 402-7551</div>
-      <div class="pg-triage-item"><b>SUD treatment now</b> &mdash; NH Doorway (603) 836-6540 same-day assessment &amp; bed placement</div>
-      <div class="pg-triage-item"><b>Homeless tonight</b> &mdash; 2-1-1 coordinated entry; Nashua Soup Kitchen (603) 889-7770; DV: Bridges (603) 883-3044</div>
-      <div class="pg-triage-item"><b>Food today</b> &mdash; Nashua Soup Kitchen, 2 Quincy St (daily meals); SNAP: nheasy.nh.gov</div>
-      <div class="pg-triage-item"><b>Uninsured</b> &mdash; Harbor Care (603) 882-3616 (FQHC, sliding-scale); insurance: nheasy.nh.gov</div>
-      <div class="pg-triage-item"><b>Undocumented</b> &mdash; Harbor Care (all welcome); Catholic Charities (603) 669-3030 immigration legal</div>
-      <div class="pg-triage-item"><b>SSI/SSDI</b> &mdash; SSA 1-800-772-1213 or 70 Commercial St; provide functional assessment letter</div>
-      <div class="pg-triage-item"><b>DV survivor</b> &mdash; Bridges (603) 883-3044 24/7; shelter, safety planning, legal advocacy</div>
-      <div class="pg-triage-item"><b>Veteran</b> &mdash; Manchester VA (603) 624-4366; housing: Harbor Care; crisis: 988 press 1</div>
-      <div class="pg-triage-item"><b>Elderly services</b> &mdash; ServiceLink (603) 889-6220; aging, disability, benefits, care coordination</div>
-      <div class="pg-triage-item"><b>Don't know where to start?</b> &mdash; Call 2-1-1 (24/7), specialists search entire NH resource database</div>
-    </div>
-
-    <div class="pg-footer">Last updated: June 2026 &nbsp;|&nbsp; Greater Nashua Community Mental Health Resources</div>
-  </div>
-
-</div>
-
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
 <footer class="site-footer">
-  <p>Greater Nashua Community Mental Health Resources &copy; 2026. For informational purposes only.</p>
-  <p>Contact information and services may change. Always verify by contacting organizations directly.</p>
-  <div class="last-updated-bar">
-    <span class="last-updated-dot"></span>
-    Content last updated: June 24, 2026 &nbsp;|&nbsp; Wave 100
+  <div class="ds-container">
+
+    <div class="footer__grid">
+
+      <!-- Brand column -->
+      <div>
+        <a href="index.html" class="site-nav__logo" style="text-decoration:none">
+          <div class="site-nav__logo-mark">NH</div>
+          <span class="site-nav__logo-text">MH Resources</span>
+        </a>
+        <p class="footer__brand-desc">A comprehensive resource hub for clinicians, case managers, and community members in the Greater Nashua area.</p>
+
+        <div class="footer__crisis-box">
+          <div class="footer__crisis-title">Crisis? Get help now.</div>
+          <div class="footer__crisis-numbers">
+            <strong>988</strong> Suicide &amp; Crisis Lifeline<br>
+            <strong>1-833-710-6477</strong> NH Rapid Response<br>
+            <strong>(603) 889-6147</strong> GNMHC Crisis<br>
+            <strong>Text HOME to 741741</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigate -->
+      <div>
+        <div class="footer__col-title">Navigate</div>
+        <ul class="footer__links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="tools.html">Clinical Tools</a></li>
+          <li><a href="guide.html">Guides</a></li>
+        </ul>
+      </div>
+
+      <!-- Quick Access -->
+      <div>
+        <div class="footer__col-title">Quick Access</div>
+        <ul class="footer__links">
+          <li><a href="tools.html#screening-tools">Screening Tools</a></li>
+          <li><a href="tools.html#clinical-note-builder">Note Builder</a></li>
+          <li><a href="guide.html#crisisTree">Crisis Tree</a></li>
+          <li><a href="resources.html#housing">Housing Resources</a></li>
+        </ul>
+      </div>
+
+      <!-- Clinical -->
+      <div>
+        <div class="footer__col-title">Clinical</div>
+        <ul class="footer__links">
+          <li><a href="tools.html#cbt">CBT Worksheets</a></li>
+          <li><a href="tools.html#dbt">DBT Handouts</a></li>
+          <li><a href="tools.html#cpt-reference">CPT Codes</a></li>
+          <li><a href="tools.html#safety-plan-builder">Safety Planning</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <div class="footer__disclaimer">
+        For informational purposes only. This resource does not replace clinical judgment, supervision, or direct consultation. Contact information and services may change; always verify by contacting organizations directly.
+      </div>
+      <div class="footer__meta">
+        <span><span class="footer__status-dot"></span> Updated Jun 24, 2026</span>
+        <a href="#" id="adminGate" style="color: var(--ds-text-muted); font-size: 11px;" aria-label="Version 4.0 - Admin access">v4.0</a>
+      </div>
+    </div>
+
   </div>
-  <p style="margin-top:8px"><a href="#" id="adminGate" style="color:var(--text-muted);font-size:11px" aria-label="Version 4.0 - Admin access">v4.0</a></p>
 </footer>
 
-<div class="toast" id="toast"></div>
 
+<!-- ============================================================
+     POCKET GUIDE (hidden, shown on print only)
+     ============================================================ -->
+<div id="pocketGuide">
+  <div class="pg-header">
+    <h1>Greater Nashua MH Quick Reference</h1>
+  </div>
+  <div class="pg-crisis">
+    <strong>CRISIS LINES</strong>
+    <span><b>988</b> Suicide &amp; Crisis Lifeline</span> &bull;
+    <span><b>1-833-710-6477</b> NH Rapid Response</span> &bull;
+    <span><b>(603) 889-6147</b> GNMHC Crisis</span> &bull;
+    <span><b>Text HOME to 741741</b></span>
+  </div>
+  <h2 class="pg-section-title">Phone Directory</h2>
+  <div class="pg-phones">
+    <table>
+      <tr><td>988 Suicide &amp; Crisis Lifeline</td><td><b>988</b></td><td>24/7</td></tr>
+      <tr><td>NH Rapid Response (MCRT)</td><td><b>1-833-710-6477</b></td><td>24/7</td></tr>
+      <tr><td>GNMHC Crisis Line</td><td><b>(603) 889-6147</b></td><td>24/7</td></tr>
+      <tr><td>211 NH (referrals)</td><td><b>2-1-1</b></td><td>24/7</td></tr>
+      <tr><td>Harbor Care</td><td><b>(603) 882-3616</b></td><td>M-F</td></tr>
+      <tr><td>NH Doorway (SUD)</td><td><b>(603) 836-6540</b></td><td>24/7</td></tr>
+      <tr><td>ServiceLink (aging)</td><td><b>(603) 889-6220</b></td><td>M-F</td></tr>
+      <tr><td>Bridges DV Crisis</td><td><b>(603) 883-3044</b></td><td>24/7</td></tr>
+      <tr><td>NH DHHS</td><td><b>1-844-275-3447</b></td><td>M-F</td></tr>
+      <tr><td>Southern NH Medical Ctr</td><td><b>(603) 577-2000</b></td><td>24/7 ED</td></tr>
+      <tr><td>Nashua Housing Auth.</td><td><b>(603) 883-5661</b></td><td>M-F</td></tr>
+      <tr><td>Manchester VA</td><td><b>(603) 624-4366</b></td><td>M-F</td></tr>
+      <tr><td>NAMI NH</td><td><b>(603) 225-5359</b></td><td>M-F</td></tr>
+      <tr><td>Crisis Text Line</td><td><b>Text HOME to 741741</b></td><td>24/7</td></tr>
+      <tr><td>Child Abuse Reporting</td><td><b>1-800-894-5533</b></td><td>24/7</td></tr>
+      <tr><td>Adult Protective Svcs</td><td><b>1-800-949-0470</b></td><td>24/7</td></tr>
+    </table>
+  </div>
+  <h2 class="pg-section-title">Quick Triage</h2>
+  <div class="pg-triage">
+    <div class="pg-triage-item"><b>Psychiatric crisis</b> &mdash; NH Rapid Response 1-833-710-6477; danger? 911; in ED? Request ACCESS assessment</div>
+    <div class="pg-triage-item"><b>MH treatment</b> &mdash; GNMHC (603) 889-6147 intake; PHP/IOP: Discover Health (603) 402-7551</div>
+    <div class="pg-triage-item"><b>SUD treatment now</b> &mdash; NH Doorway (603) 836-6540 same-day assessment &amp; bed placement</div>
+    <div class="pg-triage-item"><b>Homeless tonight</b> &mdash; 2-1-1 coordinated entry; Nashua Soup Kitchen (603) 889-7770; DV: Bridges (603) 883-3044</div>
+    <div class="pg-triage-item"><b>Food today</b> &mdash; Nashua Soup Kitchen, 2 Quincy St (daily meals); SNAP: nheasy.nh.gov</div>
+    <div class="pg-triage-item"><b>Uninsured</b> &mdash; Harbor Care (603) 882-3616 (FQHC, sliding-scale); insurance: nheasy.nh.gov</div>
+    <div class="pg-triage-item"><b>Undocumented</b> &mdash; Harbor Care (all welcome); Catholic Charities (603) 669-3030 immigration legal</div>
+    <div class="pg-triage-item"><b>SSI/SSDI</b> &mdash; SSA 1-800-772-1213 or 70 Commercial St; provide functional assessment letter</div>
+    <div class="pg-triage-item"><b>DV survivor</b> &mdash; Bridges (603) 883-3044 24/7; shelter, safety planning, legal advocacy</div>
+    <div class="pg-triage-item"><b>Veteran</b> &mdash; Manchester VA (603) 624-4366; housing: Harbor Care; crisis: 988 press 1</div>
+    <div class="pg-triage-item"><b>Elderly services</b> &mdash; ServiceLink (603) 889-6220; aging, disability, benefits, care coordination</div>
+    <div class="pg-triage-item"><b>Don't know where to start?</b> &mdash; Call 2-1-1 (24/7), specialists search entire NH resource database</div>
+  </div>
+  <div class="pg-footer">Last updated: June 2026 &nbsp;|&nbsp; Greater Nashua Community Mental Health Resources</div>
+</div>
+
+
+<!-- ============================================================
+     TOAST
+     ============================================================ -->
+<div class="ds-toast" id="toast"></div>
+
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
 <script>
-// Search
+// ---- Search ----
 function performSearch() {
-  const q = document.getElementById('heroSearch').value.trim();
+  var q = document.getElementById('heroSearch').value.trim();
   if (q) window.location.href = 'resources.html?q=' + encodeURIComponent(q);
 }
-document.getElementById('heroSearch').addEventListener('keydown', e => { if(e.key==='Enter') performSearch(); });
-
-// Triage toggle
-var triageExpanded = true;
-function toggleTriage() {
-  triageExpanded = !triageExpanded;
-  var content = document.getElementById('triageContent');
-  var hint = document.getElementById('triageHint');
-  var toggle = document.getElementById('triageToggle');
-  if (triageExpanded) {
-    content.style.display = '';
-    hint.innerHTML = '&#9660; Collapse';
-    toggle.setAttribute('aria-expanded', 'true');
-  } else {
-    content.style.display = 'none';
-    hint.innerHTML = '&#9650; Expand';
-    toggle.setAttribute('aria-expanded', 'false');
-  }
-}
-// Keyboard support for triage toggle
-document.getElementById('triageToggle').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleTriage(); }
+document.getElementById('heroSearch').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') performSearch();
 });
 
-// Pocket Guide print
+// ---- Pocket Guide Print ----
 function printPocketGuide() {
   var guide = document.getElementById('pocketGuide');
   guide.style.display = 'block';
@@ -1638,22 +1182,9 @@ function printPocketGuide() {
   document.body.classList.remove('printing-pocket-guide');
 }
 
-// News Show More/Less toggle
-function toggleNewsCards() {
-  var grid = document.getElementById('newsGrid');
-  var btn = document.getElementById('newsToggleBtn');
-  if (grid.classList.contains('show-all')) {
-    grid.classList.remove('show-all');
-    btn.innerHTML = 'Show 8 more &#9660;';
-  } else {
-    grid.classList.add('show-all');
-    btn.innerHTML = 'Show fewer &#9650;';
-  }
-}
-
-// Admin gate — 5-click the version number in footer
-let adminClicks = 0;
-let adminTimer = null;
+// ---- Admin gate: 5-click on version ----
+var adminClicks = 0;
+var adminTimer = null;
 document.getElementById('adminGate').addEventListener('click', function(e) {
   e.preventDefault();
   adminClicks++;
@@ -1662,28 +1193,61 @@ document.getElementById('adminGate').addEventListener('click', function(e) {
     adminClicks = 0;
     window.location.href = 'admin.html';
   }
-  adminTimer = setTimeout(() => { adminClicks = 0; }, 2000);
+  adminTimer = setTimeout(function() { adminClicks = 0; }, 2000);
 });
 
+// ---- Theme toggle ----
 function toggleTheme() {
   var html = document.documentElement;
-  var btn = document.querySelector('.theme-toggle');
+  var btn = document.getElementById('themeToggleBtn');
   if (html.getAttribute('data-theme') === 'dark') {
     html.removeAttribute('data-theme');
-    btn.textContent = '☽'; // moon
+    localStorage.setItem('theme', 'light');
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
   } else {
     html.setAttribute('data-theme', 'dark');
-    btn.textContent = '☀'; // sun
+    localStorage.setItem('theme', 'dark');
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
   }
 }
-// Respect system preference
-if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-  document.documentElement.setAttribute('data-theme', 'dark');
-  var btn = document.querySelector('.theme-toggle');
-  if (btn) btn.textContent = '☀';
+
+// Respect saved preference, then system preference
+(function() {
+  var saved = localStorage.getItem('theme');
+  var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (saved === 'dark' || (!saved && prefersDark)) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    var btn = document.getElementById('themeToggleBtn');
+    if (btn) btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+  }
+})();
+
+// ---- Mobile nav toggle ----
+function toggleMobileNav() {
+  var panel = document.getElementById('mobileNavPanel');
+  var btn = document.getElementById('hamburgerBtn');
+  var isOpen = panel.classList.toggle('is-open');
+  btn.setAttribute('aria-expanded', isOpen);
 }
+
+// ---- Scroll-triggered reveal animations ----
+(function() {
+  var reveals = document.querySelectorAll('.ds-reveal');
+  if (!reveals.length) return;
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('ds-reveal--visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(function(el) { observer.observe(el); });
+})();
 </script>
+
 <script src="js/search.js"></script>
+
 <script>
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js').catch(function(){});

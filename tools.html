@@ -10,50 +10,24 @@
 <meta property="og:type" content="website">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#2563eb">
+<meta name="theme-color" content="#2d6f59">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="css/design-system.css">
 <link rel="stylesheet" href="css/style.css">
 <script src="js/fontsize.js"></script>
 <style>
-/* ===== TOOLS PAGE ADDITIONS ===== */
+/* ===== TOOLS PAGE LAYOUT ===== */
 .tools-layout {
   display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: 24px;
+  grid-template-columns: 260px 1fr;
+  gap: var(--ds-space-8);
   align-items: start;
 }
-@media (max-width: 900px) {
-  .tools-layout { grid-template-columns: 1fr; }
-  .tools-sidebar { position: static !important; }
-}
-.tools-sidebar {
-  position: sticky;
-  top: calc(var(--header-height) + 24px);
-}
-.sidebar-nav {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-}
-.sidebar-nav a {
-  display: block;
-  padding: 10px 16px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  text-decoration: none;
-  border-bottom: 1px solid var(--border);
-  transition: all 0.15s;
-}
-.sidebar-nav a:last-child { border-bottom: none; }
-.sidebar-nav a:hover { background: var(--surface-alt); color: var(--text); }
-.sidebar-nav a.active { background: var(--accent-light); color: var(--accent); font-weight: 600; }
 
 .modality-section {
   margin-bottom: 48px;
-  scroll-margin-top: calc(var(--header-height) + 24px);
+  scroll-margin-top: calc(var(--ds-header-height, 64px) + 24px);
 }
 .modality-header {
   display: flex;
@@ -1324,46 +1298,761 @@
   .sup-form { break-inside: avoid; }
   .letter-preview { display: block !important; border: 1px solid #ccc; }
   .member-card-body { display: block !important; }
+  .site-nav, .site-nav__mobile-panel, .tools-hero, .tools-category-grid, .expand-collapse-bar { display: none !important; }
+}
+
+/* ===== REDESIGNED NAV (matches index.html) ===== */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: var(--ds-z-sticky);
+  background: rgba(253, 252, 250, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--ds-border-subtle);
+  height: var(--ds-header-height);
+}
+[data-theme="dark"] .site-nav {
+  background: rgba(26, 25, 22, 0.85);
+}
+.site-nav__inner {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+}
+.site-nav__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  text-decoration: none;
+  flex-shrink: 0;
+  margin-right: auto;
+}
+.site-nav__logo-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-primary-600);
+  color: var(--ds-text-inverse);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-bold);
+  letter-spacing: var(--ds-tracking-tight);
+}
+.site-nav__logo-text {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  white-space: nowrap;
+}
+.site-nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+}
+.site-nav__link {
+  padding: var(--ds-space-2) var(--ds-space-3);
+  border-radius: var(--ds-radius-md);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default),
+              background-color var(--ds-duration-fast) var(--ds-ease-default);
+  white-space: nowrap;
+}
+.site-nav__link:hover {
+  color: var(--ds-text-primary);
+  background: var(--ds-surface-hover);
+  text-decoration: none;
+}
+.site-nav__link--active {
+  color: var(--ds-primary-700);
+  background: var(--ds-primary-50);
+}
+[data-theme="dark"] .site-nav__link--active {
+  color: var(--ds-primary-300);
+  background: var(--ds-interactive-subtle);
+}
+.site-nav__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  margin-left: var(--ds-space-2);
+}
+.site-nav__icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ds-radius-md);
+  border: none;
+  background: transparent;
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default),
+              background-color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.site-nav__icon-btn:hover {
+  background: var(--ds-surface-hover);
+  color: var(--ds-text-primary);
+}
+.site-nav__font-controls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.site-nav__font-btn {
+  padding: var(--ds-space-1) var(--ds-space-2);
+  border-radius: var(--ds-radius-sm);
+  border: 1px solid var(--ds-border);
+  background: var(--ds-surface);
+  color: var(--ds-text-secondary);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  cursor: pointer;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+  line-height: 1;
+  min-height: 28px;
+}
+.site-nav__font-btn:hover {
+  background: var(--ds-surface-hover);
+  border-color: var(--ds-border-strong);
+}
+.site-nav__hamburger {
+  display: none;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 8px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  align-items: center;
+}
+.site-nav__hamburger span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--ds-text-secondary);
+  border-radius: 1px;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+}
+.site-nav__mobile-panel {
+  display: none;
+  position: fixed;
+  top: var(--ds-header-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--ds-surface);
+  z-index: var(--ds-z-overlay);
+  padding: var(--ds-space-6);
+  flex-direction: column;
+  gap: var(--ds-space-2);
+  overflow-y: auto;
+}
+.site-nav__mobile-panel.is-open {
+  display: flex;
+}
+.site-nav__mobile-link {
+  display: block;
+  padding: var(--ds-space-3) var(--ds-space-4);
+  border-radius: var(--ds-radius-lg);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-primary);
+  text-decoration: none;
+  transition: background-color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.site-nav__mobile-link:hover {
+  background: var(--ds-surface-hover);
+  text-decoration: none;
+}
+.site-nav__mobile-link--active {
+  color: var(--ds-primary-700);
+  background: var(--ds-primary-50);
+}
+[data-theme="dark"] .site-nav__mobile-link--active {
+  color: var(--ds-primary-300);
+  background: var(--ds-interactive-subtle);
+}
+
+/* ===== TOOLS HERO ===== */
+.tools-hero {
+  background: linear-gradient(170deg, var(--ds-primary-50) 0%, var(--ds-cream) 50%, var(--ds-warm-gray-50) 100%);
+  padding: var(--ds-space-14) 0 var(--ds-space-12);
+}
+[data-theme="dark"] .tools-hero {
+  background: linear-gradient(170deg, rgba(61, 139, 112, 0.08) 0%, var(--ds-page-bg) 50%, var(--ds-page-bg) 100%);
+}
+.tools-hero__inner {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6);
+  text-align: center;
+}
+.tools-hero__overline {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  margin-bottom: var(--ds-space-4);
+}
+.tools-hero__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-4xl);
+  font-weight: var(--ds-weight-bold);
+  line-height: var(--ds-leading-tight);
+  letter-spacing: var(--ds-tracking-tight);
+  color: var(--ds-text-primary);
+  margin: 0 0 var(--ds-space-3);
+}
+.tools-hero__subtitle {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-regular);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--ds-text-secondary);
+  max-width: 600px;
+  margin: 0 auto var(--ds-space-5);
+}
+.tools-hero__stat {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-2) var(--ds-space-4);
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-full);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  box-shadow: var(--ds-shadow-sm);
+}
+.tools-hero__stat strong {
+  color: var(--ds-primary-600);
+  font-weight: var(--ds-weight-bold);
+}
+
+/* ===== CATEGORY GRID ===== */
+.tools-category-grid {
+  max-width: var(--ds-container-xl);
+  margin: calc(-1 * var(--ds-space-6)) auto var(--ds-space-8);
+  padding: 0 var(--ds-space-6);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--ds-space-4);
+}
+.tools-category-card {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-xl);
+  padding: var(--ds-space-5);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--ds-transition-shadow), var(--ds-transition-transform);
+  box-shadow: var(--ds-shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ds-space-2);
+}
+.tools-category-card:hover {
+  box-shadow: var(--ds-shadow-lg);
+  transform: translateY(-3px);
+  border-color: var(--ds-primary-300);
+  text-decoration: none;
+}
+.tools-category-card:active {
+  transform: translateY(-1px);
+  box-shadow: var(--ds-shadow-md);
+}
+.tools-category-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--ds-radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.tools-category-card__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+}
+.tools-category-card__count {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+}
+
+/* ===== REDESIGNED SIDEBAR ===== */
+.tools-sidebar {
+  position: sticky;
+  top: calc(var(--ds-header-height) + var(--ds-space-6));
+  max-height: calc(100vh - var(--ds-header-height) - var(--ds-space-12));
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ds-warm-gray-300) transparent;
+}
+.tools-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+.tools-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.tools-sidebar::-webkit-scrollbar-thumb {
+  background: var(--ds-warm-gray-300);
+  border-radius: 2px;
+}
+.sidebar-nav {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-xl);
+  overflow: hidden;
+  box-shadow: var(--ds-shadow-sm);
+}
+.sidebar-nav__search {
+  padding: var(--ds-space-3);
+  border-bottom: 1px solid var(--ds-border-subtle);
+}
+.sidebar-nav__search-input {
+  width: 100%;
+  padding: var(--ds-space-2) var(--ds-space-3);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-primary);
+  background: var(--ds-surface-sunken);
+  outline: none;
+  transition: border-color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.sidebar-nav__search-input::placeholder {
+  color: var(--ds-text-muted);
+}
+.sidebar-nav__search-input:focus {
+  border-color: var(--ds-border-focus);
+}
+.sidebar-nav__group {
+  border-bottom: 1px solid var(--ds-border-subtle);
+}
+.sidebar-nav__group:last-child {
+  border-bottom: none;
+}
+.sidebar-nav__group-title {
+  display: block;
+  padding: var(--ds-space-2-5) var(--ds-space-4);
+  font-family: var(--ds-font-sans);
+  font-size: 10px;
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--ds-tracking-widest);
+  background: var(--ds-surface-sunken);
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sidebar-nav__group-title::after {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid var(--ds-text-muted);
+  transition: transform var(--ds-duration-fast) var(--ds-ease-default);
+}
+.sidebar-nav__group.collapsed .sidebar-nav__group-title::after {
+  transform: rotate(-90deg);
+}
+.sidebar-nav__group.collapsed .sidebar-nav__group-links {
+  display: none;
+}
+.sidebar-nav__group-links {
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-nav a {
+  display: block;
+  padding: var(--ds-space-2) var(--ds-space-4) var(--ds-space-2) var(--ds-space-5);
+  font-family: var(--ds-font-sans);
+  font-size: 13px;
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+}
+.sidebar-nav a:hover {
+  background: var(--ds-surface-hover);
+  color: var(--ds-text-primary);
+}
+.sidebar-nav a.active {
+  background: var(--ds-primary-50);
+  color: var(--ds-primary-700);
+  font-weight: var(--ds-weight-semibold);
+  border-left-color: var(--ds-primary-600);
+}
+[data-theme="dark"] .sidebar-nav a.active {
+  background: var(--ds-interactive-subtle);
+  color: var(--ds-primary-300);
+  border-left-color: var(--ds-primary-400);
+}
+.sidebar-nav a.sidebar-hidden {
+  display: none;
+}
+
+/* Mobile sidebar toggle */
+.sidebar-mobile-toggle {
+  display: none;
+  position: fixed;
+  bottom: var(--ds-space-6);
+  left: var(--ds-space-6);
+  z-index: var(--ds-z-overlay);
+  width: 48px;
+  height: 48px;
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-primary-600);
+  color: var(--ds-text-inverse);
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--ds-shadow-lg);
+  font-size: 20px;
+  transition: background var(--ds-duration-fast) var(--ds-ease-default);
+}
+.sidebar-mobile-toggle:hover {
+  background: var(--ds-primary-700);
+}
+.sidebar-mobile-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--ds-surface-overlay);
+  z-index: var(--ds-z-overlay);
+}
+.sidebar-mobile-overlay.is-open {
+  display: block;
+}
+
+/* ===== REDESIGNED FOOTER ===== */
+.site-footer {
+  background: var(--ds-surface);
+  border-top: 1px solid var(--ds-border);
+  padding: var(--ds-space-16) 0 var(--ds-space-8);
+  margin-top: 0;
+}
+.footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--ds-space-10);
+  margin-bottom: var(--ds-space-10);
+}
+.footer__brand-desc {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+  margin-top: var(--ds-space-3);
+  max-width: 320px;
+}
+.footer__col-title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--ds-tracking-widest);
+  margin-bottom: var(--ds-space-4);
+}
+.footer__links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2-5);
+}
+.footer__links a {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.footer__links a:hover {
+  color: var(--ds-text-primary);
+}
+.footer__crisis-box {
+  background: var(--ds-status-danger-bg);
+  border: 1px solid var(--ds-danger-200);
+  border-radius: var(--ds-radius-lg);
+  padding: var(--ds-space-4);
+  margin-top: var(--ds-space-4);
+}
+[data-theme="dark"] .footer__crisis-box {
+  border-color: rgba(220, 95, 95, 0.2);
+}
+.footer__crisis-title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-status-danger-text);
+  margin-bottom: var(--ds-space-2);
+}
+.footer__crisis-numbers {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+}
+.footer__crisis-numbers strong {
+  color: var(--ds-text-primary);
+}
+.footer__bottom {
+  border-top: 1px solid var(--ds-border-subtle);
+  padding-top: var(--ds-space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--ds-space-4);
+}
+.footer__disclaimer {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+  line-height: var(--ds-leading-relaxed);
+  max-width: 560px;
+}
+.footer__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-4);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+}
+.footer__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ds-success-500);
+  display: inline-block;
+}
+
+/* ===== RESPONSIVE OVERRIDES ===== */
+@media (max-width: 1023px) {
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ds-space-8);
+  }
+}
+@media (max-width: 900px) {
+  .tools-layout {
+    grid-template-columns: 1fr;
+  }
+  .tools-sidebar {
+    position: static !important;
+    max-height: none;
+    display: none;
+  }
+  .sidebar-mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .tools-sidebar.mobile-open {
+    display: block;
+    position: fixed;
+    top: var(--ds-header-height);
+    left: 0;
+    bottom: 0;
+    width: 300px;
+    z-index: calc(var(--ds-z-overlay) + 1);
+    background: var(--ds-page-bg);
+    padding: var(--ds-space-4);
+    overflow-y: auto;
+    max-height: none;
+    box-shadow: var(--ds-shadow-2xl);
+  }
+  .tools-category-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--ds-space-3);
+    margin-bottom: var(--ds-space-6);
+  }
+}
+@media (max-width: 639px) {
+  .site-nav__links,
+  .site-nav__font-controls {
+    display: none;
+  }
+  .site-nav__hamburger {
+    display: flex;
+  }
+  .tools-hero {
+    padding: var(--ds-space-10) 0 var(--ds-space-8);
+  }
+  .tools-hero__title {
+    font-size: var(--ds-text-3xl);
+  }
+  .tools-hero__subtitle {
+    font-size: var(--ds-text-base);
+  }
+  .tools-category-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: var(--ds-space-8);
+  }
+  .footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 </style>
 </head>
 <body>
 <script src="js/auth-gate.js"></script>
 
-<a href="#main-content" class="skip-link">Skip to main content</a>
+<a href="#main-content" class="ds-sr-only" style="position:absolute;top:-40px;left:0;background:var(--ds-surface);padding:8px 16px;z-index:100;font-size:14px;transition:top 0.2s" onfocus="this.style.top='0'" onblur="this.style.top='-40px'">Skip to main content</a>
 
-<header class="site-header">
-  <div class="header-inner">
-    <a href="index.html" class="site-logo" id="siteLogo">
-      <div class="logo-icon">NH</div>
-      <span>Greater Nashua MH Resources</span>
+<!-- ============================================================
+     NAVIGATION (design-system)
+     ============================================================ -->
+<nav class="site-nav" role="navigation" aria-label="Main navigation">
+  <div class="site-nav__inner">
+
+    <a href="index.html" class="site-nav__logo" id="siteLogo">
+      <div class="site-nav__logo-mark">NH</div>
+      <span class="site-nav__logo-text">MH Resources</span>
     </a>
-    <div class="header-actions">
-      <button class="search-toggle" onclick="toggleGlobalSearch()" title="Search this page (Ctrl+K)" aria-label="Search this page"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
-      <div class="font-size-controls">
-        <button class="font-size-btn" onclick="mhFontDecrease()" title="Decrease font size" aria-label="Decrease font size">A-</button>
-        <button class="font-size-btn" onclick="mhFontIncrease()" title="Increase font size" aria-label="Increase font size">A+</button>
+
+    <div class="site-nav__links">
+      <a href="index.html" class="site-nav__link">Home</a>
+      <a href="resources.html" class="site-nav__link">Resources</a>
+      <a href="tools.html" class="site-nav__link site-nav__link--active">Clinical Tools</a>
+      <a href="guide.html" class="site-nav__link">Guides</a>
+    </div>
+
+    <div class="site-nav__controls">
+      <button class="site-nav__icon-btn" onclick="toggleGlobalSearch()" title="Search (Ctrl+K)" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+
+      <div class="site-nav__font-controls">
+        <button class="site-nav__font-btn" onclick="mhFontDecrease()" title="Decrease font size" aria-label="Decrease font size">A-</button>
+        <button class="site-nav__font-btn" onclick="mhFontIncrease()" title="Increase font size" aria-label="Increase font size">A+</button>
       </div>
-      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">&#9789;</button>
-      <button class="hamburger-btn" onclick="var h=this.closest('.site-header');h.classList.toggle('nav-open');this.setAttribute('aria-expanded',h.classList.contains('nav-open'))" aria-label="Toggle navigation menu" aria-expanded="false">
-        <span class="hamburger-bar"></span><span class="hamburger-bar"></span><span class="hamburger-bar"></span>
+
+      <button class="site-nav__icon-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+
+      <button class="site-nav__hamburger" id="hamburgerBtn" onclick="toggleMobileNav()" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
       </button>
     </div>
-    <nav class="nav-links" id="navLinks">
-      <a href="index.html" class="nav-link">Home</a>
-      <a href="resources.html" class="nav-link">Resources</a>
-      <a href="tools.html" class="nav-link active">Clinical Tools</a>
-      <a href="guide.html" class="nav-link">How-To Guides</a>
-    </nav>
-  </div>
-</header>
 
-<section class="hero">
-  <div class="hero-content">
-    <h1>Clinical Tools &amp; Worksheets</h1>
-    <p>Interactive exercises, worksheets, and reference materials organized by therapeutic modality. Fill in, copy, print, or use during sessions.</p>
+  </div>
+</nav>
+
+<!-- Mobile slide-out panel -->
+<div class="site-nav__mobile-panel" id="mobileNavPanel">
+  <a href="index.html" class="site-nav__mobile-link">Home</a>
+  <a href="resources.html" class="site-nav__mobile-link">Resources</a>
+  <a href="tools.html" class="site-nav__mobile-link site-nav__mobile-link--active">Clinical Tools</a>
+  <a href="guide.html" class="site-nav__mobile-link">Guides</a>
+</div>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="tools-hero">
+  <div class="tools-hero__inner">
+    <div class="tools-hero__overline">
+      <span class="ds-badge ds-badge--primary ds-badge--dot">Clinical Suite</span>
+    </div>
+    <h1 class="tools-hero__title">Clinical Tools</h1>
+    <p class="tools-hero__subtitle">Screening instruments, documentation templates, and clinical utilities for mental health professionals.</p>
+    <div class="tools-hero__stat">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      <span><strong>30+</strong> tools available</span>
+    </div>
   </div>
 </section>
+
+<!-- ============================================================
+     CATEGORY GRID
+     ============================================================ -->
+<div class="tools-category-grid ds-stagger">
+  <a href="#screening-tools" class="tools-category-card ds-animate-fade-up" onclick="smoothScrollTo(event, 'screening-tools')">
+    <div class="tools-category-card__icon" style="background: var(--ds-primary-50); color: var(--ds-primary-600);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+    </div>
+    <div class="tools-category-card__title">Screening</div>
+    <div class="tools-category-card__count">PHQ-9, GAD-7, AUDIT, DAST-10, C-SSRS</div>
+  </a>
+  <a href="#safety-plan-builder" class="tools-category-card ds-animate-fade-up" onclick="smoothScrollTo(event, 'safety-plan-builder')">
+    <div class="tools-category-card__icon" style="background: var(--ds-status-danger-bg); color: var(--ds-danger-600);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <div class="tools-category-card__title">Safety Planning</div>
+    <div class="tools-category-card__count">Safety plan builder, crisis tools</div>
+  </a>
+  <a href="#clinical-note-builder" class="tools-category-card ds-animate-fade-up" onclick="smoothScrollTo(event, 'clinical-note-builder')">
+    <div class="tools-category-card__icon" style="background: var(--ds-accent-50); color: var(--ds-accent-600);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+    </div>
+    <div class="tools-category-card__title">Documentation</div>
+    <div class="tools-category-card__count">SOAP notes, case conference, group notes</div>
+  </a>
+  <a href="#cbt" class="tools-category-card ds-animate-fade-up" onclick="smoothScrollTo(event, 'cbt')">
+    <div class="tools-category-card__icon" style="background: var(--ds-status-info-bg); color: var(--ds-info-600);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    <div class="tools-category-card__title">Templates</div>
+    <div class="tools-category-card__count">CBT, DBT, TF-CBT, MI, SFBT worksheets</div>
+  </a>
+  <a href="#cpt-reference" class="tools-category-card ds-animate-fade-up" onclick="smoothScrollTo(event, 'cpt-reference')">
+    <div class="tools-category-card__icon" style="background: var(--ds-status-success-bg); color: var(--ds-success-600);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    </div>
+    <div class="tools-category-card__title">Billing</div>
+    <div class="tools-category-card__count">CPT codes, prior auth, eligibility</div>
+  </a>
+  <a href="#hipaa-reference" class="tools-category-card ds-animate-fade-up" onclick="smoothScrollTo(event, 'hipaa-reference')">
+    <div class="tools-category-card__icon" style="background: var(--ds-status-warning-bg); color: var(--ds-warning-600);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    </div>
+    <div class="tools-category-card__title">Administrative</div>
+    <div class="tools-category-card__count">HIPAA, 42 CFR, chart audit, caseload</div>
+  </a>
+</div>
 
 <div class="page-container" id="main-content">
 
@@ -1405,41 +2094,87 @@
   <div class="tools-layout">
 
     <!-- Sidebar -->
-    <aside class="tools-sidebar">
+    <aside class="tools-sidebar" id="toolsSidebar">
       <nav class="sidebar-nav" id="sidebarNav">
-        <a href="#cbt" class="active">Cognitive Behavioral Therapy</a>
-        <a href="#tfcbt">Trauma-Focused CBT</a>
-        <a href="#dbt">Dialectical Behavior Therapy</a>
-        <a href="#mi">Motivational Interviewing</a>
-        <a href="#sfbt">Solution-Focused Brief</a>
-        <a href="#crisis-tools">Crisis Intervention</a>
-        <a href="#screening-tools">Screening Tools</a>
-        <a href="#safety-plan-builder">Safety Plan Builder</a>
-        <a href="#goal-bank">Treatment Plan Goal Bank</a>
-        <a href="#doc-best-practices">Documentation Best Practices</a>
-        <a href="#supervision-templates">Supervision &amp; Consultation</a>
-        <a href="#cpt-reference">Billing / CPT Codes</a>
-        <a href="#prior-auth-guide">Prior Authorization Guide</a>
-        <a href="#clinical-note-builder">Clinical Note Builder</a>
-        <a href="#caseload-calculator">Caseload Calculator</a>
-        <a href="#hipaa-reference">HIPAA Quick Reference</a>
-        <a href="#42cfr-part2">42 CFR Part 2 Guide</a>
-        <a href="#case-conference-note">Case Conference Note</a>
-        <a href="#group-therapy-note">Group Therapy Note</a>
-        <a href="#collateral-contact-log">Collateral Contact Log</a>
-        <a href="#medical-necessity-letter">Letter of Medical Necessity</a>
-        <a href="#referral-letter">Referral Letter Generator</a>
-        <a href="#court-report">Court Report Template</a>
-        <a href="#prior-auth-builder">Prior Auth Request Builder</a>
-        <a href="#treatment-summary">Treatment Summary Generator</a>
-        <a href="#client-handout">Client Handout Generator</a>
-        <a href="#mileage-tracker">Mileage / Travel Tracker</a>
-        <a href="#chart-audit">Chart Audit Tool</a>
-        <a href="#eligibility-screener">Eligibility Pre-Screener</a>
-        <a href="#emergency-card-generator">Emergency Contact Card</a>
-        <a href="#resource-comparison">Resource Comparison Matrix</a>
+        <div class="sidebar-nav__search">
+          <input type="text" class="sidebar-nav__search-input" id="sidebarSearch" placeholder="Find a tool..." oninput="filterSidebar(this.value)" aria-label="Search tools sidebar">
+        </div>
+
+        <div class="sidebar-nav__group" data-group="therapeutic">
+          <span class="sidebar-nav__group-title" onclick="toggleSidebarGroup(this)">Therapeutic Modalities</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#cbt" class="active">Cognitive Behavioral Therapy</a>
+            <a href="#tfcbt">Trauma-Focused CBT</a>
+            <a href="#dbt">Dialectical Behavior Therapy</a>
+            <a href="#mi">Motivational Interviewing</a>
+            <a href="#sfbt">Solution-Focused Brief</a>
+          </div>
+        </div>
+
+        <div class="sidebar-nav__group" data-group="screening">
+          <span class="sidebar-nav__group-title" onclick="toggleSidebarGroup(this)">Screening &amp; Assessment</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#screening-tools">Screening Tools</a>
+            <a href="#crisis-tools">Crisis Intervention</a>
+            <a href="#safety-plan-builder">Safety Plan Builder</a>
+            <a href="#goal-bank">Treatment Plan Goal Bank</a>
+          </div>
+        </div>
+
+        <div class="sidebar-nav__group" data-group="documentation">
+          <span class="sidebar-nav__group-title" onclick="toggleSidebarGroup(this)">Documentation</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#clinical-note-builder">Clinical Note Builder</a>
+            <a href="#doc-best-practices">Documentation Best Practices</a>
+            <a href="#case-conference-note">Case Conference Note</a>
+            <a href="#group-therapy-note">Group Therapy Note</a>
+            <a href="#collateral-contact-log">Collateral Contact Log</a>
+            <a href="#supervision-templates">Supervision &amp; Consultation</a>
+          </div>
+        </div>
+
+        <div class="sidebar-nav__group" data-group="templates">
+          <span class="sidebar-nav__group-title" onclick="toggleSidebarGroup(this)">Letters &amp; Templates</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#medical-necessity-letter">Letter of Medical Necessity</a>
+            <a href="#referral-letter">Referral Letter Generator</a>
+            <a href="#court-report">Court Report Template</a>
+            <a href="#treatment-summary">Treatment Summary Generator</a>
+            <a href="#client-handout">Client Handout Generator</a>
+          </div>
+        </div>
+
+        <div class="sidebar-nav__group" data-group="billing">
+          <span class="sidebar-nav__group-title" onclick="toggleSidebarGroup(this)">Billing &amp; Compliance</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#cpt-reference">Billing / CPT Codes</a>
+            <a href="#prior-auth-guide">Prior Authorization Guide</a>
+            <a href="#prior-auth-builder">Prior Auth Request Builder</a>
+            <a href="#hipaa-reference">HIPAA Quick Reference</a>
+            <a href="#42cfr-part2">42 CFR Part 2 Guide</a>
+            <a href="#eligibility-screener">Eligibility Pre-Screener</a>
+          </div>
+        </div>
+
+        <div class="sidebar-nav__group" data-group="admin">
+          <span class="sidebar-nav__group-title" onclick="toggleSidebarGroup(this)">Administrative Tools</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#caseload-calculator">Caseload Calculator</a>
+            <a href="#mileage-tracker">Mileage / Travel Tracker</a>
+            <a href="#chart-audit">Chart Audit Tool</a>
+            <a href="#emergency-card-generator">Emergency Contact Card</a>
+            <a href="#resource-comparison">Resource Comparison Matrix</a>
+          </div>
+        </div>
       </nav>
     </aside>
+
+    <!-- Mobile sidebar toggle button -->
+    <button class="sidebar-mobile-toggle" id="sidebarMobileToggle" onclick="toggleMobileSidebar()" aria-label="Toggle sidebar navigation" title="Open navigation">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <!-- Mobile sidebar overlay -->
+    <div class="sidebar-mobile-overlay" id="sidebarOverlay" onclick="toggleMobileSidebar()"></div>
 
     <!-- Main Content -->
     <main>
@@ -10971,13 +11706,75 @@ SAMHSA National Helpline: 1-800-662-4357</textarea>
 </div><!-- /page-container -->
 
 <footer class="site-footer">
-  <p>Greater Nashua Community Mental Health Resources &copy; 2026. For informational purposes only.</p>
-  <p>These tools are clinical aids, not a substitute for professional training, supervision, or clinical judgment.</p>
-  <div class="last-updated-bar">
-    <span class="last-updated-dot"></span>
-    Content last updated: June 24, 2026 &nbsp;|&nbsp; Wave 100
+  <div class="ds-container">
+
+    <div class="footer__grid">
+
+      <!-- Brand column -->
+      <div>
+        <a href="index.html" class="site-nav__logo" style="text-decoration:none">
+          <div class="site-nav__logo-mark">NH</div>
+          <span class="site-nav__logo-text">MH Resources</span>
+        </a>
+        <p class="footer__brand-desc">A comprehensive resource hub for clinicians, case managers, and community members in the Greater Nashua area.</p>
+
+        <div class="footer__crisis-box">
+          <div class="footer__crisis-title">Crisis? Get help now.</div>
+          <div class="footer__crisis-numbers">
+            <strong>988</strong> Suicide &amp; Crisis Lifeline<br>
+            <strong>1-833-710-6477</strong> NH Rapid Response<br>
+            <strong>(603) 889-6147</strong> GNMHC Crisis<br>
+            <strong>Text HOME to 741741</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigate -->
+      <div>
+        <div class="footer__col-title">Navigate</div>
+        <ul class="footer__links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="tools.html">Clinical Tools</a></li>
+          <li><a href="guide.html">Guides</a></li>
+        </ul>
+      </div>
+
+      <!-- Quick Access -->
+      <div>
+        <div class="footer__col-title">Quick Access</div>
+        <ul class="footer__links">
+          <li><a href="tools.html#screening-tools">Screening Tools</a></li>
+          <li><a href="tools.html#clinical-note-builder">Note Builder</a></li>
+          <li><a href="guide.html#crisisTree">Crisis Tree</a></li>
+          <li><a href="resources.html#housing">Housing Resources</a></li>
+        </ul>
+      </div>
+
+      <!-- Clinical -->
+      <div>
+        <div class="footer__col-title">Clinical</div>
+        <ul class="footer__links">
+          <li><a href="tools.html#cbt">CBT Worksheets</a></li>
+          <li><a href="tools.html#dbt">DBT Handouts</a></li>
+          <li><a href="tools.html#cpt-reference">CPT Codes</a></li>
+          <li><a href="tools.html#safety-plan-builder">Safety Planning</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <div class="footer__disclaimer">
+        For informational purposes only. These tools are clinical aids, not a substitute for professional training, supervision, or clinical judgment. Contact information and services may change; always verify by contacting organizations directly.
+      </div>
+      <div class="footer__meta">
+        <span><span class="footer__status-dot"></span> Updated Jun 24, 2026</span>
+        <a href="#" id="adminGate" style="color: var(--ds-text-muted); font-size: 11px;" aria-label="Version 4.0 - Admin access">v4.0</a>
+      </div>
+    </div>
+
   </div>
-  <p style="margin-top:8px"><a href="#" id="adminGate" style="color:var(--text-muted);font-size:11px" aria-label="Version 4.0 - Admin access">v4.0</a></p>
 </footer>
 
 <div class="toast" id="toast"></div>
@@ -10988,27 +11785,132 @@ function toggleExpand(el) {
   el.classList.toggle('open');
 }
 
+/* ===== THEME TOGGLE ===== */
+function toggleTheme() {
+  var html = document.documentElement;
+  var btn = document.getElementById('themeToggleBtn');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.removeAttribute('data-theme');
+    localStorage.setItem('theme', 'light');
+    if (btn) btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
+    if (btn) btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+  }
+}
+
+// Respect saved preference, then system preference
+(function() {
+  var saved = localStorage.getItem('theme');
+  var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (saved === 'dark' || (!saved && prefersDark)) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    var btn = document.getElementById('themeToggleBtn');
+    if (btn) btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+  }
+})();
+
+/* ===== MOBILE NAV TOGGLE ===== */
+function toggleMobileNav() {
+  var panel = document.getElementById('mobileNavPanel');
+  var btn = document.getElementById('hamburgerBtn');
+  var isOpen = panel.classList.toggle('is-open');
+  btn.setAttribute('aria-expanded', isOpen);
+}
+
+/* ===== SMOOTH SCROLL FOR CATEGORY CARDS ===== */
+function smoothScrollTo(e, id) {
+  e.preventDefault();
+  var el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Close mobile sidebar if open
+    var sidebar = document.getElementById('toolsSidebar');
+    if (sidebar && sidebar.classList.contains('mobile-open')) {
+      toggleMobileSidebar();
+    }
+  }
+}
+
+/* ===== SIDEBAR GROUP TOGGLE ===== */
+function toggleSidebarGroup(titleEl) {
+  titleEl.parentElement.classList.toggle('collapsed');
+}
+
+/* ===== SIDEBAR SEARCH / FILTER ===== */
+function filterSidebar(query) {
+  var links = document.querySelectorAll('#sidebarNav .sidebar-nav__group-links a');
+  var groups = document.querySelectorAll('#sidebarNav .sidebar-nav__group');
+  var q = query.toLowerCase().trim();
+
+  if (!q) {
+    links.forEach(function(a) { a.classList.remove('sidebar-hidden'); });
+    groups.forEach(function(g) { g.style.display = ''; g.classList.remove('collapsed'); });
+    return;
+  }
+
+  groups.forEach(function(g) {
+    var groupLinks = g.querySelectorAll('.sidebar-nav__group-links a');
+    var anyVisible = false;
+    groupLinks.forEach(function(a) {
+      var text = a.textContent.toLowerCase();
+      if (text.indexOf(q) !== -1) {
+        a.classList.remove('sidebar-hidden');
+        anyVisible = true;
+      } else {
+        a.classList.add('sidebar-hidden');
+      }
+    });
+    g.style.display = anyVisible ? '' : 'none';
+    if (anyVisible) g.classList.remove('collapsed');
+  });
+}
+
+/* ===== MOBILE SIDEBAR TOGGLE ===== */
+function toggleMobileSidebar() {
+  var sidebar = document.getElementById('toolsSidebar');
+  var overlay = document.getElementById('sidebarOverlay');
+  sidebar.classList.toggle('mobile-open');
+  overlay.classList.toggle('is-open');
+}
+
 /* ===== SIDEBAR ACTIVE STATE ===== */
 (function() {
-  const sections = document.querySelectorAll('.modality-section');
-  const sideLinks = document.querySelectorAll('#sidebarNav a');
-  const topLinks = document.querySelectorAll('#modalityNav .category-btn');
+  var sections = document.querySelectorAll('.modality-section');
+  var sideLinks = document.querySelectorAll('#sidebarNav a');
+  var topLinks = document.querySelectorAll('#modalityNav .category-btn');
 
   function updateActive() {
-    let current = '';
-    sections.forEach(s => {
-      const top = s.getBoundingClientRect().top;
+    var current = '';
+    sections.forEach(function(s) {
+      var top = s.getBoundingClientRect().top;
       if (top < 150) current = s.id;
     });
-    sideLinks.forEach(a => {
+    sideLinks.forEach(function(a) {
       a.classList.toggle('active', a.getAttribute('href') === '#' + current);
     });
-    topLinks.forEach(a => {
+    topLinks.forEach(function(a) {
       a.classList.toggle('active', a.getAttribute('href') === '#' + current);
     });
   }
   window.addEventListener('scroll', updateActive, { passive: true });
   updateActive();
+})();
+
+/* ===== SCROLL-TRIGGERED REVEAL ANIMATIONS ===== */
+(function() {
+  var reveals = document.querySelectorAll('.ds-reveal');
+  if (!reveals.length) return;
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('ds-reveal--visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(function(el) { observer.observe(el); });
 })();
 
 /* ===== TOAST ===== */
@@ -11360,23 +12262,7 @@ function voiceInput(targetId, btn) {
   });
 })();
 
-function toggleTheme() {
-  var html = document.documentElement;
-  var btn = document.querySelector('.theme-toggle');
-  if (html.getAttribute('data-theme') === 'dark') {
-    html.removeAttribute('data-theme');
-    btn.textContent = '☽'; // moon
-  } else {
-    html.setAttribute('data-theme', 'dark');
-    btn.textContent = '☀'; // sun
-  }
-}
-// Respect system preference
-if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-  document.documentElement.setAttribute('data-theme', 'dark');
-  var btn = document.querySelector('.theme-toggle');
-  if (btn) btn.textContent = '☀';
-}
+// toggleTheme and system preference detection are defined earlier in the page
 
 /* ===== SCREENING TOOL SCORING ENGINE ===== */
 

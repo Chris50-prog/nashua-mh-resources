@@ -1,0 +1,1764 @@
+/* ================================================================
+   DESIGN SYSTEM — Greater Nashua Mental Health Resource Hub
+   ================================================================
+   Foundation layer: colors, typography, spacing, components, layout,
+   motion, dark mode, and responsive breakpoints.
+
+   Import this file BEFORE style.css during the transition period.
+   All tokens live on :root as CSS custom properties so existing
+   selectors can adopt them incrementally.
+
+   Aesthetic direction: Headspace / Calm / Notion — warm, human,
+   trustworthy. NOT a government portal.
+
+   Last updated: 2026-06-24
+   ================================================================ */
+
+
+/* ================================================================
+   0. WEB FONTS
+   ================================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+
+/* ================================================================
+   1. COLOR PALETTE
+   ================================================================
+   Primary: Deep sage / teal — calming, clinical, trustworthy
+   Secondary: Warm slate — grounding, readable
+   Accent: Warm amber — attention, warmth, calls-to-action
+   Surfaces: Warm whites and creams, never cold blue-grays
+   ================================================================ */
+:root {
+
+  /* ---- Primary: Deep Sage ---- */
+  --ds-primary-50:  #f0f7f4;
+  --ds-primary-100: #dceee5;
+  --ds-primary-200: #bcdccd;
+  --ds-primary-300: #8ec4ae;
+  --ds-primary-400: #5ea68b;
+  --ds-primary-500: #3d8b70;
+  --ds-primary-600: #2d6f59;
+  --ds-primary-700: #265a49;
+  --ds-primary-800: #21493c;
+  --ds-primary-900: #1d3d33;
+  --ds-primary-950: #0e221c;
+
+  /* ---- Secondary: Warm Slate ---- */
+  --ds-secondary-50:  #f8f7f6;
+  --ds-secondary-100: #f0eeec;
+  --ds-secondary-200: #e0dbd7;
+  --ds-secondary-300: #ccc5be;
+  --ds-secondary-400: #b0a69c;
+  --ds-secondary-500: #9a8e82;
+  --ds-secondary-600: #8a7d71;
+  --ds-secondary-700: #73675d;
+  --ds-secondary-800: #5f564e;
+  --ds-secondary-900: #504841;
+  --ds-secondary-950: #2a2521;
+
+  /* ---- Accent: Warm Amber ---- */
+  --ds-accent-50:  #fefaf3;
+  --ds-accent-100: #fdf2de;
+  --ds-accent-200: #fae1b8;
+  --ds-accent-300: #f6cb88;
+  --ds-accent-400: #f1ae54;
+  --ds-accent-500: #ed9a30;
+  --ds-accent-600: #de7f1e;
+  --ds-accent-700: #b8621a;
+  --ds-accent-800: #934e1d;
+  --ds-accent-900: #78411b;
+  --ds-accent-950: #41200b;
+
+  /* ---- Coral (warm alternative accent) ---- */
+  --ds-coral-50:  #fef5f2;
+  --ds-coral-100: #fde8e1;
+  --ds-coral-200: #fdd5c8;
+  --ds-coral-300: #fab6a2;
+  --ds-coral-400: #f48e6e;
+  --ds-coral-500: #e96d49;
+  --ds-coral-600: #d6522e;
+  --ds-coral-700: #b44224;
+  --ds-coral-800: #943a22;
+  --ds-coral-900: #7b3422;
+  --ds-coral-950: #43180d;
+
+  /* ---- Success: Muted Forest ---- */
+  --ds-success-50:  #f2f8f3;
+  --ds-success-100: #e0f0e3;
+  --ds-success-200: #c3e0c8;
+  --ds-success-300: #96c9a0;
+  --ds-success-400: #64ab73;
+  --ds-success-500: #418f55;
+  --ds-success-600: #307443;
+  --ds-success-700: #285c38;
+  --ds-success-800: #234a2f;
+  --ds-success-900: #1e3d28;
+  --ds-success-950: #0e2116;
+
+  /* ---- Warning: Muted Saffron ---- */
+  --ds-warning-50:  #fdf9ef;
+  --ds-warning-100: #f9efd1;
+  --ds-warning-200: #f3dda0;
+  --ds-warning-300: #ecc56a;
+  --ds-warning-400: #e6af42;
+  --ds-warning-500: #dd962c;
+  --ds-warning-600: #c47523;
+  --ds-warning-700: #a3571f;
+  --ds-warning-800: #854520;
+  --ds-warning-900: #6d3a1e;
+  --ds-warning-950: #3e1d0d;
+
+  /* ---- Danger: Muted Rose ---- */
+  --ds-danger-50:  #fdf5f5;
+  --ds-danger-100: #fce8e8;
+  --ds-danger-200: #f9d5d5;
+  --ds-danger-300: #f3b3b3;
+  --ds-danger-400: #ea8585;
+  --ds-danger-500: #dc5f5f;
+  --ds-danger-600: #c84343;
+  --ds-danger-700: #a83535;
+  --ds-danger-800: #8c3030;
+  --ds-danger-900: #752d2d;
+  --ds-danger-950: #3f1313;
+
+  /* ---- Info: Calm Blue ---- */
+  --ds-info-50:  #f2f7fb;
+  --ds-info-100: #e2ecf5;
+  --ds-info-200: #ccdeee;
+  --ds-info-300: #a8c9e2;
+  --ds-info-400: #7daed3;
+  --ds-info-500: #5e95c5;
+  --ds-info-600: #4a7db6;
+  --ds-info-700: #4069a0;
+  --ds-info-800: #3a5783;
+  --ds-info-900: #334a6b;
+  --ds-info-950: #222f43;
+
+  /* ---- Surfaces ---- */
+  --ds-white:           #ffffff;
+  --ds-cream:           #fdfcfa;
+  --ds-warm-gray-50:    #faf9f7;
+  --ds-warm-gray-100:   #f5f3f0;
+  --ds-warm-gray-200:   #ece9e4;
+  --ds-warm-gray-300:   #ddd8d1;
+  --ds-warm-gray-400:   #c4bcb2;
+  --ds-warm-gray-500:   #a9a094;
+  --ds-warm-gray-600:   #938979;
+  --ds-warm-gray-700:   #7a7165;
+  --ds-warm-gray-800:   #655e54;
+  --ds-warm-gray-900:   #544e46;
+  --ds-warm-gray-950:   #2d2924;
+
+  /* ---- Text ---- */
+  --ds-text-primary:    #2d2924;   /* warm charcoal, never pure black */
+  --ds-text-secondary:  #6b6358;
+  --ds-text-muted:      #9a9186;
+  --ds-text-disabled:   #c4bcb2;
+  --ds-text-inverse:    #faf9f7;
+  --ds-text-link:       #2d6f59;
+  --ds-text-link-hover: #265a49;
+
+
+  /* ================================================================
+     2. SEMANTIC TOKENS
+     ================================================================
+     Map palette values to functional roles. These are the tokens
+     that components and pages consume directly.
+     ================================================================ */
+
+  /* -- Page -- */
+  --ds-page-bg:         var(--ds-warm-gray-50);
+  --ds-page-bg-alt:     var(--ds-cream);
+
+  /* -- Surface (cards, panels, modals) -- */
+  --ds-surface:         var(--ds-white);
+  --ds-surface-hover:   var(--ds-warm-gray-100);
+  --ds-surface-active:  var(--ds-warm-gray-200);
+  --ds-surface-raised:  var(--ds-white);
+  --ds-surface-sunken:  var(--ds-warm-gray-100);
+  --ds-surface-overlay: rgba(45, 41, 36, 0.5);
+
+  /* -- Borders -- */
+  --ds-border:          var(--ds-warm-gray-200);
+  --ds-border-subtle:   var(--ds-warm-gray-100);
+  --ds-border-strong:   var(--ds-warm-gray-400);
+  --ds-border-focus:    var(--ds-primary-500);
+
+  /* -- Interactive -- */
+  --ds-interactive:         var(--ds-primary-600);
+  --ds-interactive-hover:   var(--ds-primary-700);
+  --ds-interactive-active:  var(--ds-primary-800);
+  --ds-interactive-subtle:  var(--ds-primary-50);
+
+  /* -- Focus ring -- */
+  --ds-focus-ring:      0 0 0 2px var(--ds-white), 0 0 0 4px var(--ds-primary-500);
+
+  /* -- Status -- */
+  --ds-status-success-bg:    var(--ds-success-50);
+  --ds-status-success-text:  var(--ds-success-700);
+  --ds-status-success-icon:  var(--ds-success-500);
+
+  --ds-status-warning-bg:    var(--ds-warning-50);
+  --ds-status-warning-text:  var(--ds-warning-700);
+  --ds-status-warning-icon:  var(--ds-warning-500);
+
+  --ds-status-danger-bg:     var(--ds-danger-50);
+  --ds-status-danger-text:   var(--ds-danger-700);
+  --ds-status-danger-icon:   var(--ds-danger-500);
+
+  --ds-status-info-bg:       var(--ds-info-50);
+  --ds-status-info-text:     var(--ds-info-700);
+  --ds-status-info-icon:     var(--ds-info-500);
+
+
+  /* ================================================================
+     3. TYPOGRAPHY
+     ================================================================ */
+
+  /* -- Font families -- */
+  --ds-font-sans:   'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --ds-font-mono:   'JetBrains Mono', 'SF Mono', 'Fira Code', 'Fira Mono', 'Consolas', monospace;
+
+  /* -- Modular type scale -- */
+  --ds-text-xs:   0.75rem;    /* 12px */
+  --ds-text-sm:   0.875rem;   /* 14px */
+  --ds-text-base: 1rem;       /* 16px */
+  --ds-text-lg:   1.125rem;   /* 18px */
+  --ds-text-xl:   1.25rem;    /* 20px */
+  --ds-text-2xl:  1.5rem;     /* 24px */
+  --ds-text-3xl:  2rem;       /* 32px */
+  --ds-text-4xl:  2.5rem;     /* 40px */
+  --ds-text-5xl:  3rem;       /* 48px */
+
+  /* -- Line heights -- */
+  --ds-leading-none:    1;
+  --ds-leading-tight:   1.25;
+  --ds-leading-snug:    1.375;
+  --ds-leading-normal:  1.5;
+  --ds-leading-relaxed: 1.625;
+  --ds-leading-loose:   2;
+
+  /* -- Font weights -- */
+  --ds-weight-light:    300;
+  --ds-weight-regular:  400;
+  --ds-weight-medium:   500;
+  --ds-weight-semibold: 600;
+  --ds-weight-bold:     700;
+  --ds-weight-extrabold:800;
+
+  /* -- Letter spacing -- */
+  --ds-tracking-tighter: -0.05em;
+  --ds-tracking-tight:   -0.025em;
+  --ds-tracking-normal:  0em;
+  --ds-tracking-wide:    0.025em;
+  --ds-tracking-wider:   0.05em;
+  --ds-tracking-widest:  0.1em;
+
+
+  /* ================================================================
+     4. SPACING SYSTEM
+     ================================================================
+     4px base unit. Tokens from 4px to 96px.
+     ================================================================ */
+  --ds-space-0:   0;
+  --ds-space-px:  1px;
+  --ds-space-0-5: 0.125rem;  /*  2px */
+  --ds-space-1:   0.25rem;   /*  4px */
+  --ds-space-1-5: 0.375rem;  /*  6px */
+  --ds-space-2:   0.5rem;    /*  8px */
+  --ds-space-2-5: 0.625rem;  /* 10px */
+  --ds-space-3:   0.75rem;   /* 12px */
+  --ds-space-3-5: 0.875rem;  /* 14px */
+  --ds-space-4:   1rem;      /* 16px */
+  --ds-space-5:   1.25rem;   /* 20px */
+  --ds-space-6:   1.5rem;    /* 24px */
+  --ds-space-7:   1.75rem;   /* 28px */
+  --ds-space-8:   2rem;      /* 32px */
+  --ds-space-9:   2.25rem;   /* 36px */
+  --ds-space-10:  2.5rem;    /* 40px */
+  --ds-space-11:  2.75rem;   /* 44px */
+  --ds-space-12:  3rem;      /* 48px */
+  --ds-space-14:  3.5rem;    /* 56px */
+  --ds-space-16:  4rem;      /* 64px */
+  --ds-space-20:  5rem;      /* 80px */
+  --ds-space-24:  6rem;      /* 96px */
+
+
+  /* ================================================================
+     5. BORDERS & RADII
+     ================================================================ */
+  --ds-radius-none: 0;
+  --ds-radius-sm:   4px;
+  --ds-radius-md:   8px;
+  --ds-radius-lg:   12px;
+  --ds-radius-xl:   16px;
+  --ds-radius-2xl:  20px;
+  --ds-radius-3xl:  24px;
+  --ds-radius-full: 9999px;
+
+  --ds-border-width-thin:   1px;
+  --ds-border-width-medium: 1.5px;
+  --ds-border-width-thick:  2px;
+
+
+  /* ================================================================
+     6. SHADOWS
+     ================================================================
+     Warm-tinted shadows that avoid the cold blue cast.
+     ================================================================ */
+  --ds-shadow-xs:  0 1px 2px rgba(45, 41, 36, 0.05);
+  --ds-shadow-sm:  0 1px 3px rgba(45, 41, 36, 0.08), 0 1px 2px rgba(45, 41, 36, 0.04);
+  --ds-shadow-md:  0 4px 6px rgba(45, 41, 36, 0.07), 0 2px 4px rgba(45, 41, 36, 0.04);
+  --ds-shadow-lg:  0 10px 15px rgba(45, 41, 36, 0.08), 0 4px 6px rgba(45, 41, 36, 0.04);
+  --ds-shadow-xl:  0 20px 25px rgba(45, 41, 36, 0.08), 0 8px 10px rgba(45, 41, 36, 0.04);
+  --ds-shadow-2xl: 0 25px 50px rgba(45, 41, 36, 0.15);
+
+  /* Colored shadows for interactive states */
+  --ds-shadow-primary: 0 4px 14px rgba(45, 111, 89, 0.2);
+  --ds-shadow-accent:  0 4px 14px rgba(237, 154, 48, 0.2);
+  --ds-shadow-danger:  0 4px 14px rgba(220, 95, 95, 0.2);
+
+  /* Inner shadow for sunken inputs */
+  --ds-shadow-inner: inset 0 2px 4px rgba(45, 41, 36, 0.05);
+
+
+  /* ================================================================
+     7. LAYOUT
+     ================================================================ */
+  --ds-container-xs:   480px;
+  --ds-container-sm:   640px;
+  --ds-container-md:   768px;
+  --ds-container-lg:   960px;
+  --ds-container-xl:   1200px;
+  --ds-container-2xl:  1400px;
+
+  --ds-header-height:  64px;
+  --ds-sidebar-width:  280px;
+
+
+  /* ================================================================
+     8. Z-INDEX SCALE
+     ================================================================ */
+  --ds-z-base:       0;
+  --ds-z-raised:     1;
+  --ds-z-dropdown:   10;
+  --ds-z-sticky:     20;
+  --ds-z-overlay:    30;
+  --ds-z-modal:      40;
+  --ds-z-popover:    50;
+  --ds-z-toast:      60;
+  --ds-z-tooltip:    70;
+  --ds-z-max:        100;
+
+
+  /* ================================================================
+     9. MOTION / ANIMATION
+     ================================================================ */
+  --ds-duration-instant:  50ms;
+  --ds-duration-fast:     150ms;
+  --ds-duration-normal:   250ms;
+  --ds-duration-slow:     350ms;
+  --ds-duration-slower:   500ms;
+
+  --ds-ease-default:  cubic-bezier(0.4, 0, 0.2, 1);
+  --ds-ease-in:       cubic-bezier(0.4, 0, 1, 1);
+  --ds-ease-out:      cubic-bezier(0, 0, 0.2, 1);
+  --ds-ease-in-out:   cubic-bezier(0.4, 0, 0.2, 1);
+  --ds-ease-bounce:   cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ds-ease-spring:   cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  --ds-transition-colors:   color var(--ds-duration-fast) var(--ds-ease-default),
+                             background-color var(--ds-duration-fast) var(--ds-ease-default),
+                             border-color var(--ds-duration-fast) var(--ds-ease-default);
+  --ds-transition-shadow:   box-shadow var(--ds-duration-normal) var(--ds-ease-default);
+  --ds-transition-transform: transform var(--ds-duration-normal) var(--ds-ease-default);
+  --ds-transition-all:      all var(--ds-duration-normal) var(--ds-ease-default);
+}
+
+
+/* ================================================================
+   10. DARK MODE
+   ================================================================
+   Warm navy/charcoal backgrounds. Never pure black.
+   ================================================================ */
+[data-theme="dark"] {
+
+  /* -- Surfaces -- */
+  --ds-page-bg:         #1a1916;
+  --ds-page-bg-alt:     #1f1e1a;
+  --ds-surface:         #262420;
+  --ds-surface-hover:   #302e28;
+  --ds-surface-active:  #3a3731;
+  --ds-surface-raised:  #302e28;
+  --ds-surface-sunken:  #1a1916;
+  --ds-surface-overlay: rgba(0, 0, 0, 0.6);
+
+  /* -- Borders -- */
+  --ds-border:          #3d3a33;
+  --ds-border-subtle:   #302e28;
+  --ds-border-strong:   #5a5548;
+  --ds-border-focus:    var(--ds-primary-400);
+
+  /* -- Text -- */
+  --ds-text-primary:    #ede9e3;
+  --ds-text-secondary:  #a8a197;
+  --ds-text-muted:      #7d766c;
+  --ds-text-disabled:   #504b42;
+  --ds-text-inverse:    #2d2924;
+  --ds-text-link:       #8ec4ae;
+  --ds-text-link-hover: #bcdccd;
+
+  /* -- Interactive -- */
+  --ds-interactive:         var(--ds-primary-400);
+  --ds-interactive-hover:   var(--ds-primary-300);
+  --ds-interactive-active:  var(--ds-primary-200);
+  --ds-interactive-subtle:  rgba(61, 139, 112, 0.12);
+
+  /* -- Focus ring -- */
+  --ds-focus-ring: 0 0 0 2px #262420, 0 0 0 4px var(--ds-primary-400);
+
+  /* -- Shadows (darker, wider) -- */
+  --ds-shadow-xs:  0 1px 2px rgba(0, 0, 0, 0.2);
+  --ds-shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --ds-shadow-md:  0 4px 6px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+  --ds-shadow-lg:  0 10px 15px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.2);
+  --ds-shadow-xl:  0 20px 25px rgba(0, 0, 0, 0.3), 0 8px 10px rgba(0, 0, 0, 0.2);
+  --ds-shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.5);
+  --ds-shadow-primary: 0 4px 14px rgba(94, 166, 139, 0.15);
+  --ds-shadow-accent:  0 4px 14px rgba(241, 174, 84, 0.15);
+  --ds-shadow-danger:  0 4px 14px rgba(234, 133, 133, 0.15);
+  --ds-shadow-inner:   inset 0 2px 4px rgba(0, 0, 0, 0.15);
+
+  /* -- Status (darkened backgrounds) -- */
+  --ds-status-success-bg:    rgba(65, 143, 85, 0.1);
+  --ds-status-success-text:  var(--ds-success-300);
+  --ds-status-success-icon:  var(--ds-success-400);
+
+  --ds-status-warning-bg:    rgba(221, 150, 44, 0.1);
+  --ds-status-warning-text:  var(--ds-warning-300);
+  --ds-status-warning-icon:  var(--ds-warning-400);
+
+  --ds-status-danger-bg:     rgba(220, 95, 95, 0.1);
+  --ds-status-danger-text:   var(--ds-danger-300);
+  --ds-status-danger-icon:   var(--ds-danger-400);
+
+  --ds-status-info-bg:       rgba(94, 149, 197, 0.1);
+  --ds-status-info-text:     var(--ds-info-300);
+  --ds-status-info-icon:     var(--ds-info-400);
+}
+
+
+/* ================================================================
+   11. BASE TYPOGRAPHY CLASSES
+   ================================================================
+   Opt-in via .ds-* classes. Does not override existing styles
+   unless you apply them.
+   ================================================================ */
+
+/* Headings */
+.ds-heading-1 {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-5xl);
+  font-weight: var(--ds-weight-bold);
+  line-height: var(--ds-leading-tight);
+  letter-spacing: var(--ds-tracking-tight);
+  color: var(--ds-text-primary);
+}
+.ds-heading-2 {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-4xl);
+  font-weight: var(--ds-weight-bold);
+  line-height: var(--ds-leading-tight);
+  letter-spacing: var(--ds-tracking-tight);
+  color: var(--ds-text-primary);
+}
+.ds-heading-3 {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-3xl);
+  font-weight: var(--ds-weight-semibold);
+  line-height: var(--ds-leading-snug);
+  letter-spacing: var(--ds-tracking-tight);
+  color: var(--ds-text-primary);
+}
+.ds-heading-4 {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-2xl);
+  font-weight: var(--ds-weight-semibold);
+  line-height: var(--ds-leading-snug);
+  color: var(--ds-text-primary);
+}
+.ds-heading-5 {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xl);
+  font-weight: var(--ds-weight-semibold);
+  line-height: var(--ds-leading-snug);
+  color: var(--ds-text-primary);
+}
+.ds-heading-6 {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-semibold);
+  line-height: var(--ds-leading-normal);
+  color: var(--ds-text-primary);
+}
+
+/* Body text */
+.ds-body-lg {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-regular);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--ds-text-primary);
+}
+.ds-body {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-regular);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--ds-text-primary);
+}
+.ds-body-sm {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-regular);
+  line-height: var(--ds-leading-normal);
+  color: var(--ds-text-secondary);
+}
+.ds-body-xs {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-regular);
+  line-height: var(--ds-leading-normal);
+  color: var(--ds-text-muted);
+}
+
+/* Labels and captions */
+.ds-label {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  line-height: var(--ds-leading-none);
+  letter-spacing: var(--ds-tracking-wide);
+  color: var(--ds-text-secondary);
+}
+.ds-overline {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  line-height: var(--ds-leading-none);
+  letter-spacing: var(--ds-tracking-widest);
+  text-transform: uppercase;
+  color: var(--ds-text-muted);
+}
+.ds-caption {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-regular);
+  line-height: var(--ds-leading-normal);
+  color: var(--ds-text-muted);
+}
+
+/* Code / clinical terms */
+.ds-code {
+  font-family: var(--ds-font-mono);
+  font-size: 0.9em;
+  font-weight: var(--ds-weight-regular);
+  background: var(--ds-surface-sunken);
+  color: var(--ds-primary-700);
+  padding: 0.15em 0.4em;
+  border-radius: var(--ds-radius-sm);
+}
+[data-theme="dark"] .ds-code {
+  color: var(--ds-primary-300);
+}
+.ds-code-block {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-regular);
+  line-height: var(--ds-leading-relaxed);
+  background: var(--ds-surface-sunken);
+  color: var(--ds-text-primary);
+  padding: var(--ds-space-4);
+  border-radius: var(--ds-radius-lg);
+  border: 1px solid var(--ds-border);
+  overflow-x: auto;
+  tab-size: 2;
+}
+
+
+/* ================================================================
+   12. COMPONENT STYLES
+   ================================================================ */
+
+/* ---- Cards ---- */
+.ds-card {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-xl);
+  box-shadow: var(--ds-shadow-sm);
+  overflow: hidden;
+  transition: var(--ds-transition-shadow), var(--ds-transition-transform);
+}
+.ds-card:hover {
+  box-shadow: var(--ds-shadow-md);
+  transform: translateY(-2px);
+}
+.ds-card--flat {
+  box-shadow: none;
+}
+.ds-card--flat:hover {
+  box-shadow: var(--ds-shadow-sm);
+  transform: none;
+}
+.ds-card--interactive {
+  cursor: pointer;
+}
+.ds-card--interactive:hover {
+  border-color: var(--ds-primary-300);
+  box-shadow: var(--ds-shadow-lg);
+  transform: translateY(-3px);
+}
+.ds-card--interactive:active {
+  transform: translateY(-1px);
+  box-shadow: var(--ds-shadow-md);
+}
+.ds-card__header {
+  padding: var(--ds-space-5) var(--ds-space-6);
+  border-bottom: 1px solid var(--ds-border-subtle);
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+}
+.ds-card__body {
+  padding: var(--ds-space-5) var(--ds-space-6);
+}
+.ds-card__footer {
+  padding: var(--ds-space-4) var(--ds-space-6);
+  border-top: 1px solid var(--ds-border-subtle);
+  background: var(--ds-surface-sunken);
+}
+.ds-card__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--ds-radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--ds-text-xl);
+  flex-shrink: 0;
+}
+.ds-card__title {
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  line-height: var(--ds-leading-snug);
+}
+.ds-card__subtitle {
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  margin-top: var(--ds-space-0-5);
+}
+.ds-card__description {
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+}
+
+
+/* ---- Buttons ---- */
+.ds-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-2-5) var(--ds-space-5);
+  min-height: 40px;
+  border-radius: var(--ds-radius-md);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  line-height: var(--ds-leading-none);
+  cursor: pointer;
+  border: 1px solid transparent;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  transition: var(--ds-transition-colors), var(--ds-transition-shadow);
+}
+.ds-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--ds-focus-ring);
+}
+
+/* Primary */
+.ds-btn--primary {
+  background: var(--ds-interactive);
+  color: var(--ds-text-inverse);
+  border-color: var(--ds-interactive);
+}
+.ds-btn--primary:hover {
+  background: var(--ds-interactive-hover);
+  border-color: var(--ds-interactive-hover);
+  text-decoration: none;
+}
+.ds-btn--primary:active {
+  background: var(--ds-interactive-active);
+  border-color: var(--ds-interactive-active);
+}
+
+/* Secondary (outlined) */
+.ds-btn--secondary {
+  background: var(--ds-surface);
+  color: var(--ds-text-primary);
+  border-color: var(--ds-border);
+}
+.ds-btn--secondary:hover {
+  background: var(--ds-surface-hover);
+  border-color: var(--ds-border-strong);
+  text-decoration: none;
+}
+.ds-btn--secondary:active {
+  background: var(--ds-surface-active);
+}
+
+/* Ghost (text only) */
+.ds-btn--ghost {
+  background: transparent;
+  color: var(--ds-text-secondary);
+  border-color: transparent;
+}
+.ds-btn--ghost:hover {
+  background: var(--ds-surface-hover);
+  color: var(--ds-text-primary);
+  text-decoration: none;
+}
+.ds-btn--ghost:active {
+  background: var(--ds-surface-active);
+}
+
+/* Danger */
+.ds-btn--danger {
+  background: var(--ds-danger-600);
+  color: var(--ds-text-inverse);
+  border-color: var(--ds-danger-600);
+}
+.ds-btn--danger:hover {
+  background: var(--ds-danger-700);
+  border-color: var(--ds-danger-700);
+  text-decoration: none;
+}
+.ds-btn--danger:active {
+  background: var(--ds-danger-800);
+  border-color: var(--ds-danger-800);
+}
+
+/* Accent */
+.ds-btn--accent {
+  background: var(--ds-accent-500);
+  color: var(--ds-white);
+  border-color: var(--ds-accent-500);
+}
+.ds-btn--accent:hover {
+  background: var(--ds-accent-600);
+  border-color: var(--ds-accent-600);
+  text-decoration: none;
+}
+.ds-btn--accent:active {
+  background: var(--ds-accent-700);
+  border-color: var(--ds-accent-700);
+}
+
+/* Sizes */
+.ds-btn--sm {
+  padding: var(--ds-space-1-5) var(--ds-space-3);
+  min-height: 32px;
+  font-size: var(--ds-text-xs);
+  border-radius: var(--ds-radius-sm);
+}
+.ds-btn--lg {
+  padding: var(--ds-space-3) var(--ds-space-6);
+  min-height: 48px;
+  font-size: var(--ds-text-base);
+  border-radius: var(--ds-radius-lg);
+}
+.ds-btn--xl {
+  padding: var(--ds-space-4) var(--ds-space-8);
+  min-height: 56px;
+  font-size: var(--ds-text-lg);
+  border-radius: var(--ds-radius-lg);
+}
+
+/* Icon-only button */
+.ds-btn--icon {
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--ds-radius-md);
+}
+.ds-btn--icon.ds-btn--sm {
+  width: 32px;
+  height: 32px;
+}
+.ds-btn--icon.ds-btn--lg {
+  width: 48px;
+  height: 48px;
+}
+
+/* Disabled state */
+.ds-btn:disabled,
+.ds-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Loading state */
+.ds-btn--loading {
+  position: relative;
+  color: transparent !important;
+  pointer-events: none;
+}
+.ds-btn--loading::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: ds-spin 0.6s linear infinite;
+}
+
+
+/* ---- Form Inputs ---- */
+.ds-input {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  padding: var(--ds-space-2-5) var(--ds-space-3);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-regular);
+  line-height: var(--ds-leading-normal);
+  color: var(--ds-text-primary);
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
+  box-shadow: var(--ds-shadow-inner);
+  transition: var(--ds-transition-colors), var(--ds-transition-shadow);
+  -webkit-appearance: none;
+  appearance: none;
+}
+.ds-input::placeholder {
+  color: var(--ds-text-muted);
+}
+.ds-input:hover {
+  border-color: var(--ds-border-strong);
+}
+.ds-input:focus {
+  outline: none;
+  border-color: var(--ds-border-focus);
+  box-shadow: var(--ds-focus-ring);
+}
+.ds-input:disabled {
+  background: var(--ds-surface-sunken);
+  color: var(--ds-text-disabled);
+  cursor: not-allowed;
+}
+
+/* Textarea */
+.ds-textarea {
+  composes: ds-input;
+  min-height: 120px;
+  resize: vertical;
+}
+textarea.ds-input {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Select */
+select.ds-input {
+  padding-right: var(--ds-space-10);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b6358' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+}
+
+/* Input sizing */
+.ds-input--sm {
+  min-height: 36px;
+  padding: var(--ds-space-1-5) var(--ds-space-2-5);
+  font-size: var(--ds-text-sm);
+}
+.ds-input--lg {
+  min-height: 52px;
+  padding: var(--ds-space-3) var(--ds-space-4);
+  font-size: var(--ds-text-lg);
+}
+
+/* Input states */
+.ds-input--error {
+  border-color: var(--ds-danger-500);
+}
+.ds-input--error:focus {
+  box-shadow: 0 0 0 2px var(--ds-white), 0 0 0 4px var(--ds-danger-500);
+}
+.ds-input--success {
+  border-color: var(--ds-success-500);
+}
+
+/* Form field wrapper */
+.ds-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-1-5);
+}
+.ds-field__label {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-primary);
+}
+.ds-field__label--required::after {
+  content: ' *';
+  color: var(--ds-danger-500);
+}
+.ds-field__hint {
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+}
+.ds-field__error {
+  font-size: var(--ds-text-xs);
+  color: var(--ds-danger-600);
+  font-weight: var(--ds-weight-medium);
+}
+
+
+/* ---- Badges / Pills ---- */
+.ds-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  padding: var(--ds-space-0-5) var(--ds-space-2-5);
+  border-radius: var(--ds-radius-full);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-medium);
+  line-height: var(--ds-leading-normal);
+  white-space: nowrap;
+}
+
+/* Badge variants */
+.ds-badge--default {
+  background: var(--ds-warm-gray-100);
+  color: var(--ds-text-secondary);
+}
+.ds-badge--primary {
+  background: var(--ds-primary-50);
+  color: var(--ds-primary-700);
+}
+.ds-badge--accent {
+  background: var(--ds-accent-50);
+  color: var(--ds-accent-700);
+}
+.ds-badge--success {
+  background: var(--ds-status-success-bg);
+  color: var(--ds-status-success-text);
+}
+.ds-badge--warning {
+  background: var(--ds-status-warning-bg);
+  color: var(--ds-status-warning-text);
+}
+.ds-badge--danger {
+  background: var(--ds-status-danger-bg);
+  color: var(--ds-status-danger-text);
+}
+.ds-badge--info {
+  background: var(--ds-status-info-bg);
+  color: var(--ds-status-info-text);
+}
+.ds-badge--coral {
+  background: var(--ds-coral-50);
+  color: var(--ds-coral-700);
+}
+
+/* Badge sizes */
+.ds-badge--sm {
+  padding: var(--ds-space-0) var(--ds-space-2);
+  font-size: 0.6875rem; /* 11px */
+}
+.ds-badge--lg {
+  padding: var(--ds-space-1) var(--ds-space-3);
+  font-size: var(--ds-text-sm);
+}
+
+/* Badge with dot indicator */
+.ds-badge--dot::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+
+/* ---- Dividers ---- */
+.ds-divider {
+  border: none;
+  height: 1px;
+  background: var(--ds-border-subtle);
+  margin: var(--ds-space-6) 0;
+}
+.ds-divider--strong {
+  background: var(--ds-border);
+}
+.ds-divider--dashed {
+  background: none;
+  border-top: 1px dashed var(--ds-border);
+}
+.ds-divider--with-label {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-4);
+  background: none;
+  height: auto;
+  color: var(--ds-text-muted);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--ds-tracking-wider);
+}
+.ds-divider--with-label::before,
+.ds-divider--with-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--ds-border-subtle);
+}
+
+
+/* ---- Tooltips ---- */
+.ds-tooltip {
+  position: relative;
+}
+.ds-tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  padding: var(--ds-space-1-5) var(--ds-space-3);
+  background: var(--ds-warm-gray-950);
+  color: var(--ds-warm-gray-50);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-medium);
+  line-height: var(--ds-leading-normal);
+  white-space: nowrap;
+  border-radius: var(--ds-radius-md);
+  box-shadow: var(--ds-shadow-lg);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--ds-duration-fast) var(--ds-ease-default),
+              transform var(--ds-duration-fast) var(--ds-ease-default);
+  z-index: var(--ds-z-tooltip);
+}
+.ds-tooltip::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: var(--ds-warm-gray-950);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--ds-duration-fast) var(--ds-ease-default);
+  z-index: var(--ds-z-tooltip);
+}
+.ds-tooltip:hover::after,
+.ds-tooltip:focus-visible::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.ds-tooltip:hover::before,
+.ds-tooltip:focus-visible::before {
+  opacity: 1;
+}
+
+
+/* ---- Toast Notifications ---- */
+.ds-toast {
+  position: fixed;
+  bottom: var(--ds-space-6);
+  right: var(--ds-space-6);
+  z-index: var(--ds-z-toast);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-4) var(--ds-space-5);
+  min-width: 320px;
+  max-width: 480px;
+  background: var(--ds-surface-raised);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-xl);
+  box-shadow: var(--ds-shadow-xl);
+  transform: translateY(16px);
+  opacity: 0;
+  transition: transform var(--ds-duration-normal) var(--ds-ease-out),
+              opacity var(--ds-duration-normal) var(--ds-ease-out);
+  pointer-events: none;
+}
+.ds-toast--visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+.ds-toast__icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.ds-toast__content {
+  flex: 1;
+}
+.ds-toast__title {
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+}
+.ds-toast__message {
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  margin-top: var(--ds-space-0-5);
+  line-height: var(--ds-leading-normal);
+}
+.ds-toast__close {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--ds-radius-sm);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--ds-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: var(--ds-transition-colors);
+}
+.ds-toast__close:hover {
+  background: var(--ds-surface-hover);
+  color: var(--ds-text-primary);
+}
+
+/* Toast variants */
+.ds-toast--success {
+  border-left: 3px solid var(--ds-success-500);
+}
+.ds-toast--warning {
+  border-left: 3px solid var(--ds-warning-500);
+}
+.ds-toast--danger {
+  border-left: 3px solid var(--ds-danger-500);
+}
+.ds-toast--info {
+  border-left: 3px solid var(--ds-info-500);
+}
+
+
+/* ---- Alert / Callout ---- */
+.ds-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-4) var(--ds-space-5);
+  border-radius: var(--ds-radius-lg);
+  border: 1px solid transparent;
+}
+.ds-alert--info {
+  background: var(--ds-status-info-bg);
+  border-color: var(--ds-info-200);
+  color: var(--ds-status-info-text);
+}
+.ds-alert--success {
+  background: var(--ds-status-success-bg);
+  border-color: var(--ds-success-200);
+  color: var(--ds-status-success-text);
+}
+.ds-alert--warning {
+  background: var(--ds-status-warning-bg);
+  border-color: var(--ds-warning-200);
+  color: var(--ds-status-warning-text);
+}
+.ds-alert--danger {
+  background: var(--ds-status-danger-bg);
+  border-color: var(--ds-danger-200);
+  color: var(--ds-status-danger-text);
+}
+.ds-alert__icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+}
+.ds-alert__content {
+  flex: 1;
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-relaxed);
+}
+.ds-alert__title {
+  font-weight: var(--ds-weight-semibold);
+  margin-bottom: var(--ds-space-1);
+}
+
+
+/* ---- Avatar ---- */
+.ds-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-primary-100);
+  color: var(--ds-primary-700);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.ds-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ds-avatar--sm { width: 32px; height: 32px; font-size: var(--ds-text-xs); }
+.ds-avatar--lg { width: 48px; height: 48px; font-size: var(--ds-text-base); }
+.ds-avatar--xl { width: 64px; height: 64px; font-size: var(--ds-text-xl); }
+
+
+/* ================================================================
+   13. LAYOUT PRIMITIVES
+   ================================================================ */
+
+/* ---- Container ---- */
+.ds-container {
+  width: 100%;
+  max-width: var(--ds-container-xl);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--ds-space-6);
+  padding-right: var(--ds-space-6);
+}
+.ds-container--narrow {
+  max-width: var(--ds-container-sm);
+}
+.ds-container--prose {
+  max-width: var(--ds-container-lg);
+}
+.ds-container--wide {
+  max-width: var(--ds-container-2xl);
+}
+.ds-container--full {
+  max-width: none;
+}
+
+/* ---- CSS Grid System (12-column) ---- */
+.ds-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--ds-space-6);
+}
+.ds-grid--tight   { gap: var(--ds-space-3); }
+.ds-grid--relaxed { gap: var(--ds-space-8); }
+.ds-grid--loose   { gap: var(--ds-space-12); }
+
+/* Column spans */
+.ds-col-1  { grid-column: span 1; }
+.ds-col-2  { grid-column: span 2; }
+.ds-col-3  { grid-column: span 3; }
+.ds-col-4  { grid-column: span 4; }
+.ds-col-5  { grid-column: span 5; }
+.ds-col-6  { grid-column: span 6; }
+.ds-col-7  { grid-column: span 7; }
+.ds-col-8  { grid-column: span 8; }
+.ds-col-9  { grid-column: span 9; }
+.ds-col-10 { grid-column: span 10; }
+.ds-col-11 { grid-column: span 11; }
+.ds-col-12 { grid-column: span 12; }
+
+/* Auto-fit grid (card layouts) */
+.ds-auto-grid {
+  display: grid;
+  gap: var(--ds-space-6);
+  grid-template-columns: repeat(auto-fill, minmax(var(--ds-auto-grid-min, 280px), 1fr));
+}
+
+/* ---- Stack (vertical spacing) ---- */
+.ds-stack {
+  display: flex;
+  flex-direction: column;
+}
+.ds-stack > * + * {
+  margin-top: var(--ds-stack-gap, var(--ds-space-4));
+}
+.ds-stack--xs  { --ds-stack-gap: var(--ds-space-1); }
+.ds-stack--sm  { --ds-stack-gap: var(--ds-space-2); }
+.ds-stack--md  { --ds-stack-gap: var(--ds-space-4); }
+.ds-stack--lg  { --ds-stack-gap: var(--ds-space-6); }
+.ds-stack--xl  { --ds-stack-gap: var(--ds-space-8); }
+.ds-stack--2xl { --ds-stack-gap: var(--ds-space-12); }
+
+/* ---- Cluster (horizontal spacing) ---- */
+.ds-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-cluster-gap, var(--ds-space-3));
+  align-items: center;
+}
+.ds-cluster--xs  { --ds-cluster-gap: var(--ds-space-1); }
+.ds-cluster--sm  { --ds-cluster-gap: var(--ds-space-2); }
+.ds-cluster--md  { --ds-cluster-gap: var(--ds-space-4); }
+.ds-cluster--lg  { --ds-cluster-gap: var(--ds-space-6); }
+
+/* ---- Sidebar + Content ---- */
+.ds-sidebar-layout {
+  display: flex;
+  gap: var(--ds-space-8);
+}
+.ds-sidebar-layout__sidebar {
+  width: var(--ds-sidebar-width);
+  flex-shrink: 0;
+}
+.ds-sidebar-layout__content {
+  flex: 1;
+  min-width: 0;  /* prevent overflow */
+}
+
+/* ---- Full-bleed section ---- */
+.ds-full-bleed {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+/* ---- Section spacing ---- */
+.ds-section {
+  padding-top: var(--ds-space-16);
+  padding-bottom: var(--ds-space-16);
+}
+.ds-section--sm {
+  padding-top: var(--ds-space-8);
+  padding-bottom: var(--ds-space-8);
+}
+.ds-section--lg {
+  padding-top: var(--ds-space-24);
+  padding-bottom: var(--ds-space-24);
+}
+
+/* ---- Center utility ---- */
+.ds-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- Visually hidden but accessible ---- */
+.ds-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+
+/* ================================================================
+   14. ANIMATIONS & MOTION
+   ================================================================ */
+
+/* ---- Keyframes ---- */
+@keyframes ds-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes ds-fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes ds-fade-down {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes ds-slide-in-right {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes ds-slide-in-left {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes ds-scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes ds-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes ds-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.5; }
+}
+
+/* Loading shimmer */
+@keyframes ds-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ---- Animation utility classes ---- */
+.ds-animate-fade-in       { animation: ds-fade-in var(--ds-duration-normal) var(--ds-ease-out) both; }
+.ds-animate-fade-up       { animation: ds-fade-up var(--ds-duration-normal) var(--ds-ease-out) both; }
+.ds-animate-fade-down     { animation: ds-fade-down var(--ds-duration-normal) var(--ds-ease-out) both; }
+.ds-animate-slide-right   { animation: ds-slide-in-right var(--ds-duration-normal) var(--ds-ease-out) both; }
+.ds-animate-slide-left    { animation: ds-slide-in-left var(--ds-duration-normal) var(--ds-ease-out) both; }
+.ds-animate-scale-in      { animation: ds-scale-in var(--ds-duration-normal) var(--ds-ease-out) both; }
+.ds-animate-spin           { animation: ds-spin 1s linear infinite; }
+.ds-animate-pulse          { animation: ds-pulse 2s var(--ds-ease-in-out) infinite; }
+
+/* Staggered children (use with data-stagger on parent) */
+.ds-stagger > *:nth-child(1)  { animation-delay: 0ms; }
+.ds-stagger > *:nth-child(2)  { animation-delay: 50ms; }
+.ds-stagger > *:nth-child(3)  { animation-delay: 100ms; }
+.ds-stagger > *:nth-child(4)  { animation-delay: 150ms; }
+.ds-stagger > *:nth-child(5)  { animation-delay: 200ms; }
+.ds-stagger > *:nth-child(6)  { animation-delay: 250ms; }
+.ds-stagger > *:nth-child(7)  { animation-delay: 300ms; }
+.ds-stagger > *:nth-child(8)  { animation-delay: 350ms; }
+.ds-stagger > *:nth-child(9)  { animation-delay: 400ms; }
+.ds-stagger > *:nth-child(10) { animation-delay: 450ms; }
+.ds-stagger > *:nth-child(11) { animation-delay: 500ms; }
+.ds-stagger > *:nth-child(12) { animation-delay: 550ms; }
+
+/* ---- Loading shimmer placeholder ---- */
+.ds-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--ds-warm-gray-100) 25%,
+    var(--ds-warm-gray-200) 50%,
+    var(--ds-warm-gray-100) 75%
+  );
+  background-size: 200% 100%;
+  animation: ds-shimmer 1.5s var(--ds-ease-in-out) infinite;
+  border-radius: var(--ds-radius-md);
+  color: transparent !important;
+  user-select: none;
+  pointer-events: none;
+}
+.ds-skeleton--text {
+  height: 1em;
+  margin-bottom: var(--ds-space-2);
+  border-radius: var(--ds-radius-sm);
+}
+.ds-skeleton--heading {
+  height: 1.5em;
+  width: 60%;
+  margin-bottom: var(--ds-space-3);
+}
+.ds-skeleton--circle {
+  border-radius: var(--ds-radius-full);
+}
+.ds-skeleton--card {
+  height: 200px;
+  border-radius: var(--ds-radius-xl);
+}
+
+[data-theme="dark"] .ds-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--ds-surface) 25%,
+    var(--ds-surface-hover) 50%,
+    var(--ds-surface) 75%
+  );
+  background-size: 200% 100%;
+}
+
+/* ---- Scroll-triggered entrance ---- */
+.ds-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--ds-duration-slow) var(--ds-ease-out),
+              transform var(--ds-duration-slow) var(--ds-ease-out);
+}
+.ds-reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ================================================================
+   15. REDUCED MOTION
+   ================================================================
+   Respects user preferences. All animations and transitions
+   are minimized for users who opt out of motion.
+   ================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .ds-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .ds-card:hover,
+  .ds-card--interactive:hover {
+    transform: none;
+  }
+
+  .ds-skeleton {
+    animation: none;
+    background: var(--ds-warm-gray-200);
+  }
+}
+
+
+/* ================================================================
+   16. RESPONSIVE BREAKPOINTS
+   ================================================================
+   Mobile-first:
+     Default   = mobile   (< 640px)
+     sm        = tablet   (>= 640px)
+     md        = desktop  (>= 1024px)
+     lg        = wide     (>= 1400px)
+   ================================================================ */
+
+/* ---- Tablet: >= 640px ---- */
+@media (min-width: 640px) {
+  .ds-container {
+    padding-left: var(--ds-space-8);
+    padding-right: var(--ds-space-8);
+  }
+
+  /* Responsive column overrides */
+  .ds-sm-col-1  { grid-column: span 1; }
+  .ds-sm-col-2  { grid-column: span 2; }
+  .ds-sm-col-3  { grid-column: span 3; }
+  .ds-sm-col-4  { grid-column: span 4; }
+  .ds-sm-col-5  { grid-column: span 5; }
+  .ds-sm-col-6  { grid-column: span 6; }
+  .ds-sm-col-7  { grid-column: span 7; }
+  .ds-sm-col-8  { grid-column: span 8; }
+  .ds-sm-col-9  { grid-column: span 9; }
+  .ds-sm-col-10 { grid-column: span 10; }
+  .ds-sm-col-11 { grid-column: span 11; }
+  .ds-sm-col-12 { grid-column: span 12; }
+
+  /* Hide/show */
+  .ds-hide-sm { display: none; }
+  .ds-show-sm { display: block; }
+}
+
+/* ---- Desktop: >= 1024px ---- */
+@media (min-width: 1024px) {
+  .ds-md-col-1  { grid-column: span 1; }
+  .ds-md-col-2  { grid-column: span 2; }
+  .ds-md-col-3  { grid-column: span 3; }
+  .ds-md-col-4  { grid-column: span 4; }
+  .ds-md-col-5  { grid-column: span 5; }
+  .ds-md-col-6  { grid-column: span 6; }
+  .ds-md-col-7  { grid-column: span 7; }
+  .ds-md-col-8  { grid-column: span 8; }
+  .ds-md-col-9  { grid-column: span 9; }
+  .ds-md-col-10 { grid-column: span 10; }
+  .ds-md-col-11 { grid-column: span 11; }
+  .ds-md-col-12 { grid-column: span 12; }
+
+  /* Hide/show */
+  .ds-hide-md { display: none; }
+  .ds-show-md { display: block; }
+}
+
+/* ---- Wide: >= 1400px ---- */
+@media (min-width: 1400px) {
+  .ds-lg-col-1  { grid-column: span 1; }
+  .ds-lg-col-2  { grid-column: span 2; }
+  .ds-lg-col-3  { grid-column: span 3; }
+  .ds-lg-col-4  { grid-column: span 4; }
+  .ds-lg-col-5  { grid-column: span 5; }
+  .ds-lg-col-6  { grid-column: span 6; }
+  .ds-lg-col-7  { grid-column: span 7; }
+  .ds-lg-col-8  { grid-column: span 8; }
+  .ds-lg-col-9  { grid-column: span 9; }
+  .ds-lg-col-10 { grid-column: span 10; }
+  .ds-lg-col-11 { grid-column: span 11; }
+  .ds-lg-col-12 { grid-column: span 12; }
+
+  /* Hide/show */
+  .ds-hide-lg { display: none; }
+  .ds-show-lg { display: block; }
+}
+
+/* ---- Mobile-specific (< 640px) ---- */
+@media (max-width: 639px) {
+  .ds-container {
+    padding-left: var(--ds-space-4);
+    padding-right: var(--ds-space-4);
+  }
+
+  /* Grid goes to single column */
+  .ds-grid {
+    grid-template-columns: 1fr;
+    gap: var(--ds-space-4);
+  }
+
+  /* Sidebar layout stacks */
+  .ds-sidebar-layout {
+    flex-direction: column;
+    gap: var(--ds-space-6);
+  }
+  .ds-sidebar-layout__sidebar {
+    width: 100%;
+  }
+
+  /* Sections are more compact on mobile */
+  .ds-section {
+    padding-top: var(--ds-space-10);
+    padding-bottom: var(--ds-space-10);
+  }
+  .ds-section--lg {
+    padding-top: var(--ds-space-16);
+    padding-bottom: var(--ds-space-16);
+  }
+
+  /* Toast: full width on mobile */
+  .ds-toast {
+    left: var(--ds-space-4);
+    right: var(--ds-space-4);
+    bottom: var(--ds-space-4);
+    min-width: auto;
+    max-width: none;
+  }
+
+  /* Hide on mobile */
+  .ds-hide-mobile { display: none; }
+  .ds-show-mobile { display: block; }
+}
+
+
+/* ================================================================
+   17. BRIDGE TOKENS
+   ================================================================
+   Map design-system tokens back to the legacy variable names
+   used in style.css. This lets the old styles benefit from the
+   new palette without editing 1,600 lines at once.
+
+   Import order: design-system.css THEN style.css.
+   style.css will inherit these overrides via :root cascade.
+   ================================================================ */
+:root {
+  /* Legacy variable overrides */
+  --bg:             var(--ds-page-bg);
+  --surface:        var(--ds-surface);
+  --surface-alt:    var(--ds-surface-sunken);
+  --border:         var(--ds-border);
+  --text:           var(--ds-text-primary);
+  --text-secondary: var(--ds-text-secondary);
+  --text-muted:     var(--ds-text-muted);
+
+  /* Remap accent from generic blue to our primary sage */
+  --accent:         var(--ds-primary-600);
+  --accent-light:   var(--ds-primary-50);
+  --accent-hover:   var(--ds-primary-700);
+  --accent-dark:    var(--ds-primary-800);
+
+  /* Status colors: swap harsh for muted */
+  --success:        var(--ds-success-600);
+  --success-light:  var(--ds-status-success-bg);
+  --danger:         var(--ds-danger-600);
+  --danger-light:   var(--ds-status-danger-bg);
+  --warning:        var(--ds-warning-600);
+  --warning-light:  var(--ds-status-warning-bg);
+
+  --teal:           var(--ds-primary-500);
+  --teal-light:     var(--ds-primary-50);
+  --purple:         var(--ds-info-600);
+  --purple-light:   var(--ds-status-info-bg);
+
+  /* Radii */
+  --radius:         var(--ds-radius-md);
+  --radius-lg:      var(--ds-radius-lg);
+
+  /* Shadows */
+  --shadow:         var(--ds-shadow-sm);
+  --shadow-md:      var(--ds-shadow-md);
+  --shadow-lg:      var(--ds-shadow-lg);
+
+  /* Layout */
+  --max-width:      var(--ds-container-xl);
+  --header-height:  var(--ds-header-height);
+}
+
+/* Bridge: dark mode legacy overrides */
+[data-theme="dark"] {
+  --bg:             var(--ds-page-bg);
+  --surface:        var(--ds-surface);
+  --surface-alt:    var(--ds-surface-sunken);
+  --border:         var(--ds-border);
+  --text:           var(--ds-text-primary);
+  --text-secondary: var(--ds-text-secondary);
+  --text-muted:     var(--ds-text-muted);
+  --accent-light:   var(--ds-interactive-subtle);
+  --success-light:  var(--ds-status-success-bg);
+  --danger-light:   var(--ds-status-danger-bg);
+  --warning-light:  var(--ds-status-warning-bg);
+  --teal-light:     var(--ds-interactive-subtle);
+  --purple-light:   var(--ds-status-info-bg);
+}
+
+
+/* ================================================================
+   18. PRINT OVERRIDES
+   ================================================================ */
+@media print {
+  .ds-toast,
+  .ds-skeleton,
+  [class*="ds-animate-"] {
+    display: none !important;
+  }
+
+  .ds-card {
+    box-shadow: none !important;
+    border: 1px solid #ccc;
+    break-inside: avoid;
+  }
+
+  .ds-btn {
+    box-shadow: none !important;
+    border: 1px solid #999;
+  }
+
+  .ds-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
