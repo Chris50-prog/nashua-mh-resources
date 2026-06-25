@@ -4,111 +4,651 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Page Not Found | Greater Nashua Community Mental Health Resources</title>
-<meta name="description" content="The page you're looking for could not be found.">
+<meta name="description" content="The page you're looking for could not be found. Use the search or links below to find what you need.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2d6f59">
+<link rel="stylesheet" href="css/design-system.css">
 <link rel="stylesheet" href="css/style.css">
+<script src="js/fontsize.js"></script>
 <style>
-.not-found {
+/* ---- Nav (matches site pattern) ---- */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: var(--ds-z-sticky);
+  background: rgba(253, 252, 250, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--ds-border-subtle);
+  height: var(--ds-header-height);
+}
+[data-theme="dark"] .site-nav {
+  background: rgba(26, 25, 22, 0.85);
+}
+.site-nav__inner {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+}
+.site-nav__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  text-decoration: none;
+  flex-shrink: 0;
+  margin-right: auto;
+}
+.site-nav__logo-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-primary-600);
+  color: var(--ds-text-inverse);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-bold);
+  letter-spacing: var(--ds-tracking-tight);
+}
+.site-nav__logo-text {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  white-space: nowrap;
+}
+.site-nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+}
+.site-nav__link {
+  padding: var(--ds-space-2) var(--ds-space-3);
+  border-radius: var(--ds-radius-md);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default),
+              background-color var(--ds-duration-fast) var(--ds-ease-default);
+  white-space: nowrap;
+}
+.site-nav__link:hover {
+  color: var(--ds-text-primary);
+  background: var(--ds-surface-hover);
+  text-decoration: none;
+}
+.site-nav__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  margin-left: var(--ds-space-2);
+}
+.site-nav__icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ds-radius-md);
+  border: none;
+  background: transparent;
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default),
+              background-color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.site-nav__icon-btn:hover {
+  background: var(--ds-surface-hover);
+  color: var(--ds-text-primary);
+}
+.site-nav__font-controls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.site-nav__font-btn {
+  padding: var(--ds-space-1) var(--ds-space-2);
+  border-radius: var(--ds-radius-sm);
+  border: 1px solid var(--ds-border);
+  background: var(--ds-surface);
+  color: var(--ds-text-secondary);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  cursor: pointer;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+  line-height: 1;
+  min-height: 28px;
+}
+.site-nav__font-btn:hover {
+  background: var(--ds-surface-hover);
+  border-color: var(--ds-border-strong);
+}
+.site-nav__hamburger {
+  display: none;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 8px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  align-items: center;
+}
+.site-nav__hamburger span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--ds-text-secondary);
+  border-radius: 1px;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+}
+.site-nav__mobile-panel {
+  display: none;
+  flex-direction: column;
+  padding: var(--ds-space-4) var(--ds-space-6);
+  background: var(--ds-surface);
+  border-bottom: 1px solid var(--ds-border-subtle);
+  gap: var(--ds-space-1);
+}
+.site-nav__mobile-panel.is-open { display: flex; }
+.site-nav__mobile-link {
+  padding: var(--ds-space-3) var(--ds-space-4);
+  border-radius: var(--ds-radius-md);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+}
+.site-nav__mobile-link:hover {
+  color: var(--ds-text-primary);
+  background: var(--ds-surface-hover);
+}
+
+/* ---- 404 Content ---- */
+.notfound {
   text-align: center;
-  padding: 80px 24px;
-  max-width: 560px;
+  padding: var(--ds-space-16) var(--ds-space-6) var(--ds-space-20);
+  max-width: 640px;
   margin: 0 auto;
 }
-.not-found h1 {
-  font-size: 64px;
-  font-weight: 800;
-  color: var(--accent);
-  margin-bottom: 8px;
+.notfound__icon {
+  font-size: 56px;
+  margin-bottom: var(--ds-space-4);
   line-height: 1;
 }
-.not-found h2 {
-  font-size: 22px;
-  font-weight: 600;
-  margin-bottom: 12px;
+.notfound__code {
+  font-family: var(--ds-font-sans);
+  font-size: 72px;
+  font-weight: var(--ds-weight-bold);
+  color: var(--ds-primary-600);
+  line-height: 1;
+  margin-bottom: var(--ds-space-2);
+  letter-spacing: var(--ds-tracking-tight);
 }
-.not-found p {
-  color: var(--text-secondary);
-  font-size: 15px;
-  margin-bottom: 32px;
+.notfound__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xl);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  margin-bottom: var(--ds-space-3);
 }
-.not-found-links {
+.notfound__desc {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+  margin-bottom: var(--ds-space-8);
+  max-width: 460px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---- Search bar ---- */
+.notfound__search {
+  max-width: 440px;
+  margin: 0 auto var(--ds-space-10);
+  position: relative;
+}
+.notfound__search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ds-text-muted);
+  pointer-events: none;
+}
+.notfound__search-input {
+  width: 100%;
+  padding: var(--ds-space-3) var(--ds-space-4) var(--ds-space-3) 42px;
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-lg);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  color: var(--ds-text-primary);
+  background: var(--ds-surface);
+  outline: none;
+  transition: border-color var(--ds-duration-fast) var(--ds-ease-default),
+              box-shadow var(--ds-duration-fast) var(--ds-ease-default);
+  box-sizing: border-box;
+}
+.notfound__search-input::placeholder {
+  color: var(--ds-text-muted);
+}
+.notfound__search-input:focus {
+  border-color: var(--ds-primary-500);
+  box-shadow: 0 0 0 3px rgba(45, 111, 89, 0.12);
+}
+
+/* ---- Quick links grid ---- */
+.notfound__quicklinks-title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--ds-tracking-widest);
+  margin-bottom: var(--ds-space-4);
+}
+.notfound__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--ds-space-3);
+  max-width: 480px;
+  margin: 0 auto var(--ds-space-10);
+  text-align: left;
+}
+.notfound__card {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
-}
-.not-found-links a {
-  display: inline-block;
-  padding: 10px 20px;
-  border-radius: var(--radius);
-  font-size: 14px;
-  font-weight: 600;
+  align-items: flex-start;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-4);
+  border: 1px solid var(--ds-border-subtle);
+  border-radius: var(--ds-radius-lg);
   text-decoration: none;
-  transition: all 0.2s;
+  transition: border-color var(--ds-duration-fast) var(--ds-ease-default),
+              box-shadow var(--ds-duration-fast) var(--ds-ease-default),
+              background-color var(--ds-duration-fast) var(--ds-ease-default);
+  background: var(--ds-surface);
 }
-.not-found-links a.primary {
-  background: var(--accent);
-  color: white;
+.notfound__card:hover {
+  border-color: var(--ds-primary-300);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  background: var(--ds-surface-hover);
+  text-decoration: none;
 }
-.not-found-links a.primary:hover {
-  background: var(--accent-hover);
+.notfound__card-icon {
+  font-size: 20px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
 }
-.not-found-links a.secondary {
-  background: var(--surface);
-  color: var(--text);
-  border: 1px solid var(--border);
+.notfound__card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
-.not-found-links a.secondary:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+.notfound__card-label {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+}
+.notfound__card-hint {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+}
+
+/* ---- Back to home button ---- */
+.notfound__home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-3) var(--ds-space-6);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-primary-600);
+  color: var(--ds-text-inverse);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  text-decoration: none;
+  transition: background-color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.notfound__home-btn:hover {
+  background: var(--ds-primary-700);
+  text-decoration: none;
+}
+
+/* ---- Footer (matches site pattern) ---- */
+.site-footer {
+  background: var(--ds-surface);
+  border-top: 1px solid var(--ds-border);
+  padding: var(--ds-space-16) 0 var(--ds-space-8);
+  margin-top: 0;
+}
+.footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--ds-space-10);
+  margin-bottom: var(--ds-space-10);
+}
+.footer__brand-desc {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+  margin-top: var(--ds-space-3);
+  max-width: 320px;
+}
+.footer__col-title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--ds-tracking-widest);
+  margin-bottom: var(--ds-space-4);
+}
+.footer__links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2-5);
+}
+.footer__links a {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.footer__links a:hover { color: var(--ds-text-primary); }
+.footer__crisis-box {
+  background: var(--ds-status-danger-bg);
+  border: 1px solid var(--ds-danger-200);
+  border-radius: var(--ds-radius-lg);
+  padding: var(--ds-space-4);
+  margin-top: var(--ds-space-4);
+}
+[data-theme="dark"] .footer__crisis-box {
+  border-color: rgba(220, 95, 95, 0.2);
+}
+.footer__crisis-title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-status-danger-text);
+  margin-bottom: var(--ds-space-2);
+}
+.footer__crisis-numbers {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+}
+.footer__crisis-numbers strong { color: var(--ds-text-primary); }
+.footer__bottom {
+  border-top: 1px solid var(--ds-border-subtle);
+  padding-top: var(--ds-space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--ds-space-4);
+}
+.footer__disclaimer {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+  line-height: var(--ds-leading-relaxed);
+  max-width: 560px;
+}
+.footer__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-4);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+}
+.footer__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ds-success-500);
+  display: inline-block;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1023px) {
+  .footer__grid { grid-template-columns: 1fr 1fr; gap: var(--ds-space-8); }
+}
+@media (max-width: 639px) {
+  .site-nav__links,
+  .site-nav__font-controls { display: none; }
+  .site-nav__hamburger { display: flex; }
+  .notfound__grid { grid-template-columns: 1fr; }
+  .notfound__code { font-size: 56px; }
+  .footer__grid { grid-template-columns: 1fr; gap: var(--ds-space-6); }
 }
 </style>
 </head>
 <body>
+<script src="js/auth-gate.js"></script>
+
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<header class="site-header">
-  <div class="header-inner">
-    <a href="index.html" class="site-logo" id="siteLogo">
-      <div class="logo-icon">NH</div>
-      <span>Greater Nashua MH Resources</span>
+<nav class="site-nav" role="navigation" aria-label="Main navigation">
+  <div class="site-nav__inner">
+    <a href="index.html" class="site-nav__logo" id="siteLogo">
+      <div class="site-nav__logo-mark">NH</div>
+      <span class="site-nav__logo-text">MH Resources</span>
     </a>
-    <div class="header-actions">
-      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">&#9789;</button>
-      <button class="hamburger-btn" onclick="var h=this.closest('.site-header');h.classList.toggle('nav-open');this.setAttribute('aria-expanded',h.classList.contains('nav-open'))" aria-label="Toggle navigation menu" aria-expanded="false">
-        <span class="hamburger-bar"></span><span class="hamburger-bar"></span><span class="hamburger-bar"></span>
+    <div class="site-nav__links">
+      <a href="index.html" class="site-nav__link">Home</a>
+      <a href="resources.html" class="site-nav__link">Resources</a>
+      <a href="tools.html" class="site-nav__link">Clinical Tools</a>
+      <a href="guide.html" class="site-nav__link">Guides</a>
+      <a href="neurobiology.html" class="site-nav__link">Brain &amp; Neuro</a>
+      <a href="worksheets.html" class="site-nav__link">Worksheets</a>
+      <a href="activities.html" class="site-nav__link">Activities</a>
+      <a href="games.html" class="site-nav__link">Games</a>
+    </div>
+    <div class="site-nav__controls">
+      <div class="site-nav__font-controls">
+        <button class="site-nav__font-btn" onclick="mhFontDecrease()" title="Decrease font size" aria-label="Decrease font size">A-</button>
+        <button class="site-nav__font-btn" onclick="mhFontIncrease()" title="Increase font size" aria-label="Increase font size">A+</button>
+      </div>
+      <button class="site-nav__icon-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="site-nav__hamburger" id="hamburgerBtn" onclick="toggleMobileNav()" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
       </button>
     </div>
-    <nav class="nav-links" id="navLinks">
-      <a href="index.html" class="nav-link">Home</a>
-      <a href="resources.html" class="nav-link">Resources</a>
-      <a href="tools.html" class="nav-link">Clinical Tools</a>
-      <a href="guide.html" class="nav-link">How-To Guides</a>
-    </nav>
   </div>
-</header>
+</nav>
 
-<div class="not-found" id="main-content">
-  <h1>404</h1>
-  <h2>Page Not Found</h2>
-  <p>The page you are looking for may have been moved or no longer exists. Use the links below to find what you need.</p>
-  <div class="not-found-links">
-    <a href="index.html" class="primary">Back to Home</a>
-    <a href="resources.html" class="secondary">Resources</a>
-    <a href="tools.html" class="secondary">Clinical Tools</a>
-    <a href="guide.html" class="secondary">How-To Guides</a>
-  </div>
+<!-- Mobile slide-out panel -->
+<div class="site-nav__mobile-panel" id="mobileNavPanel">
+  <a href="index.html" class="site-nav__mobile-link">Home</a>
+  <a href="resources.html" class="site-nav__mobile-link">Resources</a>
+  <a href="tools.html" class="site-nav__mobile-link">Clinical Tools</a>
+  <a href="guide.html" class="site-nav__mobile-link">Guides</a>
+  <a href="neurobiology.html" class="site-nav__mobile-link">Brain &amp; Neuro</a>
+  <a href="worksheets.html" class="site-nav__mobile-link">Worksheets</a>
+  <a href="activities.html" class="site-nav__mobile-link">Activities</a>
+  <a href="games.html" class="site-nav__mobile-link">Games</a>
 </div>
 
+<main class="notfound" id="main-content">
+  <div class="notfound__icon" aria-hidden="true">&#127807;</div>
+  <div class="notfound__code">404</div>
+  <h1 class="notfound__title">This page wandered off</h1>
+  <p class="notfound__desc">
+    No worries -- the page you were looking for may have moved or been renamed. Try searching below, or jump to one of our most-used sections.
+  </p>
+
+  <!-- Search -->
+  <div class="notfound__search">
+    <svg class="notfound__search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" class="notfound__search-input" id="notfoundSearch" placeholder="What were you looking for?" autocomplete="off" aria-label="Search the site">
+  </div>
+
+  <!-- Quick links -->
+  <div class="notfound__quicklinks-title">Popular pages</div>
+  <div class="notfound__grid">
+    <a href="resources.html" class="notfound__card">
+      <span class="notfound__card-icon" aria-hidden="true">&#128218;</span>
+      <div class="notfound__card-text">
+        <span class="notfound__card-label">Resources</span>
+        <span class="notfound__card-hint">Local services, housing, crisis lines</span>
+      </div>
+    </a>
+    <a href="tools.html" class="notfound__card">
+      <span class="notfound__card-icon" aria-hidden="true">&#129520;</span>
+      <div class="notfound__card-text">
+        <span class="notfound__card-label">Clinical Tools</span>
+        <span class="notfound__card-hint">Screening, notes, CPT codes</span>
+      </div>
+    </a>
+    <a href="guide.html" class="notfound__card">
+      <span class="notfound__card-icon" aria-hidden="true">&#128214;</span>
+      <div class="notfound__card-text">
+        <span class="notfound__card-label">How-To Guides</span>
+        <span class="notfound__card-hint">Crisis trees, referral steps</span>
+      </div>
+    </a>
+    <a href="worksheets.html" class="notfound__card">
+      <span class="notfound__card-icon" aria-hidden="true">&#128221;</span>
+      <div class="notfound__card-text">
+        <span class="notfound__card-label">Worksheets</span>
+        <span class="notfound__card-hint">CBT, DBT, coping skills</span>
+      </div>
+    </a>
+    <a href="neurobiology.html" class="notfound__card">
+      <span class="notfound__card-icon" aria-hidden="true">&#129504;</span>
+      <div class="notfound__card-text">
+        <span class="notfound__card-label">Brain &amp; Neuro</span>
+        <span class="notfound__card-hint">Neuroscience of mental health</span>
+      </div>
+    </a>
+    <a href="games.html" class="notfound__card">
+      <span class="notfound__card-icon" aria-hidden="true">&#127922;</span>
+      <div class="notfound__card-text">
+        <span class="notfound__card-label">Games &amp; Activities</span>
+        <span class="notfound__card-hint">Interactive coping tools</span>
+      </div>
+    </a>
+  </div>
+
+  <a href="index.html" class="notfound__home-btn">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    Back to Home
+  </a>
+</main>
+
 <footer class="site-footer">
-  <p>Greater Nashua Community Mental Health Resources &copy; 2026. For informational purposes only.</p>
-  <p>Contact information and services may change. Always verify by contacting organizations directly.</p>
-  <p style="margin-top:8px"><a href="#" id="adminGate" style="color:var(--text-muted);font-size:11px" aria-label="Version 2.0 - Admin access">v2.0</a></p>
+  <div class="ds-container">
+    <div class="footer__grid">
+      <!-- Brand column -->
+      <div>
+        <a href="index.html" class="site-nav__logo" style="text-decoration:none">
+          <div class="site-nav__logo-mark">NH</div>
+          <span class="site-nav__logo-text">MH Resources</span>
+        </a>
+        <p class="footer__brand-desc">A comprehensive resource hub for clinicians, case managers, and community members in the Greater Nashua area.</p>
+        <div class="footer__crisis-box">
+          <div class="footer__crisis-title">Crisis? Get help now.</div>
+          <div class="footer__crisis-numbers">
+            <strong>988</strong> Suicide &amp; Crisis Lifeline<br>
+            <strong>1-833-710-6477</strong> NH Rapid Response<br>
+            <strong>(603) 889-6147</strong> GNMHC Crisis<br>
+            <strong>Text HOME to 741741</strong>
+          </div>
+        </div>
+      </div>
+      <!-- Navigate -->
+      <div>
+        <div class="footer__col-title">Navigate</div>
+        <ul class="footer__links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="tools.html">Clinical Tools</a></li>
+          <li><a href="guide.html">Guides</a></li>
+          <li><a href="neurobiology.html">Brain &amp; Neuro</a></li>
+          <li><a href="worksheets.html">Worksheets</a></li>
+          <li><a href="activities.html">Activities</a></li>
+          <li><a href="games.html">Games</a></li>
+        </ul>
+      </div>
+      <!-- Quick Access -->
+      <div>
+        <div class="footer__col-title">Quick Access</div>
+        <ul class="footer__links">
+          <li><a href="tools.html#screening-tools">Screening Tools</a></li>
+          <li><a href="tools.html#clinical-note-builder">Note Builder</a></li>
+          <li><a href="guide.html#crisisTree">Crisis Tree</a></li>
+          <li><a href="resources.html#housing">Housing Resources</a></li>
+        </ul>
+      </div>
+      <!-- Clinical -->
+      <div>
+        <div class="footer__col-title">Clinical</div>
+        <ul class="footer__links">
+          <li><a href="tools.html#cbt">CBT Worksheets</a></li>
+          <li><a href="tools.html#dbt">DBT Handouts</a></li>
+          <li><a href="tools.html#cpt-reference">CPT Codes</a></li>
+          <li><a href="tools.html#safety-plan-builder">Safety Planning</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="footer__disclaimer">
+        For informational purposes only. This resource does not replace clinical judgment, supervision, or direct consultation. Contact information and services may change; always verify by contacting organizations directly.
+      </div>
+      <div class="footer__meta">
+        <span><span class="footer__status-dot"></span> Updated Jun 24, 2026</span>
+        <a href="#" id="adminGate" style="color: var(--ds-text-muted); font-size: 11px;" aria-label="Version 4.0 - Admin access">v4.0</a>
+      </div>
+    </div>
+  </div>
 </footer>
 
 <script>
-let adminClicks = 0;
-let adminTimer = null;
+// ---- Search: redirect to resources with query ----
+(function() {
+  var input = document.getElementById('notfoundSearch');
+  if (!input) return;
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && input.value.trim()) {
+      // Navigate to resources page with search query as hash
+      window.location.href = 'resources.html#search=' + encodeURIComponent(input.value.trim());
+    }
+  });
+  // Auto-focus the search input after a short delay
+  setTimeout(function() { input.focus(); }, 300);
+})();
+
+// ---- Admin gate: 5-click on version ----
+var adminClicks = 0;
+var adminTimer = null;
 document.getElementById('adminGate').addEventListener('click', function(e) {
   e.preventDefault();
   adminClicks++;
@@ -117,27 +657,44 @@ document.getElementById('adminGate').addEventListener('click', function(e) {
     adminClicks = 0;
     window.location.href = 'admin.html';
   }
-  adminTimer = setTimeout(() => { adminClicks = 0; }, 2000);
+  adminTimer = setTimeout(function() { adminClicks = 0; }, 2000);
 });
 
+// ---- Theme toggle ----
 function toggleTheme() {
   var html = document.documentElement;
-  var btn = document.querySelector('.theme-toggle');
+  var btn = document.getElementById('themeToggleBtn');
   if (html.getAttribute('data-theme') === 'dark') {
     html.removeAttribute('data-theme');
-    btn.textContent = '☽'; // moon
+    localStorage.setItem('theme', 'light');
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
   } else {
     html.setAttribute('data-theme', 'dark');
-    btn.textContent = '☀'; // sun
+    localStorage.setItem('theme', 'dark');
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
   }
 }
-// Respect system preference
-if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-  document.documentElement.setAttribute('data-theme', 'dark');
-  var btn = document.querySelector('.theme-toggle');
-  if (btn) btn.textContent = '☀';
+// Respect saved preference, then system preference
+(function() {
+  var saved = localStorage.getItem('theme');
+  var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (saved === 'dark' || (!saved && prefersDark)) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    var btn = document.getElementById('themeToggleBtn');
+    if (btn) btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+  }
+})();
+
+// ---- Mobile nav toggle ----
+function toggleMobileNav() {
+  var panel = document.getElementById('mobileNavPanel');
+  var btn = document.getElementById('hamburgerBtn');
+  var isOpen = panel.classList.toggle('is-open');
+  btn.setAttribute('aria-expanded', isOpen);
 }
 </script>
+
+<script src="js/search.js"></script>
 
 </body>
 </html>
