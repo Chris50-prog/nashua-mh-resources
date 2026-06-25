@@ -331,6 +331,128 @@
 .game-card__icon--thought { background: rgba(128, 113, 181, 0.15); }
 .game-card__icon--breathing { background: rgba(76, 145, 200, 0.15); }
 .game-card__icon--checkin { background: rgba(233, 120, 141, 0.15); }
+.game-card__icon--grounding { background: rgba(76, 145, 200, 0.15); }
+.game-card__icon--gratitude { background: rgba(124, 179, 66, 0.15); }
+.game-card__icon--worrytree { background: rgba(42, 157, 143, 0.15); }
+.game-card__icon--valuessort { background: rgba(128, 113, 181, 0.15); }
+.game-card__icon--emotionwheel { background: rgba(233, 120, 141, 0.15); }
+.game-card__icon--pmr { background: rgba(244, 162, 97, 0.15); }
+.game-card__icon--cogquiz { background: rgba(128, 113, 181, 0.15); }
+.game-card__icon--affirmations { background: rgba(255, 193, 7, 0.15); }
+.game-card__icon--stressthermometer { background: rgba(229, 115, 115, 0.15); }
+.game-card__icon--mindfuljar { background: rgba(76, 145, 200, 0.15); }
+.game-card__icon--strengths { background: rgba(124, 179, 66, 0.15); }
+.game-card__icon--flexibility { background: rgba(42, 157, 143, 0.15); }
+.game-card__icon--socialscenarios { background: rgba(244, 162, 97, 0.15); }
+.game-card__icon--calmcountdown { background: rgba(229, 115, 115, 0.15); }
+
+/* ---- Shared new-game UI utilities ---- */
+.gx-btn {
+  padding: var(--ds-space-2-5) var(--ds-space-5);
+  border-radius: var(--ds-radius-lg);
+  border: none;
+  background: var(--ds-primary-600);
+  color: var(--ds-text-inverse);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  cursor: pointer;
+  transition: background-color var(--ds-duration-fast) var(--ds-ease-default),
+              transform var(--ds-duration-fast) var(--ds-ease-default);
+}
+.gx-btn:hover { background: var(--ds-primary-700); transform: scale(1.03); }
+.gx-btn:active { transform: scale(0.98); }
+.gx-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.gx-btn--ghost {
+  background: var(--ds-surface);
+  color: var(--ds-text-primary);
+  border: 1px solid var(--ds-border);
+}
+.gx-btn--ghost:hover { background: var(--ds-surface-hover); }
+.gx-input, .gx-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--ds-space-3);
+  border-radius: var(--ds-radius-md);
+  border: 1px solid var(--ds-border);
+  background: var(--ds-surface);
+  color: var(--ds-text-primary);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+}
+.gx-textarea { min-height: 70px; resize: vertical; line-height: var(--ds-leading-relaxed); }
+.gx-input:focus, .gx-textarea:focus { outline: 2px solid var(--ds-primary-500); outline-offset: 1px; }
+.gx-label {
+  display: block;
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-primary);
+  margin-bottom: var(--ds-space-2);
+}
+.gx-help {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+  margin: 0 0 var(--ds-space-4);
+}
+.gx-card {
+  background: var(--ds-primary-50);
+  border: 1px solid var(--ds-border-subtle);
+  border-radius: var(--ds-radius-lg);
+  padding: var(--ds-space-4);
+  margin-bottom: var(--ds-space-3);
+}
+[data-theme="dark"] .gx-card { background: var(--ds-interactive-subtle); }
+.gx-step-dots { display: flex; gap: var(--ds-space-2); justify-content: center; margin-bottom: var(--ds-space-4); }
+.gx-step-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--ds-border); }
+.gx-step-dot.active { background: var(--ds-primary-600); }
+.gx-step-dot.done { background: var(--ds-primary-400); }
+.gx-actions { display: flex; gap: var(--ds-space-3); flex-wrap: wrap; margin-top: var(--ds-space-4); }
+.gx-list { list-style: none; padding: 0; margin: var(--ds-space-3) 0 0; display: flex; flex-direction: column; gap: var(--ds-space-2); }
+.gx-list li {
+  display: flex; align-items: center; gap: var(--ds-space-2);
+  background: var(--ds-surface); border: 1px solid var(--ds-border-subtle);
+  border-radius: var(--ds-radius-md); padding: var(--ds-space-2-5) var(--ds-space-3);
+  font-family: var(--ds-font-sans); font-size: var(--ds-text-sm); color: var(--ds-text-primary);
+}
+.gx-result {
+  background: var(--ds-primary-50); border: 1px solid var(--ds-border-subtle);
+  border-radius: var(--ds-radius-lg); padding: var(--ds-space-5); margin-top: var(--ds-space-4);
+}
+[data-theme="dark"] .gx-result { background: var(--ds-interactive-subtle); }
+.gx-result h4 { margin: 0 0 var(--ds-space-2); font-family: var(--ds-font-sans); font-size: var(--ds-text-base); color: var(--ds-text-primary); }
+.gx-result p { margin: 0; font-family: var(--ds-font-sans); font-size: var(--ds-text-sm); color: var(--ds-text-secondary); line-height: var(--ds-leading-relaxed); }
+.gx-option-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: var(--ds-space-2); }
+.gx-chip {
+  padding: var(--ds-space-2-5) var(--ds-space-3); border-radius: var(--ds-radius-md);
+  border: 1px solid var(--ds-border); background: var(--ds-surface); color: var(--ds-text-primary);
+  font-family: var(--ds-font-sans); font-size: var(--ds-text-sm); cursor: pointer; text-align: center;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+}
+.gx-chip:hover { border-color: var(--ds-primary-400); }
+.gx-chip.selected { background: var(--ds-primary-600); color: var(--ds-text-inverse); border-color: var(--ds-primary-600); }
+.gx-chip:disabled { opacity: 0.4; cursor: not-allowed; }
+.gx-feedback { border-radius: var(--ds-radius-md); padding: var(--ds-space-3); margin-top: var(--ds-space-3); font-family: var(--ds-font-sans); font-size: var(--ds-text-sm); line-height: var(--ds-leading-relaxed); }
+.gx-feedback--good { background: rgba(124, 179, 66, 0.12); color: var(--ds-text-primary); border: 1px solid rgba(124, 179, 66, 0.4); }
+.gx-feedback--warn { background: rgba(244, 162, 97, 0.12); color: var(--ds-text-primary); border: 1px solid rgba(244, 162, 97, 0.4); }
+.gx-feedback--info { background: var(--ds-primary-50); color: var(--ds-text-primary); border: 1px solid var(--ds-border-subtle); }
+[data-theme="dark"] .gx-feedback--info { background: var(--ds-interactive-subtle); }
+.gx-center { text-align: center; }
+.gx-big-num { font-family: var(--ds-font-sans); font-size: 56px; font-weight: var(--ds-weight-bold); color: var(--ds-primary-600); line-height: 1; }
+.gx-bloom { font-size: 28px; }
+.gx-progress-track { height: 8px; border-radius: var(--ds-radius-full); background: var(--ds-border); overflow: hidden; margin: var(--ds-space-3) 0; }
+.gx-progress-fill { height: 100%; background: var(--ds-primary-600); width: 0%; transition: width 0.4s ease; }
+.gx-range { width: 100%; }
+.gx-emotion-core { display: flex; flex-wrap: wrap; gap: var(--ds-space-2); justify-content: center; }
+.gx-jar {
+  width: 160px; height: 200px; margin: 0 auto var(--ds-space-3); border-radius: 0 0 60px 60px;
+  border: 3px solid var(--ds-primary-400); position: relative; overflow: hidden;
+  background: linear-gradient(180deg, rgba(76,145,200,0.05), rgba(76,145,200,0.18));
+}
+.gx-glitter { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--ds-primary-500); opacity: 0.8; }
+@keyframes gxFall { 0% { transform: translateY(-10px); } 100% { transform: translateY(210px); } }
 .game-card__title {
   font-family: var(--ds-font-sans);
   font-size: var(--ds-text-lg);
@@ -1573,6 +1695,216 @@
     </button>
   </div>
 
+  <!-- Card 6: 5-4-3-2-1 Grounding -->
+  <div class="game-card">
+    <div class="game-card__icon game-card__icon--grounding">&#127757;</div>
+    <h3 class="game-card__title">5-4-3-2-1 Grounding</h3>
+    <p class="game-card__desc">Step through five senses &mdash; 5 things you see, 4 you hear, 3 you touch, 2 you smell, 1 you taste &mdash; to anchor in the present moment.</p>
+    <div class="game-card__meta">
+      <span class="game-card__badge game-card__badge--age">All Ages</span>
+      <span class="game-card__badge game-card__badge--purpose">Grounding &amp; Anxiety</span>
+    </div>
+    <button class="game-card__play-btn" onclick="openGame('grounding')" aria-label="Play 5-4-3-2-1 Grounding">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Play
+    </button>
+  </div>
+
+  <!-- Card 7: Gratitude Garden -->
+  <div class="game-card">
+    <div class="game-card__icon game-card__icon--gratitude">&#127807;</div>
+    <h3 class="game-card__title">Gratitude Garden</h3>
+    <p class="game-card__desc">Add things you're grateful for and watch a garden bloom. A simple positive-psychology practice to broaden attention and lift mood.</p>
+    <div class="game-card__meta">
+      <span class="game-card__badge game-card__badge--age">All Ages</span>
+      <span class="game-card__badge game-card__badge--purpose">Positive Psychology</span>
+    </div>
+    <button class="game-card__play-btn" onclick="openGame('gratitude')" aria-label="Play Gratitude Garden">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Play
+    </button>
+  </div>
+
+  <!-- Card 8: Worry Tree -->
+  <div class="game-card">
+    <div class="game-card__icon game-card__icon--worrytree">&#127795;</div>
+    <h3 class="game-card__title">Worry Tree</h3>
+    <p class="game-card__desc">A guided CBT decision tree. Name a worry, decide whether it's solvable, then build an action plan or practice letting go.</p>
+    <div class="game-card__meta">
+      <span class="game-card__badge game-card__badge--age">Ages 13+</span>
+      <span class="game-card__badge game-card__badge--purpose">Anxiety &amp; CBT</span>
+    </div>
+    <button class="game-card__play-btn" onclick="openGame('worrytree')" aria-label="Play Worry Tree">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Play
+    </button>
+  </div>
+
+  <!-- Card 9: Values Sort -->
+  <div class="game-card">
+    <div class="game-card__icon game-card__icon--valuessort">&#129517;</div>
+    <h3 class="game-card__title">Values Sort</h3>
+    <p class="game-card__desc">Choose your top five core values from a deck of sixteen, then commit to one small action aligned with each. An ACT-informed exercise.</p>
+    <div class="game-card__meta">
+      <span class="game-card__badge game-card__badge--age">Ages 13+</span>
+      <span class="game-card__badge game-card__badge--purpose">Values &amp; ACT</span>
+    </div>
+    <button class="game-card__play-btn" onclick="openGame('valuessort')" aria-label="Play Values Sort">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Play
+    </button>
+  </div>
+
+  <!-- Card 10: Emotion Wheel Explorer -->
+  <div class="game-card">
+    <div class="game-card__icon game-card__icon--emotionwheel">&#127912;</div>
+    <h3 class="game-card__title">Emotion Wheel Explorer</h3>
+    <p class="game-card__desc">Tap a core emotion to reveal its nuanced sub-feelings, a validating reflection, and a matching coping tip. Builds emotional literacy.</p>
+    <div class="game-card__meta">
+      <span class="game-card__badge game-card__badge--age">All Ages</span>
+      <span class="game-card__badge game-card__badge--purpose">Emotional Literacy</span>
+    </div>
+    <button class="game-card__play-btn" onclick="openGame('emotionwheel')" aria-label="Play Emotion Wheel Explorer">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Play
+    </button>
+  </div>
+
+  <!-- Card 11: Progressive Muscle Relaxation -->
+  <div class="game-card">
+    <div class="game-card__icon game-card__icon--pmr">&#129336;</div>
+    <h3 class="game-card__title">Muscle Relaxation</h3>
+    <p class="game-card__desc">A timed, guided tense-and-release journey through the body with a progress bar and play/pause. Releases physical tension.</p>
+    <div class="game-card__meta">
+      <span class="game-card__badge game-card__badge--age">All Ages</span>
+      <span class="game-card__badge game-card__badge--purpose">Relaxation</span>
+    </div>
+    <button class="game-card__play-btn" onclick="openGame('pmr')" aria-label="Play Muscle Relaxation">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Play
+    </button>
+  </div>
+
+  <!-- Card 12: Distortion Detective Quiz -->
+  <div class="game-card">
+    <div class="game-card__icon game-card__icon--cogquiz">&#128269;</div>
+    <h3 class="game-card__title">Distortion Detective</h3>
+    <p class="game-card__desc">A multiple-choice quiz on common thinking traps. Get instant feedback with plain-language explanations, plus a final score.</p>
+    <div class="game-card__meta">
+      <span class="game-card__badge game-card__badge--age">Ages 13+</span>
+      <span class="game-card__badge game-card__badge--purpose">Psychoeducation</span>
+    </div>
+    <button class="game-card__play-btn" onclick="openGame('cogquiz')" aria-label="Play Distortion Detective">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Play
+    </button>
+  </div>
+
+  <!-- Card 13: Affirmation Generator -->
+  <div class="game-card">
+    <div class="game-card__icon game-card__icon--affirmations">&#10024;</div>
+    <h3 class="game-card__title">Affirmation Generator</h3>
+    <p class="game-card__desc">Reveal an evidence-informed affirmation, then save the ones that resonate to build a personal collection of supportive self-talk.</p>
+    <div class="game-card__meta">
+      <span class="game-card__badge game-card__badge--age">All Ages</span>
+      <span class="game-card__badge game-card__badge--purpose">Self-Esteem</span>
+    </div>
+    <button class="game-card__play-btn" onclick="openGame('affirmations')" aria-label="Play Affirmation Generator">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Play
+    </button>
+  </div>
+
+  <!-- Card 14: Stress Thermometer -->
+  <div class="game-card">
+    <div class="game-card__icon game-card__icon--stressthermometer">&#127777;&#65039;</div>
+    <h3 class="game-card__title">Stress Thermometer</h3>
+    <p class="game-card__desc">A 0&ndash;100 SUDS check-in. Slide to rate your distress and receive a zone reading with a regulation suggestion matched to your level.</p>
+    <div class="game-card__meta">
+      <span class="game-card__badge game-card__badge--age">All Ages</span>
+      <span class="game-card__badge game-card__badge--purpose">Distress Tolerance</span>
+    </div>
+    <button class="game-card__play-btn" onclick="openGame('stressthermometer')" aria-label="Play Stress Thermometer">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Play
+    </button>
+  </div>
+
+  <!-- Card 15: Mindful Glitter Jar -->
+  <div class="game-card">
+    <div class="game-card__icon game-card__icon--mindfuljar">&#10052;&#65039;</div>
+    <h3 class="game-card__title">Mindful Glitter Jar</h3>
+    <p class="game-card__desc">Watch settling glitter while a one-minute timer and gentle breathing cue guide you. A calming visual metaphor for a busy mind.</p>
+    <div class="game-card__meta">
+      <span class="game-card__badge game-card__badge--age">All Ages</span>
+      <span class="game-card__badge game-card__badge--purpose">Mindfulness</span>
+    </div>
+    <button class="game-card__play-btn" onclick="openGame('mindfuljar')" aria-label="Play Mindful Glitter Jar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Play
+    </button>
+  </div>
+
+  <!-- Card 16: Strengths Spotter -->
+  <div class="game-card">
+    <div class="game-card__icon game-card__icon--strengths">&#11088;</div>
+    <h3 class="game-card__title">Strengths Spotter</h3>
+    <p class="game-card__desc">Flip through character-strength cards and keep the ones that feel like you. Build a personal list to draw on in tough moments.</p>
+    <div class="game-card__meta">
+      <span class="game-card__badge game-card__badge--age">Ages 10+</span>
+      <span class="game-card__badge game-card__badge--purpose">Positive Psychology</span>
+    </div>
+    <button class="game-card__play-btn" onclick="openGame('strengths')" aria-label="Play Strengths Spotter">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Play
+    </button>
+  </div>
+
+  <!-- Card 17: Reframe-It -->
+  <div class="game-card">
+    <div class="game-card__icon game-card__icon--flexibility">&#128260;</div>
+    <h3 class="game-card__title">Reframe-It</h3>
+    <p class="game-card__desc">Meet a stuck, negative thought and practice cognitive flexibility &mdash; pick or write a more balanced reframe and get coaching feedback.</p>
+    <div class="game-card__meta">
+      <span class="game-card__badge game-card__badge--age">Ages 13+</span>
+      <span class="game-card__badge game-card__badge--purpose">Cognitive Flexibility</span>
+    </div>
+    <button class="game-card__play-btn" onclick="openGame('flexibility')" aria-label="Play Reframe-It">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Play
+    </button>
+  </div>
+
+  <!-- Card 18: Social Scenarios -->
+  <div class="game-card">
+    <div class="game-card__icon game-card__icon--socialscenarios">&#128172;</div>
+    <h3 class="game-card__title">Social Scenarios</h3>
+    <p class="game-card__desc">Read a tricky social situation and choose a response. Learn the difference between passive, aggressive, and assertive communication.</p>
+    <div class="game-card__meta">
+      <span class="game-card__badge game-card__badge--age">Ages 12+</span>
+      <span class="game-card__badge game-card__badge--purpose">Social Skills</span>
+    </div>
+    <button class="game-card__play-btn" onclick="openGame('socialscenarios')" aria-label="Play Social Scenarios">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Play
+    </button>
+  </div>
+
+  <!-- Card 19: Cool-Down Countdown -->
+  <div class="game-card">
+    <div class="game-card__icon game-card__icon--calmcountdown">&#128293;</div>
+    <h3 class="game-card__title">Cool-Down Countdown</h3>
+    <p class="game-card__desc">A guided anger time-out. A countdown paired with rotating cool-down prompts helps the body and brain settle before responding.</p>
+    <div class="game-card__meta">
+      <span class="game-card__badge game-card__badge--age">All Ages</span>
+      <span class="game-card__badge game-card__badge--purpose">Anger Management</span>
+    </div>
+    <button class="game-card__play-btn" onclick="openGame('calmcountdown')" aria-label="Play Cool-Down Countdown">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Play
+    </button>
+  </div>
+
 </div>
 
 
@@ -1590,6 +1922,9 @@
           <li>Thought Challenger pairs naturally with CBT psychoeducation on cognitive distortions</li>
           <li>Breathing Guide can anchor regulation practice at any point in a session</li>
           <li>Open sessions with a Feelings Check-In to set the therapeutic agenda</li>
+          <li>Use 5-4-3-2-1 Grounding or the Mindful Glitter Jar to down-regulate before processing distressing material</li>
+          <li>Run the Worry Tree alongside problem-solving therapy to separate solvable problems from uncertainty</li>
+          <li>Use Values Sort early in ACT-informed work to clarify direction, then revisit as goals shift</li>
         </ul>
       </div>
 
@@ -1601,6 +1936,8 @@
           <li>Track belief rating changes in Thought Challenger as a measure of cognitive flexibility</li>
           <li>Document breathing pattern tolerance and duration for progress monitoring</li>
           <li>Use Check-In responses to track mood trends across sessions</li>
+          <li>Record the SUDS baseline and post-skill rating from the Stress Thermometer to evidence in-session regulation</li>
+          <li>Note which thinking traps the client identified in Distortion Detective and Reframe-It for psychoeducation progress</li>
         </ul>
       </div>
 
@@ -1612,6 +1949,9 @@
           <li><strong>Thought Challenger:</strong> Adolescents and adults with anxiety, depression, or negative self-talk</li>
           <li><strong>Breathing Guide:</strong> Anxiety, PTSD, panic, or any client learning regulation skills</li>
           <li><strong>Check-In:</strong> All clients; especially helpful for those who struggle to verbalize feelings</li>
+          <li><strong>Grounding &amp; Glitter Jar:</strong> Trauma, panic, and dissociation; clients needing quick present-moment anchoring</li>
+          <li><strong>Cool-Down Countdown:</strong> Clients working on anger and impulse control, including adolescents</li>
+          <li><strong>Social Scenarios:</strong> Adolescents and adults building assertiveness and communication skills</li>
         </ul>
       </div>
 
@@ -1743,6 +2083,251 @@
             <p class="checkin-suggestion__text" id="checkinSuggestionText"></p>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ---- 5-4-3-2-1 Grounding Modal ---- -->
+<div class="game-modal-overlay" id="modal-grounding" role="dialog" aria-modal="true" aria-label="5-4-3-2-1 Grounding">
+  <div class="game-modal">
+    <div class="game-modal__header">
+      <h2 class="game-modal__title">5-4-3-2-1 Grounding</h2>
+      <button class="game-modal__close" onclick="closeGame('grounding')" aria-label="Close">&times;</button>
+    </div>
+    <div class="game-modal__body">
+      <p class="gx-help">When anxiety pulls you out of the moment, your senses can bring you back. Move through each step at your own pace.</p>
+      <div class="gx-step-dots" id="groundingDots" aria-hidden="true"></div>
+      <div id="groundingStage"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ---- Gratitude Garden Modal ---- -->
+<div class="game-modal-overlay" id="modal-gratitude" role="dialog" aria-modal="true" aria-label="Gratitude Garden">
+  <div class="game-modal">
+    <div class="game-modal__header">
+      <h2 class="game-modal__title">Gratitude Garden</h2>
+      <button class="game-modal__close" onclick="closeGame('gratitude')" aria-label="Close">&times;</button>
+    </div>
+    <div class="game-modal__body">
+      <p class="gx-help">Name something you're grateful for &mdash; big or small. Each one plants a bloom in your garden.</p>
+      <label class="gx-label" for="gratitudeInput">What are you grateful for?</label>
+      <div style="display:flex;gap:8px;align-items:flex-start">
+        <input type="text" class="gx-input" id="gratitudeInput" placeholder="e.g. a warm cup of tea" maxlength="80">
+        <button class="gx-btn" onclick="addGratitude()" aria-label="Add gratitude">Add</button>
+      </div>
+      <div id="gratitudeGarden" style="font-size:32px;line-height:1.6;margin-top:16px;min-height:48px" aria-live="polite"></div>
+      <ul class="gx-list" id="gratitudeList"></ul>
+      <div id="gratitudeReflection"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ---- Worry Tree Modal ---- -->
+<div class="game-modal-overlay" id="modal-worrytree" role="dialog" aria-modal="true" aria-label="Worry Tree">
+  <div class="game-modal">
+    <div class="game-modal__header">
+      <h2 class="game-modal__title">Worry Tree</h2>
+      <button class="game-modal__close" onclick="closeGame('worrytree')" aria-label="Close">&times;</button>
+    </div>
+    <div class="game-modal__body">
+      <p class="gx-help">Worries fall into two kinds: ones we can act on, and ones we can only carry more gently. Let's sort yours.</p>
+      <div id="worrytreeStage"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ---- Values Sort Modal ---- -->
+<div class="game-modal-overlay" id="modal-valuessort" role="dialog" aria-modal="true" aria-label="Values Sort">
+  <div class="game-modal">
+    <div class="game-modal__header">
+      <h2 class="game-modal__title">Values Sort</h2>
+      <button class="game-modal__close" onclick="closeGame('valuessort')" aria-label="Close">&times;</button>
+    </div>
+    <div class="game-modal__body">
+      <p class="gx-help">Values are directions, not destinations. Choose the five that matter most to you right now. <strong id="valuesCount">0</strong> of 5 chosen.</p>
+      <div class="gx-option-grid" id="valuesGrid" role="group" aria-label="Core values"></div>
+      <div class="gx-actions">
+        <button class="gx-btn" id="valuesNextBtn" onclick="valuesReflect()" disabled>See my top values</button>
+      </div>
+      <div id="valuesReflection"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ---- Emotion Wheel Modal ---- -->
+<div class="game-modal-overlay" id="modal-emotionwheel" role="dialog" aria-modal="true" aria-label="Emotion Wheel Explorer">
+  <div class="game-modal">
+    <div class="game-modal__header">
+      <h2 class="game-modal__title">Emotion Wheel Explorer</h2>
+      <button class="game-modal__close" onclick="closeGame('emotionwheel')" aria-label="Close">&times;</button>
+    </div>
+    <div class="game-modal__body">
+      <p class="gx-help">Start with a core feeling. We'll explore the more specific emotions hiding underneath, and what each one might need.</p>
+      <div class="gx-emotion-core" id="emotionCore" role="group" aria-label="Core emotions"></div>
+      <div id="emotionDetail"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ---- Muscle Relaxation Modal ---- -->
+<div class="game-modal-overlay" id="modal-pmr" role="dialog" aria-modal="true" aria-label="Muscle Relaxation">
+  <div class="game-modal">
+    <div class="game-modal__header">
+      <h2 class="game-modal__title">Progressive Muscle Relaxation</h2>
+      <button class="game-modal__close" onclick="closeGame('pmr')" aria-label="Close">&times;</button>
+    </div>
+    <div class="game-modal__body">
+      <p class="gx-help">We'll move through the body, tensing each muscle group gently for a few seconds, then releasing. Never strain &mdash; ease off any area that hurts.</p>
+      <div class="gx-card gx-center">
+        <div class="gx-label" id="pmrGroup" style="font-size:var(--ds-text-lg);margin-bottom:6px">Ready when you are</div>
+        <div id="pmrPhase" style="font-family:var(--ds-font-sans);font-size:var(--ds-text-base);color:var(--ds-text-secondary)">Press Start to begin</div>
+        <div class="gx-big-num" id="pmrCount" style="font-size:40px;margin-top:8px">&middot;</div>
+      </div>
+      <div class="gx-progress-track"><div class="gx-progress-fill" id="pmrProgress"></div></div>
+      <div class="gx-actions">
+        <button class="gx-btn" id="pmrToggle" onclick="togglePmr()">Start</button>
+        <button class="gx-btn gx-btn--ghost" onclick="resetPmr()">Reset</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ---- Distortion Detective Modal ---- -->
+<div class="game-modal-overlay" id="modal-cogquiz" role="dialog" aria-modal="true" aria-label="Distortion Detective">
+  <div class="game-modal">
+    <div class="game-modal__header">
+      <h2 class="game-modal__title">Distortion Detective</h2>
+      <button class="game-modal__close" onclick="closeGame('cogquiz')" aria-label="Close">&times;</button>
+    </div>
+    <div class="game-modal__body">
+      <p class="gx-help">Thinking traps (cognitive distortions) are common and learnable. Read each thought and pick the trap at work.</p>
+      <div id="cogquizStage"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ---- Affirmation Generator Modal ---- -->
+<div class="game-modal-overlay" id="modal-affirmations" role="dialog" aria-modal="true" aria-label="Affirmation Generator">
+  <div class="game-modal">
+    <div class="game-modal__header">
+      <h2 class="game-modal__title">Affirmation Generator</h2>
+      <button class="game-modal__close" onclick="closeGame('affirmations')" aria-label="Close">&times;</button>
+    </div>
+    <div class="game-modal__body">
+      <p class="gx-help">Affirmations work best when they feel believable and are repeated. Generate one, sit with it, and save the ones that fit.</p>
+      <div class="gx-result gx-center">
+        <p id="affirmationText" style="font-size:var(--ds-text-lg);color:var(--ds-text-primary)" aria-live="polite">Tap &ldquo;New affirmation&rdquo; to begin.</p>
+      </div>
+      <div class="gx-actions">
+        <button class="gx-btn" onclick="newAffirmation()" aria-label="Generate a new affirmation">New affirmation</button>
+        <button class="gx-btn gx-btn--ghost" id="affirmationSaveBtn" onclick="saveAffirmation()" aria-label="Save this affirmation" disabled>Save this one</button>
+      </div>
+      <div id="affirmationSavedWrap" style="margin-top:16px;display:none">
+        <div class="gx-label">Saved affirmations</div>
+        <ul class="gx-list" id="affirmationSaved"></ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ---- Stress Thermometer Modal ---- -->
+<div class="game-modal-overlay" id="modal-stressthermometer" role="dialog" aria-modal="true" aria-label="Stress Thermometer">
+  <div class="game-modal">
+    <div class="game-modal__header">
+      <h2 class="game-modal__title">Stress Thermometer</h2>
+      <button class="game-modal__close" onclick="closeGame('stressthermometer')" aria-label="Close">&times;</button>
+    </div>
+    <div class="game-modal__body">
+      <p class="gx-help">Subjective Units of Distress (SUDS): 0 is completely calm, 100 is the most distress you can imagine. Where are you right now?</p>
+      <div class="gx-center">
+        <div class="gx-big-num" id="sudsValue">0</div>
+        <div id="sudsZone" style="font-family:var(--ds-font-sans);font-weight:var(--ds-weight-semibold);margin:4px 0 12px" aria-live="polite">Green &middot; Calm</div>
+      </div>
+      <label class="gx-label" for="sudsSlider">Distress level, 0 to 100</label>
+      <input type="range" class="gx-range" id="sudsSlider" min="0" max="100" value="0" step="1" oninput="updateSuds(this.value)" aria-valuemin="0" aria-valuemax="100">
+      <div id="sudsSuggestion"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ---- Mindful Glitter Jar Modal ---- -->
+<div class="game-modal-overlay" id="modal-mindfuljar" role="dialog" aria-modal="true" aria-label="Mindful Glitter Jar">
+  <div class="game-modal">
+    <div class="game-modal__header">
+      <h2 class="game-modal__title">Mindful Glitter Jar</h2>
+      <button class="game-modal__close" onclick="closeGame('mindfuljar')" aria-label="Close">&times;</button>
+    </div>
+    <div class="game-modal__body gx-center">
+      <p class="gx-help">When your mind is stirred up, thoughts swirl like glitter in water. Watch them settle &mdash; you don't have to do anything but breathe.</p>
+      <div class="gx-jar" id="mindfulJar" aria-hidden="true"></div>
+      <div class="gx-big-num" id="mindfulTimer" style="font-size:36px">1:00</div>
+      <div id="mindfulCue" style="font-family:var(--ds-font-sans);color:var(--ds-text-secondary);margin:8px 0" aria-live="polite">Breathe in slowly&hellip;</div>
+      <div class="gx-actions" style="justify-content:center">
+        <button class="gx-btn" id="mindfulToggle" onclick="toggleMindful()">Start</button>
+        <button class="gx-btn gx-btn--ghost" onclick="resetMindful()">Reset</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ---- Strengths Spotter Modal ---- -->
+<div class="game-modal-overlay" id="modal-strengths" role="dialog" aria-modal="true" aria-label="Strengths Spotter">
+  <div class="game-modal">
+    <div class="game-modal__header">
+      <h2 class="game-modal__title">Strengths Spotter</h2>
+      <button class="game-modal__close" onclick="closeGame('strengths')" aria-label="Close">&times;</button>
+    </div>
+    <div class="game-modal__body">
+      <p class="gx-help">Everyone has signature strengths. For each card, decide: does this sound like you? Keep the ones that do.</p>
+      <div id="strengthsStage"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ---- Reframe-It Modal ---- -->
+<div class="game-modal-overlay" id="modal-flexibility" role="dialog" aria-modal="true" aria-label="Reframe-It">
+  <div class="game-modal">
+    <div class="game-modal__header">
+      <h2 class="game-modal__title">Reframe-It</h2>
+      <button class="game-modal__close" onclick="closeGame('flexibility')" aria-label="Close">&times;</button>
+    </div>
+    <div class="game-modal__body">
+      <p class="gx-help">A reframe isn't fake positivity &mdash; it's a more complete, flexible way of seeing the same situation. Pick the most balanced option, or write your own.</p>
+      <div id="flexibilityStage"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ---- Social Scenarios Modal ---- -->
+<div class="game-modal-overlay" id="modal-socialscenarios" role="dialog" aria-modal="true" aria-label="Social Scenarios">
+  <div class="game-modal">
+    <div class="game-modal__header">
+      <h2 class="game-modal__title">Social Scenarios</h2>
+      <button class="game-modal__close" onclick="closeGame('socialscenarios')" aria-label="Close">&times;</button>
+    </div>
+    <div class="game-modal__body">
+      <p class="gx-help">There's a sweet spot between bottling things up (passive) and lashing out (aggressive): assertive communication. Try these scenarios.</p>
+      <div id="socialStage"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ---- Cool-Down Countdown Modal ---- -->
+<div class="game-modal-overlay" id="modal-calmcountdown" role="dialog" aria-modal="true" aria-label="Cool-Down Countdown">
+  <div class="game-modal">
+    <div class="game-modal__header">
+      <h2 class="game-modal__title">Cool-Down Countdown</h2>
+      <button class="game-modal__close" onclick="closeGame('calmcountdown')" aria-label="Close">&times;</button>
+    </div>
+    <div class="game-modal__body gx-center">
+      <p class="gx-help">Anger is normal, and it peaks fast then fades. Giving your body a brief time-out lets the thinking brain come back online before you act.</p>
+      <div class="gx-big-num" id="calmTimer">1:30</div>
+      <div id="calmPrompt" style="font-family:var(--ds-font-sans);font-size:var(--ds-text-base);color:var(--ds-text-primary);margin:12px 0;min-height:48px" aria-live="polite">Press Start for a 90-second cool-down.</div>
+      <div class="gx-actions" style="justify-content:center">
+        <button class="gx-btn" id="calmToggle" onclick="toggleCalm()">Start</button>
+        <button class="gx-btn gx-btn--ghost" onclick="resetCalm()">Reset</button>
       </div>
     </div>
   </div>
@@ -1885,6 +2470,20 @@ function openGame(id) {
   if (id === 'spinner') initSpinner();
   if (id === 'thought') initThoughtChallenger();
   if (id === 'checkin') initCheckin();
+  if (id === 'grounding') initGrounding();
+  if (id === 'gratitude') initGratitude();
+  if (id === 'worrytree') initWorrytree();
+  if (id === 'valuessort') initValuesSort();
+  if (id === 'emotionwheel') initEmotionWheel();
+  if (id === 'pmr') initPmr();
+  if (id === 'cogquiz') initCogquiz();
+  if (id === 'affirmations') initAffirmations();
+  if (id === 'stressthermometer') initStressThermometer();
+  if (id === 'mindfuljar') initMindful();
+  if (id === 'strengths') initStrengths();
+  if (id === 'flexibility') initFlexibility();
+  if (id === 'socialscenarios') initSocial();
+  if (id === 'calmcountdown') initCalm();
   // Trap focus
   modal.querySelector('.game-modal__close').focus();
 }
@@ -1894,6 +2493,9 @@ function closeGame(id) {
   modal.classList.remove('is-open');
   document.body.style.overflow = '';
   if (id === 'breathing') stopBreathing();
+  if (id === 'pmr') stopPmr();
+  if (id === 'mindfuljar') stopMindful();
+  if (id === 'calmcountdown') stopCalm();
 }
 
 // Close on overlay click
@@ -2590,6 +3192,780 @@ function setCheckinIntensity(val) {
       star.setAttribute('aria-checked', 'false');
     }
   });
+}
+
+// ============================================================
+// SHARED HELPERS FOR NEW GAMES
+// ============================================================
+function gxEscape(s) {
+  return String(s).replace(/[&<>"']/g, function(c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  });
+}
+function gxEl(id) { return document.getElementById(id); }
+
+// ============================================================
+// GAME 6: 5-4-3-2-1 GROUNDING
+// ============================================================
+var groundingSteps = [
+  { n: 5, sense: 'see', verb: 'see', prompt: 'Look around. Name 5 things you can see right now.', icon: '\u{1F441}\u{FE0F}' },
+  { n: 4, sense: 'hear', verb: 'hear', prompt: 'Listen. Name 4 things you can hear.', icon: '\u{1F442}' },
+  { n: 3, sense: 'touch', verb: 'feel', prompt: 'Notice 3 things you can physically feel or touch.', icon: '\u{270B}' },
+  { n: 2, sense: 'smell', verb: 'smell', prompt: 'Name 2 things you can smell (or 2 smells you like).', icon: '\u{1F443}' },
+  { n: 1, sense: 'taste', verb: 'taste', prompt: 'Name 1 thing you can taste (or one you enjoy).', icon: '\u{1F445}' }
+];
+var groundingIndex = 0;
+function initGrounding() {
+  groundingIndex = 0;
+  renderGrounding();
+}
+function renderGrounding() {
+  var dots = gxEl('groundingDots');
+  if (dots) {
+    dots.innerHTML = '';
+    for (var i = 0; i < groundingSteps.length; i++) {
+      var d = document.createElement('span');
+      d.className = 'gx-step-dot' + (i < groundingIndex ? ' done' : (i === groundingIndex ? ' active' : ''));
+      dots.appendChild(d);
+    }
+  }
+  var stage = gxEl('groundingStage');
+  if (!stage) return;
+  if (groundingIndex >= groundingSteps.length) {
+    stage.innerHTML = '<div class="gx-result gx-center"><div style="font-size:40px">\u{1F33F}</div>' +
+      '<h4>You\'re here, in this moment.</h4>' +
+      '<p>You just guided your attention back to the present using your five senses. Notice how your body feels now compared to when you started. You can return to this any time.</p>' +
+      '<div class="gx-actions" style="justify-content:center"><button class="gx-btn" onclick="initGrounding()">Start again</button></div></div>';
+    return;
+  }
+  var step = groundingSteps[groundingIndex];
+  var fields = '';
+  for (var k = 0; k < step.n; k++) {
+    var fid = 'grounding-' + step.sense + '-' + k;
+    fields += '<label class="ds-sr-only" for="' + fid + '">Thing you ' + step.verb + ', number ' + (k + 1) + '</label>' +
+      '<input type="text" class="gx-input" id="' + fid + '" style="margin-bottom:8px" placeholder="Something you ' + step.verb + '…" maxlength="60">';
+  }
+  stage.innerHTML = '<div class="gx-card gx-center"><div style="font-size:36px">' + step.icon + '</div>' +
+    '<div class="gx-big-num" style="font-size:40px">' + step.n + '</div>' +
+    '<p style="font-family:var(--ds-font-sans);color:var(--ds-text-secondary);margin:4px 0 0">' + step.prompt + '</p></div>' +
+    fields +
+    '<div class="gx-actions"><button class="gx-btn" onclick="groundingNext()">' +
+    (groundingIndex === groundingSteps.length - 1 ? 'Finish' : 'Next') + '</button></div>';
+  var first = stage.querySelector('input');
+  if (first) first.focus();
+}
+function groundingNext() {
+  groundingIndex++;
+  renderGrounding();
+}
+
+// ============================================================
+// GAME 7: GRATITUDE GARDEN
+// ============================================================
+var gratitudeBlooms = ['\u{1F33B}', '\u{1F337}', '\u{1F33C}', '\u{1F338}', '\u{1F33A}', '\u{1F490}', '\u{1F33F}', '\u{1F343}'];
+var gratitudeItems = [];
+function initGratitude() {
+  gratitudeItems = [];
+  var g = gxEl('gratitudeGarden'); if (g) g.innerHTML = '';
+  var l = gxEl('gratitudeList'); if (l) l.innerHTML = '';
+  var r = gxEl('gratitudeReflection'); if (r) r.innerHTML = '';
+  var inp = gxEl('gratitudeInput'); if (inp) inp.value = '';
+}
+function addGratitude() {
+  var inp = gxEl('gratitudeInput');
+  if (!inp) return;
+  var val = inp.value.trim();
+  if (!val) return;
+  gratitudeItems.push(val);
+  inp.value = '';
+  inp.focus();
+  var bloom = gratitudeBlooms[(gratitudeItems.length - 1) % gratitudeBlooms.length];
+  var garden = gxEl('gratitudeGarden');
+  if (garden) garden.insertAdjacentHTML('beforeend', '<span class="gx-bloom" aria-hidden="true">' + bloom + '</span> ');
+  var list = gxEl('gratitudeList');
+  if (list) {
+    var li = document.createElement('li');
+    li.innerHTML = '<span aria-hidden="true">' + bloom + '</span><span>' + gxEscape(val) + '</span>';
+    list.appendChild(li);
+  }
+  var ref = gxEl('gratitudeReflection');
+  if (ref) {
+    if (gratitudeItems.length >= 3) {
+      ref.innerHTML = '<div class="gx-result"><h4>Your garden is growing</h4><p>You\'ve named ' + gratitudeItems.length +
+        ' things. Gratitude practice gently widens our attention toward what\'s going right. Try reading your list slowly, letting each one land.</p></div>';
+    } else {
+      ref.innerHTML = '<p class="gx-help" style="margin-top:12px">Add at least three to see your garden in bloom.</p>';
+    }
+  }
+}
+
+// ============================================================
+// GAME 8: WORRY TREE
+// ============================================================
+var worryText = '';
+function initWorrytree() {
+  worryText = '';
+  worrytreeAsk();
+}
+function worrytreeAsk() {
+  var s = gxEl('worrytreeStage');
+  if (!s) return;
+  s.innerHTML = '<div class="gx-card"><label class="gx-label" for="worryInput">What\'s on your mind?</label>' +
+    '<textarea class="gx-textarea" id="worryInput" placeholder="Name the worry in a sentence or two…"></textarea></div>' +
+    '<div class="gx-actions"><button class="gx-btn" onclick="worrytreeDecide()">Continue</button></div>';
+  var t = s.querySelector('textarea'); if (t) t.focus();
+}
+function worrytreeDecide() {
+  var t = gxEl('worryInput');
+  worryText = t ? t.value.trim() : '';
+  var s = gxEl('worrytreeStage');
+  if (!s) return;
+  var quoted = worryText ? '<div class="gx-feedback gx-feedback--info">&ldquo;' + gxEscape(worryText) + '&rdquo;</div>' : '';
+  s.innerHTML = quoted + '<div class="gx-card gx-center"><h4 style="margin:0 0 12px;font-family:var(--ds-font-sans)">Is this something you can do something about right now?</h4>' +
+    '<div class="gx-actions" style="justify-content:center">' +
+    '<button class="gx-btn" onclick="worrytreeActionable()">Yes, there\'s a step I could take</button>' +
+    '<button class="gx-btn gx-btn--ghost" onclick="worrytreeLetGo()">No, it\'s out of my control</button></div></div>';
+}
+function worrytreeActionable() {
+  var s = gxEl('worrytreeStage');
+  if (!s) return;
+  s.innerHTML = '<div class="gx-feedback gx-feedback--good">Good &mdash; a solvable worry is really a problem in disguise. Let\'s make a plan.</div>' +
+    '<div class="gx-card"><label class="gx-label" for="worryAction">What is one small first step you could take?</label>' +
+    '<input type="text" class="gx-input" id="worryAction" placeholder="e.g. send one email, ask one question"></div>' +
+    '<div class="gx-card"><label class="gx-label" for="worryWhen">When will you do it?</label>' +
+    '<input type="text" class="gx-input" id="worryWhen" placeholder="e.g. tomorrow morning"></div>' +
+    '<div class="gx-actions"><button class="gx-btn" onclick="worrytreePlan()">Save my plan</button>' +
+    '<button class="gx-btn gx-btn--ghost" onclick="initWorrytree()">Start over</button></div>';
+}
+function worrytreePlan() {
+  var a = gxEl('worryAction'), w = gxEl('worryWhen');
+  var act = a ? a.value.trim() : '', wh = w ? w.value.trim() : '';
+  var s = gxEl('worrytreeStage');
+  if (!s) return;
+  s.innerHTML = '<div class="gx-result"><h4>Your action plan</h4>' +
+    '<p><strong>Step:</strong> ' + (act ? gxEscape(act) : '(add a step above next time)') + '<br>' +
+    '<strong>When:</strong> ' + (wh ? gxEscape(wh) : '(pick a time)') + '</p>' +
+    '<p style="margin-top:8px">Once you\'ve scheduled the step, you have permission to set the worry down until then. Re-worrying won\'t make the plan better.</p>' +
+    '<div class="gx-actions" style="margin-top:12px"><button class="gx-btn" onclick="initWorrytree()">Sort another worry</button></div></div>';
+}
+function worrytreeLetGo() {
+  var s = gxEl('worrytreeStage');
+  if (!s) return;
+  s.innerHTML = '<div class="gx-feedback gx-feedback--info">If you genuinely can\'t act on it, the work shifts from <em>solving</em> to <em>releasing</em>. Try one of these:</div>' +
+    '<ul class="gx-list">' +
+    '<li>Picture placing the worry on a leaf and watching it float down a stream.</li>' +
+    '<li>Schedule a brief “worry time” later, and gently postpone it until then.</li>' +
+    '<li>Shift your attention to the present with a few slow breaths or the 5-4-3-2-1 exercise.</li>' +
+    '<li>Tell yourself: “This is uncertain, and I can cope with uncertainty.”</li></ul>' +
+    '<div class="gx-actions"><button class="gx-btn" onclick="initWorrytree()">Sort another worry</button></div>';
+}
+
+// ============================================================
+// GAME 9: VALUES SORT
+// ============================================================
+var valuesDeck = ['Family', 'Friendship', 'Health', 'Honesty', 'Creativity', 'Adventure', 'Kindness', 'Learning',
+  'Independence', 'Spirituality', 'Justice', 'Security', 'Achievement', 'Humor', 'Nature', 'Community'];
+var valuesChosen = [];
+function initValuesSort() {
+  valuesChosen = [];
+  var grid = gxEl('valuesGrid');
+  if (grid) {
+    grid.innerHTML = '';
+    valuesDeck.forEach(function(v) {
+      var b = document.createElement('button');
+      b.className = 'gx-chip';
+      b.type = 'button';
+      b.textContent = v;
+      b.setAttribute('aria-pressed', 'false');
+      b.setAttribute('aria-label', 'Value: ' + v);
+      b.onclick = function() { toggleValue(v, b); };
+      grid.appendChild(b);
+    });
+  }
+  var c = gxEl('valuesCount'); if (c) c.textContent = '0';
+  var n = gxEl('valuesNextBtn'); if (n) n.disabled = true;
+  var r = gxEl('valuesReflection'); if (r) r.innerHTML = '';
+}
+function toggleValue(v, btn) {
+  var i = valuesChosen.indexOf(v);
+  if (i >= 0) {
+    valuesChosen.splice(i, 1);
+    btn.classList.remove('selected');
+    btn.setAttribute('aria-pressed', 'false');
+  } else {
+    if (valuesChosen.length >= 5) return;
+    valuesChosen.push(v);
+    btn.classList.add('selected');
+    btn.setAttribute('aria-pressed', 'true');
+  }
+  var c = gxEl('valuesCount'); if (c) c.textContent = String(valuesChosen.length);
+  var n = gxEl('valuesNextBtn'); if (n) n.disabled = valuesChosen.length < 1;
+  // disable remaining unselected when at 5
+  document.querySelectorAll('#valuesGrid .gx-chip').forEach(function(b) {
+    if (!b.classList.contains('selected')) b.disabled = valuesChosen.length >= 5;
+  });
+}
+function valuesReflect() {
+  var r = gxEl('valuesReflection');
+  if (!r) return;
+  var rows = valuesChosen.map(function(v, idx) {
+    var fid = 'valueaction-' + idx;
+    return '<div class="gx-card"><div class="gx-label" style="margin-bottom:6px">' + gxEscape(v) + '</div>' +
+      '<label class="ds-sr-only" for="' + fid + '">One action that honors ' + gxEscape(v) + '</label>' +
+      '<input type="text" class="gx-input" id="' + fid + '" placeholder="One small action that honors ' + gxEscape(v) + '…"></div>';
+  }).join('');
+  r.innerHTML = '<div class="gx-feedback gx-feedback--good" style="margin-top:16px">These are your compass for now. Values aren\'t goals to finish &mdash; they\'re directions to keep walking. For each, name one action you could take this week.</div>' +
+    rows + '<div class="gx-actions"><button class="gx-btn gx-btn--ghost" onclick="initValuesSort()">Re-sort</button></div>';
+}
+
+// ============================================================
+// GAME 10: EMOTION WHEEL EXPLORER
+// ============================================================
+var emotionWheel = [
+  { core: 'Happy', emoji: '\u{1F60A}', subs: ['joyful', 'content', 'proud', 'hopeful', 'grateful'],
+    reflect: 'It\'s good to let yourself fully feel the good moments &mdash; savoring them helps them last.',
+    tip: 'Try naming one thing that contributed to this feeling, and let yourself enjoy it for a few breaths.' },
+  { core: 'Sad', emoji: '\u{1F622}', subs: ['lonely', 'disappointed', 'hurt', 'grieving', 'empty'],
+    reflect: 'Sadness usually means something mattered to you. It deserves space, not a rush to fix it.',
+    tip: 'Offer yourself the kindness you\'d give a friend. Reaching out to someone you trust can help carry it.' },
+  { core: 'Angry', emoji: '\u{1F621}', subs: ['frustrated', 'irritated', 'resentful', 'betrayed', 'jealous'],
+    reflect: 'Anger often guards a boundary or an unmet need. It\'s information, not something to be ashamed of.',
+    tip: 'Pause before acting. A few slow breaths or a short walk lets the thinking brain catch up to the feeling.' },
+  { core: 'Scared', emoji: '\u{1F628}', subs: ['anxious', 'nervous', 'overwhelmed', 'insecure', 'helpless'],
+    reflect: 'Fear is your body trying to protect you, even when the threat isn\'t as big as it feels.',
+    tip: 'Ground yourself in the present: feel your feet on the floor and name what you can actually see and hear.' },
+  { core: 'Surprised', emoji: '\u{1F632}', subs: ['startled', 'confused', 'amazed', 'shocked', 'curious'],
+    reflect: 'Surprise means reality didn\'t match your expectation &mdash; a natural moment of recalibration.',
+    tip: 'Give yourself a beat to take it in before reacting. Curiosity is a gentler response than judgment.' },
+  { core: 'Calm', emoji: '\u{1F60C}', subs: ['peaceful', 'relaxed', 'safe', 'grounded', 'relieved'],
+    reflect: 'Calm is worth noticing on purpose &mdash; your nervous system is learning that this state is possible.',
+    tip: 'Anchor the feeling: notice where in your body it lives, so you can find your way back to it later.' }
+];
+function initEmotionWheel() {
+  var core = gxEl('emotionCore');
+  if (core) {
+    core.innerHTML = '';
+    emotionWheel.forEach(function(e, i) {
+      var b = document.createElement('button');
+      b.className = 'gx-chip';
+      b.type = 'button';
+      b.style.minWidth = '92px';
+      b.innerHTML = '<span aria-hidden="true" style="font-size:20px">' + e.emoji + '</span> ' + e.core;
+      b.setAttribute('aria-label', 'Explore feeling: ' + e.core);
+      b.onclick = function() { selectEmotionCore(i, b); };
+      core.appendChild(b);
+    });
+  }
+  var d = gxEl('emotionDetail'); if (d) d.innerHTML = '';
+}
+function selectEmotionCore(i, btn) {
+  document.querySelectorAll('#emotionCore .gx-chip').forEach(function(b) { b.classList.remove('selected'); b.setAttribute('aria-pressed', 'false'); });
+  if (btn) { btn.classList.add('selected'); btn.setAttribute('aria-pressed', 'true'); }
+  var e = emotionWheel[i];
+  var d = gxEl('emotionDetail');
+  if (!d) return;
+  var subs = e.subs.map(function(s) { return '<span class="gx-chip" style="cursor:default;display:inline-block;margin:2px">' + gxEscape(s) + '</span>'; }).join(' ');
+  d.innerHTML = '<div class="gx-result"><h4>Underneath &ldquo;' + gxEscape(e.core) + '&rdquo; you might find…</h4>' +
+    '<div style="margin:8px 0">' + subs + '</div>' +
+    '<p style="margin-bottom:8px"><strong>Validating it:</strong> ' + e.reflect + '</p>' +
+    '<p><strong>Coping tip:</strong> ' + e.tip + '</p></div>';
+}
+
+// ============================================================
+// GAME 11: PROGRESSIVE MUSCLE RELAXATION
+// ============================================================
+var pmrGroups = ['Hands &amp; forearms', 'Upper arms', 'Shoulders &amp; neck', 'Face &amp; jaw', 'Chest &amp; back', 'Stomach', 'Legs &amp; glutes', 'Feet &amp; calves'];
+var pmrPhases = [{ label: 'Tense gently…', secs: 5 }, { label: 'Now release. Notice the difference.', secs: 8 }];
+var pmrTimer = null, pmrGroupIdx = 0, pmrPhaseIdx = 0, pmrCountLeft = 0, pmrRunning = false;
+function initPmr() { resetPmr(); }
+function resetPmr() {
+  stopPmr();
+  pmrGroupIdx = 0; pmrPhaseIdx = 0; pmrRunning = false;
+  var g = gxEl('pmrGroup'); if (g) g.innerHTML = 'Ready when you are';
+  var p = gxEl('pmrPhase'); if (p) p.textContent = 'Press Start to begin';
+  var c = gxEl('pmrCount'); if (c) c.innerHTML = '&middot;';
+  var pr = gxEl('pmrProgress'); if (pr) pr.style.width = '0%';
+  var t = gxEl('pmrToggle'); if (t) t.textContent = 'Start';
+}
+function stopPmr() {
+  if (pmrTimer) { clearInterval(pmrTimer); pmrTimer = null; }
+  pmrRunning = false;
+}
+function togglePmr() {
+  if (pmrRunning) {
+    stopPmr();
+    var t = gxEl('pmrToggle'); if (t) t.textContent = 'Resume';
+    return;
+  }
+  pmrRunning = true;
+  var t2 = gxEl('pmrToggle'); if (t2) t2.textContent = 'Pause';
+  if (pmrCountLeft <= 0) startPmrPhase();
+  pmrTick();
+  pmrTimer = setInterval(pmrTick, 1000);
+}
+function startPmrPhase() {
+  if (pmrGroupIdx >= pmrGroups.length) { pmrFinish(); return; }
+  pmrCountLeft = pmrPhases[pmrPhaseIdx].secs;
+  var g = gxEl('pmrGroup'); if (g) g.innerHTML = pmrGroups[pmrGroupIdx];
+  var p = gxEl('pmrPhase'); if (p) p.textContent = pmrPhases[pmrPhaseIdx].label;
+}
+function pmrTick() {
+  if (!pmrRunning) return;
+  if (pmrCountLeft <= 0) {
+    pmrPhaseIdx++;
+    if (pmrPhaseIdx >= pmrPhases.length) { pmrPhaseIdx = 0; pmrGroupIdx++; }
+    if (pmrGroupIdx >= pmrGroups.length) { pmrFinish(); return; }
+    startPmrPhase();
+  }
+  var c = gxEl('pmrCount'); if (c) c.textContent = String(pmrCountLeft);
+  var totalSteps = pmrGroups.length * pmrPhases.length;
+  var doneSteps = pmrGroupIdx * pmrPhases.length + pmrPhaseIdx;
+  var pr = gxEl('pmrProgress'); if (pr) pr.style.width = Math.round((doneSteps / totalSteps) * 100) + '%';
+  pmrCountLeft--;
+}
+function pmrFinish() {
+  stopPmr();
+  var g = gxEl('pmrGroup'); if (g) g.innerHTML = 'Complete \u{1F44F}';
+  var p = gxEl('pmrPhase'); if (p) p.textContent = 'Your whole body has been tensed and released. Sit for a moment and notice how it feels.';
+  var c = gxEl('pmrCount'); if (c) c.innerHTML = '✓';
+  var pr = gxEl('pmrProgress'); if (pr) pr.style.width = '100%';
+  var t = gxEl('pmrToggle'); if (t) t.textContent = 'Start';
+}
+
+// ============================================================
+// GAME 12: DISTORTION DETECTIVE QUIZ
+// ============================================================
+var cogquizQuestions = [
+  { thought: '“I failed one test, so I’m a total failure.”', options: ['All-or-Nothing Thinking', 'Mind Reading', 'Should Statements'], answer: 0,
+    explain: 'All-or-Nothing (black-and-white) thinking treats a single setback as total failure, ignoring the middle ground.' },
+  { thought: '“They didn’t text back &mdash; they must be mad at me.”', options: ['Overgeneralization', 'Mind Reading', 'Magnification'], answer: 1,
+    explain: 'Mind Reading assumes we know what others think without evidence. There are usually many other explanations.' },
+  { thought: '“This always happens to me. Nothing ever works out.”', options: ['Overgeneralization', 'Personalization', 'Emotional Reasoning'], answer: 0,
+    explain: 'Overgeneralization takes one event and turns it into a never-ending pattern with words like “always” and “never.”' },
+  { thought: '“I feel guilty, so I must have done something wrong.”', options: ['Labeling', 'Emotional Reasoning', 'Fortune Telling'], answer: 1,
+    explain: 'Emotional Reasoning treats a feeling as proof of fact. Emotions are real, but they aren’t always accurate evidence.' },
+  { thought: '“I should never feel anxious. I’m so weak.”', options: ['Should Statements', 'Catastrophizing', 'Filtering'], answer: 0,
+    explain: 'Should Statements set rigid rules that breed guilt and shame. Softer language (“I’d prefer”) is kinder and more flexible.' },
+  { thought: '“The whole presentation was ruined by one typo.”', options: ['Mind Reading', 'Mental Filtering', 'Personalization'], answer: 1,
+    explain: 'Mental Filtering zooms in on a single negative detail while screening out everything that went well.' }
+];
+var cogquizIdx = 0, cogquizScore = 0, cogquizAnswered = false;
+function initCogquiz() {
+  cogquizIdx = 0; cogquizScore = 0; cogquizAnswered = false;
+  renderCogquiz();
+}
+function renderCogquiz() {
+  var s = gxEl('cogquizStage');
+  if (!s) return;
+  if (cogquizIdx >= cogquizQuestions.length) {
+    s.innerHTML = '<div class="gx-result gx-center"><h4>You scored ' + cogquizScore + ' / ' + cogquizQuestions.length + '</h4>' +
+      '<p>Spotting distortions is the first step in CBT &mdash; once you can name a thinking trap, you can question it instead of believing it automatically.</p>' +
+      '<div class="gx-actions" style="justify-content:center"><button class="gx-btn" onclick="initCogquiz()">Play again</button></div></div>';
+    return;
+  }
+  cogquizAnswered = false;
+  var q = cogquizQuestions[cogquizIdx];
+  var opts = q.options.map(function(o, i) {
+    return '<button class="gx-btn gx-btn--ghost" style="width:100%;text-align:left;margin-bottom:8px" onclick="answerCogquiz(' + i + ')">' + gxEscape(o) + '</button>';
+  }).join('');
+  s.innerHTML = '<p class="gx-help" style="margin-bottom:8px">Question ' + (cogquizIdx + 1) + ' of ' + cogquizQuestions.length + '</p>' +
+    '<div class="gx-card"><p style="margin:0;font-family:var(--ds-font-sans);font-size:var(--ds-text-base);color:var(--ds-text-primary)">' + q.thought + '</p></div>' +
+    '<p class="gx-label">Which thinking trap is this?</p><div id="cogquizOptions">' + opts + '</div><div id="cogquizFeedback"></div>';
+}
+function answerCogquiz(i) {
+  if (cogquizAnswered) return;
+  cogquizAnswered = true;
+  var q = cogquizQuestions[cogquizIdx];
+  var correct = i === q.answer;
+  if (correct) cogquizScore++;
+  document.querySelectorAll('#cogquizOptions button').forEach(function(b) { b.disabled = true; });
+  var fb = gxEl('cogquizFeedback');
+  if (fb) {
+    fb.innerHTML = '<div class="gx-feedback ' + (correct ? 'gx-feedback--good' : 'gx-feedback--warn') + '">' +
+      '<strong>' + (correct ? 'Correct!' : 'Not quite — it’s ' + gxEscape(q.options[q.answer]) + '.') + '</strong><br>' + q.explain + '</div>' +
+      '<div class="gx-actions"><button class="gx-btn" onclick="cogquizNext()">' +
+      (cogquizIdx === cogquizQuestions.length - 1 ? 'See results' : 'Next question') + '</button></div>';
+  }
+}
+function cogquizNext() { cogquizIdx++; renderCogquiz(); }
+
+// ============================================================
+// GAME 13: AFFIRMATION GENERATOR
+// ============================================================
+var affirmationPool = [
+  'I am allowed to take up space and ask for what I need.',
+  'I can do hard things, one small step at a time.',
+  'My worth isn’t measured by my productivity.',
+  'It’s okay to rest. Rest is part of the work.',
+  'I am learning, and learning means making mistakes.',
+  'My feelings are valid, even the uncomfortable ones.',
+  'I have survived every difficult day so far.',
+  'I can be a work in progress and still be worthy now.',
+  'I don’t have to earn my own kindness.',
+  'I am more than my hardest moments.',
+  'Progress, not perfection, is enough.',
+  'I can set boundaries without guilt.',
+  'I am capable of changing my mind and growing.',
+  'I deserve the same compassion I give others.',
+  'This feeling is real, and it will also pass.'
+];
+var affirmationCurrent = '', affirmationSavedList = [];
+function initAffirmations() {
+  affirmationCurrent = '';
+  affirmationSavedList = [];
+  var t = gxEl('affirmationText'); if (t) t.textContent = 'Tap “New affirmation” to begin.';
+  var b = gxEl('affirmationSaveBtn'); if (b) b.disabled = true;
+  var w = gxEl('affirmationSavedWrap'); if (w) w.style.display = 'none';
+  var l = gxEl('affirmationSaved'); if (l) l.innerHTML = '';
+}
+function newAffirmation() {
+  var pick;
+  do { pick = affirmationPool[Math.floor(Math.random() * affirmationPool.length)]; }
+  while (pick === affirmationCurrent && affirmationPool.length > 1);
+  affirmationCurrent = pick;
+  var t = gxEl('affirmationText'); if (t) t.textContent = pick;
+  var b = gxEl('affirmationSaveBtn'); if (b) b.disabled = false;
+}
+function saveAffirmation() {
+  if (!affirmationCurrent || affirmationSavedList.indexOf(affirmationCurrent) >= 0) return;
+  affirmationSavedList.push(affirmationCurrent);
+  var w = gxEl('affirmationSavedWrap'); if (w) w.style.display = 'block';
+  var l = gxEl('affirmationSaved');
+  if (l) {
+    var li = document.createElement('li');
+    li.innerHTML = '<span aria-hidden="true">\u{1F496}</span><span>' + gxEscape(affirmationCurrent) + '</span>';
+    l.appendChild(li);
+  }
+}
+
+// ============================================================
+// GAME 14: STRESS THERMOMETER (SUDS)
+// ============================================================
+function initStressThermometer() {
+  var sl = gxEl('sudsSlider'); if (sl) sl.value = 0;
+  updateSuds(0);
+}
+function updateSuds(val) {
+  val = parseInt(val, 10) || 0;
+  var v = gxEl('sudsValue'); if (v) v.textContent = val;
+  var sl = gxEl('sudsSlider'); if (sl) sl.setAttribute('aria-valuenow', val);
+  var zone, color, suggest;
+  if (val <= 33) {
+    zone = 'Green · Calm to mild';
+    color = '#4caf50';
+    suggest = 'You’re in a manageable range. This is a great time to use a skill proactively &mdash; a few slow breaths or noticing what’s going well keeps you grounded.';
+  } else if (val <= 66) {
+    zone = 'Yellow · Moderate distress';
+    color = '#f4a261';
+    suggest = 'Your stress is rising. Try a regulation skill now, before it climbs: paced breathing, a short walk, or the 5-4-3-2-1 grounding exercise.';
+  } else {
+    zone = 'Red · High distress';
+    color = '#e57373';
+    suggest = 'You’re in a high-distress zone. Prioritize safety and soothing: cold water on your face, slow exhale-focused breathing, or reaching out to someone you trust. Big decisions can wait until this eases.';
+  }
+  var z = gxEl('sudsZone'); if (z) { z.textContent = zone; z.style.color = color; }
+  var v2 = gxEl('sudsValue'); if (v2) v2.style.color = color;
+  var sug = gxEl('sudsSuggestion');
+  if (sug) sug.innerHTML = '<div class="gx-feedback gx-feedback--info" style="margin-top:16px">' + suggest + '</div>';
+}
+
+// ============================================================
+// GAME 15: MINDFUL GLITTER JAR
+// ============================================================
+var mindfulTimer = null, mindfulLeft = 60, mindfulRunning = false, mindfulCueTimer = null;
+var mindfulCues = ['Breathe in slowly…', 'And breathe out…', 'Watch the glitter settle…', 'There’s nothing to fix right now…'];
+function initMindful() {
+  resetMindful();
+  buildGlitter();
+}
+function buildGlitter() {
+  var jar = gxEl('mindfulJar');
+  if (!jar) return;
+  jar.innerHTML = '';
+  for (var i = 0; i < 24; i++) {
+    var g = document.createElement('span');
+    g.className = 'gx-glitter';
+    g.style.left = (5 + Math.random() * 90) + '%';
+    g.style.top = (Math.random() * 60) + '%';
+    var hue = ['var(--ds-primary-500)', 'var(--ds-primary-400)', '#80b3ff'][i % 3];
+    g.style.background = hue;
+    jar.appendChild(g);
+  }
+}
+function animateGlitter() {
+  var jar = gxEl('mindfulJar');
+  if (!jar) return;
+  jar.querySelectorAll('.gx-glitter').forEach(function(g) {
+    var dur = (2 + Math.random() * 3).toFixed(1);
+    g.style.animation = 'gxFall ' + dur + 's ease-in forwards';
+  });
+}
+function resetMindful() {
+  stopMindful();
+  mindfulLeft = 60; mindfulRunning = false;
+  var t = gxEl('mindfulTimer'); if (t) t.textContent = '1:00';
+  var c = gxEl('mindfulCue'); if (c) c.textContent = 'Breathe in slowly…';
+  var b = gxEl('mindfulToggle'); if (b) b.textContent = 'Start';
+  var jar = gxEl('mindfulJar');
+  if (jar) jar.querySelectorAll('.gx-glitter').forEach(function(g) { g.style.animation = 'none'; });
+}
+function stopMindful() {
+  if (mindfulTimer) { clearInterval(mindfulTimer); mindfulTimer = null; }
+  if (mindfulCueTimer) { clearInterval(mindfulCueTimer); mindfulCueTimer = null; }
+  mindfulRunning = false;
+}
+function toggleMindful() {
+  if (mindfulRunning) {
+    stopMindful();
+    var b = gxEl('mindfulToggle'); if (b) b.textContent = 'Resume';
+    return;
+  }
+  mindfulRunning = true;
+  var b2 = gxEl('mindfulToggle'); if (b2) b2.textContent = 'Pause';
+  animateGlitter();
+  var cueI = 0;
+  mindfulCueTimer = setInterval(function() {
+    cueI = (cueI + 1) % mindfulCues.length;
+    var c = gxEl('mindfulCue'); if (c) c.textContent = mindfulCues[cueI];
+  }, 4000);
+  mindfulTimer = setInterval(function() {
+    mindfulLeft--;
+    if (mindfulLeft <= 0) {
+      stopMindful();
+      var t = gxEl('mindfulTimer'); if (t) t.textContent = '0:00';
+      var c = gxEl('mindfulCue'); if (c) c.textContent = 'The glitter has settled. So can you. \u{1F496}';
+      var bt = gxEl('mindfulToggle'); if (bt) bt.textContent = 'Start';
+      mindfulLeft = 60;
+      return;
+    }
+    var t2 = gxEl('mindfulTimer');
+    if (t2) t2.textContent = '0:' + (mindfulLeft < 10 ? '0' : '') + mindfulLeft;
+  }, 1000);
+}
+
+// ============================================================
+// GAME 16: STRENGTHS SPOTTER
+// ============================================================
+var strengthsDeck = [
+  { name: 'Curiosity', emoji: '\u{1F50D}', desc: 'You love exploring, asking questions, and discovering how things work.' },
+  { name: 'Kindness', emoji: '\u{1F49B}', desc: 'You notice when others are struggling and want to help.' },
+  { name: 'Perseverance', emoji: '\u{1F9D7}', desc: 'You keep going even when things get hard.' },
+  { name: 'Creativity', emoji: '\u{1F3A8}', desc: 'You find original ideas and new ways of doing things.' },
+  { name: 'Bravery', emoji: '\u{1F981}', desc: 'You face fears and do what’s right even when it’s scary.' },
+  { name: 'Fairness', emoji: '⚖️', desc: 'You care about treating everyone justly and equally.' },
+  { name: 'Humor', emoji: '\u{1F604}', desc: 'You bring lightness and laughter to those around you.' },
+  { name: 'Gratitude', emoji: '\u{1F64F}', desc: 'You notice and appreciate the good things in life.' },
+  { name: 'Honesty', emoji: '\u{1F4AC}', desc: 'You speak the truth and act with integrity.' },
+  { name: 'Teamwork', emoji: '\u{1F91D}', desc: 'You work well with others and pull your weight in a group.' },
+  { name: 'Leadership', emoji: '\u{1F9ED}', desc: 'You help organize and guide people toward a shared goal.' },
+  { name: 'Hope', emoji: '\u{1F31F}', desc: 'You expect good things and work toward a better future.' }
+];
+var strengthsIdx = 0, strengthsKept = [];
+function initStrengths() {
+  strengthsIdx = 0; strengthsKept = [];
+  renderStrengths();
+}
+function renderStrengths() {
+  var s = gxEl('strengthsStage');
+  if (!s) return;
+  if (strengthsIdx >= strengthsDeck.length) {
+    var kept = strengthsKept.length
+      ? '<ul class="gx-list">' + strengthsKept.map(function(k) { return '<li><span aria-hidden="true">' + k.emoji + '</span><span><strong>' + gxEscape(k.name) + '</strong></span></li>'; }).join('') + '</ul>'
+      : '<p class="gx-help">You didn’t keep any this round &mdash; that’s okay. Strengths can be subtle. Try again and look for the ones that quietly fit.</p>';
+    s.innerHTML = '<div class="gx-result"><h4>Your signature strengths</h4>' +
+      '<p>These are strengths you already carry. When things get hard, ask: how could one of these help me right now?</p>' + kept +
+      '<div class="gx-actions"><button class="gx-btn" onclick="initStrengths()">Go through the deck again</button></div></div>';
+    return;
+  }
+  var c = strengthsDeck[strengthsIdx];
+  s.innerHTML = '<p class="gx-help" style="margin-bottom:8px">Card ' + (strengthsIdx + 1) + ' of ' + strengthsDeck.length + ' · Kept: ' + strengthsKept.length + '</p>' +
+    '<div class="gx-card gx-center"><div style="font-size:40px">' + c.emoji + '</div>' +
+    '<h4 style="margin:8px 0 4px;font-family:var(--ds-font-sans);font-size:var(--ds-text-lg)">' + gxEscape(c.name) + '</h4>' +
+    '<p style="font-family:var(--ds-font-sans);color:var(--ds-text-secondary);margin:0">' + gxEscape(c.desc) + '</p></div>' +
+    '<div class="gx-actions"><button class="gx-btn" onclick="strengthsKeep(true)" aria-label="Keep ' + gxEscape(c.name) + '">This sounds like me</button>' +
+    '<button class="gx-btn gx-btn--ghost" onclick="strengthsKeep(false)" aria-label="Skip ' + gxEscape(c.name) + '">Not really</button></div>';
+}
+function strengthsKeep(keep) {
+  if (keep) strengthsKept.push(strengthsDeck[strengthsIdx]);
+  strengthsIdx++;
+  renderStrengths();
+}
+
+// ============================================================
+// GAME 17: REFRAME-IT
+// ============================================================
+var flexibilityItems = [
+  { thought: '“I completely embarrassed myself in that meeting.”',
+    options: [
+      { text: 'Everyone thinks I’m incompetent now.', good: false, fb: 'That’s mind-reading and catastrophizing &mdash; it assumes the worst about what others think.' },
+      { text: 'I stumbled on one point, but I also made some good contributions.', good: true, fb: 'Balanced and specific &mdash; it acknowledges the slip without erasing the whole picture.' },
+      { text: 'It doesn’t matter, nothing matters anyway.', good: false, fb: 'Dismissing the feeling isn’t the same as reframing it. A flexible thought stays realistic, not numb.' }
+    ] },
+  { thought: '“My friend cancelled on me. People always let me down.”',
+    options: [
+      { text: 'I’ll just never count on anyone again.', good: false, fb: 'That’s an all-or-nothing rule that would leave you isolated. One cancellation isn’t “always.”' },
+      { text: 'I’m disappointed, and one cancellation doesn’t define our friendship or all people.', good: true, fb: 'It honors the disappointment while resisting overgeneralization. That’s flexible thinking.' },
+      { text: 'It’s probably my fault they didn’t want to come.', good: false, fb: 'That’s personalization &mdash; taking the blame without evidence. There are many reasons people cancel.' }
+    ] },
+  { thought: '“I made a mistake at work, so I’m going to get fired.”',
+    options: [
+      { text: 'Everyone makes mistakes and most are recoverable; I can address this one.', good: true, fb: 'Realistic and action-oriented &mdash; it shrinks the catastrophe back to its actual size.' },
+      { text: 'My career is over.', good: false, fb: 'That’s fortune-telling and catastrophizing &mdash; jumping to the worst outcome as if it’s certain.' },
+      { text: 'I should never make any mistakes ever.', good: false, fb: 'A “should” rule that sets an impossible standard. Flexibility allows room to be human.' }
+    ] }
+];
+var flexIdx = 0;
+function initFlexibility() {
+  flexIdx = 0;
+  renderFlexibility();
+}
+function renderFlexibility() {
+  var s = gxEl('flexibilityStage');
+  if (!s) return;
+  if (flexIdx >= flexibilityItems.length) {
+    s.innerHTML = '<div class="gx-result gx-center"><h4>Nicely reframed \u{1F31F}</h4>' +
+      '<p>Cognitive flexibility is a skill that strengthens with practice. The goal isn’t to think positively &mdash; it’s to think more completely and fairly about yourself.</p>' +
+      '<div class="gx-actions" style="justify-content:center"><button class="gx-btn" onclick="initFlexibility()">Practice again</button></div></div>';
+    return;
+  }
+  var item = flexibilityItems[flexIdx];
+  var opts = item.options.map(function(o, i) {
+    return '<button class="gx-btn gx-btn--ghost" style="width:100%;text-align:left;margin-bottom:8px" onclick="answerFlexibility(' + i + ')">' + gxEscape(o.text) + '</button>';
+  }).join('');
+  s.innerHTML = '<p class="gx-help" style="margin-bottom:8px">Thought ' + (flexIdx + 1) + ' of ' + flexibilityItems.length + '</p>' +
+    '<div class="gx-card"><p style="margin:0;font-family:var(--ds-font-sans);font-size:var(--ds-text-base);color:var(--ds-text-primary)">' + item.thought + '</p></div>' +
+    '<p class="gx-label">Which is the most balanced reframe?</p><div id="flexOptions">' + opts + '</div>' +
+    '<div style="margin-top:12px"><label class="gx-label" for="flexOwn">Or write your own reframe:</label>' +
+    '<textarea class="gx-textarea" id="flexOwn" placeholder="A more flexible way to see this is…"></textarea></div>' +
+    '<div id="flexFeedback"></div>';
+}
+function answerFlexibility(i) {
+  var item = flexibilityItems[flexIdx];
+  var o = item.options[i];
+  document.querySelectorAll('#flexOptions button').forEach(function(b) { b.disabled = true; });
+  var fb = gxEl('flexFeedback');
+  if (fb) {
+    fb.innerHTML = '<div class="gx-feedback ' + (o.good ? 'gx-feedback--good' : 'gx-feedback--warn') + '">' + o.fb + '</div>' +
+      '<div class="gx-actions"><button class="gx-btn" onclick="flexNext()">' +
+      (flexIdx === flexibilityItems.length - 1 ? 'Finish' : 'Next thought') + '</button></div>';
+  }
+}
+function flexNext() { flexIdx++; renderFlexibility(); }
+
+// ============================================================
+// GAME 18: SOCIAL SCENARIOS
+// ============================================================
+var socialItems = [
+  { situation: 'A friend keeps borrowing money and hasn’t paid you back. They ask again.',
+    options: [
+      { text: '“Sure, no problem!” (then feel resentful)', style: 'Passive', good: false, fb: 'Passive: you put your own needs last to avoid conflict, which often breeds resentment.' },
+      { text: '“You never pay me back. Forget it, you’re so irresponsible.”', style: 'Aggressive', good: false, fb: 'Aggressive: it attacks the person rather than the problem and damages the relationship.' },
+      { text: '“I care about you, but I’m not comfortable lending more until the last loan is paid back.”', style: 'Assertive', good: true, fb: 'Assertive: clear, respectful, and honest about your limit. It protects both you and the friendship.' }
+    ] },
+  { situation: 'A classmate keeps interrupting you during a group project.',
+    options: [
+      { text: '“Can I finish my point? I’d like to share my idea, then I want to hear yours.”', style: 'Assertive', good: true, fb: 'Assertive: you name the behavior, state your need, and still invite them in. Well done.' },
+      { text: 'Say nothing and stop contributing.', style: 'Passive', good: false, fb: 'Passive: staying silent means your ideas are lost and the frustration builds.' },
+      { text: '“Would you just shut up for once?”', style: 'Aggressive', good: false, fb: 'Aggressive: it humiliates them and is likely to escalate the conflict.' }
+    ] },
+  { situation: 'Your manager asks you to take on extra work when you’re already overloaded.',
+    options: [
+      { text: '“Whatever, fine.” (then burn out)', style: 'Passive', good: false, fb: 'Passive: agreeing despite being overloaded sets you up for burnout and unclear expectations.' },
+      { text: '“I’d like to help. I’m at capacity with X and Y &mdash; can we talk about priorities?”', style: 'Assertive', good: true, fb: 'Assertive: you stay collaborative while being honest about limits and inviting a solution.' },
+      { text: '“That’s not my job. Ask someone else.”', style: 'Aggressive', good: false, fb: 'Aggressive: dismissive and confrontational, it shuts down problem-solving.' }
+    ] }
+];
+var socialIdx = 0;
+function initSocial() {
+  socialIdx = 0;
+  renderSocial();
+}
+function renderSocial() {
+  var s = gxEl('socialStage');
+  if (!s) return;
+  if (socialIdx >= socialItems.length) {
+    s.innerHTML = '<div class="gx-result gx-center"><h4>Scenario set complete \u{1F4AC}</h4>' +
+      '<p>Assertiveness sits between passive (ignoring your own needs) and aggressive (ignoring others’). It says: my needs matter, and so do yours.</p>' +
+      '<div class="gx-actions" style="justify-content:center"><button class="gx-btn" onclick="initSocial()">Try again</button></div></div>';
+    return;
+  }
+  var item = socialItems[socialIdx];
+  var opts = item.options.map(function(o, i) {
+    return '<button class="gx-btn gx-btn--ghost" style="width:100%;text-align:left;margin-bottom:8px" onclick="answerSocial(' + i + ')">' + gxEscape(o.text) + '</button>';
+  }).join('');
+  s.innerHTML = '<p class="gx-help" style="margin-bottom:8px">Scenario ' + (socialIdx + 1) + ' of ' + socialItems.length + '</p>' +
+    '<div class="gx-card"><p style="margin:0;font-family:var(--ds-font-sans);font-size:var(--ds-text-base);color:var(--ds-text-primary)">' + gxEscape(item.situation) + '</p></div>' +
+    '<p class="gx-label">How would you respond?</p><div id="socialOptions">' + opts + '</div><div id="socialFeedback"></div>';
+}
+function answerSocial(i) {
+  var item = socialItems[socialIdx];
+  var o = item.options[i];
+  document.querySelectorAll('#socialOptions button').forEach(function(b) { b.disabled = true; });
+  var fb = gxEl('socialFeedback');
+  if (fb) {
+    fb.innerHTML = '<div class="gx-feedback ' + (o.good ? 'gx-feedback--good' : 'gx-feedback--warn') + '">' +
+      '<strong>' + gxEscape(o.style) + '.</strong> ' + o.fb + '</div>' +
+      '<div class="gx-actions"><button class="gx-btn" onclick="socialNext()">' +
+      (socialIdx === socialItems.length - 1 ? 'Finish' : 'Next scenario') + '</button></div>';
+  }
+}
+function socialNext() { socialIdx++; renderSocial(); }
+
+// ============================================================
+// GAME 19: COOL-DOWN COUNTDOWN
+// ============================================================
+var calmTimer = null, calmLeft = 90, calmRunning = false, calmPromptTimer = null;
+var calmPrompts = [
+  'Unclench your jaw and drop your shoulders.',
+  'Breathe in for 4… hold… out for 6. Longer out-breaths calm the body.',
+  'Name what you’re feeling: “I’m noticing anger.” Naming it loosens its grip.',
+  'Press your feet into the floor. You are safe in this moment.',
+  'The wave of anger peaks fast and then fades. Ride it out.',
+  'Ask: what do I actually need right now?'
+];
+function initCalm() { resetCalm(); }
+function resetCalm() {
+  stopCalm();
+  calmLeft = 90; calmRunning = false;
+  var t = gxEl('calmTimer'); if (t) t.textContent = '1:30';
+  var p = gxEl('calmPrompt'); if (p) p.textContent = 'Press Start for a 90-second cool-down.';
+  var b = gxEl('calmToggle'); if (b) b.textContent = 'Start';
+}
+function stopCalm() {
+  if (calmTimer) { clearInterval(calmTimer); calmTimer = null; }
+  if (calmPromptTimer) { clearInterval(calmPromptTimer); calmPromptTimer = null; }
+  calmRunning = false;
+}
+function fmtCalm(sec) {
+  var m = Math.floor(sec / 60), s = sec % 60;
+  return m + ':' + (s < 10 ? '0' : '') + s;
+}
+function toggleCalm() {
+  if (calmRunning) {
+    stopCalm();
+    var b = gxEl('calmToggle'); if (b) b.textContent = 'Resume';
+    return;
+  }
+  calmRunning = true;
+  var b2 = gxEl('calmToggle'); if (b2) b2.textContent = 'Pause';
+  var pi = 0;
+  var pEl = gxEl('calmPrompt'); if (pEl) pEl.textContent = calmPrompts[0];
+  calmPromptTimer = setInterval(function() {
+    pi = (pi + 1) % calmPrompts.length;
+    var p = gxEl('calmPrompt'); if (p) p.textContent = calmPrompts[pi];
+  }, 12000);
+  calmTimer = setInterval(function() {
+    calmLeft--;
+    if (calmLeft <= 0) {
+      stopCalm();
+      var t = gxEl('calmTimer'); if (t) t.textContent = '0:00';
+      var p = gxEl('calmPrompt'); if (p) p.textContent = 'Cool-down complete. Your thinking brain is back online &mdash; now you can choose how to respond. \u{1F44F}';
+      var bt = gxEl('calmToggle'); if (bt) bt.textContent = 'Start';
+      calmLeft = 90;
+      return;
+    }
+    var t2 = gxEl('calmTimer'); if (t2) t2.textContent = fmtCalm(calmLeft);
+  }, 1000);
 }
 </script>
 

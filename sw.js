@@ -1,7 +1,7 @@
 // Service Worker — Greater Nashua Community MH Resources
 // Caches all pages for offline access at air-gapped facilities
 
-const CACHE_NAME = 'mh-resources-v15';
+const CACHE_NAME = 'mh-resources-v16';
 const ASSETS = [
   './',
   './index.html',
@@ -45,7 +45,29 @@ const ASSETS = [
   './pdfs/coloring/nature-scene.pdf',
   './pdfs/coloring/kindness-jar.pdf',
   './pdfs/coloring/coping-wheel.pdf',
-  './pdfs/coloring/growth-tree.pdf'
+  './pdfs/coloring/growth-tree.pdf',
+  './pdfs/dbt/tipp-crisis-survival.pdf',
+  './pdfs/dbt/dear-man.pdf',
+  './pdfs/dbt/please-emotion-regulation.pdf',
+  './pdfs/dbt/radical-acceptance.pdf',
+  './pdfs/dbt/wise-mind.pdf',
+  './pdfs/dbt/check-the-facts.pdf',
+  './pdfs/act/values-clarification.pdf',
+  './pdfs/act/cognitive-defusion.pdf',
+  './pdfs/act/mindful-breathing-body-scan.pdf',
+  './pdfs/act/observing-self-leaves.pdf',
+  './pdfs/trauma/window-of-tolerance.pdf',
+  './pdfs/trauma/grounding-skills.pdf',
+  './pdfs/trauma/grief-continuing-bonds.pdf',
+  './pdfs/trauma/trigger-tracking.pdf',
+  './pdfs/skills/anger-iceberg.pdf',
+  './pdfs/skills/anger-time-out-plan.pdf',
+  './pdfs/skills/distress-tolerance-accepts.pdf',
+  './pdfs/recovery/self-esteem-inventory.pdf',
+  './pdfs/recovery/assertive-communication.pdf',
+  './pdfs/recovery/urge-surfing-halt.pdf',
+  './pdfs/recovery/sleep-hygiene-plan.pdf',
+  './pdfs/recovery/gratitude-positive-activity.pdf'
 ];
 
 // Install: pre-cache all assets
