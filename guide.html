@@ -431,65 +431,359 @@
   }
 }
 
+/* ===== REDESIGNED GUIDE HERO ===== */
+.guide-hero {
+  background: linear-gradient(170deg, var(--ds-primary-50) 0%, var(--ds-cream) 50%, var(--ds-warm-gray-50) 100%);
+  padding: var(--ds-space-20) 0 var(--ds-space-16);
+}
+[data-theme="dark"] .guide-hero {
+  background: linear-gradient(170deg, rgba(61, 139, 112, 0.08) 0%, var(--ds-page-bg) 50%, var(--ds-page-bg) 100%);
+}
+.guide-hero__inner {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6);
+  text-align: center;
+}
+.guide-hero__overline {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  margin-bottom: var(--ds-space-5);
+}
+.guide-hero__overline-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ds-success-500);
+}
+.guide-hero__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-4xl);
+  font-weight: var(--ds-weight-bold);
+  line-height: var(--ds-leading-tight);
+  letter-spacing: var(--ds-tracking-tight);
+  color: var(--ds-text-primary);
+  max-width: 720px;
+  margin: 0 auto var(--ds-space-5);
+}
+.guide-hero__subtitle {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-regular);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--ds-text-secondary);
+  max-width: 620px;
+  margin: 0 auto var(--ds-space-8);
+}
+.guide-hero__stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-3);
+  flex-wrap: wrap;
+}
+.guide-hero__stat {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-2) var(--ds-space-4);
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-full);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  box-shadow: var(--ds-shadow-sm);
+}
+.guide-hero__stat strong {
+  color: var(--ds-primary-600);
+  font-weight: var(--ds-weight-bold);
+}
+
+/* Hide old hero and stats bar */
+.hero { display: none !important; }
+.guide-stats { display: none !important; }
+.mobile-jump { display: none !important; }
+
+/* ===== CATEGORY GRID ===== */
+.guide-category-grid {
+  max-width: var(--ds-container-xl);
+  margin: calc(-1 * var(--ds-space-8)) auto var(--ds-space-10);
+  padding: 0 var(--ds-space-6);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--ds-space-4);
+}
+.guide-category-card {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-xl);
+  padding: var(--ds-space-5) var(--ds-space-4);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--ds-transition-shadow), var(--ds-transition-transform), border-color var(--ds-duration-fast) var(--ds-ease-default);
+  box-shadow: var(--ds-shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ds-space-2);
+}
+.guide-category-card:hover {
+  box-shadow: var(--ds-shadow-lg);
+  transform: translateY(-3px);
+  border-color: var(--ds-primary-300);
+  text-decoration: none;
+}
+.guide-category-card:active {
+  transform: translateY(-1px);
+  box-shadow: var(--ds-shadow-md);
+}
+.guide-category-card.is-active {
+  border-color: var(--ds-primary-400);
+  box-shadow: var(--ds-shadow-md), 0 0 0 1px var(--ds-primary-200);
+  background: var(--ds-primary-50);
+}
+[data-theme="dark"] .guide-category-card.is-active {
+  background: var(--ds-interactive-subtle);
+  border-color: var(--ds-primary-400);
+}
+.guide-category-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--ds-radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.guide-category-card__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+}
+.guide-category-card__count {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+  line-height: var(--ds-leading-relaxed);
+}
+
 /* ===== GUIDE PAGE LAYOUT ===== */
 .guide-layout {
   display: grid;
-  grid-template-columns: 240px 1fr;
-  gap: 24px;
+  grid-template-columns: 260px 1fr;
+  gap: var(--ds-space-8);
   align-items: start;
 }
-@media (max-width: 900px) {
-  .guide-layout { grid-template-columns: 1fr; }
-  .guide-sidebar { position: static !important; }
-  .sidebar-category { display: none; }
-  .mobile-jump { display: block !important; }
-}
+
+/* ===== REDESIGNED SIDEBAR ===== */
 .guide-sidebar {
   position: sticky;
-  top: calc(var(--header-height) + 24px);
-  max-height: calc(100vh - var(--header-height) - 48px);
+  top: calc(var(--ds-header-height) + var(--ds-space-6));
+  max-height: calc(100vh - var(--ds-header-height) - var(--ds-space-12));
   overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ds-warm-gray-300) transparent;
 }
-.sidebar-section-title {
-  padding: 8px 16px 4px;
+.guide-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+.guide-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.guide-sidebar::-webkit-scrollbar-thumb {
+  background: var(--ds-warm-gray-300);
+  border-radius: 2px;
+}
+.guide-sidebar .sidebar-nav {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-xl);
+  overflow: hidden;
+  box-shadow: var(--ds-shadow-sm);
+}
+.guide-sidebar .sidebar-nav__search {
+  padding: var(--ds-space-3);
+  border-bottom: 1px solid var(--ds-border-subtle);
+}
+.guide-sidebar .sidebar-nav__search-input {
+  width: 100%;
+  padding: var(--ds-space-2) var(--ds-space-3);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-primary);
+  background: var(--ds-surface-sunken);
+  outline: none;
+  transition: border-color var(--ds-duration-fast) var(--ds-ease-default);
+  box-sizing: border-box;
+}
+.guide-sidebar .sidebar-nav__search-input::placeholder {
+  color: var(--ds-text-muted);
+}
+.guide-sidebar .sidebar-nav__search-input:focus {
+  border-color: var(--ds-border-focus);
+}
+.guide-sidebar .sidebar-nav__group {
+  border-bottom: 1px solid var(--ds-border-subtle);
+}
+.guide-sidebar .sidebar-nav__group:last-child {
+  border-bottom: none;
+}
+.guide-sidebar .sidebar-nav__group-title {
+  display: block;
+  padding: var(--ds-space-2-5) var(--ds-space-4);
+  font-family: var(--ds-font-sans);
   font-size: 10px;
-  font-weight: 700;
+  font-weight: var(--ds-weight-bold);
   text-transform: uppercase;
   letter-spacing: 0.6px;
-  color: var(--text-muted);
-  background: var(--surface);
+  color: var(--ds-text-muted);
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default);
 }
-.sidebar-nav {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
+.guide-sidebar .sidebar-nav__group-title:hover {
+  color: var(--ds-text-secondary);
 }
-.sidebar-nav a {
-  display: block;
-  padding: 8px 16px;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  text-decoration: none;
-  border-bottom: 1px solid var(--border);
-  transition: all 0.15s;
-  line-height: 1.4;
+.guide-sidebar .sidebar-nav__group-title::after {
+  content: '';
+  position: absolute;
+  right: var(--ds-space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid currentColor;
+  transition: transform var(--ds-duration-fast) var(--ds-ease-default);
 }
-.sidebar-nav a:last-child { border-bottom: none; }
-.sidebar-nav a:hover { background: var(--surface-alt); color: var(--text); text-decoration: none; }
-.sidebar-nav a.active { background: var(--accent-light); color: var(--accent); font-weight: 600; }
-
-/* Mobile jump dropdown */
-.mobile-jump {
+.guide-sidebar .sidebar-nav__group.collapsed .sidebar-nav__group-title::after {
+  transform: translateY(-50%) rotate(-90deg);
+}
+.guide-sidebar .sidebar-nav__group.collapsed .sidebar-nav__group-links {
   display: none;
-  margin-bottom: 16px;
 }
-.mobile-jump select {
-  width: 100%; padding: 10px 12px;
-  border: 1px solid var(--border); border-radius: var(--radius);
-  font-size: 14px; font-family: inherit; background: var(--surface);
-  outline: none;
+.guide-sidebar .sidebar-nav__group-links {
+  padding-bottom: var(--ds-space-1);
+}
+.guide-sidebar .sidebar-nav a {
+  display: block;
+  padding: 5px var(--ds-space-4) 5px var(--ds-space-6);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default),
+              background var(--ds-duration-fast) var(--ds-ease-default);
+  line-height: 1.5;
+  border: none;
+}
+.guide-sidebar .sidebar-nav a:hover {
+  color: var(--ds-text-primary);
+  background: var(--ds-surface-hover);
+  text-decoration: none;
+}
+.guide-sidebar .sidebar-nav a.active {
+  color: var(--ds-primary-700);
+  background: var(--ds-primary-50);
+  font-weight: var(--ds-weight-semibold);
+}
+[data-theme="dark"] .guide-sidebar .sidebar-nav a.active {
+  color: var(--ds-primary-300);
+  background: var(--ds-interactive-subtle);
+}
+.guide-sidebar .sidebar-nav a.sidebar-hidden {
+  display: none;
+}
+
+/* Mobile sidebar toggle */
+.guide-sidebar-toggle {
+  display: none;
+  position: fixed;
+  bottom: var(--ds-space-6);
+  left: var(--ds-space-6);
+  z-index: var(--ds-z-overlay);
+  width: 48px;
+  height: 48px;
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-primary-600);
+  color: var(--ds-text-inverse);
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--ds-shadow-lg);
+  font-size: 20px;
+  transition: background var(--ds-duration-fast) var(--ds-ease-default);
+  align-items: center;
+  justify-content: center;
+}
+.guide-sidebar-toggle:hover {
+  background: var(--ds-primary-700);
+}
+.guide-sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--ds-surface-overlay);
+  z-index: var(--ds-z-overlay);
+}
+.guide-sidebar-overlay.is-open {
+  display: block;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .guide-layout { grid-template-columns: 1fr; }
+  .guide-sidebar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 280px;
+    z-index: calc(var(--ds-z-overlay) + 1);
+    max-height: 100vh;
+    background: var(--ds-surface);
+    border-right: 1px solid var(--ds-border);
+    padding: var(--ds-space-4);
+    box-shadow: var(--ds-shadow-xl);
+  }
+  .guide-sidebar.mobile-open {
+    display: block;
+  }
+  .guide-sidebar-toggle {
+    display: flex;
+  }
+  .guide-category-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--ds-space-3);
+  }
+}
+@media (max-width: 639px) {
+  .guide-hero {
+    padding: var(--ds-space-12) 0 var(--ds-space-10);
+  }
+  .guide-hero__title {
+    font-size: var(--ds-text-3xl);
+  }
+  .guide-hero__subtitle {
+    font-size: var(--ds-text-base);
+  }
+  .guide-category-grid {
+    grid-template-columns: 1fr 1fr;
+    margin-top: calc(-1 * var(--ds-space-5));
+  }
 }
 
 /* ===== GUIDE SECTIONS ===== */
@@ -738,7 +1032,7 @@
 
 /* Print */
 @media print {
-  .guide-sidebar, .hero, .mobile-jump, .guide-search-bar { display: none !important; }
+  .guide-sidebar, .hero, .mobile-jump, .guide-search-bar, .guide-hero, .guide-category-grid, .guide-sidebar-toggle, .guide-sidebar-overlay { display: none !important; }
   .guide-layout { grid-template-columns: 1fr !important; }
   .guide-card-body { display: block !important; }
   .guide-card { break-inside: avoid; }
@@ -1815,22 +2109,139 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
   <a href="games.html" class="site-nav__mobile-link">Games</a>
 </div>
 
-<section class="hero">
-  <div class="hero__inner">
-    <div class="hero__overline">
-      <span class="hero__overline-dot"></span>
-      <span class="ds-overline">Greater Nashua, NH</span>
+<!-- ============================================================
+     REDESIGNED HERO
+     ============================================================ -->
+<section class="guide-hero">
+  <div class="guide-hero__inner">
+
+    <div class="guide-hero__overline">
+      <span class="guide-hero__overline-dot"></span>
+      <span class="ds-overline">Clinical Reference Library</span>
     </div>
-    <h1 class="hero__title">Practice Guides</h1>
-    <p class="hero__subtitle">Step-by-step clinical procedures, crisis protocols, and evidence-based references</p>
-    <div class="hero__search">
+
+    <h1 class="guide-hero__title">Practice Guides &amp; Protocols</h1>
+
+    <p class="guide-hero__subtitle">Crisis protocols, evidence-based practice references, therapy technique libraries, mandated reporting procedures, and step-by-step clinical workflows for community mental health.</p>
+
+    <div class="guide-hero__stats">
+      <div class="guide-hero__stat">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        <span><strong>71</strong> guides</span>
+      </div>
+      <div class="guide-hero__stat">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        <span><strong>30</strong> categories</span>
+      </div>
+      <div class="guide-hero__stat">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span><strong>150+</strong> phone numbers</span>
+      </div>
+      <div class="guide-hero__stat">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        <span><strong>200+</strong> action steps</span>
+      </div>
+    </div>
+
+    <div class="hero__search" style="margin-top:var(--ds-space-8)">
       <div class="hero__search-icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       </div>
       <input type="text" id="guideSearch" class="hero__search-input" placeholder="Search guides... (e.g., housing, crisis, DCYF, ANSA)" autocomplete="off">
     </div>
+
   </div>
 </section>
+
+<!-- ============================================================
+     CATEGORY QUICK-NAV GRID
+     ============================================================ -->
+<div class="guide-category-grid ds-stagger" id="guideCategoryGrid">
+  <a href="#cat-crisis" class="guide-category-card ds-animate-fade-up" data-category-targets="cat-crisis" onclick="guideScrollTo(event,'cat-crisis')">
+    <div class="guide-category-card__icon" style="background: var(--ds-status-danger-bg); color: var(--ds-danger-600);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    <div class="guide-category-card__title">Crisis &amp; Safety</div>
+    <div class="guide-category-card__count">Emergency response, safety planning, DCYF, DV</div>
+  </a>
+  <a href="#cat-mh" class="guide-category-card ds-animate-fade-up" data-category-targets="cat-mh" onclick="guideScrollTo(event,'cat-mh')">
+    <div class="guide-category-card__icon" style="background: var(--ds-primary-50); color: var(--ds-primary-600);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    </div>
+    <div class="guide-category-card__title">Mental Health</div>
+    <div class="guide-category-card__count">Outpatient referrals, psychiatric evaluations</div>
+  </a>
+  <a href="#cat-sud" class="guide-category-card ds-animate-fade-up" data-category-targets="cat-sud" onclick="guideScrollTo(event,'cat-sud')">
+    <div class="guide-category-card__icon" style="background: #f3e8ff; color: #7c3aed;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+    </div>
+    <div class="guide-category-card__title">Substance Use</div>
+    <div class="guide-category-card__count">Screening, treatment, levels of care</div>
+  </a>
+  <a href="#cat-housing" class="guide-category-card ds-animate-fade-up" data-category-targets="cat-housing" onclick="guideScrollTo(event,'cat-housing')">
+    <div class="guide-category-card__icon" style="background: var(--ds-status-warning-bg); color: var(--ds-warning-600);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </div>
+    <div class="guide-category-card__title">Housing &amp; Needs</div>
+    <div class="guide-category-card__count">Shelter, food, transportation</div>
+  </a>
+  <a href="#cat-benefits" class="guide-category-card ds-animate-fade-up" data-category-targets="cat-benefits" onclick="guideScrollTo(event,'cat-benefits')">
+    <div class="guide-category-card__icon" style="background: var(--ds-status-success-bg); color: var(--ds-success-600);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    </div>
+    <div class="guide-category-card__title">Benefits</div>
+    <div class="guide-category-card__count">Insurance, SSI/SSDI, Medicaid</div>
+  </a>
+  <a href="#cat-ebp" class="guide-category-card ds-animate-fade-up" data-category-targets="cat-ebp" onclick="guideScrollTo(event,'cat-ebp')">
+    <div class="guide-category-card__icon" style="background: #f3e8ff; color: #7c3aed;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    <div class="guide-category-card__title">Evidence-Based</div>
+    <div class="guide-category-card__count">CBT, DBT, EMDR, MI, ACT, TF-CBT</div>
+  </a>
+  <a href="#cat-tic" class="guide-category-card ds-animate-fade-up" data-category-targets="cat-tic" onclick="guideScrollTo(event,'cat-tic')">
+    <div class="guide-category-card__icon" style="background: var(--ds-status-success-bg); color: #059669;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <div class="guide-category-card__title">Trauma-Informed</div>
+    <div class="guide-category-card__count">TIC principles, ACEs, language, self-care</div>
+  </a>
+  <a href="#cat-clinical" class="guide-category-card ds-animate-fade-up" data-category-targets="cat-clinical" onclick="guideScrollTo(event,'cat-clinical')">
+    <div class="guide-category-card__icon" style="background: var(--ds-status-info-bg); color: var(--ds-info-600);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+    </div>
+    <div class="guide-category-card__title">Documentation</div>
+    <div class="guide-category-card__count">ANSA, CANS, ISP, session notes</div>
+  </a>
+  <a href="#cat-mandated" class="guide-category-card ds-animate-fade-up" data-category-targets="cat-mandated" onclick="guideScrollTo(event,'cat-mandated')">
+    <div class="guide-category-card__icon" style="background: var(--ds-status-danger-bg); color: var(--ds-danger-600);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    <div class="guide-category-card__title">Mandated Reporting</div>
+    <div class="guide-category-card__count">NH obligations, procedures, decisions</div>
+  </a>
+  <a href="#cat-mi" class="guide-category-card ds-animate-fade-up" data-category-targets="cat-mi" onclick="guideScrollTo(event,'cat-mi')">
+    <div class="guide-category-card__icon" style="background: #f3e8ff; color: #7c3aed;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </div>
+    <div class="guide-category-card__title">MI Techniques</div>
+    <div class="guide-category-card__count">OARS, stages of change, change talk</div>
+  </a>
+  <a href="#cat-group-therapy" class="guide-category-card ds-animate-fade-up" data-category-targets="cat-group-therapy" onclick="guideScrollTo(event,'cat-group-therapy')">
+    <div class="guide-category-card__icon" style="background: var(--ds-status-success-bg); color: #059669;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    </div>
+    <div class="guide-category-card__title">Group Therapy</div>
+    <div class="guide-category-card__count">Process, psychoed, DBT skills groups</div>
+  </a>
+  <a href="#cat-family-therapy" class="guide-category-card ds-animate-fade-up" data-category-targets="cat-family-therapy" onclick="guideScrollTo(event,'cat-family-therapy')">
+    <div class="guide-category-card__icon" style="background: #fae8ff; color: #a855f7;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    </div>
+    <div class="guide-category-card__title">Family Therapy</div>
+    <div class="guide-category-card__count">Structural, strategic, Bowenian, narrative</div>
+  </a>
+</div>
 
 <div class="page-container" id="main-content">
 
@@ -1845,26 +2256,6 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <strong>(603) 889-6147</strong> GNMHC Crisis &nbsp;|&nbsp;
         <strong>Text HOME to 741741</strong>
       </div>
-    </div>
-  </div>
-
-  <!-- Stats Bar -->
-  <div class="guide-stats">
-    <div class="guide-stat">
-      <div class="guide-stat-num">71</div>
-      <div class="guide-stat-label">How-To Guides</div>
-    </div>
-    <div class="guide-stat">
-      <div class="guide-stat-num">27</div>
-      <div class="guide-stat-label">Categories</div>
-    </div>
-    <div class="guide-stat">
-      <div class="guide-stat-num">150+</div>
-      <div class="guide-stat-label">Phone Numbers</div>
-    </div>
-    <div class="guide-stat">
-      <div class="guide-stat-num">200+</div>
-      <div class="guide-stat-label">Action Steps</div>
     </div>
   </div>
 
@@ -2302,149 +2693,263 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
   </div>
 
   <div class="guide-layout">
-    <!-- Sidebar -->
-    <aside class="guide-sidebar">
+    <!-- Redesigned Sidebar -->
+    <aside class="guide-sidebar" id="guideSidebar">
       <nav class="sidebar-nav" id="sidebarNav">
-        <div class="sidebar-section-title" style="color:var(--danger);font-weight:800">Crisis Decision Tree</div>
-        <a href="#crisisTree" onclick="event.preventDefault();document.getElementById('crisisTree').scrollIntoView({behavior:'smooth',block:'start'});resetCrisisTree();" style="color:var(--danger);font-weight:600">&#9888; Interactive Triage Tool</a>
-        <div class="sidebar-section-title">Crisis &amp; Safety</div>
-        <a href="#guide-crisis" data-cat="cat-crisis">Emergency/Crisis Services</a>
-        <a href="#guide-safety-plan" data-cat="cat-crisis">Create a Safety Plan</a>
-        <a href="#guide-dcyf" data-cat="cat-crisis">File a DCYF Report</a>
-        <a href="#guide-dv" data-cat="cat-crisis">DV Situation</a>
-        <div class="sidebar-section-title">Mental Health</div>
-        <a href="#guide-outpatient" data-cat="cat-mh">Outpatient MH Referral</a>
-        <a href="#guide-psych-eval" data-cat="cat-mh">Psychiatric Evaluation</a>
-        <div class="sidebar-section-title">Substance Use</div>
-        <a href="#guide-sud" data-cat="cat-sud">SUD Treatment</a>
-        <div class="sidebar-section-title">Housing &amp; Basic Needs</div>
-        <a href="#guide-housing" data-cat="cat-housing">Find Housing</a>
-        <a href="#guide-food" data-cat="cat-housing">Food Resources</a>
-        <a href="#guide-transport" data-cat="cat-housing">Transportation</a>
-        <div class="sidebar-section-title">Benefits &amp; Insurance</div>
-        <a href="#guide-insurance" data-cat="cat-benefits">Health Insurance</a>
-        <a href="#guide-disability" data-cat="cat-benefits">SSI/SSDI</a>
-        <a href="#guide-medicaid" data-cat="cat-benefits">NH Medicaid System</a>
-        <div class="sidebar-section-title">Legal &amp; Advocacy</div>
-        <a href="#guide-legal" data-cat="cat-legal">Legal Services</a>
-        <a href="#guide-employment" data-cat="cat-legal">Employment/Job Training</a>
-        <div class="sidebar-section-title">Special Populations</div>
-        <a href="#guide-veterans" data-cat="cat-special">Veteran Services</a>
-        <div class="sidebar-section-title">Clinical Documentation</div>
-        <a href="#guide-ansa" data-cat="cat-clinical">ANSA Assessment</a>
-        <a href="#guide-cans" data-cat="cat-clinical">CANS Assessment</a>
-        <a href="#guide-isp" data-cat="cat-clinical">Individual Service Plan</a>
-        <a href="#guide-documentation" data-cat="cat-clinical">Session Documentation</a>
-        <div class="sidebar-section-title">Evidence-Based Practice</div>
-        <a href="#guide-ebp-cbt" data-cat="cat-ebp">CBT</a>
-        <a href="#guide-ebp-dbt" data-cat="cat-ebp">DBT</a>
-        <a href="#guide-ebp-emdr" data-cat="cat-ebp">EMDR</a>
-        <a href="#guide-ebp-mi" data-cat="cat-ebp">Motivational Interviewing</a>
-        <a href="#guide-ebp-pe" data-cat="cat-ebp">Prolonged Exposure</a>
-        <a href="#guide-ebp-cpt" data-cat="cat-ebp">Cognitive Processing Therapy</a>
-        <a href="#guide-ebp-act" data-cat="cat-ebp">ACT</a>
-        <a href="#guide-ebp-sfbt" data-cat="cat-ebp">Solution-Focused Brief</a>
-        <a href="#guide-ebp-tfcbt" data-cat="cat-ebp">TF-CBT</a>
-        <a href="#guide-ebp-cams" data-cat="cat-ebp">CAMS</a>
-        <div class="sidebar-section-title">Trauma-Informed Care</div>
-        <a href="#guide-tic-principles" data-cat="cat-tic">6 Principles of TIC</a>
-        <a href="#guide-tic-aces" data-cat="cat-tic">ACEs</a>
-        <a href="#guide-tic-responses" data-cat="cat-tic">Trauma Responses</a>
-        <a href="#guide-tic-language" data-cat="cat-tic">Trauma-Informed Language</a>
-        <a href="#guide-tic-org" data-cat="cat-tic">Organizational TIC</a>
-        <a href="#guide-tic-sts" data-cat="cat-tic">Secondary Traumatic Stress</a>
-        <a href="#guide-tic-nh" data-cat="cat-tic">NH-Specific TIC Resources</a>
-        <div class="sidebar-section-title">Mandated Reporting</div>
-        <a href="#guide-mandated-reporting" data-cat="cat-mandated">NH Mandated Reporting Guide</a>
-        <div class="sidebar-section-title">IEA Procedures</div>
-        <a href="#guide-iea" data-cat="cat-iea">IEA Procedures</a>
-        <div class="sidebar-section-title">De-escalation</div>
-        <a href="#guide-deescalation" data-cat="cat-deescalation">De-escalation Techniques Library</a>
-        <div class="sidebar-section-title">Suicide Risk Assessment</div>
-        <a href="#guide-suicide-risk" data-cat="cat-suicide-risk">Suicide Risk Quick Reference</a>
-        <div class="sidebar-section-title">Psychiatric Emergency</div>
-        <a href="#guide-psych-emergency" data-cat="cat-psych-emergency">Psychiatric Emergency Workflow</a>
-        <div class="sidebar-section-title">Duty to Warn</div>
-        <a href="#guide-duty-to-warn" data-cat="cat-duty-warn">Tarasoff / NH Duty to Warn</a>
-        <div class="sidebar-section-title">Handout Library</div>
-        <a href="#guide-handout-depression" data-cat="cat-handouts">Understanding Depression</a>
-        <a href="#guide-handout-anxiety" data-cat="cat-handouts">Understanding Anxiety</a>
-        <a href="#guide-handout-ptsd" data-cat="cat-handouts">Understanding PTSD</a>
-        <a href="#guide-handout-coping" data-cat="cat-handouts">Coping Skills Toolbox</a>
-        <a href="#guide-handout-sleep" data-cat="cat-handouts">Sleep Hygiene</a>
-        <a href="#guide-handout-mindfulness" data-cat="cat-handouts">Mindfulness Basics</a>
-        <a href="#guide-handout-boundaries" data-cat="cat-handouts">Healthy Boundaries</a>
-        <a href="#guide-handout-grief" data-cat="cat-handouts">Understanding Grief</a>
-        <a href="#guide-handout-substance" data-cat="cat-handouts">Substance Use &amp; Mental Health</a>
-        <a href="#guide-handout-selfcare" data-cat="cat-handouts">Self-Care Planner</a>
-        <div class="sidebar-section-title">MI Technique Library</div>
-        <a href="#guide-mi-oars" data-cat="cat-mi">OARS Skills</a>
-        <a href="#guide-mi-stages" data-cat="cat-mi">Stages of Change</a>
-        <a href="#guide-mi-changetalk" data-cat="cat-mi">Change Talk vs Sustain Talk</a>
-        <a href="#guide-mi-traps" data-cat="cat-mi">Common MI Traps</a>
-        <a href="#guide-mi-spirit" data-cat="cat-mi">MI Spirit</a>
-        <div class="sidebar-section-title">CBT Worksheets</div>
-        <a href="#guide-cbt-thought-record" data-cat="cat-cbt-worksheets">Thought Record</a>
-        <a href="#guide-cbt-distortions" data-cat="cat-cbt-worksheets">Cognitive Distortions</a>
-        <a href="#guide-cbt-ba" data-cat="cat-cbt-worksheets">Behavioral Activation</a>
-        <a href="#guide-cbt-experiment" data-cat="cat-cbt-worksheets">Behavioral Experiment</a>
-        <div class="sidebar-section-title">DBT Skills Reference</div>
-        <a href="#guide-dbt-mindfulness" data-cat="cat-dbt-skills">Mindfulness</a>
-        <a href="#guide-dbt-distress" data-cat="cat-dbt-skills">Distress Tolerance</a>
-        <a href="#guide-dbt-emotion" data-cat="cat-dbt-skills">Emotion Regulation</a>
-        <a href="#guide-dbt-interpersonal" data-cat="cat-dbt-skills">Interpersonal Effectiveness</a>
-        <div class="sidebar-section-title">Psychoeducation Handouts</div>
-        <a href="#guide-psychoed-depression" data-cat="cat-psychoed">Depression Handout</a>
-        <a href="#guide-psychoed-anxiety" data-cat="cat-psychoed">Anxiety Handout</a>
-        <a href="#guide-psychoed-ptsd" data-cat="cat-psychoed">PTSD Handout</a>
-        <a href="#guide-psychoed-grief" data-cat="cat-psychoed">Grief Handout</a>
-        <a href="#guide-psychoed-substance" data-cat="cat-psychoed">Substance Use Handout</a>
-        <a href="#guide-psychoed-stress" data-cat="cat-psychoed">Stress Management Handout</a>
-        <a href="#guide-psychoed-sleep" data-cat="cat-psychoed">Sleep Hygiene Handout</a>
-        <div class="sidebar-section-title">ACE Scoring Guide</div>
-        <a href="#guide-ace-tool" data-cat="cat-ace">ACE Scoring Tool</a>
-        <div class="sidebar-section-title">Cultural Competency</div>
-        <a href="#guide-cultural-populations" data-cat="cat-cultural">Local Populations</a>
-        <a href="#guide-cultural-interpreters" data-cat="cat-cultural">Working with Interpreters</a>
-        <a href="#guide-cultural-cfi" data-cat="cat-cultural">Cultural Formulation</a>
-        <div class="sidebar-section-title">Intake Assessment</div>
-        <a href="#guide-intake-template" data-cat="cat-intake">Intake Template</a>
-        <div class="sidebar-section-title">Group Therapy</div>
-        <a href="#guide-group-process" data-cat="cat-group-therapy">Process Groups</a>
-        <a href="#guide-group-psychoed" data-cat="cat-group-therapy">Psychoeducation Groups</a>
-        <a href="#guide-group-dbt" data-cat="cat-group-therapy">Skills Groups (DBT)</a>
-        <a href="#guide-group-support" data-cat="cat-group-therapy">Support Groups</a>
-        <a href="#guide-group-sud" data-cat="cat-group-therapy">Substance Use Groups</a>
-        <a href="#guide-group-challenges" data-cat="cat-group-therapy">Common Challenges</a>
-        <div class="sidebar-section-title">Family Therapy</div>
-        <a href="#guide-family-structural" data-cat="cat-family-therapy">Structural</a>
-        <a href="#guide-family-strategic" data-cat="cat-family-therapy">Strategic</a>
-        <a href="#guide-family-bowenian" data-cat="cat-family-therapy">Bowenian</a>
-        <a href="#guide-family-narrative" data-cat="cat-family-therapy">Narrative</a>
-        <a href="#guide-family-psychoed" data-cat="cat-family-therapy">Family Psychoeducation</a>
-        <a href="#guide-family-when" data-cat="cat-family-therapy">When to Involve Family</a>
-        <div class="sidebar-section-title">Discharge Planning</div>
-        <a href="#guide-discharge-checklist" data-cat="cat-discharge">Discharge Checklist</a>
-        <div class="sidebar-section-title">ASAM Criteria</div>
-        <a href="#guide-asam-levels" data-cat="cat-asam">Levels of Care</a>
-        <div class="sidebar-section-title">Co-occurring Disorders</div>
-        <a href="#guide-cooccurring-guide" data-cat="cat-cooccurring">Treatment Guidelines</a>
-        <div class="sidebar-section-title">Child/Adolescent</div>
-        <a href="#guide-child-assessment" data-cat="cat-child-adolescent">Assessment Guides</a>
-        <div class="sidebar-section-title">Grief &amp; Bereavement</div>
-        <a href="#guide-grief-interventions" data-cat="cat-grief">Intervention Library</a>
-        <div class="sidebar-section-title">Couples / Relationship Therapy</div>
-        <a href="#guide-couples-gottman" data-cat="cat-couples">Gottman Method</a>
-        <a href="#guide-couples-eft" data-cat="cat-couples">Emotionally Focused (EFT)</a>
-        <a href="#guide-couples-imago" data-cat="cat-couples">Imago Therapy</a>
-        <a href="#guide-couples-when" data-cat="cat-couples">When to Recommend</a>
-        <a href="#guide-couples-contraindications" data-cat="cat-couples">Contraindications</a>
-        <a href="#guide-couples-assessment" data-cat="cat-couples">Assessment Tools</a>
+        <div class="sidebar-nav__search">
+          <input type="text" class="sidebar-nav__search-input" id="guideSidebarSearch" placeholder="Find a guide..." oninput="filterGuideSidebar(this.value)" aria-label="Search guides sidebar">
+        </div>
 
-        <div class="sidebar-section-title">On-Call Reference</div>
-        <a href="#guide-oncall-reference" data-cat="cat-oncall">On-Call Reference Guide</a>
+        <div class="sidebar-nav__group" data-group="crisis-safety">
+          <span class="sidebar-nav__group-title" onclick="toggleGuideSidebarGroup(this)">Crisis &amp; Safety</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#crisisTree" data-cat="cat-crisis">Interactive Crisis Triage</a>
+            <a href="#guide-crisis" data-cat="cat-crisis">Emergency/Crisis Services</a>
+            <a href="#guide-safety-plan" data-cat="cat-crisis">Create a Safety Plan</a>
+            <a href="#guide-dcyf" data-cat="cat-crisis">File a DCYF Report</a>
+            <a href="#guide-dv" data-cat="cat-crisis">DV Situation</a>
+          </div>
+        </div>
+
+        <div class="sidebar-nav__group" data-group="mh-services">
+          <span class="sidebar-nav__group-title" onclick="toggleGuideSidebarGroup(this)">Mental Health</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#guide-outpatient" data-cat="cat-mh">Outpatient MH Referral</a>
+            <a href="#guide-psych-eval" data-cat="cat-mh">Psychiatric Evaluation</a>
+          </div>
+        </div>
+
+        <div class="sidebar-nav__group" data-group="substance-use">
+          <span class="sidebar-nav__group-title" onclick="toggleGuideSidebarGroup(this)">Substance Use</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#guide-sud" data-cat="cat-sud">SUD Treatment</a>
+          </div>
+        </div>
+
+        <div class="sidebar-nav__group" data-group="housing-needs">
+          <span class="sidebar-nav__group-title" onclick="toggleGuideSidebarGroup(this)">Housing &amp; Basic Needs</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#guide-housing" data-cat="cat-housing">Find Housing</a>
+            <a href="#guide-food" data-cat="cat-housing">Food Resources</a>
+            <a href="#guide-transport" data-cat="cat-housing">Transportation</a>
+          </div>
+        </div>
+
+        <div class="sidebar-nav__group" data-group="benefits">
+          <span class="sidebar-nav__group-title" onclick="toggleGuideSidebarGroup(this)">Benefits &amp; Insurance</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#guide-insurance" data-cat="cat-benefits">Health Insurance</a>
+            <a href="#guide-disability" data-cat="cat-benefits">SSI/SSDI</a>
+            <a href="#guide-medicaid" data-cat="cat-benefits">NH Medicaid System</a>
+          </div>
+        </div>
+
+        <div class="sidebar-nav__group" data-group="legal">
+          <span class="sidebar-nav__group-title" onclick="toggleGuideSidebarGroup(this)">Legal &amp; Advocacy</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#guide-legal" data-cat="cat-legal">Legal Services</a>
+            <a href="#guide-employment" data-cat="cat-legal">Employment/Job Training</a>
+          </div>
+        </div>
+
+        <div class="sidebar-nav__group" data-group="special-pops">
+          <span class="sidebar-nav__group-title" onclick="toggleGuideSidebarGroup(this)">Special Populations</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#guide-veterans" data-cat="cat-special">Veteran Services</a>
+          </div>
+        </div>
+
+        <div class="sidebar-nav__group" data-group="clinical-doc">
+          <span class="sidebar-nav__group-title" onclick="toggleGuideSidebarGroup(this)">Clinical Documentation</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#guide-ansa" data-cat="cat-clinical">ANSA Assessment</a>
+            <a href="#guide-cans" data-cat="cat-clinical">CANS Assessment</a>
+            <a href="#guide-isp" data-cat="cat-clinical">Individual Service Plan</a>
+            <a href="#guide-documentation" data-cat="cat-clinical">Session Documentation</a>
+          </div>
+        </div>
+
+        <div class="sidebar-nav__group" data-group="ebp">
+          <span class="sidebar-nav__group-title" onclick="toggleGuideSidebarGroup(this)">Evidence-Based Practice</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#guide-ebp-cbt" data-cat="cat-ebp">CBT</a>
+            <a href="#guide-ebp-dbt" data-cat="cat-ebp">DBT</a>
+            <a href="#guide-ebp-emdr" data-cat="cat-ebp">EMDR</a>
+            <a href="#guide-ebp-mi" data-cat="cat-ebp">Motivational Interviewing</a>
+            <a href="#guide-ebp-pe" data-cat="cat-ebp">Prolonged Exposure</a>
+            <a href="#guide-ebp-cpt" data-cat="cat-ebp">Cognitive Processing Therapy</a>
+            <a href="#guide-ebp-act" data-cat="cat-ebp">ACT</a>
+            <a href="#guide-ebp-sfbt" data-cat="cat-ebp">Solution-Focused Brief</a>
+            <a href="#guide-ebp-tfcbt" data-cat="cat-ebp">TF-CBT</a>
+            <a href="#guide-ebp-cams" data-cat="cat-ebp">CAMS</a>
+          </div>
+        </div>
+
+        <div class="sidebar-nav__group" data-group="tic">
+          <span class="sidebar-nav__group-title" onclick="toggleGuideSidebarGroup(this)">Trauma-Informed Care</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#guide-tic-principles" data-cat="cat-tic">6 Principles of TIC</a>
+            <a href="#guide-tic-aces" data-cat="cat-tic">ACEs</a>
+            <a href="#guide-tic-responses" data-cat="cat-tic">Trauma Responses</a>
+            <a href="#guide-tic-language" data-cat="cat-tic">Trauma-Informed Language</a>
+            <a href="#guide-tic-org" data-cat="cat-tic">Organizational TIC</a>
+            <a href="#guide-tic-sts" data-cat="cat-tic">Secondary Traumatic Stress</a>
+            <a href="#guide-tic-nh" data-cat="cat-tic">NH-Specific TIC Resources</a>
+          </div>
+        </div>
+
+        <div class="sidebar-nav__group" data-group="crisis-protocols">
+          <span class="sidebar-nav__group-title" onclick="toggleGuideSidebarGroup(this)">Crisis Protocols</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#guide-mandated-reporting" data-cat="cat-mandated">NH Mandated Reporting</a>
+            <a href="#guide-iea" data-cat="cat-iea">IEA Procedures</a>
+            <a href="#guide-deescalation" data-cat="cat-deescalation">De-escalation Techniques</a>
+            <a href="#guide-suicide-risk" data-cat="cat-suicide-risk">Suicide Risk Assessment</a>
+            <a href="#guide-psych-emergency" data-cat="cat-psych-emergency">Psychiatric Emergency</a>
+            <a href="#guide-duty-to-warn" data-cat="cat-duty-warn">Duty to Warn</a>
+          </div>
+        </div>
+
+        <div class="sidebar-nav__group" data-group="handouts">
+          <span class="sidebar-nav__group-title" onclick="toggleGuideSidebarGroup(this)">Handout Library</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#guide-handout-depression" data-cat="cat-handouts">Understanding Depression</a>
+            <a href="#guide-handout-anxiety" data-cat="cat-handouts">Understanding Anxiety</a>
+            <a href="#guide-handout-ptsd" data-cat="cat-handouts">Understanding PTSD</a>
+            <a href="#guide-handout-coping" data-cat="cat-handouts">Coping Skills Toolbox</a>
+            <a href="#guide-handout-sleep" data-cat="cat-handouts">Sleep Hygiene</a>
+            <a href="#guide-handout-mindfulness" data-cat="cat-handouts">Mindfulness Basics</a>
+            <a href="#guide-handout-boundaries" data-cat="cat-handouts">Healthy Boundaries</a>
+            <a href="#guide-handout-grief" data-cat="cat-handouts">Understanding Grief</a>
+            <a href="#guide-handout-substance" data-cat="cat-handouts">Substance Use &amp; MH</a>
+            <a href="#guide-handout-selfcare" data-cat="cat-handouts">Self-Care Planner</a>
+          </div>
+        </div>
+
+        <div class="sidebar-nav__group" data-group="mi-techniques">
+          <span class="sidebar-nav__group-title" onclick="toggleGuideSidebarGroup(this)">MI Technique Library</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#guide-mi-oars" data-cat="cat-mi">OARS Skills</a>
+            <a href="#guide-mi-stages" data-cat="cat-mi">Stages of Change</a>
+            <a href="#guide-mi-changetalk" data-cat="cat-mi">Change Talk vs Sustain Talk</a>
+            <a href="#guide-mi-traps" data-cat="cat-mi">Common MI Traps</a>
+            <a href="#guide-mi-spirit" data-cat="cat-mi">MI Spirit</a>
+          </div>
+        </div>
+
+        <div class="sidebar-nav__group" data-group="cbt-worksheets">
+          <span class="sidebar-nav__group-title" onclick="toggleGuideSidebarGroup(this)">CBT Worksheets</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#guide-cbt-thought-record" data-cat="cat-cbt-worksheets">Thought Record</a>
+            <a href="#guide-cbt-distortions" data-cat="cat-cbt-worksheets">Cognitive Distortions</a>
+            <a href="#guide-cbt-ba" data-cat="cat-cbt-worksheets">Behavioral Activation</a>
+            <a href="#guide-cbt-experiment" data-cat="cat-cbt-worksheets">Behavioral Experiment</a>
+          </div>
+        </div>
+
+        <div class="sidebar-nav__group" data-group="dbt-skills">
+          <span class="sidebar-nav__group-title" onclick="toggleGuideSidebarGroup(this)">DBT Skills Reference</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#guide-dbt-mindfulness" data-cat="cat-dbt-skills">Mindfulness</a>
+            <a href="#guide-dbt-distress" data-cat="cat-dbt-skills">Distress Tolerance</a>
+            <a href="#guide-dbt-emotion" data-cat="cat-dbt-skills">Emotion Regulation</a>
+            <a href="#guide-dbt-interpersonal" data-cat="cat-dbt-skills">Interpersonal Effectiveness</a>
+          </div>
+        </div>
+
+        <div class="sidebar-nav__group" data-group="psychoed">
+          <span class="sidebar-nav__group-title" onclick="toggleGuideSidebarGroup(this)">Psychoeducation Handouts</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#guide-psychoed-depression" data-cat="cat-psychoed">Depression Handout</a>
+            <a href="#guide-psychoed-anxiety" data-cat="cat-psychoed">Anxiety Handout</a>
+            <a href="#guide-psychoed-ptsd" data-cat="cat-psychoed">PTSD Handout</a>
+            <a href="#guide-psychoed-grief" data-cat="cat-psychoed">Grief Handout</a>
+            <a href="#guide-psychoed-substance" data-cat="cat-psychoed">Substance Use Handout</a>
+            <a href="#guide-psychoed-stress" data-cat="cat-psychoed">Stress Management</a>
+            <a href="#guide-psychoed-sleep" data-cat="cat-psychoed">Sleep Hygiene Handout</a>
+          </div>
+        </div>
+
+        <div class="sidebar-nav__group" data-group="assessment-tools">
+          <span class="sidebar-nav__group-title" onclick="toggleGuideSidebarGroup(this)">Assessment Tools</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#guide-ace-tool" data-cat="cat-ace">ACE Scoring Guide</a>
+            <a href="#guide-intake-template" data-cat="cat-intake">Intake Assessment</a>
+          </div>
+        </div>
+
+        <div class="sidebar-nav__group" data-group="cultural">
+          <span class="sidebar-nav__group-title" onclick="toggleGuideSidebarGroup(this)">Cultural Competency</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#guide-cultural-populations" data-cat="cat-cultural">Local Populations</a>
+            <a href="#guide-cultural-interpreters" data-cat="cat-cultural">Working with Interpreters</a>
+            <a href="#guide-cultural-cfi" data-cat="cat-cultural">Cultural Formulation</a>
+          </div>
+        </div>
+
+        <div class="sidebar-nav__group" data-group="group-therapy">
+          <span class="sidebar-nav__group-title" onclick="toggleGuideSidebarGroup(this)">Group Therapy</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#guide-group-process" data-cat="cat-group-therapy">Process Groups</a>
+            <a href="#guide-group-psychoed" data-cat="cat-group-therapy">Psychoeducation Groups</a>
+            <a href="#guide-group-dbt" data-cat="cat-group-therapy">Skills Groups (DBT)</a>
+            <a href="#guide-group-support" data-cat="cat-group-therapy">Support Groups</a>
+            <a href="#guide-group-sud" data-cat="cat-group-therapy">Substance Use Groups</a>
+            <a href="#guide-group-challenges" data-cat="cat-group-therapy">Common Challenges</a>
+          </div>
+        </div>
+
+        <div class="sidebar-nav__group" data-group="family-therapy">
+          <span class="sidebar-nav__group-title" onclick="toggleGuideSidebarGroup(this)">Family Therapy</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#guide-family-structural" data-cat="cat-family-therapy">Structural</a>
+            <a href="#guide-family-strategic" data-cat="cat-family-therapy">Strategic</a>
+            <a href="#guide-family-bowenian" data-cat="cat-family-therapy">Bowenian</a>
+            <a href="#guide-family-narrative" data-cat="cat-family-therapy">Narrative</a>
+            <a href="#guide-family-psychoed" data-cat="cat-family-therapy">Family Psychoeducation</a>
+            <a href="#guide-family-when" data-cat="cat-family-therapy">When to Involve Family</a>
+          </div>
+        </div>
+
+        <div class="sidebar-nav__group" data-group="specialized">
+          <span class="sidebar-nav__group-title" onclick="toggleGuideSidebarGroup(this)">Specialized References</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#guide-discharge-checklist" data-cat="cat-discharge">Discharge Planning</a>
+            <a href="#guide-asam-levels" data-cat="cat-asam">ASAM Criteria</a>
+            <a href="#guide-cooccurring-guide" data-cat="cat-cooccurring">Co-occurring Disorders</a>
+            <a href="#guide-child-assessment" data-cat="cat-child-adolescent">Child/Adolescent Assessment</a>
+            <a href="#guide-grief-interventions" data-cat="cat-grief">Grief &amp; Bereavement</a>
+          </div>
+        </div>
+
+        <div class="sidebar-nav__group" data-group="couples">
+          <span class="sidebar-nav__group-title" onclick="toggleGuideSidebarGroup(this)">Couples Therapy</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#guide-couples-gottman" data-cat="cat-couples">Gottman Method</a>
+            <a href="#guide-couples-eft" data-cat="cat-couples">Emotionally Focused (EFT)</a>
+            <a href="#guide-couples-imago" data-cat="cat-couples">Imago Therapy</a>
+            <a href="#guide-couples-when" data-cat="cat-couples">When to Recommend</a>
+            <a href="#guide-couples-contraindications" data-cat="cat-couples">Contraindications</a>
+            <a href="#guide-couples-assessment" data-cat="cat-couples">Assessment Tools</a>
+          </div>
+        </div>
+
+        <div class="sidebar-nav__group" data-group="oncall">
+          <span class="sidebar-nav__group-title" onclick="toggleGuideSidebarGroup(this)">On-Call Reference</span>
+          <div class="sidebar-nav__group-links">
+            <a href="#guide-oncall-reference" data-cat="cat-oncall">On-Call Reference Guide</a>
+          </div>
+        </div>
+
       </nav>
     </aside>
+
+    <!-- Mobile sidebar toggle button -->
+    <button class="guide-sidebar-toggle" id="guideSidebarToggle" onclick="toggleGuidesMobileSidebar()" aria-label="Toggle sidebar navigation" title="Open navigation">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <!-- Mobile sidebar overlay -->
+    <div class="guide-sidebar-overlay" id="guideSidebarOverlay" onclick="toggleGuidesMobileSidebar()"></div>
 
     <!-- Main Content -->
     <main class="guide-content" id="guideContent">
@@ -10845,11 +11350,20 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
 function toggleGuide(header) {
   const card = header.closest('.guide-card');
   card.classList.toggle('open');
-  // Update sidebar active state
-  const id = card.id;
-  document.querySelectorAll('#sidebarNav a').forEach(a => {
-    a.classList.toggle('active', a.getAttribute('href') === '#' + id && card.classList.contains('open'));
-  });
+}
+
+// ===== SMOOTH SCROLL FOR CATEGORY CARDS =====
+function guideScrollTo(e, id) {
+  e.preventDefault();
+  var el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Close mobile sidebar if open
+    var sidebar = document.getElementById('guideSidebar');
+    if (sidebar && sidebar.classList.contains('mobile-open')) {
+      toggleGuidesMobileSidebar();
+    }
+  }
 }
 
 // ===== SIDEBAR CLICK =====
@@ -10857,22 +11371,111 @@ document.querySelectorAll('#sidebarNav a').forEach(link => {
   link.addEventListener('click', function(e) {
     e.preventDefault();
     const targetId = this.getAttribute('href').substring(1);
-    const card = document.getElementById(targetId);
-    if (card) {
-      // Open the card if not already open
-      if (!card.classList.contains('open')) {
-        card.classList.add('open');
+    const target = document.getElementById(targetId);
+    if (target) {
+      // Open the card if it's a guide-card and not already open
+      if (target.classList.contains('guide-card') && !target.classList.contains('open')) {
+        target.classList.add('open');
       }
       // Scroll to it
-      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       // Update sidebar active
       document.querySelectorAll('#sidebarNav a').forEach(a => a.classList.remove('active'));
       this.classList.add('active');
+      // Close mobile sidebar if open
+      var sidebar = document.getElementById('guideSidebar');
+      if (sidebar && sidebar.classList.contains('mobile-open')) {
+        toggleGuidesMobileSidebar();
+      }
     }
   });
 });
 
-// ===== MOBILE JUMP =====
+// ===== SIDEBAR GROUP TOGGLE =====
+function toggleGuideSidebarGroup(titleEl) {
+  titleEl.parentElement.classList.toggle('collapsed');
+}
+
+// ===== SIDEBAR SEARCH / FILTER =====
+function filterGuideSidebar(query) {
+  var links = document.querySelectorAll('#sidebarNav .sidebar-nav__group-links a');
+  var groups = document.querySelectorAll('#sidebarNav .sidebar-nav__group');
+  var q = query.toLowerCase().trim();
+
+  if (!q) {
+    links.forEach(function(a) { a.classList.remove('sidebar-hidden'); });
+    groups.forEach(function(g) { g.style.display = ''; g.classList.remove('collapsed'); });
+    return;
+  }
+
+  groups.forEach(function(g) {
+    var groupLinks = g.querySelectorAll('.sidebar-nav__group-links a');
+    var anyVisible = false;
+    groupLinks.forEach(function(a) {
+      var text = a.textContent.toLowerCase();
+      if (text.indexOf(q) !== -1) {
+        a.classList.remove('sidebar-hidden');
+        anyVisible = true;
+      } else {
+        a.classList.add('sidebar-hidden');
+      }
+    });
+    g.style.display = anyVisible ? '' : 'none';
+    if (anyVisible) g.classList.remove('collapsed');
+  });
+}
+
+// ===== MOBILE SIDEBAR TOGGLE =====
+function toggleGuidesMobileSidebar() {
+  var sidebar = document.getElementById('guideSidebar');
+  var overlay = document.getElementById('guideSidebarOverlay');
+  sidebar.classList.toggle('mobile-open');
+  overlay.classList.toggle('is-open');
+}
+
+// ===== SCROLL-SPY: SIDEBAR + CATEGORY GRID ACTIVE STATE =====
+(function() {
+  var sections = document.querySelectorAll('.guide-category');
+  var sideLinks = document.querySelectorAll('#sidebarNav a');
+  var categoryCards = document.querySelectorAll('#guideCategoryGrid .guide-category-card');
+
+  function updateActive() {
+    var current = '';
+    sections.forEach(function(s) {
+      var top = s.getBoundingClientRect().top;
+      if (top < 150) current = s.id;
+    });
+    // Update sidebar links: highlight the one whose data-cat matches the current section
+    sideLinks.forEach(function(a) {
+      var cat = a.getAttribute('data-cat') || '';
+      a.classList.toggle('active', cat === current);
+    });
+    // Highlight the category card whose target sections include the current section
+    categoryCards.forEach(function(card) {
+      var targets = (card.getAttribute('data-category-targets') || '').split(',');
+      card.classList.toggle('is-active', targets.indexOf(current) !== -1);
+    });
+  }
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
+})();
+
+// ===== SCROLL-TRIGGERED REVEAL ANIMATIONS =====
+(function() {
+  var reveals = document.querySelectorAll('.ds-reveal');
+  if (!reveals.length) return;
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('ds-reveal--visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(function(el) { observer.observe(el); });
+})();
+
+// ===== MOBILE JUMP (legacy, kept for backwards compat) =====
 function jumpToSection(id) {
   if (!id) return;
   const section = document.getElementById(id);
