@@ -1,0 +1,2423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neurobiology of Mental Health | Greater Nashua MH Resources</title>
+<meta name="description" content="Interactive brain visualization for understanding the neurobiology of mental health conditions. A clinical education tool for clinicians and clients.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2d6f59">
+<link rel="stylesheet" href="css/design-system.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/fontsize.js"></script>
+<style>
+/* ================================================================
+   Neurobiology Page — Layout & Component Styles
+   ================================================================ */
+
+/* ---- Nav (mirrored from index.html) ---- */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: var(--ds-z-sticky);
+  background: rgba(253, 252, 250, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--ds-border-subtle);
+  height: var(--ds-header-height);
+}
+[data-theme="dark"] .site-nav {
+  background: rgba(26, 25, 22, 0.85);
+}
+.site-nav__inner {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+}
+.site-nav__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  text-decoration: none;
+  flex-shrink: 0;
+  margin-right: auto;
+}
+.site-nav__logo-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-primary-600);
+  color: var(--ds-text-inverse);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-bold);
+  letter-spacing: var(--ds-tracking-tight);
+}
+.site-nav__logo-text {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  white-space: nowrap;
+}
+.site-nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+}
+.site-nav__link {
+  padding: var(--ds-space-2) var(--ds-space-3);
+  border-radius: var(--ds-radius-md);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default),
+              background-color var(--ds-duration-fast) var(--ds-ease-default);
+  white-space: nowrap;
+}
+.site-nav__link:hover {
+  color: var(--ds-text-primary);
+  background: var(--ds-surface-hover);
+  text-decoration: none;
+}
+.site-nav__link--active {
+  color: var(--ds-primary-700);
+  background: var(--ds-primary-50);
+}
+[data-theme="dark"] .site-nav__link--active {
+  color: var(--ds-primary-300);
+  background: var(--ds-interactive-subtle);
+}
+.site-nav__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  margin-left: var(--ds-space-2);
+}
+.site-nav__icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ds-radius-md);
+  border: none;
+  background: transparent;
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default),
+              background-color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.site-nav__icon-btn:hover {
+  background: var(--ds-surface-hover);
+  color: var(--ds-text-primary);
+}
+.site-nav__font-controls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.site-nav__font-btn {
+  padding: var(--ds-space-1) var(--ds-space-2);
+  border-radius: var(--ds-radius-sm);
+  border: 1px solid var(--ds-border);
+  background: var(--ds-surface);
+  color: var(--ds-text-secondary);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  cursor: pointer;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+  line-height: 1;
+  min-height: 28px;
+}
+.site-nav__font-btn:hover {
+  background: var(--ds-surface-hover);
+  border-color: var(--ds-border-strong);
+}
+.site-nav__hamburger {
+  display: none;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 8px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  align-items: center;
+}
+.site-nav__hamburger span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--ds-text-secondary);
+  border-radius: 1px;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+}
+.site-nav__mobile-panel {
+  display: none;
+  position: fixed;
+  top: var(--ds-header-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--ds-surface);
+  z-index: var(--ds-z-overlay);
+  padding: var(--ds-space-6);
+  flex-direction: column;
+  gap: var(--ds-space-2);
+  overflow-y: auto;
+}
+.site-nav__mobile-panel.is-open {
+  display: flex;
+}
+.site-nav__mobile-link {
+  display: block;
+  padding: var(--ds-space-3) var(--ds-space-4);
+  border-radius: var(--ds-radius-lg);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-primary);
+  text-decoration: none;
+  transition: background-color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.site-nav__mobile-link:hover {
+  background: var(--ds-surface-hover);
+  text-decoration: none;
+}
+
+/* ---- Footer (mirrored from index.html) ---- */
+.site-footer {
+  background: var(--ds-surface);
+  border-top: 1px solid var(--ds-border);
+  padding: var(--ds-space-16) 0 var(--ds-space-8);
+  margin-top: 0;
+}
+.footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--ds-space-10);
+  margin-bottom: var(--ds-space-10);
+}
+.footer__brand-desc {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+  margin-top: var(--ds-space-3);
+  max-width: 320px;
+}
+.footer__col-title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--ds-tracking-widest);
+  margin-bottom: var(--ds-space-4);
+}
+.footer__links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2-5);
+}
+.footer__links a {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.footer__links a:hover {
+  color: var(--ds-text-primary);
+}
+.footer__crisis-box {
+  background: var(--ds-status-danger-bg);
+  border: 1px solid var(--ds-danger-200);
+  border-radius: var(--ds-radius-lg);
+  padding: var(--ds-space-4);
+  margin-top: var(--ds-space-4);
+}
+[data-theme="dark"] .footer__crisis-box {
+  border-color: rgba(220, 95, 95, 0.2);
+}
+.footer__crisis-title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-status-danger-text);
+  margin-bottom: var(--ds-space-2);
+}
+.footer__crisis-numbers {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+}
+.footer__crisis-numbers strong {
+  color: var(--ds-text-primary);
+}
+.footer__bottom {
+  border-top: 1px solid var(--ds-border-subtle);
+  padding-top: var(--ds-space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--ds-space-4);
+}
+.footer__disclaimer {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+  line-height: var(--ds-leading-relaxed);
+  max-width: 560px;
+}
+.footer__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-4);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+}
+.footer__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ds-success-500);
+  display: inline-block;
+}
+
+/* ---- Page Hero ---- */
+.neuro-hero {
+  background: linear-gradient(170deg, var(--ds-primary-50) 0%, var(--ds-cream) 40%, var(--ds-warm-gray-50) 100%);
+  padding: var(--ds-space-14) 0 var(--ds-space-10);
+}
+[data-theme="dark"] .neuro-hero {
+  background: linear-gradient(170deg, rgba(61, 139, 112, 0.08) 0%, var(--ds-page-bg) 50%, var(--ds-page-bg) 100%);
+}
+.neuro-hero__inner {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6);
+}
+.neuro-hero__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-muted);
+  margin-bottom: var(--ds-space-4);
+}
+.neuro-hero__breadcrumb a {
+  color: var(--ds-text-link);
+  text-decoration: none;
+}
+.neuro-hero__breadcrumb a:hover {
+  text-decoration: underline;
+}
+.neuro-hero__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-3xl);
+  font-weight: var(--ds-weight-bold);
+  line-height: var(--ds-leading-tight);
+  letter-spacing: var(--ds-tracking-tight);
+  color: var(--ds-text-primary);
+  margin-bottom: var(--ds-space-3);
+}
+.neuro-hero__subtitle {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+  max-width: 640px;
+}
+
+/* ---- Toolbar ---- */
+.neuro-toolbar {
+  background: var(--ds-surface);
+  border-bottom: 1px solid var(--ds-border-subtle);
+  position: sticky;
+  top: var(--ds-header-height);
+  z-index: var(--ds-z-sticky);
+  padding: var(--ds-space-3) 0;
+}
+.neuro-toolbar__inner {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6);
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-4);
+  flex-wrap: wrap;
+}
+.neuro-toolbar__group {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+}
+.neuro-toolbar__label {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--ds-tracking-wider);
+  white-space: nowrap;
+}
+.neuro-toolbar__select {
+  padding: var(--ds-space-1-5) var(--ds-space-8) var(--ds-space-1-5) var(--ds-space-3);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-primary);
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b6358' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 14px;
+  transition: border-color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.neuro-toolbar__select:hover {
+  border-color: var(--ds-border-strong);
+}
+.neuro-toolbar__select:focus {
+  outline: none;
+  border-color: var(--ds-border-focus);
+  box-shadow: var(--ds-focus-ring);
+}
+
+/* Mode toggle */
+.mode-toggle {
+  display: flex;
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
+  overflow: hidden;
+  margin-left: auto;
+}
+.mode-toggle__btn {
+  padding: var(--ds-space-1-5) var(--ds-space-3);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-secondary);
+  background: var(--ds-surface);
+  border: none;
+  cursor: pointer;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+  white-space: nowrap;
+}
+.mode-toggle__btn:not(:last-child) {
+  border-right: 1px solid var(--ds-border);
+}
+.mode-toggle__btn:hover {
+  background: var(--ds-surface-hover);
+}
+.mode-toggle__btn.is-active {
+  background: var(--ds-primary-600);
+  color: var(--ds-text-inverse);
+}
+[data-theme="dark"] .mode-toggle__btn.is-active {
+  background: var(--ds-primary-400);
+  color: var(--ds-warm-gray-950);
+}
+
+/* ---- Main Content Area ---- */
+.neuro-main {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: var(--ds-space-8) var(--ds-space-6);
+}
+.neuro-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: var(--ds-space-8);
+  align-items: start;
+}
+
+/* ---- Brain Container ---- */
+.brain-container {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-2xl);
+  box-shadow: var(--ds-shadow-md);
+  overflow: hidden;
+}
+.brain-container__header {
+  padding: var(--ds-space-4) var(--ds-space-6);
+  border-bottom: 1px solid var(--ds-border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brain-container__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+}
+.brain-container__legend {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-4);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+}
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--ds-radius-full);
+  flex-shrink: 0;
+}
+.legend-dot--primary { background: var(--ds-accent-500); }
+.legend-dot--secondary { background: var(--ds-accent-300); }
+.legend-dot--tertiary { background: var(--ds-accent-100); border: 1px solid var(--ds-accent-300); }
+.brain-container__body {
+  padding: var(--ds-space-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 420px;
+}
+
+/* ---- SVG Brain Styles ---- */
+.brain-svg {
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+}
+.brain-region {
+  cursor: pointer;
+  transition: fill 0.3s ease, stroke 0.3s ease, opacity 0.3s ease, filter 0.3s ease;
+  stroke: var(--ds-warm-gray-300);
+  stroke-width: 1;
+}
+[data-theme="dark"] .brain-region {
+  stroke: var(--ds-warm-gray-700);
+}
+.brain-region:hover {
+  filter: brightness(1.15) saturate(1.2);
+  stroke: var(--ds-primary-500);
+  stroke-width: 1.5;
+}
+.brain-region:focus {
+  outline: none;
+  stroke: var(--ds-primary-500);
+  stroke-width: 2;
+}
+.brain-region.is-selected {
+  stroke: var(--ds-primary-600);
+  stroke-width: 2.5;
+  filter: brightness(1.1) saturate(1.3);
+}
+.brain-region.is-highlighted--primary {
+  filter: brightness(1.15) saturate(1.4);
+  stroke: var(--ds-accent-600);
+  stroke-width: 2;
+}
+.brain-region.is-highlighted--secondary {
+  filter: brightness(1.08) saturate(1.2);
+  stroke: var(--ds-accent-400);
+  stroke-width: 1.5;
+}
+.brain-region.is-highlighted--tertiary {
+  filter: brightness(1.03);
+  stroke: var(--ds-accent-200);
+  stroke-width: 1;
+}
+.brain-region.is-dimmed {
+  opacity: 0.4;
+}
+
+/* Brain labels */
+.brain-label {
+  font-family: var(--ds-font-sans);
+  font-size: 9px;
+  font-weight: 600;
+  fill: var(--ds-text-secondary);
+  pointer-events: none;
+  text-anchor: middle;
+  transition: fill 0.3s ease, font-size 0.3s ease;
+}
+.brain-label.is-active {
+  fill: var(--ds-text-primary);
+  font-size: 10px;
+  font-weight: 700;
+}
+[data-theme="dark"] .brain-label {
+  fill: var(--ds-text-muted);
+}
+[data-theme="dark"] .brain-label.is-active {
+  fill: var(--ds-text-primary);
+}
+
+/* Brain outline */
+.brain-outline {
+  fill: none;
+  stroke: var(--ds-warm-gray-300);
+  stroke-width: 1.5;
+}
+[data-theme="dark"] .brain-outline {
+  stroke: var(--ds-warm-gray-700);
+}
+
+/* Tooltip */
+.brain-tooltip {
+  position: absolute;
+  background: var(--ds-warm-gray-950);
+  color: var(--ds-warm-gray-50);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-medium);
+  padding: var(--ds-space-1-5) var(--ds-space-3);
+  border-radius: var(--ds-radius-md);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--ds-duration-fast) var(--ds-ease-default);
+  z-index: var(--ds-z-tooltip);
+  white-space: nowrap;
+  box-shadow: var(--ds-shadow-lg);
+}
+.brain-tooltip.is-visible {
+  opacity: 1;
+}
+
+/* ---- Detail Panel ---- */
+.detail-panel {
+  position: sticky;
+  top: calc(var(--ds-header-height) + 60px);
+}
+.detail-card {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-2xl);
+  box-shadow: var(--ds-shadow-md);
+  overflow: hidden;
+  transition: all var(--ds-duration-normal) var(--ds-ease-default);
+}
+.detail-card__header {
+  padding: var(--ds-space-5) var(--ds-space-6);
+  border-bottom: 1px solid var(--ds-border-subtle);
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+}
+.detail-card__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--ds-radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.detail-card__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  line-height: var(--ds-leading-snug);
+}
+.detail-card__subtitle {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+  margin-top: 2px;
+}
+.detail-card__body {
+  padding: var(--ds-space-5) var(--ds-space-6);
+}
+.detail-section {
+  margin-bottom: var(--ds-space-5);
+}
+.detail-section:last-child {
+  margin-bottom: 0;
+}
+.detail-section__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--ds-tracking-wider);
+  margin-bottom: var(--ds-space-2);
+}
+.detail-section__text {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-primary);
+  line-height: var(--ds-leading-relaxed);
+}
+.detail-section__text--client {
+  font-size: var(--ds-text-base);
+  line-height: var(--ds-leading-loose);
+}
+.detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-1-5);
+}
+.detail-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  padding: var(--ds-space-0-5) var(--ds-space-2-5);
+  border-radius: var(--ds-radius-full);
+  font-family: var(--ds-font-sans);
+  font-size: 11px;
+  font-weight: var(--ds-weight-medium);
+  background: var(--ds-primary-50);
+  color: var(--ds-primary-700);
+}
+[data-theme="dark"] .detail-tag {
+  background: var(--ds-interactive-subtle);
+  color: var(--ds-primary-300);
+}
+.detail-empty {
+  text-align: center;
+  padding: var(--ds-space-12) var(--ds-space-6);
+}
+.detail-empty__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-primary-50);
+  color: var(--ds-primary-400);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--ds-space-4);
+}
+[data-theme="dark"] .detail-empty__icon {
+  background: var(--ds-interactive-subtle);
+}
+.detail-empty__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  margin-bottom: var(--ds-space-2);
+}
+.detail-empty__desc {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+}
+
+/* Condition description panel */
+.condition-panel {
+  margin-top: var(--ds-space-6);
+}
+.condition-card {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-2xl);
+  box-shadow: var(--ds-shadow-md);
+  overflow: hidden;
+}
+.condition-card__header {
+  padding: var(--ds-space-4) var(--ds-space-6);
+  border-bottom: 1px solid var(--ds-border-subtle);
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+}
+.condition-card__body {
+  padding: var(--ds-space-5) var(--ds-space-6);
+}
+
+/* ---- Section Headers ---- */
+.section-header-neuro {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto var(--ds-space-6);
+  padding: 0 var(--ds-space-6);
+  display: flex;
+  align-items: baseline;
+  gap: var(--ds-space-4);
+}
+.section-header-neuro__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-2xl);
+  font-weight: var(--ds-weight-bold);
+  color: var(--ds-text-primary);
+  letter-spacing: var(--ds-tracking-tight);
+}
+
+/* ---- Brain-Body Connection ---- */
+.body-connection {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: var(--ds-space-12) var(--ds-space-6);
+}
+.body-connection__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--ds-space-6);
+}
+.pathway-card {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-2xl);
+  box-shadow: var(--ds-shadow-sm);
+  padding: var(--ds-space-6);
+  transition: var(--ds-transition-shadow), var(--ds-transition-transform);
+}
+.pathway-card:hover {
+  box-shadow: var(--ds-shadow-lg);
+  transform: translateY(-2px);
+}
+.pathway-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--ds-radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--ds-space-4);
+}
+.pathway-card__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  margin-bottom: var(--ds-space-2);
+}
+.pathway-card__desc {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+  margin-bottom: var(--ds-space-4);
+}
+.pathway-flow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+}
+.pathway-step {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2-5);
+  padding: var(--ds-space-2) var(--ds-space-3);
+  background: var(--ds-surface-sunken);
+  border-radius: var(--ds-radius-md);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-primary);
+  font-weight: var(--ds-weight-medium);
+}
+.pathway-step__icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pathway-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ds-text-muted);
+  font-size: 14px;
+  padding: 0 var(--ds-space-2);
+}
+
+/* ---- Neurotransmitter Cards ---- */
+.nt-section {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6) var(--ds-space-12);
+}
+.nt-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--ds-space-5);
+}
+.nt-card {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-xl);
+  box-shadow: var(--ds-shadow-sm);
+  overflow: hidden;
+  transition: var(--ds-transition-shadow), var(--ds-transition-transform);
+}
+.nt-card:hover {
+  box-shadow: var(--ds-shadow-md);
+  transform: translateY(-2px);
+}
+.nt-card__header {
+  padding: var(--ds-space-4) var(--ds-space-5);
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  border-bottom: 1px solid var(--ds-border-subtle);
+}
+.nt-card__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--ds-radius-full);
+  flex-shrink: 0;
+}
+.nt-card__name {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+}
+.nt-card__body {
+  padding: var(--ds-space-4) var(--ds-space-5);
+}
+.nt-card__role {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+  margin-bottom: var(--ds-space-3);
+}
+.nt-detail-row {
+  display: flex;
+  gap: var(--ds-space-3);
+  margin-bottom: var(--ds-space-2);
+}
+.nt-detail-row:last-child {
+  margin-bottom: 0;
+}
+.nt-detail-label {
+  font-family: var(--ds-font-sans);
+  font-size: 11px;
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  min-width: 60px;
+  padding-top: 2px;
+}
+.nt-detail-value {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-primary);
+  line-height: var(--ds-leading-relaxed);
+}
+
+/* ---- Print Button ---- */
+.print-bar {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6) var(--ds-space-8);
+  display: flex;
+  justify-content: center;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1023px) {
+  .neuro-layout {
+    grid-template-columns: 1fr;
+  }
+  .detail-panel {
+    position: static;
+  }
+  .body-connection__grid {
+    grid-template-columns: 1fr;
+  }
+  .nt-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .brain-container__legend {
+    display: none;
+  }
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ds-space-8);
+  }
+}
+@media (max-width: 639px) {
+  .site-nav__links,
+  .site-nav__font-controls {
+    display: none;
+  }
+  .site-nav__hamburger {
+    display: flex;
+  }
+  .neuro-hero__title {
+    font-size: var(--ds-text-2xl);
+  }
+  .neuro-toolbar__inner {
+    gap: var(--ds-space-2);
+  }
+  .neuro-toolbar__label {
+    display: none;
+  }
+  .mode-toggle {
+    margin-left: 0;
+  }
+  .nt-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: var(--ds-space-8);
+  }
+  .footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .brain-container__body {
+    min-height: 300px;
+    padding: var(--ds-space-2);
+  }
+}
+
+/* ---- Print ---- */
+@media print {
+  .site-nav,
+  .neuro-toolbar,
+  .site-footer,
+  .print-bar,
+  .mode-toggle,
+  .site-nav__mobile-panel,
+  .brain-container__legend {
+    display: none !important;
+  }
+  .neuro-layout {
+    grid-template-columns: 1fr !important;
+  }
+  .brain-container,
+  .detail-card,
+  .condition-card,
+  .pathway-card,
+  .nt-card {
+    box-shadow: none !important;
+    border: 1px solid #ccc;
+    break-inside: avoid;
+  }
+  .neuro-hero {
+    background: none !important;
+    padding: var(--ds-space-4) 0;
+  }
+  .brain-region {
+    transition: none !important;
+  }
+  body {
+    background: white !important;
+  }
+  .neuro-main {
+    padding-top: var(--ds-space-4);
+  }
+}
+</style>
+</head>
+<body>
+<script src="js/auth-gate.js"></script>
+
+<a href="#main-content" class="ds-sr-only" style="position:absolute;top:-40px;left:0;background:var(--ds-surface);padding:8px 16px;z-index:100;font-size:14px;transition:top 0.2s" onfocus="this.style.top='0'" onblur="this.style.top='-40px'">Skip to main content</a>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav class="site-nav" role="navigation" aria-label="Main navigation">
+  <div class="site-nav__inner">
+    <a href="index.html" class="site-nav__logo">
+      <div class="site-nav__logo-mark">NH</div>
+      <span class="site-nav__logo-text">MH Resources</span>
+    </a>
+    <div class="site-nav__links">
+      <a href="index.html" class="site-nav__link">Home</a>
+      <a href="resources.html" class="site-nav__link">Resources</a>
+      <a href="tools.html" class="site-nav__link site-nav__link--active">Clinical Tools</a>
+      <a href="guide.html" class="site-nav__link">Guides</a>
+    </div>
+    <div class="site-nav__controls">
+      <div class="site-nav__font-controls">
+        <button class="site-nav__font-btn" onclick="mhFontDecrease()" title="Decrease font size" aria-label="Decrease font size">A-</button>
+        <button class="site-nav__font-btn" onclick="mhFontIncrease()" title="Increase font size" aria-label="Increase font size">A+</button>
+      </div>
+      <button class="site-nav__icon-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="site-nav__hamburger" id="hamburgerBtn" onclick="toggleMobileNav()" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="site-nav__mobile-panel" id="mobileNavPanel">
+  <a href="index.html" class="site-nav__mobile-link">Home</a>
+  <a href="resources.html" class="site-nav__mobile-link">Resources</a>
+  <a href="tools.html" class="site-nav__mobile-link">Clinical Tools</a>
+  <a href="guide.html" class="site-nav__mobile-link">Guides</a>
+</div>
+
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="neuro-hero">
+  <div class="neuro-hero__inner">
+    <div class="neuro-hero__breadcrumb">
+      <a href="index.html">Home</a>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+      <a href="tools.html">Clinical Tools</a>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+      <span>Neurobiology</span>
+    </div>
+    <h1 class="neuro-hero__title">Neurobiology of Mental Health</h1>
+    <p class="neuro-hero__subtitle">An interactive brain visualization for understanding how mental health conditions affect the brain. Select a region or condition to explore.</p>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     TOOLBAR
+     ============================================================ -->
+<div class="neuro-toolbar">
+  <div class="neuro-toolbar__inner">
+    <div class="neuro-toolbar__group">
+      <span class="neuro-toolbar__label">Condition</span>
+      <select class="neuro-toolbar__select" id="conditionSelect" aria-label="Select a mental health condition">
+        <option value="">-- Select condition --</option>
+        <option value="depression">Depression (MDD)</option>
+        <option value="anxiety">Anxiety (GAD)</option>
+        <option value="ptsd">PTSD</option>
+        <option value="adhd">ADHD</option>
+        <option value="addiction">Addiction / Substance Use</option>
+        <option value="bipolar">Bipolar Disorder</option>
+        <option value="ocd">OCD</option>
+        <option value="psychosis">Psychosis / Schizophrenia</option>
+      </select>
+    </div>
+    <div class="mode-toggle" role="group" aria-label="Viewing mode">
+      <button class="mode-toggle__btn is-active" id="modeClient" onclick="setMode('client')" aria-pressed="true">Show Client</button>
+      <button class="mode-toggle__btn" id="modeClinician" onclick="setMode('clinician')" aria-pressed="false">Clinician</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     MAIN CONTENT
+     ============================================================ -->
+<main id="main-content">
+
+  <div class="neuro-main">
+    <div class="neuro-layout">
+
+      <!-- Left: Brain SVG -->
+      <div>
+        <div class="brain-container">
+          <div class="brain-container__header">
+            <div class="brain-container__title">Lateral Brain View</div>
+            <div class="brain-container__legend" id="conditionLegend" style="display:none;">
+              <div class="legend-item"><div class="legend-dot legend-dot--primary"></div> Primary</div>
+              <div class="legend-item"><div class="legend-dot legend-dot--secondary"></div> Secondary</div>
+              <div class="legend-item"><div class="legend-dot legend-dot--tertiary"></div> Tertiary</div>
+            </div>
+          </div>
+          <div class="brain-container__body" id="brainBody">
+            <div class="brain-tooltip" id="brainTooltip"></div>
+
+            <svg class="brain-svg" viewBox="0 0 640 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Interactive lateral view of the human brain showing major regions">
+              <title>Interactive Brain Diagram - Lateral View</title>
+
+              <defs>
+                <!-- Gradient fills for each region -->
+                <radialGradient id="gradPFC" cx="30%" cy="40%">
+                  <stop offset="0%" stop-color="#bcdccd"/>
+                  <stop offset="100%" stop-color="#8ec4ae"/>
+                </radialGradient>
+                <radialGradient id="gradACC" cx="50%" cy="40%">
+                  <stop offset="0%" stop-color="#dceee5"/>
+                  <stop offset="100%" stop-color="#5ea68b"/>
+                </radialGradient>
+                <radialGradient id="gradInsula" cx="50%" cy="50%">
+                  <stop offset="0%" stop-color="#fae1b8"/>
+                  <stop offset="100%" stop-color="#f1ae54"/>
+                </radialGradient>
+                <radialGradient id="gradAmygdala" cx="50%" cy="50%">
+                  <stop offset="0%" stop-color="#fdd5c8"/>
+                  <stop offset="100%" stop-color="#f48e6e"/>
+                </radialGradient>
+                <radialGradient id="gradHippo" cx="50%" cy="50%">
+                  <stop offset="0%" stop-color="#ccdeee"/>
+                  <stop offset="100%" stop-color="#7daed3"/>
+                </radialGradient>
+                <radialGradient id="gradThalamus" cx="50%" cy="50%">
+                  <stop offset="0%" stop-color="#f3dda0"/>
+                  <stop offset="100%" stop-color="#e6af42"/>
+                </radialGradient>
+                <radialGradient id="gradHypothalamus" cx="50%" cy="50%">
+                  <stop offset="0%" stop-color="#c3e0c8"/>
+                  <stop offset="100%" stop-color="#64ab73"/>
+                </radialGradient>
+                <radialGradient id="gradNAcc" cx="50%" cy="50%">
+                  <stop offset="0%" stop-color="#f9d5d5"/>
+                  <stop offset="100%" stop-color="#ea8585"/>
+                </radialGradient>
+                <radialGradient id="gradBrainstem" cx="50%" cy="30%">
+                  <stop offset="0%" stop-color="#e0dbd7"/>
+                  <stop offset="100%" stop-color="#b0a69c"/>
+                </radialGradient>
+                <radialGradient id="gradCerebellum" cx="50%" cy="40%">
+                  <stop offset="0%" stop-color="#e2ecf5"/>
+                  <stop offset="100%" stop-color="#a8c9e2"/>
+                </radialGradient>
+
+                <!-- Subtle inner shadow for depth -->
+                <filter id="innerShadow" x="-10%" y="-10%" width="120%" height="120%">
+                  <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur"/>
+                  <feOffset dx="1" dy="2" result="offsetBlur"/>
+                  <feComposite in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="inverse"/>
+                  <feFlood flood-color="#000" flood-opacity="0.08" result="color"/>
+                  <feComposite in="color" in2="inverse" operator="in" result="shadow"/>
+                  <feComposite in="shadow" in2="SourceGraphic" operator="over"/>
+                </filter>
+              </defs>
+
+              <!-- Brain outline / cortex silhouette -->
+              <path class="brain-outline" d="
+                M 160,340
+                C 120,340 85,320 70,290
+                C 50,250 45,200 50,160
+                C 55,120 70,85 100,60
+                C 130,35 170,20 220,15
+                C 280,8 340,12 390,25
+                C 430,35 460,55 480,85
+                C 500,115 510,150 510,190
+                C 510,230 500,260 485,285
+                C 475,300 468,310 465,315
+                L 465,315
+              " fill="var(--ds-warm-gray-100)" filter="url(#innerShadow)"/>
+
+              <!-- Cerebral cortex texture lines (sulci) -->
+              <g opacity="0.15" stroke="var(--ds-warm-gray-500)" stroke-width="1" fill="none">
+                <path d="M 140,110 C 200,95 280,90 360,100"/>
+                <path d="M 120,160 C 180,145 260,140 380,155"/>
+                <path d="M 130,210 C 190,195 280,190 400,210"/>
+                <path d="M 160,260 C 220,245 300,240 420,260"/>
+                <path d="M 200,60 C 220,100 230,160 235,230"/>
+                <path d="M 300,40 C 310,80 315,140 320,220"/>
+                <path d="M 400,70 C 405,110 410,170 420,250"/>
+              </g>
+
+              <!-- ===== BRAIN REGIONS (clickable) ===== -->
+
+              <!-- Prefrontal Cortex (front, upper) -->
+              <path
+                class="brain-region"
+                id="region-pfc"
+                data-region="pfc"
+                tabindex="0"
+                role="button"
+                aria-label="Prefrontal Cortex"
+                fill="url(#gradPFC)"
+                d="
+                  M 100,60
+                  C 110,45 130,30 160,22
+                  C 185,15 210,15 220,15
+                  L 210,50
+                  C 195,65 170,90 140,100
+                  C 115,108 95,105 80,100
+                  C 70,95 60,130 55,155
+                  C 50,160 48,145 50,130
+                  C 55,105 65,80 80,65
+                  Z
+                "
+              />
+
+              <!-- Anterior Cingulate Cortex (top-center, medial) -->
+              <path
+                class="brain-region"
+                id="region-acc"
+                data-region="acc"
+                tabindex="0"
+                role="button"
+                aria-label="Anterior Cingulate Cortex"
+                fill="url(#gradACC)"
+                d="
+                  M 220,15
+                  C 260,10 300,12 340,20
+                  C 330,50 310,80 290,100
+                  C 265,75 240,60 210,50
+                  Z
+                "
+              />
+
+              <!-- Insula (lateral, buried in sylvian fissure) -->
+              <path
+                class="brain-region"
+                id="region-insula"
+                data-region="insula"
+                tabindex="0"
+                role="button"
+                aria-label="Insula"
+                fill="url(#gradInsula)"
+                d="
+                  M 220,170
+                  C 240,155 265,145 290,150
+                  C 305,155 310,170 305,190
+                  C 298,210 275,225 250,225
+                  C 230,225 215,210 215,195
+                  Z
+                "
+              />
+
+              <!-- Thalamus (deep center, oval) -->
+              <ellipse
+                class="brain-region"
+                id="region-thalamus"
+                data-region="thalamus"
+                tabindex="0"
+                role="button"
+                aria-label="Thalamus"
+                fill="url(#gradThalamus)"
+                cx="310"
+                cy="185"
+                rx="38"
+                ry="26"
+              />
+
+              <!-- Hypothalamus (below thalamus, small) -->
+              <ellipse
+                class="brain-region"
+                id="region-hypothalamus"
+                data-region="hypothalamus"
+                tabindex="0"
+                role="button"
+                aria-label="Hypothalamus"
+                fill="url(#gradHypothalamus)"
+                cx="280"
+                cy="235"
+                rx="28"
+                ry="18"
+              />
+
+              <!-- Amygdala (small, deep, almond-shaped) -->
+              <path
+                class="brain-region"
+                id="region-amygdala"
+                data-region="amygdala"
+                tabindex="0"
+                role="button"
+                aria-label="Amygdala"
+                fill="url(#gradAmygdala)"
+                d="
+                  M 240,260
+                  C 250,245 268,240 280,245
+                  C 292,250 296,265 290,278
+                  C 284,290 268,295 256,288
+                  C 244,281 237,272 240,260
+                  Z
+                "
+              />
+
+              <!-- Hippocampus (curved, seahorse shape) -->
+              <path
+                class="brain-region"
+                id="region-hippocampus"
+                data-region="hippocampus"
+                tabindex="0"
+                role="button"
+                aria-label="Hippocampus"
+                fill="url(#gradHippo)"
+                d="
+                  M 300,255
+                  C 320,248 345,250 360,260
+                  C 375,270 380,285 370,300
+                  C 360,310 340,312 325,308
+                  C 310,304 295,290 295,272
+                  Z
+                "
+              />
+
+              <!-- Nucleus Accumbens (small, deep) -->
+              <ellipse
+                class="brain-region"
+                id="region-nacc"
+                data-region="nacc"
+                tabindex="0"
+                role="button"
+                aria-label="Nucleus Accumbens"
+                fill="url(#gradNAcc)"
+                cx="230"
+                cy="230"
+                rx="18"
+                ry="14"
+              />
+
+              <!-- Brain Stem (lower center, elongated) -->
+              <path
+                class="brain-region"
+                id="region-brainstem"
+                data-region="brainstem"
+                tabindex="0"
+                role="button"
+                aria-label="Brain Stem"
+                fill="url(#gradBrainstem)"
+                d="
+                  M 365,310
+                  C 370,330 372,355 368,380
+                  C 365,400 355,415 340,420
+                  C 325,425 315,418 310,400
+                  C 305,380 308,355 315,330
+                  C 320,315 340,305 365,310
+                  Z
+                "
+              />
+
+              <!-- Cerebellum (back/bottom, textured) -->
+              <path
+                class="brain-region"
+                id="region-cerebellum"
+                data-region="cerebellum"
+                tabindex="0"
+                role="button"
+                aria-label="Cerebellum"
+                fill="url(#gradCerebellum)"
+                d="
+                  M 380,300
+                  C 420,290 460,295 485,310
+                  C 505,322 510,345 500,365
+                  C 490,385 465,400 435,405
+                  C 405,408 380,400 365,385
+                  C 355,370 355,350 360,335
+                  C 365,320 370,308 380,300
+                  Z
+                "
+              />
+              <!-- Cerebellum texture (folia lines) -->
+              <g opacity="0.2" stroke="var(--ds-warm-gray-500)" stroke-width="0.8" fill="none">
+                <path d="M 385,310 C 410,305 440,308 470,318"/>
+                <path d="M 375,330 C 400,325 435,328 475,340"/>
+                <path d="M 370,350 C 395,345 430,348 480,360"/>
+                <path d="M 375,370 C 400,367 430,370 465,378"/>
+              </g>
+
+              <!-- Parietal / Temporal cortex fill (background regions) -->
+              <path
+                fill="var(--ds-warm-gray-100)"
+                opacity="0.5"
+                d="
+                  M 340,20
+                  C 380,30 420,50 450,80
+                  C 475,105 495,140 505,180
+                  C 510,210 505,245 490,275
+                  C 480,295 470,310 465,315
+                  C 450,310 430,300 410,295
+                  C 390,290 375,295 365,310
+                  C 350,305 340,295 335,280
+                  C 340,260 355,245 360,230
+                  C 365,210 355,190 345,175
+                  C 335,165 320,155 310,150
+                  C 305,140 300,120 295,105
+                  C 310,80 330,50 340,20
+                  Z
+                "
+              />
+
+              <!-- ===== LABELS ===== -->
+              <text class="brain-label" x="120" y="75" data-for="pfc">Prefrontal</text>
+              <text class="brain-label" x="120" y="86" data-for="pfc">Cortex</text>
+
+              <text class="brain-label" x="280" y="40" data-for="acc">Anterior Cingulate</text>
+
+              <text class="brain-label" x="260" y="188" data-for="insula">Insula</text>
+
+              <text class="brain-label" x="310" y="183" data-for="thalamus">Thalamus</text>
+
+              <text class="brain-label" x="280" y="237" data-for="hypothalamus">Hypothal.</text>
+
+              <text class="brain-label" x="265" y="270" data-for="amygdala">Amygdala</text>
+
+              <text class="brain-label" x="338" y="282" data-for="hippocampus">Hippocampus</text>
+
+              <text class="brain-label" x="230" y="232" data-for="nacc">N.Acc.</text>
+
+              <text class="brain-label" x="340" y="370" data-for="brainstem">Brain</text>
+              <text class="brain-label" x="340" y="381" data-for="brainstem">Stem</text>
+
+              <text class="brain-label" x="435" y="350" data-for="cerebellum">Cerebellum</text>
+
+              <!-- Spinal cord indicator -->
+              <line x1="330" y1="420" x2="325" y2="435" stroke="var(--ds-warm-gray-300)" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+
+          </div>
+        </div>
+
+        <!-- Condition info panel (appears below brain when condition selected) -->
+        <div class="condition-panel" id="conditionPanel" style="display:none;"></div>
+      </div>
+
+      <!-- Right: Detail Panel -->
+      <div class="detail-panel">
+        <div class="detail-card" id="detailCard">
+          <div id="detailContent">
+            <div class="detail-empty">
+              <div class="detail-empty__icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+              </div>
+              <div class="detail-empty__title">Select a brain region</div>
+              <div class="detail-empty__desc">Click or tap any highlighted area on the brain to learn about that region and its role in mental health.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       BRAIN-BODY CONNECTION
+       ============================================================ -->
+  <section style="background: var(--ds-page-bg-alt); padding: var(--ds-space-12) 0;">
+    <div class="section-header-neuro">
+      <h2 class="section-header-neuro__title">Brain-Body Connection</h2>
+    </div>
+    <div class="body-connection">
+      <div class="body-connection__grid">
+
+        <!-- Stress Response -->
+        <div class="pathway-card">
+          <div class="pathway-card__icon" style="background: var(--ds-status-warning-bg); color: var(--ds-warning-600);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <div class="pathway-card__title">Stress Response (HPA Axis)</div>
+          <div class="pathway-card__desc" data-client="When you feel stressed, your brain sends a signal that releases the stress hormone cortisol. This affects your whole body." data-clinician="The hypothalamic-pituitary-adrenal axis mediates the neuroendocrine stress response. Chronic activation leads to cortisol dysregulation with downstream systemic effects.">When you feel stressed, your brain sends a signal that releases the stress hormone cortisol. This affects your whole body.</div>
+          <div class="pathway-flow">
+            <div class="pathway-step"><div class="pathway-step__icon">&#129504;</div> Hypothalamus detects threat</div>
+            <div class="pathway-arrow">&#8595;</div>
+            <div class="pathway-step"><div class="pathway-step__icon">&#9883;</div> Releases CRH &rarr; Pituitary releases ACTH</div>
+            <div class="pathway-arrow">&#8595;</div>
+            <div class="pathway-step"><div class="pathway-step__icon">&#128167;</div> Adrenal glands release cortisol</div>
+            <div class="pathway-arrow">&#8595;</div>
+            <div class="pathway-step"><div class="pathway-step__icon">&#10084;</div> Heart rate, blood pressure, digestion, immunity, sleep all affected</div>
+          </div>
+        </div>
+
+        <!-- Anxiety Pathway -->
+        <div class="pathway-card">
+          <div class="pathway-card__icon" style="background: var(--ds-status-danger-bg); color: var(--ds-danger-600);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg>
+          </div>
+          <div class="pathway-card__title">Anxiety &amp; the Nervous System</div>
+          <div class="pathway-card__desc" data-client="When your brain's alarm center (amygdala) fires too often, it triggers your body's fight-or-flight response, causing the physical symptoms of anxiety." data-clinician="Amygdala hyperactivation engages the sympathetic nervous system via locus coeruleus noradrenergic projections, producing autonomic arousal symptoms characteristic of anxiety disorders.">When your brain's alarm center (amygdala) fires too often, it triggers your body's fight-or-flight response, causing the physical symptoms of anxiety.</div>
+          <div class="pathway-flow">
+            <div class="pathway-step"><div class="pathway-step__icon">&#128680;</div> Amygdala sounds the alarm</div>
+            <div class="pathway-arrow">&#8595;</div>
+            <div class="pathway-step"><div class="pathway-step__icon">&#9889;</div> Sympathetic nervous system activates</div>
+            <div class="pathway-arrow">&#8595;</div>
+            <div class="pathway-step"><div class="pathway-step__icon">&#128147;</div> Racing heart, rapid breathing, sweating</div>
+            <div class="pathway-arrow">&#8595;</div>
+            <div class="pathway-step"><div class="pathway-step__icon">&#129760;</div> Muscle tension, stomach upset, dizziness</div>
+          </div>
+        </div>
+
+        <!-- Depression Pathway -->
+        <div class="pathway-card">
+          <div class="pathway-card__icon" style="background: var(--ds-status-info-bg); color: var(--ds-info-600);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          </div>
+          <div class="pathway-card__title">Depression &amp; the Body</div>
+          <div class="pathway-card__desc" data-client="When brain chemicals like serotonin and dopamine are out of balance, it doesn't just affect your mood. It affects your energy, sleep, appetite, and even your ability to feel pleasure." data-clinician="Monoamine deficiency (5-HT, DA, NE) disrupts prefrontal-limbic circuits, producing neurovegetative symptoms. Inflammatory cytokine elevation and HPA axis hyperactivation contribute to somatic symptom burden.">When brain chemicals like serotonin and dopamine are out of balance, it doesn't just affect your mood. It affects your energy, sleep, appetite, and even your ability to feel pleasure.</div>
+          <div class="pathway-flow">
+            <div class="pathway-step"><div class="pathway-step__icon">&#128300;</div> Serotonin &amp; dopamine levels drop</div>
+            <div class="pathway-arrow">&#8595;</div>
+            <div class="pathway-step"><div class="pathway-step__icon">&#128164;</div> Sleep disrupted (too much or too little)</div>
+            <div class="pathway-arrow">&#8595;</div>
+            <div class="pathway-step"><div class="pathway-step__icon">&#127829;</div> Appetite changes (increase or decrease)</div>
+            <div class="pathway-arrow">&#8595;</div>
+            <div class="pathway-step"><div class="pathway-step__icon">&#128546;</div> Low energy, loss of motivation and pleasure</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       NEUROTRANSMITTER QUICK REFERENCE
+       ============================================================ -->
+  <section style="padding: var(--ds-space-12) 0;">
+    <div class="section-header-neuro">
+      <h2 class="section-header-neuro__title">Neurotransmitter Quick Reference</h2>
+    </div>
+    <div class="nt-section">
+      <div class="nt-grid" id="ntGrid">
+        <!-- Populated by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       PRINT BAR
+       ============================================================ -->
+  <div class="print-bar">
+    <button class="ds-btn ds-btn--secondary ds-btn--lg" onclick="window.print()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      Print This View
+    </button>
+  </div>
+
+</main>
+
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="ds-container">
+    <div class="footer__grid">
+      <div>
+        <a href="index.html" class="site-nav__logo" style="text-decoration:none">
+          <div class="site-nav__logo-mark">NH</div>
+          <span class="site-nav__logo-text">MH Resources</span>
+        </a>
+        <p class="footer__brand-desc">A comprehensive resource hub for clinicians, case managers, and community members in the Greater Nashua area.</p>
+        <div class="footer__crisis-box">
+          <div class="footer__crisis-title">Crisis? Get help now.</div>
+          <div class="footer__crisis-numbers">
+            <strong>988</strong> Suicide &amp; Crisis Lifeline<br>
+            <strong>1-833-710-6477</strong> NH Rapid Response<br>
+            <strong>(603) 889-6147</strong> GNMHC Crisis<br>
+            <strong>Text HOME to 741741</strong>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="footer__col-title">Navigate</div>
+        <ul class="footer__links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="tools.html">Clinical Tools</a></li>
+          <li><a href="guide.html">Guides</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer__col-title">Quick Access</div>
+        <ul class="footer__links">
+          <li><a href="tools.html#screening-tools">Screening Tools</a></li>
+          <li><a href="tools.html#clinical-note-builder">Note Builder</a></li>
+          <li><a href="guide.html#crisisTree">Crisis Tree</a></li>
+          <li><a href="resources.html#housing">Housing Resources</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer__col-title">Clinical</div>
+        <ul class="footer__links">
+          <li><a href="tools.html#cbt">CBT Worksheets</a></li>
+          <li><a href="tools.html#dbt">DBT Handouts</a></li>
+          <li><a href="tools.html#cpt-reference">CPT Codes</a></li>
+          <li><a href="tools.html#safety-plan-builder">Safety Planning</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="footer__disclaimer">
+        For informational purposes only. This resource does not replace clinical judgment, supervision, or direct consultation. Contact information and services may change; always verify by contacting organizations directly.
+      </div>
+      <div class="footer__meta">
+        <span><span class="footer__status-dot"></span> Updated Jun 24, 2026</span>
+        <span style="color: var(--ds-text-muted); font-size: 11px;">v4.0</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script>
+(function() {
+  'use strict';
+
+  // ================================================================
+  // DATA: Brain Regions
+  // ================================================================
+  var REGIONS = {
+    pfc: {
+      name: 'Prefrontal Cortex',
+      location: 'Front of the brain, behind the forehead',
+      color: '#8ec4ae',
+      clientDesc: {
+        role: 'This is your brain\'s "CEO." It helps you make decisions, plan ahead, control impulses, and manage your emotions. It\'s what helps you pause before reacting.',
+        dysregulated: 'When this area isn\'t working well, you might have trouble concentrating, making decisions, controlling impulses, or managing your emotions.',
+        conditions: 'Depression, ADHD, Addiction, Bipolar Disorder, Schizophrenia'
+      },
+      clinicianDesc: {
+        role: 'Executive functioning hub: working memory, cognitive flexibility, planning, decision-making, impulse inhibition, and top-down emotional regulation via connections to limbic structures. Dorsolateral PFC mediates cognitive control; ventromedial PFC integrates emotion with decision-making; orbitofrontal cortex processes reward valuation.',
+        dysregulated: 'Hypoactivation: impaired executive function, poor impulse control, anhedonia, psychomotor retardation. Hyperactivation in OFC: rumination, compulsive behaviors. Reduced gray matter volume observed in MDD, ADHD, and SUD. Disrupted PFC-amygdala connectivity is a transdiagnostic finding.',
+        conditions: 'MDD (hypoactivation, reduced volume), ADHD (delayed maturation, hypoactivation), SUD (impaired inhibitory control), Bipolar (state-dependent activation changes), Schizophrenia (hypofrontality), OCD (OFC hyperactivation)'
+      }
+    },
+    acc: {
+      name: 'Anterior Cingulate Cortex',
+      location: 'Top-center of the brain, wrapping around the corpus callosum',
+      color: '#5ea68b',
+      clientDesc: {
+        role: 'This region acts like an error detector. It notices when something is "off" -- when there\'s a conflict between what you expect and what happens. It also helps connect your thinking brain with your emotional brain.',
+        dysregulated: 'When it\'s overactive, you might get stuck on mistakes or feel overwhelmed by conflicting signals. When underactive, you might not notice important emotional cues.',
+        conditions: 'Depression, OCD, PTSD, Anxiety'
+      },
+      clinicianDesc: {
+        role: 'Error detection, conflict monitoring, and cognitive-affective integration. Dorsal ACC (dACC) mediates cognitive control and error processing; subgenual ACC (sgACC/BA25) integrates autonomic, emotional, and reward processing. Key hub in the salience network (with anterior insula).',
+        dysregulated: 'dACC hyperactivation in OCD (excessive error signaling). sgACC hypermetabolism in treatment-resistant depression (target for DBS). Reduced ACC volume in PTSD. Abnormal ACC-amygdala connectivity in anxiety disorders. ACC hypoactivation correlates with apathy and motivational deficits.',
+        conditions: 'MDD (sgACC hyperactivation, DBS target), OCD (dACC hyperactivation), PTSD (reduced volume, altered connectivity), GAD (hyperactivation during worry), ADHD (hypoactivation during cognitive control tasks)'
+      }
+    },
+    insula: {
+      name: 'Insula',
+      location: 'Deep within the lateral sulcus, between temporal and frontal lobes',
+      color: '#f1ae54',
+      clientDesc: {
+        role: 'The insula is your brain\'s body awareness center. It helps you notice internal body signals -- like a racing heart, a "gut feeling," or the sensation of hunger. It helps you understand what you\'re feeling emotionally by reading your body.',
+        dysregulated: 'When overactive, you may become hyper-aware of every body sensation, leading to health anxiety or panic. When underactive, you might feel disconnected from your body or emotions.',
+        conditions: 'Anxiety, PTSD, Addiction, Eating Disorders'
+      },
+      clinicianDesc: {
+        role: 'Interoceptive awareness and integration of bodily signals with emotional states. Anterior insula (AI) is a key node in the salience network; mediates subjective feeling states, risk assessment, empathy, and disgust processing. Posterior insula processes primary interoceptive signals.',
+        dysregulated: 'AI hyperactivation: heightened interoceptive sensitivity (panic disorder, GAD, somatic symptom disorders). Altered insula activation in SUD (disrupted interoceptive error signaling for craving). Insula-amygdala hyperconnectivity in PTSD. Reduced insular gray matter in schizophrenia.',
+        conditions: 'GAD (heightened interoceptive prediction error), Panic Disorder (interoceptive hypersensitivity), SUD (craving and interoceptive awareness), PTSD (body-based re-experiencing), Eating Disorders (disrupted hunger/satiety signaling)'
+      }
+    },
+    amygdala: {
+      name: 'Amygdala',
+      location: 'Deep in the medial temporal lobe, almond-shaped',
+      color: '#f48e6e',
+      clientDesc: {
+        role: 'This is your brain\'s alarm system. It quickly detects threats and triggers your fight-or-flight response. It also helps create strong emotional memories -- which is why frightening experiences are so hard to forget.',
+        dysregulated: 'When overactive, it can make you feel constantly on edge, as if danger is everywhere even when you\'re safe. This drives anxiety, panic attacks, and flashbacks.',
+        conditions: 'Anxiety, PTSD, Depression, Phobias, Bipolar Disorder'
+      },
+      clinicianDesc: {
+        role: 'Rapid threat detection and emotional memory consolidation. Basolateral amygdala (BLA) receives sensory input and assigns emotional valence; central amygdala (CeA) orchestrates autonomic/behavioral fear responses via brainstem projections. Critical for fear conditioning and extinction learning.',
+        dysregulated: 'Hyperactivation: exaggerated threat processing (GAD, PTSD, social anxiety, specific phobias). Impaired fear extinction (PTSD). Increased amygdala volume in early anxiety; decreased volume with chronic stress. Reduced PFC-amygdala inhibitory connectivity is a core finding in anxiety and mood disorders.',
+        conditions: 'GAD (hyperactivation to ambiguous stimuli), PTSD (hyperactivation, impaired extinction), MDD (negative valence bias), Social Anxiety (face-processing hyperreactivity), Bipolar (state-dependent amygdala reactivity), Specific Phobias'
+      }
+    },
+    hippocampus: {
+      name: 'Hippocampus',
+      location: 'Medial temporal lobe, seahorse-shaped',
+      color: '#7daed3',
+      clientDesc: {
+        role: 'The hippocampus is your brain\'s memory center. It helps form new memories and puts experiences into context -- it helps you understand that a loud noise at a party is different from a loud noise signaling danger.',
+        dysregulated: 'When it shrinks or isn\'t working well (which chronic stress can cause), you may have trouble forming new memories, feel confused about time and place, or struggle to tell the difference between past trauma and present safety.',
+        conditions: 'PTSD, Depression, Alzheimer\'s Disease, Chronic Stress'
+      },
+      clinicianDesc: {
+        role: 'Episodic memory encoding and consolidation, spatial navigation, and contextual fear processing. Provides contextual modulation of amygdala-driven fear responses (distinguishing safe vs. threatening contexts). Supports pattern separation and completion. Contains high density of glucocorticoid receptors.',
+        dysregulated: 'Volume reduction: chronic stress-induced dendritic retraction and suppressed neurogenesis (MDD, PTSD, chronic CORT exposure). Impaired contextual discrimination (PTSD -- inability to distinguish safe contexts from trauma-associated cues). Hippocampal atrophy correlates with depression duration and trauma severity. Responds to SSRI treatment and exercise with increased neurogenesis.',
+        conditions: 'MDD (reduced volume, impaired neurogenesis), PTSD (volume reduction, contextual processing deficits), GAD (impaired safety signaling), Schizophrenia (reduced volume, pattern separation deficits), Alzheimer\'s (early neurodegeneration site)'
+      }
+    },
+    hypothalamus: {
+      name: 'Hypothalamus',
+      location: 'Base of the brain, below the thalamus',
+      color: '#64ab73',
+      clientDesc: {
+        role: 'Think of this as your brain\'s thermostat for the body. It controls the stress hormone system (HPA axis), regulates body temperature, hunger, thirst, sleep cycles, and links your brain to the hormone system.',
+        dysregulated: 'When dysregulated, it can cause disrupted sleep, appetite changes, hormonal imbalances, and a stress response that\'s either stuck "on" or burned out.',
+        conditions: 'Depression, Eating Disorders, Sleep Disorders, Chronic Stress'
+      },
+      clinicianDesc: {
+        role: 'Master neuroendocrine regulator: HPA axis initiation (CRH release), autonomic nervous system modulation, circadian rhythm regulation (suprachiasmatic nucleus), thermoregulation, and appetitive drive. Paraventricular nucleus integrates stress signals; lateral hypothalamus mediates arousal and feeding.',
+        dysregulated: 'HPA axis hyperactivation with impaired negative feedback (MDD, PTSD). Dysregulated CRH signaling (anxiety, melancholic depression). Circadian disruption (mood disorders, insomnia). Appetite dysregulation (atypical vs. melancholic depression). Elevated cortisol with hippocampal neurotoxicity in chronic stress.',
+        conditions: 'MDD (HPA hyperactivation, cortisol dysregulation), PTSD (altered cortisol rhythms), GAD (autonomic hyperarousal), Eating Disorders (appetite signaling disruption), Insomnia (SCN dysfunction), Bipolar (circadian rhythm disruption)'
+      }
+    },
+    nacc: {
+      name: 'Nucleus Accumbens',
+      location: 'Ventral striatum, deep in the forebrain',
+      color: '#ea8585',
+      clientDesc: {
+        role: 'This is your brain\'s reward center. It lights up when you experience something pleasurable and drives your motivation to seek out rewarding things. It\'s why food, social connection, and accomplishments feel good.',
+        dysregulated: 'In depression, this area becomes less responsive, making it hard to feel pleasure (anhedonia). In addiction, it becomes hijacked by substances, making them feel more rewarding than natural pleasures.',
+        conditions: 'Addiction, Depression, ADHD, Bipolar Disorder'
+      },
+      clinicianDesc: {
+        role: 'Central node of the mesolimbic dopamine reward circuit. Integrates reward prediction, motivation, and reinforcement learning. Receives dopaminergic projections from VTA; glutamatergic input from PFC, hippocampus, and amygdala. Shell subregion mediates hedonic impact; core mediates incentive salience and motivated behavior.',
+        dysregulated: 'Hypoactivation: anhedonia, amotivation (MDD, schizophrenia negative symptoms). Sensitization: substance-induced dopamine surges produce neuroplastic changes supporting compulsive drug-seeking (SUD). Reward prediction error abnormalities in ADHD. Elevated activity during manic episodes.',
+        conditions: 'SUD (dopamine sensitization, hijacked reward learning), MDD (blunted reward response, anhedonia), ADHD (altered reward processing, delay aversion), Bipolar (elevated reward sensitivity in mania), Schizophrenia (reward processing deficits contributing to negative symptoms)'
+      }
+    },
+    thalamus: {
+      name: 'Thalamus',
+      location: 'Central brain, between cerebral cortex and midbrain',
+      color: '#e6af42',
+      clientDesc: {
+        role: 'The thalamus is your brain\'s relay station. Almost all sensory information (sight, sound, touch, taste) passes through it on the way to the rest of the brain. It also plays a role in consciousness, sleep, and alertness.',
+        dysregulated: 'When it doesn\'t filter information properly, you might feel overwhelmed by sensory input, have trouble sleeping, or experience perceptual disturbances like hallucinations.',
+        conditions: 'Schizophrenia, PTSD, Sleep Disorders'
+      },
+      clinicianDesc: {
+        role: 'Thalamocortical relay and sensory gating hub. All sensory modalities except olfaction synapse here before cortical processing. Reticular nucleus provides inhibitory gating (sensory filtering). Mediodorsal nucleus connects to PFC; pulvinar to association cortex. Critical for arousal regulation, attention, and consciousness.',
+        dysregulated: 'Sensory gating deficits: thalamic filtering failure may underlie hallucinations and perceptual abnormalities (schizophrenia). Thalamocortical dysrhythmia model links altered thalamic oscillations to tinnitus, chronic pain, and neuropsychiatric symptoms. Hyperactivation during flashbacks (PTSD). Sleep spindle abnormalities in insomnia.',
+        conditions: 'Schizophrenia (thalamic volume reduction, sensory gating failure), PTSD (sensory processing abnormalities), Sleep Disorders (thalamocortical dysrhythmia), Absence Epilepsy (thalamocortical spike-wave), Chronic Pain (thalamic sensitization)'
+      }
+    },
+    brainstem: {
+      name: 'Brain Stem',
+      location: 'Base of the brain, connecting to the spinal cord',
+      color: '#b0a69c',
+      clientDesc: {
+        role: 'The brain stem handles the basics that keep you alive: breathing, heart rate, blood pressure, and your sleep-wake cycle. It\'s also home to the fight-flight-freeze response and produces several key brain chemicals.',
+        dysregulated: 'When dysregulated, you might experience panic attacks (sudden activation), sleep problems, or a "freeze" response where you feel paralyzed or numb during stress.',
+        conditions: 'Panic Disorder, PTSD, Sleep Disorders'
+      },
+      clinicianDesc: {
+        role: 'Houses critical monoamine nuclei: locus coeruleus (norepinephrine -- arousal, vigilance), raphe nuclei (serotonin -- mood, sleep regulation), ventral tegmental area (dopamine -- reward, motivation). Periaqueductal gray mediates defensive behaviors (fight/flight/freeze). Reticular activating system regulates consciousness and sleep-wake transitions.',
+        dysregulated: 'LC hyperactivation: hyperarousal, hypervigilance, exaggerated startle (PTSD, panic disorder). Raphe nuclei dysfunction: serotonergic deficits across mood and anxiety disorders. PAG-mediated freeze/dissociative responses in severe PTSD. Altered RAS function in sleep-wake disorders.',
+        conditions: 'PTSD (LC hyperactivation, PAG freeze response), Panic Disorder (LC activation, respiratory center sensitivity), MDD (raphe serotonergic dysfunction), Narcolepsy (orexin system), Insomnia (RAS dysregulation)'
+      }
+    },
+    cerebellum: {
+      name: 'Cerebellum',
+      location: 'Back and bottom of the brain',
+      color: '#a8c9e2',
+      clientDesc: {
+        role: 'While known for coordinating movement and balance, the cerebellum also plays a role in emotional processing, language, and cognition. It helps "fine-tune" emotional responses, similar to how it fine-tunes motor movements.',
+        dysregulated: 'Research is still emerging, but cerebellar dysfunction may contribute to emotional dysregulation, cognitive difficulties, and the processing speed issues seen in several mental health conditions.',
+        conditions: 'ADHD, Autism, Schizophrenia'
+      },
+      clinicianDesc: {
+        role: 'Beyond motor coordination, the cerebellar vermis and posterior lobe contribute to emotional regulation, cognitive processing, and timing. Cerebellar projections to PFC, limbic structures, and association cortices via cerebello-thalamo-cortical circuits support "cerebellar cognitive affective syndrome" (Schmahmann).',
+        dysregulated: 'Volume and structural abnormalities in ADHD (reduced vermis volume), autism (Purkinje cell loss, reduced posterior vermis), and schizophrenia (altered cerebellar-cortical connectivity, cognitive dysmetria). Emerging evidence for cerebellar involvement in mood regulation and PTSD.',
+        conditions: 'ADHD (cerebellar volume reduction), Autism Spectrum (Purkinje cell abnormalities), Schizophrenia (cognitive dysmetria, cerebellar-thalamic-cortical circuit disruption), MDD (emerging -- emotion timing), PTSD (emerging -- procedural aspects of trauma processing)'
+      }
+    }
+  };
+
+
+  // ================================================================
+  // DATA: Conditions
+  // ================================================================
+  var CONDITIONS = {
+    depression: {
+      name: 'Major Depressive Disorder (MDD)',
+      regions: {
+        pfc: 'primary',
+        amygdala: 'primary',
+        hippocampus: 'primary',
+        nacc: 'primary',
+        acc: 'secondary',
+        hypothalamus: 'secondary',
+        insula: 'secondary',
+        brainstem: 'tertiary',
+        thalamus: 'tertiary'
+      },
+      clientDesc: 'Depression isn\'t just "feeling sad." It involves real changes in how the brain works. The front of the brain (which helps with motivation and decision-making) becomes less active, while the emotional alarm system can become overactive. The brain\'s reward center struggles to respond to pleasurable things. Chronic stress can also cause the memory center to shrink.',
+      clinicianDesc: 'MDD involves PFC hypoactivation (reduced executive function, psychomotor retardation), amygdala hyperactivation (negative valence bias, emotional reactivity), hippocampal volume reduction (impaired neurogenesis, contextual processing), and NAcc hypoactivation (anhedonia, reward insensitivity). Subgenual ACC (BA25) hypermetabolism is a consistent finding and DBS target. HPA axis dysregulation with elevated cortisol contributes to neuroplastic changes.',
+      neurotransmitters: {
+        client: 'Serotonin (mood chemical -- often too low), dopamine (reward chemical -- reduced), norepinephrine (energy chemical -- imbalanced)',
+        clinician: 'Serotonin: reduced 5-HT synthesis, post-synaptic receptor sensitivity changes, impaired tryptophan metabolism. Dopamine: mesolimbic hypofunction (anhedonia), reduced D2/D3 binding. Norepinephrine: LC dysregulation, reduced prefrontal NE tone. BDNF: reduced expression in hippocampus. Glutamate: emerging role via NMDA-receptor modulation (ketamine mechanism).'
+      },
+      treatments: {
+        client: 'SSRIs boost serotonin levels. Therapy (especially CBT) helps retrain the thinking brain to regulate emotions. Exercise promotes growth of new brain cells in the memory center. SNRIs target both serotonin and norepinephrine.',
+        clinician: 'SSRIs (5-HT reuptake inhibition, downstream BDNF upregulation, hippocampal neurogenesis). SNRIs (dual 5-HT/NE reuptake). Bupropion (DA/NE -- targeting anhedonia). CBT/BA (PFC-mediated top-down regulation, behavioral reward exposure). ECT (broad neuroplastic effects, sgACC normalization). Ketamine/esketamine (rapid glutamatergic synaptogenesis via AMPA potentiation). Exercise (BDNF upregulation, hippocampal neurogenesis). TMS (DLPFC stimulation normalizing prefrontal-limbic connectivity).'
+      }
+    },
+    anxiety: {
+      name: 'Generalized Anxiety Disorder (GAD)',
+      regions: {
+        amygdala: 'primary',
+        acc: 'primary',
+        insula: 'primary',
+        pfc: 'secondary',
+        hippocampus: 'secondary',
+        hypothalamus: 'secondary',
+        brainstem: 'secondary',
+        thalamus: 'tertiary'
+      },
+      clientDesc: 'In anxiety, your brain\'s alarm system (amygdala) is set on "high alert" -- it overreacts to situations that aren\'t actually dangerous. Meanwhile, the front of your brain, which should calm down the alarm, has trouble doing its job. You might notice your body is always tense because the brain keeps sending "danger" signals.',
+      clinicianDesc: 'GAD involves amygdala hyperactivation to ambiguous/uncertain stimuli, anterior insula hyperactivation (heightened interoceptive prediction errors driving somatic anxiety), and ACC hyperactivation during worry and uncertainty processing. PFC regulatory capacity is compromised (impaired top-down inhibition of amygdala). Hippocampal dysfunction impairs contextual safety signaling. Autonomic hyperarousal via hypothalamic and brainstem (LC) activation.',
+      neurotransmitters: {
+        client: 'GABA (the brain\'s natural calming chemical -- often too low), serotonin (mood and worry -- often imbalanced), norepinephrine (alertness -- often too high)',
+        clinician: 'GABA: reduced GABAergic inhibition in amygdala and cortex (benzodiazepine receptor alterations). Serotonin: 5-HT1A receptor downregulation in raphe and limbic structures. Norepinephrine: LC hyperactivation producing hyperarousal and hypervigilance. CRH: elevated CRH signaling in central amygdala. Glutamate: excitatory-inhibitory imbalance in prefrontal-amygdala circuits.'
+      },
+      treatments: {
+        client: 'SSRIs help rebalance serotonin. Benzodiazepines boost GABA (the calming chemical) for short-term relief. CBT teaches the thinking brain to reality-check the alarm system. Mindfulness helps reduce the brain\'s reactivity to worry.',
+        clinician: 'SSRIs/SNRIs (first-line: 5-HT modulation reduces amygdala reactivity, enhances PFC regulation). Buspirone (5-HT1A partial agonist). Benzodiazepines (GABA-A PAMs -- short-term, rapid anxiolysis; dependence risk). Pregabalin (voltage-gated calcium channel modulation). CBT (exposure-based PFC strengthening, worry habituation). ACT/MBCT (insular decentering, metacognitive awareness). HRV biofeedback (vagal tone enhancement, autonomic regulation).'
+      }
+    },
+    ptsd: {
+      name: 'Post-Traumatic Stress Disorder (PTSD)',
+      regions: {
+        amygdala: 'primary',
+        hippocampus: 'primary',
+        pfc: 'primary',
+        acc: 'secondary',
+        brainstem: 'secondary',
+        insula: 'secondary',
+        hypothalamus: 'secondary',
+        thalamus: 'tertiary'
+      },
+      clientDesc: 'After a traumatic experience, the brain can get "stuck" in threat mode. The alarm system stays overactive, while the part of the brain that processes memories can\'t properly file the trauma away as "past." This is why triggers can make you feel like the trauma is happening right now, not in the past.',
+      clinicianDesc: 'PTSD is characterized by amygdala hyperactivation (exaggerated threat detection, impaired fear extinction), hippocampal hypoactivation and volume reduction (failed contextual discrimination -- inability to distinguish safe contexts from threat-associated contexts, fragmented traumatic memory consolidation), and medial PFC (vmPFC) hypoactivation (impaired top-down inhibition of amygdala). The brainstem PAG mediates freeze/dissociative responses. ACC (dACC) shows altered error monitoring. Thalamic sensory gating failures contribute to flashback phenomenology.',
+      neurotransmitters: {
+        client: 'Norepinephrine (the stress/alertness chemical -- stuck on high), cortisol (stress hormone -- can be either too high or too low), serotonin (mood chemical -- disrupted)',
+        clinician: 'Norepinephrine: LC hyperactivation, elevated central NE driving hyperarousal, hypervigilance, and exaggerated startle. Cortisol: variable findings -- HPA axis sensitization with lower basal cortisol but exaggerated stress reactivity (enhanced negative feedback). Serotonin: 5-HT system dysregulation (SSRIs effective). Endocannabinoids: reduced eCB signaling (impaired fear extinction). GABA: reduced GABAergic inhibition in amygdala. Neuropeptide Y: reduced NPY associated with stress vulnerability.'
+      },
+      treatments: {
+        client: 'Trauma-focused therapy (CPT, PE, EMDR) helps the brain reprocess traumatic memories so they can be properly "filed away." SSRIs help regulate mood and reduce reactivity. Prazosin can help with trauma-related nightmares by reducing the alertness chemical at night.',
+        clinician: 'Trauma-focused psychotherapy: PE (amygdala habituation via prolonged exposure), CPT (cognitive restructuring of trauma appraisals), EMDR (bilateral stimulation during trauma reprocessing -- possibly enhancing reconsolidation). Pharmacotherapy: SSRIs/SNRIs (first-line: sertraline, paroxetine FDA-approved). Prazosin (alpha-1 antagonist for trauma nightmares -- LC NE blockade). Propranolol (reconsolidation disruption, investigational). MDMA-assisted psychotherapy (enhanced fear extinction, therapeutic alliance -- FDA breakthrough therapy). Stellate ganglion block (sympathetic chain interruption, investigational).'
+      }
+    },
+    adhd: {
+      name: 'Attention-Deficit/Hyperactivity Disorder (ADHD)',
+      regions: {
+        pfc: 'primary',
+        nacc: 'primary',
+        cerebellum: 'secondary',
+        acc: 'secondary',
+        thalamus: 'tertiary',
+        amygdala: 'tertiary'
+      },
+      clientDesc: 'ADHD isn\'t about laziness or a lack of intelligence. The front of the brain, which manages attention and impulse control, develops more slowly and works differently. The reward center also responds differently, which is why people with ADHD often need things to be more stimulating or immediate to feel motivated.',
+      clinicianDesc: 'ADHD involves delayed PFC maturation (cortical thinning trajectory, reduced DLPFC activation during cognitive control tasks), altered fronto-striatal dopamine signaling (NAcc reward prediction error abnormalities, delay aversion), and cerebellar volumetric reductions (timing and motor coordination). ACC hypoactivation during conflict monitoring tasks. Fronto-parietal attention network dysfunction. Default mode network (DMN) interference with task-positive networks.',
+      neurotransmitters: {
+        client: 'Dopamine (the reward and focus chemical -- not available in the right amounts in the front of the brain), norepinephrine (attention and alertness chemical -- also imbalanced)',
+        clinician: 'Dopamine: reduced DA tone in PFC (catechol-O-methyltransferase activity), altered DAT density in striatum. PFC operates on inverted-U dose-response for DA -- both too little and too much impair function. Norepinephrine: suboptimal alpha-2A adrenergic signaling in PFC (basis for guanfacine, atomoxetine mechanisms). Dopamine transporter (DAT) overexpression in striatum is primary stimulant target.'
+      },
+      treatments: {
+        client: 'Stimulant medications (like Adderall or Ritalin) work by boosting dopamine and norepinephrine in the front of the brain, helping it work more effectively. Non-stimulant options target norepinephrine. Behavioral strategies and environmental modifications complement medication.',
+        clinician: 'Stimulants: methylphenidate (DAT/NET blockade), amphetamines (DA/NE release + reuptake inhibition). Both optimize PFC catecholamine signaling on inverted-U curve. Non-stimulants: atomoxetine (selective NRI -- PFC NE enhancement), guanfacine (alpha-2A agonist -- PFC postsynaptic signaling), viloxazine (NRI with 5-HT modulation). Bupropion (off-label: DA/NE). CBT adapted for ADHD (executive function scaffolding). Neurofeedback (investigational: SMR/theta-beta ratio training). Exercise (acute DA/NE release, BDNF).'
+      }
+    },
+    addiction: {
+      name: 'Addiction / Substance Use Disorder',
+      regions: {
+        nacc: 'primary',
+        pfc: 'primary',
+        amygdala: 'secondary',
+        hippocampus: 'secondary',
+        hypothalamus: 'secondary',
+        insula: 'secondary',
+        brainstem: 'tertiary'
+      },
+      clientDesc: 'Addiction changes the brain\'s reward system. Substances flood the reward center with much more dopamine than natural rewards ever could, essentially "hijacking" it. Over time, the brain adjusts, making it harder to feel pleasure from normal activities and weakening the front brain\'s ability to say "no."',
+      clinicianDesc: 'SUD involves mesolimbic dopamine sensitization (VTA-NAcc pathway: substance-induced DA surges produce long-term potentiation in reward circuits), PFC hypofunction (impaired inhibitory control, compulsive drug-seeking despite negative consequences), and amygdala-driven negative reinforcement (withdrawal-related negative affect states). Hippocampal contextual conditioning drives cue-triggered relapse. Insular interoceptive signaling mediates craving. Allostatic load model: progression from impulsive (binge/intoxication) to compulsive (withdrawal/negative affect) to habitual (preoccupation/craving) stages.',
+      neurotransmitters: {
+        client: 'Dopamine (reward chemical -- becomes hijacked by substances, requiring more and more to feel the same effect), GABA (calming chemical -- affected by alcohol and benzodiazepines), endorphins (natural painkillers -- activated by opioids), glutamate (learning chemical -- helps form strong substance-associated memories)',
+        clinician: 'Dopamine: acute DA surges (especially stimulants, nicotine); chronic use reduces D2/D3 receptor availability (reward deficit state). Glutamate: substance cue-induced glutamate release from PFC to NAcc drives reinstatement; mGluR5/NMDA plasticity changes. GABA: alcohol/benzodiazepine GABA-A modulation; GABAergic interneuron adaptations. Opioid system: mu-opioid receptor agonism (opioids); endogenous opioid system dysregulation. Endocannabinoids: CB1 modulation of reward circuits. CRH/dynorphin: extended amygdala stress systems in negative reinforcement.'
+      },
+      treatments: {
+        client: 'Medications can reduce cravings (naltrexone), ease withdrawal (buprenorphine), or make substances less rewarding. Therapy (CBT, motivational interviewing) helps rebuild the thinking brain\'s control over the reward system. Recovery involves retraining the brain to find pleasure in healthy activities again.',
+        clinician: 'Alcohol: naltrexone (mu-opioid antagonist -- reduces reward), acamprosate (glutamatergic normalization), disulfiram (aversive conditioning). Opioids: buprenorphine (partial mu agonist -- occupancy therapy), methadone (full agonist maintenance), naltrexone XR. Nicotine: varenicline (alpha4beta2 nAChR partial agonist), NRT, bupropion. Stimulants: no FDA-approved pharmacotherapy; contingency management has strongest evidence. CBT-based relapse prevention, MI/MET, 12-step facilitation. Emerging: psilocybin-assisted therapy (SUD), ibogaine (investigational), DBS (NAcc, investigational), TMS (DLPFC -- craving reduction).'
+      }
+    },
+    bipolar: {
+      name: 'Bipolar Disorder',
+      regions: {
+        pfc: 'primary',
+        amygdala: 'primary',
+        nacc: 'secondary',
+        acc: 'secondary',
+        hippocampus: 'secondary',
+        hypothalamus: 'tertiary',
+        thalamus: 'tertiary'
+      },
+      clientDesc: 'In bipolar disorder, the brain swings between two states. During mania, the reward center becomes overactive and the "brakes" (prefrontal cortex) weaken, leading to impulsive, high-energy behavior. During depression, the pattern reverses -- the reward center goes quiet and motivation drops. The emotional center (amygdala) is unstable throughout.',
+      clinicianDesc: 'Bipolar disorder involves state-dependent prefrontal-limbic circuit dysregulation. Mania: PFC hypoactivation (impaired inhibitory control), NAcc hyperactivation (elevated reward sensitivity, goal-directed hyperactivation), amygdala hyperreactivity. Depression: pattern mirrors unipolar MDD (PFC hypoactivation, NAcc blunting, amygdala negative bias). Trait abnormalities: reduced PFC-amygdala connectivity, white matter tract disruption, circadian rhythm dysregulation (hypothalamic SCN), progressive gray matter loss. Kindling hypothesis: episodes may become self-perpetuating.',
+      neurotransmitters: {
+        client: 'Dopamine (reward chemical -- too high in mania, too low in depression), serotonin (mood chemical -- imbalanced), norepinephrine (energy chemical -- fluctuates with episodes), glutamate (excitation chemical -- may be elevated)',
+        clinician: 'Dopamine: mesolimbic hyperactivation in mania (DA hypothesis), hypofunction in bipolar depression. Glutamate: elevated glutamatergic signaling (excitotoxicity hypothesis), basis for lamotrigine mechanism. Serotonin: 5-HT dysregulation across phases. Norepinephrine: LC-mediated hyperarousal in mania. GABA: reduced cortical GABAergic inhibition. Intracellular signaling: GSK-3beta dysregulation (lithium target), protein kinase C hyperactivation (basis for tamoxifen studies), inositol signaling (lithium\'s phosphoinositide hypothesis), circadian clock gene disruption.'
+      },
+      treatments: {
+        client: 'Mood stabilizers like lithium help even out the brain\'s chemical swings. Anticonvulsants calm overexcited brain circuits. During depressive episodes, certain medications can carefully boost activity without triggering mania.',
+        clinician: 'Mood stabilizers: lithium (GSK-3beta inhibition, inositol monophosphatase inhibition, neuroprotective -- increased gray matter, BDNF). Anticonvulsants: valproate (GABAergic, histone deacetylase inhibition), lamotrigine (glutamate modulation -- depression prophylaxis, sodium channel). Atypical antipsychotics: quetiapine, lurasidone, cariprazine (D2/D3 partial agonism, 5-HT modulation). Bipolar depression: quetiapine, lurasidone, cariprazine, lamotrigine. Lithium anti-suicidal effects. ECT (severe/refractory episodes). Interpersonal and social rhythm therapy (IPSRT: circadian stabilization). CBT adapted for bipolar.'
+      }
+    },
+    ocd: {
+      name: 'Obsessive-Compulsive Disorder (OCD)',
+      regions: {
+        acc: 'primary',
+        pfc: 'primary',
+        thalamus: 'secondary',
+        nacc: 'secondary',
+        amygdala: 'tertiary',
+        insula: 'tertiary'
+      },
+      clientDesc: 'In OCD, the brain\'s error detection system gets stuck in a loop. The part of your brain that notices "something is wrong" (ACC) keeps sending false alarms, and the thinking brain (especially the orbital frontal cortex) can\'t stop cycling through these worry thoughts. Compulsions temporarily quiet the alarm, but the cycle repeats.',
+      clinicianDesc: 'OCD involves cortico-striato-thalamo-cortical (CSTC) circuit hyperactivation. OFC/vmPFC hyperactivation (excessive evaluation of potential harm, "not just right" experiences), dACC hyperactivation (pathological error signaling, heightened sense of incompleteness), and caudate/striatum dysfunction (impaired habit-goal arbitration). Thalamic sensory relay contributes to the reverberating circuit. NAcc involvement reflects reward/relief signaling from compulsion completion. Model: OFC detects potential threat, caudate fails to suppress, thalamus fails to gate, creating a self-sustaining loop.',
+      neurotransmitters: {
+        client: 'Serotonin (mood and anxiety chemical -- disrupted, which is why SSRIs at higher doses can help), glutamate (the brain\'s main excitatory chemical -- may fuel the "stuck" circuits), dopamine (involved in the habit-forming loops)',
+        clinician: 'Serotonin: 5-HT dysfunction (basis for SSRI efficacy -- higher doses required than for MDD, suggesting different mechanism, possibly 5-HT modulation of CSTC circuit). Glutamate: hyperglutamatergic state in CSTC circuit (basis for memantine, NAC augmentation trials, riluzole investigations). Dopamine: D2 receptor involvement in striatal components (basis for antipsychotic augmentation). GABA: potential GABAergic deficits contributing to cortical disinhibition.'
+      },
+      treatments: {
+        client: 'ERP (Exposure and Response Prevention) is the gold-standard therapy -- it helps the brain learn that the feared outcome doesn\'t happen even without the compulsion. SSRIs at higher doses help reduce the intensity of the obsessive thoughts. For severe cases, deep brain stimulation is an option.',
+        clinician: 'First-line: ERP (systematic habituation/inhibitory learning targeting CSTC circuit dysregulation; gold-standard evidence base). SSRIs at OCD-range doses (fluoxetine 40-80mg, sertraline 200mg, fluvoxamine 300mg). Clomipramine (most potent SRI but SE profile limits use). Augmentation: low-dose antipsychotics (aripiprazole, risperidone -- D2 striatal modulation). Emerging: glutamate modulators (memantine, NAC, ketamine). Neurostimulation: DBS (ventral capsule/ventral striatum, STN -- FDA humanitarian device exemption), TMS (SMA/pre-SMA targeting). Gamma knife capsulotomy (refractory, last resort).'
+      }
+    },
+    psychosis: {
+      name: 'Psychosis / Schizophrenia',
+      regions: {
+        pfc: 'primary',
+        thalamus: 'primary',
+        hippocampus: 'secondary',
+        nacc: 'secondary',
+        acc: 'secondary',
+        amygdala: 'tertiary',
+        cerebellum: 'tertiary',
+        brainstem: 'tertiary'
+      },
+      clientDesc: 'In psychosis, the brain has trouble filtering and organizing information. The relay station (thalamus) lets through too much sensory information, which can create hallucinations. The front of the brain struggles with organized thinking. The reward center may process dopamine differently, leading to unusual beliefs about the significance of everyday events.',
+      clinicianDesc: 'Schizophrenia involves PFC hypofrontality (negative symptoms, cognitive deficits, disorganization), thalamic filtering failure (reticular nucleus dysfunction contributing to sensory flooding and hallucinations), hippocampal pattern separation deficits (reality monitoring failures), and mesolimbic DA hyperactivation (positive symptoms: aberrant salience attribution). Dopamine hypothesis refined: mesolimbic hyperactivation (positive symptoms) with mesocortical hypoactivation (negative/cognitive symptoms). Progressive gray matter loss (accelerated synaptic pruning). White matter disconnection (fronto-temporal, fronto-parietal). Cerebellar-thalamo-cortical circuit disruption (cognitive dysmetria hypothesis). NMDA receptor hypofunction (glutamate hypothesis -- basis for glycine site agonist research).',
+      neurotransmitters: {
+        client: 'Dopamine (the brain chemical most involved -- too active in some pathways causing hallucinations and delusions, not active enough in others causing low motivation), glutamate (excitatory chemical -- may also be involved)',
+        clinician: 'Dopamine: mesolimbic DA hyperactivation (D2 receptor hyperstimulation -- positive symptoms, aberrant salience); mesocortical DA hypofunction (D1 receptor deficit -- negative symptoms, cognitive impairment). Glutamate: NMDA receptor hypofunction on GABAergic interneurons (disinhibition model, basis for PCP/ketamine psychosis model). GABA: reduced cortical GABAergic interneuron (PV+) function, impaired gamma oscillations. Serotonin: 5-HT2A involvement (basis for atypical antipsychotic mechanism, pimavanserin). Acetylcholine: muscarinic receptor dysfunction (basis for xanomeline-trospium).'
+      },
+      treatments: {
+        client: 'Antipsychotic medications work by reducing excess dopamine activity in the pathways that cause hallucinations and delusions. Newer medications also affect serotonin. Therapy (CBT for psychosis) can help manage symptoms. Early treatment leads to better outcomes.',
+        clinician: 'First-generation antipsychotics (FGA: D2 antagonism -- chlorpromazine, haloperidol). Second-generation (SGA: D2/5-HT2A antagonism -- risperidone, olanzapine, quetiapine, aripiprazole [D2 partial agonist], clozapine [treatment-resistant, multi-receptor]). Third-generation: brexpiprazole, cariprazine (D2/D3 partial agonism). Novel mechanisms: xanomeline-trospium (M1/M4 muscarinic agonist -- first non-D2 antipsychotic, FDA 2024), lumateperone (5-HT2A/D2/SERT), pimavanserin (selective 5-HT2A inverse agonist). LAI formulations for adherence. CBTp (evidence-based for persistent symptoms). Cognitive remediation. Coordinated specialty care (first-episode programs). Negative symptom interventions remain limited.'
+      }
+    }
+  };
+
+
+  // ================================================================
+  // DATA: Neurotransmitters
+  // ================================================================
+  var NEUROTRANSMITTERS = [
+    {
+      name: 'Serotonin (5-HT)',
+      color: '#5ea68b',
+      clientRole: 'Helps regulate mood, sleep, appetite, and digestion. Often called the "feel good" chemical.',
+      clinicianRole: 'Monoamine neurotransmitter synthesized from tryptophan in raphe nuclei. Modulates mood, anxiety, sleep architecture, appetite, pain perception, and GI motility via 14+ receptor subtypes. 5-HT1A (anxiolytic, autoreceptor), 5-HT2A (psychedelic/psychotic effects), 5-HT2C (appetite, mood), 5-HT3 (nausea), 5-HT4 (GI motility, cognition).',
+      low: 'Depression, anxiety, insomnia, increased appetite, irritability',
+      high: 'Serotonin syndrome (agitation, hyperthermia, clonus, autonomic instability -- medical emergency)',
+      meds: 'SSRIs (fluoxetine, sertraline), SNRIs (venlafaxine, duloxetine), triptans, buspirone, trazodone',
+      conditions: 'Depression, Anxiety, OCD, PTSD, Eating Disorders'
+    },
+    {
+      name: 'Dopamine (DA)',
+      color: '#ea8585',
+      clientRole: 'Drives motivation, reward, and pleasure. Makes you want to do things and feel good when you accomplish them.',
+      clinicianRole: 'Catecholamine neurotransmitter synthesized from tyrosine. Four major pathways: mesolimbic (reward/motivation), mesocortical (executive function), nigrostriatal (motor control), tuberoinfundibular (prolactin regulation). D1-like (D1/D5: excitatory, PFC cognition) and D2-like (D2/D3/D4: inhibitory, reward, motor) receptor families.',
+      low: 'Low motivation, anhedonia, fatigue, difficulty concentrating, Parkinson\'s tremor',
+      high: 'Psychosis, mania, impulsivity, compulsive behaviors, tics',
+      meds: 'Stimulants (methylphenidate, amphetamines), bupropion, antipsychotics (D2 blockers), L-DOPA, pramipexole',
+      conditions: 'ADHD, Addiction, Depression, Schizophrenia, Parkinson\'s, Bipolar'
+    },
+    {
+      name: 'Norepinephrine (NE)',
+      color: '#f1ae54',
+      clientRole: 'Controls alertness, energy, and the body\'s "fight or flight" response. Helps you focus and respond to stress.',
+      clinicianRole: 'Catecholamine neurotransmitter synthesized from dopamine in locus coeruleus. Modulates arousal, attention, vigilance, stress response, and autonomic function. Alpha-1 (vasoconstriction, arousal), alpha-2 (presynaptic autoreceptor, PFC optimization), beta-1 (cardiac), beta-2 (bronchodilation) receptor subtypes.',
+      low: 'Fatigue, poor concentration, depression, low blood pressure, brain fog',
+      high: 'Anxiety, hypervigilance, insomnia, elevated blood pressure, panic',
+      meds: 'SNRIs (venlafaxine, duloxetine), atomoxetine, guanfacine (alpha-2A agonist), prazosin (alpha-1 blocker), propranolol (beta blocker)',
+      conditions: 'ADHD, Depression, Anxiety, PTSD, Panic Disorder'
+    },
+    {
+      name: 'GABA',
+      color: '#7daed3',
+      clientRole: 'The brain\'s main "brake pedal." It calms neural activity and helps reduce anxiety, promote sleep, and prevent seizures.',
+      clinicianRole: 'Primary inhibitory neurotransmitter (synthesized from glutamate by GAD enzyme). GABA-A receptors (ionotropic: fast inhibition, Cl- conductance -- benzodiazepine, barbiturate, alcohol binding sites). GABA-B receptors (metabotropic: slow inhibition -- baclofen). Cortical inhibitory interneurons (PV+, SST+) shape neural circuit computation. Tonic vs. phasic inhibition.',
+      low: 'Anxiety, insomnia, seizures, muscle tension, racing thoughts',
+      high: 'Excessive sedation, respiratory depression, cognitive impairment',
+      meds: 'Benzodiazepines (GABA-A PAMs), gabapentin/pregabalin (indirect), barbiturates, Z-drugs (zolpidem), valproate (increases GABA)',
+      conditions: 'Anxiety, Insomnia, Epilepsy, Alcohol Withdrawal, Bipolar'
+    },
+    {
+      name: 'Glutamate',
+      color: '#e6af42',
+      clientRole: 'The brain\'s main "gas pedal." It activates neural circuits, drives learning and memory formation, and helps the brain adapt.',
+      clinicianRole: 'Primary excitatory neurotransmitter. NMDA receptors (learning, synaptic plasticity, require glycine co-agonist -- basis for ketamine mechanism), AMPA receptors (fast excitation, synaptic strength), mGluRs (modulatory). Glutamate-glutamine cycle with astrocytes. Excitotoxicity: excessive glutamate causes neuronal death via Ca2+ influx. Critical for LTP/LTD (basis of learning).',
+      low: 'Cognitive impairment, fatigue, insomnia, poor concentration',
+      high: 'Excitotoxicity, seizures, anxiety, neurodegenerative damage, psychosis',
+      meds: 'Ketamine/esketamine (NMDA antagonist), memantine, lamotrigine (reduces release), riluzole, NAC (modulates via cystine-glutamate exchanger)',
+      conditions: 'Depression (ketamine mechanism), Schizophrenia, OCD, Epilepsy, Alzheimer\'s'
+    },
+    {
+      name: 'Endorphins',
+      color: '#b0a69c',
+      clientRole: 'Your body\'s natural painkillers and pleasure chemicals. Released during exercise, laughter, and social bonding. Create feelings of well-being.',
+      clinicianRole: 'Endogenous opioid peptides (beta-endorphin, enkephalins, dynorphins) acting on mu, delta, and kappa opioid receptors. Modulate pain perception, stress response, reward, and social bonding. Beta-endorphin from POMC neurons in arcuate nucleus. Exercise-induced release contributes to "runner\'s high" (also involving endocannabinoids). Kappa/dynorphin system mediates dysphoria and aversion (stress-induced).',
+      low: 'Increased pain sensitivity, difficulty coping with stress, depression, chronic pain conditions',
+      high: 'Reduced pain perception, euphoria (relevant in opioid use disorder)',
+      meds: 'Naltrexone (opioid antagonist -- blocks), opioid analgesics (agonists), buprenorphine (partial agonist), LDN (low-dose naltrexone -- investigational for immune/pain)',
+      conditions: 'Chronic Pain, Addiction (Opioid Use Disorder), Depression, Self-harm'
+    }
+  ];
+
+
+  // ================================================================
+  // STATE
+  // ================================================================
+  var currentMode = 'client';
+  var selectedRegion = null;
+  var selectedCondition = null;
+
+
+  // ================================================================
+  // MODE TOGGLE
+  // ================================================================
+  window.setMode = function(mode) {
+    currentMode = mode;
+    document.getElementById('modeClient').classList.toggle('is-active', mode === 'client');
+    document.getElementById('modeClinician').classList.toggle('is-active', mode === 'clinician');
+    document.getElementById('modeClient').setAttribute('aria-pressed', mode === 'client');
+    document.getElementById('modeClinician').setAttribute('aria-pressed', mode === 'clinician');
+
+    // Update detail panel if region selected
+    if (selectedRegion) showRegionDetail(selectedRegion);
+    // Update condition panel if condition selected
+    if (selectedCondition) showConditionInfo(selectedCondition);
+    // Update pathway descriptions
+    updatePathwayDescriptions();
+    // Re-render neurotransmitter cards
+    renderNTCards();
+  };
+
+
+  // ================================================================
+  // REGION INTERACTION
+  // ================================================================
+  var brainBody = document.getElementById('brainBody');
+  var tooltip = document.getElementById('brainTooltip');
+
+  // Click handlers for brain regions
+  document.querySelectorAll('.brain-region').forEach(function(el) {
+    el.addEventListener('click', function() {
+      var regionId = this.getAttribute('data-region');
+      selectRegion(regionId);
+    });
+    el.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        var regionId = this.getAttribute('data-region');
+        selectRegion(regionId);
+      }
+    });
+
+    // Hover tooltip
+    el.addEventListener('mouseenter', function(e) {
+      var regionId = this.getAttribute('data-region');
+      var region = REGIONS[regionId];
+      if (region) {
+        tooltip.textContent = region.name;
+        tooltip.classList.add('is-visible');
+      }
+    });
+    el.addEventListener('mousemove', function(e) {
+      var rect = brainBody.getBoundingClientRect();
+      var x = e.clientX - rect.left + 12;
+      var y = e.clientY - rect.top - 30;
+      tooltip.style.left = x + 'px';
+      tooltip.style.top = y + 'px';
+    });
+    el.addEventListener('mouseleave', function() {
+      tooltip.classList.remove('is-visible');
+    });
+  });
+
+  function selectRegion(regionId) {
+    // Toggle selection
+    if (selectedRegion === regionId) {
+      selectedRegion = null;
+      clearRegionSelection();
+      showEmptyDetail();
+      return;
+    }
+    selectedRegion = regionId;
+
+    // Update SVG states
+    document.querySelectorAll('.brain-region').forEach(function(el) {
+      el.classList.remove('is-selected');
+    });
+    var regionEl = document.getElementById('region-' + regionId);
+    if (regionEl) regionEl.classList.add('is-selected');
+
+    // Update labels
+    document.querySelectorAll('.brain-label').forEach(function(el) {
+      el.classList.toggle('is-active', el.getAttribute('data-for') === regionId);
+    });
+
+    showRegionDetail(regionId);
+  }
+
+  function clearRegionSelection() {
+    document.querySelectorAll('.brain-region').forEach(function(el) {
+      el.classList.remove('is-selected');
+    });
+    document.querySelectorAll('.brain-label').forEach(function(el) {
+      el.classList.remove('is-active');
+    });
+  }
+
+  function showEmptyDetail() {
+    document.getElementById('detailContent').innerHTML = '<div class="detail-empty">' +
+      '<div class="detail-empty__icon">' +
+      '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>' +
+      '</div>' +
+      '<div class="detail-empty__title">Select a brain region</div>' +
+      '<div class="detail-empty__desc">Click or tap any highlighted area on the brain to learn about that region and its role in mental health.</div>' +
+      '</div>';
+  }
+
+  function showRegionDetail(regionId) {
+    var region = REGIONS[regionId];
+    if (!region) return;
+
+    var desc = currentMode === 'client' ? region.clientDesc : region.clinicianDesc;
+    var textClass = currentMode === 'client' ? ' detail-section__text--client' : '';
+
+    var html = '<div class="detail-card__header">' +
+      '<div class="detail-card__icon" style="background: ' + region.color + '22; color: ' + region.color + ';">' +
+      '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l2 2"/></svg>' +
+      '</div>' +
+      '<div><div class="detail-card__title">' + region.name + '</div>' +
+      '<div class="detail-card__subtitle">' + region.location + '</div></div>' +
+      '</div>' +
+      '<div class="detail-card__body">' +
+      '<div class="detail-section">' +
+      '<div class="detail-section__title">' + (currentMode === 'client' ? 'What It Does' : 'Function') + '</div>' +
+      '<div class="detail-section__text' + textClass + '">' + desc.role + '</div>' +
+      '</div>' +
+      '<div class="detail-section">' +
+      '<div class="detail-section__title">' + (currentMode === 'client' ? 'When It\'s Not Working Right' : 'Dysregulation') + '</div>' +
+      '<div class="detail-section__text' + textClass + '">' + desc.dysregulated + '</div>' +
+      '</div>' +
+      '<div class="detail-section">' +
+      '<div class="detail-section__title">Associated Conditions</div>' +
+      '<div class="detail-tags">' + desc.conditions.split(', ').map(function(c) {
+        return '<span class="detail-tag">' + c + '</span>';
+      }).join('') + '</div>' +
+      '</div>' +
+      '</div>';
+
+    document.getElementById('detailContent').innerHTML = html;
+  }
+
+
+  // ================================================================
+  // CONDITION SELECTION
+  // ================================================================
+  document.getElementById('conditionSelect').addEventListener('change', function() {
+    var val = this.value;
+    if (!val) {
+      selectedCondition = null;
+      clearConditionHighlights();
+      document.getElementById('conditionLegend').style.display = 'none';
+      document.getElementById('conditionPanel').style.display = 'none';
+      return;
+    }
+    selectedCondition = val;
+    highlightCondition(val);
+    showConditionInfo(val);
+    document.getElementById('conditionLegend').style.display = '';
+  });
+
+  function clearConditionHighlights() {
+    document.querySelectorAll('.brain-region').forEach(function(el) {
+      el.classList.remove('is-highlighted--primary', 'is-highlighted--secondary', 'is-highlighted--tertiary', 'is-dimmed');
+    });
+  }
+
+  function highlightCondition(conditionId) {
+    var condition = CONDITIONS[conditionId];
+    if (!condition) return;
+
+    document.querySelectorAll('.brain-region').forEach(function(el) {
+      var regionId = el.getAttribute('data-region');
+      el.classList.remove('is-highlighted--primary', 'is-highlighted--secondary', 'is-highlighted--tertiary', 'is-dimmed');
+      if (condition.regions[regionId]) {
+        el.classList.add('is-highlighted--' + condition.regions[regionId]);
+      } else {
+        el.classList.add('is-dimmed');
+      }
+    });
+  }
+
+  function showConditionInfo(conditionId) {
+    var condition = CONDITIONS[conditionId];
+    if (!condition) return;
+
+    var isClinician = currentMode === 'clinician';
+    var desc = isClinician ? condition.clinicianDesc : condition.clientDesc;
+    var nt = isClinician ? condition.neurotransmitters.clinician : condition.neurotransmitters.client;
+    var tx = isClinician ? condition.treatments.clinician : condition.treatments.client;
+    var textClass = currentMode === 'client' ? ' detail-section__text--client' : '';
+
+    // Build region involvement list
+    var regionHtml = '';
+    var levels = { primary: [], secondary: [], tertiary: [] };
+    for (var rId in condition.regions) {
+      levels[condition.regions[rId]].push(REGIONS[rId].name);
+    }
+    if (levels.primary.length) {
+      regionHtml += '<div style="margin-bottom: 6px;"><strong style="color: var(--ds-accent-600);">Primary:</strong> ' + levels.primary.join(', ') + '</div>';
+    }
+    if (levels.secondary.length) {
+      regionHtml += '<div style="margin-bottom: 6px;"><strong style="color: var(--ds-accent-400);">Secondary:</strong> ' + levels.secondary.join(', ') + '</div>';
+    }
+    if (levels.tertiary.length) {
+      regionHtml += '<div><strong style="color: var(--ds-accent-200);">Tertiary:</strong> ' + levels.tertiary.join(', ') + '</div>';
+    }
+
+    var html = '<div class="condition-card">' +
+      '<div class="condition-card__header">' +
+      '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--ds-primary-600)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>' +
+      '<div class="detail-card__title">' + condition.name + '</div>' +
+      '</div>' +
+      '<div class="condition-card__body">' +
+      '<div class="detail-section">' +
+      '<div class="detail-section__title">' + (isClinician ? 'Neurobiological Basis' : 'How It Affects the Brain') + '</div>' +
+      '<div class="detail-section__text' + textClass + '">' + desc + '</div>' +
+      '</div>' +
+      '<div class="detail-section">' +
+      '<div class="detail-section__title">Regions Involved</div>' +
+      '<div class="detail-section__text" style="font-size: var(--ds-text-xs);">' + regionHtml + '</div>' +
+      '</div>' +
+      '<div class="detail-section">' +
+      '<div class="detail-section__title">' + (isClinician ? 'Neurotransmitter Involvement' : 'Brain Chemicals Involved') + '</div>' +
+      '<div class="detail-section__text' + textClass + '">' + nt + '</div>' +
+      '</div>' +
+      '<div class="detail-section">' +
+      '<div class="detail-section__title">' + (isClinician ? 'Treatment Targets' : 'How Treatment Helps') + '</div>' +
+      '<div class="detail-section__text' + textClass + '">' + tx + '</div>' +
+      '</div>' +
+      '</div>' +
+      '</div>';
+
+    var panel = document.getElementById('conditionPanel');
+    panel.innerHTML = html;
+    panel.style.display = '';
+  }
+
+
+  // ================================================================
+  // PATHWAY DESCRIPTIONS (mode-aware)
+  // ================================================================
+  function updatePathwayDescriptions() {
+    document.querySelectorAll('.pathway-card__desc[data-client]').forEach(function(el) {
+      el.textContent = currentMode === 'client' ? el.getAttribute('data-client') : el.getAttribute('data-clinician');
+    });
+  }
+
+
+  // ================================================================
+  // NEUROTRANSMITTER CARDS
+  // ================================================================
+  function renderNTCards() {
+    var grid = document.getElementById('ntGrid');
+    var isClinician = currentMode === 'clinician';
+    var html = '';
+
+    NEUROTRANSMITTERS.forEach(function(nt) {
+      var role = isClinician ? nt.clinicianRole : nt.clientRole;
+      html += '<div class="nt-card">' +
+        '<div class="nt-card__header">' +
+        '<div class="nt-card__dot" style="background: ' + nt.color + ';"></div>' +
+        '<div class="nt-card__name">' + nt.name + '</div>' +
+        '</div>' +
+        '<div class="nt-card__body">' +
+        '<div class="nt-card__role">' + role + '</div>' +
+        '<div class="nt-detail-row">' +
+        '<div class="nt-detail-label" style="color: var(--ds-info-600);">Too Low</div>' +
+        '<div class="nt-detail-value">' + nt.low + '</div>' +
+        '</div>' +
+        '<div class="nt-detail-row">' +
+        '<div class="nt-detail-label" style="color: var(--ds-danger-600);">Too High</div>' +
+        '<div class="nt-detail-value">' + nt.high + '</div>' +
+        '</div>' +
+        '<div class="nt-detail-row">' +
+        '<div class="nt-detail-label" style="color: var(--ds-primary-600);">Meds</div>' +
+        '<div class="nt-detail-value">' + nt.meds + '</div>' +
+        '</div>' +
+        '<div class="nt-detail-row">' +
+        '<div class="nt-detail-label" style="color: var(--ds-accent-600);">Links</div>' +
+        '<div class="nt-detail-value">' + nt.conditions + '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>';
+    });
+
+    grid.innerHTML = html;
+  }
+
+  // Initial render
+  renderNTCards();
+  updatePathwayDescriptions();
+
+
+  // ================================================================
+  // THEME TOGGLE
+  // ================================================================
+  window.toggleTheme = function() {
+    var html = document.documentElement;
+    var btn = document.getElementById('themeToggleBtn');
+    if (html.getAttribute('data-theme') === 'dark') {
+      html.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'light');
+      btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+    } else {
+      html.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+      btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+    }
+  };
+
+  // Respect saved theme
+  (function() {
+    var saved = localStorage.getItem('theme');
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (saved === 'dark' || (!saved && prefersDark)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      var btn = document.getElementById('themeToggleBtn');
+      if (btn) btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+    }
+  })();
+
+
+  // ================================================================
+  // MOBILE NAV
+  // ================================================================
+  window.toggleMobileNav = function() {
+    var panel = document.getElementById('mobileNavPanel');
+    var btn = document.getElementById('hamburgerBtn');
+    var isOpen = panel.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', isOpen);
+  };
+
+})();
+</script>
+
+</body>
+</html>
