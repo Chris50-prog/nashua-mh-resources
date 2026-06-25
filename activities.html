@@ -1,0 +1,2918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session Activities | Greater Nashua Community Mental Health Resources</title>
+<meta name="description" content="Searchable catalog of evidence-based therapeutic session activities organized by age, modality, and presenting problem. Ready to use in individual, group, and family sessions.">
+<meta property="og:title" content="Session Activities | Greater Nashua Community Mental Health Resources">
+<meta property="og:description" content="Searchable catalog of evidence-based therapeutic session activities organized by age, modality, and presenting problem.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2d6f59">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="css/design-system.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/fontsize.js"></script>
+<style>
+/* ================================================================
+   Activities Page — Layout & Component Overrides
+   Page-specific styles only. Everything else from design-system.css.
+   ================================================================ */
+
+/* ---- Nav ---- */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: var(--ds-z-sticky);
+  background: rgba(253, 252, 250, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--ds-border-subtle);
+  height: var(--ds-header-height);
+}
+[data-theme="dark"] .site-nav {
+  background: rgba(26, 25, 22, 0.85);
+}
+.site-nav__inner {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+}
+.site-nav__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  text-decoration: none;
+  flex-shrink: 0;
+  margin-right: auto;
+}
+.site-nav__logo-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-primary-600);
+  color: var(--ds-text-inverse);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-bold);
+  letter-spacing: var(--ds-tracking-tight);
+}
+.site-nav__logo-text {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  white-space: nowrap;
+}
+.site-nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+}
+.site-nav__link {
+  padding: var(--ds-space-2) var(--ds-space-3);
+  border-radius: var(--ds-radius-md);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default),
+              background-color var(--ds-duration-fast) var(--ds-ease-default);
+  white-space: nowrap;
+}
+.site-nav__link:hover {
+  color: var(--ds-text-primary);
+  background: var(--ds-surface-hover);
+  text-decoration: none;
+}
+.site-nav__link--active {
+  color: var(--ds-primary-700);
+  background: var(--ds-primary-50);
+}
+[data-theme="dark"] .site-nav__link--active {
+  color: var(--ds-primary-300);
+  background: var(--ds-interactive-subtle);
+}
+.site-nav__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  margin-left: var(--ds-space-2);
+}
+.site-nav__icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ds-radius-md);
+  border: none;
+  background: transparent;
+  color: var(--ds-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color var(--ds-duration-fast) var(--ds-ease-default),
+              color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.site-nav__icon-btn:hover {
+  background: var(--ds-surface-hover);
+  color: var(--ds-text-primary);
+}
+.site-nav__font-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-0-5);
+}
+.site-nav__font-btn {
+  padding: var(--ds-space-1) var(--ds-space-2);
+  border-radius: var(--ds-radius-sm);
+  border: 1px solid var(--ds-border);
+  background: var(--ds-surface);
+  color: var(--ds-text-secondary);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-medium);
+  cursor: pointer;
+  transition: background-color var(--ds-duration-fast) var(--ds-ease-default),
+              color var(--ds-duration-fast) var(--ds-ease-default);
+  line-height: 1;
+}
+.site-nav__font-btn:hover {
+  background: var(--ds-surface-hover);
+  color: var(--ds-text-primary);
+}
+.site-nav__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--ds-radius-md);
+  padding: 0;
+}
+.site-nav__hamburger span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--ds-text-secondary);
+  border-radius: 2px;
+  transition: transform var(--ds-duration-normal) var(--ds-ease-default),
+              opacity var(--ds-duration-normal) var(--ds-ease-default);
+}
+.site-nav__mobile-panel {
+  display: none;
+  position: fixed;
+  top: var(--ds-header-height);
+  left: 0;
+  right: 0;
+  background: var(--ds-surface);
+  border-bottom: 1px solid var(--ds-border);
+  padding: var(--ds-space-4) var(--ds-space-6);
+  z-index: calc(var(--ds-z-sticky) - 1);
+  flex-direction: column;
+  gap: var(--ds-space-1);
+  box-shadow: var(--ds-shadow-lg);
+}
+.site-nav__mobile-panel.is-open {
+  display: flex;
+}
+.site-nav__mobile-link {
+  padding: var(--ds-space-3) var(--ds-space-4);
+  border-radius: var(--ds-radius-lg);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-primary);
+  text-decoration: none;
+  transition: background-color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.site-nav__mobile-link:hover {
+  background: var(--ds-surface-hover);
+  text-decoration: none;
+}
+.site-nav__mobile-link--active {
+  color: var(--ds-primary-700);
+  background: var(--ds-primary-50);
+}
+[data-theme="dark"] .site-nav__mobile-link--active {
+  color: var(--ds-primary-300);
+  background: var(--ds-interactive-subtle);
+}
+
+/* ---- Hero ---- */
+.hero {
+  background: linear-gradient(170deg, var(--ds-primary-50) 0%, var(--ds-cream) 50%, var(--ds-warm-gray-50) 100%);
+  padding: var(--ds-space-20) 0 var(--ds-space-16);
+}
+[data-theme="dark"] .hero {
+  background: linear-gradient(170deg, rgba(61, 139, 112, 0.08) 0%, var(--ds-page-bg) 50%, var(--ds-page-bg) 100%);
+}
+.hero__inner {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6);
+  text-align: center;
+}
+.hero__overline {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  margin-bottom: var(--ds-space-5);
+}
+.hero__overline-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ds-success-500);
+}
+.hero__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-4xl);
+  font-weight: var(--ds-weight-bold);
+  line-height: var(--ds-leading-tight);
+  letter-spacing: var(--ds-tracking-tight);
+  color: var(--ds-text-primary);
+  max-width: 720px;
+  margin: 0 auto var(--ds-space-5);
+}
+.hero__subtitle {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-regular);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--ds-text-secondary);
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* ---- Filter Bar ---- */
+.filter-bar {
+  position: sticky;
+  top: var(--ds-header-height);
+  z-index: calc(var(--ds-z-sticky) - 2);
+  background: rgba(253, 252, 250, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--ds-border-subtle);
+  padding: var(--ds-space-4) 0;
+}
+[data-theme="dark"] .filter-bar {
+  background: rgba(26, 25, 22, 0.92);
+}
+.filter-bar__inner {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-3);
+}
+.filter-bar__row {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  flex-wrap: wrap;
+}
+.filter-bar__label {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--ds-tracking-widest);
+  flex-shrink: 0;
+  min-width: 80px;
+}
+.filter-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--ds-space-1) var(--ds-space-3);
+  border-radius: var(--ds-radius-full);
+  border: 1px solid var(--ds-border);
+  background: var(--ds-surface);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+  white-space: nowrap;
+  user-select: none;
+}
+.filter-pill:hover {
+  border-color: var(--ds-primary-300);
+  color: var(--ds-primary-700);
+  background: var(--ds-primary-50);
+}
+.filter-pill.active {
+  border-color: var(--ds-primary-600);
+  background: var(--ds-primary-600);
+  color: var(--ds-text-inverse);
+}
+[data-theme="dark"] .filter-pill.active {
+  background: var(--ds-primary-500);
+  border-color: var(--ds-primary-500);
+}
+.filter-bar__search {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+  max-width: 360px;
+}
+.filter-bar__search-icon {
+  position: absolute;
+  left: var(--ds-space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ds-text-muted);
+  pointer-events: none;
+}
+.filter-bar__search-input {
+  width: 100%;
+  padding: var(--ds-space-2) var(--ds-space-3) var(--ds-space-2) var(--ds-space-10);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-primary);
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-lg);
+  outline: none;
+  transition: border-color var(--ds-duration-fast) var(--ds-ease-default),
+              box-shadow var(--ds-duration-fast) var(--ds-ease-default);
+  -webkit-appearance: none;
+}
+.filter-bar__search-input::placeholder {
+  color: var(--ds-text-muted);
+}
+.filter-bar__search-input:focus {
+  border-color: var(--ds-border-focus);
+  box-shadow: var(--ds-focus-ring);
+}
+.filter-bar__count {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-muted);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.filter-bar__clear {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-primary-600);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--ds-space-1) var(--ds-space-2);
+  border-radius: var(--ds-radius-sm);
+  transition: background-color var(--ds-duration-fast) var(--ds-ease-default);
+  display: none;
+}
+.filter-bar__clear.visible {
+  display: inline-flex;
+}
+.filter-bar__clear:hover {
+  background: var(--ds-primary-50);
+}
+
+/* ---- Activity Cards Grid ---- */
+.activities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--ds-space-6);
+}
+
+/* ---- Activity Card ---- */
+.activity-card {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-xl);
+  padding: var(--ds-space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-3);
+  transition: box-shadow var(--ds-duration-normal) var(--ds-ease-default),
+              transform var(--ds-duration-normal) var(--ds-ease-default),
+              border-color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.activity-card:hover {
+  box-shadow: var(--ds-shadow-lg);
+  transform: translateY(-3px);
+}
+.activity-card.hidden {
+  display: none;
+}
+
+/* Card header: badges row */
+.activity-card__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-1-5);
+  align-items: center;
+}
+.activity-card__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--ds-space-0-5) var(--ds-space-2-5);
+  border-radius: var(--ds-radius-full);
+  font-family: var(--ds-font-sans);
+  font-size: 10px;
+  font-weight: var(--ds-weight-semibold);
+  line-height: var(--ds-leading-normal);
+  white-space: nowrap;
+  letter-spacing: var(--ds-tracking-wide);
+  text-transform: uppercase;
+}
+.activity-card__badge--age {
+  background: #ede9fe;
+  color: #6d28d9;
+}
+[data-theme="dark"] .activity-card__badge--age {
+  background: rgba(109, 40, 217, 0.15);
+  color: #c4b5fd;
+}
+.activity-card__badge--modality {
+  background: var(--ds-primary-50);
+  color: var(--ds-primary-700);
+}
+[data-theme="dark"] .activity-card__badge--modality {
+  background: rgba(61, 139, 112, 0.15);
+  color: var(--ds-primary-300);
+}
+.activity-card__badge--problem {
+  background: #fef3c7;
+  color: #92400e;
+}
+[data-theme="dark"] .activity-card__badge--problem {
+  background: rgba(146, 64, 14, 0.15);
+  color: #fcd34d;
+}
+.activity-card__badge--setting {
+  background: #dbeafe;
+  color: #1e40af;
+}
+[data-theme="dark"] .activity-card__badge--setting {
+  background: rgba(30, 64, 175, 0.15);
+  color: #93c5fd;
+}
+
+/* Card title */
+.activity-card__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  line-height: var(--ds-leading-snug);
+}
+
+/* Card meta row */
+.activity-card__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-4);
+  flex-wrap: wrap;
+}
+.activity-card__meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-1-5);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+}
+.activity-card__meta-item svg {
+  flex-shrink: 0;
+}
+
+/* Card description */
+.activity-card__desc {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+}
+
+/* Engagement dots */
+.activity-card__engagement {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+}
+.activity-card__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ds-primary-500);
+}
+.activity-card__dot--empty {
+  background: var(--ds-border);
+}
+
+/* Materials list */
+.activity-card__materials {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+  line-height: var(--ds-leading-relaxed);
+}
+.activity-card__materials strong {
+  color: var(--ds-text-secondary);
+  font-weight: var(--ds-weight-semibold);
+}
+
+/* Expandable sections */
+.activity-card__expand {
+  border: none;
+  background: none;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-primary-600);
+  cursor: pointer;
+  padding: var(--ds-space-1) 0;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.activity-card__expand:hover {
+  color: var(--ds-primary-700);
+}
+.activity-card__expand svg {
+  transition: transform var(--ds-duration-fast) var(--ds-ease-default);
+}
+.activity-card__expand.open svg {
+  transform: rotate(180deg);
+}
+.activity-card__details {
+  display: none;
+  flex-direction: column;
+  gap: var(--ds-space-3);
+  padding-top: var(--ds-space-2);
+}
+.activity-card__details.open {
+  display: flex;
+}
+
+/* Steps list */
+.activity-card__steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: step-counter;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+}
+.activity-card__steps li {
+  counter-increment: step-counter;
+  position: relative;
+  padding-left: var(--ds-space-7);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+}
+.activity-card__steps li::before {
+  content: counter(step-counter);
+  position: absolute;
+  left: 0;
+  top: 1px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--ds-primary-50);
+  color: var(--ds-primary-700);
+  font-size: 10px;
+  font-weight: var(--ds-weight-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+[data-theme="dark"] .activity-card__steps li::before {
+  background: rgba(61, 139, 112, 0.15);
+  color: var(--ds-primary-300);
+}
+
+/* Rationale callout */
+.activity-card__rationale {
+  background: var(--ds-primary-50);
+  border-left: 3px solid var(--ds-primary-400);
+  border-radius: 0 var(--ds-radius-md) var(--ds-radius-md) 0;
+  padding: var(--ds-space-3) var(--ds-space-4);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+}
+[data-theme="dark"] .activity-card__rationale {
+  background: rgba(61, 139, 112, 0.08);
+  border-left-color: var(--ds-primary-500);
+}
+.activity-card__rationale strong {
+  display: block;
+  color: var(--ds-primary-700);
+  font-weight: var(--ds-weight-semibold);
+  margin-bottom: var(--ds-space-1);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: var(--ds-tracking-widest);
+}
+[data-theme="dark"] .activity-card__rationale strong {
+  color: var(--ds-primary-300);
+}
+
+/* No results message */
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: var(--ds-space-16) var(--ds-space-6);
+  display: none;
+}
+.no-results.visible {
+  display: block;
+}
+.no-results__icon {
+  font-size: 48px;
+  margin-bottom: var(--ds-space-4);
+}
+.no-results__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xl);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  margin-bottom: var(--ds-space-2);
+}
+.no-results__desc {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+}
+
+/* ---- Section Header ---- */
+.section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ds-space-4);
+  margin-bottom: var(--ds-space-6);
+}
+.section-header__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-2xl);
+  font-weight: var(--ds-weight-bold);
+  color: var(--ds-text-primary);
+  letter-spacing: var(--ds-tracking-tight);
+}
+
+/* ---- Guidance Grid ---- */
+.guidance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--ds-space-5);
+}
+.guidance-card {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-xl);
+  padding: var(--ds-space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-3);
+}
+.guidance-card__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--ds-radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  background: var(--ds-primary-50);
+  color: var(--ds-primary-600);
+}
+[data-theme="dark"] .guidance-card__icon {
+  background: rgba(61, 139, 112, 0.12);
+  color: var(--ds-primary-400);
+}
+.guidance-card__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  line-height: var(--ds-leading-snug);
+}
+.guidance-card__desc {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+}
+
+/* ---- Footer ---- */
+.site-footer {
+  background: var(--ds-surface);
+  border-top: 1px solid var(--ds-border);
+  padding: var(--ds-space-16) 0 var(--ds-space-8);
+  margin-top: 0;
+}
+.footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--ds-space-10);
+  margin-bottom: var(--ds-space-10);
+}
+.footer__brand-desc {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+  margin-top: var(--ds-space-3);
+  max-width: 320px;
+}
+.footer__col-title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--ds-tracking-widest);
+  margin-bottom: var(--ds-space-4);
+}
+.footer__links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2-5);
+}
+.footer__links a {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.footer__links a:hover {
+  color: var(--ds-text-primary);
+}
+.footer__crisis-box {
+  background: var(--ds-status-danger-bg);
+  border: 1px solid var(--ds-danger-200);
+  border-radius: var(--ds-radius-lg);
+  padding: var(--ds-space-4);
+  margin-top: var(--ds-space-4);
+}
+[data-theme="dark"] .footer__crisis-box {
+  border-color: rgba(220, 95, 95, 0.2);
+}
+.footer__crisis-title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-status-danger-text);
+  margin-bottom: var(--ds-space-2);
+}
+.footer__crisis-numbers {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+}
+.footer__crisis-numbers strong {
+  color: var(--ds-text-primary);
+}
+.footer__bottom {
+  border-top: 1px solid var(--ds-border-subtle);
+  padding-top: var(--ds-space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--ds-space-4);
+}
+.footer__disclaimer {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+  line-height: var(--ds-leading-relaxed);
+  max-width: 560px;
+}
+.footer__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-4);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+}
+.footer__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ds-success-500);
+  display: inline-block;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1023px) {
+  .activities-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .guidance-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ds-space-8);
+  }
+}
+@media (max-width: 639px) {
+  .site-nav__links,
+  .site-nav__font-controls {
+    display: none;
+  }
+  .site-nav__hamburger {
+    display: flex;
+  }
+  .hero {
+    padding: var(--ds-space-12) 0 var(--ds-space-10);
+  }
+  .hero__title {
+    font-size: var(--ds-text-3xl);
+  }
+  .hero__subtitle {
+    font-size: var(--ds-text-base);
+  }
+  .activities-grid {
+    grid-template-columns: 1fr;
+  }
+  .guidance-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: var(--ds-space-8);
+  }
+  .footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .section-header {
+    flex-direction: column;
+    gap: var(--ds-space-2);
+  }
+  .filter-bar__row {
+    gap: var(--ds-space-1-5);
+  }
+  .filter-bar__label {
+    min-width: auto;
+    width: 100%;
+  }
+  .filter-bar__search {
+    max-width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+<script src="js/auth-gate.js"></script>
+
+<a href="#main-content" class="ds-sr-only" style="position:absolute;top:-40px;left:0;background:var(--ds-surface);padding:8px 16px;z-index:100;font-size:14px;transition:top 0.2s" onfocus="this.style.top='0'" onblur="this.style.top='-40px'">Skip to main content</a>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav class="site-nav" role="navigation" aria-label="Main navigation">
+  <div class="site-nav__inner">
+
+    <a href="index.html" class="site-nav__logo" id="siteLogo">
+      <div class="site-nav__logo-mark">NH</div>
+      <span class="site-nav__logo-text">MH Resources</span>
+    </a>
+
+    <div class="site-nav__links">
+      <a href="index.html" class="site-nav__link">Home</a>
+      <a href="resources.html" class="site-nav__link">Resources</a>
+      <a href="tools.html" class="site-nav__link">Clinical Tools</a>
+      <a href="guide.html" class="site-nav__link">Guides</a>
+      <a href="neurobiology.html" class="site-nav__link">Brain &amp; Neuro</a>
+      <a href="worksheets.html" class="site-nav__link">Worksheets</a>
+      <a href="activities.html" class="site-nav__link site-nav__link--active">Activities</a>
+    </div>
+
+    <div class="site-nav__controls">
+      <button class="site-nav__icon-btn" onclick="toggleGlobalSearch()" title="Search (Ctrl+K)" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+
+      <div class="site-nav__font-controls">
+        <button class="site-nav__font-btn" onclick="mhFontDecrease()" title="Decrease font size" aria-label="Decrease font size">A-</button>
+        <button class="site-nav__font-btn" onclick="mhFontIncrease()" title="Increase font size" aria-label="Increase font size">A+</button>
+      </div>
+
+      <button class="site-nav__icon-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+
+      <button class="site-nav__hamburger" id="hamburgerBtn" onclick="toggleMobileNav()" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </div>
+</nav>
+
+<!-- Mobile slide-out panel -->
+<div class="site-nav__mobile-panel" id="mobileNavPanel">
+  <a href="index.html" class="site-nav__mobile-link">Home</a>
+  <a href="resources.html" class="site-nav__mobile-link">Resources</a>
+  <a href="tools.html" class="site-nav__mobile-link">Clinical Tools</a>
+  <a href="guide.html" class="site-nav__mobile-link">Guides</a>
+  <a href="neurobiology.html" class="site-nav__mobile-link">Brain &amp; Neuro</a>
+  <a href="worksheets.html" class="site-nav__mobile-link">Worksheets</a>
+  <a href="activities.html" class="site-nav__mobile-link site-nav__mobile-link--active">Activities</a>
+</div>
+
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero">
+  <div class="hero__inner">
+    <div class="hero__overline">
+      <div class="hero__overline-dot"></div>
+      <span style="font-family:var(--ds-font-sans);font-size:var(--ds-text-sm);font-weight:var(--ds-weight-medium);color:var(--ds-text-secondary)">Clinical Activity Catalog</span>
+    </div>
+    <h1 class="hero__title">Session Activity Ideas</h1>
+    <p class="hero__subtitle">Evidence-based activities organized by age group, therapeutic modality, and presenting problem. Filter, search, and find the right activity for your next session.</p>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FILTER BAR
+     ============================================================ -->
+<div class="filter-bar" id="filterBar">
+  <div class="filter-bar__inner">
+
+    <!-- Row 1: Age + Modality -->
+    <div class="filter-bar__row">
+      <span class="filter-bar__label">Age</span>
+      <button class="filter-pill" data-filter="age" data-value="children" onclick="toggleFilter(this)">Children (5-12)</button>
+      <button class="filter-pill" data-filter="age" data-value="adolescents" onclick="toggleFilter(this)">Adolescents (13-17)</button>
+      <button class="filter-pill" data-filter="age" data-value="adults" onclick="toggleFilter(this)">Adults (18+)</button>
+      <button class="filter-pill" data-filter="age" data-value="all-ages" onclick="toggleFilter(this)">All Ages</button>
+
+      <span class="filter-bar__label" style="margin-left:var(--ds-space-4)">Modality</span>
+      <button class="filter-pill" data-filter="modality" data-value="cbt" onclick="toggleFilter(this)">CBT</button>
+      <button class="filter-pill" data-filter="modality" data-value="dbt" onclick="toggleFilter(this)">DBT</button>
+      <button class="filter-pill" data-filter="modality" data-value="play-therapy" onclick="toggleFilter(this)">Play Therapy</button>
+      <button class="filter-pill" data-filter="modality" data-value="art-therapy" onclick="toggleFilter(this)">Art Therapy</button>
+      <button class="filter-pill" data-filter="modality" data-value="narrative" onclick="toggleFilter(this)">Narrative</button>
+      <button class="filter-pill" data-filter="modality" data-value="mindfulness" onclick="toggleFilter(this)">Mindfulness</button>
+      <button class="filter-pill" data-filter="modality" data-value="group" onclick="toggleFilter(this)">Group</button>
+    </div>
+
+    <!-- Row 2: Problem + Setting + Search -->
+    <div class="filter-bar__row">
+      <span class="filter-bar__label">Problem</span>
+      <button class="filter-pill" data-filter="problem" data-value="anxiety" onclick="toggleFilter(this)">Anxiety</button>
+      <button class="filter-pill" data-filter="problem" data-value="depression" onclick="toggleFilter(this)">Depression</button>
+      <button class="filter-pill" data-filter="problem" data-value="trauma" onclick="toggleFilter(this)">Trauma</button>
+      <button class="filter-pill" data-filter="problem" data-value="anger" onclick="toggleFilter(this)">Anger</button>
+      <button class="filter-pill" data-filter="problem" data-value="grief" onclick="toggleFilter(this)">Grief</button>
+      <button class="filter-pill" data-filter="problem" data-value="social-skills" onclick="toggleFilter(this)">Social Skills</button>
+      <button class="filter-pill" data-filter="problem" data-value="self-esteem" onclick="toggleFilter(this)">Self-Esteem</button>
+      <button class="filter-pill" data-filter="problem" data-value="coping-skills" onclick="toggleFilter(this)">Coping Skills</button>
+
+      <span class="filter-bar__label" style="margin-left:var(--ds-space-4)">Setting</span>
+      <button class="filter-pill" data-filter="setting" data-value="individual" onclick="toggleFilter(this)">Individual</button>
+      <button class="filter-pill" data-filter="setting" data-value="group" onclick="toggleFilter(this)">Group</button>
+      <button class="filter-pill" data-filter="setting" data-value="family" onclick="toggleFilter(this)">Family</button>
+
+      <div class="filter-bar__search" style="margin-left:var(--ds-space-4)">
+        <svg class="filter-bar__search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" class="filter-bar__search-input" id="activitySearch" placeholder="Search activities..." oninput="applyFilters()">
+      </div>
+    </div>
+
+    <!-- Row 3: Count + Clear -->
+    <div class="filter-bar__row">
+      <span class="filter-bar__count" id="filterCount">Showing all 28 activities</span>
+      <button class="filter-bar__clear" id="clearFilters" onclick="clearAllFilters()">Clear all filters</button>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ============================================================
+     MAIN CONTENT
+     ============================================================ -->
+<main id="main-content" style="padding:var(--ds-space-12) 0 var(--ds-space-20)">
+  <div class="ds-container">
+
+    <div class="activities-grid" id="activitiesGrid">
+
+      <!-- ============================
+           CBT ACTIVITIES
+           ============================ -->
+
+      <!-- 1. Thought Detective -->
+      <div class="activity-card" data-age="children adolescents" data-modality="cbt" data-problem="anxiety depression" data-setting="individual">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">Children</span>
+          <span class="activity-card__badge activity-card__badge--age">Adolescents</span>
+          <span class="activity-card__badge activity-card__badge--modality">CBT</span>
+          <span class="activity-card__badge activity-card__badge--problem">Anxiety</span>
+          <span class="activity-card__badge activity-card__badge--problem">Depression</span>
+        </div>
+        <h3 class="activity-card__title">Thought Detective</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            15-25 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/></svg>
+            Individual
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">Clients become "thought detectives" who investigate their own automatic negative thoughts. Using a detective worksheet, they identify the thought, gather evidence for and against it, and reach a more balanced conclusion.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Thought Detective worksheet, pencils, magnifying glass prop (optional for younger clients)</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Introduce the concept of being a "thought detective" and explain that thoughts are not always facts.</li>
+            <li>Help the client identify a recent automatic negative thought (e.g., "Nobody likes me").</li>
+            <li>Use the worksheet to collect "evidence for" the thought in one column.</li>
+            <li>Collect "evidence against" the thought in the second column.</li>
+            <li>Review all evidence together and help the client write a more balanced, realistic thought.</li>
+            <li>Practice with 1-2 additional examples and discuss how the balanced thought feels different.</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            Cognitive restructuring is a core CBT technique. The detective metaphor makes abstract thinking skills concrete and engaging, especially for younger clients. It builds metacognitive awareness and teaches that thoughts can be evaluated rather than accepted automatically.
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Worry Time Box -->
+      <div class="activity-card" data-age="children adolescents adults all-ages" data-modality="cbt" data-problem="anxiety coping-skills" data-setting="individual">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">All Ages</span>
+          <span class="activity-card__badge activity-card__badge--modality">CBT</span>
+          <span class="activity-card__badge activity-card__badge--problem">Anxiety</span>
+          <span class="activity-card__badge activity-card__badge--problem">Coping Skills</span>
+        </div>
+        <h3 class="activity-card__title">Worry Time Box</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            20-30 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/></svg>
+            Individual
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot--empty"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">Clients create a physical or imagined "worry box" where they deposit their worries during the day, deferring them to a scheduled 15-minute "worry time." This containment strategy reduces all-day rumination.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Small box or container, slips of paper, pen; timer</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Discuss how worrying "all day" strengthens anxiety. Introduce the concept of scheduled worry time.</li>
+            <li>Have the client decorate or select a box. For adults, a notes app folder works too.</li>
+            <li>Practice: write 3-5 current worries on slips of paper and place them in the box.</li>
+            <li>Set a daily "worry time" (15 min at a consistent time, not before bed).</li>
+            <li>During worry time, review each slip: Is this still a worry? Can I do anything? If not, discard it.</li>
+            <li>Assign as homework: use the box all week, bring it to next session to review.</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            Stimulus control for worry is an evidence-based technique from CBT for generalized anxiety. By containing worry to a designated period, clients learn they can postpone anxious thoughts and that most worries lose intensity when deferred. This builds a sense of control over intrusive cognitions.
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Evidence Court -->
+      <div class="activity-card" data-age="adolescents adults" data-modality="cbt" data-problem="depression anxiety self-esteem" data-setting="individual">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">Adolescents</span>
+          <span class="activity-card__badge activity-card__badge--age">Adults</span>
+          <span class="activity-card__badge activity-card__badge--modality">CBT</span>
+          <span class="activity-card__badge activity-card__badge--problem">Depression</span>
+          <span class="activity-card__badge activity-card__badge--problem">Self-Esteem</span>
+        </div>
+        <h3 class="activity-card__title">Evidence Court</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            25-35 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/></svg>
+            Individual
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">The client plays both "prosecutor" and "defense attorney" for a core negative belief. The clinician serves as judge. Each side presents evidence, and the "jury" (the client) reaches a balanced verdict.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Evidence Court worksheet (two columns), pen, optional gavel prop</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Identify a core negative belief the client holds (e.g., "I am a failure").</li>
+            <li>Explain the courtroom metaphor. The belief is "on trial."</li>
+            <li>As "prosecutor," the client lists all evidence supporting the belief.</li>
+            <li>Switch roles: as "defense attorney," list all evidence contradicting the belief.</li>
+            <li>The clinician as "judge" helps ensure fair consideration of both sides.</li>
+            <li>The client delivers the "verdict" -- a revised, balanced belief statement.</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            Role-play based cognitive restructuring increases engagement and emotional distance from negative beliefs. The courtroom metaphor normalizes examining evidence and helps clients see that beliefs, like legal cases, require proof. Particularly effective for adolescents who respond to role-play.
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Behavioral Experiments -->
+      <div class="activity-card" data-age="adolescents adults" data-modality="cbt" data-problem="anxiety social-skills" data-setting="individual">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">Adolescents</span>
+          <span class="activity-card__badge activity-card__badge--age">Adults</span>
+          <span class="activity-card__badge activity-card__badge--modality">CBT</span>
+          <span class="activity-card__badge activity-card__badge--problem">Anxiety</span>
+          <span class="activity-card__badge activity-card__badge--problem">Social Skills</span>
+        </div>
+        <h3 class="activity-card__title">Behavioral Experiments</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            20-30 min (setup)
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/></svg>
+            Individual
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot--empty"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">Clients design and carry out small experiments to test their anxious predictions. They record their prediction, what actually happened, and what they learned. Results provide powerful, personal counter-evidence.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Behavioral Experiment Log, pen</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Identify a specific anxious prediction (e.g., "If I speak up, everyone will laugh").</li>
+            <li>Rate the client's belief strength (0-100%) and expected anxiety level.</li>
+            <li>Design a small, safe experiment to test the prediction (e.g., "Ask a question in class").</li>
+            <li>Discuss potential outcomes and plan how to handle each one.</li>
+            <li>Client carries out the experiment between sessions.</li>
+            <li>Review results together: What actually happened? How does this update the belief?</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            Behavioral experiments are among the most effective CBT techniques for anxiety disorders. They shift the mechanism of change from verbal disputation to lived experience, which produces stronger and more durable belief change. The scientific framing reduces shame around feared outcomes.
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Thought Bubbles Comic Strip -->
+      <div class="activity-card" data-age="children adolescents" data-modality="cbt art-therapy" data-problem="anxiety depression anger" data-setting="individual">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">Children</span>
+          <span class="activity-card__badge activity-card__badge--age">Adolescents</span>
+          <span class="activity-card__badge activity-card__badge--modality">CBT</span>
+          <span class="activity-card__badge activity-card__badge--modality">Art Therapy</span>
+          <span class="activity-card__badge activity-card__badge--problem">Anxiety</span>
+          <span class="activity-card__badge activity-card__badge--problem">Anger</span>
+        </div>
+        <h3 class="activity-card__title">Thought Bubbles Comic Strip</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            20-30 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/></svg>
+            Individual
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">Clients draw a 4-6 panel comic strip of a challenging situation, filling in thought bubbles for each scene. They then create an alternate version with more helpful thoughts, visually contrasting the two.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Blank comic strip template, colored markers or pencils, thought bubble stickers (optional)</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Choose a recent situation that triggered strong emotions.</li>
+            <li>Sketch the situation across 4-6 comic panels (stick figures are fine).</li>
+            <li>Add thought bubbles showing what the client was thinking at each stage.</li>
+            <li>Identify which thoughts were helpful and which were unhelpful.</li>
+            <li>Create a second strip with the same situation but alternative, more balanced thoughts.</li>
+            <li>Compare the two strips: How do the different thoughts change the character's feelings and actions?</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            Visual storytelling externalizes the cognitive model in a developmentally appropriate way. Drawing the same scenario twice with different thought content demonstrates the thought-feeling connection concretely. The creative process also increases engagement and retention of CBT concepts.
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. My Thinking Traps Journal -->
+      <div class="activity-card" data-age="adolescents adults" data-modality="cbt" data-problem="depression anxiety self-esteem" data-setting="individual">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">Adolescents</span>
+          <span class="activity-card__badge activity-card__badge--age">Adults</span>
+          <span class="activity-card__badge activity-card__badge--modality">CBT</span>
+          <span class="activity-card__badge activity-card__badge--problem">Depression</span>
+          <span class="activity-card__badge activity-card__badge--problem">Self-Esteem</span>
+        </div>
+        <h3 class="activity-card__title">My Thinking Traps Journal</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            15-20 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/></svg>
+            Individual
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot--empty"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">Clients learn to identify common cognitive distortions (all-or-nothing thinking, catastrophizing, mind reading, etc.) and keep a running journal to track which "thinking traps" they fall into most often.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Thinking Traps reference card, journal or notebook, pen</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Review 8-10 common cognitive distortions using the reference card with examples.</li>
+            <li>Ask the client which ones "sound familiar" -- most will recognize 2-3 immediately.</li>
+            <li>Practice identifying distortions in sample thoughts together.</li>
+            <li>Set up the journal format: Date, Situation, Thought, Thinking Trap, Balanced Thought.</li>
+            <li>Complete 2-3 entries together in session using recent examples.</li>
+            <li>Assign daily journaling as homework; review patterns at the next session.</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            Cognitive distortion identification builds metacognitive awareness, which is foundational to CBT. The journaling format creates a feedback loop: over time, clients notice their personal "top 3" distortions and begin catching them in real-time. The pattern recognition itself becomes therapeutic.
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================
+           DBT ACTIVITIES
+           ============================ -->
+
+      <!-- 7. Emotion Thermometer -->
+      <div class="activity-card" data-age="children adolescents all-ages" data-modality="dbt" data-problem="anger coping-skills anxiety" data-setting="individual group">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">Children</span>
+          <span class="activity-card__badge activity-card__badge--age">Adolescents</span>
+          <span class="activity-card__badge activity-card__badge--modality">DBT</span>
+          <span class="activity-card__badge activity-card__badge--problem">Anger</span>
+          <span class="activity-card__badge activity-card__badge--problem">Coping Skills</span>
+        </div>
+        <h3 class="activity-card__title">Emotion Thermometer</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            15-20 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>
+            Individual / Group
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">Clients create a visual thermometer showing emotion intensity from 1-10. At each level, they identify body sensations, thoughts, and appropriate coping strategies, building a personalized de-escalation roadmap.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Large paper, markers, thermometer template, coping skills cards</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Draw a large thermometer on paper with levels 1 (calm) through 10 (crisis).</li>
+            <li>Color-code zones: green (1-3), yellow (4-6), orange (7-8), red (9-10).</li>
+            <li>For each level, identify body sensations ("stomach tight," "hands shaking").</li>
+            <li>Add matching coping strategies at each level (gentle strategies at lower levels, crisis skills at higher levels).</li>
+            <li>Practice recognizing "where am I right now?" using real and hypothetical scenarios.</li>
+            <li>Photograph the completed thermometer for the client to keep on their phone.</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            Emotion labeling and intensity scaling are core DBT skills. The thermometer provides a concrete visual for interoceptive awareness and teaches that different intensity levels require different coping responses. It also builds shared clinical vocabulary for future sessions.
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. TIPP Skills Practice -->
+      <div class="activity-card" data-age="adolescents adults" data-modality="dbt" data-problem="anxiety anger coping-skills" data-setting="individual group">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">Adolescents</span>
+          <span class="activity-card__badge activity-card__badge--age">Adults</span>
+          <span class="activity-card__badge activity-card__badge--modality">DBT</span>
+          <span class="activity-card__badge activity-card__badge--problem">Anxiety</span>
+          <span class="activity-card__badge activity-card__badge--problem">Coping Skills</span>
+        </div>
+        <h3 class="activity-card__title">TIPP Skills Practice</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            20-30 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>
+            Individual / Group
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">Walk through the DBT TIPP skills in sequence: Temperature change (ice water), Intense exercise, Paced breathing, and Progressive relaxation. Clients practice each technique and rate its effectiveness for them personally.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Bowl of ice water, towels, timer, TIPP handout, rating scale</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Explain the TIPP acronym and why these skills work (dive reflex, vagus nerve, nervous system regulation).</li>
+            <li>Temperature: Have client hold ice cubes or dip hands in ice water for 30 seconds. Rate distress before/after.</li>
+            <li>Intense exercise: Do 60 seconds of jumping jacks, wall push-ups, or stair climbing. Rate again.</li>
+            <li>Paced breathing: Practice 4-7-8 breathing (inhale 4 counts, hold 7, exhale 8) for 3 cycles.</li>
+            <li>Progressive relaxation: Guide a 5-minute progressive muscle relaxation sequence.</li>
+            <li>Debrief: Which skill was most effective? Create a personalized TIPP card to carry.</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            TIPP skills are Linehan's distress tolerance techniques that work through physiological mechanisms (the dive reflex, autonomic regulation) rather than cognitive processes. This makes them effective even when clients are too dysregulated for cognitive strategies. Experiential practice in session builds confidence to use them in real crises.
+          </div>
+        </div>
+      </div>
+
+      <!-- 9. Opposite Action Role Play -->
+      <div class="activity-card" data-age="adolescents adults" data-modality="dbt" data-problem="depression anxiety anger" data-setting="individual group">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">Adolescents</span>
+          <span class="activity-card__badge activity-card__badge--age">Adults</span>
+          <span class="activity-card__badge activity-card__badge--modality">DBT</span>
+          <span class="activity-card__badge activity-card__badge--problem">Depression</span>
+          <span class="activity-card__badge activity-card__badge--problem">Anger</span>
+        </div>
+        <h3 class="activity-card__title">Opposite Action Role Play</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            20-30 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>
+            Individual / Group
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot--empty"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">Clients identify their emotion-driven action urge (e.g., withdraw when sad, attack when angry) and practice doing the opposite in safe role-play scenarios. The experiential practice builds the skill before real-world use.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Opposite Action reference card, scenario cards, emotion/action tracking sheet</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Teach the concept: emotions come with action urges. When the emotion does not fit the facts, act opposite.</li>
+            <li>Create a list of the client's common emotion-action urge pairs (sad=isolate, angry=yell, anxious=avoid).</li>
+            <li>For each pair, identify the opposite action (sad=engage socially, angry=speak gently, anxious=approach).</li>
+            <li>Set up a role-play scenario for one emotion. Coach the client through acting opposite.</li>
+            <li>Debrief: How did acting opposite change the feeling intensity?</li>
+            <li>Assign a small opposite action to practice between sessions. Track intensity before and after.</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            Opposite action is a core DBT emotion regulation skill based on the principle that actions maintain emotions. By changing the behavioral response, the emotion itself shifts. Role-play provides rehearsal in a safe environment and reduces avoidance of the skill in real situations.
+          </div>
+        </div>
+      </div>
+
+      <!-- 10. Mindfulness Jar (Glitter Jar) -->
+      <div class="activity-card" data-age="children adolescents" data-modality="dbt mindfulness" data-problem="anxiety anger coping-skills" data-setting="individual group family">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">Children</span>
+          <span class="activity-card__badge activity-card__badge--age">Adolescents</span>
+          <span class="activity-card__badge activity-card__badge--modality">DBT</span>
+          <span class="activity-card__badge activity-card__badge--modality">Mindfulness</span>
+          <span class="activity-card__badge activity-card__badge--problem">Anxiety</span>
+          <span class="activity-card__badge activity-card__badge--problem">Coping Skills</span>
+        </div>
+        <h3 class="activity-card__title">Mindfulness Jar (Glitter Jar)</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            15-25 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>
+            Individual / Group / Family
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">Clients create a glitter jar to use as a mindfulness tool. The swirling glitter represents overwhelming thoughts and feelings; watching it settle demonstrates how stillness calms the mind.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Clear jar with lid, warm water, clear glue, fine glitter (multiple colors), food coloring (optional), super glue for lid</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Fill the jar 3/4 with warm water, add clear glue (about 1/4 of the jar), and mix.</li>
+            <li>Add glitter -- each color can represent a different feeling (red=anger, blue=sadness, etc.).</li>
+            <li>Seal the lid tightly (super glue for young children).</li>
+            <li>Shake the jar vigorously: "This is your brain when you are upset."</li>
+            <li>Set it down and watch: "Now notice what happens when you just breathe and watch."</li>
+            <li>Practice using the jar as a "calm down" tool, breathing slowly until all glitter settles.</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            The glitter jar provides a tangible metaphor for emotional dysregulation and the process of calming. The visual focus and slow breathing that accompany watching the glitter settle activate the parasympathetic nervous system. Clients take the jar home as a portable coping tool.
+          </div>
+        </div>
+      </div>
+
+      <!-- 11. Wise Mind Meditation -->
+      <div class="activity-card" data-age="adolescents adults" data-modality="dbt mindfulness" data-problem="coping-skills anxiety depression" data-setting="individual group">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">Adolescents</span>
+          <span class="activity-card__badge activity-card__badge--age">Adults</span>
+          <span class="activity-card__badge activity-card__badge--modality">DBT</span>
+          <span class="activity-card__badge activity-card__badge--modality">Mindfulness</span>
+          <span class="activity-card__badge activity-card__badge--problem">Coping Skills</span>
+        </div>
+        <h3 class="activity-card__title">Wise Mind Meditation</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            10-15 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>
+            Individual / Group
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot--empty"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">A guided meditation that helps clients access "Wise Mind" -- the integration of emotional mind and reasonable mind. Uses a stone-in-the-lake visualization to find a centered, knowing place within.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Comfortable seating, optional: small stone as anchor object, soft background music</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Teach the three states of mind: Reasonable Mind, Emotion Mind, and Wise Mind (the overlap).</li>
+            <li>Use the Venn diagram to visualize. Wise Mind is the intersection -- intuitive knowing.</li>
+            <li>Guide a brief breathing exercise (1-2 minutes) to settle.</li>
+            <li>Lead the stone-in-the-lake visualization: "Imagine yourself as a stone, gently sinking to the bottom of a clear lake..."</li>
+            <li>At the lake bottom, ask: "From this place, what do you know to be true?"</li>
+            <li>Debrief: What did Wise Mind feel like? How was it different from Emotion Mind or Reasonable Mind?</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            Wise Mind is the foundational DBT mindfulness concept. This meditation teaches clients to access an integrated state of knowing that balances emotional reactivity with cold rationality. Regular practice builds the capacity to pause before acting on impulse and to find internal wisdom during distress.
+          </div>
+        </div>
+      </div>
+
+      <!-- 12. Distress Tolerance Bingo -->
+      <div class="activity-card" data-age="adolescents adults" data-modality="dbt" data-problem="coping-skills anxiety anger" data-setting="group">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">Adolescents</span>
+          <span class="activity-card__badge activity-card__badge--age">Adults</span>
+          <span class="activity-card__badge activity-card__badge--modality">DBT</span>
+          <span class="activity-card__badge activity-card__badge--problem">Coping Skills</span>
+          <span class="activity-card__badge activity-card__badge--setting">Group</span>
+        </div>
+        <h3 class="activity-card__title">Distress Tolerance Bingo</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            30-45 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Group
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">Between-session homework disguised as a game. Each bingo square contains a different distress tolerance skill to practice during the week. Clients mark off skills as they use them and share experiences in group.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Pre-made bingo cards with DT skills in each square, markers/daubers, small prizes (optional)</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Create bingo cards with 25 squares, each containing a DT skill (ice dive, paced breathing, ACCEPTS, self-soothe with senses, etc.).</li>
+            <li>Distribute cards at the beginning of the week or group cycle.</li>
+            <li>Clients mark off each skill they practiced during the week, noting when and how it helped.</li>
+            <li>In group, call out skills randomly. If a client used that skill, they share their experience.</li>
+            <li>First to get a row/column/diagonal wins. Celebrate with small rewards or recognition.</li>
+            <li>Discuss: Which skills were hardest to try? Which were surprisingly effective?</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            Gamification increases motivation for skills practice outside of session, which is where real behavior change occurs. The bingo format ensures clients try diverse skills rather than defaulting to one or two favorites. Group sharing normalizes the learning process and provides peer reinforcement.
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================
+           PLAY THERAPY ACTIVITIES
+           ============================ -->
+
+      <!-- 13. Feelings Faces Drawing -->
+      <div class="activity-card" data-age="children" data-modality="play-therapy art-therapy" data-problem="coping-skills self-esteem social-skills" data-setting="individual">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">Children</span>
+          <span class="activity-card__badge activity-card__badge--modality">Play Therapy</span>
+          <span class="activity-card__badge activity-card__badge--modality">Art Therapy</span>
+          <span class="activity-card__badge activity-card__badge--problem">Coping Skills</span>
+          <span class="activity-card__badge activity-card__badge--problem">Social Skills</span>
+        </div>
+        <h3 class="activity-card__title">Feelings Faces Drawing</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            15-20 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/></svg>
+            Individual
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">Children draw faces showing different emotions on blank face templates. They label each emotion, share a time they felt that way, and identify where in their body they feel it. Builds emotional vocabulary and interoceptive awareness.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Blank face templates, crayons/markers, feelings word list, body outline template</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Provide 6-8 blank face templates and coloring supplies.</li>
+            <li>Ask the child to draw faces showing different feelings. Start with basic emotions (happy, sad, angry, scared).</li>
+            <li>Expand to more nuanced feelings (frustrated, embarrassed, excited, lonely, proud).</li>
+            <li>For each face, ask: "Tell me about a time you felt this way."</li>
+            <li>On the body outline, color where each emotion "lives" in the body.</li>
+            <li>Create a personal "feelings dictionary" the child can reference between sessions.</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            Emotional literacy is foundational for emotional regulation. Children who can identify and name emotions are better able to communicate needs and use coping strategies. The body mapping component builds interoceptive awareness, connecting cognitive labels to physical experiences.
+          </div>
+        </div>
+      </div>
+
+      <!-- 14. Sand Tray Scenario -->
+      <div class="activity-card" data-age="children adolescents" data-modality="play-therapy" data-problem="trauma grief anxiety" data-setting="individual">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">Children</span>
+          <span class="activity-card__badge activity-card__badge--age">Adolescents</span>
+          <span class="activity-card__badge activity-card__badge--modality">Play Therapy</span>
+          <span class="activity-card__badge activity-card__badge--problem">Trauma</span>
+          <span class="activity-card__badge activity-card__badge--problem">Grief</span>
+        </div>
+        <h3 class="activity-card__title">Sand Tray Scenario</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            30-45 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/></svg>
+            Individual
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">Clients use miniature figures in a sand tray to create scenes representing their inner world, family system, or a specific experience. The non-verbal medium allows expression of experiences that may be difficult to verbalize.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Sand tray, collection of miniature figures (people, animals, buildings, vehicles, natural objects, symbols)</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Invite the client to "build a world" or "show me what it looks like inside" using the figures.</li>
+            <li>Remain present but do not direct. Observe choices, placement, interactions between figures.</li>
+            <li>When the scene is complete, ask open-ended questions: "Tell me about your world."</li>
+            <li>Note proximity and distance between figures, barriers, what is central vs. peripheral.</li>
+            <li>If appropriate, ask "If you could change one thing in this world, what would it be?"</li>
+            <li>Photograph the scene for clinical records (with permission). Discuss themes that emerged.</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            Sand tray therapy provides a projective, non-verbal medium for expression. It bypasses language barriers and defenses, making it particularly effective for trauma work where verbal narrative may be overwhelming. The spatial relationships between figures reveal relational dynamics and internal models.
+          </div>
+        </div>
+      </div>
+
+      <!-- 15. Puppet Interview -->
+      <div class="activity-card" data-age="children" data-modality="play-therapy" data-problem="anxiety social-skills self-esteem" data-setting="individual family">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">Children</span>
+          <span class="activity-card__badge activity-card__badge--modality">Play Therapy</span>
+          <span class="activity-card__badge activity-card__badge--problem">Anxiety</span>
+          <span class="activity-card__badge activity-card__badge--problem">Social Skills</span>
+          <span class="activity-card__badge activity-card__badge--problem">Self-Esteem</span>
+        </div>
+        <h3 class="activity-card__title">Puppet Interview</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            15-25 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/></svg>
+            Individual / Family
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">The clinician uses a puppet to "interview" the child, or the child uses puppets to act out scenarios. The displacement through puppets reduces defensiveness and allows children to disclose feelings they might not share directly.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> 3-5 diverse puppets (animal and people), puppet stage (optional)</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Let the child choose a puppet. The clinician takes a different puppet.</li>
+            <li>The clinician's puppet introduces itself and asks simple, open-ended questions in character.</li>
+            <li>Start with easy topics ("What is your favorite thing to do?") before deeper exploration.</li>
+            <li>Gradually introduce therapeutically relevant questions through the puppet ("What makes your puppet worried?").</li>
+            <li>If the child's puppet shares a problem, the clinician's puppet can model coping or problem-solving.</li>
+            <li>Debrief gently: "Your puppet shared something important. Do you ever feel that way too?"</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            Puppets provide psychological distance (displacement) that allows children to project feelings onto the puppet character. This reduces shame, defensiveness, and direct vulnerability. The play format aligns with children's natural mode of expression and communication.
+          </div>
+        </div>
+      </div>
+
+      <!-- 16. Therapeutic Board Game -->
+      <div class="activity-card" data-age="children adolescents" data-modality="play-therapy" data-problem="social-skills coping-skills self-esteem" data-setting="individual group family">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">Children</span>
+          <span class="activity-card__badge activity-card__badge--age">Adolescents</span>
+          <span class="activity-card__badge activity-card__badge--modality">Play Therapy</span>
+          <span class="activity-card__badge activity-card__badge--problem">Social Skills</span>
+          <span class="activity-card__badge activity-card__badge--problem">Coping Skills</span>
+          <span class="activity-card__badge activity-card__badge--setting">Group</span>
+        </div>
+        <h3 class="activity-card__title">Therapeutic Board Game Adaptation</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            25-40 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Individual / Group / Family
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">Adapt any simple board game (Candyland, Chutes and Ladders, etc.) by adding therapeutic question cards. When a player lands on a designated space, they draw a card with a feelings question, coping skill challenge, or social scenario.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Any simple board game, deck of therapeutic question cards (pre-made or created with client)</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Select a board game the client enjoys. Create 20-30 question cards divided into categories.</li>
+            <li>Categories: Feelings ("Name a time you felt proud"), Coping ("Show us a deep breath"), Social ("What would you do if..."), Self-Esteem ("Name something you are good at").</li>
+            <li>Designate which game spaces trigger a card draw (e.g., every colored space, when rolling doubles).</li>
+            <li>Play the game normally, pausing for card draws. Model thoughtful answers yourself.</li>
+            <li>In family sessions, all players answer, providing rich relational material.</li>
+            <li>Let the client create new cards to add to the deck, personalizing the activity.</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            Structured game play reduces performance anxiety around therapeutic disclosure. The game provides a shared activity that regulates arousal and engagement. Turn-taking builds social skills organically, and the question cards ensure therapeutic content without the pressure of direct questioning.
+          </div>
+        </div>
+      </div>
+
+      <!-- 17. Emotion Charades -->
+      <div class="activity-card" data-age="children adolescents" data-modality="play-therapy" data-problem="social-skills coping-skills" data-setting="group family">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">Children</span>
+          <span class="activity-card__badge activity-card__badge--age">Adolescents</span>
+          <span class="activity-card__badge activity-card__badge--modality">Play Therapy</span>
+          <span class="activity-card__badge activity-card__badge--problem">Social Skills</span>
+          <span class="activity-card__badge activity-card__badge--problem">Coping Skills</span>
+          <span class="activity-card__badge activity-card__badge--setting">Group</span>
+        </div>
+        <h3 class="activity-card__title">Emotion Charades</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            15-25 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Group / Family
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">Players take turns acting out emotions without words while others guess. Includes basic and complex emotions. After each round, the group discusses situations that cause that feeling and healthy responses to it.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Emotion cards (20-30, ranging from basic to complex emotions), timer (optional)</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Prepare emotion cards with basic (happy, sad, angry, scared) and nuanced (jealous, embarrassed, guilty, proud, confused) emotions.</li>
+            <li>Each person draws a card and acts out the emotion using face, body, and gestures -- no words.</li>
+            <li>Others guess the emotion. Discuss: "What clues helped you figure it out?"</li>
+            <li>After guessing, discuss: "When might someone feel this way?" and "What could help?"</li>
+            <li>For advanced rounds, act out scenarios rather than single emotions (e.g., "losing a game and being a good sport").</li>
+            <li>Debrief: How does noticing body language help us understand others' feelings?</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            Charades builds emotional recognition skills through embodiment and observation. Acting out emotions strengthens the mind-body connection, while guessing builds empathy and social awareness. The physical, active format is engaging for children who struggle with talk-based therapy.
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================
+           ART THERAPY ACTIVITIES
+           ============================ -->
+
+      <!-- 18. Feelings Collage -->
+      <div class="activity-card" data-age="children adolescents adults all-ages" data-modality="art-therapy" data-problem="self-esteem depression grief" data-setting="individual group">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">All Ages</span>
+          <span class="activity-card__badge activity-card__badge--modality">Art Therapy</span>
+          <span class="activity-card__badge activity-card__badge--problem">Self-Esteem</span>
+          <span class="activity-card__badge activity-card__badge--problem">Depression</span>
+          <span class="activity-card__badge activity-card__badge--problem">Grief</span>
+        </div>
+        <h3 class="activity-card__title">Feelings Collage</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            25-40 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>
+            Individual / Group
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot--empty"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">Clients create a collage from magazine images, words, and textures that represents their current emotional state, a particular theme (e.g., "my strengths"), or their hopes for the future. The selection process itself is revealing.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Magazines, scissors, glue sticks, cardstock/poster board, markers</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Provide the prompt: "Create a collage that shows how you feel right now" or a specific theme.</li>
+            <li>Allow 15-20 minutes for browsing, selecting, and arranging images and words.</li>
+            <li>Do not direct the process. Notice what catches the client's attention.</li>
+            <li>Once complete, invite the client to "walk you through" their collage.</li>
+            <li>Ask about specific choices: "What drew you to this image?" "Tell me about this word you chose."</li>
+            <li>Reflect themes and connections you notice. The collage can serve as a reference point for future sessions.</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            Collage is a low-threat art therapy intervention because it does not require drawing skill, making it accessible to all ages. The process of selecting pre-existing images allows unconscious material to surface through attraction and resonance. It also provides a concrete artifact for tracking therapeutic progress over time.
+          </div>
+        </div>
+      </div>
+
+      <!-- 19. Safe Place Drawing -->
+      <div class="activity-card" data-age="children adolescents adults all-ages" data-modality="art-therapy" data-problem="trauma anxiety coping-skills" data-setting="individual">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">All Ages</span>
+          <span class="activity-card__badge activity-card__badge--modality">Art Therapy</span>
+          <span class="activity-card__badge activity-card__badge--problem">Trauma</span>
+          <span class="activity-card__badge activity-card__badge--problem">Anxiety</span>
+          <span class="activity-card__badge activity-card__badge--problem">Coping Skills</span>
+        </div>
+        <h3 class="activity-card__title">Safe Place Drawing</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            20-30 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/></svg>
+            Individual
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot--empty"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">Clients draw or paint a real or imagined place where they feel completely safe and calm. They add sensory details and use the image as an anchor for guided visualization during distressing moments.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Drawing paper, colored pencils/markers/watercolors, calming background music (optional)</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Guide a brief relaxation exercise to settle into the creative process.</li>
+            <li>Ask: "Think of a place -- real or imaginary -- where you feel completely safe and at peace."</li>
+            <li>Invite them to draw this place with as much detail as possible.</li>
+            <li>As they draw, prompt sensory exploration: "What do you hear there? What does the air smell like? What textures do you feel?"</li>
+            <li>Once complete, practice visualization: Close eyes, breathe, mentally "enter" the safe place using all senses.</li>
+            <li>Photograph or keep the drawing. Practice the visualization as a homework coping tool.</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            Safe place imagery is a resource-building technique used in trauma therapy (EMDR, Sensorimotor). Creating a visual representation strengthens the mental image and makes it more accessible during distress. The drawing process itself is calming and regulating, and the finished product serves as a portable coping tool.
+          </div>
+        </div>
+      </div>
+
+      <!-- 20. Anger Volcano -->
+      <div class="activity-card" data-age="children adolescents" data-modality="art-therapy" data-problem="anger coping-skills" data-setting="individual">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">Children</span>
+          <span class="activity-card__badge activity-card__badge--age">Adolescents</span>
+          <span class="activity-card__badge activity-card__badge--modality">Art Therapy</span>
+          <span class="activity-card__badge activity-card__badge--problem">Anger</span>
+          <span class="activity-card__badge activity-card__badge--problem">Coping Skills</span>
+        </div>
+        <h3 class="activity-card__title">Anger Volcano</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            20-30 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/></svg>
+            Individual
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">Clients draw a volcano with layers showing what builds underneath anger (hurt, frustration, fear, embarrassment) before it "erupts." They then add coping strategies around the volcano that can prevent or reduce eruptions.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Large paper, markers/crayons, volcano template (optional)</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Draw a large volcano shape. Explain that anger is like a volcano -- it builds up before it erupts.</li>
+            <li>In the layers inside the volcano, write or draw the feelings that build up underneath (hurt, frustration, embarrassment, fear).</li>
+            <li>At the top (the eruption), write what happens when anger "blows" -- yelling, hitting, crying.</li>
+            <li>Around the outside, draw "cooling strategies" that can lower the pressure: deep breathing, walking away, talking to someone.</li>
+            <li>Identify early warning signs (body sensations) that signal the volcano is building.</li>
+            <li>Create a personal "volcano prevention plan" using the client's best strategies.</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            The volcano metaphor helps children understand anger as a process with identifiable stages, not an uncontrollable event. Identifying underlying emotions (hurt, fear) beneath anger builds emotional complexity and empathy. The visual format is memorable and can be referenced in future sessions as shorthand.
+          </div>
+        </div>
+      </div>
+
+      <!-- 21. Worry Monster Craft -->
+      <div class="activity-card" data-age="children" data-modality="art-therapy" data-problem="anxiety coping-skills" data-setting="individual family">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">Children</span>
+          <span class="activity-card__badge activity-card__badge--modality">Art Therapy</span>
+          <span class="activity-card__badge activity-card__badge--problem">Anxiety</span>
+          <span class="activity-card__badge activity-card__badge--problem">Coping Skills</span>
+        </div>
+        <h3 class="activity-card__title">Worry Monster Craft</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            25-35 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/></svg>
+            Individual / Family
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">Children create a "Worry Monster" from a tissue box or paper bag -- a friendly monster that "eats" their worries. They write worries on paper, feed them to the monster, and the worries become the monster's problem, not theirs.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Empty tissue box or paper bag, construction paper, googly eyes, glue, markers, small paper strips</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Decorate the tissue box or bag to look like a friendly monster (big mouth for the opening).</li>
+            <li>Name the Worry Monster -- giving it a silly name reduces anxiety around the concept.</li>
+            <li>Write current worries on small paper strips.</li>
+            <li>"Feed" the worries to the monster by putting them in the box mouth.</li>
+            <li>Discuss: "The monster is very brave and can handle all your worries. Now they are the monster's problem!"</li>
+            <li>Take the monster home. Each night, feed it any worries from the day before bed.</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            Externalizing anxiety through a concrete, playful object helps children separate themselves from their worries. The ritual of "feeding" the monster provides a structured containment activity, especially useful at bedtime when anxiety often peaks. The creative process builds self-efficacy and ownership of the coping strategy.
+          </div>
+        </div>
+      </div>
+
+      <!-- 22. Strength Shield -->
+      <div class="activity-card" data-age="children adolescents" data-modality="art-therapy narrative" data-problem="self-esteem trauma" data-setting="individual group">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">Children</span>
+          <span class="activity-card__badge activity-card__badge--age">Adolescents</span>
+          <span class="activity-card__badge activity-card__badge--modality">Art Therapy</span>
+          <span class="activity-card__badge activity-card__badge--modality">Narrative</span>
+          <span class="activity-card__badge activity-card__badge--problem">Self-Esteem</span>
+          <span class="activity-card__badge activity-card__badge--problem">Trauma</span>
+        </div>
+        <h3 class="activity-card__title">Strength Shield</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            20-30 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>
+            Individual / Group
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot--empty"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">Clients design a personal shield divided into 4-6 sections, each representing a different strength, value, support person, or accomplishment. The shield symbolizes their inner resources and can be referenced when facing challenges.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Shield template (large), markers, stickers, magazines for collage, cardboard (optional for 3D version)</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Provide a large shield template divided into 4-6 sections.</li>
+            <li>Assign each section a prompt: My greatest strength, Someone who supports me, Something I have overcome, A value I live by, What makes me unique, A goal I am working toward.</li>
+            <li>Clients fill each section with drawings, words, or collage images.</li>
+            <li>Decorate the border and add a personal motto or "battle cry."</li>
+            <li>Present the shield: "Tell me about your shield. How does it protect you?"</li>
+            <li>In future sessions, reference the shield when the client faces challenges: "What part of your shield can help you here?"</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            Identifying and visualizing strengths counters the negativity bias common in depression and trauma. The shield metaphor conveys resilience and protection, which is empowering for clients who feel vulnerable. The concrete artifact serves as a lasting reminder of resources that can be accessed in difficult moments.
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================
+           MINDFULNESS ACTIVITIES
+           ============================ -->
+
+      <!-- 23. Body Scan Script -->
+      <div class="activity-card" data-age="adolescents adults all-ages" data-modality="mindfulness" data-problem="anxiety coping-skills trauma" data-setting="individual group">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">All Ages</span>
+          <span class="activity-card__badge activity-card__badge--modality">Mindfulness</span>
+          <span class="activity-card__badge activity-card__badge--problem">Anxiety</span>
+          <span class="activity-card__badge activity-card__badge--problem">Coping Skills</span>
+        </div>
+        <h3 class="activity-card__title">Body Scan Script</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            10-20 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>
+            Individual / Group
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot--empty"></span>
+              <span class="activity-card__dot--empty"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">A guided meditation that moves attention systematically through the body from head to toe, noticing sensations without judgment. Builds interoceptive awareness and serves as both a grounding technique and a mindfulness practice.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Comfortable seating or mat, body scan script, optional soft music</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Have the client sit or lie comfortably. Dim lights if possible. Begin with 3 deep breaths.</li>
+            <li>Guide attention to the top of the head: "Notice any sensations here... warmth, tingling, nothing at all."</li>
+            <li>Move slowly through each body area: forehead, jaw, neck, shoulders, arms, hands, chest, stomach, back, hips, legs, feet.</li>
+            <li>At each area, invite curiosity without judgment: "Just notice what is there."</li>
+            <li>If the client notices tension, guide them to breathe into that area and soften.</li>
+            <li>End with whole-body awareness. Debrief: What did you notice? Any surprises?</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            Body scanning builds interoceptive awareness -- the ability to notice internal states -- which is foundational for emotional regulation. It teaches non-judgmental observation, reducing the tendency to react to sensations with alarm. Regular practice has been shown to reduce anxiety, improve sleep, and increase body-emotion connection.
+          </div>
+        </div>
+      </div>
+
+      <!-- 24. 5-4-3-2-1 Grounding -->
+      <div class="activity-card" data-age="children adolescents adults all-ages" data-modality="mindfulness" data-problem="anxiety trauma coping-skills" data-setting="individual group family">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">All Ages</span>
+          <span class="activity-card__badge activity-card__badge--modality">Mindfulness</span>
+          <span class="activity-card__badge activity-card__badge--problem">Anxiety</span>
+          <span class="activity-card__badge activity-card__badge--problem">Trauma</span>
+          <span class="activity-card__badge activity-card__badge--problem">Coping Skills</span>
+        </div>
+        <h3 class="activity-card__title">5-4-3-2-1 Grounding Walk-Through</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            5-10 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Individual / Group / Family
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot--empty"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">A sensory grounding technique: name 5 things you see, 4 you hear, 3 you can touch, 2 you smell, and 1 you taste. Quickly anchors attention to the present moment and interrupts dissociation or panic spirals.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> None required; optional 5-4-3-2-1 reference card</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Explain the purpose: "When we are anxious or overwhelmed, our mind leaves the present. This brings you back."</li>
+            <li>Start with sight: "Name 5 things you can see right now." Have them look around and describe each one.</li>
+            <li>Sound: "Name 4 things you can hear." Encourage noticing subtle sounds (clock ticking, air conditioning).</li>
+            <li>Touch: "Name 3 things you can physically feel." (chair under you, feet on floor, fabric of shirt)</li>
+            <li>Smell: "Name 2 things you can smell." If nothing obvious, have them smell their sleeve or hand.</li>
+            <li>Taste: "Name 1 thing you can taste." (residual taste in mouth, or offer a mint to create one)</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            Sensory grounding redirects attention from internal distress to external, present-moment stimuli. It activates the ventral vagal system and interrupts the fight-flight-freeze response. Its simplicity makes it one of the most accessible and widely applicable coping skills across diagnoses and settings.
+          </div>
+        </div>
+      </div>
+
+      <!-- 25. Mindful Eating Exercise -->
+      <div class="activity-card" data-age="adolescents adults" data-modality="mindfulness" data-problem="anxiety coping-skills" data-setting="individual group">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">Adolescents</span>
+          <span class="activity-card__badge activity-card__badge--age">Adults</span>
+          <span class="activity-card__badge activity-card__badge--modality">Mindfulness</span>
+          <span class="activity-card__badge activity-card__badge--problem">Anxiety</span>
+          <span class="activity-card__badge activity-card__badge--problem">Coping Skills</span>
+        </div>
+        <h3 class="activity-card__title">Mindful Eating Exercise</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            10-15 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>
+            Individual / Group
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot--empty"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">Using a single raisin (or small piece of chocolate), guide clients through a full sensory exploration: seeing, touching, smelling, hearing, and tasting with full attention. Demonstrates the power of present-moment awareness.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Raisins, small chocolates, or another small food item (check allergies first)</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Give each person one raisin (or food item). Ask them to hold it and not eat it yet.</li>
+            <li>Seeing: "Look at it as if you have never seen one before. Notice the color, texture, ridges."</li>
+            <li>Touching: "Feel it between your fingers. Squeeze gently. What do you notice?"</li>
+            <li>Smelling: "Hold it under your nose. Inhale. What do you notice?"</li>
+            <li>Placing: "Slowly place it on your tongue. Do not chew yet. What sensations arise?"</li>
+            <li>Tasting: "Now begin to chew very slowly. Notice the explosion of flavor. How does it change?"</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            The raisin exercise (from MBSR) is a powerful demonstration that mindfulness can transform any ordinary experience. It teaches focused attention, non-judgmental observation, and patience. Many clients find it revelatory and are motivated to practice mindfulness in daily activities as a result.
+          </div>
+        </div>
+      </div>
+
+      <!-- 26. Breathing Buddy -->
+      <div class="activity-card" data-age="children" data-modality="mindfulness" data-problem="anxiety coping-skills anger" data-setting="individual group family">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">Children</span>
+          <span class="activity-card__badge activity-card__badge--modality">Mindfulness</span>
+          <span class="activity-card__badge activity-card__badge--problem">Anxiety</span>
+          <span class="activity-card__badge activity-card__badge--problem">Coping Skills</span>
+          <span class="activity-card__badge activity-card__badge--problem">Anger</span>
+        </div>
+        <h3 class="activity-card__title">Breathing Buddy</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            5-10 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Individual / Group / Family
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">Children lie down and place a stuffed animal on their belly. They watch it rise and fall with each breath, learning diaphragmatic breathing through the concrete, visual feedback of their "breathing buddy" riding the waves.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Stuffed animals (one per child), yoga mats or comfortable floor space</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Have each child choose a stuffed animal "breathing buddy."</li>
+            <li>Lie down comfortably and place the buddy on their belly.</li>
+            <li>"Your buddy wants a nice, smooth ride. Breathe in slowly through your nose and watch it rise."</li>
+            <li>"Now breathe out through your mouth and watch it gently come back down."</li>
+            <li>Practice 8-10 breaths. "Can you make the ride so smooth your buddy falls asleep?"</li>
+            <li>Debrief: "How does your body feel now compared to before? You can do this any time you feel upset."</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            Diaphragmatic breathing activates the parasympathetic nervous system, reducing heart rate and cortisol. The stuffed animal provides concrete visual feedback that makes belly breathing accessible to young children who cannot follow abstract breathing instructions. The caregiving frame (giving the buddy a smooth ride) adds motivation and engagement.
+          </div>
+        </div>
+      </div>
+
+      <!-- 27. Progressive Muscle Relaxation Script -->
+      <div class="activity-card" data-age="adolescents adults all-ages" data-modality="mindfulness" data-problem="anxiety coping-skills anger" data-setting="individual group">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">All Ages</span>
+          <span class="activity-card__badge activity-card__badge--modality">Mindfulness</span>
+          <span class="activity-card__badge activity-card__badge--problem">Anxiety</span>
+          <span class="activity-card__badge activity-card__badge--problem">Coping Skills</span>
+        </div>
+        <h3 class="activity-card__title">Progressive Muscle Relaxation Script</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            10-20 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>
+            Individual / Group
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot--empty"></span>
+              <span class="activity-card__dot--empty"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">Guide clients through systematically tensing and releasing each muscle group for 5-7 seconds each. The contrast between tension and relaxation teaches body awareness and demonstrates that relaxation is an active skill, not passive.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Comfortable seating, PMR script, optional calming music</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Have the client sit or lie comfortably. Explain the tense-and-release cycle.</li>
+            <li>Start with hands: "Make tight fists. Hold for 5 seconds... now release. Notice the difference."</li>
+            <li>Progress through muscle groups: forearms, biceps, shoulders, forehead, jaw, neck, chest, stomach, thighs, calves, feet.</li>
+            <li>At each group, hold tension for 5-7 seconds, then release for 15-20 seconds.</li>
+            <li>Guide awareness to the contrast: "Notice how the relaxation feels different from the tension."</li>
+            <li>End with a full-body check-in. Rate relaxation level before vs. after. Assign daily practice.</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            PMR (Jacobson) is one of the most researched relaxation techniques. The deliberate tensing-then-releasing teaches clients the difference between tension and relaxation, which many anxious or traumatized individuals have lost awareness of. It is especially useful for clients who find stillness-based meditation difficult, as it provides an active focus.
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================
+           GROUP ACTIVITIES
+           ============================ -->
+
+      <!-- 28. Two Truths and a Lie (Adapted) -->
+      <div class="activity-card" data-age="adolescents adults" data-modality="group" data-problem="social-skills self-esteem" data-setting="group">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">Adolescents</span>
+          <span class="activity-card__badge activity-card__badge--age">Adults</span>
+          <span class="activity-card__badge activity-card__badge--modality">Group</span>
+          <span class="activity-card__badge activity-card__badge--problem">Social Skills</span>
+          <span class="activity-card__badge activity-card__badge--problem">Self-Esteem</span>
+          <span class="activity-card__badge activity-card__badge--setting">Group</span>
+        </div>
+        <h3 class="activity-card__title">Two Truths and a Lie (Adapted)</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            15-20 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Group
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">A therapeutic adaptation of the classic icebreaker. The prompt is tailored: "Two strengths and one thing you wish you were better at" or "Two coping skills you use and one you have never tried." Builds connection and normalizes shared experiences.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Index cards, pens; optional: prompt variations list</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Explain the adapted version: "Share three statements about yourself -- two true, one false -- but use our prompt."</li>
+            <li>Give the prompt for the round (e.g., "Two strengths and one thing you wish you were better at").</li>
+            <li>Give 2-3 minutes to write their three statements on index cards.</li>
+            <li>Each person shares their statements. The group guesses which is false.</li>
+            <li>After the reveal, invite follow-up: "Tell us more about that strength" or "Who else identified with that?"</li>
+            <li>Run additional rounds with different prompts as time allows. Debrief shared themes.</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            This activity builds group cohesion while practicing vulnerability in a structured, low-risk format. Therapeutic prompts ensure the content is clinically relevant. Discovering shared experiences normalizes struggles and reduces shame. The game format makes self-disclosure feel less threatening than direct sharing.
+          </div>
+        </div>
+      </div>
+
+      <!-- 29. Coping Skills Relay -->
+      <div class="activity-card" data-age="children adolescents" data-modality="group" data-problem="coping-skills social-skills" data-setting="group">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">Children</span>
+          <span class="activity-card__badge activity-card__badge--age">Adolescents</span>
+          <span class="activity-card__badge activity-card__badge--modality">Group</span>
+          <span class="activity-card__badge activity-card__badge--problem">Coping Skills</span>
+          <span class="activity-card__badge activity-card__badge--problem">Social Skills</span>
+          <span class="activity-card__badge activity-card__badge--setting">Group</span>
+        </div>
+        <h3 class="activity-card__title">Coping Skills Relay</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            20-30 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Group
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">Teams race to complete coping skill challenges from station to station. Each station presents a scenario and requires demonstrating an appropriate coping skill before moving on. Combines movement, teamwork, and skills practice.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Scenario cards for each station, station markers, timer, scoreboard</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Set up 5-6 stations around the room, each with a scenario card and a required coping skill.</li>
+            <li>Station examples: "Your friend said something mean" (use an I-statement), "You feel a panic attack coming" (do 5-4-3-2-1 grounding), "You got a bad grade" (challenge the negative thought).</li>
+            <li>Divide into teams of 2-3. Teams rotate through stations, completing each challenge.</li>
+            <li>A facilitator at each station confirms the skill was demonstrated before they move on.</li>
+            <li>First team to complete all stations wins. Celebrate all teams' efforts.</li>
+            <li>Debrief: Which station was hardest? Which skill do you want to practice more?</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            Active, physical learning enhances skill acquisition and retention, especially for children and adolescents. The team format builds peer support and accountability. The relay format creates urgency that mimics real-world stress, giving clients a chance to practice skills under mild pressure in a safe environment.
+          </div>
+        </div>
+      </div>
+
+      <!-- 30. Feelings Bingo -->
+      <div class="activity-card" data-age="children adolescents" data-modality="group" data-problem="social-skills coping-skills self-esteem" data-setting="group">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">Children</span>
+          <span class="activity-card__badge activity-card__badge--age">Adolescents</span>
+          <span class="activity-card__badge activity-card__badge--modality">Group</span>
+          <span class="activity-card__badge activity-card__badge--problem">Social Skills</span>
+          <span class="activity-card__badge activity-card__badge--problem">Self-Esteem</span>
+          <span class="activity-card__badge activity-card__badge--setting">Group</span>
+        </div>
+        <h3 class="activity-card__title">Feelings Bingo</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            15-25 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Group
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">Bingo cards with feeling words in each square. The caller reads scenarios ("Your best friend moves away") and players mark which feeling they would experience. Multiple feelings can be valid, sparking rich group discussion.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Pre-made Feelings Bingo cards (various feeling words per card), scenario call-out list, markers/chips</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Distribute bingo cards with diverse feeling words (excited, worried, proud, jealous, grateful, lonely, etc.).</li>
+            <li>Read a scenario: "You are picked last for a team" or "Someone compliments your drawing."</li>
+            <li>Each player marks the feeling(s) they would experience in that scenario.</li>
+            <li>Pause after each round to discuss: "Who marked 'embarrassed'? Who marked 'angry'? Both are valid!"</li>
+            <li>Continue until someone gets bingo. Play multiple rounds with different scenarios.</li>
+            <li>Debrief: "We learned that the same situation can cause different feelings for different people. None are wrong."</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            Feelings Bingo builds emotional vocabulary while normalizing the range of emotional responses. Hearing that others experience different feelings in the same situation builds empathy and reduces the sense that one's own reactions are "wrong." The game format keeps engagement high, particularly with younger groups.
+          </div>
+        </div>
+      </div>
+
+      <!-- 31. Support Web Activity -->
+      <div class="activity-card" data-age="adolescents adults" data-modality="group narrative" data-problem="social-skills self-esteem grief" data-setting="group">
+        <div class="activity-card__badges">
+          <span class="activity-card__badge activity-card__badge--age">Adolescents</span>
+          <span class="activity-card__badge activity-card__badge--age">Adults</span>
+          <span class="activity-card__badge activity-card__badge--modality">Group</span>
+          <span class="activity-card__badge activity-card__badge--modality">Narrative</span>
+          <span class="activity-card__badge activity-card__badge--problem">Social Skills</span>
+          <span class="activity-card__badge activity-card__badge--problem">Self-Esteem</span>
+          <span class="activity-card__badge activity-card__badge--problem">Grief</span>
+          <span class="activity-card__badge activity-card__badge--setting">Group</span>
+        </div>
+        <h3 class="activity-card__title">Support Web Activity</h3>
+        <div class="activity-card__meta">
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            15-25 min
+          </span>
+          <span class="activity-card__meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Group
+          </span>
+          <span class="activity-card__meta-item">
+            Engagement:
+            <span class="activity-card__engagement">
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+              <span class="activity-card__dot"></span>
+            </span>
+          </span>
+        </div>
+        <p class="activity-card__desc">Group members stand in a circle and pass a ball of yarn. Each person shares something they appreciate about the person they are passing to. The resulting web visually demonstrates the interconnected support network they have built.</p>
+        <p class="activity-card__materials"><strong>Materials:</strong> Ball of yarn or string</p>
+        <button class="activity-card__expand" onclick="toggleDetails(this)">
+          How to Run This Activity
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="activity-card__details">
+          <ol class="activity-card__steps">
+            <li>Stand in a circle. One person holds the yarn ball.</li>
+            <li>They share something they appreciate or admire about another person in the group.</li>
+            <li>They hold their end of the yarn and toss the ball to that person.</li>
+            <li>Continue until everyone has received at least one compliment and the yarn forms a web.</li>
+            <li>Pull the web taut: "This is the support network you have built. When one person struggles, the web holds them up."</li>
+            <li>Optional: If one person drops their strand, the web weakens -- demonstrating why showing up matters.</li>
+          </ol>
+          <div class="activity-card__rationale">
+            <strong>Therapeutic Rationale</strong>
+            The Support Web creates a visceral, visual experience of connection and mutual support. Receiving genuine appreciation from peers is a powerful antidote to shame and isolation. The physical web demonstrates systems thinking -- that we are all interconnected and that each person's presence strengthens the group.
+          </div>
+        </div>
+      </div>
+
+      <!-- No results message -->
+      <div class="no-results" id="noResults">
+        <div class="no-results__icon">&#128269;</div>
+        <h3 class="no-results__title">No activities match your filters</h3>
+        <p class="no-results__desc">Try removing some filters or adjusting your search terms.</p>
+      </div>
+
+    </div><!-- /.activities-grid -->
+
+
+    <!-- ============================================================
+         HOW TO USE SECTION
+         ============================================================ -->
+    <section style="margin-top:var(--ds-space-20)">
+      <div class="section-header">
+        <h2 class="section-header__title">How to Use These Activities</h2>
+      </div>
+      <div class="guidance-grid">
+
+        <div class="guidance-card">
+          <div class="guidance-card__icon">&#127919;</div>
+          <h3 class="guidance-card__title">Match to Treatment Goals</h3>
+          <p class="guidance-card__desc">Select activities that align with the client's treatment plan goals. Use the filter system to narrow by presenting problem and modality. The most effective activities feel purposeful, not random -- connect each activity to a specific therapeutic objective.</p>
+        </div>
+
+        <div class="guidance-card">
+          <div class="guidance-card__icon">&#9881;&#65039;</div>
+          <h3 class="guidance-card__title">Adapt for Your Client</h3>
+          <p class="guidance-card__desc">Every activity can be modified. Adjust language for developmental level, simplify steps for cognitive challenges, extend time for processing needs, or add cultural references that resonate. The activity is a starting point -- your clinical judgment shapes how it lands.</p>
+        </div>
+
+        <div class="guidance-card">
+          <div class="guidance-card__icon">&#128203;</div>
+          <h3 class="guidance-card__title">Document and Track</h3>
+          <p class="guidance-card__desc">Note which activities each client responded to positively. Track engagement level, therapeutic insights that emerged, and whether the skill generalized outside session. This data informs future activity selection and demonstrates progress for treatment reviews.</p>
+        </div>
+
+        <div class="guidance-card">
+          <div class="guidance-card__icon">&#128257;</div>
+          <h3 class="guidance-card__title">Build a Sequence</h3>
+          <p class="guidance-card__desc">Activities work best as part of a progression. Start with simpler, higher-engagement activities to build rapport, then introduce activities that require more vulnerability or abstract thinking. Revisit favorites to deepen skills over time.</p>
+        </div>
+
+        <div class="guidance-card">
+          <div class="guidance-card__icon">&#128101;</div>
+          <h3 class="guidance-card__title">Consider the Setting</h3>
+          <p class="guidance-card__desc">Individual activities can often be adapted for group use and vice versa. Group activities require more structure and clear facilitation. Family activities should include all members as active participants, not observers. Adjust pacing for group size.</p>
+        </div>
+
+        <div class="guidance-card">
+          <div class="guidance-card__icon">&#129504;</div>
+          <h3 class="guidance-card__title">Debrief Every Time</h3>
+          <p class="guidance-card__desc">The activity itself is only half the intervention -- the processing conversation afterward is where therapeutic insight crystallizes. Always reserve time for debriefing. Ask what the client noticed, felt, and learned, and connect it back to their real-world experiences.</p>
+        </div>
+
+      </div>
+    </section>
+
+  </div><!-- /.ds-container -->
+</main>
+
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="ds-container">
+
+    <div class="footer__grid">
+
+      <!-- Brand column -->
+      <div>
+        <a href="index.html" class="site-nav__logo" style="text-decoration:none">
+          <div class="site-nav__logo-mark">NH</div>
+          <span class="site-nav__logo-text">MH Resources</span>
+        </a>
+        <p class="footer__brand-desc">A comprehensive resource hub for clinicians, case managers, and community members in the Greater Nashua area.</p>
+
+        <div class="footer__crisis-box">
+          <div class="footer__crisis-title">Crisis? Get help now.</div>
+          <div class="footer__crisis-numbers">
+            <strong>988</strong> Suicide &amp; Crisis Lifeline<br>
+            <strong>1-833-710-6477</strong> NH Rapid Response<br>
+            <strong>(603) 889-6147</strong> GNMHC Crisis<br>
+            <strong>Text HOME to 741741</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigate -->
+      <div>
+        <div class="footer__col-title">Navigate</div>
+        <ul class="footer__links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="tools.html">Clinical Tools</a></li>
+          <li><a href="guide.html">Guides</a></li>
+          <li><a href="neurobiology.html">Brain &amp; Neuro</a></li>
+          <li><a href="worksheets.html">Worksheets</a></li>
+          <li><a href="activities.html">Activities</a></li>
+        </ul>
+      </div>
+
+      <!-- Quick Access -->
+      <div>
+        <div class="footer__col-title">Quick Access</div>
+        <ul class="footer__links">
+          <li><a href="tools.html#screening-tools">Screening Tools</a></li>
+          <li><a href="tools.html#clinical-note-builder">Note Builder</a></li>
+          <li><a href="guide.html#crisisTree">Crisis Tree</a></li>
+          <li><a href="resources.html#housing">Housing Resources</a></li>
+        </ul>
+      </div>
+
+      <!-- Clinical -->
+      <div>
+        <div class="footer__col-title">Clinical</div>
+        <ul class="footer__links">
+          <li><a href="tools.html#cbt">CBT Worksheets</a></li>
+          <li><a href="tools.html#dbt">DBT Handouts</a></li>
+          <li><a href="tools.html#cpt-reference">CPT Codes</a></li>
+          <li><a href="tools.html#safety-plan-builder">Safety Planning</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <div class="footer__disclaimer">
+        For informational purposes only. This resource does not replace clinical judgment, supervision, or direct consultation. Contact information and services may change; always verify by contacting organizations directly.
+      </div>
+      <div class="footer__meta">
+        <span><span class="footer__status-dot"></span> Updated Jun 24, 2026</span>
+        <span>v4.0</span>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ============================================================
+     TOAST
+     ============================================================ -->
+<div class="ds-toast" id="toast"></div>
+
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script>
+// ---- Theme toggle ----
+function toggleTheme() {
+  var html = document.documentElement;
+  var btn = document.getElementById('themeToggleBtn');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.removeAttribute('data-theme');
+    localStorage.setItem('theme', 'light');
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+  }
+}
+
+// Respect saved preference, then system preference
+(function() {
+  var saved = localStorage.getItem('theme');
+  var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (saved === 'dark' || (!saved && prefersDark)) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    var btn = document.getElementById('themeToggleBtn');
+    if (btn) btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+  }
+})();
+
+// ---- Mobile nav toggle ----
+function toggleMobileNav() {
+  var panel = document.getElementById('mobileNavPanel');
+  var btn = document.getElementById('hamburgerBtn');
+  var isOpen = panel.classList.toggle('is-open');
+  btn.setAttribute('aria-expanded', isOpen);
+}
+
+// ---- Expand/Collapse details ----
+function toggleDetails(btn) {
+  btn.classList.toggle('open');
+  var details = btn.nextElementSibling;
+  details.classList.toggle('open');
+}
+
+// ---- Filtering ----
+var activeFilters = { age: [], modality: [], problem: [], setting: [] };
+
+function toggleFilter(pill) {
+  pill.classList.toggle('active');
+  var filterType = pill.getAttribute('data-filter');
+  var filterValue = pill.getAttribute('data-value');
+
+  if (pill.classList.contains('active')) {
+    activeFilters[filterType].push(filterValue);
+  } else {
+    activeFilters[filterType] = activeFilters[filterType].filter(function(v) { return v !== filterValue; });
+  }
+  applyFilters();
+}
+
+function applyFilters() {
+  var searchTerm = document.getElementById('activitySearch').value.toLowerCase().trim();
+  var cards = document.querySelectorAll('.activity-card');
+  var visibleCount = 0;
+  var hasActiveFilters = searchTerm.length > 0;
+
+  for (var key in activeFilters) {
+    if (activeFilters[key].length > 0) hasActiveFilters = true;
+  }
+
+  cards.forEach(function(card) {
+    var show = true;
+
+    // Check each filter category (AND between categories)
+    for (var key in activeFilters) {
+      if (activeFilters[key].length > 0) {
+        var cardValues = (card.getAttribute('data-' + key) || '').split(' ');
+        // At least one selected value must match (OR within category)
+        var categoryMatch = activeFilters[key].some(function(filterVal) {
+          return cardValues.indexOf(filterVal) !== -1;
+        });
+        if (!categoryMatch) {
+          show = false;
+          break;
+        }
+      }
+    }
+
+    // Check search term
+    if (show && searchTerm.length > 0) {
+      var cardText = card.textContent.toLowerCase();
+      if (cardText.indexOf(searchTerm) === -1) {
+        show = false;
+      }
+    }
+
+    if (show) {
+      card.classList.remove('hidden');
+      visibleCount++;
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+
+  // Update count
+  var countEl = document.getElementById('filterCount');
+  var totalCards = cards.length;
+  if (hasActiveFilters) {
+    countEl.textContent = 'Showing ' + visibleCount + ' of ' + totalCards + ' activities';
+  } else {
+    countEl.textContent = 'Showing all ' + totalCards + ' activities';
+  }
+
+  // Show/hide clear button
+  var clearBtn = document.getElementById('clearFilters');
+  if (hasActiveFilters) {
+    clearBtn.classList.add('visible');
+  } else {
+    clearBtn.classList.remove('visible');
+  }
+
+  // Show/hide no results message
+  var noResults = document.getElementById('noResults');
+  if (visibleCount === 0 && hasActiveFilters) {
+    noResults.classList.add('visible');
+  } else {
+    noResults.classList.remove('visible');
+  }
+}
+
+function clearAllFilters() {
+  activeFilters = { age: [], modality: [], problem: [], setting: [] };
+  document.querySelectorAll('.filter-pill.active').forEach(function(pill) {
+    pill.classList.remove('active');
+  });
+  document.getElementById('activitySearch').value = '';
+  applyFilters();
+}
+
+// Initialize count on load
+document.addEventListener('DOMContentLoaded', function() {
+  var totalCards = document.querySelectorAll('.activity-card').length;
+  document.getElementById('filterCount').textContent = 'Showing all ' + totalCards + ' activities';
+});
+</script>
+<script src="js/search.js"></script>
+<script src="js/toc.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(function(){});
+}
+</script>
+
+</body>
+</html>
