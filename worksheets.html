@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Worksheets | Greater Nashua Community Mental Health Resources</title>
+<meta name="description" content="Printable clinical worksheets and handouts for CBT, safety planning, coping skills, and goal setting. Ready to download and use in sessions.">
+<meta property="og:title" content="Worksheets | Greater Nashua Community Mental Health Resources">
+<meta property="og:description" content="Printable clinical worksheets and handouts for CBT, safety planning, coping skills, and goal setting. Ready to download and use in sessions.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2d6f59">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="css/design-system.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/fontsize.js"></script>
+<style>
+/* ================================================================
+   Worksheets Page — Layout & Component Overrides
+   Page-specific styles only. Everything else from design-system.css.
+   ================================================================ */
+
+/* ---- Nav ---- */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: var(--ds-z-sticky);
+  background: rgba(253, 252, 250, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--ds-border-subtle);
+  height: var(--ds-header-height);
+}
+[data-theme="dark"] .site-nav {
+  background: rgba(26, 25, 22, 0.85);
+}
+.site-nav__inner {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+}
+.site-nav__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  text-decoration: none;
+  flex-shrink: 0;
+  margin-right: auto;
+}
+.site-nav__logo-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-primary-600);
+  color: var(--ds-text-inverse);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-bold);
+  letter-spacing: var(--ds-tracking-tight);
+}
+.site-nav__logo-text {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  white-space: nowrap;
+}
+.site-nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+}
+.site-nav__link {
+  padding: var(--ds-space-2) var(--ds-space-3);
+  border-radius: var(--ds-radius-md);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default),
+              background-color var(--ds-duration-fast) var(--ds-ease-default);
+  white-space: nowrap;
+}
+.site-nav__link:hover {
+  color: var(--ds-text-primary);
+  background: var(--ds-surface-hover);
+  text-decoration: none;
+}
+.site-nav__link--active {
+  color: var(--ds-primary-700);
+  background: var(--ds-primary-50);
+}
+[data-theme="dark"] .site-nav__link--active {
+  color: var(--ds-primary-300);
+  background: var(--ds-interactive-subtle);
+}
+.site-nav__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+}
+.site-nav__icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ds-radius-md);
+  border: none;
+  background: transparent;
+  color: var(--ds-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color var(--ds-duration-fast) var(--ds-ease-default),
+              color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.site-nav__icon-btn:hover {
+  background: var(--ds-surface-hover);
+  color: var(--ds-text-primary);
+}
+.site-nav__font-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-0-5);
+}
+.site-nav__font-btn {
+  padding: var(--ds-space-1) var(--ds-space-2);
+  border-radius: var(--ds-radius-sm);
+  border: 1px solid var(--ds-border);
+  background: var(--ds-surface);
+  color: var(--ds-text-secondary);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-medium);
+  cursor: pointer;
+  transition: background-color var(--ds-duration-fast) var(--ds-ease-default),
+              color var(--ds-duration-fast) var(--ds-ease-default);
+  line-height: 1;
+}
+.site-nav__font-btn:hover {
+  background: var(--ds-surface-hover);
+  color: var(--ds-text-primary);
+}
+.site-nav__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--ds-radius-md);
+  padding: 0;
+}
+.site-nav__hamburger span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--ds-text-secondary);
+  border-radius: 2px;
+  transition: transform var(--ds-duration-normal) var(--ds-ease-default),
+              opacity var(--ds-duration-normal) var(--ds-ease-default);
+}
+.site-nav__mobile-panel {
+  display: none;
+  position: fixed;
+  top: var(--ds-header-height);
+  left: 0;
+  right: 0;
+  background: var(--ds-surface);
+  border-bottom: 1px solid var(--ds-border);
+  padding: var(--ds-space-4) var(--ds-space-6);
+  z-index: calc(var(--ds-z-sticky) - 1);
+  flex-direction: column;
+  gap: var(--ds-space-1);
+  box-shadow: var(--ds-shadow-lg);
+}
+.site-nav__mobile-panel.is-open {
+  display: flex;
+}
+.site-nav__mobile-link {
+  padding: var(--ds-space-3) var(--ds-space-4);
+  border-radius: var(--ds-radius-lg);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-primary);
+  text-decoration: none;
+  transition: background-color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.site-nav__mobile-link:hover {
+  background: var(--ds-surface-hover);
+  text-decoration: none;
+}
+.site-nav__mobile-link--active {
+  color: var(--ds-primary-700);
+  background: var(--ds-primary-50);
+}
+[data-theme="dark"] .site-nav__mobile-link--active {
+  color: var(--ds-primary-300);
+  background: var(--ds-interactive-subtle);
+}
+
+/* ---- Hero ---- */
+.hero {
+  background: linear-gradient(170deg, var(--ds-primary-50) 0%, var(--ds-cream) 50%, var(--ds-warm-gray-50) 100%);
+  padding: var(--ds-space-20) 0 var(--ds-space-16);
+}
+[data-theme="dark"] .hero {
+  background: linear-gradient(170deg, rgba(61, 139, 112, 0.08) 0%, var(--ds-page-bg) 50%, var(--ds-page-bg) 100%);
+}
+.hero__inner {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6);
+  text-align: center;
+}
+.hero__overline {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  margin-bottom: var(--ds-space-5);
+}
+.hero__overline-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ds-success-500);
+}
+.hero__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-4xl);
+  font-weight: var(--ds-weight-bold);
+  line-height: var(--ds-leading-tight);
+  letter-spacing: var(--ds-tracking-tight);
+  color: var(--ds-text-primary);
+  max-width: 720px;
+  margin: 0 auto var(--ds-space-5);
+}
+.hero__subtitle {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-regular);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--ds-text-secondary);
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* ---- Worksheet Grid ---- */
+.worksheets-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--ds-space-6);
+}
+
+/* ---- Worksheet Card ---- */
+.ws-card {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-xl);
+  padding: var(--ds-space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-3);
+  transition: box-shadow var(--ds-duration-normal) var(--ds-ease-default),
+              transform var(--ds-duration-normal) var(--ds-ease-default),
+              border-color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.ws-card:hover {
+  box-shadow: var(--ds-shadow-lg);
+  transform: translateY(-3px);
+}
+
+/* Card header: badge + pages */
+.ws-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-2);
+}
+
+/* Category badges with distinct colors */
+.ws-card__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  padding: var(--ds-space-0-5) var(--ds-space-2-5);
+  border-radius: var(--ds-radius-full);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  line-height: var(--ds-leading-normal);
+  white-space: nowrap;
+  letter-spacing: var(--ds-tracking-wide);
+  text-transform: uppercase;
+}
+.ws-card__badge--cbt {
+  background: var(--ds-primary-50);
+  color: var(--ds-primary-700);
+}
+[data-theme="dark"] .ws-card__badge--cbt {
+  background: rgba(61, 139, 112, 0.15);
+  color: var(--ds-primary-300);
+}
+.ws-card__badge--safety {
+  background: var(--ds-coral-50);
+  color: var(--ds-coral-700);
+}
+[data-theme="dark"] .ws-card__badge--safety {
+  background: rgba(214, 82, 46, 0.15);
+  color: var(--ds-coral-400);
+}
+.ws-card__badge--skills {
+  background: var(--ds-success-50);
+  color: var(--ds-success-700);
+}
+[data-theme="dark"] .ws-card__badge--skills {
+  background: rgba(65, 143, 85, 0.15);
+  color: var(--ds-success-400);
+}
+.ws-card__badge--goals {
+  background: var(--ds-accent-50);
+  color: var(--ds-accent-700);
+}
+[data-theme="dark"] .ws-card__badge--goals {
+  background: rgba(222, 127, 30, 0.15);
+  color: var(--ds-accent-400);
+}
+
+/* Pages indicator */
+.ws-card__pages {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+}
+.ws-card__pages svg {
+  flex-shrink: 0;
+}
+
+/* Card title */
+.ws-card__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  line-height: var(--ds-leading-snug);
+}
+
+/* Card description */
+.ws-card__desc {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+  flex: 1;
+}
+
+/* Download button */
+.ws-card__download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-2-5) var(--ds-space-5);
+  min-height: 40px;
+  border-radius: var(--ds-radius-md);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  line-height: var(--ds-leading-none);
+  cursor: pointer;
+  border: 1px solid var(--ds-border);
+  background: var(--ds-surface);
+  color: var(--ds-text-primary);
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  transition: background-color var(--ds-duration-fast) var(--ds-ease-default),
+              border-color var(--ds-duration-fast) var(--ds-ease-default),
+              color var(--ds-duration-fast) var(--ds-ease-default);
+  margin-top: auto;
+  align-self: flex-start;
+}
+.ws-card__download:hover {
+  background: var(--ds-interactive);
+  border-color: var(--ds-interactive);
+  color: var(--ds-text-inverse);
+  text-decoration: none;
+}
+.ws-card__download:active {
+  background: var(--ds-interactive-hover);
+  border-color: var(--ds-interactive-hover);
+}
+
+/* Hover accent on cards by category */
+.ws-card--cbt:hover    { border-color: var(--ds-primary-300); }
+.ws-card--safety:hover { border-color: var(--ds-coral-300); }
+.ws-card--skills:hover { border-color: var(--ds-success-300); }
+.ws-card--goals:hover  { border-color: var(--ds-accent-300); }
+
+/* ---- Guidance Section ---- */
+.guidance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--ds-space-5);
+}
+.guidance-card {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-xl);
+  padding: var(--ds-space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-3);
+}
+.guidance-card__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--ds-radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  background: var(--ds-primary-50);
+  color: var(--ds-primary-600);
+}
+[data-theme="dark"] .guidance-card__icon {
+  background: rgba(61, 139, 112, 0.12);
+  color: var(--ds-primary-400);
+}
+.guidance-card__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  line-height: var(--ds-leading-snug);
+}
+.guidance-card__desc {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+}
+
+/* ---- Section Header ---- */
+.section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ds-space-4);
+  margin-bottom: var(--ds-space-6);
+}
+.section-header__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-2xl);
+  font-weight: var(--ds-weight-bold);
+  color: var(--ds-text-primary);
+  letter-spacing: var(--ds-tracking-tight);
+}
+
+/* ---- Footer ---- */
+.site-footer {
+  background: var(--ds-surface);
+  border-top: 1px solid var(--ds-border);
+  padding: var(--ds-space-16) 0 var(--ds-space-8);
+  margin-top: 0;
+}
+.footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--ds-space-10);
+  margin-bottom: var(--ds-space-10);
+}
+.footer__brand-desc {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+  margin-top: var(--ds-space-3);
+  max-width: 320px;
+}
+.footer__col-title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--ds-tracking-widest);
+  margin-bottom: var(--ds-space-4);
+}
+.footer__links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2-5);
+}
+.footer__links a {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.footer__links a:hover {
+  color: var(--ds-text-primary);
+}
+.footer__crisis-box {
+  background: var(--ds-status-danger-bg);
+  border: 1px solid var(--ds-danger-200);
+  border-radius: var(--ds-radius-lg);
+  padding: var(--ds-space-4);
+  margin-top: var(--ds-space-4);
+}
+[data-theme="dark"] .footer__crisis-box {
+  border-color: rgba(220, 95, 95, 0.2);
+}
+.footer__crisis-title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-status-danger-text);
+  margin-bottom: var(--ds-space-2);
+}
+.footer__crisis-numbers {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+}
+.footer__crisis-numbers strong {
+  color: var(--ds-text-primary);
+}
+.footer__bottom {
+  border-top: 1px solid var(--ds-border-subtle);
+  padding-top: var(--ds-space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--ds-space-4);
+}
+.footer__disclaimer {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+  line-height: var(--ds-leading-relaxed);
+  max-width: 560px;
+}
+.footer__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-4);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+}
+.footer__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ds-success-500);
+  display: inline-block;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1023px) {
+  .worksheets-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .guidance-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ds-space-8);
+  }
+}
+@media (max-width: 639px) {
+  .site-nav__links,
+  .site-nav__font-controls {
+    display: none;
+  }
+  .site-nav__hamburger {
+    display: flex;
+  }
+  .hero {
+    padding: var(--ds-space-12) 0 var(--ds-space-10);
+  }
+  .hero__title {
+    font-size: var(--ds-text-3xl);
+  }
+  .hero__subtitle {
+    font-size: var(--ds-text-base);
+  }
+  .worksheets-grid {
+    grid-template-columns: 1fr;
+  }
+  .guidance-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: var(--ds-space-8);
+  }
+  .footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .section-header {
+    flex-direction: column;
+    gap: var(--ds-space-2);
+  }
+}
+</style>
+</head>
+<body>
+<script src="js/auth-gate.js"></script>
+
+<a href="#main-content" class="ds-sr-only" style="position:absolute;top:-40px;left:0;background:var(--ds-surface);padding:8px 16px;z-index:100;font-size:14px;transition:top 0.2s" onfocus="this.style.top='0'" onblur="this.style.top='-40px'">Skip to main content</a>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav class="site-nav" role="navigation" aria-label="Main navigation">
+  <div class="site-nav__inner">
+
+    <a href="index.html" class="site-nav__logo" id="siteLogo">
+      <div class="site-nav__logo-mark">NH</div>
+      <span class="site-nav__logo-text">MH Resources</span>
+    </a>
+
+    <div class="site-nav__links">
+      <a href="index.html" class="site-nav__link">Home</a>
+      <a href="resources.html" class="site-nav__link">Resources</a>
+      <a href="tools.html" class="site-nav__link">Clinical Tools</a>
+      <a href="guide.html" class="site-nav__link">Guides</a>
+      <a href="neurobiology.html" class="site-nav__link">Brain &amp; Neuro</a>
+      <a href="worksheets.html" class="site-nav__link site-nav__link--active">Worksheets</a>
+    </div>
+
+    <div class="site-nav__controls">
+      <button class="site-nav__icon-btn" onclick="toggleGlobalSearch()" title="Search (Ctrl+K)" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+
+      <div class="site-nav__font-controls">
+        <button class="site-nav__font-btn" onclick="mhFontDecrease()" title="Decrease font size" aria-label="Decrease font size">A-</button>
+        <button class="site-nav__font-btn" onclick="mhFontIncrease()" title="Increase font size" aria-label="Increase font size">A+</button>
+      </div>
+
+      <button class="site-nav__icon-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+
+      <button class="site-nav__hamburger" id="hamburgerBtn" onclick="toggleMobileNav()" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </div>
+</nav>
+
+<!-- Mobile slide-out panel -->
+<div class="site-nav__mobile-panel" id="mobileNavPanel">
+  <a href="index.html" class="site-nav__mobile-link">Home</a>
+  <a href="resources.html" class="site-nav__mobile-link">Resources</a>
+  <a href="tools.html" class="site-nav__mobile-link">Clinical Tools</a>
+  <a href="guide.html" class="site-nav__mobile-link">Guides</a>
+  <a href="neurobiology.html" class="site-nav__mobile-link">Brain &amp; Neuro</a>
+  <a href="worksheets.html" class="site-nav__mobile-link site-nav__mobile-link--active">Worksheets</a>
+</div>
+
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero">
+  <div class="hero__inner">
+
+    <div class="hero__overline">
+      <span class="hero__overline-dot"></span>
+      <span class="ds-overline">Clinical Materials</span>
+    </div>
+
+    <h1 class="hero__title">Printable Worksheets &amp; Handouts</h1>
+
+    <p class="hero__subtitle">Professional clinical materials ready to download and use in sessions</p>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     MAIN CONTENT
+     ============================================================ -->
+<main id="main-content">
+
+  <!-- ---- Worksheet Cards ---- -->
+  <section class="ds-section" style="background: var(--ds-page-bg);">
+    <div class="ds-container">
+
+      <div class="section-header">
+        <h2 class="section-header__title">Available Worksheets</h2>
+        <span style="font-family: var(--ds-font-sans); font-size: var(--ds-text-sm); color: var(--ds-text-muted);">6 worksheets</span>
+      </div>
+
+      <div class="worksheets-grid">
+
+        <!-- CBT Thought Record -->
+        <div class="ws-card ws-card--cbt">
+          <div class="ws-card__header">
+            <span class="ws-card__badge ws-card__badge--cbt">CBT</span>
+            <span class="ws-card__pages">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              1 page
+            </span>
+          </div>
+          <h3 class="ws-card__title">CBT Thought Record</h3>
+          <p class="ws-card__desc">Track automatic thoughts, examine evidence, and develop balanced alternatives. The foundation of cognitive behavioral therapy.</p>
+          <a href="pdfs/cbt-thought-record.pdf" class="ws-card__download" download>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </a>
+        </div>
+
+        <!-- Cognitive Distortions -->
+        <div class="ws-card ws-card--cbt">
+          <div class="ws-card__header">
+            <span class="ws-card__badge ws-card__badge--cbt">CBT</span>
+            <span class="ws-card__pages">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              3 pages
+            </span>
+          </div>
+          <h3 class="ws-card__title">Cognitive Distortions</h3>
+          <p class="ws-card__desc">Reference guide covering all 15 common cognitive distortions with definitions and real-world examples. Great for client psychoeducation.</p>
+          <a href="pdfs/cognitive-distortions.pdf" class="ws-card__download" download>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </a>
+        </div>
+
+        <!-- Behavioral Activation Schedule -->
+        <div class="ws-card ws-card--cbt">
+          <div class="ws-card__header">
+            <span class="ws-card__badge ws-card__badge--cbt">CBT</span>
+            <span class="ws-card__pages">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              2 pages
+            </span>
+          </div>
+          <h3 class="ws-card__title">Behavioral Activation Schedule</h3>
+          <p class="ws-card__desc">Weekly activity planning grid with mood tracking. Helps clients reconnect with values-driven activities to combat depression.</p>
+          <a href="pdfs/behavioral-activation-schedule.pdf" class="ws-card__download" download>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </a>
+        </div>
+
+        <!-- Safety Plan -->
+        <div class="ws-card ws-card--safety">
+          <div class="ws-card__header">
+            <span class="ws-card__badge ws-card__badge--safety">Safety</span>
+            <span class="ws-card__pages">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              2 pages
+            </span>
+          </div>
+          <h3 class="ws-card__title">Safety Plan</h3>
+          <p class="ws-card__desc">Stanley &amp; Brown safety planning template with 6 steps, reasons for living, and pre-filled crisis resources. Essential for risk management.</p>
+          <a href="pdfs/safety-plan.pdf" class="ws-card__download" download>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </a>
+        </div>
+
+        <!-- Coping Skills Toolbox -->
+        <div class="ws-card ws-card--skills">
+          <div class="ws-card__header">
+            <span class="ws-card__badge ws-card__badge--skills">Skills</span>
+            <span class="ws-card__pages">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              2 pages
+            </span>
+          </div>
+          <h3 class="ws-card__title">Coping Skills Toolbox</h3>
+          <p class="ws-card__desc">Comprehensive checklist of physical, emotional, social, and cognitive coping strategies. Includes the 5-4-3-2-1 grounding exercise.</p>
+          <a href="pdfs/coping-skills-toolbox.pdf" class="ws-card__download" download>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </a>
+        </div>
+
+        <!-- SMART Goal Setting -->
+        <div class="ws-card ws-card--goals">
+          <div class="ws-card__header">
+            <span class="ws-card__badge ws-card__badge--goals">Goals</span>
+            <span class="ws-card__pages">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              3 pages
+            </span>
+          </div>
+          <h3 class="ws-card__title">SMART Goal Setting</h3>
+          <p class="ws-card__desc">Structured goal-setting templates with SMART framework, action steps, obstacle planning, and weekly progress tracking.</p>
+          <a href="pdfs/smart-goal-setting.pdf" class="ws-card__download" download>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ---- How to Use These Worksheets ---- -->
+  <section class="ds-section" style="background: var(--ds-page-bg-alt);">
+    <div class="ds-container">
+
+      <div class="section-header">
+        <h2 class="section-header__title">How to Use These Worksheets</h2>
+      </div>
+
+      <p style="font-family: var(--ds-font-sans); font-size: var(--ds-text-sm); color: var(--ds-text-secondary); line-height: var(--ds-leading-relaxed); margin-bottom: var(--ds-space-8); max-width: 680px;">
+        These worksheets are designed for use by licensed clinicians during sessions or as between-session homework. Here are a few tips for getting the most out of them.
+      </p>
+
+      <div class="guidance-grid">
+
+        <div class="guidance-card">
+          <div class="guidance-card__icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 class="guidance-card__title">Introduce During Session</h3>
+          <p class="guidance-card__desc">Walk through each worksheet collaboratively with the client the first time. Model how to complete it, explain the rationale, and answer questions before assigning it as homework.</p>
+        </div>
+
+        <div class="guidance-card">
+          <div class="guidance-card__icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3 class="guidance-card__title">Review Consistently</h3>
+          <p class="guidance-card__desc">Begin each session by reviewing completed worksheets. This reinforces the skill, shows the client you value their effort, and provides rich clinical material for discussion.</p>
+        </div>
+
+        <div class="guidance-card">
+          <div class="guidance-card__icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </div>
+          <h3 class="guidance-card__title">Adapt to Your Client</h3>
+          <p class="guidance-card__desc">These are starting points, not rigid protocols. Modify language for developmental level, cultural context, and reading ability. Consider translating key terms for multilingual clients.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+</main>
+
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="ds-container">
+
+    <div class="footer__grid">
+
+      <!-- Brand column -->
+      <div>
+        <a href="index.html" class="site-nav__logo" style="text-decoration:none">
+          <div class="site-nav__logo-mark">NH</div>
+          <span class="site-nav__logo-text">MH Resources</span>
+        </a>
+        <p class="footer__brand-desc">A comprehensive resource hub for clinicians, case managers, and community members in the Greater Nashua area.</p>
+
+        <div class="footer__crisis-box">
+          <div class="footer__crisis-title">Crisis? Get help now.</div>
+          <div class="footer__crisis-numbers">
+            <strong>988</strong> Suicide &amp; Crisis Lifeline<br>
+            <strong>1-833-710-6477</strong> NH Rapid Response<br>
+            <strong>(603) 889-6147</strong> GNMHC Crisis<br>
+            <strong>Text HOME to 741741</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigate -->
+      <div>
+        <div class="footer__col-title">Navigate</div>
+        <ul class="footer__links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="tools.html">Clinical Tools</a></li>
+          <li><a href="guide.html">Guides</a></li>
+          <li><a href="neurobiology.html">Brain &amp; Neuro</a></li>
+          <li><a href="worksheets.html">Worksheets</a></li>
+        </ul>
+      </div>
+
+      <!-- Quick Access -->
+      <div>
+        <div class="footer__col-title">Quick Access</div>
+        <ul class="footer__links">
+          <li><a href="tools.html#screening-tools">Screening Tools</a></li>
+          <li><a href="tools.html#clinical-note-builder">Note Builder</a></li>
+          <li><a href="guide.html#crisisTree">Crisis Tree</a></li>
+          <li><a href="resources.html#housing">Housing Resources</a></li>
+        </ul>
+      </div>
+
+      <!-- Clinical -->
+      <div>
+        <div class="footer__col-title">Clinical</div>
+        <ul class="footer__links">
+          <li><a href="tools.html#cbt">CBT Worksheets</a></li>
+          <li><a href="tools.html#dbt">DBT Handouts</a></li>
+          <li><a href="tools.html#cpt-reference">CPT Codes</a></li>
+          <li><a href="tools.html#safety-plan-builder">Safety Planning</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <div class="footer__disclaimer">
+        For informational purposes only. This resource does not replace clinical judgment, supervision, or direct consultation. Contact information and services may change; always verify by contacting organizations directly.
+      </div>
+      <div class="footer__meta">
+        <span><span class="footer__status-dot"></span> Updated Jun 24, 2026</span>
+        <span>v4.0</span>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ============================================================
+     TOAST
+     ============================================================ -->
+<div class="ds-toast" id="toast"></div>
+
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script>
+// ---- Theme toggle ----
+function toggleTheme() {
+  var html = document.documentElement;
+  var btn = document.getElementById('themeToggleBtn');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.removeAttribute('data-theme');
+    localStorage.setItem('theme', 'light');
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+  }
+}
+
+// Respect saved preference, then system preference
+(function() {
+  var saved = localStorage.getItem('theme');
+  var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (saved === 'dark' || (!saved && prefersDark)) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    var btn = document.getElementById('themeToggleBtn');
+    if (btn) btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+  }
+})();
+
+// ---- Mobile nav toggle ----
+function toggleMobileNav() {
+  var panel = document.getElementById('mobileNavPanel');
+  var btn = document.getElementById('hamburgerBtn');
+  var isOpen = panel.classList.toggle('is-open');
+  btn.setAttribute('aria-expanded', isOpen);
+}
+</script>
+<script src="js/search.js"></script>
+<script src="js/toc.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(function(){});
+}
+</script>
+
+</body>
+</html>
