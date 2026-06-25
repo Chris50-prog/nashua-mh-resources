@@ -1,0 +1,2939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documentation Templates - Greater Nashua Community Mental Health Resources</title>
+<meta name="description" content="Clinical documentation templates including SOAP, DAP, Case Conference, Group Therapy, and Collateral Contact notes in a guided wizard format.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2d6f59">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="css/design-system.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/fontsize.js"></script>
+<style>
+/* ================================================================
+   Documentation Templates Page — Layout & Component Overrides
+   ================================================================ */
+
+/* ---- Nav ---- */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: var(--ds-z-sticky);
+  background: rgba(253, 252, 250, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--ds-border-subtle);
+  height: var(--ds-header-height);
+}
+[data-theme="dark"] .site-nav {
+  background: rgba(26, 25, 22, 0.85);
+}
+.site-nav__inner {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+}
+.site-nav__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  text-decoration: none;
+  flex-shrink: 0;
+  margin-right: auto;
+}
+.site-nav__logo-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-primary-600);
+  color: var(--ds-text-inverse);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-bold);
+  letter-spacing: var(--ds-tracking-tight);
+}
+.site-nav__logo-text {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  white-space: nowrap;
+}
+.site-nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+}
+.site-nav__link {
+  padding: var(--ds-space-2) var(--ds-space-3);
+  border-radius: var(--ds-radius-md);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default),
+              background-color var(--ds-duration-fast) var(--ds-ease-default);
+  white-space: nowrap;
+}
+.site-nav__link:hover {
+  color: var(--ds-text-primary);
+  background: var(--ds-surface-hover);
+  text-decoration: none;
+}
+.site-nav__link--active {
+  color: var(--ds-primary-700);
+  background: var(--ds-primary-50);
+  font-weight: var(--ds-weight-semibold);
+}
+[data-theme="dark"] .site-nav__link--active {
+  color: var(--ds-primary-300);
+  background: var(--ds-interactive-subtle);
+}
+.site-nav__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  margin-left: var(--ds-space-2);
+}
+.site-nav__icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ds-radius-md);
+  border: none;
+  background: transparent;
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default),
+              background-color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.site-nav__icon-btn:hover {
+  background: var(--ds-surface-hover);
+  color: var(--ds-text-primary);
+}
+.site-nav__font-controls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.site-nav__font-btn {
+  padding: var(--ds-space-1) var(--ds-space-2);
+  border-radius: var(--ds-radius-sm);
+  border: 1px solid var(--ds-border);
+  background: var(--ds-surface);
+  color: var(--ds-text-secondary);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  cursor: pointer;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+  line-height: 1;
+  min-height: 28px;
+}
+.site-nav__font-btn:hover {
+  background: var(--ds-surface-hover);
+  border-color: var(--ds-border-strong);
+}
+
+/* Hamburger */
+.site-nav__hamburger {
+  display: none;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 8px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  align-items: center;
+}
+.site-nav__hamburger span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--ds-text-secondary);
+  border-radius: 1px;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+}
+
+/* Mobile nav overlay */
+.site-nav__mobile-panel {
+  display: none;
+  position: fixed;
+  top: var(--ds-header-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--ds-surface);
+  z-index: var(--ds-z-overlay);
+  padding: var(--ds-space-6);
+  flex-direction: column;
+  gap: var(--ds-space-2);
+  overflow-y: auto;
+}
+.site-nav__mobile-panel.is-open {
+  display: flex;
+}
+.site-nav__mobile-link {
+  display: block;
+  padding: var(--ds-space-3) var(--ds-space-4);
+  border-radius: var(--ds-radius-lg);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-primary);
+  text-decoration: none;
+  transition: background-color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.site-nav__mobile-link:hover {
+  background: var(--ds-surface-hover);
+  text-decoration: none;
+}
+.site-nav__mobile-link--active {
+  color: var(--ds-primary-700);
+  background: var(--ds-primary-50);
+}
+[data-theme="dark"] .site-nav__mobile-link--active {
+  color: var(--ds-primary-300);
+  background: var(--ds-interactive-subtle);
+}
+
+/* ---- Hero ---- */
+.hero {
+  background: linear-gradient(170deg, var(--ds-primary-50) 0%, var(--ds-cream) 50%, var(--ds-warm-gray-50) 100%);
+  padding: var(--ds-space-16) 0 var(--ds-space-12);
+}
+[data-theme="dark"] .hero {
+  background: linear-gradient(170deg, rgba(61, 139, 112, 0.08) 0%, var(--ds-page-bg) 50%, var(--ds-page-bg) 100%);
+}
+.hero__inner {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6);
+  text-align: center;
+}
+.hero__overline {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  margin-bottom: var(--ds-space-4);
+}
+.hero__overline-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ds-primary-500);
+}
+.hero__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-4xl);
+  font-weight: var(--ds-weight-bold);
+  line-height: var(--ds-leading-tight);
+  letter-spacing: var(--ds-tracking-tight);
+  color: var(--ds-text-primary);
+  max-width: 720px;
+  margin: 0 auto var(--ds-space-4);
+}
+.hero__subtitle {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-regular);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--ds-text-secondary);
+  max-width: 640px;
+  margin: 0 auto;
+}
+.hero__privacy-note {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  margin-top: var(--ds-space-4);
+  padding: var(--ds-space-2) var(--ds-space-4);
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border-subtle);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+}
+
+/* ---- Template Selector Grid ---- */
+.template-selector {
+  padding: var(--ds-space-12) 0;
+}
+.template-selector__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--ds-space-6);
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6);
+}
+.tmpl-card {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-xl);
+  padding: var(--ds-space-6);
+  cursor: pointer;
+  transition: all 300ms var(--ds-ease-default);
+  position: relative;
+  overflow: hidden;
+}
+.tmpl-card:hover {
+  border-color: var(--ds-primary-300);
+  box-shadow: var(--ds-shadow-lg);
+  transform: translateY(-3px);
+}
+.tmpl-card:active {
+  transform: translateY(-1px);
+  box-shadow: var(--ds-shadow-md);
+}
+.tmpl-card__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--ds-radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: var(--ds-space-4);
+}
+.tmpl-card__icon--soap { background: rgba(13,148,136,0.12); color: #0d9488; }
+[data-theme="dark"] .tmpl-card__icon--soap { background: rgba(13,148,136,0.18); }
+.tmpl-card__icon--dap { background: rgba(8,145,178,0.12); color: #0891b2; }
+[data-theme="dark"] .tmpl-card__icon--dap { background: rgba(8,145,178,0.18); }
+.tmpl-card__icon--conference { background: rgba(99,102,241,0.12); color: #6366f1; }
+[data-theme="dark"] .tmpl-card__icon--conference { background: rgba(99,102,241,0.18); }
+.tmpl-card__icon--group { background: rgba(124,58,237,0.12); color: #7c3aed; }
+[data-theme="dark"] .tmpl-card__icon--group { background: rgba(124,58,237,0.18); }
+.tmpl-card__icon--collateral { background: rgba(180,83,9,0.12); color: #b45309; }
+[data-theme="dark"] .tmpl-card__icon--collateral { background: rgba(180,83,9,0.18); }
+.tmpl-card__name {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  margin-bottom: var(--ds-space-1);
+}
+.tmpl-card__desc {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-muted);
+  line-height: var(--ds-leading-relaxed);
+}
+.tmpl-card__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  margin-top: var(--ds-space-4);
+  padding-top: var(--ds-space-3);
+  border-top: 1px solid var(--ds-border-subtle);
+}
+.tmpl-card__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  padding: var(--ds-space-0-5) var(--ds-space-2);
+  border-radius: var(--ds-radius-full);
+  font-family: var(--ds-font-sans);
+  font-size: 11px;
+  font-weight: var(--ds-weight-medium);
+  background: var(--ds-warm-gray-100);
+  color: var(--ds-text-secondary);
+}
+[data-theme="dark"] .tmpl-card__badge {
+  background: var(--ds-surface-hover);
+}
+
+/* ---- Wizard Overlay ---- */
+.wizard-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--ds-z-modal);
+  background: var(--ds-surface-overlay);
+  align-items: center;
+  justify-content: center;
+  padding: var(--ds-space-4);
+  opacity: 0;
+  transition: opacity 300ms var(--ds-ease-default);
+}
+.wizard-overlay.is-active {
+  display: flex;
+  opacity: 1;
+}
+.wizard-overlay.is-entering {
+  display: flex;
+  opacity: 0;
+}
+
+.wizard {
+  background: var(--ds-surface);
+  border-radius: var(--ds-radius-2xl);
+  box-shadow: var(--ds-shadow-2xl);
+  width: 100%;
+  max-width: 760px;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transform: scale(0.95) translateY(20px);
+  transition: transform 300ms var(--ds-ease-out);
+}
+.wizard-overlay.is-active .wizard {
+  transform: scale(1) translateY(0);
+}
+
+/* Wizard Header */
+.wizard__header {
+  padding: var(--ds-space-5) var(--ds-space-6);
+  border-bottom: 1px solid var(--ds-border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+.wizard__header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+}
+.wizard__tool-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-1) var(--ds-space-3);
+  border-radius: var(--ds-radius-full);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+}
+.wizard__tool-badge--soap { background: rgba(13,148,136,0.12); color: #0d9488; }
+.wizard__tool-badge--dap { background: rgba(8,145,178,0.12); color: #0891b2; }
+.wizard__tool-badge--conference { background: rgba(99,102,241,0.12); color: #6366f1; }
+.wizard__tool-badge--group { background: rgba(124,58,237,0.12); color: #7c3aed; }
+.wizard__tool-badge--collateral { background: rgba(180,83,9,0.12); color: #b45309; }
+[data-theme="dark"] .wizard__tool-badge--soap { background: rgba(13,148,136,0.18); color: #2dd4bf; }
+[data-theme="dark"] .wizard__tool-badge--dap { background: rgba(8,145,178,0.18); color: #22d3ee; }
+[data-theme="dark"] .wizard__tool-badge--conference { background: rgba(99,102,241,0.18); color: #a5b4fc; }
+[data-theme="dark"] .wizard__tool-badge--group { background: rgba(124,58,237,0.18); color: #c4b5fd; }
+[data-theme="dark"] .wizard__tool-badge--collateral { background: rgba(180,83,9,0.18); color: #fbbf24; }
+.wizard__step-label {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-muted);
+}
+.wizard__close-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ds-radius-md);
+  border: none;
+  background: transparent;
+  color: var(--ds-text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+}
+.wizard__close-btn:hover {
+  background: var(--ds-surface-hover);
+  color: var(--ds-text-primary);
+}
+
+/* Progress Bar */
+.wizard__progress {
+  height: 4px;
+  background: var(--ds-warm-gray-100);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+[data-theme="dark"] .wizard__progress {
+  background: var(--ds-surface-hover);
+}
+.wizard__progress-bar {
+  height: 100%;
+  border-radius: 0 2px 2px 0;
+  transition: width 400ms var(--ds-ease-out);
+  width: 0%;
+}
+.wizard__progress-bar--soap { background: linear-gradient(90deg, #0d9488, #14b8a6); }
+.wizard__progress-bar--dap { background: linear-gradient(90deg, #0891b2, #06b6d4); }
+.wizard__progress-bar--conference { background: linear-gradient(90deg, #6366f1, #818cf8); }
+.wizard__progress-bar--group { background: linear-gradient(90deg, #7c3aed, #8b5cf6); }
+.wizard__progress-bar--collateral { background: linear-gradient(90deg, #b45309, #d97706); }
+
+/* Wizard Body */
+.wizard__body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 340px;
+}
+
+/* Slide Container */
+.wizard__slide-container {
+  position: relative;
+  width: 100%;
+}
+.wizard__slide {
+  padding: var(--ds-space-8) var(--ds-space-6);
+  transition: transform 300ms var(--ds-ease-default), opacity 300ms var(--ds-ease-default);
+}
+.wizard__slide.slide-out-left {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  transform: translateX(-100%);
+  opacity: 0;
+}
+.wizard__slide.slide-out-right {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  transform: translateX(100%);
+  opacity: 0;
+}
+.wizard__slide.slide-in {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Step Title */
+.wizard__step-title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-primary-600);
+  margin-bottom: var(--ds-space-2);
+  text-transform: uppercase;
+  letter-spacing: var(--ds-tracking-wide);
+}
+[data-theme="dark"] .wizard__step-title {
+  color: var(--ds-primary-400);
+}
+.wizard__step-heading {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xl);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-primary);
+  line-height: var(--ds-leading-relaxed);
+  margin-bottom: var(--ds-space-6);
+}
+
+/* Form Fields */
+.wiz-field {
+  margin-bottom: var(--ds-space-5);
+}
+.wiz-field__label {
+  display: block;
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-primary);
+  margin-bottom: var(--ds-space-2);
+}
+.wiz-field__hint {
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+  font-weight: var(--ds-weight-regular);
+  margin-left: var(--ds-space-1);
+}
+.wiz-field__input,
+.wiz-field__select {
+  width: 100%;
+  padding: var(--ds-space-3) var(--ds-space-4);
+  border: 2px solid var(--ds-border);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-surface);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  color: var(--ds-text-primary);
+  transition: border-color 200ms var(--ds-ease-default), box-shadow 200ms var(--ds-ease-default);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.wiz-field__input:focus,
+.wiz-field__select:focus {
+  border-color: var(--ds-primary-400);
+  box-shadow: 0 0 0 3px rgba(13,148,136,0.12);
+}
+[data-theme="dark"] .wiz-field__input:focus,
+[data-theme="dark"] .wiz-field__select:focus {
+  box-shadow: 0 0 0 3px rgba(13,148,136,0.25);
+}
+.wiz-field__input::placeholder {
+  color: var(--ds-text-muted);
+}
+[data-theme="dark"] .wiz-field__input,
+[data-theme="dark"] .wiz-field__select {
+  background: var(--ds-surface-sunken);
+}
+.wiz-field__select {
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%239a8e82' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+}
+.wiz-field__textarea {
+  width: 100%;
+  padding: var(--ds-space-3) var(--ds-space-4);
+  border: 2px solid var(--ds-border);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-surface);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  color: var(--ds-text-primary);
+  line-height: var(--ds-leading-relaxed);
+  resize: vertical;
+  min-height: 100px;
+  transition: border-color 200ms var(--ds-ease-default), box-shadow 200ms var(--ds-ease-default);
+  outline: none;
+}
+.wiz-field__textarea:focus {
+  border-color: var(--ds-primary-400);
+  box-shadow: 0 0 0 3px rgba(13,148,136,0.12);
+}
+[data-theme="dark"] .wiz-field__textarea:focus {
+  box-shadow: 0 0 0 3px rgba(13,148,136,0.25);
+}
+[data-theme="dark"] .wiz-field__textarea {
+  background: var(--ds-surface-sunken);
+}
+.wiz-field__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--ds-space-4);
+}
+.wiz-field__row-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--ds-space-4);
+}
+
+/* Checkbox group */
+.wiz-check-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-2);
+}
+.wiz-check {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-2) var(--ds-space-3);
+  border: 2px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
+  cursor: pointer;
+  transition: all 200ms var(--ds-ease-default);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-primary);
+  user-select: none;
+  -webkit-user-select: none;
+}
+.wiz-check:hover {
+  border-color: var(--ds-primary-300);
+  background: var(--ds-primary-50);
+}
+[data-theme="dark"] .wiz-check:hover {
+  background: var(--ds-interactive-subtle);
+}
+.wiz-check.is-checked {
+  border-color: var(--ds-primary-500);
+  background: var(--ds-primary-50);
+}
+[data-theme="dark"] .wiz-check.is-checked {
+  border-color: var(--ds-primary-400);
+  background: var(--ds-interactive-subtle);
+}
+.wiz-check__box {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--ds-border-strong);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 200ms var(--ds-ease-default);
+}
+.wiz-check.is-checked .wiz-check__box {
+  background: var(--ds-primary-600);
+  border-color: var(--ds-primary-600);
+}
+.wiz-check.is-checked .wiz-check__box svg {
+  opacity: 1;
+}
+.wiz-check__box svg {
+  opacity: 0;
+  width: 12px;
+  height: 12px;
+  stroke: #fff;
+  stroke-width: 3;
+  fill: none;
+}
+
+/* Dynamic list (attendees, action items, members) */
+.wiz-dynlist {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-3);
+}
+.wiz-dynlist__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-4);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-surface-sunken);
+}
+.wiz-dynlist__item-fields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+}
+.wiz-dynlist__item-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--ds-space-2);
+}
+.wiz-dynlist__remove {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--ds-radius-md);
+  border: none;
+  background: transparent;
+  color: var(--ds-text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+}
+.wiz-dynlist__remove:hover {
+  background: var(--ds-status-danger-bg);
+  color: var(--ds-danger-600);
+}
+.wiz-dynlist__add {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-2) var(--ds-space-4);
+  border: 2px dashed var(--ds-border);
+  border-radius: var(--ds-radius-lg);
+  background: transparent;
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-primary-600);
+  cursor: pointer;
+  transition: all 200ms var(--ds-ease-default);
+  align-self: flex-start;
+}
+.wiz-dynlist__add:hover {
+  border-color: var(--ds-primary-400);
+  background: var(--ds-primary-50);
+}
+[data-theme="dark"] .wiz-dynlist__add {
+  color: var(--ds-primary-400);
+}
+
+/* Member cards for group therapy */
+.member-card {
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-xl);
+  padding: var(--ds-space-5);
+  background: var(--ds-surface-sunken);
+  margin-bottom: var(--ds-space-4);
+}
+.member-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--ds-space-4);
+}
+.member-card__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+}
+
+/* Crisis Alert */
+.crisis-alert {
+  background: #fef2f2;
+  border: 2px solid #dc2626;
+  border-radius: var(--ds-radius-xl);
+  padding: var(--ds-space-5) var(--ds-space-6);
+  margin-top: var(--ds-space-4);
+}
+[data-theme="dark"] .crisis-alert {
+  background: rgba(220, 38, 38, 0.1);
+  border-color: #ef4444;
+}
+.crisis-alert__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-bold);
+  color: #dc2626;
+  margin-bottom: var(--ds-space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+}
+.crisis-alert__numbers {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  color: var(--ds-text-primary);
+}
+.crisis-alert__numbers strong {
+  color: #dc2626;
+  font-weight: var(--ds-weight-bold);
+}
+
+/* Risk level colors */
+.risk-low { color: #22c55e; }
+.risk-moderate { color: #eab308; }
+.risk-high { color: #dc2626; }
+
+/* ---- Preview / Review ---- */
+.preview-note {
+  background: var(--ds-surface-sunken);
+  border: 1px solid var(--ds-border-subtle);
+  border-radius: var(--ds-radius-xl);
+  padding: var(--ds-space-6);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--ds-text-primary);
+  max-height: 420px;
+  overflow-y: auto;
+}
+.preview-note__header {
+  text-align: center;
+  padding-bottom: var(--ds-space-4);
+  margin-bottom: var(--ds-space-4);
+  border-bottom: 2px solid var(--ds-border);
+}
+.preview-note__disclaimer {
+  font-size: var(--ds-text-xs);
+  color: var(--ds-warning-700);
+  background: var(--ds-status-warning-bg);
+  padding: var(--ds-space-2) var(--ds-space-3);
+  border-radius: var(--ds-radius-md);
+  margin-bottom: var(--ds-space-3);
+  text-align: center;
+}
+[data-theme="dark"] .preview-note__disclaimer {
+  color: var(--ds-warning-300);
+}
+.preview-note__title {
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-bold);
+  color: var(--ds-text-primary);
+}
+.preview-note__section {
+  margin-bottom: var(--ds-space-4);
+  cursor: pointer;
+  padding: var(--ds-space-3);
+  border-radius: var(--ds-radius-md);
+  transition: background 200ms var(--ds-ease-default);
+}
+.preview-note__section:hover {
+  background: var(--ds-surface-hover);
+}
+.preview-note__section-title {
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-primary-700);
+  margin-bottom: var(--ds-space-1);
+  font-size: var(--ds-text-sm);
+  text-transform: uppercase;
+  letter-spacing: var(--ds-tracking-wide);
+}
+[data-theme="dark"] .preview-note__section-title {
+  color: var(--ds-primary-400);
+}
+.preview-note__section-content {
+  white-space: pre-wrap;
+  color: var(--ds-text-secondary);
+}
+.preview-note__section--empty {
+  opacity: 0.5;
+  border: 1px dashed var(--ds-border);
+}
+.preview-note__section--empty .preview-note__section-title::after {
+  content: " (empty)";
+  font-style: italic;
+  font-weight: var(--ds-weight-regular);
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--ds-text-muted);
+}
+.preview-note__footer {
+  margin-top: var(--ds-space-4);
+  padding-top: var(--ds-space-4);
+  border-top: 1px solid var(--ds-border-subtle);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+  text-align: center;
+}
+
+/* Completion counter */
+.completion-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-2) var(--ds-space-4);
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-secondary);
+  margin-bottom: var(--ds-space-4);
+}
+.completion-counter__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.completion-counter__dot--good { background: #22c55e; }
+.completion-counter__dot--partial { background: #eab308; }
+
+/* Export Actions */
+.export-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-3);
+  justify-content: center;
+  margin-top: var(--ds-space-6);
+}
+.export-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-2-5) var(--ds-space-5);
+  min-height: 44px;
+  border-radius: var(--ds-radius-md);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+}
+.export-btn--primary {
+  background: var(--ds-interactive);
+  color: var(--ds-text-inverse);
+  border-color: var(--ds-interactive);
+}
+.export-btn--primary:hover {
+  background: var(--ds-interactive-hover);
+  border-color: var(--ds-interactive-hover);
+}
+.export-btn--secondary {
+  background: var(--ds-surface);
+  color: var(--ds-text-primary);
+  border-color: var(--ds-border);
+}
+.export-btn--secondary:hover {
+  background: var(--ds-surface-hover);
+  border-color: var(--ds-border-strong);
+}
+
+/* Wizard Footer */
+.wizard__footer {
+  padding: var(--ds-space-4) var(--ds-space-6);
+  border-top: 1px solid var(--ds-border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+.wizard__footer-left {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-muted);
+}
+.wizard__footer-right {
+  display: flex;
+  gap: var(--ds-space-3);
+}
+.wizard__nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-2-5) var(--ds-space-5);
+  min-height: 44px;
+  border-radius: var(--ds-radius-md);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+}
+.wizard__nav-btn--back {
+  background: var(--ds-surface);
+  color: var(--ds-text-secondary);
+  border-color: var(--ds-border);
+}
+.wizard__nav-btn--back:hover {
+  background: var(--ds-surface-hover);
+  border-color: var(--ds-border-strong);
+}
+.wizard__nav-btn--next {
+  background: var(--ds-interactive);
+  color: var(--ds-text-inverse);
+  border-color: var(--ds-interactive);
+}
+.wizard__nav-btn--next:hover {
+  background: var(--ds-interactive-hover);
+  border-color: var(--ds-interactive-hover);
+}
+.wizard__nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ---- Footer ---- */
+.site-footer {
+  background: var(--ds-surface);
+  border-top: 1px solid var(--ds-border);
+  padding: var(--ds-space-16) 0 var(--ds-space-8);
+  margin-top: 0;
+}
+.footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--ds-space-10);
+  margin-bottom: var(--ds-space-10);
+}
+.footer__brand-desc {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+  margin-top: var(--ds-space-3);
+  max-width: 320px;
+}
+.footer__col-title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--ds-tracking-widest);
+  margin-bottom: var(--ds-space-4);
+}
+.footer__links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2-5);
+}
+.footer__links a {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.footer__links a:hover {
+  color: var(--ds-text-primary);
+}
+.footer__crisis-box {
+  background: var(--ds-status-danger-bg);
+  border: 1px solid var(--ds-danger-200);
+  border-radius: var(--ds-radius-lg);
+  padding: var(--ds-space-4);
+  margin-top: var(--ds-space-4);
+}
+[data-theme="dark"] .footer__crisis-box {
+  border-color: rgba(220, 95, 95, 0.2);
+}
+.footer__crisis-title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-status-danger-text);
+  margin-bottom: var(--ds-space-2);
+}
+.footer__crisis-numbers {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+}
+.footer__crisis-numbers strong {
+  color: var(--ds-text-primary);
+}
+.footer__bottom {
+  border-top: 1px solid var(--ds-border-subtle);
+  padding-top: var(--ds-space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--ds-space-4);
+}
+.footer__disclaimer {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+  line-height: var(--ds-leading-relaxed);
+  max-width: 560px;
+}
+.footer__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-4);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+}
+.footer__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ds-success-500);
+  display: inline-block;
+}
+
+/* ---- AI Label ---- */
+.ai-assisted-label {
+  text-align: center;
+  padding: var(--ds-space-4) 0;
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+  background: var(--ds-warm-gray-50);
+  border-top: 1px solid var(--ds-border-subtle);
+}
+[data-theme="dark"] .ai-assisted-label {
+  background: var(--ds-page-bg);
+}
+
+/* ---- Toast ---- */
+.ds-toast {
+  position: fixed;
+  bottom: var(--ds-space-6);
+  right: var(--ds-space-6);
+  z-index: var(--ds-z-toast);
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-3) var(--ds-space-5);
+  background: var(--ds-surface-raised);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-xl);
+  box-shadow: var(--ds-shadow-xl);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-primary);
+  transform: translateY(16px);
+  opacity: 0;
+  transition: all 300ms var(--ds-ease-out);
+  pointer-events: none;
+}
+.ds-toast.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1023px) {
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ds-space-8);
+  }
+}
+@media (max-width: 639px) {
+  .site-nav__links,
+  .site-nav__font-controls {
+    display: none;
+  }
+  .site-nav__hamburger {
+    display: flex;
+  }
+  .hero {
+    padding: var(--ds-space-12) 0 var(--ds-space-8);
+  }
+  .hero__title {
+    font-size: var(--ds-text-3xl);
+  }
+  .hero__subtitle {
+    font-size: var(--ds-text-base);
+  }
+  .template-selector__grid {
+    grid-template-columns: 1fr;
+    gap: var(--ds-space-4);
+    padding: 0 var(--ds-space-4);
+  }
+  .wizard {
+    max-height: calc(100vh - 32px);
+    border-radius: var(--ds-radius-lg);
+  }
+  .wizard__slide {
+    padding: var(--ds-space-6) var(--ds-space-4);
+  }
+  .wizard__step-heading {
+    font-size: var(--ds-text-lg);
+  }
+  .wiz-field__row,
+  .wiz-field__row-3 {
+    grid-template-columns: 1fr;
+  }
+  .wiz-dynlist__item-row {
+    grid-template-columns: 1fr;
+  }
+  .export-actions {
+    flex-direction: column;
+  }
+  .export-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: var(--ds-space-8);
+  }
+  .footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .ds-toast {
+    left: var(--ds-space-4);
+    right: var(--ds-space-4);
+    bottom: var(--ds-space-4);
+  }
+}
+
+/* ---- Print ---- */
+@media print {
+  .site-nav,
+  .site-nav__mobile-panel,
+  .hero,
+  .template-selector,
+  .wizard__header,
+  .wizard__progress,
+  .wizard__footer,
+  .export-actions,
+  .site-footer,
+  .ai-assisted-label,
+  .ds-toast,
+  .completion-counter {
+    display: none !important;
+  }
+  .wizard-overlay {
+    display: block !important;
+    position: static !important;
+    background: none !important;
+    padding: 0 !important;
+  }
+  .wizard {
+    max-width: 100% !important;
+    max-height: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    transform: none !important;
+    border-radius: 0 !important;
+  }
+  .wizard__body {
+    overflow: visible !important;
+  }
+  .preview-note {
+    max-height: none !important;
+    overflow: visible !important;
+    border: none !important;
+    padding: 0 !important;
+    background: none !important;
+  }
+  .preview-note__section {
+    cursor: default !important;
+    break-inside: avoid;
+  }
+  .preview-note__section:hover {
+    background: none !important;
+  }
+  @page {
+    margin: 1in;
+  }
+}
+</style>
+</head>
+<body>
+<script src="js/auth-gate.js"></script>
+
+<a href="#main-content" class="ds-sr-only" style="position:absolute;top:-40px;left:0;background:var(--ds-surface);padding:8px 16px;z-index:100;font-size:14px;transition:top 0.2s" onfocus="this.style.top='0'" onblur="this.style.top='-40px'">Skip to main content</a>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav class="site-nav" role="navigation" aria-label="Main navigation">
+  <div class="site-nav__inner">
+
+    <a href="index.html" class="site-nav__logo" id="siteLogo">
+      <div class="site-nav__logo-mark">NH</div>
+      <span class="site-nav__logo-text">MH Resources</span>
+    </a>
+
+    <div class="site-nav__links">
+      <a href="index.html" class="site-nav__link">Home</a>
+      <a href="resources.html" class="site-nav__link">Resources</a>
+      <a href="tools.html" class="site-nav__link">Clinical Tools</a>
+      <a href="guide.html" class="site-nav__link">Clinical Guide</a>
+      <a href="neurobiology.html" class="site-nav__link">Brain &amp; Neuro</a>
+      <a href="worksheets.html" class="site-nav__link">Worksheets</a>
+      <a href="activities.html" class="site-nav__link">Activities</a>
+      <a href="games.html" class="site-nav__link">Games</a>
+      <a href="screening.html" class="site-nav__link">Screening</a>
+      <a href="map.html" class="site-nav__link">Map</a>
+      <a href="templates.html" class="site-nav__link site-nav__link--active">Templates</a>
+    </div>
+
+    <div class="site-nav__controls">
+      <div class="site-nav__font-controls">
+        <button class="site-nav__font-btn" onclick="mhFontDecrease()" title="Decrease font size" aria-label="Decrease font size">A-</button>
+        <button class="site-nav__font-btn" onclick="mhFontIncrease()" title="Increase font size" aria-label="Increase font size">A+</button>
+      </div>
+
+      <button class="site-nav__icon-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+
+      <button class="site-nav__hamburger" id="hamburgerBtn" onclick="toggleMobileNav()" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </div>
+</nav>
+
+<!-- Mobile slide-out panel -->
+<div class="site-nav__mobile-panel" id="mobileNavPanel">
+  <a href="index.html" class="site-nav__mobile-link">Home</a>
+  <a href="resources.html" class="site-nav__mobile-link">Resources</a>
+  <a href="tools.html" class="site-nav__mobile-link">Clinical Tools</a>
+  <a href="guide.html" class="site-nav__mobile-link">Clinical Guide</a>
+  <a href="neurobiology.html" class="site-nav__mobile-link">Brain &amp; Neuro</a>
+  <a href="worksheets.html" class="site-nav__mobile-link">Worksheets</a>
+  <a href="activities.html" class="site-nav__mobile-link">Activities</a>
+  <a href="games.html" class="site-nav__mobile-link">Games</a>
+  <a href="screening.html" class="site-nav__mobile-link">Screening</a>
+  <a href="map.html" class="site-nav__mobile-link">Map</a>
+  <a href="templates.html" class="site-nav__mobile-link site-nav__mobile-link--active">Templates</a>
+</div>
+
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero">
+  <div class="hero__inner">
+    <div class="hero__overline">
+      <span class="hero__overline-dot"></span>
+      <span class="ds-overline">Clinical Documentation</span>
+    </div>
+    <h1 class="hero__title">Documentation Templates</h1>
+    <p class="hero__subtitle">Step-by-step clinical note builders for SOAP, DAP, case conferences, group sessions, and collateral contacts. Complete each section and export a formatted note for your EHR.</p>
+    <div class="hero__privacy-note">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      No data is stored or transmitted &mdash; everything stays in your browser
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     MAIN CONTENT
+     ============================================================ -->
+<main id="main-content">
+
+<!-- Template Selector -->
+<section class="template-selector" aria-label="Choose a documentation template">
+  <div class="template-selector__grid" id="templateGrid">
+
+    <div class="tmpl-card" onclick="startTemplate('soap')" tabindex="0" role="button" aria-label="Start SOAP Note template">
+      <div class="tmpl-card__icon tmpl-card__icon--soap">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <div class="tmpl-card__name">SOAP Note</div>
+      <div class="tmpl-card__desc">Subjective, Objective, Assessment, Plan. The standard progress note format for individual therapy sessions.</div>
+      <div class="tmpl-card__meta">
+        <span class="tmpl-card__badge">7 steps</span>
+        <span class="tmpl-card__badge">~5 min</span>
+      </div>
+    </div>
+
+    <div class="tmpl-card" onclick="startTemplate('dap')" tabindex="0" role="button" aria-label="Start DAP Note template">
+      <div class="tmpl-card__icon tmpl-card__icon--dap">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+      </div>
+      <div class="tmpl-card__name">DAP Note</div>
+      <div class="tmpl-card__desc">Data, Assessment, Plan. A concise alternative to SOAP for streamlined session documentation.</div>
+      <div class="tmpl-card__meta">
+        <span class="tmpl-card__badge">5 steps</span>
+        <span class="tmpl-card__badge">~3 min</span>
+      </div>
+    </div>
+
+    <div class="tmpl-card" onclick="startTemplate('conference')" tabindex="0" role="button" aria-label="Start Case Conference Note template">
+      <div class="tmpl-card__icon tmpl-card__icon--conference">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div class="tmpl-card__name">Case Conference</div>
+      <div class="tmpl-card__desc">Multi-disciplinary team meeting documentation with discussion points, recommendations, and action items.</div>
+      <div class="tmpl-card__meta">
+        <span class="tmpl-card__badge">5 steps</span>
+        <span class="tmpl-card__badge">~4 min</span>
+      </div>
+    </div>
+
+    <div class="tmpl-card" onclick="startTemplate('group')" tabindex="0" role="button" aria-label="Start Group Therapy Note template">
+      <div class="tmpl-card__icon tmpl-card__icon--group">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+      </div>
+      <div class="tmpl-card__name">Group Therapy</div>
+      <div class="tmpl-card__desc">Group session notes with per-member tracking, therapeutic factors, and group process documentation.</div>
+      <div class="tmpl-card__meta">
+        <span class="tmpl-card__badge">6 steps</span>
+        <span class="tmpl-card__badge">~6 min</span>
+      </div>
+    </div>
+
+    <div class="tmpl-card" onclick="startTemplate('collateral')" tabindex="0" role="button" aria-label="Start Collateral Contact Log template">
+      <div class="tmpl-card__icon tmpl-card__icon--collateral">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+      <div class="tmpl-card__name">Collateral Contact</div>
+      <div class="tmpl-card__desc">External contact documentation including phone calls, emails, coordination with providers, schools, and agencies.</div>
+      <div class="tmpl-card__meta">
+        <span class="tmpl-card__badge">4 steps</span>
+        <span class="tmpl-card__badge">~2 min</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+
+<!-- ============================================================
+     WIZARD OVERLAY
+     ============================================================ -->
+<div class="wizard-overlay" id="wizardOverlay" role="dialog" aria-modal="true" aria-label="Documentation template wizard">
+  <div class="wizard" id="wizardPanel">
+    <div class="wizard__header">
+      <div class="wizard__header-left">
+        <span class="wizard__tool-badge" id="wizardToolBadge"></span>
+        <span class="wizard__step-label" id="wizardStepLabel"></span>
+      </div>
+      <button class="wizard__close-btn" onclick="closeWizard()" aria-label="Close template" title="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="wizard__progress">
+      <div class="wizard__progress-bar" id="wizardProgressBar"></div>
+    </div>
+    <div class="wizard__body" id="wizardBody">
+      <!-- Steps rendered here by JS -->
+    </div>
+    <div class="wizard__footer" id="wizardFooter">
+      <div class="wizard__footer-left" id="wizardFooterLabel"></div>
+      <div class="wizard__footer-right">
+        <button class="wizard__nav-btn wizard__nav-btn--back" id="wizardBackBtn" onclick="wizardBack()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          Back
+        </button>
+        <button class="wizard__nav-btn wizard__nav-btn--next" id="wizardNextBtn" onclick="wizardNext()">
+          Next
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast notification -->
+<div class="ds-toast" id="toastNotification"></div>
+
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="ds-container">
+
+    <div class="footer__grid">
+
+      <!-- Brand column -->
+      <div>
+        <a href="index.html" class="site-nav__logo" style="text-decoration:none">
+          <div class="site-nav__logo-mark">NH</div>
+          <span class="site-nav__logo-text">MH Resources</span>
+        </a>
+        <p class="footer__brand-desc">A comprehensive resource hub for clinicians, case managers, and community members in the Greater Nashua area.</p>
+
+        <div class="footer__crisis-box">
+          <div class="footer__crisis-title">Crisis? Get help now.</div>
+          <div class="footer__crisis-numbers">
+            <strong>988</strong> Suicide &amp; Crisis Lifeline<br>
+            <strong>1-833-710-6477</strong> NH Rapid Response<br>
+            <strong>(603) 889-6147</strong> GNMHC Crisis<br>
+            <strong>Text HOME to 741741</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigate -->
+      <div>
+        <div class="footer__col-title">Navigate</div>
+        <ul class="footer__links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="tools.html">Clinical Tools</a></li>
+          <li><a href="screening.html">Screening</a></li>
+          <li><a href="templates.html">Templates</a></li>
+          <li><a href="map.html">Map</a></li>
+          <li><a href="guide.html">Guides</a></li>
+          <li><a href="neurobiology.html">Brain &amp; Neuro</a></li>
+          <li><a href="worksheets.html">Worksheets</a></li>
+          <li><a href="activities.html">Activities</a></li>
+          <li><a href="games.html">Games</a></li>
+        </ul>
+      </div>
+
+      <!-- Quick Access -->
+      <div>
+        <div class="footer__col-title">Quick Access</div>
+        <ul class="footer__links">
+          <li><a href="screening.html">Screening Tools</a></li>
+          <li><a href="templates.html">Note Templates</a></li>
+          <li><a href="guide.html#crisisTree">Crisis Tree</a></li>
+          <li><a href="resources.html#housing">Housing Resources</a></li>
+        </ul>
+      </div>
+
+      <!-- Clinical -->
+      <div>
+        <div class="footer__col-title">Clinical</div>
+        <ul class="footer__links">
+          <li><a href="tools.html#cbt">CBT Worksheets</a></li>
+          <li><a href="tools.html#dbt">DBT Handouts</a></li>
+          <li><a href="tools.html#cpt-reference">CPT Codes</a></li>
+          <li><a href="tools.html#safety-plan-builder">Safety Planning</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <div class="footer__disclaimer">
+        For informational purposes only. This resource does not replace clinical judgment, supervision, or direct consultation. Contact information and services may change; always verify by contacting organizations directly.
+      </div>
+      <div class="footer__meta">
+        <span><span class="footer__status-dot"></span> Updated Jun 24, 2026</span>
+        <a href="#" id="adminGate" style="color: var(--ds-text-muted); font-size: 11px;" aria-label="Version 4.0 - Admin access">v4.0</a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<!-- AI-assisted label -->
+<div class="ai-assisted-label">AI-assisted clinical resource &mdash; clinician review required</div>
+
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script>
+/* ================================================================
+   TEMPLATE DEFINITIONS
+   ================================================================ */
+var TEMPLATES = {
+
+  /* ---- SOAP Note ---- */
+  soap: {
+    id: 'soap',
+    name: 'SOAP Note',
+    badgeClass: 'soap',
+    steps: [
+      {
+        title: 'Step 1 of 7',
+        heading: 'Client Information',
+        fields: [
+          { id: 'client_initials', type: 'text', label: 'Client Initials', hint: 'Use initials only — never full client names', maxlength: 10, placeholder: 'e.g. J.D.' },
+          { id: 'session_date', type: 'date', label: 'Session Date', defaultToday: true },
+          { id: 'session_number', type: 'number', label: 'Session #', placeholder: 'e.g. 12', min: 1 },
+          { id: 'duration', type: 'select', label: 'Duration', options: ['','30 min','45 min','60 min','90 min'] },
+          { id: 'cpt_code', type: 'select', label: 'CPT Code', options: ['','90791 — Psychiatric Diagnostic Evaluation','90832 — Psychotherapy, 30 min','90834 — Psychotherapy, 45 min','90837 — Psychotherapy, 60 min','90846 — Family w/o Patient','90847 — Family w/ Patient','90853 — Group Psychotherapy','90839 — Crisis, first 60 min','90840 — Crisis, add-on 30 min','96156 — Health Behavior Assessment','96158 — Health Behavior Intervention'] }
+        ],
+        layout: [
+          { row: ['client_initials','session_date'] },
+          { row: ['session_number','duration'] },
+          { single: 'cpt_code' }
+        ]
+      },
+      {
+        title: 'Step 2 of 7',
+        heading: 'Subjective',
+        fields: [
+          { id: 'chief_complaint', type: 'textarea', label: 'Chief Complaint / Presenting Concerns', placeholder: 'Client reports...' },
+          { id: 'reported_mood', type: 'select', label: 'Reported Mood', options: ['','Euthymic','Depressed','Anxious','Irritable','Manic','Flat','Labile'] },
+          { id: 'sleep_quality', type: 'select', label: 'Sleep Quality', options: ['','Good','Fair','Poor','Insomnia'] },
+          { id: 'appetite', type: 'select', label: 'Appetite', options: ['','Normal','Decreased','Increased'] },
+          { id: 'suicidal_ideation', type: 'select', label: 'Suicidal Ideation', options: ['','Denied','Passive ideation','Active with plan'], crisis: 'Active with plan' }
+        ],
+        layout: [
+          { single: 'chief_complaint' },
+          { row: ['reported_mood','sleep_quality'] },
+          { row: ['appetite','suicidal_ideation'] }
+        ]
+      },
+      {
+        title: 'Step 3 of 7',
+        heading: 'Objective — Mental Status Exam',
+        fields: [
+          { id: 'appearance', type: 'select', label: 'Appearance', options: ['','Well-groomed','Disheveled','Appropriate','Unkempt'] },
+          { id: 'behavior', type: 'select', label: 'Behavior', options: ['','Cooperative','Guarded','Agitated','Withdrawn','Hostile'] },
+          { id: 'speech', type: 'select', label: 'Speech', options: ['','Normal rate & volume','Pressured','Slow','Loud','Soft','Tangential'] },
+          { id: 'affect', type: 'select', label: 'Affect', options: ['','Congruent','Flat','Restricted','Labile','Bright'] },
+          { id: 'thought_process', type: 'select', label: 'Thought Process', options: ['','Logical & goal-directed','Circumstantial','Tangential','Loose associations','Flight of ideas'] },
+          { id: 'thought_content', type: 'checks', label: 'Thought Content', options: ['No delusions','Paranoid ideation','Grandiosity','Obsessions'] },
+          { id: 'orientation', type: 'checks', label: 'Orientation', options: ['Person','Place','Time','Situation'] },
+          { id: 'insight', type: 'select', label: 'Insight', options: ['','Good','Fair','Poor','Absent'] },
+          { id: 'judgment', type: 'select', label: 'Judgment', options: ['','Good','Fair','Poor','Impaired'] }
+        ],
+        layout: [
+          { row: ['appearance','behavior'] },
+          { row: ['speech','affect'] },
+          { single: 'thought_process' },
+          { single: 'thought_content' },
+          { single: 'orientation' },
+          { row: ['insight','judgment'] }
+        ]
+      },
+      {
+        title: 'Step 4 of 7',
+        heading: 'Assessment',
+        fields: [
+          { id: 'clinical_formulation', type: 'textarea', label: 'Clinical Formulation', placeholder: 'Client presents with...' },
+          { id: 'risk_level', type: 'select', label: 'Risk Level', options: ['','Low','Moderate','High'], riskColor: true },
+          { id: 'progress', type: 'select', label: 'Progress Toward Goals', options: ['','Improving','Stable','Regressing','Mixed'] },
+          { id: 'diagnosis', type: 'textarea', label: 'Diagnosis / Diagnostic Impressions', placeholder: 'e.g. F32.1 Major Depressive Disorder, single episode, moderate' }
+        ],
+        layout: [
+          { single: 'clinical_formulation' },
+          { row: ['risk_level','progress'] },
+          { single: 'diagnosis' }
+        ]
+      },
+      {
+        title: 'Step 5 of 7',
+        heading: 'Plan',
+        fields: [
+          { id: 'interventions', type: 'checks', label: 'Interventions Used This Session', options: ['CBT','DBT skills','MI techniques','Psychoeducation','Supportive therapy','Crisis intervention','Behavioral activation','Exposure','EMDR','Play therapy'] },
+          { id: 'homework', type: 'textarea', label: 'Homework / Between-Session Tasks', placeholder: 'e.g. Complete thought record for 3 situations...' },
+          { id: 'next_appointment', type: 'date', label: 'Next Appointment' },
+          { id: 'referrals', type: 'textarea', label: 'Referrals / Coordination Needed', placeholder: 'e.g. Refer to psychiatrist for med eval...' },
+          { id: 'medication_notes', type: 'textarea', label: 'Medication Notes', hint: 'Defer to prescriber', placeholder: 'e.g. Client reports compliance with current regimen...' }
+        ],
+        layout: [
+          { single: 'interventions' },
+          { single: 'homework' },
+          { single: 'next_appointment' },
+          { single: 'referrals' },
+          { single: 'medication_notes' }
+        ]
+      },
+      { title: 'Step 6 of 7', heading: 'Review & Preview', isReview: true },
+      { title: 'Step 7 of 7', heading: 'Export', isExport: true }
+    ],
+    sections: ['Client Information','Subjective','Objective','Assessment','Plan'],
+    formatNote: function(d) {
+      return formatSOAP(d);
+    }
+  },
+
+  /* ---- DAP Note ---- */
+  dap: {
+    id: 'dap',
+    name: 'DAP Note',
+    badgeClass: 'dap',
+    steps: [
+      {
+        title: 'Step 1 of 5',
+        heading: 'Client Information',
+        fields: [
+          { id: 'client_initials', type: 'text', label: 'Client Initials', hint: 'Use initials only — never full client names', maxlength: 10, placeholder: 'e.g. J.D.' },
+          { id: 'session_date', type: 'date', label: 'Session Date', defaultToday: true },
+          { id: 'session_number', type: 'number', label: 'Session #', placeholder: 'e.g. 12', min: 1 },
+          { id: 'duration', type: 'select', label: 'Duration', options: ['','30 min','45 min','60 min','90 min'] },
+          { id: 'cpt_code', type: 'select', label: 'CPT Code', options: ['','90791 — Psychiatric Diagnostic Evaluation','90832 — Psychotherapy, 30 min','90834 — Psychotherapy, 45 min','90837 — Psychotherapy, 60 min','90846 — Family w/o Patient','90847 — Family w/ Patient','90853 — Group Psychotherapy','90839 — Crisis, first 60 min','90840 — Crisis, add-on 30 min','96156 — Health Behavior Assessment','96158 — Health Behavior Intervention'] }
+        ],
+        layout: [
+          { row: ['client_initials','session_date'] },
+          { row: ['session_number','duration'] },
+          { single: 'cpt_code' }
+        ]
+      },
+      {
+        title: 'Step 2 of 5',
+        heading: 'Data',
+        fields: [
+          { id: 'session_content', type: 'textarea', label: 'Session Content / Observations', placeholder: 'Describe what was discussed and observed during the session...' },
+          { id: 'client_statements', type: 'textarea', label: 'Client Statements', placeholder: 'Notable client quotes or self-reports...' },
+          { id: 'behavioral_observations', type: 'textarea', label: 'Behavioral Observations', placeholder: 'Client appeared...' }
+        ],
+        layout: [
+          { single: 'session_content' },
+          { single: 'client_statements' },
+          { single: 'behavioral_observations' }
+        ]
+      },
+      {
+        title: 'Step 3 of 5',
+        heading: 'Assessment',
+        fields: [
+          { id: 'clinical_impressions', type: 'textarea', label: 'Clinical Impressions', placeholder: 'Clinical interpretation of the data...' },
+          { id: 'progress', type: 'select', label: 'Progress Toward Goals', options: ['','Improving','Stable','Regressing','Mixed'] },
+          { id: 'risk_assessment', type: 'select', label: 'Risk Assessment', options: ['','Low','Moderate','High'], riskColor: true }
+        ],
+        layout: [
+          { single: 'clinical_impressions' },
+          { row: ['progress','risk_assessment'] }
+        ]
+      },
+      {
+        title: 'Step 4 of 5',
+        heading: 'Plan',
+        fields: [
+          { id: 'interventions', type: 'checks', label: 'Interventions', options: ['CBT','DBT skills','MI techniques','Psychoeducation','Supportive therapy','Crisis intervention','Behavioral activation','Exposure','EMDR','Play therapy'] },
+          { id: 'next_steps', type: 'textarea', label: 'Next Steps', placeholder: 'Planned interventions, homework, follow-up...' },
+          { id: 'next_appointment', type: 'date', label: 'Next Appointment' }
+        ],
+        layout: [
+          { single: 'interventions' },
+          { single: 'next_steps' },
+          { single: 'next_appointment' }
+        ]
+      },
+      { title: 'Step 5 of 5', heading: 'Review & Export', isReview: true, isExport: true }
+    ],
+    sections: ['Client Information','Data','Assessment','Plan'],
+    formatNote: function(d) { return formatDAP(d); }
+  },
+
+  /* ---- Case Conference ---- */
+  conference: {
+    id: 'conference',
+    name: 'Case Conference Note',
+    badgeClass: 'conference',
+    steps: [
+      {
+        title: 'Step 1 of 5',
+        heading: 'Conference Information',
+        fields: [
+          { id: 'conf_date', type: 'date', label: 'Date', defaultToday: true },
+          { id: 'conf_time', type: 'text', label: 'Time', placeholder: 'e.g. 2:00 PM' },
+          { id: 'client_initials', type: 'text', label: 'Client Initials', hint: 'Use initials only — never full client names', maxlength: 10, placeholder: 'e.g. J.D.' },
+          { id: 'attendees', type: 'dynlist', label: 'Attendees', itemFields: ['Name','Role'] }
+        ],
+        layout: [
+          { row: ['conf_date','conf_time'] },
+          { single: 'client_initials' },
+          { single: 'attendees' }
+        ]
+      },
+      {
+        title: 'Step 2 of 5',
+        heading: 'Case Presentation',
+        fields: [
+          { id: 'presenting_issues', type: 'textarea', label: 'Presenting Issues', placeholder: 'Current concerns being brought to the team...' },
+          { id: 'current_treatment', type: 'textarea', label: 'Current Treatment', placeholder: 'Overview of current treatment plan and services...' },
+          { id: 'relevant_history', type: 'textarea', label: 'Relevant History', placeholder: 'Pertinent history for team consideration...' }
+        ],
+        layout: [
+          { single: 'presenting_issues' },
+          { single: 'current_treatment' },
+          { single: 'relevant_history' }
+        ]
+      },
+      {
+        title: 'Step 3 of 5',
+        heading: 'Team Discussion',
+        fields: [
+          { id: 'discussion_points', type: 'textarea', label: 'Discussion Points', placeholder: 'Key topics and perspectives discussed by the team...' },
+          { id: 'differing_perspectives', type: 'textarea', label: 'Differing Perspectives', placeholder: 'Areas of disagreement or alternative viewpoints...' }
+        ],
+        layout: [
+          { single: 'discussion_points' },
+          { single: 'differing_perspectives' }
+        ]
+      },
+      {
+        title: 'Step 4 of 5',
+        heading: 'Recommendations',
+        fields: [
+          { id: 'recommendations', type: 'textarea', label: 'Team Recommendations', placeholder: 'Consensus recommendations from the team...' },
+          { id: 'action_items', type: 'dynlist', label: 'Action Items', itemFields: ['Task','Assignee','Deadline'] },
+          { id: 'followup_date', type: 'date', label: 'Follow-Up Date' }
+        ],
+        layout: [
+          { single: 'recommendations' },
+          { single: 'action_items' },
+          { single: 'followup_date' }
+        ]
+      },
+      { title: 'Step 5 of 5', heading: 'Review & Export', isReview: true, isExport: true }
+    ],
+    sections: ['Conference Information','Case Presentation','Team Discussion','Recommendations'],
+    formatNote: function(d) { return formatConference(d); }
+  },
+
+  /* ---- Group Therapy ---- */
+  group: {
+    id: 'group',
+    name: 'Group Therapy Note',
+    badgeClass: 'group',
+    steps: [
+      {
+        title: 'Step 1 of 6',
+        heading: 'Group Information',
+        fields: [
+          { id: 'group_name', type: 'text', label: 'Group Name', placeholder: 'e.g. DBT Skills Group' },
+          { id: 'session_date', type: 'date', label: 'Date', defaultToday: true },
+          { id: 'session_number', type: 'number', label: 'Session #', placeholder: 'e.g. 8', min: 1 },
+          { id: 'duration', type: 'select', label: 'Duration', options: ['','60 min','75 min','90 min','120 min'] },
+          { id: 'facilitator', type: 'text', label: 'Facilitator', placeholder: 'Name' },
+          { id: 'cofacilitator', type: 'text', label: 'Co-Facilitator', hint: 'optional', placeholder: 'Name' },
+          { id: 'topic', type: 'text', label: 'Topic / Theme', placeholder: 'e.g. Distress Tolerance' }
+        ],
+        layout: [
+          { row: ['group_name','session_date'] },
+          { row: ['session_number','duration'] },
+          { row: ['facilitator','cofacilitator'] },
+          { single: 'topic' }
+        ]
+      },
+      {
+        title: 'Step 2 of 6',
+        heading: 'Group Process',
+        fields: [
+          { id: 'session_goals', type: 'textarea', label: 'Session Goals', placeholder: 'What this session aimed to accomplish...' },
+          { id: 'activities', type: 'textarea', label: 'Activities / Exercises', placeholder: 'Describe structured activities, role plays, skill practice...' },
+          { id: 'group_dynamics', type: 'select', label: 'Group Dynamics', options: ['','Cohesive','Tense','Productive','Unfocused','Supportive'] }
+        ],
+        layout: [
+          { single: 'session_goals' },
+          { single: 'activities' },
+          { single: 'group_dynamics' }
+        ]
+      },
+      {
+        title: 'Step 3 of 6',
+        heading: 'Member Notes',
+        fields: [
+          { id: 'members', type: 'memberlist', label: 'Group Members' }
+        ],
+        layout: [
+          { single: 'members' }
+        ]
+      },
+      {
+        title: 'Step 4 of 6',
+        heading: 'Clinical Observations',
+        fields: [
+          { id: 'therapeutic_factors', type: 'checks', label: 'Therapeutic Factors Observed (Yalom)', options: ['Universality','Altruism','Instillation of hope','Imparting information','Corrective recapitulation','Socializing techniques','Imitative behavior','Interpersonal learning','Group cohesiveness','Catharsis','Existential factors'] },
+          { id: 'critical_incidents', type: 'textarea', label: 'Critical Incidents', placeholder: 'Any significant events, disruptions, or breakthroughs...' }
+        ],
+        layout: [
+          { single: 'therapeutic_factors' },
+          { single: 'critical_incidents' }
+        ]
+      },
+      {
+        title: 'Step 5 of 6',
+        heading: 'Plan',
+        fields: [
+          { id: 'next_topic', type: 'text', label: 'Next Session Topic', placeholder: 'e.g. Emotion Regulation' },
+          { id: 'homework', type: 'textarea', label: 'Homework', placeholder: 'Between-session assignments for the group...' },
+          { id: 'individual_followups', type: 'textarea', label: 'Individual Follow-Ups Needed', placeholder: 'Members requiring individual outreach or attention...' }
+        ],
+        layout: [
+          { single: 'next_topic' },
+          { single: 'homework' },
+          { single: 'individual_followups' }
+        ]
+      },
+      { title: 'Step 6 of 6', heading: 'Review & Export', isReview: true, isExport: true }
+    ],
+    sections: ['Group Information','Group Process','Member Notes','Clinical Observations','Plan'],
+    formatNote: function(d) { return formatGroup(d); }
+  },
+
+  /* ---- Collateral Contact ---- */
+  collateral: {
+    id: 'collateral',
+    name: 'Collateral Contact Log',
+    badgeClass: 'collateral',
+    steps: [
+      {
+        title: 'Step 1 of 4',
+        heading: 'Contact Information',
+        fields: [
+          { id: 'contact_date', type: 'date', label: 'Date', defaultToday: true },
+          { id: 'contact_time', type: 'text', label: 'Time', placeholder: 'e.g. 10:30 AM' },
+          { id: 'contact_duration', type: 'select', label: 'Duration', options: ['','5 min','10 min','15 min','30 min','45 min','60 min'] },
+          { id: 'client_initials', type: 'text', label: 'Client Initials', hint: 'Use initials only — never full client names', maxlength: 10, placeholder: 'e.g. J.D.' },
+          { id: 'contact_person', type: 'text', label: 'Contact Person (Role/Name)', placeholder: 'e.g. Dr. Smith, PCP / School counselor' },
+          { id: 'contact_type', type: 'select', label: 'Contact Type', options: ['','Phone','In-person','Email','Letter','Fax','Video'] },
+          { id: 'consent_status', type: 'select', label: 'Consent / Authorization Status', options: ['','On file','Verbal consent obtained','Guardian consent','Court-ordered'] }
+        ],
+        layout: [
+          { row: ['contact_date','contact_time'] },
+          { row: ['contact_duration','client_initials'] },
+          { single: 'contact_person' },
+          { row: ['contact_type','consent_status'] }
+        ]
+      },
+      {
+        title: 'Step 2 of 4',
+        heading: 'Content',
+        fields: [
+          { id: 'purpose', type: 'textarea', label: 'Purpose of Contact', placeholder: 'Reason for the contact...' },
+          { id: 'info_shared', type: 'textarea', label: 'Information Shared', placeholder: 'What information was provided to the contact...' },
+          { id: 'info_received', type: 'textarea', label: 'Information Received', placeholder: 'What information was obtained from the contact...' }
+        ],
+        layout: [
+          { single: 'purpose' },
+          { single: 'info_shared' },
+          { single: 'info_received' }
+        ]
+      },
+      {
+        title: 'Step 3 of 4',
+        heading: 'Follow-Up',
+        fields: [
+          { id: 'action_items', type: 'textarea', label: 'Action Items', placeholder: 'Steps to take based on this contact...' },
+          { id: 'followup_needed', type: 'select', label: 'Follow-Up Needed', options: ['','Yes','No'] },
+          { id: 'followup_date', type: 'date', label: 'Follow-Up Date', conditional: { field: 'followup_needed', value: 'Yes' } }
+        ],
+        layout: [
+          { single: 'action_items' },
+          { row: ['followup_needed','followup_date'] }
+        ]
+      },
+      { title: 'Step 4 of 4', heading: 'Review & Export', isReview: true, isExport: true }
+    ],
+    sections: ['Contact Information','Content','Follow-Up'],
+    formatNote: function(d) { return formatCollateral(d); }
+  }
+};
+
+
+/* ================================================================
+   STATE
+   ================================================================ */
+var currentTemplate = null;
+var currentStep = 0;
+var formData = {};
+var memberData = []; // for group therapy
+
+
+/* ================================================================
+   WIZARD LIFECYCLE
+   ================================================================ */
+function startTemplate(id) {
+  currentTemplate = TEMPLATES[id];
+  currentStep = 0;
+  formData = {};
+  memberData = [];
+  if (id === 'group') {
+    memberData.push(createEmptyMember());
+  }
+
+  var overlay = document.getElementById('wizardOverlay');
+  var badge = document.getElementById('wizardToolBadge');
+  var progressBar = document.getElementById('wizardProgressBar');
+
+  badge.textContent = currentTemplate.name;
+  badge.className = 'wizard__tool-badge wizard__tool-badge--' + currentTemplate.badgeClass;
+  progressBar.className = 'wizard__progress-bar wizard__progress-bar--' + currentTemplate.badgeClass;
+
+  overlay.classList.add('is-entering');
+  requestAnimationFrame(function() {
+    overlay.classList.add('is-active');
+    overlay.classList.remove('is-entering');
+  });
+
+  renderStep();
+  document.body.style.overflow = 'hidden';
+}
+
+function closeWizard() {
+  var overlay = document.getElementById('wizardOverlay');
+  overlay.classList.remove('is-active');
+  currentTemplate = null;
+  currentStep = 0;
+  formData = {};
+  memberData = [];
+  document.body.style.overflow = '';
+}
+
+function wizardNext() {
+  if (!currentTemplate) return;
+  saveCurrentStepData();
+  if (currentStep < currentTemplate.steps.length - 1) {
+    currentStep++;
+    renderStep('forward');
+  }
+}
+
+function wizardBack() {
+  if (!currentTemplate || currentStep <= 0) return;
+  saveCurrentStepData();
+  currentStep--;
+  renderStep('back');
+}
+
+function goToStep(stepIndex) {
+  if (!currentTemplate || stepIndex < 0 || stepIndex >= currentTemplate.steps.length) return;
+  saveCurrentStepData();
+  var direction = stepIndex > currentStep ? 'forward' : 'back';
+  currentStep = stepIndex;
+  renderStep(direction);
+}
+
+
+/* ================================================================
+   RENDER STEP
+   ================================================================ */
+function renderStep(direction) {
+  var body = document.getElementById('wizardBody');
+  var step = currentTemplate.steps[currentStep];
+  var totalSteps = currentTemplate.steps.length;
+
+  // Progress
+  var pct = ((currentStep + 1) / totalSteps) * 100;
+  document.getElementById('wizardProgressBar').style.width = pct + '%';
+
+  // Step label
+  document.getElementById('wizardStepLabel').textContent = step.title;
+
+  // Footer
+  document.getElementById('wizardFooterLabel').textContent = 'Step ' + (currentStep + 1) + ' of ' + totalSteps;
+  document.getElementById('wizardBackBtn').style.display = currentStep === 0 ? 'none' : '';
+
+  var nextBtn = document.getElementById('wizardNextBtn');
+  if (currentStep === totalSteps - 1) {
+    nextBtn.style.display = 'none';
+  } else {
+    nextBtn.style.display = '';
+    nextBtn.textContent = 'Next';
+    nextBtn.innerHTML = 'Next <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
+  }
+
+  // Build slide content
+  var html = '';
+  if (step.isReview || step.isExport) {
+    html = renderReviewExport(step);
+  } else {
+    html = renderFormStep(step);
+  }
+
+  // Animate
+  var oldSlide = body.querySelector('.wizard__slide');
+  var container = document.createElement('div');
+  container.className = 'wizard__slide-container';
+  var newSlide = document.createElement('div');
+  newSlide.className = 'wizard__slide';
+  newSlide.innerHTML = html;
+
+  if (oldSlide && direction) {
+    var outClass = direction === 'forward' ? 'slide-out-left' : 'slide-out-right';
+    var inStart = direction === 'forward' ? 'translateX(100%)' : 'translateX(-100%)';
+    oldSlide.classList.add(outClass);
+    newSlide.style.transform = inStart;
+    newSlide.style.opacity = '0';
+    body.innerHTML = '';
+    body.appendChild(container);
+    container.appendChild(oldSlide);
+    container.appendChild(newSlide);
+    requestAnimationFrame(function() {
+      newSlide.style.transform = '';
+      newSlide.style.opacity = '';
+      newSlide.classList.add('slide-in');
+    });
+    setTimeout(function() {
+      if (oldSlide.parentNode) oldSlide.parentNode.removeChild(oldSlide);
+    }, 350);
+  } else {
+    body.innerHTML = '';
+    body.appendChild(newSlide);
+    newSlide.classList.add('slide-in');
+  }
+
+  // Scroll body to top
+  body.scrollTop = 0;
+
+  // Restore form values after DOM is built
+  requestAnimationFrame(function() {
+    restoreFormValues();
+    initDynamicBehaviors();
+  });
+}
+
+
+/* ================================================================
+   RENDER FORM STEP
+   ================================================================ */
+function renderFormStep(step) {
+  var h = '';
+  h += '<div class="wizard__step-title">' + esc(step.title) + '</div>';
+  h += '<div class="wizard__step-heading">' + esc(step.heading) + '</div>';
+
+  step.layout.forEach(function(item) {
+    if (item.row) {
+      h += '<div class="wiz-field__row">';
+      item.row.forEach(function(fid) {
+        var field = findField(step, fid);
+        if (field) h += renderField(field);
+      });
+      h += '</div>';
+    } else if (item.row3) {
+      h += '<div class="wiz-field__row-3">';
+      item.row3.forEach(function(fid) {
+        var field = findField(step, fid);
+        if (field) h += renderField(field);
+      });
+      h += '</div>';
+    } else if (item.single) {
+      var field = findField(step, item.single);
+      if (field) h += renderField(field);
+    }
+  });
+
+  return h;
+}
+
+function findField(step, id) {
+  for (var i = 0; i < step.fields.length; i++) {
+    if (step.fields[i].id === id) return step.fields[i];
+  }
+  return null;
+}
+
+function renderField(f) {
+  var h = '<div class="wiz-field" data-field-id="' + f.id + '"';
+  if (f.conditional) {
+    h += ' data-conditional-field="' + f.conditional.field + '" data-conditional-value="' + f.conditional.value + '"';
+    var condVal = formData[f.conditional.field] || '';
+    if (condVal !== f.conditional.value) {
+      h += ' style="display:none"';
+    }
+  }
+  h += '>';
+  h += '<label class="wiz-field__label" for="field_' + f.id + '">' + esc(f.label);
+  if (f.hint) h += ' <span class="wiz-field__hint">(' + esc(f.hint) + ')</span>';
+  h += '</label>';
+
+  if (f.type === 'text') {
+    h += '<input type="text" class="wiz-field__input" id="field_' + f.id + '" autocomplete="off"';
+    if (f.maxlength) h += ' maxlength="' + f.maxlength + '"';
+    if (f.placeholder) h += ' placeholder="' + esc(f.placeholder) + '"';
+    h += '>';
+  } else if (f.type === 'number') {
+    h += '<input type="number" class="wiz-field__input" id="field_' + f.id + '" autocomplete="off"';
+    if (f.min !== undefined) h += ' min="' + f.min + '"';
+    if (f.placeholder) h += ' placeholder="' + esc(f.placeholder) + '"';
+    h += '>';
+  } else if (f.type === 'date') {
+    h += '<input type="date" class="wiz-field__input" id="field_' + f.id + '" autocomplete="off">';
+  } else if (f.type === 'select') {
+    h += '<select class="wiz-field__select" id="field_' + f.id + '" autocomplete="off">';
+    f.options.forEach(function(opt) {
+      h += '<option value="' + esc(opt) + '">' + (opt === '' ? 'Select...' : esc(opt)) + '</option>';
+    });
+    h += '</select>';
+    if (f.crisis) {
+      h += '<div class="crisis-alert" id="crisis_' + f.id + '" style="display:none">';
+      h += '<div class="crisis-alert__title"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg> Immediate Action Required</div>';
+      h += '<div class="crisis-alert__numbers">';
+      h += '<strong>988</strong> Suicide &amp; Crisis Lifeline (call or text)<br>';
+      h += '<strong>1-833-710-6477</strong> NH Rapid Response<br>';
+      h += '<strong>(603) 889-6147</strong> GNMHC Crisis Line<br>';
+      h += '<strong>Text HOME to 741741</strong> Crisis Text Line<br><br>';
+      h += 'Conduct a full risk assessment immediately. Consider higher level of care.';
+      h += '</div></div>';
+    }
+  } else if (f.type === 'textarea') {
+    h += '<textarea class="wiz-field__textarea" id="field_' + f.id + '" autocomplete="off"';
+    if (f.placeholder) h += ' placeholder="' + esc(f.placeholder) + '"';
+    h += '></textarea>';
+  } else if (f.type === 'checks') {
+    h += '<div class="wiz-check-group" id="field_' + f.id + '">';
+    f.options.forEach(function(opt) {
+      var checked = (formData[f.id] && formData[f.id].indexOf(opt) >= 0);
+      h += '<div class="wiz-check' + (checked ? ' is-checked' : '') + '" data-value="' + esc(opt) + '" onclick="toggleCheck(this,\'' + f.id + '\')">';
+      h += '<div class="wiz-check__box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>';
+      h += '<span>' + esc(opt) + '</span>';
+      h += '</div>';
+    });
+    h += '</div>';
+  } else if (f.type === 'dynlist') {
+    h += renderDynList(f);
+  } else if (f.type === 'memberlist') {
+    h += renderMemberList();
+  }
+
+  h += '</div>';
+  return h;
+}
+
+
+/* ================================================================
+   DYNAMIC LISTS (Attendees, Action Items)
+   ================================================================ */
+function renderDynList(f) {
+  var items = formData[f.id] || [{}];
+  if (!formData[f.id]) formData[f.id] = items;
+  var h = '<div class="wiz-dynlist" id="field_' + f.id + '">';
+  items.forEach(function(item, idx) {
+    h += '<div class="wiz-dynlist__item" data-index="' + idx + '">';
+    h += '<div class="wiz-dynlist__item-fields">';
+    if (f.itemFields.length <= 2) {
+      h += '<div class="wiz-dynlist__item-row">';
+      f.itemFields.forEach(function(label, fi) {
+        var val = item[label] || '';
+        h += '<input type="text" class="wiz-field__input" placeholder="' + esc(label) + '" autocomplete="off" data-dynlist="' + f.id + '" data-index="' + idx + '" data-field="' + esc(label) + '" value="' + esc(val) + '">';
+      });
+      h += '</div>';
+    } else {
+      h += '<div class="wiz-dynlist__item-row">';
+      f.itemFields.forEach(function(label, fi) {
+        var val = item[label] || '';
+        h += '<input type="text" class="wiz-field__input" placeholder="' + esc(label) + '" autocomplete="off" data-dynlist="' + f.id + '" data-index="' + idx + '" data-field="' + esc(label) + '" value="' + esc(val) + '" style="' + (fi === 0 ? 'grid-column: 1/-1;' : '') + '">';
+      });
+      h += '</div>';
+    }
+    h += '</div>';
+    h += '<button class="wiz-dynlist__remove" onclick="removeDynItem(\'' + f.id + '\',' + idx + ')" title="Remove">';
+    h += '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+    h += '</button>';
+    h += '</div>';
+  });
+  h += '<button class="wiz-dynlist__add" onclick="addDynItem(\'' + f.id + '\')">';
+  h += '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>';
+  h += 'Add ' + esc(f.itemFields[0]) + '</button>';
+  h += '</div>';
+  return h;
+}
+
+function addDynItem(fieldId) {
+  saveCurrentStepData();
+  if (!formData[fieldId]) formData[fieldId] = [];
+  formData[fieldId].push({});
+  renderStep();
+}
+
+function removeDynItem(fieldId, idx) {
+  saveCurrentStepData();
+  if (formData[fieldId] && formData[fieldId].length > 1) {
+    formData[fieldId].splice(idx, 1);
+  }
+  renderStep();
+}
+
+
+/* ================================================================
+   MEMBER LIST (Group Therapy)
+   ================================================================ */
+function createEmptyMember() {
+  return { initials: '', participation: '', mood: '', contributions: '', progress: '' };
+}
+
+function renderMemberList() {
+  var h = '<div id="memberListContainer">';
+  memberData.forEach(function(m, idx) {
+    h += '<div class="member-card" data-member-index="' + idx + '">';
+    h += '<div class="member-card__header">';
+    h += '<div class="member-card__title">Member ' + (idx + 1) + '</div>';
+    if (memberData.length > 1) {
+      h += '<button class="wiz-dynlist__remove" onclick="removeMember(' + idx + ')" title="Remove member">';
+      h += '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+      h += '</button>';
+    }
+    h += '</div>';
+    h += '<div class="wiz-field__row">';
+    h += '<div class="wiz-field"><label class="wiz-field__label">Initials <span class="wiz-field__hint">(initials only)</span></label>';
+    h += '<input type="text" class="wiz-field__input" autocomplete="off" maxlength="10" data-member="' + idx + '" data-mfield="initials" value="' + esc(m.initials) + '" placeholder="e.g. A.B."></div>';
+    h += '<div class="wiz-field"><label class="wiz-field__label">Participation Level</label>';
+    h += '<select class="wiz-field__select" autocomplete="off" data-member="' + idx + '" data-mfield="participation">';
+    ['','Active','Moderate','Minimal','Disruptive'].forEach(function(opt) {
+      h += '<option value="' + esc(opt) + '"' + (m.participation === opt ? ' selected' : '') + '>' + (opt === '' ? 'Select...' : esc(opt)) + '</option>';
+    });
+    h += '</select></div>';
+    h += '</div>';
+    h += '<div class="wiz-field"><label class="wiz-field__label">Mood Presentation</label>';
+    h += '<select class="wiz-field__select" autocomplete="off" data-member="' + idx + '" data-mfield="mood">';
+    ['','Euthymic','Depressed','Anxious','Irritable','Manic','Flat','Labile'].forEach(function(opt) {
+      h += '<option value="' + esc(opt) + '"' + (m.mood === opt ? ' selected' : '') + '>' + (opt === '' ? 'Select...' : esc(opt)) + '</option>';
+    });
+    h += '</select></div>';
+    h += '<div class="wiz-field"><label class="wiz-field__label">Key Contributions</label>';
+    h += '<textarea class="wiz-field__textarea" autocomplete="off" data-member="' + idx + '" data-mfield="contributions" placeholder="Notable contributions to the session..." style="min-height:70px">' + esc(m.contributions) + '</textarea></div>';
+    h += '<div class="wiz-field"><label class="wiz-field__label">Individual Progress</label>';
+    h += '<textarea class="wiz-field__textarea" autocomplete="off" data-member="' + idx + '" data-mfield="progress" placeholder="Progress toward individual goals..." style="min-height:70px">' + esc(m.progress) + '</textarea></div>';
+    h += '</div>';
+  });
+
+  h += '<button class="wiz-dynlist__add" onclick="addMember()">';
+  h += '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>';
+  h += 'Add Member</button>';
+  h += '</div>';
+  return h;
+}
+
+function addMember() {
+  saveMemberData();
+  memberData.push(createEmptyMember());
+  renderStep();
+}
+
+function removeMember(idx) {
+  saveMemberData();
+  if (memberData.length > 1) {
+    memberData.splice(idx, 1);
+  }
+  renderStep();
+}
+
+function saveMemberData() {
+  document.querySelectorAll('[data-member]').forEach(function(el) {
+    var idx = parseInt(el.getAttribute('data-member'));
+    var field = el.getAttribute('data-mfield');
+    if (memberData[idx]) {
+      memberData[idx][field] = el.value;
+    }
+  });
+}
+
+
+/* ================================================================
+   SAVE / RESTORE FORM DATA
+   ================================================================ */
+function saveCurrentStepData() {
+  if (!currentTemplate) return;
+  var step = currentTemplate.steps[currentStep];
+  if (!step.fields) return;
+
+  // Save regular fields
+  step.fields.forEach(function(f) {
+    if (f.type === 'checks') {
+      // Already saved via toggleCheck
+    } else if (f.type === 'dynlist') {
+      saveDynListData(f.id);
+    } else if (f.type === 'memberlist') {
+      saveMemberData();
+    } else {
+      var el = document.getElementById('field_' + f.id);
+      if (el) formData[f.id] = el.value;
+    }
+  });
+}
+
+function saveDynListData(fieldId) {
+  var inputs = document.querySelectorAll('[data-dynlist="' + fieldId + '"]');
+  inputs.forEach(function(el) {
+    var idx = parseInt(el.getAttribute('data-index'));
+    var field = el.getAttribute('data-field');
+    if (!formData[fieldId]) formData[fieldId] = [{}];
+    if (!formData[fieldId][idx]) formData[fieldId][idx] = {};
+    formData[fieldId][idx][field] = el.value;
+  });
+}
+
+function restoreFormValues() {
+  if (!currentTemplate) return;
+  var step = currentTemplate.steps[currentStep];
+  if (!step.fields) return;
+
+  step.fields.forEach(function(f) {
+    if (f.type === 'checks' || f.type === 'dynlist' || f.type === 'memberlist') return;
+    var el = document.getElementById('field_' + f.id);
+    if (!el) return;
+    if (formData[f.id] !== undefined) {
+      el.value = formData[f.id];
+    } else if (f.type === 'date' && f.defaultToday) {
+      el.value = todayISO();
+      formData[f.id] = el.value;
+    }
+  });
+}
+
+
+/* ================================================================
+   DYNAMIC BEHAVIORS (crisis alerts, conditional fields)
+   ================================================================ */
+function initDynamicBehaviors() {
+  // Crisis field watchers
+  document.querySelectorAll('.wiz-field__select').forEach(function(sel) {
+    sel.addEventListener('change', function() {
+      var fieldDiv = sel.closest('.wiz-field');
+      var fid = fieldDiv ? fieldDiv.getAttribute('data-field-id') : '';
+      // Check for crisis alert
+      var crisisEl = document.getElementById('crisis_' + fid);
+      if (crisisEl) {
+        var step = currentTemplate.steps[currentStep];
+        var field = findField(step, fid);
+        if (field && field.crisis && sel.value === field.crisis) {
+          crisisEl.style.display = '';
+        } else {
+          crisisEl.style.display = 'none';
+        }
+      }
+
+      // Check conditional fields
+      document.querySelectorAll('[data-conditional-field="' + fid + '"]').forEach(function(condField) {
+        var condVal = condField.getAttribute('data-conditional-value');
+        condField.style.display = sel.value === condVal ? '' : 'none';
+      });
+    });
+  });
+}
+
+function toggleCheck(el, fieldId) {
+  el.classList.toggle('is-checked');
+  // Update formData
+  var group = el.parentElement;
+  var checked = [];
+  group.querySelectorAll('.wiz-check.is-checked').forEach(function(c) {
+    checked.push(c.getAttribute('data-value'));
+  });
+  formData[fieldId] = checked;
+}
+
+
+/* ================================================================
+   REVIEW & EXPORT
+   ================================================================ */
+function renderReviewExport(step) {
+  var h = '';
+  h += '<div class="wizard__step-title">' + esc(step.title) + '</div>';
+  h += '<div class="wizard__step-heading">' + esc(step.heading) + '</div>';
+
+  // Completion counter
+  var stats = getCompletionStats();
+  var dotClass = stats.pct >= 80 ? 'completion-counter__dot--good' : 'completion-counter__dot--partial';
+  h += '<div class="completion-counter">';
+  h += '<span class="completion-counter__dot ' + dotClass + '"></span>';
+  h += stats.filled + ' of ' + stats.total + ' fields completed (' + stats.pct + '%)';
+  h += '</div>';
+
+  // Preview
+  var noteText = currentTemplate.formatNote(formData);
+  h += '<div class="preview-note" id="previewNote">';
+  h += renderPreviewHTML(noteText);
+  h += '</div>';
+
+  // Export buttons
+  h += '<div class="export-actions">';
+  h += '<button class="export-btn export-btn--primary" onclick="copyToClipboard()">';
+  h += '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+  h += 'Copy to Clipboard</button>';
+  h += '<button class="export-btn export-btn--secondary" onclick="printNote()">';
+  h += '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>';
+  h += 'Print</button>';
+  h += '<button class="export-btn export-btn--secondary" onclick="startNew()">';
+  h += '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>';
+  h += 'Start New</button>';
+  h += '</div>';
+
+  return h;
+}
+
+function renderPreviewHTML(noteObj) {
+  var h = '';
+  h += '<div class="preview-note__header">';
+  h += '<div class="preview-note__disclaimer">AI-Assisted Documentation Template — Clinician Review Required</div>';
+  h += '<div class="preview-note__title">' + esc(currentTemplate.name) + '</div>';
+  h += '</div>';
+
+  noteObj.sections.forEach(function(sec, idx) {
+    var isEmpty = !sec.content || sec.content.trim() === '' || sec.content.trim() === 'N/A';
+    var emptyClass = isEmpty ? ' preview-note__section--empty' : '';
+    h += '<div class="preview-note__section' + emptyClass + '" onclick="goToStep(' + sec.stepIndex + ')" title="Click to edit">';
+    h += '<div class="preview-note__section-title">' + esc(sec.title) + '</div>';
+    h += '<div class="preview-note__section-content">' + esc(sec.content || 'Not completed') + '</div>';
+    h += '</div>';
+  });
+
+  h += '<div class="preview-note__footer">No data is stored or transmitted. This note was generated entirely within the browser.</div>';
+  return h;
+}
+
+function getCompletionStats() {
+  var total = 0;
+  var filled = 0;
+  currentTemplate.steps.forEach(function(step) {
+    if (step.isReview || step.isExport || !step.fields) return;
+    step.fields.forEach(function(f) {
+      if (f.type === 'dynlist' || f.type === 'memberlist') return;
+      total++;
+      var val = formData[f.id];
+      if (f.type === 'checks') {
+        if (val && val.length > 0) filled++;
+      } else {
+        if (val && val.toString().trim() !== '') filled++;
+      }
+    });
+  });
+  var pct = total === 0 ? 100 : Math.round((filled / total) * 100);
+  return { total: total, filled: filled, pct: pct };
+}
+
+
+/* ================================================================
+   NOTE FORMATTERS
+   ================================================================ */
+function formatSOAP(d) {
+  var sections = [];
+
+  // Client Info
+  var info = [];
+  if (d.client_initials) info.push('Client: ' + d.client_initials);
+  if (d.session_date) info.push('Date: ' + formatDate(d.session_date));
+  if (d.session_number) info.push('Session #: ' + d.session_number);
+  if (d.duration) info.push('Duration: ' + d.duration);
+  if (d.cpt_code) info.push('CPT: ' + d.cpt_code);
+  sections.push({ title: 'CLIENT INFORMATION', content: info.join('\n'), stepIndex: 0 });
+
+  // Subjective
+  var subj = [];
+  if (d.chief_complaint) subj.push('Chief Complaint: ' + d.chief_complaint);
+  if (d.reported_mood) subj.push('Reported Mood: ' + d.reported_mood);
+  if (d.sleep_quality) subj.push('Sleep: ' + d.sleep_quality);
+  if (d.appetite) subj.push('Appetite: ' + d.appetite);
+  if (d.suicidal_ideation) subj.push('Suicidal Ideation: ' + d.suicidal_ideation);
+  sections.push({ title: 'SUBJECTIVE', content: subj.join('\n') || 'N/A', stepIndex: 1 });
+
+  // Objective
+  var obj = [];
+  if (d.appearance) obj.push('Appearance: ' + d.appearance);
+  if (d.behavior) obj.push('Behavior: ' + d.behavior);
+  if (d.speech) obj.push('Speech: ' + d.speech);
+  if (d.affect) obj.push('Affect: ' + d.affect);
+  if (d.thought_process) obj.push('Thought Process: ' + d.thought_process);
+  if (d.thought_content && d.thought_content.length) obj.push('Thought Content: ' + d.thought_content.join(', '));
+  if (d.orientation && d.orientation.length) obj.push('Orientation: Oriented x' + d.orientation.length + ' (' + d.orientation.join(', ') + ')');
+  if (d.insight) obj.push('Insight: ' + d.insight);
+  if (d.judgment) obj.push('Judgment: ' + d.judgment);
+  sections.push({ title: 'OBJECTIVE', content: obj.join('\n') || 'N/A', stepIndex: 2 });
+
+  // Assessment
+  var assess = [];
+  if (d.clinical_formulation) assess.push('Clinical Formulation:\n' + d.clinical_formulation);
+  if (d.risk_level) assess.push('Risk Level: ' + d.risk_level);
+  if (d.progress) assess.push('Progress Toward Goals: ' + d.progress);
+  if (d.diagnosis) assess.push('Diagnosis: ' + d.diagnosis);
+  sections.push({ title: 'ASSESSMENT', content: assess.join('\n') || 'N/A', stepIndex: 3 });
+
+  // Plan
+  var plan = [];
+  if (d.interventions && d.interventions.length) plan.push('Interventions: ' + d.interventions.join(', '));
+  if (d.homework) plan.push('Homework: ' + d.homework);
+  if (d.next_appointment) plan.push('Next Appointment: ' + formatDate(d.next_appointment));
+  if (d.referrals) plan.push('Referrals: ' + d.referrals);
+  if (d.medication_notes) plan.push('Medication Notes (defer to prescriber): ' + d.medication_notes);
+  sections.push({ title: 'PLAN', content: plan.join('\n') || 'N/A', stepIndex: 4 });
+
+  return { sections: sections };
+}
+
+function formatDAP(d) {
+  var sections = [];
+
+  var info = [];
+  if (d.client_initials) info.push('Client: ' + d.client_initials);
+  if (d.session_date) info.push('Date: ' + formatDate(d.session_date));
+  if (d.session_number) info.push('Session #: ' + d.session_number);
+  if (d.duration) info.push('Duration: ' + d.duration);
+  if (d.cpt_code) info.push('CPT: ' + d.cpt_code);
+  sections.push({ title: 'CLIENT INFORMATION', content: info.join('\n'), stepIndex: 0 });
+
+  var data = [];
+  if (d.session_content) data.push('Session Content: ' + d.session_content);
+  if (d.client_statements) data.push('Client Statements: ' + d.client_statements);
+  if (d.behavioral_observations) data.push('Behavioral Observations: ' + d.behavioral_observations);
+  sections.push({ title: 'DATA', content: data.join('\n') || 'N/A', stepIndex: 1 });
+
+  var assess = [];
+  if (d.clinical_impressions) assess.push('Clinical Impressions: ' + d.clinical_impressions);
+  if (d.progress) assess.push('Progress Toward Goals: ' + d.progress);
+  if (d.risk_assessment) assess.push('Risk Assessment: ' + d.risk_assessment);
+  sections.push({ title: 'ASSESSMENT', content: assess.join('\n') || 'N/A', stepIndex: 2 });
+
+  var plan = [];
+  if (d.interventions && d.interventions.length) plan.push('Interventions: ' + d.interventions.join(', '));
+  if (d.next_steps) plan.push('Next Steps: ' + d.next_steps);
+  if (d.next_appointment) plan.push('Next Appointment: ' + formatDate(d.next_appointment));
+  sections.push({ title: 'PLAN', content: plan.join('\n') || 'N/A', stepIndex: 3 });
+
+  return { sections: sections };
+}
+
+function formatConference(d) {
+  var sections = [];
+
+  var info = [];
+  if (d.conf_date) info.push('Date: ' + formatDate(d.conf_date));
+  if (d.conf_time) info.push('Time: ' + d.conf_time);
+  if (d.client_initials) info.push('Client: ' + d.client_initials);
+  if (d.attendees && d.attendees.length) {
+    var attendeeList = d.attendees.filter(function(a) { return a.Name; }).map(function(a) {
+      return a.Name + (a.Role ? ' (' + a.Role + ')' : '');
+    });
+    if (attendeeList.length) info.push('Attendees:\n  ' + attendeeList.join('\n  '));
+  }
+  sections.push({ title: 'CONFERENCE INFORMATION', content: info.join('\n'), stepIndex: 0 });
+
+  var pres = [];
+  if (d.presenting_issues) pres.push('Presenting Issues: ' + d.presenting_issues);
+  if (d.current_treatment) pres.push('Current Treatment: ' + d.current_treatment);
+  if (d.relevant_history) pres.push('Relevant History: ' + d.relevant_history);
+  sections.push({ title: 'CASE PRESENTATION', content: pres.join('\n') || 'N/A', stepIndex: 1 });
+
+  var disc = [];
+  if (d.discussion_points) disc.push('Discussion Points: ' + d.discussion_points);
+  if (d.differing_perspectives) disc.push('Differing Perspectives: ' + d.differing_perspectives);
+  sections.push({ title: 'TEAM DISCUSSION', content: disc.join('\n') || 'N/A', stepIndex: 2 });
+
+  var recs = [];
+  if (d.recommendations) recs.push('Team Recommendations: ' + d.recommendations);
+  if (d.action_items && d.action_items.length) {
+    var items = d.action_items.filter(function(a) { return a.Task; }).map(function(a) {
+      var parts = [a.Task];
+      if (a.Assignee) parts.push('Assignee: ' + a.Assignee);
+      if (a.Deadline) parts.push('Deadline: ' + a.Deadline);
+      return '  - ' + parts.join(' | ');
+    });
+    if (items.length) recs.push('Action Items:\n' + items.join('\n'));
+  }
+  if (d.followup_date) recs.push('Follow-Up Date: ' + formatDate(d.followup_date));
+  sections.push({ title: 'RECOMMENDATIONS', content: recs.join('\n') || 'N/A', stepIndex: 3 });
+
+  return { sections: sections };
+}
+
+function formatGroup(d) {
+  var sections = [];
+
+  var info = [];
+  if (d.group_name) info.push('Group: ' + d.group_name);
+  if (d.session_date) info.push('Date: ' + formatDate(d.session_date));
+  if (d.session_number) info.push('Session #: ' + d.session_number);
+  if (d.duration) info.push('Duration: ' + d.duration);
+  if (d.facilitator) info.push('Facilitator: ' + d.facilitator);
+  if (d.cofacilitator) info.push('Co-Facilitator: ' + d.cofacilitator);
+  if (d.topic) info.push('Topic: ' + d.topic);
+  sections.push({ title: 'GROUP INFORMATION', content: info.join('\n'), stepIndex: 0 });
+
+  var proc = [];
+  if (d.session_goals) proc.push('Session Goals: ' + d.session_goals);
+  if (d.activities) proc.push('Activities/Exercises: ' + d.activities);
+  if (d.group_dynamics) proc.push('Group Dynamics: ' + d.group_dynamics);
+  sections.push({ title: 'GROUP PROCESS', content: proc.join('\n') || 'N/A', stepIndex: 1 });
+
+  // Members
+  var memContent = [];
+  memberData.forEach(function(m, idx) {
+    if (!m.initials && !m.participation && !m.mood && !m.contributions && !m.progress) return;
+    var lines = ['Member ' + (idx + 1) + ': ' + (m.initials || 'N/A')];
+    if (m.participation) lines.push('  Participation: ' + m.participation);
+    if (m.mood) lines.push('  Mood: ' + m.mood);
+    if (m.contributions) lines.push('  Contributions: ' + m.contributions);
+    if (m.progress) lines.push('  Progress: ' + m.progress);
+    memContent.push(lines.join('\n'));
+  });
+  sections.push({ title: 'MEMBER NOTES', content: memContent.join('\n\n') || 'N/A', stepIndex: 2 });
+
+  var obs = [];
+  if (d.therapeutic_factors && d.therapeutic_factors.length) obs.push('Therapeutic Factors Observed: ' + d.therapeutic_factors.join(', '));
+  if (d.critical_incidents) obs.push('Critical Incidents: ' + d.critical_incidents);
+  sections.push({ title: 'CLINICAL OBSERVATIONS', content: obs.join('\n') || 'N/A', stepIndex: 3 });
+
+  var plan = [];
+  if (d.next_topic) plan.push('Next Session Topic: ' + d.next_topic);
+  if (d.homework) plan.push('Homework: ' + d.homework);
+  if (d.individual_followups) plan.push('Individual Follow-Ups: ' + d.individual_followups);
+  sections.push({ title: 'PLAN', content: plan.join('\n') || 'N/A', stepIndex: 4 });
+
+  return { sections: sections };
+}
+
+function formatCollateral(d) {
+  var sections = [];
+
+  var info = [];
+  if (d.contact_date) info.push('Date: ' + formatDate(d.contact_date));
+  if (d.contact_time) info.push('Time: ' + d.contact_time);
+  if (d.contact_duration) info.push('Duration: ' + d.contact_duration);
+  if (d.client_initials) info.push('Client: ' + d.client_initials);
+  if (d.contact_person) info.push('Contact: ' + d.contact_person);
+  if (d.contact_type) info.push('Type: ' + d.contact_type);
+  if (d.consent_status) info.push('Authorization: ' + d.consent_status);
+  sections.push({ title: 'CONTACT INFORMATION', content: info.join('\n'), stepIndex: 0 });
+
+  var content = [];
+  if (d.purpose) content.push('Purpose: ' + d.purpose);
+  if (d.info_shared) content.push('Information Shared: ' + d.info_shared);
+  if (d.info_received) content.push('Information Received: ' + d.info_received);
+  sections.push({ title: 'CONTENT', content: content.join('\n') || 'N/A', stepIndex: 1 });
+
+  var fu = [];
+  if (d.action_items) fu.push('Action Items: ' + d.action_items);
+  if (d.followup_needed) fu.push('Follow-Up Needed: ' + d.followup_needed);
+  if (d.followup_needed === 'Yes' && d.followup_date) fu.push('Follow-Up Date: ' + formatDate(d.followup_date));
+  sections.push({ title: 'FOLLOW-UP', content: fu.join('\n') || 'N/A', stepIndex: 2 });
+
+  return { sections: sections };
+}
+
+
+/* ================================================================
+   EXPORT ACTIONS
+   ================================================================ */
+function generatePlainText() {
+  if (!currentTemplate) return '';
+  var noteObj = currentTemplate.formatNote(formData);
+  var lines = [];
+  lines.push('='.repeat(60));
+  lines.push('AI-Assisted Documentation Template — Clinician Review Required');
+  lines.push('='.repeat(60));
+  lines.push(currentTemplate.name.toUpperCase());
+  lines.push('Generated: ' + new Date().toLocaleString());
+  lines.push('='.repeat(60));
+  lines.push('');
+
+  noteObj.sections.forEach(function(sec) {
+    lines.push(sec.title);
+    lines.push('-'.repeat(sec.title.length));
+    lines.push(sec.content || 'N/A');
+    lines.push('');
+  });
+
+  lines.push('='.repeat(60));
+  lines.push('No data stored or transmitted. Generated in-browser only.');
+  lines.push('AI-assisted template — clinician review required.');
+  lines.push('='.repeat(60));
+
+  return lines.join('\n');
+}
+
+function copyToClipboard() {
+  var text = generatePlainText();
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function() {
+      showToast('Copied to clipboard');
+    }).catch(function() {
+      fallbackCopy(text);
+    });
+  } else {
+    fallbackCopy(text);
+  }
+}
+
+function fallbackCopy(text) {
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.left = '-9999px';
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  try {
+    document.execCommand('copy');
+    showToast('Copied to clipboard');
+  } catch(e) {
+    showToast('Copy failed — please select and copy manually');
+  }
+  document.body.removeChild(ta);
+}
+
+function printNote() {
+  window.print();
+}
+
+function startNew() {
+  if (!currentTemplate) return;
+  var id = currentTemplate.id;
+  closeWizard();
+  setTimeout(function() { startTemplate(id); }, 350);
+}
+
+
+/* ================================================================
+   TOAST
+   ================================================================ */
+function showToast(msg) {
+  var toast = document.getElementById('toastNotification');
+  toast.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> ' + esc(msg);
+  toast.classList.add('is-visible');
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(function() {
+    toast.classList.remove('is-visible');
+  }, 3000);
+}
+
+
+/* ================================================================
+   KEYBOARD NAVIGATION
+   ================================================================ */
+document.addEventListener('keydown', function(e) {
+  if (!currentTemplate) {
+    // Template card selection with Enter
+    if (e.key === 'Enter' && document.activeElement && document.activeElement.classList.contains('tmpl-card')) {
+      document.activeElement.click();
+    }
+    return;
+  }
+
+  if (e.key === 'ArrowRight' || (e.key === 'Enter' && !e.target.matches('textarea, button, .wiz-check'))) {
+    e.preventDefault();
+    wizardNext();
+  } else if (e.key === 'ArrowLeft') {
+    e.preventDefault();
+    wizardBack();
+  } else if (e.key === 'Escape') {
+    closeWizard();
+  }
+});
+
+
+/* ================================================================
+   UTILITIES
+   ================================================================ */
+function esc(s) {
+  if (s === null || s === undefined) return '';
+  var div = document.createElement('div');
+  div.appendChild(document.createTextNode(String(s)));
+  return div.innerHTML;
+}
+
+function todayISO() {
+  var d = new Date();
+  return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+}
+
+function pad(n) {
+  return n < 10 ? '0' + n : '' + n;
+}
+
+function formatDate(iso) {
+  if (!iso) return '';
+  var parts = iso.split('-');
+  if (parts.length !== 3) return iso;
+  return parts[1] + '/' + parts[2] + '/' + parts[0];
+}
+
+
+/* ================================================================
+   THEME TOGGLE
+   ================================================================ */
+function toggleTheme() {
+  var html = document.documentElement;
+  var btn = document.getElementById('themeToggleBtn');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.removeAttribute('data-theme');
+    localStorage.setItem('theme', 'light');
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+  }
+}
+
+// Respect saved preference, then system preference
+(function() {
+  var saved = localStorage.getItem('theme');
+  var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (saved === 'dark' || (!saved && prefersDark)) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    var btn = document.getElementById('themeToggleBtn');
+    if (btn) btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+  }
+})();
+
+
+/* ================================================================
+   MOBILE NAV TOGGLE
+   ================================================================ */
+function toggleMobileNav() {
+  var panel = document.getElementById('mobileNavPanel');
+  var btn = document.getElementById('hamburgerBtn');
+  var isOpen = panel.classList.toggle('is-open');
+  btn.setAttribute('aria-expanded', isOpen);
+}
+
+
+/* ================================================================
+   ADMIN GATE (5-click)
+   ================================================================ */
+var adminClicks = 0;
+var adminTimer = null;
+document.getElementById('adminGate').addEventListener('click', function(e) {
+  e.preventDefault();
+  adminClicks++;
+  clearTimeout(adminTimer);
+  if (adminClicks >= 5) {
+    adminClicks = 0;
+    window.location.href = 'admin.html';
+  }
+  adminTimer = setTimeout(function() { adminClicks = 0; }, 2000);
+});
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(function(){});
+}
+</script>
+
+</body>
+</html>

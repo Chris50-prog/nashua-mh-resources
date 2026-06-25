@@ -1,0 +1,2471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Screening Tools - Greater Nashua Community Mental Health Resources</title>
+<meta name="description" content="Standardized clinical screening instruments including PHQ-9, GAD-7, AUDIT, DAST-10, and C-SSRS in an interactive step-by-step format.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2d6f59">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="css/design-system.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/fontsize.js"></script>
+<style>
+/* ================================================================
+   Screening Tools Page — Layout & Component Overrides
+   ================================================================ */
+
+/* ---- Nav ---- */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: var(--ds-z-sticky);
+  background: rgba(253, 252, 250, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--ds-border-subtle);
+  height: var(--ds-header-height);
+}
+[data-theme="dark"] .site-nav {
+  background: rgba(26, 25, 22, 0.85);
+}
+.site-nav__inner {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+}
+.site-nav__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  text-decoration: none;
+  flex-shrink: 0;
+  margin-right: auto;
+}
+.site-nav__logo-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-primary-600);
+  color: var(--ds-text-inverse);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-bold);
+  letter-spacing: var(--ds-tracking-tight);
+}
+.site-nav__logo-text {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  white-space: nowrap;
+}
+.site-nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+}
+.site-nav__link {
+  padding: var(--ds-space-2) var(--ds-space-3);
+  border-radius: var(--ds-radius-md);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default),
+              background-color var(--ds-duration-fast) var(--ds-ease-default);
+  white-space: nowrap;
+}
+.site-nav__link:hover {
+  color: var(--ds-text-primary);
+  background: var(--ds-surface-hover);
+  text-decoration: none;
+}
+.site-nav__link--active {
+  color: var(--ds-primary-700);
+  background: var(--ds-primary-50);
+}
+[data-theme="dark"] .site-nav__link--active {
+  color: var(--ds-primary-300);
+  background: var(--ds-interactive-subtle);
+}
+.site-nav__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  margin-left: var(--ds-space-2);
+}
+.site-nav__icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ds-radius-md);
+  border: none;
+  background: transparent;
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default),
+              background-color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.site-nav__icon-btn:hover {
+  background: var(--ds-surface-hover);
+  color: var(--ds-text-primary);
+}
+.site-nav__font-controls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.site-nav__font-btn {
+  padding: var(--ds-space-1) var(--ds-space-2);
+  border-radius: var(--ds-radius-sm);
+  border: 1px solid var(--ds-border);
+  background: var(--ds-surface);
+  color: var(--ds-text-secondary);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  cursor: pointer;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+  line-height: 1;
+  min-height: 28px;
+}
+.site-nav__font-btn:hover {
+  background: var(--ds-surface-hover);
+  border-color: var(--ds-border-strong);
+}
+
+/* Hamburger */
+.site-nav__hamburger {
+  display: none;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 8px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  align-items: center;
+}
+.site-nav__hamburger span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--ds-text-secondary);
+  border-radius: 1px;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+}
+
+/* Mobile nav overlay */
+.site-nav__mobile-panel {
+  display: none;
+  position: fixed;
+  top: var(--ds-header-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--ds-surface);
+  z-index: var(--ds-z-overlay);
+  padding: var(--ds-space-6);
+  flex-direction: column;
+  gap: var(--ds-space-2);
+  overflow-y: auto;
+}
+.site-nav__mobile-panel.is-open {
+  display: flex;
+}
+.site-nav__mobile-link {
+  display: block;
+  padding: var(--ds-space-3) var(--ds-space-4);
+  border-radius: var(--ds-radius-lg);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-primary);
+  text-decoration: none;
+  transition: background-color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.site-nav__mobile-link:hover {
+  background: var(--ds-surface-hover);
+  text-decoration: none;
+}
+.site-nav__mobile-link--active {
+  color: var(--ds-primary-700);
+  background: var(--ds-primary-50);
+}
+[data-theme="dark"] .site-nav__mobile-link--active {
+  color: var(--ds-primary-300);
+  background: var(--ds-interactive-subtle);
+}
+
+/* ---- Hero ---- */
+.hero {
+  background: linear-gradient(170deg, var(--ds-primary-50) 0%, var(--ds-cream) 50%, var(--ds-warm-gray-50) 100%);
+  padding: var(--ds-space-16) 0 var(--ds-space-12);
+}
+[data-theme="dark"] .hero {
+  background: linear-gradient(170deg, rgba(61, 139, 112, 0.08) 0%, var(--ds-page-bg) 50%, var(--ds-page-bg) 100%);
+}
+.hero__inner {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6);
+  text-align: center;
+}
+.hero__overline {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  margin-bottom: var(--ds-space-4);
+}
+.hero__overline-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ds-primary-500);
+}
+.hero__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-4xl);
+  font-weight: var(--ds-weight-bold);
+  line-height: var(--ds-leading-tight);
+  letter-spacing: var(--ds-tracking-tight);
+  color: var(--ds-text-primary);
+  max-width: 720px;
+  margin: 0 auto var(--ds-space-4);
+}
+.hero__subtitle {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-regular);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--ds-text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ---- Tool Selector Grid ---- */
+.tool-selector {
+  padding: var(--ds-space-12) 0;
+}
+.tool-selector__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--ds-space-6);
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6);
+}
+.tool-card {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-xl);
+  padding: var(--ds-space-6);
+  cursor: pointer;
+  transition: all 300ms var(--ds-ease-default);
+  position: relative;
+  overflow: hidden;
+}
+.tool-card:hover {
+  border-color: var(--ds-primary-300);
+  box-shadow: var(--ds-shadow-lg);
+  transform: translateY(-3px);
+}
+.tool-card:active {
+  transform: translateY(-1px);
+  box-shadow: var(--ds-shadow-md);
+}
+.tool-card__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--ds-radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: var(--ds-space-4);
+}
+.tool-card__icon--phq9 {
+  background: #ede9fe;
+  color: #7c3aed;
+}
+[data-theme="dark"] .tool-card__icon--phq9 {
+  background: rgba(124, 58, 237, 0.15);
+}
+.tool-card__icon--gad7 {
+  background: #dbeafe;
+  color: #2563eb;
+}
+[data-theme="dark"] .tool-card__icon--gad7 {
+  background: rgba(37, 99, 235, 0.15);
+}
+.tool-card__icon--audit {
+  background: #fef3c7;
+  color: #d97706;
+}
+[data-theme="dark"] .tool-card__icon--audit {
+  background: rgba(217, 119, 6, 0.15);
+}
+.tool-card__icon--dast10 {
+  background: #fce7f3;
+  color: #db2777;
+}
+[data-theme="dark"] .tool-card__icon--dast10 {
+  background: rgba(219, 39, 119, 0.15);
+}
+.tool-card__icon--cssrs {
+  background: var(--ds-status-danger-bg);
+  color: var(--ds-danger-600);
+}
+.tool-card__name {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  margin-bottom: var(--ds-space-1);
+}
+.tool-card__full-name {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  margin-bottom: var(--ds-space-3);
+}
+.tool-card__desc {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-muted);
+  line-height: var(--ds-leading-relaxed);
+}
+.tool-card__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  margin-top: var(--ds-space-4);
+  padding-top: var(--ds-space-3);
+  border-top: 1px solid var(--ds-border-subtle);
+}
+.tool-card__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  padding: var(--ds-space-0-5) var(--ds-space-2);
+  border-radius: var(--ds-radius-full);
+  font-family: var(--ds-font-sans);
+  font-size: 11px;
+  font-weight: var(--ds-weight-medium);
+  background: var(--ds-warm-gray-100);
+  color: var(--ds-text-secondary);
+}
+[data-theme="dark"] .tool-card__badge {
+  background: var(--ds-surface-hover);
+}
+
+/* ---- Wizard Overlay ---- */
+.wizard-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--ds-z-modal);
+  background: var(--ds-surface-overlay);
+  align-items: center;
+  justify-content: center;
+  padding: var(--ds-space-4);
+  opacity: 0;
+  transition: opacity 300ms var(--ds-ease-default);
+}
+.wizard-overlay.is-active {
+  display: flex;
+  opacity: 1;
+}
+.wizard-overlay.is-entering {
+  display: flex;
+  opacity: 0;
+}
+
+.wizard {
+  background: var(--ds-surface);
+  border-radius: var(--ds-radius-2xl);
+  box-shadow: var(--ds-shadow-2xl);
+  width: 100%;
+  max-width: 680px;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transform: scale(0.95) translateY(20px);
+  transition: transform 300ms var(--ds-ease-out);
+}
+.wizard-overlay.is-active .wizard {
+  transform: scale(1) translateY(0);
+}
+
+/* Wizard Header */
+.wizard__header {
+  padding: var(--ds-space-5) var(--ds-space-6);
+  border-bottom: 1px solid var(--ds-border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+.wizard__header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+}
+.wizard__tool-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-1) var(--ds-space-3);
+  border-radius: var(--ds-radius-full);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  background: var(--ds-primary-50);
+  color: var(--ds-primary-700);
+}
+[data-theme="dark"] .wizard__tool-badge {
+  background: var(--ds-interactive-subtle);
+  color: var(--ds-primary-300);
+}
+.wizard__close-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ds-radius-md);
+  border: none;
+  background: transparent;
+  color: var(--ds-text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+}
+.wizard__close-btn:hover {
+  background: var(--ds-surface-hover);
+  color: var(--ds-text-primary);
+}
+
+/* Progress Bar */
+.wizard__progress {
+  height: 4px;
+  background: var(--ds-warm-gray-100);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+[data-theme="dark"] .wizard__progress {
+  background: var(--ds-surface-hover);
+}
+.wizard__progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--ds-primary-500), var(--ds-primary-400));
+  border-radius: 0 2px 2px 0;
+  transition: width 400ms var(--ds-ease-out);
+  width: 0%;
+}
+
+/* Wizard Body */
+.wizard__body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 320px;
+}
+
+/* Question Slide Container */
+.wizard__slide-container {
+  position: relative;
+  width: 100%;
+}
+.wizard__slide {
+  padding: var(--ds-space-8) var(--ds-space-6);
+  transition: transform 300ms var(--ds-ease-default), opacity 300ms var(--ds-ease-default);
+}
+.wizard__slide.slide-out-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: translateX(-100%);
+  opacity: 0;
+}
+.wizard__slide.slide-out-right {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: translateX(100%);
+  opacity: 0;
+}
+.wizard__slide.slide-in {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Question Styling */
+.wizard__question-number {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-primary-600);
+  margin-bottom: var(--ds-space-2);
+  text-transform: uppercase;
+  letter-spacing: var(--ds-tracking-wide);
+}
+[data-theme="dark"] .wizard__question-number {
+  color: var(--ds-primary-400);
+}
+.wizard__timeframe {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+  margin-bottom: var(--ds-space-4);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  padding: var(--ds-space-1) var(--ds-space-2-5);
+  background: var(--ds-warm-gray-100);
+  border-radius: var(--ds-radius-full);
+}
+[data-theme="dark"] .wizard__timeframe {
+  background: var(--ds-surface-hover);
+}
+.wizard__question-text {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xl);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-primary);
+  line-height: var(--ds-leading-relaxed);
+  margin-bottom: var(--ds-space-6);
+}
+
+/* Response Option Cards */
+.wizard__options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-3);
+}
+.wizard__option {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-4) var(--ds-space-5);
+  border: 2px solid var(--ds-border);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-surface);
+  cursor: pointer;
+  transition: all 200ms var(--ds-ease-default);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-primary);
+  position: relative;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.wizard__option:hover {
+  border-color: var(--ds-primary-300);
+  background: var(--ds-primary-50);
+}
+[data-theme="dark"] .wizard__option:hover {
+  background: var(--ds-interactive-subtle);
+}
+.wizard__option.is-selected {
+  border-color: var(--ds-primary-500);
+  background: var(--ds-primary-50);
+  box-shadow: var(--ds-shadow-primary);
+}
+[data-theme="dark"] .wizard__option.is-selected {
+  border-color: var(--ds-primary-400);
+  background: var(--ds-interactive-subtle);
+}
+.wizard__option-key {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-warm-gray-100);
+  color: var(--ds-text-muted);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 200ms var(--ds-ease-default);
+}
+[data-theme="dark"] .wizard__option-key {
+  background: var(--ds-surface-hover);
+}
+.wizard__option.is-selected .wizard__option-key {
+  background: var(--ds-primary-600);
+  color: var(--ds-text-inverse);
+}
+.wizard__option-label {
+  flex: 1;
+}
+.wizard__option-score {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+  flex-shrink: 0;
+}
+/* Auto-advance fill bar */
+.wizard__option-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  background: var(--ds-primary-50);
+  border-radius: var(--ds-radius-lg);
+  opacity: 0.5;
+  transition: width 600ms linear;
+  pointer-events: none;
+}
+[data-theme="dark"] .wizard__option-fill {
+  background: var(--ds-interactive-subtle);
+}
+.wizard__option.is-advancing .wizard__option-fill {
+  width: 100%;
+}
+
+/* Wizard Footer */
+.wizard__footer {
+  padding: var(--ds-space-4) var(--ds-space-6);
+  border-top: 1px solid var(--ds-border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+.wizard__footer-left {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-muted);
+}
+.wizard__footer-right {
+  display: flex;
+  gap: var(--ds-space-3);
+}
+.wizard__nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-2-5) var(--ds-space-5);
+  min-height: 40px;
+  border-radius: var(--ds-radius-md);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+}
+.wizard__nav-btn--back {
+  background: var(--ds-surface);
+  color: var(--ds-text-secondary);
+  border-color: var(--ds-border);
+}
+.wizard__nav-btn--back:hover {
+  background: var(--ds-surface-hover);
+  border-color: var(--ds-border-strong);
+}
+.wizard__nav-btn--next {
+  background: var(--ds-interactive);
+  color: var(--ds-text-inverse);
+  border-color: var(--ds-interactive);
+}
+.wizard__nav-btn--next:hover {
+  background: var(--ds-interactive-hover);
+  border-color: var(--ds-interactive-hover);
+}
+.wizard__nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ---- Score Reveal ---- */
+.result {
+  padding: var(--ds-space-8) var(--ds-space-6);
+}
+.result__score-section {
+  text-align: center;
+  margin-bottom: var(--ds-space-8);
+}
+.result__score-display {
+  font-family: var(--ds-font-sans);
+  font-size: 72px;
+  font-weight: var(--ds-weight-extrabold);
+  line-height: 1;
+  letter-spacing: var(--ds-tracking-tight);
+  color: var(--ds-text-primary);
+  margin-bottom: var(--ds-space-2);
+}
+.result__score-max {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  color: var(--ds-text-muted);
+  margin-bottom: var(--ds-space-5);
+}
+.result__severity-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-2) var(--ds-space-5);
+  border-radius: var(--ds-radius-full);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-semibold);
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 500ms var(--ds-ease-out), transform 500ms var(--ds-ease-out);
+}
+.result__severity-badge.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Score Context Bar */
+.result__context-bar {
+  margin: var(--ds-space-6) auto;
+  max-width: 400px;
+}
+.result__bar-track {
+  width: 100%;
+  height: 10px;
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-warm-gray-100);
+  position: relative;
+  overflow: hidden;
+}
+[data-theme="dark"] .result__bar-track {
+  background: var(--ds-surface-hover);
+}
+.result__bar-fill {
+  height: 100%;
+  border-radius: var(--ds-radius-full);
+  transition: width 1.5s var(--ds-ease-out);
+  width: 0%;
+}
+.result__bar-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--ds-space-2);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+}
+
+/* Severity color classes */
+.severity-green { background-color: #22c55e; color: #fff; }
+.severity-green-bg { background-color: #22c55e; }
+.severity-green-text { color: #15803d; }
+.severity-yellow { background-color: #eab308; color: #422006; }
+.severity-yellow-bg { background-color: #eab308; }
+.severity-yellow-text { color: #a16207; }
+.severity-orange { background-color: #f97316; color: #fff; }
+.severity-orange-bg { background-color: #f97316; }
+.severity-orange-text { color: #c2410c; }
+.severity-redorange { background-color: #ef4444; color: #fff; }
+.severity-redorange-bg { background-color: #ef4444; }
+.severity-redorange-text { color: #dc2626; }
+.severity-red { background-color: #dc2626; color: #fff; }
+.severity-red-bg { background-color: #dc2626; }
+.severity-red-text { color: #991b1b; }
+
+/* Result Detail Card */
+.result__detail-card {
+  background: var(--ds-surface-sunken);
+  border: 1px solid var(--ds-border-subtle);
+  border-radius: var(--ds-radius-xl);
+  padding: var(--ds-space-6);
+  margin-bottom: var(--ds-space-6);
+  text-align: left;
+}
+.result__detail-title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  margin-bottom: var(--ds-space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+}
+.result__detail-text {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+}
+
+/* Crisis Alert Banner */
+.result__crisis-alert {
+  background: #fef2f2;
+  border: 2px solid #dc2626;
+  border-radius: var(--ds-radius-xl);
+  padding: var(--ds-space-5) var(--ds-space-6);
+  margin-bottom: var(--ds-space-6);
+  text-align: left;
+}
+[data-theme="dark"] .result__crisis-alert {
+  background: rgba(220, 38, 38, 0.1);
+  border-color: #ef4444;
+}
+.result__crisis-alert-title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-bold);
+  color: #dc2626;
+  margin-bottom: var(--ds-space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+}
+.result__crisis-numbers {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+}
+.result__crisis-number {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  color: var(--ds-text-primary);
+}
+.result__crisis-number strong {
+  font-weight: var(--ds-weight-bold);
+  color: #dc2626;
+}
+[data-theme="dark"] .result__crisis-number strong {
+  color: #f87171;
+}
+
+/* Attribution */
+.result__attribution {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+  line-height: var(--ds-leading-relaxed);
+  margin-top: var(--ds-space-4);
+  padding-top: var(--ds-space-4);
+  border-top: 1px solid var(--ds-border-subtle);
+}
+.result__disclaimer {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-warning-700);
+  background: var(--ds-status-warning-bg);
+  padding: var(--ds-space-3) var(--ds-space-4);
+  border-radius: var(--ds-radius-md);
+  line-height: var(--ds-leading-relaxed);
+  margin-top: var(--ds-space-3);
+}
+[data-theme="dark"] .result__disclaimer {
+  color: var(--ds-warning-300);
+}
+
+/* Result Actions */
+.result__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-3);
+  justify-content: center;
+  margin-top: var(--ds-space-6);
+}
+.result__action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-2-5) var(--ds-space-5);
+  min-height: 40px;
+  border-radius: var(--ds-radius-md);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+}
+.result__action-btn--primary {
+  background: var(--ds-interactive);
+  color: var(--ds-text-inverse);
+  border-color: var(--ds-interactive);
+}
+.result__action-btn--primary:hover {
+  background: var(--ds-interactive-hover);
+  border-color: var(--ds-interactive-hover);
+}
+.result__action-btn--secondary {
+  background: var(--ds-surface);
+  color: var(--ds-text-primary);
+  border-color: var(--ds-border);
+}
+.result__action-btn--secondary:hover {
+  background: var(--ds-surface-hover);
+  border-color: var(--ds-border-strong);
+}
+
+/* ---- Footer ---- */
+.site-footer {
+  background: var(--ds-surface);
+  border-top: 1px solid var(--ds-border);
+  padding: var(--ds-space-16) 0 var(--ds-space-8);
+  margin-top: 0;
+}
+.footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--ds-space-10);
+  margin-bottom: var(--ds-space-10);
+}
+.footer__brand-desc {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+  margin-top: var(--ds-space-3);
+  max-width: 320px;
+}
+.footer__col-title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--ds-tracking-widest);
+  margin-bottom: var(--ds-space-4);
+}
+.footer__links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2-5);
+}
+.footer__links a {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.footer__links a:hover {
+  color: var(--ds-text-primary);
+}
+.footer__crisis-box {
+  background: var(--ds-status-danger-bg);
+  border: 1px solid var(--ds-danger-200);
+  border-radius: var(--ds-radius-lg);
+  padding: var(--ds-space-4);
+  margin-top: var(--ds-space-4);
+}
+[data-theme="dark"] .footer__crisis-box {
+  border-color: rgba(220, 95, 95, 0.2);
+}
+.footer__crisis-title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-status-danger-text);
+  margin-bottom: var(--ds-space-2);
+}
+.footer__crisis-numbers {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+}
+.footer__crisis-numbers strong {
+  color: var(--ds-text-primary);
+}
+.footer__bottom {
+  border-top: 1px solid var(--ds-border-subtle);
+  padding-top: var(--ds-space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--ds-space-4);
+}
+.footer__disclaimer {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+  line-height: var(--ds-leading-relaxed);
+  max-width: 560px;
+}
+.footer__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-4);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+}
+.footer__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ds-success-500);
+  display: inline-block;
+}
+
+/* ---- AI Label ---- */
+.ai-assisted-label {
+  text-align: center;
+  padding: var(--ds-space-4) 0;
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+  background: var(--ds-warm-gray-50);
+  border-top: 1px solid var(--ds-border-subtle);
+}
+[data-theme="dark"] .ai-assisted-label {
+  background: var(--ds-page-bg);
+}
+
+/* ---- Toast (reused) ---- */
+.ds-toast-screening {
+  position: fixed;
+  bottom: var(--ds-space-6);
+  right: var(--ds-space-6);
+  z-index: var(--ds-z-toast);
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-3) var(--ds-space-5);
+  background: var(--ds-surface-raised);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-xl);
+  box-shadow: var(--ds-shadow-xl);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-primary);
+  transform: translateY(16px);
+  opacity: 0;
+  transition: all 300ms var(--ds-ease-out);
+  pointer-events: none;
+}
+.ds-toast-screening.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1023px) {
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ds-space-8);
+  }
+}
+@media (max-width: 639px) {
+  .site-nav__links,
+  .site-nav__font-controls {
+    display: none;
+  }
+  .site-nav__hamburger {
+    display: flex;
+  }
+  .hero {
+    padding: var(--ds-space-12) 0 var(--ds-space-8);
+  }
+  .hero__title {
+    font-size: var(--ds-text-3xl);
+  }
+  .hero__subtitle {
+    font-size: var(--ds-text-base);
+  }
+  .tool-selector__grid {
+    grid-template-columns: 1fr;
+    gap: var(--ds-space-4);
+    padding: 0 var(--ds-space-4);
+  }
+  .wizard {
+    max-height: 100vh;
+    border-radius: var(--ds-radius-lg);
+    max-height: calc(100vh - 32px);
+  }
+  .wizard__slide {
+    padding: var(--ds-space-6) var(--ds-space-4);
+  }
+  .wizard__question-text {
+    font-size: var(--ds-text-lg);
+  }
+  .wizard__option {
+    padding: var(--ds-space-3-5) var(--ds-space-4);
+  }
+  .result__score-display {
+    font-size: 56px;
+  }
+  .result__actions {
+    flex-direction: column;
+  }
+  .result__action-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: var(--ds-space-8);
+  }
+  .footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .ds-toast-screening {
+    left: var(--ds-space-4);
+    right: var(--ds-space-4);
+    bottom: var(--ds-space-4);
+  }
+}
+
+/* ---- Print ---- */
+@media print {
+  .site-nav,
+  .site-nav__mobile-panel,
+  .hero,
+  .tool-selector,
+  .wizard__header,
+  .wizard__progress,
+  .wizard__footer,
+  .result__actions,
+  .site-footer,
+  .ai-assisted-label,
+  .ds-toast-screening {
+    display: none !important;
+  }
+  .wizard-overlay {
+    display: block !important;
+    position: static !important;
+    background: none !important;
+    padding: 0 !important;
+  }
+  .wizard {
+    max-width: 100% !important;
+    max-height: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    transform: none !important;
+    border-radius: 0 !important;
+  }
+  .wizard__body {
+    overflow: visible !important;
+  }
+  .result {
+    padding: 0 !important;
+  }
+  .result__detail-card {
+    border: 1px solid #ccc !important;
+    break-inside: avoid;
+  }
+  .result__crisis-alert {
+    border: 2px solid #dc2626 !important;
+    break-inside: avoid;
+  }
+  @page {
+    margin: 1in;
+  }
+}
+</style>
+</head>
+<body>
+<script src="js/auth-gate.js"></script>
+
+<a href="#main-content" class="ds-sr-only" style="position:absolute;top:-40px;left:0;background:var(--ds-surface);padding:8px 16px;z-index:100;font-size:14px;transition:top 0.2s" onfocus="this.style.top='0'" onblur="this.style.top='-40px'">Skip to main content</a>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav class="site-nav" role="navigation" aria-label="Main navigation">
+  <div class="site-nav__inner">
+
+    <a href="index.html" class="site-nav__logo" id="siteLogo">
+      <div class="site-nav__logo-mark">NH</div>
+      <span class="site-nav__logo-text">MH Resources</span>
+    </a>
+
+    <div class="site-nav__links">
+      <a href="index.html" class="site-nav__link">Home</a>
+      <a href="resources.html" class="site-nav__link">Resources</a>
+      <a href="tools.html" class="site-nav__link site-nav__link--active">Clinical Tools</a>
+      <a href="screening.html" class="site-nav__link">Screening</a>
+      <a href="map.html" class="site-nav__link">Map</a>
+      <a href="templates.html" class="site-nav__link">Templates</a>
+      <a href="guide.html" class="site-nav__link">Guides</a>
+      <a href="neurobiology.html" class="site-nav__link">Brain &amp; Neuro</a>
+      <a href="worksheets.html" class="site-nav__link">Worksheets</a>
+      <a href="activities.html" class="site-nav__link">Activities</a>
+      <a href="games.html" class="site-nav__link">Games</a>
+    </div>
+
+    <div class="site-nav__controls">
+      <div class="site-nav__font-controls">
+        <button class="site-nav__font-btn" onclick="mhFontDecrease()" title="Decrease font size" aria-label="Decrease font size">A-</button>
+        <button class="site-nav__font-btn" onclick="mhFontIncrease()" title="Increase font size" aria-label="Increase font size">A+</button>
+      </div>
+
+      <button class="site-nav__icon-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+
+      <button class="site-nav__hamburger" id="hamburgerBtn" onclick="toggleMobileNav()" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </div>
+</nav>
+
+<!-- Mobile slide-out panel -->
+<div class="site-nav__mobile-panel" id="mobileNavPanel">
+  <a href="index.html" class="site-nav__mobile-link">Home</a>
+  <a href="resources.html" class="site-nav__mobile-link">Resources</a>
+  <a href="tools.html" class="site-nav__mobile-link site-nav__mobile-link--active">Clinical Tools</a>
+  <a href="screening.html" class="site-nav__mobile-link">Screening</a>
+  <a href="map.html" class="site-nav__mobile-link">Map</a>
+  <a href="templates.html" class="site-nav__mobile-link">Templates</a>
+  <a href="guide.html" class="site-nav__mobile-link">Guides</a>
+  <a href="neurobiology.html" class="site-nav__mobile-link">Brain &amp; Neuro</a>
+  <a href="worksheets.html" class="site-nav__mobile-link">Worksheets</a>
+  <a href="activities.html" class="site-nav__mobile-link">Activities</a>
+  <a href="games.html" class="site-nav__mobile-link">Games</a>
+</div>
+
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero">
+  <div class="hero__inner">
+    <div class="hero__overline">
+      <span class="hero__overline-dot"></span>
+      <span class="ds-overline">Clinical Instruments</span>
+    </div>
+    <h1 class="hero__title">Screening Tools</h1>
+    <p class="hero__subtitle">Standardized, validated screening instruments for depression, anxiety, substance use, and suicide risk -- administered one question at a time.</p>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     MAIN CONTENT
+     ============================================================ -->
+<main id="main-content">
+
+<!-- Tool Selector -->
+<section class="tool-selector" aria-label="Choose a screening tool">
+  <div class="tool-selector__grid" id="toolGrid">
+
+    <div class="tool-card" onclick="startTool('phq9')" tabindex="0" role="button" aria-label="Start PHQ-9 Depression Screening">
+      <div class="tool-card__icon tool-card__icon--phq9">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+      </div>
+      <div class="tool-card__name">PHQ-9</div>
+      <div class="tool-card__full-name">Patient Health Questionnaire</div>
+      <div class="tool-card__desc">Screens for depression severity. 9 questions about mood, energy, sleep, appetite, and self-harm over the past 2 weeks.</div>
+      <div class="tool-card__meta">
+        <span class="tool-card__badge">9 questions</span>
+        <span class="tool-card__badge">~2 min</span>
+      </div>
+    </div>
+
+    <div class="tool-card" onclick="startTool('gad7')" tabindex="0" role="button" aria-label="Start GAD-7 Anxiety Screening">
+      <div class="tool-card__icon tool-card__icon--gad7">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      <div class="tool-card__name">GAD-7</div>
+      <div class="tool-card__full-name">Generalized Anxiety Disorder Scale</div>
+      <div class="tool-card__desc">Screens for anxiety severity. 7 questions about nervousness, worry, restlessness, and fear over the past 2 weeks.</div>
+      <div class="tool-card__meta">
+        <span class="tool-card__badge">7 questions</span>
+        <span class="tool-card__badge">~2 min</span>
+      </div>
+    </div>
+
+    <div class="tool-card" onclick="startTool('audit')" tabindex="0" role="button" aria-label="Start AUDIT Alcohol Screening">
+      <div class="tool-card__icon tool-card__icon--audit">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l4 10H4L8 2z"/><path d="M12 12v6"/><path d="M8 22h8"/><path d="M12 18h.01"/></svg>
+      </div>
+      <div class="tool-card__name">AUDIT</div>
+      <div class="tool-card__full-name">Alcohol Use Disorders Identification Test</div>
+      <div class="tool-card__desc">Screens for hazardous and harmful alcohol use. 10 questions about drinking frequency, quantity, and consequences.</div>
+      <div class="tool-card__meta">
+        <span class="tool-card__badge">10 questions</span>
+        <span class="tool-card__badge">~3 min</span>
+      </div>
+    </div>
+
+    <div class="tool-card" onclick="startTool('dast10')" tabindex="0" role="button" aria-label="Start DAST-10 Drug Use Screening">
+      <div class="tool-card__icon tool-card__icon--dast10">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7z"/><path d="m8.5 8.5 7 7"/></svg>
+      </div>
+      <div class="tool-card__name">DAST-10</div>
+      <div class="tool-card__full-name">Drug Abuse Screening Test</div>
+      <div class="tool-card__desc">Screens for drug use problems. 10 yes/no questions about drug-related consequences over the past 12 months (excluding alcohol and tobacco).</div>
+      <div class="tool-card__meta">
+        <span class="tool-card__badge">10 questions</span>
+        <span class="tool-card__badge">~2 min</span>
+      </div>
+    </div>
+
+    <div class="tool-card" onclick="startTool('cssrs')" tabindex="0" role="button" aria-label="Start C-SSRS Suicide Risk Screening">
+      <div class="tool-card__icon tool-card__icon--cssrs">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+      </div>
+      <div class="tool-card__name">C-SSRS</div>
+      <div class="tool-card__full-name">Columbia Suicide Severity Rating Scale</div>
+      <div class="tool-card__desc">Triage screening for suicide risk. 6 yes/no questions assessing ideation, planning, intent, and behavior. Determines risk level.</div>
+      <div class="tool-card__meta">
+        <span class="tool-card__badge">6 questions</span>
+        <span class="tool-card__badge">~1 min</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+
+<!-- ============================================================
+     WIZARD OVERLAY
+     ============================================================ -->
+<div class="wizard-overlay" id="wizardOverlay" role="dialog" aria-modal="true" aria-label="Screening tool wizard">
+  <div class="wizard" id="wizardPanel">
+    <div class="wizard__header">
+      <div class="wizard__header-left">
+        <span class="wizard__tool-badge" id="wizardToolBadge"></span>
+      </div>
+      <button class="wizard__close-btn" onclick="closeWizard()" aria-label="Close screening tool" title="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="wizard__progress">
+      <div class="wizard__progress-bar" id="wizardProgressBar"></div>
+    </div>
+    <div class="wizard__body" id="wizardBody">
+      <!-- Question slides and results rendered here by JS -->
+    </div>
+    <div class="wizard__footer" id="wizardFooter">
+      <div class="wizard__footer-left" id="wizardFooterLabel"></div>
+      <div class="wizard__footer-right">
+        <button class="wizard__nav-btn wizard__nav-btn--back" id="wizardBackBtn" onclick="wizardBack()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          Back
+        </button>
+        <button class="wizard__nav-btn wizard__nav-btn--next" id="wizardNextBtn" onclick="wizardNext()" disabled>
+          Next
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast notification -->
+<div class="ds-toast-screening" id="toastNotification"></div>
+
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="ds-container">
+
+    <div class="footer__grid">
+
+      <!-- Brand column -->
+      <div>
+        <a href="index.html" class="site-nav__logo" style="text-decoration:none">
+          <div class="site-nav__logo-mark">NH</div>
+          <span class="site-nav__logo-text">MH Resources</span>
+        </a>
+        <p class="footer__brand-desc">A comprehensive resource hub for clinicians, case managers, and community members in the Greater Nashua area.</p>
+
+        <div class="footer__crisis-box">
+          <div class="footer__crisis-title">Crisis? Get help now.</div>
+          <div class="footer__crisis-numbers">
+            <strong>988</strong> Suicide &amp; Crisis Lifeline<br>
+            <strong>1-833-710-6477</strong> NH Rapid Response<br>
+            <strong>(603) 889-6147</strong> GNMHC Crisis<br>
+            <strong>Text HOME to 741741</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigate -->
+      <div>
+        <div class="footer__col-title">Navigate</div>
+        <ul class="footer__links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="tools.html">Clinical Tools</a></li>
+          <li><a href="screening.html">Screening</a></li>
+          <li><a href="map.html">Map</a></li>
+          <li><a href="templates.html">Templates</a></li>
+          <li><a href="guide.html">Guides</a></li>
+          <li><a href="neurobiology.html">Brain &amp; Neuro</a></li>
+          <li><a href="worksheets.html">Worksheets</a></li>
+          <li><a href="activities.html">Activities</a></li>
+          <li><a href="games.html">Games</a></li>
+        </ul>
+      </div>
+
+      <!-- Quick Access -->
+      <div>
+        <div class="footer__col-title">Quick Access</div>
+        <ul class="footer__links">
+          <li><a href="tools.html#screening-tools">Screening Tools</a></li>
+          <li><a href="tools.html#clinical-note-builder">Note Builder</a></li>
+          <li><a href="guide.html#crisisTree">Crisis Tree</a></li>
+          <li><a href="resources.html#housing">Housing Resources</a></li>
+        </ul>
+      </div>
+
+      <!-- Clinical -->
+      <div>
+        <div class="footer__col-title">Clinical</div>
+        <ul class="footer__links">
+          <li><a href="tools.html#cbt">CBT Worksheets</a></li>
+          <li><a href="tools.html#dbt">DBT Handouts</a></li>
+          <li><a href="tools.html#cpt-reference">CPT Codes</a></li>
+          <li><a href="tools.html#safety-plan-builder">Safety Planning</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <div class="footer__disclaimer">
+        For informational purposes only. This resource does not replace clinical judgment, supervision, or direct consultation. Contact information and services may change; always verify by contacting organizations directly.
+      </div>
+      <div class="footer__meta">
+        <span><span class="footer__status-dot"></span> Updated Jun 24, 2026</span>
+        <a href="#" id="adminGate" style="color: var(--ds-text-muted); font-size: 11px;" aria-label="Version 4.0 - Admin access">v4.0</a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<!-- AI-assisted label -->
+<div class="ai-assisted-label">AI-assisted clinical resource &mdash; clinician review required</div>
+
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script>
+/* ================================================================
+   SCREENING TOOLS DATA
+   ================================================================ */
+var TOOLS = {
+
+  /* ---- PHQ-9 ---- */
+  phq9: {
+    id: 'phq9',
+    name: 'PHQ-9',
+    fullName: 'Patient Health Questionnaire-9',
+    timeframe: 'Over the last 2 weeks',
+    maxScore: 27,
+    type: 'likert',
+    questions: [
+      'Little interest or pleasure in doing things',
+      'Feeling down, depressed, or hopeless',
+      'Trouble falling or staying asleep, or sleeping too much',
+      'Feeling tired or having little energy',
+      'Poor appetite or overeating',
+      'Feeling bad about yourself — or that you are a failure or have let yourself or your family down',
+      'Trouble concentrating on things, such as reading the newspaper or watching television',
+      'Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual',
+      'Thoughts that you would be better off dead, or of hurting yourself in some way'
+    ],
+    options: [
+      { label: 'Not at all', value: 0 },
+      { label: 'Several days', value: 1 },
+      { label: 'More than half the days', value: 2 },
+      { label: 'Nearly every day', value: 3 }
+    ],
+    scoring: [
+      { min: 0,  max: 4,  label: 'Minimal Depression', color: 'green', recs: 'No treatment indicated. Monitor as clinically appropriate.' },
+      { min: 5,  max: 9,  label: 'Mild Depression', color: 'yellow', recs: 'Watchful waiting. Psychoeducation and self-management strategies may be appropriate. Reassess at follow-up.' },
+      { min: 10, max: 14, label: 'Moderate Depression', color: 'orange', recs: 'Develop a treatment plan. Consider psychotherapy (e.g., CBT, IPT) and/or pharmacotherapy. Follow up within 2-4 weeks.' },
+      { min: 15, max: 19, label: 'Moderately Severe Depression', color: 'redorange', recs: 'Active treatment with pharmacotherapy and/or psychotherapy. Psychiatric consultation recommended. Close follow-up indicated.' },
+      { min: 20, max: 27, label: 'Severe Depression', color: 'red', recs: 'Immediate pharmacotherapy combined with psychotherapy strongly recommended. Psychiatric referral for medication management. Consider higher level of care if safety concerns exist.' }
+    ],
+    attribution: 'Developed by Drs. Robert L. Spitzer, Janet B.W. Williams, Kurt Kroenke and colleagues, with an educational grant from Pfizer Inc. No permission required to reproduce, translate, display, or distribute.',
+    disclaimer: 'The PHQ-9 is a screening tool, not a diagnostic instrument. Clinical judgment should guide all treatment decisions. If the client endorses item 9 (self-harm/suicidal thoughts), conduct an immediate risk assessment regardless of the total score.'
+  },
+
+  /* ---- GAD-7 ---- */
+  gad7: {
+    id: 'gad7',
+    name: 'GAD-7',
+    fullName: 'Generalized Anxiety Disorder 7-Item Scale',
+    timeframe: 'Over the last 2 weeks',
+    maxScore: 21,
+    type: 'likert',
+    questions: [
+      'Feeling nervous, anxious, or on edge',
+      'Not being able to stop or control worrying',
+      'Worrying too much about different things',
+      'Trouble relaxing',
+      'Being so restless that it is hard to sit still',
+      'Becoming easily annoyed or irritable',
+      'Feeling afraid, as if something awful might happen'
+    ],
+    options: [
+      { label: 'Not at all', value: 0 },
+      { label: 'Several days', value: 1 },
+      { label: 'More than half the days', value: 2 },
+      { label: 'Nearly every day', value: 3 }
+    ],
+    scoring: [
+      { min: 0,  max: 4,  label: 'Minimal Anxiety', color: 'green', recs: 'No treatment indicated. Monitor as clinically appropriate.' },
+      { min: 5,  max: 9,  label: 'Mild Anxiety', color: 'yellow', recs: 'Watchful waiting. Psychoeducation, relaxation techniques, and self-management strategies may be appropriate.' },
+      { min: 10, max: 14, label: 'Moderate Anxiety', color: 'orange', recs: 'Consider psychotherapy (e.g., CBT) and/or pharmacotherapy. Follow up within 2-4 weeks to reassess.' },
+      { min: 15, max: 21, label: 'Severe Anxiety', color: 'red', recs: 'Active treatment with pharmacotherapy and/or psychotherapy. Psychiatric consultation recommended. Consider higher level of care if functional impairment is significant.' }
+    ],
+    attribution: 'Developed by Drs. Robert L. Spitzer, Janet B.W. Williams, Kurt Kroenke, and colleagues. No permission required to reproduce, translate, display, or distribute.',
+    disclaimer: null
+  },
+
+  /* ---- AUDIT ---- */
+  audit: {
+    id: 'audit',
+    name: 'AUDIT',
+    fullName: 'Alcohol Use Disorders Identification Test',
+    timeframe: '',
+    maxScore: 40,
+    type: 'custom',
+    questions: [
+      {
+        text: 'How often do you have a drink containing alcohol?',
+        options: [
+          { label: 'Never', value: 0 },
+          { label: 'Monthly or less', value: 1 },
+          { label: '2–4 times a month', value: 2 },
+          { label: '2–3 times a week', value: 3 },
+          { label: '4 or more times a week', value: 4 }
+        ]
+      },
+      {
+        text: 'How many drinks containing alcohol do you have on a typical day when you are drinking?',
+        options: [
+          { label: '1 or 2', value: 0 },
+          { label: '3 or 4', value: 1 },
+          { label: '5 or 6', value: 2 },
+          { label: '7 to 9', value: 3 },
+          { label: '10 or more', value: 4 }
+        ]
+      },
+      {
+        text: 'How often do you have six or more drinks on one occasion?',
+        options: [
+          { label: 'Never', value: 0 },
+          { label: 'Less than monthly', value: 1 },
+          { label: 'Monthly', value: 2 },
+          { label: 'Weekly', value: 3 },
+          { label: 'Daily or almost daily', value: 4 }
+        ]
+      },
+      {
+        text: 'How often during the last year have you found that you were not able to stop drinking once you had started?',
+        options: [
+          { label: 'Never', value: 0 },
+          { label: 'Less than monthly', value: 1 },
+          { label: 'Monthly', value: 2 },
+          { label: 'Weekly', value: 3 },
+          { label: 'Daily or almost daily', value: 4 }
+        ]
+      },
+      {
+        text: 'How often during the last year have you failed to do what was normally expected of you because of drinking?',
+        options: [
+          { label: 'Never', value: 0 },
+          { label: 'Less than monthly', value: 1 },
+          { label: 'Monthly', value: 2 },
+          { label: 'Weekly', value: 3 },
+          { label: 'Daily or almost daily', value: 4 }
+        ]
+      },
+      {
+        text: 'How often during the last year have you needed a first drink in the morning to get yourself going after a heavy drinking session?',
+        options: [
+          { label: 'Never', value: 0 },
+          { label: 'Less than monthly', value: 1 },
+          { label: 'Monthly', value: 2 },
+          { label: 'Weekly', value: 3 },
+          { label: 'Daily or almost daily', value: 4 }
+        ]
+      },
+      {
+        text: 'How often during the last year have you had a feeling of guilt or remorse after drinking?',
+        options: [
+          { label: 'Never', value: 0 },
+          { label: 'Less than monthly', value: 1 },
+          { label: 'Monthly', value: 2 },
+          { label: 'Weekly', value: 3 },
+          { label: 'Daily or almost daily', value: 4 }
+        ]
+      },
+      {
+        text: 'How often during the last year have you been unable to remember what happened the night before because of your drinking?',
+        options: [
+          { label: 'Never', value: 0 },
+          { label: 'Less than monthly', value: 1 },
+          { label: 'Monthly', value: 2 },
+          { label: 'Weekly', value: 3 },
+          { label: 'Daily or almost daily', value: 4 }
+        ]
+      },
+      {
+        text: 'Have you or someone else been injured because of your drinking?',
+        options: [
+          { label: 'No', value: 0 },
+          { label: 'Yes, but not in the last year', value: 2 },
+          { label: 'Yes, during the last year', value: 4 }
+        ]
+      },
+      {
+        text: 'Has a relative, friend, doctor, or other health care worker been concerned about your drinking or suggested you cut down?',
+        options: [
+          { label: 'No', value: 0 },
+          { label: 'Yes, but not in the last year', value: 2 },
+          { label: 'Yes, during the last year', value: 4 }
+        ]
+      }
+    ],
+    scoring: [
+      { min: 0,  max: 7,  label: 'Low Risk', color: 'green', recs: 'Low-risk drinking pattern. Provide brief alcohol education and positive reinforcement.' },
+      { min: 8,  max: 15, label: 'Hazardous Drinking', color: 'yellow', recs: 'Hazardous alcohol use. Brief intervention with feedback, advice, and goal-setting is recommended. Reassess at follow-up.' },
+      { min: 16, max: 19, label: 'Harmful Drinking', color: 'orange', recs: 'Harmful alcohol use pattern. Brief intervention plus continued monitoring. Consider referral to substance use treatment (e.g., NH Doorway).' },
+      { min: 20, max: 40, label: 'Possible Dependence', color: 'red', recs: 'Possible alcohol dependence. Refer for comprehensive substance use evaluation and specialized treatment. Consider medical detoxification assessment. NH Doorway: (603) 836-6540.' }
+    ],
+    attribution: 'Developed by the World Health Organization (WHO). The AUDIT is in the public domain and may be freely used, reproduced, and distributed.',
+    disclaimer: null
+  },
+
+  /* ---- DAST-10 ---- */
+  dast10: {
+    id: 'dast10',
+    name: 'DAST-10',
+    fullName: 'Drug Abuse Screening Test-10',
+    timeframe: 'Past 12 months (excluding alcohol and tobacco)',
+    maxScore: 10,
+    type: 'yesno',
+    questions: [
+      'Have you used drugs other than those required for medical reasons?',
+      'Do you abuse more than one drug at a time?',
+      'Are you always able to stop using drugs when you want to?',
+      'Have you had "blackouts" or "flashbacks" as a result of drug use?',
+      'Do you ever feel bad or guilty about your drug use?',
+      'Does your spouse (or parents) ever complain about your involvement with drugs?',
+      'Have you neglected your family because of your use of drugs?',
+      'Have you engaged in illegal activities in order to obtain drugs?',
+      'Have you experienced withdrawal symptoms when you stopped taking drugs?',
+      'Have you had medical problems as a result of your drug use?'
+    ],
+    reverseScored: [2],
+    options: [
+      { label: 'Yes', value: 1 },
+      { label: 'No', value: 0 }
+    ],
+    scoring: [
+      { min: 0,  max: 0,  label: 'No Problems Reported', color: 'green', recs: 'No drug-related problems identified. No intervention needed at this time.' },
+      { min: 1,  max: 2,  label: 'Low Level', color: 'yellow', recs: 'Low level of drug-related problems. Monitor and provide brief psychoeducation. Reassess periodically.' },
+      { min: 3,  max: 5,  label: 'Moderate Level', color: 'orange', recs: 'Moderate level of drug-related problems. Further assessment warranted. Consider outpatient substance use treatment referral.' },
+      { min: 6,  max: 8,  label: 'Substantial Level', color: 'redorange', recs: 'Substantial level of drug-related problems. Intensive assessment needed. Referral to substance use treatment strongly recommended. NH Doorway: (603) 836-6540.' },
+      { min: 9,  max: 10, label: 'Severe Level', color: 'red', recs: 'Severe level of drug-related problems. Intensive assessment and treatment needed. Immediate referral to specialized substance use program. NH Doorway: (603) 836-6540.' }
+    ],
+    attribution: 'Developed by Dr. Harvey A. Skinner, Centre for Addiction and Mental Health (CAMH). The DAST-10 may be used for clinical and research purposes.',
+    disclaimer: null
+  },
+
+  /* ---- C-SSRS ---- */
+  cssrs: {
+    id: 'cssrs',
+    name: 'C-SSRS',
+    fullName: 'Columbia Suicide Severity Rating Scale (Triage)',
+    timeframe: '',
+    maxScore: null,
+    type: 'yesno_risk',
+    questions: [
+      'Have you wished you were dead or wished you could go to sleep and not wake up?',
+      'Have you actually had any thoughts of killing yourself?',
+      'Have you been thinking about how you might do this?',
+      'Have you had these thoughts and had some intention of acting on them?',
+      'Have you started to work out or worked out the details of how to kill yourself? Do you intend to carry out this plan?',
+      'Have you ever done anything, started to do anything, or prepared to do anything to end your life?'
+    ],
+    options: [
+      { label: 'Yes', value: 1 },
+      { label: 'No', value: 0 }
+    ],
+    attribution: 'The Columbia Suicide Severity Rating Scale (C-SSRS) was developed at Columbia University. These are the triage screening questions. For full administration, use the complete validated instrument.',
+    disclaimer: null
+  }
+};
+
+
+/* ================================================================
+   WIZARD STATE
+   ================================================================ */
+var wizState = {
+  toolId: null,
+  currentQ: 0,
+  answers: [],
+  advanceTimer: null,
+  isTransitioning: false
+};
+
+
+/* ================================================================
+   WIZARD CONTROL
+   ================================================================ */
+function startTool(toolId) {
+  var tool = TOOLS[toolId];
+  if (!tool) return;
+
+  wizState.toolId = toolId;
+  wizState.currentQ = 0;
+  wizState.answers = [];
+  wizState.isTransitioning = false;
+
+  var numQ = (tool.type === 'custom') ? tool.questions.length : tool.questions.length;
+  for (var i = 0; i < numQ; i++) {
+    wizState.answers.push(null);
+  }
+
+  document.getElementById('wizardToolBadge').textContent = tool.name;
+  document.getElementById('wizardFooter').style.display = '';
+
+  renderQuestion(0, 'none');
+  updateProgress();
+  updateNav();
+
+  var overlay = document.getElementById('wizardOverlay');
+  overlay.classList.add('is-entering');
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      overlay.classList.remove('is-entering');
+      overlay.classList.add('is-active');
+    });
+  });
+  document.body.style.overflow = 'hidden';
+}
+
+function closeWizard() {
+  var overlay = document.getElementById('wizardOverlay');
+  overlay.classList.remove('is-active');
+  document.body.style.overflow = '';
+  clearTimeout(wizState.advanceTimer);
+  wizState.toolId = null;
+}
+
+function renderQuestion(index, direction) {
+  var tool = TOOLS[wizState.toolId];
+  var body = document.getElementById('wizardBody');
+  var numQ = tool.questions.length;
+
+  var qText, qOptions;
+  if (tool.type === 'custom') {
+    var qData = tool.questions[index];
+    qText = qData.text;
+    qOptions = qData.options;
+  } else {
+    qText = tool.questions[index];
+    qOptions = tool.options;
+  }
+
+  // For DAST-10 reverse-scored Q3: options display stays Yes/No but scoring flips
+  // We handle this in selectOption, not in rendering
+
+  var timeframeHTML = '';
+  if (tool.timeframe) {
+    timeframeHTML = '<div class="wizard__timeframe"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ' + escapeHtml(tool.timeframe) + '</div>';
+  }
+
+  var optionsHTML = '';
+  for (var i = 0; i < qOptions.length; i++) {
+    var isSelected = wizState.answers[index] !== null && wizState.answers[index] === i;
+    var selectedClass = isSelected ? ' is-selected' : '';
+    var keyNum = i + 1;
+    var scoreDisplay = '';
+    if (tool.type !== 'yesno_risk') {
+      scoreDisplay = '<span class="wizard__option-score">' + qOptions[i].value + ' pt' + (qOptions[i].value !== 1 ? 's' : '') + '</span>';
+    }
+    optionsHTML += '<div class="wizard__option' + selectedClass + '" data-option-index="' + i + '" onclick="selectOption(' + index + ',' + i + ')" tabindex="0" role="button" aria-label="' + escapeHtml(qOptions[i].label) + '">' +
+      '<div class="wizard__option-fill"></div>' +
+      '<span class="wizard__option-key">' + keyNum + '</span>' +
+      '<span class="wizard__option-label">' + escapeHtml(qOptions[i].label) + '</span>' +
+      scoreDisplay +
+    '</div>';
+  }
+
+  var html = '<div class="wizard__slide slide-in" id="wizardSlide">' +
+    '<div class="wizard__question-number">Question ' + (index + 1) + ' of ' + numQ + '</div>' +
+    timeframeHTML +
+    '<div class="wizard__question-text">' + escapeHtml(qText) + '</div>' +
+    '<div class="wizard__options">' + optionsHTML + '</div>' +
+  '</div>';
+
+  if (direction === 'none') {
+    body.innerHTML = html;
+  } else {
+    var oldSlide = document.getElementById('wizardSlide');
+    if (oldSlide) {
+      oldSlide.id = 'wizardSlideOld';
+      oldSlide.classList.remove('slide-in');
+      oldSlide.classList.add(direction === 'forward' ? 'slide-out-left' : 'slide-out-right');
+    }
+
+    var tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    var newSlide = tempDiv.firstChild;
+    newSlide.classList.remove('slide-in');
+    newSlide.classList.add(direction === 'forward' ? 'slide-out-right' : 'slide-out-left');
+    body.appendChild(newSlide);
+
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        newSlide.classList.remove('slide-out-right', 'slide-out-left');
+        newSlide.classList.add('slide-in');
+        setTimeout(function() {
+          var old = document.getElementById('wizardSlideOld');
+          if (old) old.parentNode.removeChild(old);
+          wizState.isTransitioning = false;
+        }, 300);
+      });
+    });
+  }
+}
+
+function selectOption(questionIndex, optionIndex) {
+  if (wizState.isTransitioning) return;
+  clearTimeout(wizState.advanceTimer);
+
+  var prev = wizState.answers[questionIndex];
+  wizState.answers[questionIndex] = optionIndex;
+
+  // Update visual
+  var options = document.querySelectorAll('#wizardSlide .wizard__option');
+  for (var i = 0; i < options.length; i++) {
+    options[i].classList.remove('is-selected', 'is-advancing');
+  }
+  if (options[optionIndex]) {
+    options[optionIndex].classList.add('is-selected');
+  }
+
+  updateNav();
+
+  // Auto-advance after 600ms
+  var tool = TOOLS[wizState.toolId];
+  var numQ = tool.questions.length;
+  if (questionIndex < numQ - 1) {
+    if (options[optionIndex]) {
+      options[optionIndex].classList.add('is-advancing');
+    }
+    wizState.advanceTimer = setTimeout(function() {
+      wizardNext();
+    }, 600);
+  } else {
+    // Last question - auto-show results
+    if (options[optionIndex]) {
+      options[optionIndex].classList.add('is-advancing');
+    }
+    wizState.advanceTimer = setTimeout(function() {
+      showResults();
+    }, 600);
+  }
+}
+
+function wizardBack() {
+  if (wizState.isTransitioning) return;
+  clearTimeout(wizState.advanceTimer);
+
+  if (wizState.currentQ > 0) {
+    wizState.isTransitioning = true;
+    wizState.currentQ--;
+    renderQuestion(wizState.currentQ, 'back');
+    updateProgress();
+    updateNav();
+  }
+}
+
+function wizardNext() {
+  if (wizState.isTransitioning) return;
+  clearTimeout(wizState.advanceTimer);
+
+  var tool = TOOLS[wizState.toolId];
+  var numQ = tool.questions.length;
+
+  if (wizState.answers[wizState.currentQ] === null) return;
+
+  if (wizState.currentQ < numQ - 1) {
+    wizState.isTransitioning = true;
+    wizState.currentQ++;
+    renderQuestion(wizState.currentQ, 'forward');
+    updateProgress();
+    updateNav();
+  } else {
+    showResults();
+  }
+}
+
+function updateProgress() {
+  var tool = TOOLS[wizState.toolId];
+  var numQ = tool.questions.length;
+  var pct = ((wizState.currentQ + 1) / numQ) * 100;
+  document.getElementById('wizardProgressBar').style.width = pct + '%';
+}
+
+function updateNav() {
+  var tool = TOOLS[wizState.toolId];
+  var numQ = tool.questions.length;
+
+  var backBtn = document.getElementById('wizardBackBtn');
+  var nextBtn = document.getElementById('wizardNextBtn');
+  var label = document.getElementById('wizardFooterLabel');
+
+  backBtn.disabled = wizState.currentQ === 0;
+  nextBtn.disabled = wizState.answers[wizState.currentQ] === null;
+
+  if (wizState.currentQ === numQ - 1 && wizState.answers[wizState.currentQ] !== null) {
+    nextBtn.innerHTML = 'See Results <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
+  } else {
+    nextBtn.innerHTML = 'Next <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
+  }
+
+  label.textContent = 'Use keys 1–' + tool.options.length + ' to select';
+  if (tool.type === 'custom') {
+    var qData = tool.questions[wizState.currentQ];
+    label.textContent = 'Use keys 1–' + qData.options.length + ' to select';
+  }
+}
+
+
+/* ================================================================
+   SCORING & RESULTS
+   ================================================================ */
+function calculateScore() {
+  var tool = TOOLS[wizState.toolId];
+
+  if (tool.type === 'yesno_risk') {
+    return calculateCSSRSRisk();
+  }
+
+  var totalScore = 0;
+  for (var i = 0; i < wizState.answers.length; i++) {
+    var optIdx = wizState.answers[i];
+    if (optIdx === null) continue;
+
+    if (tool.type === 'custom') {
+      totalScore += tool.questions[i].options[optIdx].value;
+    } else if (tool.type === 'yesno' && tool.reverseScored && tool.reverseScored.indexOf(i) !== -1) {
+      // Reverse scored: Yes=0, No=1
+      totalScore += (optIdx === 0) ? 0 : 1;
+    } else {
+      totalScore += tool.options[optIdx].value;
+    }
+  }
+
+  var severity = null;
+  for (var j = 0; j < tool.scoring.length; j++) {
+    if (totalScore >= tool.scoring[j].min && totalScore <= tool.scoring[j].max) {
+      severity = tool.scoring[j];
+      break;
+    }
+  }
+
+  return { score: totalScore, severity: severity };
+}
+
+function calculateCSSRSRisk() {
+  var answers = wizState.answers;
+  // answers[i] is the option index: 0 = Yes, 1 = No (from the options array)
+  var yesQ = [];
+  for (var i = 0; i < answers.length; i++) {
+    if (answers[i] === 0) yesQ.push(i); // index 0 = "Yes"
+  }
+
+  var riskLevel, riskColor, recs;
+
+  // Q6 (index 5) yes = HIGH
+  if (yesQ.indexOf(5) !== -1) {
+    riskLevel = 'HIGH RISK';
+    riskColor = 'red';
+    recs = 'Immediate safety assessment required. The individual has endorsed past suicidal behavior. Conduct a comprehensive risk assessment, develop or update a safety plan, and consider immediate clinical intervention or higher level of care.';
+  }
+  // Q4 (index 3) or Q5 (index 4) yes = HIGH
+  else if (yesQ.indexOf(3) !== -1 || yesQ.indexOf(4) !== -1) {
+    riskLevel = 'HIGH RISK';
+    riskColor = 'red';
+    recs = 'Immediate safety assessment required. The individual has endorsed suicidal ideation with intent and/or a plan. Conduct a comprehensive risk assessment, develop or update a safety plan, and consider immediate clinical intervention or higher level of care.';
+  }
+  // Q3 (index 2) yes = MODERATE
+  else if (yesQ.indexOf(2) !== -1) {
+    riskLevel = 'MODERATE RISK';
+    riskColor = 'orange';
+    recs = 'Further assessment recommended. The individual has endorsed suicidal ideation with a method in mind but without stated intent. Conduct a thorough risk assessment, develop a safety plan, and establish close follow-up.';
+  }
+  // Q1 (index 0) or Q2 (index 1) yes = LOW
+  else if (yesQ.indexOf(0) !== -1 || yesQ.indexOf(1) !== -1) {
+    riskLevel = 'LOW RISK';
+    riskColor = 'yellow';
+    recs = 'The individual has endorsed some level of suicidal ideation without a plan or intent. Provide supportive counseling, psychoeducation, and establish follow-up. Document findings and monitor.';
+  }
+  // All no = no risk
+  else {
+    riskLevel = 'No Identified Risk';
+    riskColor = 'green';
+    recs = 'No suicidal ideation or behavior endorsed at this time. Continue routine clinical monitoring as appropriate.';
+  }
+
+  return {
+    score: null,
+    severity: {
+      label: riskLevel,
+      color: riskColor,
+      recs: recs
+    },
+    isHighRisk: riskColor === 'red'
+  };
+}
+
+function showResults() {
+  clearTimeout(wizState.advanceTimer);
+
+  var tool = TOOLS[wizState.toolId];
+  var result = calculateScore();
+
+  // Hide footer nav
+  document.getElementById('wizardFooter').style.display = 'none';
+
+  // Set progress to 100%
+  document.getElementById('wizardProgressBar').style.width = '100%';
+
+  var html = '<div class="wizard__slide slide-in result" id="wizardSlide">';
+
+  // Score section
+  html += '<div class="result__score-section">';
+
+  if (result.score !== null) {
+    // Numeric score display
+    html += '<div class="result__score-display" id="scoreCounter">0</div>';
+    html += '<div class="result__score-max">out of ' + tool.maxScore + '</div>';
+  }
+
+  // Severity badge
+  html += '<div class="result__severity-badge severity-' + result.severity.color + '" id="severityBadge">' + escapeHtml(result.severity.label) + '</div>';
+
+  // Score context bar (for numeric scores)
+  if (result.score !== null) {
+    var pct = Math.round((result.score / tool.maxScore) * 100);
+    html += '<div class="result__context-bar">';
+    html += '<div class="result__bar-track"><div class="result__bar-fill severity-' + result.severity.color + '-bg" id="scoreBarFill" style="width:0%"></div></div>';
+    html += '<div class="result__bar-labels"><span>0</span><span>' + tool.maxScore + '</span></div>';
+    html += '</div>';
+  }
+
+  html += '</div>';
+
+  // Crisis alert for C-SSRS HIGH RISK
+  if (result.isHighRisk) {
+    html += '<div class="result__crisis-alert">';
+    html += '<div class="result__crisis-alert-title"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg> Immediate Crisis Resources</div>';
+    html += '<div class="result__crisis-numbers">';
+    html += '<div class="result__crisis-number"><strong>988</strong> &mdash; Suicide &amp; Crisis Lifeline (call or text, 24/7)</div>';
+    html += '<div class="result__crisis-number"><strong>1-833-710-6477</strong> &mdash; NH Rapid Response Access (24/7)</div>';
+    html += '<div class="result__crisis-number"><strong>(603) 889-6147</strong> &mdash; GNMHC Crisis Line (24/7)</div>';
+    html += '</div>';
+    html += '</div>';
+  }
+
+  // Recommendations card
+  html += '<div class="result__detail-card">';
+  html += '<div class="result__detail-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> Clinical Recommendations</div>';
+  html += '<div class="result__detail-text">' + escapeHtml(result.severity.recs) + '</div>';
+  html += '</div>';
+
+  // Attribution
+  html += '<div class="result__attribution">' + escapeHtml(tool.attribution) + '</div>';
+
+  // Disclaimer (PHQ-9 specific)
+  if (tool.disclaimer) {
+    html += '<div class="result__disclaimer">' + escapeHtml(tool.disclaimer) + '</div>';
+  }
+
+  // Action buttons
+  html += '<div class="result__actions">';
+  html += '<button class="result__action-btn result__action-btn--primary" onclick="copyForEHR()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy for EHR</button>';
+  html += '<button class="result__action-btn result__action-btn--secondary" onclick="printResults()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> Print Results</button>';
+  html += '<button class="result__action-btn result__action-btn--secondary" onclick="startTool(\'' + tool.id + '\')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg> Start Over</button>';
+  html += '<button class="result__action-btn result__action-btn--secondary" onclick="closeWizard()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> Try Another Tool</button>';
+  html += '</div>';
+
+  html += '</div>';
+
+  var body = document.getElementById('wizardBody');
+  var oldSlide = document.getElementById('wizardSlide');
+  if (oldSlide) {
+    oldSlide.id = 'wizardSlideOld';
+    oldSlide.classList.remove('slide-in');
+    oldSlide.classList.add('slide-out-left');
+  }
+
+  var tempDiv = document.createElement('div');
+  tempDiv.innerHTML = html;
+  var newSlide = tempDiv.firstChild;
+  newSlide.classList.remove('slide-in');
+  newSlide.classList.add('slide-out-right');
+  body.appendChild(newSlide);
+
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      newSlide.classList.remove('slide-out-right');
+      newSlide.classList.add('slide-in');
+
+      setTimeout(function() {
+        var old = document.getElementById('wizardSlideOld');
+        if (old) old.parentNode.removeChild(old);
+
+        // Animate score counter
+        if (result.score !== null) {
+          animateScoreCounter(result.score);
+          // Animate bar fill
+          var barFill = document.getElementById('scoreBarFill');
+          if (barFill) {
+            var pct = Math.round((result.score / tool.maxScore) * 100);
+            setTimeout(function() { barFill.style.width = pct + '%'; }, 200);
+          }
+        }
+
+        // Fade in severity badge
+        var badge = document.getElementById('severityBadge');
+        if (badge) {
+          setTimeout(function() { badge.classList.add('is-visible'); }, result.score !== null ? 1200 : 300);
+        }
+      }, 350);
+    });
+  });
+}
+
+function animateScoreCounter(targetScore) {
+  var el = document.getElementById('scoreCounter');
+  if (!el) return;
+
+  var duration = 1500;
+  var start = null;
+
+  function step(timestamp) {
+    if (!start) start = timestamp;
+    var elapsed = timestamp - start;
+    var progress = Math.min(elapsed / duration, 1);
+    // Ease out cubic
+    var eased = 1 - Math.pow(1 - progress, 3);
+    var currentValue = Math.round(eased * targetScore);
+    el.textContent = currentValue;
+
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    } else {
+      el.textContent = targetScore;
+    }
+  }
+
+  requestAnimationFrame(step);
+}
+
+
+/* ================================================================
+   COPY FOR EHR
+   ================================================================ */
+function copyForEHR() {
+  var tool = TOOLS[wizState.toolId];
+  var result = calculateScore();
+  var now = new Date();
+  var dateStr = now.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  var timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+  var text = '';
+  text += '=== ' + tool.name + ' Screening Results ===\n';
+  text += 'Date: ' + dateStr + ' at ' + timeStr + '\n';
+  text += 'Instrument: ' + tool.fullName + '\n';
+  if (tool.timeframe) {
+    text += 'Timeframe: ' + tool.timeframe + '\n';
+  }
+  text += '\n--- Responses ---\n';
+
+  for (var i = 0; i < wizState.answers.length; i++) {
+    var qText, optLabel, optValue;
+    if (tool.type === 'custom') {
+      qText = tool.questions[i].text;
+      optLabel = tool.questions[i].options[wizState.answers[i]].label;
+      optValue = tool.questions[i].options[wizState.answers[i]].value;
+    } else if (tool.type === 'yesno_risk') {
+      qText = tool.questions[i];
+      optLabel = tool.options[wizState.answers[i]].label;
+      optValue = '';
+    } else {
+      qText = tool.questions[i];
+      optLabel = tool.options[wizState.answers[i]].label;
+      if (tool.type === 'yesno' && tool.reverseScored && tool.reverseScored.indexOf(i) !== -1) {
+        optValue = (wizState.answers[i] === 0) ? 0 : 1;
+      } else {
+        optValue = tool.options[wizState.answers[i]].value;
+      }
+    }
+
+    text += (i + 1) + '. ' + qText + '\n';
+    if (tool.type === 'yesno_risk') {
+      text += '   Response: ' + optLabel + '\n';
+    } else {
+      text += '   Response: ' + optLabel + ' (' + optValue + ')\n';
+    }
+  }
+
+  text += '\n--- Results ---\n';
+  if (result.score !== null) {
+    text += 'Total Score: ' + result.score + ' / ' + tool.maxScore + '\n';
+  }
+  text += 'Severity: ' + result.severity.label + '\n';
+  text += '\n--- Recommendations ---\n';
+  text += result.severity.recs + '\n';
+
+  if (tool.disclaimer) {
+    text += '\nNote: ' + tool.disclaimer + '\n';
+  }
+
+  text += '\n' + tool.attribution + '\n';
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function() {
+      showToast('Copied to clipboard');
+    }).catch(function() {
+      fallbackCopy(text);
+    });
+  } else {
+    fallbackCopy(text);
+  }
+}
+
+function fallbackCopy(text) {
+  var textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  document.body.appendChild(textarea);
+  textarea.select();
+  try {
+    document.execCommand('copy');
+    showToast('Copied to clipboard');
+  } catch (e) {
+    showToast('Copy failed — please copy manually');
+  }
+  document.body.removeChild(textarea);
+}
+
+function printResults() {
+  window.print();
+}
+
+function showToast(message) {
+  var toast = document.getElementById('toastNotification');
+  toast.textContent = message;
+  toast.classList.add('is-visible');
+  setTimeout(function() {
+    toast.classList.remove('is-visible');
+  }, 2500);
+}
+
+
+/* ================================================================
+   KEYBOARD NAVIGATION
+   ================================================================ */
+document.addEventListener('keydown', function(e) {
+  if (!wizState.toolId) return;
+
+  // Check if results are showing (footer hidden)
+  var footer = document.getElementById('wizardFooter');
+  if (footer.style.display === 'none') return;
+
+  var tool = TOOLS[wizState.toolId];
+  var numOptions;
+  if (tool.type === 'custom') {
+    numOptions = tool.questions[wizState.currentQ].options.length;
+  } else {
+    numOptions = tool.options.length;
+  }
+
+  // Number keys 1-9 to select option
+  var keyNum = parseInt(e.key);
+  if (keyNum >= 1 && keyNum <= numOptions) {
+    e.preventDefault();
+    selectOption(wizState.currentQ, keyNum - 1);
+    return;
+  }
+
+  // Arrow keys
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+    e.preventDefault();
+    if (e.key === 'ArrowLeft') {
+      wizardBack();
+    } else {
+      // Move selection up
+      var current = wizState.answers[wizState.currentQ];
+      if (current !== null && current > 0) {
+        selectOption(wizState.currentQ, current - 1);
+      }
+    }
+    return;
+  }
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+    e.preventDefault();
+    if (e.key === 'ArrowRight') {
+      wizardNext();
+    } else {
+      // Move selection down
+      var current2 = wizState.answers[wizState.currentQ];
+      var nextIdx = (current2 === null) ? 0 : current2 + 1;
+      if (nextIdx < numOptions) {
+        selectOption(wizState.currentQ, nextIdx);
+      }
+    }
+    return;
+  }
+
+  // Enter to confirm / advance
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    if (wizState.answers[wizState.currentQ] !== null) {
+      clearTimeout(wizState.advanceTimer);
+      wizardNext();
+    }
+    return;
+  }
+
+  // Escape to close
+  if (e.key === 'Escape') {
+    e.preventDefault();
+    closeWizard();
+    return;
+  }
+});
+
+// Also handle Enter/Space on tool cards
+document.querySelectorAll('.tool-card').forEach(function(card) {
+  card.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      card.click();
+    }
+  });
+});
+
+// Close overlay when clicking backdrop
+document.getElementById('wizardOverlay').addEventListener('click', function(e) {
+  if (e.target === this) {
+    closeWizard();
+  }
+});
+
+
+/* ================================================================
+   UTILITY
+   ================================================================ */
+function escapeHtml(text) {
+  var div = document.createElement('div');
+  div.appendChild(document.createTextNode(text));
+  return div.innerHTML;
+}
+
+
+/* ================================================================
+   THEME TOGGLE
+   ================================================================ */
+function toggleTheme() {
+  var html = document.documentElement;
+  var btn = document.getElementById('themeToggleBtn');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.removeAttribute('data-theme');
+    localStorage.setItem('theme', 'light');
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+  }
+}
+
+// Respect saved preference, then system preference
+(function() {
+  var saved = localStorage.getItem('theme');
+  var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (saved === 'dark' || (!saved && prefersDark)) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    var btn = document.getElementById('themeToggleBtn');
+    if (btn) btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+  }
+})();
+
+
+/* ================================================================
+   MOBILE NAV TOGGLE
+   ================================================================ */
+function toggleMobileNav() {
+  var panel = document.getElementById('mobileNavPanel');
+  var btn = document.getElementById('hamburgerBtn');
+  var isOpen = panel.classList.toggle('is-open');
+  btn.setAttribute('aria-expanded', isOpen);
+}
+
+
+/* ================================================================
+   ADMIN GATE (5-click)
+   ================================================================ */
+var adminClicks = 0;
+var adminTimer = null;
+document.getElementById('adminGate').addEventListener('click', function(e) {
+  e.preventDefault();
+  adminClicks++;
+  clearTimeout(adminTimer);
+  if (adminClicks >= 5) {
+    adminClicks = 0;
+    window.location.href = 'admin.html';
+  }
+  adminTimer = setTimeout(function() { adminClicks = 0; }, 2000);
+});
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(function(){});
+}
+</script>
+
+</body>
+</html>

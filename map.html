@@ -1,0 +1,1959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resource Directory Map - Greater Nashua Community Mental Health Resources</title>
+<meta name="description" content="Interactive map of mental health services, crisis centers, substance use treatment, and community resources in Nashua and Southern New Hampshire.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2d6f59">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="css/design-system.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin="" />
+<script src="js/fontsize.js"></script>
+<style>
+/* ================================================================
+   Resource Directory Map — Layout & Component Overrides
+   ================================================================ */
+
+/* ---- Nav ---- */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: var(--ds-z-sticky);
+  background: rgba(253, 252, 250, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--ds-border-subtle);
+  height: var(--ds-header-height);
+}
+[data-theme="dark"] .site-nav {
+  background: rgba(26, 25, 22, 0.85);
+}
+.site-nav__inner {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+}
+.site-nav__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  text-decoration: none;
+  flex-shrink: 0;
+  margin-right: auto;
+}
+.site-nav__logo-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-primary-600);
+  color: var(--ds-text-inverse);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-bold);
+  letter-spacing: var(--ds-tracking-tight);
+}
+.site-nav__logo-text {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  white-space: nowrap;
+}
+.site-nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+}
+.site-nav__link {
+  padding: var(--ds-space-2) var(--ds-space-3);
+  border-radius: var(--ds-radius-md);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default),
+              background-color var(--ds-duration-fast) var(--ds-ease-default);
+  white-space: nowrap;
+}
+.site-nav__link:hover {
+  color: var(--ds-text-primary);
+  background: var(--ds-surface-hover);
+  text-decoration: none;
+}
+.site-nav__link--active {
+  color: var(--ds-primary-700);
+  background: var(--ds-primary-50);
+}
+[data-theme="dark"] .site-nav__link--active {
+  color: var(--ds-primary-300);
+  background: var(--ds-interactive-subtle);
+}
+.site-nav__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  margin-left: var(--ds-space-2);
+}
+.site-nav__icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ds-radius-md);
+  border: none;
+  background: transparent;
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default),
+              background-color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.site-nav__icon-btn:hover {
+  background: var(--ds-surface-hover);
+  color: var(--ds-text-primary);
+}
+.site-nav__font-controls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.site-nav__font-btn {
+  padding: var(--ds-space-1) var(--ds-space-2);
+  border-radius: var(--ds-radius-sm);
+  border: 1px solid var(--ds-border);
+  background: var(--ds-surface);
+  color: var(--ds-text-secondary);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  cursor: pointer;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+  line-height: 1;
+  min-height: 28px;
+}
+.site-nav__font-btn:hover {
+  background: var(--ds-surface-hover);
+  border-color: var(--ds-border-strong);
+}
+
+/* Hamburger */
+.site-nav__hamburger {
+  display: none;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 8px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  align-items: center;
+}
+.site-nav__hamburger span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--ds-text-secondary);
+  border-radius: 1px;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+}
+
+/* Mobile nav overlay */
+.site-nav__mobile-panel {
+  display: none;
+  position: fixed;
+  top: var(--ds-header-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--ds-surface);
+  z-index: var(--ds-z-overlay);
+  padding: var(--ds-space-6);
+  flex-direction: column;
+  gap: var(--ds-space-2);
+  overflow-y: auto;
+}
+.site-nav__mobile-panel.is-open {
+  display: flex;
+}
+.site-nav__mobile-link {
+  display: block;
+  padding: var(--ds-space-3) var(--ds-space-4);
+  border-radius: var(--ds-radius-lg);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-primary);
+  text-decoration: none;
+  transition: background-color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.site-nav__mobile-link:hover {
+  background: var(--ds-surface-hover);
+  text-decoration: none;
+}
+.site-nav__mobile-link--active {
+  color: var(--ds-primary-700);
+  background: var(--ds-primary-50);
+}
+[data-theme="dark"] .site-nav__mobile-link--active {
+  color: var(--ds-primary-300);
+  background: var(--ds-interactive-subtle);
+}
+
+/* ---- Hero ---- */
+.hero {
+  background: linear-gradient(170deg, var(--ds-primary-50) 0%, var(--ds-cream) 50%, var(--ds-warm-gray-50) 100%);
+  padding: var(--ds-space-10) 0 var(--ds-space-8);
+}
+[data-theme="dark"] .hero {
+  background: linear-gradient(170deg, rgba(61, 139, 112, 0.08) 0%, var(--ds-page-bg) 50%, var(--ds-page-bg) 100%);
+}
+.hero__inner {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--ds-space-6);
+  text-align: center;
+}
+.hero__overline {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  margin-bottom: var(--ds-space-3);
+}
+.hero__overline-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ds-primary-500);
+}
+.hero__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-4xl);
+  font-weight: var(--ds-weight-bold);
+  line-height: var(--ds-leading-tight);
+  letter-spacing: var(--ds-tracking-tight);
+  color: var(--ds-text-primary);
+  max-width: 720px;
+  margin: 0 auto var(--ds-space-3);
+}
+.hero__subtitle {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+/* ---- Map Layout ---- */
+.map-layout {
+  max-width: var(--ds-container-xl);
+  margin: 0 auto;
+  padding: var(--ds-space-6);
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: var(--ds-space-6);
+  min-height: 70vh;
+}
+
+/* ---- Sidebar ---- */
+.map-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-4);
+  max-height: calc(100vh - 200px);
+  position: sticky;
+  top: calc(var(--ds-header-height) + var(--ds-space-6));
+}
+
+.crisis-banner {
+  background: var(--ds-status-danger-bg);
+  border: 1px solid var(--ds-danger-200);
+  border-radius: var(--ds-radius-lg);
+  padding: var(--ds-space-4);
+}
+[data-theme="dark"] .crisis-banner {
+  border-color: rgba(220, 95, 95, 0.25);
+}
+.crisis-banner__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-status-danger-text);
+  margin-bottom: var(--ds-space-2);
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+}
+.crisis-banner__numbers {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-secondary);
+  line-height: 1.8;
+}
+.crisis-banner__numbers strong {
+  color: var(--ds-text-primary);
+  font-weight: var(--ds-weight-semibold);
+}
+.crisis-banner__numbers a {
+  color: var(--ds-text-primary);
+  font-weight: var(--ds-weight-semibold);
+  text-decoration: none;
+}
+
+/* Search + Filters */
+.map-search {
+  position: relative;
+}
+.map-search__input {
+  width: 100%;
+  padding: var(--ds-space-3) var(--ds-space-4) var(--ds-space-3) var(--ds-space-10);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-surface);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-primary);
+  outline: none;
+  transition: border-color var(--ds-duration-fast) var(--ds-ease-default),
+              box-shadow var(--ds-duration-fast) var(--ds-ease-default);
+  box-sizing: border-box;
+}
+.map-search__input::placeholder {
+  color: var(--ds-text-muted);
+}
+.map-search__input:focus {
+  border-color: var(--ds-primary-500);
+  box-shadow: 0 0 0 3px rgba(61, 139, 112, 0.12);
+}
+.map-search__icon {
+  position: absolute;
+  left: var(--ds-space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ds-text-muted);
+  pointer-events: none;
+}
+
+.filter-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+}
+.filter-section__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.filter-section__label {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--ds-tracking-widest);
+}
+.filter-section__actions {
+  display: flex;
+  gap: var(--ds-space-2);
+}
+.filter-action-btn {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-link);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: none;
+}
+.filter-action-btn:hover {
+  text-decoration: underline;
+}
+.filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-2);
+}
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-1-5);
+  padding: var(--ds-space-1-5) var(--ds-space-3);
+  border-radius: 9999px;
+  border: 1px solid var(--ds-border);
+  background: var(--ds-surface);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+  user-select: none;
+}
+.filter-chip:hover {
+  border-color: var(--ds-border-strong);
+  background: var(--ds-surface-hover);
+}
+.filter-chip--active {
+  border-color: var(--cat-color);
+  background: var(--cat-bg);
+  color: var(--cat-color);
+}
+.filter-chip__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.filter-chip__count {
+  font-size: 10px;
+  opacity: 0.7;
+  margin-left: 2px;
+}
+
+/* Location list */
+.location-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+  padding-right: var(--ds-space-1);
+  scrollbar-width: thin;
+  scrollbar-color: var(--ds-border) transparent;
+}
+.location-list::-webkit-scrollbar {
+  width: 4px;
+}
+.location-list::-webkit-scrollbar-thumb {
+  background: var(--ds-border);
+  border-radius: 2px;
+}
+
+.location-card {
+  padding: var(--ds-space-3) var(--ds-space-4);
+  border: 1px solid var(--ds-border-subtle);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-surface);
+  cursor: pointer;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+}
+.location-card:hover {
+  border-color: var(--ds-border-strong);
+  box-shadow: var(--ds-shadow-sm);
+}
+.location-card--active {
+  border-color: var(--ds-primary-500);
+  box-shadow: 0 0 0 2px rgba(61, 139, 112, 0.12);
+  background: var(--ds-primary-50);
+}
+[data-theme="dark"] .location-card--active {
+  background: rgba(61, 139, 112, 0.08);
+}
+.location-card__header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-space-2);
+  margin-bottom: var(--ds-space-1);
+}
+.location-card__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+.location-card__name {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+  line-height: var(--ds-leading-snug);
+}
+.location-card__address {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+  margin-left: 18px;
+  line-height: var(--ds-leading-relaxed);
+}
+.location-card__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-1);
+  margin-top: var(--ds-space-2);
+  margin-left: 18px;
+}
+.location-badge {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 9999px;
+  font-family: var(--ds-font-sans);
+  font-size: 10px;
+  font-weight: var(--ds-weight-medium);
+  letter-spacing: 0.02em;
+  border: 1px solid;
+}
+
+/* My Location button */
+.my-location-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-2) var(--ds-space-3);
+  border-radius: var(--ds-radius-md);
+  border: 1px solid var(--ds-border);
+  background: var(--ds-surface);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+  width: 100%;
+  justify-content: center;
+}
+.my-location-btn:hover {
+  border-color: var(--ds-primary-500);
+  color: var(--ds-primary-600);
+  background: var(--ds-primary-50);
+}
+
+/* ---- Map container ---- */
+.map-container {
+  border-radius: var(--ds-radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--ds-border);
+  position: relative;
+  min-height: 500px;
+}
+#map {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  z-index: 1;
+}
+
+/* Leaflet popup overrides */
+.leaflet-popup-content-wrapper {
+  border-radius: var(--ds-radius-lg) !important;
+  box-shadow: var(--ds-shadow-lg) !important;
+  padding: 0 !important;
+  overflow: hidden;
+}
+[data-theme="dark"] .leaflet-popup-content-wrapper {
+  background: var(--ds-surface) !important;
+  color: var(--ds-text-primary) !important;
+}
+[data-theme="dark"] .leaflet-popup-tip {
+  background: var(--ds-surface) !important;
+}
+.leaflet-popup-content {
+  margin: 0 !important;
+  min-width: 260px;
+  max-width: 320px;
+}
+.leaflet-popup-close-btn {
+  color: var(--ds-text-muted) !important;
+  font-size: 20px !important;
+  width: 28px !important;
+  height: 28px !important;
+  padding: 0 !important;
+  top: 6px !important;
+  right: 6px !important;
+}
+
+/* Custom popup inner */
+.popup-inner {
+  padding: var(--ds-space-4);
+}
+.popup-inner__cat {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 9999px;
+  font-family: var(--ds-font-sans);
+  font-size: 10px;
+  font-weight: var(--ds-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--ds-space-2);
+}
+.popup-inner__name {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-bold);
+  color: var(--ds-text-primary);
+  margin-bottom: var(--ds-space-1);
+  line-height: var(--ds-leading-snug);
+  padding-right: var(--ds-space-6);
+}
+.popup-inner__address {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+  margin-bottom: var(--ds-space-3);
+  line-height: var(--ds-leading-relaxed);
+}
+.popup-inner__details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+  margin-bottom: var(--ds-space-3);
+}
+.popup-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-space-2);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+}
+.popup-detail__icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ds-text-muted);
+  margin-top: 1px;
+}
+.popup-inner__services {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+  margin-bottom: var(--ds-space-3);
+  padding: var(--ds-space-2) var(--ds-space-3);
+  background: var(--ds-surface-hover);
+  border-radius: var(--ds-radius-md);
+}
+.popup-inner__services strong {
+  display: block;
+  color: var(--ds-text-primary);
+  margin-bottom: 2px;
+  font-weight: var(--ds-weight-semibold);
+}
+.popup-directions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-1-5);
+  padding: var(--ds-space-2) var(--ds-space-4);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-primary-600);
+  color: #fff;
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  text-decoration: none;
+  transition: background var(--ds-duration-fast) var(--ds-ease-default);
+  width: 100%;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.popup-directions:hover {
+  background: var(--ds-primary-700);
+  text-decoration: none;
+  color: #fff;
+}
+
+/* Map fallback */
+.map-fallback {
+  display: none;
+  padding: var(--ds-space-8);
+  text-align: center;
+  background: var(--ds-surface-hover);
+  border-radius: var(--ds-radius-xl);
+  border: 1px solid var(--ds-border);
+  min-height: 300px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: var(--ds-space-4);
+}
+.map-fallback.is-visible {
+  display: flex;
+}
+.map-fallback__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--ds-primary-50);
+  color: var(--ds-primary-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+[data-theme="dark"] .map-fallback__icon {
+  background: rgba(61, 139, 112, 0.12);
+}
+.map-fallback__title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-primary);
+}
+.map-fallback__desc {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  max-width: 400px;
+}
+
+/* No results */
+.no-results {
+  display: none;
+  padding: var(--ds-space-8) var(--ds-space-4);
+  text-align: center;
+}
+.no-results.is-visible {
+  display: block;
+}
+.no-results__text {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-muted);
+}
+
+/* Mobile sidebar toggle */
+.sidebar-toggle {
+  display: none;
+  width: 100%;
+  padding: var(--ds-space-3) var(--ds-space-4);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-surface);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  color: var(--ds-text-primary);
+  cursor: pointer;
+  margin-bottom: var(--ds-space-4);
+  text-align: center;
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+}
+.sidebar-toggle:hover {
+  background: var(--ds-surface-hover);
+  border-color: var(--ds-border-strong);
+}
+.sidebar-toggle svg {
+  vertical-align: middle;
+  margin-right: var(--ds-space-2);
+}
+
+/* ---- Dark mode Leaflet tiles ---- */
+[data-theme="dark"] .leaflet-tile-pane {
+  filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9);
+}
+[data-theme="dark"] .leaflet-control-zoom a {
+  background: var(--ds-surface) !important;
+  color: var(--ds-text-primary) !important;
+  border-color: var(--ds-border) !important;
+}
+[data-theme="dark"] .leaflet-control-attribution {
+  background: rgba(26, 25, 22, 0.7) !important;
+  color: var(--ds-text-muted) !important;
+}
+[data-theme="dark"] .leaflet-control-attribution a {
+  color: var(--ds-text-secondary) !important;
+}
+
+/* ---- Footer ---- */
+.site-footer {
+  background: var(--ds-surface);
+  border-top: 1px solid var(--ds-border);
+  padding: var(--ds-space-16) 0 var(--ds-space-8);
+  margin-top: 0;
+}
+.footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--ds-space-10);
+  margin-bottom: var(--ds-space-10);
+}
+.footer__brand-desc {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+  margin-top: var(--ds-space-3);
+  max-width: 320px;
+}
+.footer__col-title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--ds-tracking-widest);
+  margin-bottom: var(--ds-space-4);
+}
+.footer__links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2-5);
+}
+.footer__links a {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  transition: color var(--ds-duration-fast) var(--ds-ease-default);
+}
+.footer__links a:hover {
+  color: var(--ds-text-primary);
+}
+.footer__crisis-box {
+  background: var(--ds-status-danger-bg);
+  border: 1px solid var(--ds-danger-200);
+  border-radius: var(--ds-radius-lg);
+  padding: var(--ds-space-4);
+  margin-top: var(--ds-space-4);
+}
+[data-theme="dark"] .footer__crisis-box {
+  border-color: rgba(220, 95, 95, 0.2);
+}
+.footer__crisis-title {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  color: var(--ds-status-danger-text);
+  margin-bottom: var(--ds-space-2);
+}
+.footer__crisis-numbers {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-leading-relaxed);
+}
+.footer__crisis-numbers strong {
+  color: var(--ds-text-primary);
+}
+.footer__bottom {
+  border-top: 1px solid var(--ds-border-subtle);
+  padding-top: var(--ds-space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--ds-space-4);
+}
+.footer__disclaimer {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+  line-height: var(--ds-leading-relaxed);
+  max-width: 560px;
+}
+.footer__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-4);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+}
+.footer__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ds-success-500);
+  display: inline-block;
+}
+
+/* AI label */
+.ai-label {
+  text-align: center;
+  padding: var(--ds-space-4) var(--ds-space-6);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  color: var(--ds-text-muted);
+  background: var(--ds-surface-hover);
+  border-top: 1px solid var(--ds-border-subtle);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1023px) {
+  .map-layout {
+    grid-template-columns: 280px 1fr;
+  }
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ds-space-8);
+  }
+}
+@media (max-width: 768px) {
+  .map-layout {
+    grid-template-columns: 1fr;
+  }
+  .map-sidebar {
+    position: static;
+    max-height: none;
+  }
+  .map-sidebar--collapsed .filter-section,
+  .map-sidebar--collapsed .location-list,
+  .map-sidebar--collapsed .my-location-btn {
+    display: none;
+  }
+  .sidebar-toggle {
+    display: block;
+  }
+  .map-container {
+    min-height: 400px;
+  }
+  #map {
+    min-height: 400px;
+  }
+}
+@media (max-width: 639px) {
+  .site-nav__links,
+  .site-nav__font-controls {
+    display: none;
+  }
+  .site-nav__hamburger {
+    display: flex;
+  }
+  .hero {
+    padding: var(--ds-space-8) 0 var(--ds-space-6);
+  }
+  .hero__title {
+    font-size: var(--ds-text-3xl);
+  }
+  .hero__subtitle {
+    font-size: var(--ds-text-base);
+  }
+  .map-layout {
+    padding: var(--ds-space-4);
+  }
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: var(--ds-space-8);
+  }
+  .footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ---- Print styles ---- */
+@media print {
+  .site-nav,
+  .site-nav__mobile-panel,
+  .map-container,
+  .map-fallback,
+  .sidebar-toggle,
+  .filter-section,
+  .map-search,
+  .my-location-btn,
+  .site-footer,
+  .ai-label {
+    display: none !important;
+  }
+  .map-layout {
+    display: block !important;
+    padding: 0 !important;
+  }
+  .map-sidebar {
+    position: static !important;
+    max-height: none !important;
+  }
+  .hero {
+    background: none !important;
+    padding: var(--ds-space-4) 0 !important;
+  }
+  .crisis-banner {
+    border: 2px solid #dc2626 !important;
+    page-break-inside: avoid;
+  }
+  .location-list {
+    overflow: visible !important;
+    max-height: none !important;
+  }
+  .location-card {
+    page-break-inside: avoid;
+    border: 1px solid #ccc !important;
+  }
+  .print-header {
+    display: block !important;
+    font-family: var(--ds-font-sans);
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #000;
+  }
+  .print-subheader {
+    display: block !important;
+    font-family: var(--ds-font-sans);
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 16px;
+  }
+}
+.print-header,
+.print-subheader {
+  display: none;
+}
+</style>
+</head>
+<body>
+<script src="js/auth-gate.js"></script>
+
+<a href="#main-content" class="ds-sr-only" style="position:absolute;top:-40px;left:0;background:var(--ds-surface);padding:8px 16px;z-index:100;font-size:14px;transition:top 0.2s" onfocus="this.style.top='0'" onblur="this.style.top='-40px'">Skip to main content</a>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav class="site-nav" role="navigation" aria-label="Main navigation">
+  <div class="site-nav__inner">
+
+    <a href="index.html" class="site-nav__logo" id="siteLogo">
+      <div class="site-nav__logo-mark">NH</div>
+      <span class="site-nav__logo-text">MH Resources</span>
+    </a>
+
+    <div class="site-nav__links">
+      <a href="index.html" class="site-nav__link">Home</a>
+      <a href="resources.html" class="site-nav__link">Resources</a>
+      <a href="tools.html" class="site-nav__link">Clinical Tools</a>
+      <a href="screening.html" class="site-nav__link">Screening</a>
+      <a href="guide.html" class="site-nav__link">Guides</a>
+      <a href="neurobiology.html" class="site-nav__link">Brain &amp; Neuro</a>
+      <a href="worksheets.html" class="site-nav__link">Worksheets</a>
+      <a href="activities.html" class="site-nav__link">Activities</a>
+      <a href="games.html" class="site-nav__link">Games</a>
+      <a href="templates.html" class="site-nav__link">Templates</a>
+    </div>
+
+    <div class="site-nav__controls">
+      <div class="site-nav__font-controls">
+        <button class="site-nav__font-btn" onclick="mhFontDecrease()" title="Decrease font size" aria-label="Decrease font size">A-</button>
+        <button class="site-nav__font-btn" onclick="mhFontIncrease()" title="Increase font size" aria-label="Increase font size">A+</button>
+      </div>
+
+      <button class="site-nav__icon-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+
+      <button class="site-nav__hamburger" id="hamburgerBtn" onclick="toggleMobileNav()" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </div>
+</nav>
+
+<!-- Mobile slide-out panel -->
+<div class="site-nav__mobile-panel" id="mobileNavPanel">
+  <a href="index.html" class="site-nav__mobile-link">Home</a>
+  <a href="resources.html" class="site-nav__mobile-link">Resources</a>
+  <a href="tools.html" class="site-nav__mobile-link">Clinical Tools</a>
+  <a href="screening.html" class="site-nav__mobile-link">Screening</a>
+  <a href="guide.html" class="site-nav__mobile-link">Guides</a>
+  <a href="neurobiology.html" class="site-nav__mobile-link">Brain &amp; Neuro</a>
+  <a href="worksheets.html" class="site-nav__mobile-link">Worksheets</a>
+  <a href="activities.html" class="site-nav__mobile-link">Activities</a>
+  <a href="games.html" class="site-nav__mobile-link">Games</a>
+  <a href="templates.html" class="site-nav__mobile-link">Templates</a>
+</div>
+
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero">
+  <div class="hero__inner">
+    <div class="hero__overline">
+      <span class="hero__overline-dot"></span>
+      <span class="ds-overline">Greater Nashua, NH</span>
+    </div>
+    <h1 class="hero__title">Resource Directory Map</h1>
+    <p class="hero__subtitle">Mental health services in Nashua and Southern New Hampshire</p>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     MAIN CONTENT
+     ============================================================ -->
+<main id="main-content">
+
+  <!-- Print-only headers -->
+  <div class="print-header">Resource Directory &mdash; Greater Nashua Mental Health Services</div>
+  <div class="print-subheader">Mental health services in Nashua and Southern New Hampshire &bull; Printed from gnmhc-resources</div>
+
+  <!-- Mobile sidebar toggle -->
+  <div style="max-width: var(--ds-container-xl); margin: 0 auto; padding: 0 var(--ds-space-6);">
+    <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+      Show Filters &amp; Locations
+    </button>
+  </div>
+
+  <div class="map-layout">
+
+    <!-- ---- SIDEBAR ---- -->
+    <aside class="map-sidebar map-sidebar--collapsed" id="mapSidebar">
+
+      <!-- Crisis numbers -->
+      <div class="crisis-banner">
+        <div class="crisis-banner__title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Crisis? Get help now.
+        </div>
+        <div class="crisis-banner__numbers">
+          <strong><a href="tel:988">988</a></strong> Suicide &amp; Crisis Lifeline (24/7)<br>
+          <strong><a href="tel:18337106477">1-833-710-6477</a></strong> NH Rapid Response<br>
+          <strong><a href="tel:6038896147">(603) 889-6147</a></strong> GNMHC Crisis Line<br>
+          <strong>Text HOME to 741741</strong> Crisis Text Line
+        </div>
+      </div>
+
+      <!-- Search -->
+      <div class="map-search">
+        <div class="map-search__icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <input type="text" class="map-search__input" id="locationSearch" placeholder="Search locations..." autocomplete="off" aria-label="Search locations">
+      </div>
+
+      <!-- Filter chips -->
+      <div class="filter-section">
+        <div class="filter-section__header">
+          <span class="filter-section__label">Categories</span>
+          <div class="filter-section__actions">
+            <button class="filter-action-btn" onclick="showAllCategories()">Show All</button>
+            <button class="filter-action-btn" onclick="clearAllCategories()">Clear</button>
+          </div>
+        </div>
+        <div class="filter-chips" id="filterChips">
+          <!-- Chips injected by JS -->
+        </div>
+      </div>
+
+      <!-- My location -->
+      <button class="my-location-btn" id="myLocationBtn" onclick="goToMyLocation()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="9"/></svg>
+        Show My Location
+      </button>
+
+      <!-- Location list -->
+      <div class="location-list" id="locationList">
+        <!-- Cards injected by JS -->
+      </div>
+
+      <div class="no-results" id="noResults">
+        <p class="no-results__text">No locations match your search or filters.</p>
+      </div>
+
+    </aside>
+
+    <!-- ---- MAP ---- -->
+    <div class="map-container" id="mapContainer">
+      <div id="map"></div>
+    </div>
+
+    <!-- Fallback if Leaflet fails -->
+    <div class="map-fallback" id="mapFallback">
+      <div class="map-fallback__icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <div class="map-fallback__title">Map unavailable</div>
+      <div class="map-fallback__desc">The interactive map could not load. You can still browse all locations in the sidebar list, or use the links below to open each address in Google Maps.</div>
+    </div>
+
+  </div>
+</main>
+
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="ds-container">
+
+    <div class="footer__grid">
+
+      <!-- Brand column -->
+      <div>
+        <a href="index.html" class="site-nav__logo" style="text-decoration:none">
+          <div class="site-nav__logo-mark">NH</div>
+          <span class="site-nav__logo-text">MH Resources</span>
+        </a>
+        <p class="footer__brand-desc">A comprehensive resource hub for clinicians, case managers, and community members in the Greater Nashua area.</p>
+
+        <div class="footer__crisis-box">
+          <div class="footer__crisis-title">Crisis? Get help now.</div>
+          <div class="footer__crisis-numbers">
+            <strong>988</strong> Suicide &amp; Crisis Lifeline<br>
+            <strong>1-833-710-6477</strong> NH Rapid Response<br>
+            <strong>(603) 889-6147</strong> GNMHC Crisis<br>
+            <strong>Text HOME to 741741</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigate -->
+      <div>
+        <div class="footer__col-title">Navigate</div>
+        <ul class="footer__links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="tools.html">Clinical Tools</a></li>
+          <li><a href="screening.html">Screening</a></li>
+          <li><a href="guide.html">Guides</a></li>
+          <li><a href="neurobiology.html">Brain &amp; Neuro</a></li>
+          <li><a href="worksheets.html">Worksheets</a></li>
+          <li><a href="activities.html">Activities</a></li>
+          <li><a href="games.html">Games</a></li>
+          <li><a href="templates.html">Templates</a></li>
+        </ul>
+      </div>
+
+      <!-- Quick Access -->
+      <div>
+        <div class="footer__col-title">Quick Access</div>
+        <ul class="footer__links">
+          <li><a href="tools.html#screening-tools">Screening Tools</a></li>
+          <li><a href="tools.html#clinical-note-builder">Note Builder</a></li>
+          <li><a href="guide.html#crisisTree">Crisis Tree</a></li>
+          <li><a href="resources.html#housing">Housing Resources</a></li>
+        </ul>
+      </div>
+
+      <!-- Clinical -->
+      <div>
+        <div class="footer__col-title">Clinical</div>
+        <ul class="footer__links">
+          <li><a href="tools.html#cbt">CBT Worksheets</a></li>
+          <li><a href="tools.html#dbt">DBT Handouts</a></li>
+          <li><a href="tools.html#cpt-reference">CPT Codes</a></li>
+          <li><a href="tools.html#safety-plan-builder">Safety Planning</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <div class="footer__disclaimer">
+        For informational purposes only. This resource does not replace clinical judgment, supervision, or direct consultation. Contact information and services may change; always verify by contacting organizations directly.
+      </div>
+      <div class="footer__meta">
+        <span><span class="footer__status-dot"></span> Updated Jun 2026</span>
+        <a href="#" id="adminGate" style="color: var(--ds-text-muted); font-size: 11px;" aria-label="Version 4.0 - Admin access">v4.0</a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<div class="ai-label">
+  Content on this page was compiled with AI assistance. All locations and contact information should be independently verified.
+</div>
+
+
+<!-- ============================================================
+     TOAST
+     ============================================================ -->
+<div class="ds-toast" id="toast"></div>
+
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+
+<script>
+// ================================================================
+// DATA: Service Locations
+// ================================================================
+var CATEGORIES = {
+  'mental-health': {
+    label: 'Mental Health Centers',
+    color: '#0d9488',
+    bg: 'rgba(13, 148, 136, 0.08)',
+    darkBg: 'rgba(13, 148, 136, 0.15)'
+  },
+  'crisis': {
+    label: 'Crisis Services',
+    color: '#dc2626',
+    bg: 'rgba(220, 38, 38, 0.06)',
+    darkBg: 'rgba(220, 38, 38, 0.12)'
+  },
+  'substance-use': {
+    label: 'Substance Use Treatment',
+    color: '#d97706',
+    bg: 'rgba(217, 119, 6, 0.06)',
+    darkBg: 'rgba(217, 119, 6, 0.12)'
+  },
+  'community': {
+    label: 'Community Services',
+    color: '#2563eb',
+    bg: 'rgba(37, 99, 235, 0.06)',
+    darkBg: 'rgba(37, 99, 235, 0.12)'
+  },
+  'support': {
+    label: 'Support Groups',
+    color: '#16a34a',
+    bg: 'rgba(22, 163, 74, 0.06)',
+    darkBg: 'rgba(22, 163, 74, 0.12)'
+  }
+};
+
+var LOCATIONS = [
+  {
+    id: 1,
+    name: 'Greater Nashua Mental Health Center',
+    category: 'mental-health',
+    address: '100 West Pearl St, Nashua, NH 03060',
+    lat: 42.7616,
+    lng: -71.4720,
+    phone: '(603) 889-6147',
+    hours: 'Mon-Fri 8:00 AM - 5:00 PM',
+    services: 'Outpatient therapy, psychiatric evaluation, medication management, case management, crisis services',
+    hasMap: true
+  },
+  {
+    id: 2,
+    name: 'GNMHC Community Services',
+    category: 'mental-health',
+    address: '15 Prospect St, Nashua, NH 03060',
+    lat: 42.7651,
+    lng: -71.4665,
+    phone: '(603) 889-6147',
+    hours: 'Mon-Fri 8:30 AM - 5:00 PM',
+    services: 'Community-based programs, supported employment, community support, peer services',
+    hasMap: true
+  },
+  {
+    id: 3,
+    name: 'Riverbend Community Mental Health',
+    category: 'mental-health',
+    address: '278 Pleasant St, Concord, NH 03301',
+    lat: 43.2081,
+    lng: -71.5376,
+    phone: '(603) 228-1551',
+    hours: 'Mon-Fri 8:00 AM - 5:00 PM',
+    services: 'Regional mental health center, outpatient services, emergency services, community support programs',
+    hasMap: true
+  },
+  {
+    id: 4,
+    name: 'Southern NH Medical Center ED',
+    category: 'crisis',
+    address: '8 Prospect St, Nashua, NH 03060',
+    lat: 42.7656,
+    lng: -71.4660,
+    phone: '(603) 577-2000',
+    hours: '24/7 Emergency Department',
+    services: 'Emergency psychiatric evaluation, medical clearance, crisis stabilization, ACCESS team assessments',
+    hasMap: true
+  },
+  {
+    id: 5,
+    name: 'NH Rapid Response Access Point',
+    category: 'crisis',
+    address: 'Statewide hotline service',
+    lat: null,
+    lng: null,
+    phone: '1-833-710-6477',
+    hours: '24/7',
+    services: 'Mobile crisis response teams, crisis stabilization, emergency mental health assessment, follow-up services',
+    hasMap: false
+  },
+  {
+    id: 6,
+    name: 'Granite Pathways',
+    category: 'substance-use',
+    address: '10 Ferry St, Concord, NH 03301',
+    lat: 43.2065,
+    lng: -71.5348,
+    phone: '(603) 225-0092',
+    hours: 'Mon-Fri 8:30 AM - 5:00 PM',
+    services: 'Recovery support services, recovery coaching, employment support, housing assistance',
+    hasMap: true
+  },
+  {
+    id: 7,
+    name: 'Keystone Hall',
+    category: 'substance-use',
+    address: '74 Northeastern Blvd, Nashua, NH 03062',
+    lat: 42.7480,
+    lng: -71.4340,
+    phone: '(603) 881-4848',
+    hours: '24/7 Residential Program',
+    services: 'Residential treatment (men), detox services, intensive outpatient, recovery support, transitional living',
+    hasMap: true
+  },
+  {
+    id: 8,
+    name: 'Nashua Soup Kitchen & Shelter',
+    category: 'community',
+    address: '2 Quincy St, Nashua, NH 03060',
+    lat: 42.7622,
+    lng: -71.4658,
+    phone: '(603) 889-7770',
+    hours: 'Daily meal service; call for shelter hours',
+    services: 'Hot meals, emergency shelter, case management, referrals, seasonal warming center',
+    hasMap: true
+  },
+  {
+    id: 9,
+    name: "Marguerite's Place",
+    category: 'community',
+    address: '5 Pine St Extension, Nashua, NH 03060',
+    lat: 42.7660,
+    lng: -71.4690,
+    phone: '(603) 889-1463',
+    hours: 'Mon-Fri 9:00 AM - 5:00 PM (office)',
+    services: 'Transitional housing for women and children, life skills, employment support, childcare, case management',
+    hasMap: true
+  },
+  {
+    id: 10,
+    name: 'Bridges: Domestic & Sexual Violence Support',
+    category: 'community',
+    address: '31 High St, Nashua, NH 03060',
+    lat: 42.7673,
+    lng: -71.4697,
+    phone: '(603) 883-3044',
+    hours: '24/7 Crisis Line; Office Mon-Fri',
+    services: 'Crisis intervention, emergency shelter, legal advocacy, support groups, safety planning, court accompaniment',
+    hasMap: true
+  },
+  {
+    id: 11,
+    name: 'NAMI New Hampshire',
+    category: 'support',
+    address: '85 North State St, Concord, NH 03301',
+    lat: 43.2120,
+    lng: -71.5380,
+    phone: '(603) 225-5359',
+    hours: 'Mon-Fri 9:00 AM - 5:00 PM',
+    services: 'Mental health advocacy, Family-to-Family education, peer support, support groups, community education',
+    hasMap: true
+  },
+  {
+    id: 12,
+    name: 'AA Meeting Locations',
+    category: 'support',
+    address: 'Multiple locations throughout Nashua area',
+    lat: 42.7630,
+    lng: -71.4650,
+    phone: '(603) 622-6967 (NH Hotline)',
+    hours: 'Various meeting times; check nhaa.net',
+    services: 'Alcoholics Anonymous meetings, open and closed meetings, speaker meetings, newcomer meetings',
+    hasMap: true
+  }
+];
+
+// ================================================================
+// STATE
+// ================================================================
+var map = null;
+var markers = {};
+var activeCategories = {};
+var activeCardId = null;
+var leafletLoaded = typeof L !== 'undefined';
+
+// Initialize all categories as active
+Object.keys(CATEGORIES).forEach(function(key) {
+  activeCategories[key] = true;
+});
+
+// ================================================================
+// INITIALIZATION
+// ================================================================
+document.addEventListener('DOMContentLoaded', function() {
+  renderFilterChips();
+  renderLocationCards();
+
+  if (leafletLoaded) {
+    initMap();
+  } else {
+    showFallback();
+  }
+});
+
+// ================================================================
+// MAP
+// ================================================================
+function initMap() {
+  try {
+    map = L.map('map', {
+      center: [42.7654, -71.4676],
+      zoom: 12,
+      zoomControl: true,
+      scrollWheelZoom: true
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Add markers
+    LOCATIONS.forEach(function(loc) {
+      if (!loc.hasMap || loc.lat === null) return;
+
+      var cat = CATEGORIES[loc.category];
+      var markerIcon = L.divIcon({
+        className: 'custom-marker',
+        html: '<div style="' +
+          'width: 28px; height: 28px;' +
+          'background: ' + cat.color + ';' +
+          'border: 3px solid #fff;' +
+          'border-radius: 50%;' +
+          'box-shadow: 0 2px 8px rgba(0,0,0,0.3);' +
+          'position: relative;' +
+          'cursor: pointer;' +
+          '"></div>' +
+          '<div style="' +
+          'width: 0; height: 0;' +
+          'border-left: 6px solid transparent;' +
+          'border-right: 6px solid transparent;' +
+          'border-top: 8px solid ' + cat.color + ';' +
+          'position: absolute;' +
+          'bottom: -6px;' +
+          'left: 50%;' +
+          'transform: translateX(-50%);' +
+          '"></div>',
+        iconSize: [28, 36],
+        iconAnchor: [14, 36],
+        popupAnchor: [0, -36]
+      });
+
+      var marker = L.marker([loc.lat, loc.lng], { icon: markerIcon });
+      marker.bindPopup(buildPopupContent(loc), {
+        maxWidth: 320,
+        minWidth: 260,
+        closeButton: true
+      });
+
+      marker.on('click', function() {
+        setActiveCard(loc.id);
+      });
+
+      marker.addTo(map);
+      markers[loc.id] = marker;
+    });
+
+  } catch (e) {
+    showFallback();
+  }
+}
+
+function buildPopupContent(loc) {
+  var cat = CATEGORIES[loc.category];
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  var bgColor = isDark ? cat.darkBg : cat.bg;
+  var directionsUrl = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(loc.address);
+
+  var html = '<div class="popup-inner">';
+  html += '<div class="popup-inner__cat" style="background: ' + bgColor + '; color: ' + cat.color + ';">' + cat.label + '</div>';
+  html += '<div class="popup-inner__name">' + escapeHtml(loc.name) + '</div>';
+  html += '<div class="popup-inner__address">' + escapeHtml(loc.address) + '</div>';
+
+  html += '<div class="popup-inner__details">';
+
+  // Phone
+  html += '<div class="popup-detail">';
+  html += '<div class="popup-detail__icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>';
+  html += '<span><a href="tel:' + loc.phone.replace(/[^0-9+]/g, '') + '" style="color: inherit; text-decoration: none; border-bottom: 1px dashed currentColor;">' + escapeHtml(loc.phone) + '</a></span>';
+  html += '</div>';
+
+  // Hours
+  html += '<div class="popup-detail">';
+  html += '<div class="popup-detail__icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>';
+  html += '<span>' + escapeHtml(loc.hours) + '</span>';
+  html += '</div>';
+
+  html += '</div>';
+
+  // Services
+  html += '<div class="popup-inner__services">';
+  html += '<strong>Services</strong>';
+  html += escapeHtml(loc.services);
+  html += '</div>';
+
+  // Directions button
+  if (loc.hasMap) {
+    html += '<a href="' + directionsUrl + '" target="_blank" rel="noopener noreferrer" class="popup-directions">';
+    html += '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>';
+    html += 'Get Directions';
+    html += '</a>';
+  }
+
+  html += '</div>';
+  return html;
+}
+
+function showFallback() {
+  document.getElementById('mapContainer').style.display = 'none';
+  document.getElementById('mapFallback').classList.add('is-visible');
+  // Expand sidebar on mobile when map is unavailable
+  var sidebar = document.getElementById('mapSidebar');
+  sidebar.classList.remove('map-sidebar--collapsed');
+}
+
+// ================================================================
+// FILTER CHIPS
+// ================================================================
+function renderFilterChips() {
+  var container = document.getElementById('filterChips');
+  var html = '';
+
+  Object.keys(CATEGORIES).forEach(function(key) {
+    var cat = CATEGORIES[key];
+    var count = LOCATIONS.filter(function(l) { return l.category === key; }).length;
+    var isActive = activeCategories[key];
+
+    html += '<button class="filter-chip' + (isActive ? ' filter-chip--active' : '') + '" ';
+    html += 'data-category="' + key + '" ';
+    html += 'style="--cat-color: ' + cat.color + '; --cat-bg: ' + cat.bg + ';" ';
+    html += 'onclick="toggleCategory(\'' + key + '\')" ';
+    html += 'aria-pressed="' + isActive + '">';
+    html += '<span class="filter-chip__dot" style="background: ' + cat.color + ';"></span>';
+    html += cat.label;
+    html += '<span class="filter-chip__count">(' + count + ')</span>';
+    html += '</button>';
+  });
+
+  container.innerHTML = html;
+}
+
+function toggleCategory(key) {
+  activeCategories[key] = !activeCategories[key];
+  renderFilterChips();
+  applyFilters();
+}
+
+function showAllCategories() {
+  Object.keys(CATEGORIES).forEach(function(key) {
+    activeCategories[key] = true;
+  });
+  renderFilterChips();
+  applyFilters();
+}
+
+function clearAllCategories() {
+  Object.keys(CATEGORIES).forEach(function(key) {
+    activeCategories[key] = false;
+  });
+  renderFilterChips();
+  applyFilters();
+}
+
+// ================================================================
+// LOCATION CARDS
+// ================================================================
+function renderLocationCards() {
+  var container = document.getElementById('locationList');
+  var searchTerm = (document.getElementById('locationSearch').value || '').toLowerCase().trim();
+  var html = '';
+  var visibleCount = 0;
+
+  LOCATIONS.forEach(function(loc) {
+    var cat = CATEGORIES[loc.category];
+    var isVisible = activeCategories[loc.category];
+
+    // Apply search filter
+    if (searchTerm) {
+      var searchable = (loc.name + ' ' + loc.address + ' ' + loc.services + ' ' + cat.label).toLowerCase();
+      if (searchable.indexOf(searchTerm) === -1) {
+        isVisible = false;
+      }
+    }
+
+    if (!isVisible) return;
+    visibleCount++;
+
+    var isActive = activeCardId === loc.id;
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    var badgeBg = isDark ? cat.darkBg : cat.bg;
+
+    html += '<div class="location-card' + (isActive ? ' location-card--active' : '') + '" ';
+    html += 'data-id="' + loc.id + '" ';
+    html += 'onclick="selectLocation(' + loc.id + ')" ';
+    html += 'role="button" tabindex="0" ';
+    html += 'aria-label="' + escapeHtml(loc.name) + '">';
+
+    html += '<div class="location-card__header">';
+    html += '<span class="location-card__dot" style="background: ' + cat.color + ';"></span>';
+    html += '<span class="location-card__name">' + escapeHtml(loc.name) + '</span>';
+    html += '</div>';
+
+    html += '<div class="location-card__address">' + escapeHtml(loc.address) + '</div>';
+
+    html += '<div class="location-card__badges">';
+    html += '<span class="location-badge" style="background: ' + badgeBg + '; color: ' + cat.color + '; border-color: ' + cat.color + '30;">' + cat.label + '</span>';
+    if (loc.hours && loc.hours.indexOf('24/7') !== -1) {
+      html += '<span class="location-badge" style="background: rgba(220, 38, 38, 0.06); color: #dc2626; border-color: #dc262630;">24/7</span>';
+    }
+    html += '</div>';
+
+    html += '</div>';
+  });
+
+  container.innerHTML = html;
+
+  // No results message
+  var noResults = document.getElementById('noResults');
+  if (visibleCount === 0) {
+    noResults.classList.add('is-visible');
+  } else {
+    noResults.classList.remove('is-visible');
+  }
+}
+
+function selectLocation(id) {
+  setActiveCard(id);
+
+  var loc = LOCATIONS.find(function(l) { return l.id === id; });
+  if (!loc) return;
+
+  if (map && loc.hasMap && loc.lat !== null && markers[id]) {
+    map.setView([loc.lat, loc.lng], 15, { animate: true });
+    markers[id].openPopup();
+  }
+}
+
+function setActiveCard(id) {
+  activeCardId = id;
+
+  // Update card styles
+  document.querySelectorAll('.location-card').forEach(function(card) {
+    var cardId = parseInt(card.getAttribute('data-id'));
+    if (cardId === id) {
+      card.classList.add('location-card--active');
+      // Scroll card into view
+      card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } else {
+      card.classList.remove('location-card--active');
+    }
+  });
+}
+
+// ================================================================
+// FILTERS
+// ================================================================
+function applyFilters() {
+  // Update map markers
+  LOCATIONS.forEach(function(loc) {
+    if (!markers[loc.id]) return;
+    var searchTerm = (document.getElementById('locationSearch').value || '').toLowerCase().trim();
+    var catVisible = activeCategories[loc.category];
+    var searchVisible = true;
+
+    if (searchTerm) {
+      var cat = CATEGORIES[loc.category];
+      var searchable = (loc.name + ' ' + loc.address + ' ' + loc.services + ' ' + cat.label).toLowerCase();
+      searchVisible = searchable.indexOf(searchTerm) !== -1;
+    }
+
+    if (catVisible && searchVisible) {
+      if (!map.hasLayer(markers[loc.id])) {
+        markers[loc.id].addTo(map);
+      }
+    } else {
+      if (map && map.hasLayer(markers[loc.id])) {
+        map.removeLayer(markers[loc.id]);
+      }
+    }
+  });
+
+  renderLocationCards();
+}
+
+// Search handler
+document.getElementById('locationSearch').addEventListener('input', function() {
+  applyFilters();
+});
+
+// ================================================================
+// GEOLOCATION
+// ================================================================
+var userMarker = null;
+
+function goToMyLocation() {
+  if (!navigator.geolocation) {
+    showToast('Geolocation is not supported by your browser.');
+    return;
+  }
+
+  var btn = document.getElementById('myLocationBtn');
+  btn.textContent = 'Locating...';
+  btn.disabled = true;
+
+  navigator.geolocation.getCurrentPosition(
+    function(position) {
+      var lat = position.coords.latitude;
+      var lng = position.coords.longitude;
+
+      if (map) {
+        // Remove old user marker
+        if (userMarker) {
+          map.removeLayer(userMarker);
+        }
+
+        var userIcon = L.divIcon({
+          className: 'user-marker',
+          html: '<div style="' +
+            'width: 16px; height: 16px;' +
+            'background: #3b82f6;' +
+            'border: 3px solid #fff;' +
+            'border-radius: 50%;' +
+            'box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25), 0 2px 6px rgba(0,0,0,0.3);' +
+            '"></div>',
+          iconSize: [16, 16],
+          iconAnchor: [8, 8]
+        });
+
+        userMarker = L.marker([lat, lng], { icon: userIcon }).addTo(map);
+        userMarker.bindPopup('<div class="popup-inner" style="padding: 12px;"><strong>Your Location</strong></div>');
+        map.setView([lat, lng], 13, { animate: true });
+      }
+
+      btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="9"/></svg> Show My Location';
+      btn.disabled = false;
+    },
+    function(error) {
+      var msg = 'Unable to determine your location.';
+      if (error.code === 1) msg = 'Location access was denied. Please enable location services.';
+      showToast(msg);
+      btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="9"/></svg> Show My Location';
+      btn.disabled = false;
+    },
+    { enableHighAccuracy: true, timeout: 10000, maximumAge: 300000 }
+  );
+}
+
+// ================================================================
+// MOBILE SIDEBAR TOGGLE
+// ================================================================
+function toggleSidebar() {
+  var sidebar = document.getElementById('mapSidebar');
+  var btn = document.getElementById('sidebarToggle');
+  var isCollapsed = sidebar.classList.toggle('map-sidebar--collapsed');
+  btn.innerHTML = isCollapsed
+    ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg> Show Filters &amp; Locations'
+    : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Hide Filters &amp; Locations';
+}
+
+// ================================================================
+// UTILITIES
+// ================================================================
+function escapeHtml(text) {
+  var div = document.createElement('div');
+  div.appendChild(document.createTextNode(text));
+  return div.innerHTML;
+}
+
+function showToast(message) {
+  var toast = document.getElementById('toast');
+  if (!toast) return;
+  toast.textContent = message;
+  toast.classList.add('ds-toast--visible');
+  setTimeout(function() {
+    toast.classList.remove('ds-toast--visible');
+  }, 3500);
+}
+
+// ================================================================
+// THEME TOGGLE
+// ================================================================
+function toggleTheme() {
+  var html = document.documentElement;
+  var btn = document.getElementById('themeToggleBtn');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.removeAttribute('data-theme');
+    localStorage.setItem('theme', 'light');
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+  }
+  // Re-render cards to update badge backgrounds for theme
+  renderLocationCards();
+}
+
+// Respect saved preference, then system preference
+(function() {
+  var saved = localStorage.getItem('theme');
+  var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (saved === 'dark' || (!saved && prefersDark)) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    var btn = document.getElementById('themeToggleBtn');
+    if (btn) btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+  }
+})();
+
+// ---- Mobile nav toggle ----
+function toggleMobileNav() {
+  var panel = document.getElementById('mobileNavPanel');
+  var btn = document.getElementById('hamburgerBtn');
+  var isOpen = panel.classList.toggle('is-open');
+  btn.setAttribute('aria-expanded', isOpen);
+}
+
+// ---- Admin gate: 5-click on version ----
+var adminClicks = 0;
+var adminTimer = null;
+document.getElementById('adminGate').addEventListener('click', function(e) {
+  e.preventDefault();
+  adminClicks++;
+  clearTimeout(adminTimer);
+  if (adminClicks >= 5) {
+    adminClicks = 0;
+    window.location.href = 'admin.html';
+  }
+  adminTimer = setTimeout(function() { adminClicks = 0; }, 2000);
+});
+
+// Keyboard support for location cards
+document.getElementById('locationList').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' || e.key === ' ') {
+    var card = e.target.closest('.location-card');
+    if (card) {
+      e.preventDefault();
+      var id = parseInt(card.getAttribute('data-id'));
+      selectLocation(id);
+    }
+  }
+});
+</script>
+
+<script src="js/search.js"></script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(function(){});
+}
+</script>
+
+</body>
+</html>

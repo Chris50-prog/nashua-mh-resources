@@ -395,6 +395,7 @@
 .need-card--supervise:hover { border-color: var(--ds-secondary-400); }
 .need-card--activities:hover { border-color: var(--ds-success-400); }
 .need-card--games:hover { border-color: #7c3aed; }
+.need-card--map:hover { border-color: var(--ds-primary-400); }
 
 /* ---- Stats bar ---- */
 .stats-bar {
@@ -737,6 +738,9 @@
       <a href="index.html" class="site-nav__link site-nav__link--active">Home</a>
       <a href="resources.html" class="site-nav__link">Resources</a>
       <a href="tools.html" class="site-nav__link">Clinical Tools</a>
+      <a href="screening.html" class="site-nav__link">Screening</a>
+      <a href="map.html" class="site-nav__link">Map</a>
+      <a href="templates.html" class="site-nav__link">Templates</a>
       <a href="guide.html" class="site-nav__link">Guides</a>
       <a href="neurobiology.html" class="site-nav__link">Brain &amp; Neuro</a>
       <a href="worksheets.html" class="site-nav__link">Worksheets</a>
@@ -771,6 +775,9 @@
   <a href="index.html" class="site-nav__mobile-link site-nav__mobile-link--active">Home</a>
   <a href="resources.html" class="site-nav__mobile-link">Resources</a>
   <a href="tools.html" class="site-nav__mobile-link">Clinical Tools</a>
+  <a href="screening.html" class="site-nav__mobile-link">Screening</a>
+  <a href="map.html" class="site-nav__mobile-link">Map</a>
+  <a href="templates.html" class="site-nav__mobile-link">Templates</a>
   <a href="guide.html" class="site-nav__mobile-link">Guides</a>
   <a href="neurobiology.html" class="site-nav__mobile-link">Brain &amp; Neuro</a>
   <a href="worksheets.html" class="site-nav__mobile-link">Worksheets</a>
@@ -792,7 +799,7 @@
 
     <h1 class="hero__title">Community Mental Health Resources</h1>
 
-    <p class="hero__subtitle">Clinical tools, community resources, and practice guides -- all in one place.</p>
+    <p class="hero__subtitle">An AI-assisted clinical resource hub for clinicians, case managers, and community providers serving Greater Nashua.</p>
 
     <div class="hero__search">
       <div class="hero__search-icon">
@@ -822,146 +829,146 @@
 
       <div class="needs__grid ds-stagger">
 
-        <!-- Handle a Crisis -->
+        <!-- 1. Clinical Tools -->
+        <a href="tools.html" class="need-card need-card--notes ds-animate-fade-up">
+          <div class="need-card__icon" style="background: var(--ds-accent-50); color: var(--ds-accent-700);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </div>
+          <div class="need-card__content">
+            <div class="need-card__title">Clinical Tools</div>
+            <div class="need-card__desc">SOAP note builder, safety plans, CPT codes, supervision templates, and documentation aids.</div>
+          </div>
+          <div class="need-card__arrow">Explore <span>&rarr;</span></div>
+        </a>
+
+        <!-- 2. Screening -->
+        <a href="screening.html" class="need-card need-card--screen ds-animate-fade-up">
+          <div class="need-card__icon" style="background: var(--ds-status-info-bg); color: var(--ds-info-600);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M9 14l2 2 4-4"/></svg>
+          </div>
+          <div class="need-card__content">
+            <div class="need-card__title">Screening</div>
+            <div class="need-card__desc">PHQ-9, GAD-7, C-SSRS, AUDIT, and other validated instruments in step-by-step format.</div>
+          </div>
+          <div class="need-card__arrow">Explore <span>&rarr;</span></div>
+        </a>
+
+        <!-- 3. Crisis &amp; Safety -->
         <a href="guide.html#crisisTree" class="need-card need-card--crisis ds-animate-fade-up">
           <div class="need-card__icon" style="background: var(--ds-status-danger-bg); color: var(--ds-danger-600);">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
           </div>
           <div class="need-card__content">
-            <div class="need-card__title">Handle a Crisis</div>
+            <div class="need-card__title">Crisis &amp; Safety</div>
             <div class="need-card__desc">Crisis decision tree, psychiatric emergency workflows, and safety planning tools.</div>
           </div>
           <div class="need-card__arrow">Explore <span>&rarr;</span></div>
         </a>
 
-        <!-- Screen a Client -->
-        <a href="tools.html#screening-tools" class="need-card need-card--screen ds-animate-fade-up">
-          <div class="need-card__icon" style="background: var(--ds-status-info-bg); color: var(--ds-info-600);">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-          </div>
-          <div class="need-card__content">
-            <div class="need-card__title">Screen a Client</div>
-            <div class="need-card__desc">PHQ-9, GAD-7, C-SSRS, AUDIT, and other validated screening instruments.</div>
-          </div>
-          <div class="need-card__arrow">Explore <span>&rarr;</span></div>
-        </a>
-
-        <!-- Write Clinical Notes -->
-        <a href="tools.html#clinical-note-builder" class="need-card need-card--notes ds-animate-fade-up">
-          <div class="need-card__icon" style="background: var(--ds-accent-50); color: var(--ds-accent-700);">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-          </div>
-          <div class="need-card__content">
-            <div class="need-card__title">Write Clinical Notes</div>
-            <div class="need-card__desc">SOAP note builder, group therapy templates, and documentation best practices.</div>
-          </div>
-          <div class="need-card__arrow">Explore <span>&rarr;</span></div>
-        </a>
-
-        <!-- Find Resources -->
+        <!-- 4. Resources -->
         <a href="resources.html" class="need-card need-card--resources ds-animate-fade-up">
           <div class="need-card__icon" style="background: var(--ds-primary-50); color: var(--ds-primary-700);">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           </div>
           <div class="need-card__content">
-            <div class="need-card__title">Find Resources</div>
-            <div class="need-card__desc">Housing, food security, medical care, legal aid, and transportation options.</div>
+            <div class="need-card__title">Resources</div>
+            <div class="need-card__desc">Housing, food security, medical care, legal aid, and transportation options for Greater Nashua.</div>
           </div>
           <div class="need-card__arrow">Explore <span>&rarr;</span></div>
         </a>
 
-        <!-- Get a Printable -->
-        <a href="tools.html#dbt" class="need-card need-card--print ds-animate-fade-up">
-          <div class="need-card__icon" style="background: var(--ds-status-success-bg); color: var(--ds-success-600);">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-          </div>
-          <div class="need-card__content">
-            <div class="need-card__title">Get a Printable</div>
-            <div class="need-card__desc">Client handouts, CBT worksheets, DBT skills sheets, and safety plan templates.</div>
-          </div>
-          <div class="need-card__arrow">Explore <span>&rarr;</span></div>
-        </a>
-
-        <!-- Look Up Billing -->
-        <a href="tools.html#cpt-reference" class="need-card need-card--billing ds-animate-fade-up">
-          <div class="need-card__icon" style="background: var(--ds-warm-gray-100); color: var(--ds-warm-gray-700);">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-          </div>
-          <div class="need-card__content">
-            <div class="need-card__title">Look Up Billing</div>
-            <div class="need-card__desc">CPT code reference, prior authorization guides, and medical necessity letters.</div>
-          </div>
-          <div class="need-card__arrow">Explore <span>&rarr;</span></div>
-        </a>
-
-        <!-- Learn a Technique -->
-        <a href="tools.html#cbt" class="need-card need-card--learn ds-animate-fade-up">
+        <!-- 5. Clinical Guide -->
+        <a href="guide.html" class="need-card need-card--learn ds-animate-fade-up">
           <div class="need-card__icon" style="background: #eef2ff; color: #4338ca;">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
           </div>
           <div class="need-card__content">
-            <div class="need-card__title">Learn a Technique</div>
-            <div class="need-card__desc">CBT, DBT, motivational interviewing guides, and evidence-based practice resources.</div>
+            <div class="need-card__title">Clinical Guide</div>
+            <div class="need-card__desc">Evidence-based practice guides for CBT, DBT, motivational interviewing, and more.</div>
           </div>
           <div class="need-card__arrow">Explore <span>&rarr;</span></div>
         </a>
 
-        <!-- Brain & Neurobiology -->
+        <!-- 6. Brain &amp; Neurobiology -->
         <a href="neurobiology.html" class="need-card need-card--neuro ds-animate-fade-up">
           <div class="need-card__icon" style="background: #fdf2f8; color: #be185d;">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A5.5 5.5 0 0 0 4 7.5c0 1.58.67 3 1.73 4.01L12 18l6.27-6.49A5.5 5.5 0 0 0 14.5 2a5.5 5.5 0 0 0-5 3.21"/><path d="M12 18v4"/><path d="M8 22h8"/><circle cx="12" cy="9" r="2"/></svg>
           </div>
           <div class="need-card__content">
             <div class="need-card__title">Brain &amp; Neurobiology</div>
-            <div class="need-card__desc">Neuroscience of mental health, brain-behavior connections, and neurobiology-informed clinical insights.</div>
+            <div class="need-card__desc">Neuroscience of mental health, brain-behavior connections, and neurobiology-informed insights.</div>
           </div>
           <div class="need-card__arrow">Explore <span>&rarr;</span></div>
         </a>
 
-        <!-- Printable Worksheets -->
+        <!-- 7. Worksheets -->
         <a href="worksheets.html" class="need-card need-card--worksheets ds-animate-fade-up">
           <div class="need-card__icon" style="background: var(--ds-accent-50); color: var(--ds-accent-700);">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
           </div>
           <div class="need-card__content">
-            <div class="need-card__title">Printable Worksheets</div>
-            <div class="need-card__desc">CBT thought records, safety plans, coping skills toolbox, and goal-setting templates ready to download.</div>
+            <div class="need-card__title">Worksheets</div>
+            <div class="need-card__desc">Printable CBT thought records, coping skills toolbox, safety plans, and goal-setting templates.</div>
           </div>
           <div class="need-card__arrow">Explore <span>&rarr;</span></div>
         </a>
 
-        <!-- Activity Ideas -->
+        <!-- 8. Activities -->
         <a href="activities.html" class="need-card need-card--activities ds-animate-fade-up">
           <div class="need-card__icon" style="background: var(--ds-status-success-bg); color: var(--ds-success-700);">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           </div>
           <div class="need-card__content">
-            <div class="need-card__title">Activity Ideas</div>
-            <div class="need-card__desc">Therapeutic activities, behavioral activation ideas, and engagement strategies for individual and group sessions.</div>
+            <div class="need-card__title">Activities</div>
+            <div class="need-card__desc">Behavioral activation ideas and therapeutic engagement strategies for individual and group sessions.</div>
           </div>
           <div class="need-card__arrow">Explore <span>&rarr;</span></div>
         </a>
 
-        <!-- Therapeutic Games -->
+        <!-- 9. Games -->
         <a href="games.html" class="need-card need-card--games ds-animate-fade-up">
           <div class="need-card__icon" style="background: #f5f3ff; color: #7c3aed;">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><circle cx="15" cy="11" r="1"/><circle cx="18" cy="13" r="1"/></svg>
           </div>
           <div class="need-card__content">
-            <div class="need-card__title">Therapeutic Games</div>
-            <div class="need-card__desc">Engaging therapeutic games for building coping skills, emotional regulation, and social skills in sessions.</div>
+            <div class="need-card__title">Games</div>
+            <div class="need-card__desc">Therapeutic games for building coping skills, emotional regulation, and social skills in sessions.</div>
           </div>
           <div class="need-card__arrow">Explore <span>&rarr;</span></div>
         </a>
 
-        <!-- Prepare for Supervision -->
-        <a href="tools.html#supervision-templates" class="need-card need-card--supervise ds-animate-fade-up">
-          <div class="need-card__icon" style="background: var(--ds-secondary-100); color: var(--ds-secondary-700);">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <!-- 10. Service Map -->
+        <a href="map.html" class="need-card need-card--map ds-animate-fade-up">
+          <div class="need-card__icon" style="background: var(--ds-primary-50); color: var(--ds-primary-600);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
           </div>
           <div class="need-card__content">
-            <div class="need-card__title">Prepare for Supervision</div>
-            <div class="need-card__desc">Supervision templates, case conference notes, and caseload management tools.</div>
+            <div class="need-card__title">Service Map</div>
+            <div class="need-card__desc">Interactive map of mental health services, shelters, and community organizations in Greater Nashua.</div>
+          </div>
+          <div class="need-card__arrow">Explore <span>&rarr;</span></div>
+        </a>
+
+        <!-- 11. Documentation Templates -->
+        <a href="templates.html" class="need-card need-card--templates ds-animate-fade-up">
+          <div class="need-card__icon" style="background: #f0fdfa; color: #0d9488;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <div class="need-card__content">
+            <div class="need-card__title">Doc Templates</div>
+            <div class="need-card__desc">Guided SOAP, DAP, case conference, group therapy, and collateral contact note builders with live preview.</div>
+          </div>
+          <div class="need-card__arrow">Build <span>&rarr;</span></div>
+        </a>
+
+        <!-- 12. Admin -->
+        <a href="admin.html" class="need-card need-card--billing ds-animate-fade-up">
+          <div class="need-card__icon" style="background: var(--ds-warm-gray-100); color: var(--ds-warm-gray-700);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1.08-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1.08 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </div>
+          <div class="need-card__content">
+            <div class="need-card__title">Admin</div>
+            <div class="need-card__desc">Site administration, content management, and platform settings.</div>
           </div>
           <div class="need-card__arrow">Explore <span>&rarr;</span></div>
         </a>
@@ -1097,7 +1104,7 @@
           <div class="site-nav__logo-mark">NH</div>
           <span class="site-nav__logo-text">MH Resources</span>
         </a>
-        <p class="footer__brand-desc">A comprehensive resource hub for clinicians, case managers, and community members in the Greater Nashua area.</p>
+        <p class="footer__brand-desc">An AI-assisted clinical resource hub for clinicians, case managers, and community providers in the Greater Nashua area.</p>
 
         <div class="footer__crisis-box">
           <div class="footer__crisis-title">Crisis? Get help now.</div>
@@ -1117,6 +1124,9 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="resources.html">Resources</a></li>
           <li><a href="tools.html">Clinical Tools</a></li>
+          <li><a href="screening.html">Screening</a></li>
+          <li><a href="map.html">Map</a></li>
+          <li><a href="templates.html">Templates</a></li>
           <li><a href="guide.html">Guides</a></li>
           <li><a href="neurobiology.html">Brain &amp; Neuro</a></li>
           <li><a href="worksheets.html">Worksheets</a></li>
@@ -1129,9 +1139,10 @@
       <div>
         <div class="footer__col-title">Quick Access</div>
         <ul class="footer__links">
-          <li><a href="tools.html#screening-tools">Screening Tools</a></li>
           <li><a href="tools.html#clinical-note-builder">Note Builder</a></li>
-          <li><a href="guide.html#crisisTree">Crisis Tree</a></li>
+          <li><a href="guide.html#crisisTree">Crisis Decision Tree</a></li>
+          <li><a href="tools.html#cpt-reference">CPT Code Reference</a></li>
+          <li><a href="tools.html#safety-plan-builder">Safety Planning</a></li>
           <li><a href="resources.html#housing">Housing Resources</a></li>
         </ul>
       </div>
@@ -1142,8 +1153,9 @@
         <ul class="footer__links">
           <li><a href="tools.html#cbt">CBT Worksheets</a></li>
           <li><a href="tools.html#dbt">DBT Handouts</a></li>
-          <li><a href="tools.html#cpt-reference">CPT Codes</a></li>
-          <li><a href="tools.html#safety-plan-builder">Safety Planning</a></li>
+          <li><a href="worksheets.html">Printable Worksheets</a></li>
+          <li><a href="tools.html#supervision-templates">Supervision Templates</a></li>
+          <li><a href="admin.html">Admin</a></li>
         </ul>
       </div>
 
@@ -1151,7 +1163,7 @@
 
     <div class="footer__bottom">
       <div class="footer__disclaimer">
-        For informational purposes only. This resource does not replace clinical judgment, supervision, or direct consultation. Contact information and services may change; always verify by contacting organizations directly.
+        For informational purposes only. This platform does not replace clinical judgment, supervision, or direct consultation. Some content is AI-assisted and should be verified. Contact information and service availability may change; always confirm by contacting organizations directly.
       </div>
       <div class="footer__meta">
         <span><span class="footer__status-dot"></span> Updated Jun 24, 2026</span>
