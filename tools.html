@@ -1495,7 +1495,7 @@
 /* ===== TOOLS HERO ===== */
 .tools-hero {
   background: linear-gradient(170deg, var(--ds-primary-50) 0%, var(--ds-cream) 50%, var(--ds-warm-gray-50) 100%);
-  padding: var(--ds-space-14) 0 var(--ds-space-12);
+  padding: var(--ds-space-20) 0 var(--ds-space-16);
 }
 [data-theme="dark"] .tools-hero {
   background: linear-gradient(170deg, rgba(61, 139, 112, 0.08) 0%, var(--ds-page-bg) 50%, var(--ds-page-bg) 100%);
@@ -1510,7 +1510,13 @@
   display: inline-flex;
   align-items: center;
   gap: var(--ds-space-2);
-  margin-bottom: var(--ds-space-4);
+  margin-bottom: var(--ds-space-5);
+}
+.tools-hero__overline-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ds-success-500);
 }
 .tools-hero__title {
   font-family: var(--ds-font-sans);
@@ -1519,7 +1525,8 @@
   line-height: var(--ds-leading-tight);
   letter-spacing: var(--ds-tracking-tight);
   color: var(--ds-text-primary);
-  margin: 0 0 var(--ds-space-3);
+  max-width: 720px;
+  margin: 0 auto var(--ds-space-5);
 }
 .tools-hero__subtitle {
   font-family: var(--ds-font-sans);
@@ -1528,7 +1535,14 @@
   line-height: var(--ds-leading-relaxed);
   color: var(--ds-text-secondary);
   max-width: 600px;
-  margin: 0 auto var(--ds-space-5);
+  margin: 0 auto var(--ds-space-8);
+}
+.tools-hero__stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-3);
+  flex-wrap: wrap;
 }
 .tools-hero__stat {
   display: inline-flex;
@@ -1548,24 +1562,30 @@
   font-weight: var(--ds-weight-bold);
 }
 
+/* Hide old-style category pill nav and expand/collapse bar */
+.category-nav,
+.expand-collapse-bar {
+  display: none !important;
+}
+
 /* ===== CATEGORY GRID ===== */
 .tools-category-grid {
   max-width: var(--ds-container-xl);
-  margin: calc(-1 * var(--ds-space-6)) auto var(--ds-space-8);
+  margin: calc(-1 * var(--ds-space-8)) auto var(--ds-space-10);
   padding: 0 var(--ds-space-6);
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: var(--ds-space-4);
 }
 .tools-category-card {
   background: var(--ds-surface);
   border: 1px solid var(--ds-border);
   border-radius: var(--ds-radius-xl);
-  padding: var(--ds-space-5);
+  padding: var(--ds-space-5) var(--ds-space-4);
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  transition: var(--ds-transition-shadow), var(--ds-transition-transform);
+  transition: var(--ds-transition-shadow), var(--ds-transition-transform), border-color var(--ds-duration-fast) var(--ds-ease-default);
   box-shadow: var(--ds-shadow-sm);
   display: flex;
   flex-direction: column;
@@ -1581,6 +1601,15 @@
 .tools-category-card:active {
   transform: translateY(-1px);
   box-shadow: var(--ds-shadow-md);
+}
+.tools-category-card.is-active {
+  border-color: var(--ds-primary-400);
+  box-shadow: var(--ds-shadow-md), 0 0 0 1px var(--ds-primary-200);
+  background: var(--ds-primary-50);
+}
+[data-theme="dark"] .tools-category-card.is-active {
+  background: var(--ds-interactive-subtle);
+  border-color: var(--ds-primary-400);
 }
 .tools-category-card__icon {
   width: 48px;
@@ -1602,6 +1631,7 @@
   font-family: var(--ds-font-sans);
   font-size: var(--ds-text-xs);
   color: var(--ds-text-muted);
+  line-height: var(--ds-leading-relaxed);
 }
 
 /* ===== REDESIGNED SIDEBAR ===== */
@@ -1914,7 +1944,7 @@
     display: flex;
   }
   .tools-hero {
-    padding: var(--ds-space-10) 0 var(--ds-space-8);
+    padding: var(--ds-space-14) 0 var(--ds-space-10);
   }
   .tools-hero__title {
     font-size: var(--ds-text-3xl);
@@ -1924,6 +1954,7 @@
   }
   .tools-category-grid {
     grid-template-columns: repeat(2, 1fr);
+    margin-top: calc(-1 * var(--ds-space-5));
   }
   .footer__grid {
     grid-template-columns: 1fr;
@@ -2002,63 +2033,86 @@
      ============================================================ -->
 <section class="tools-hero">
   <div class="tools-hero__inner">
+
     <div class="tools-hero__overline">
-      <span class="ds-badge ds-badge--primary ds-badge--dot">Clinical Suite</span>
+      <span class="tools-hero__overline-dot"></span>
+      <span class="ds-overline">Clinical Suite</span>
     </div>
-    <h1 class="tools-hero__title">Clinical Tools</h1>
-    <p class="tools-hero__subtitle">Screening instruments, documentation templates, and clinical utilities for mental health professionals.</p>
-    <div class="tools-hero__stat">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-      <span><strong>30+</strong> tools available</span>
+
+    <h1 class="tools-hero__title">Clinical Tools &amp; Documentation</h1>
+
+    <p class="tools-hero__subtitle">Standardized screening instruments, note builders, treatment planning templates, and administrative utilities -- all in one place.</p>
+
+    <div class="tools-hero__stats">
+      <div class="tools-hero__stat">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        <span><strong>30+</strong> tools</span>
+      </div>
+      <div class="tools-hero__stat">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        <span><strong>7</strong> categories</span>
+      </div>
+      <div class="tools-hero__stat">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <span>Print &amp; export ready</span>
+      </div>
     </div>
+
   </div>
 </section>
 
 <!-- ============================================================
      CATEGORY GRID
      ============================================================ -->
-<div class="tools-category-grid ds-stagger">
-  <a href="#screening-tools" class="tools-category-card ds-animate-fade-up" onclick="smoothScrollTo(event, 'screening-tools')">
+<div class="tools-category-grid ds-stagger" id="categoryGrid">
+  <a href="#screening-tools" class="tools-category-card ds-animate-fade-up" data-category-targets="screening-tools,crisis-tools,safety-plan-builder" onclick="smoothScrollTo(event, 'screening-tools')">
     <div class="tools-category-card__icon" style="background: var(--ds-primary-50); color: var(--ds-primary-600);">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
     </div>
-    <div class="tools-category-card__title">Screening</div>
-    <div class="tools-category-card__count">PHQ-9, GAD-7, AUDIT, DAST-10, C-SSRS</div>
+    <div class="tools-category-card__title">Screening Tools</div>
+    <div class="tools-category-card__count">PHQ-9, GAD-7, AUDIT, DAST-10, C-SSRS, safety planning</div>
   </a>
-  <a href="#safety-plan-builder" class="tools-category-card ds-animate-fade-up" onclick="smoothScrollTo(event, 'safety-plan-builder')">
-    <div class="tools-category-card__icon" style="background: var(--ds-status-danger-bg); color: var(--ds-danger-600);">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-    </div>
-    <div class="tools-category-card__title">Safety Planning</div>
-    <div class="tools-category-card__count">Safety plan builder, crisis tools</div>
-  </a>
-  <a href="#clinical-note-builder" class="tools-category-card ds-animate-fade-up" onclick="smoothScrollTo(event, 'clinical-note-builder')">
+  <a href="#clinical-note-builder" class="tools-category-card ds-animate-fade-up" data-category-targets="clinical-note-builder,case-conference-note,group-therapy-note,collateral-contact-log" onclick="smoothScrollTo(event, 'clinical-note-builder')">
     <div class="tools-category-card__icon" style="background: var(--ds-accent-50); color: var(--ds-accent-600);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+    </div>
+    <div class="tools-category-card__title">Note Builders</div>
+    <div class="tools-category-card__count">SOAP notes, case conference, group therapy, collateral logs</div>
+  </a>
+  <a href="#goal-bank" class="tools-category-card ds-animate-fade-up" data-category-targets="goal-bank,cbt,tfcbt,dbt,mi,sfbt" onclick="smoothScrollTo(event, 'goal-bank')">
+    <div class="tools-category-card__icon" style="background: var(--ds-status-info-bg); color: var(--ds-info-600);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+    </div>
+    <div class="tools-category-card__title">Treatment Planning</div>
+    <div class="tools-category-card__count">Goal bank, CBT, DBT, TF-CBT, MI, SFBT worksheets</div>
+  </a>
+  <a href="#doc-best-practices" class="tools-category-card ds-animate-fade-up" data-category-targets="doc-best-practices,supervision-templates" onclick="smoothScrollTo(event, 'doc-best-practices')">
+    <div class="tools-category-card__icon" style="background: var(--ds-coral-50); color: var(--ds-coral-600);">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
     </div>
     <div class="tools-category-card__title">Documentation</div>
-    <div class="tools-category-card__count">SOAP notes, case conference, group notes</div>
+    <div class="tools-category-card__count">Best practices, supervision templates, compliance guides</div>
   </a>
-  <a href="#cbt" class="tools-category-card ds-animate-fade-up" onclick="smoothScrollTo(event, 'cbt')">
-    <div class="tools-category-card__icon" style="background: var(--ds-status-info-bg); color: var(--ds-info-600);">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-    </div>
-    <div class="tools-category-card__title">Templates</div>
-    <div class="tools-category-card__count">CBT, DBT, TF-CBT, MI, SFBT worksheets</div>
-  </a>
-  <a href="#cpt-reference" class="tools-category-card ds-animate-fade-up" onclick="smoothScrollTo(event, 'cpt-reference')">
-    <div class="tools-category-card__icon" style="background: var(--ds-status-success-bg); color: var(--ds-success-600);">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-    </div>
-    <div class="tools-category-card__title">Billing</div>
-    <div class="tools-category-card__count">CPT codes, prior auth, eligibility</div>
-  </a>
-  <a href="#hipaa-reference" class="tools-category-card ds-animate-fade-up" onclick="smoothScrollTo(event, 'hipaa-reference')">
+  <a href="#caseload-calculator" class="tools-category-card ds-animate-fade-up" data-category-targets="caseload-calculator,mileage-tracker,chart-audit,emergency-card-generator,resource-comparison" onclick="smoothScrollTo(event, 'caseload-calculator')">
     <div class="tools-category-card__icon" style="background: var(--ds-status-warning-bg); color: var(--ds-warning-600);">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
     </div>
     <div class="tools-category-card__title">Administrative</div>
-    <div class="tools-category-card__count">HIPAA, 42 CFR, chart audit, caseload</div>
+    <div class="tools-category-card__count">Caseload calculator, mileage, chart audit, emergency cards</div>
+  </a>
+  <a href="#medical-necessity-letter" class="tools-category-card ds-animate-fade-up" data-category-targets="medical-necessity-letter,referral-letter,court-report,treatment-summary,client-handout" onclick="smoothScrollTo(event, 'medical-necessity-letter')">
+    <div class="tools-category-card__icon" style="background: var(--ds-status-success-bg); color: var(--ds-success-600);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    </div>
+    <div class="tools-category-card__title">Letter Generators</div>
+    <div class="tools-category-card__count">Medical necessity, referrals, court reports, treatment summaries</div>
+  </a>
+  <a href="#cpt-reference" class="tools-category-card ds-animate-fade-up" data-category-targets="cpt-reference,prior-auth-guide,prior-auth-builder,hipaa-reference,42cfr-part2,eligibility-screener" onclick="smoothScrollTo(event, 'cpt-reference')">
+    <div class="tools-category-card__icon" style="background: var(--ds-status-danger-bg); color: var(--ds-danger-600);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    </div>
+    <div class="tools-category-card__title">Clinical References</div>
+    <div class="tools-category-card__count">CPT codes, prior auth, HIPAA, 42 CFR Part 2, eligibility</div>
   </a>
 </div>
 
@@ -11887,11 +11941,12 @@ function toggleMobileSidebar() {
   overlay.classList.toggle('is-open');
 }
 
-/* ===== SIDEBAR ACTIVE STATE ===== */
+/* ===== SIDEBAR + CATEGORY GRID ACTIVE STATE ===== */
 (function() {
   var sections = document.querySelectorAll('.modality-section');
   var sideLinks = document.querySelectorAll('#sidebarNav a');
   var topLinks = document.querySelectorAll('#modalityNav .category-btn');
+  var categoryCards = document.querySelectorAll('#categoryGrid .tools-category-card');
 
   function updateActive() {
     var current = '';
@@ -11904,6 +11959,11 @@ function toggleMobileSidebar() {
     });
     topLinks.forEach(function(a) {
       a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+    /* Highlight the category card whose target sections include the current section */
+    categoryCards.forEach(function(card) {
+      var targets = (card.getAttribute('data-category-targets') || '').split(',');
+      card.classList.toggle('is-active', targets.indexOf(current) !== -1);
     });
   }
   window.addEventListener('scroll', updateActive, { passive: true });
