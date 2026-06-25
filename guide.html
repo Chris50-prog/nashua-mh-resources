@@ -789,7 +789,7 @@
 /* ===== GUIDE SECTIONS ===== */
 .guide-category {
   margin-bottom: 40px;
-  scroll-margin-top: calc(var(--header-height) + 24px);
+  scroll-margin-top: calc(var(--ds-header-height) + 24px);
 }
 .category-header {
   display: flex;
@@ -797,24 +797,24 @@
   gap: 12px;
   margin-bottom: 16px;
   padding-bottom: 12px;
-  border-bottom: 2px solid var(--border);
+  border-bottom: 2px solid var(--ds-border);
 }
 .category-badge {
-  width: 44px; height: 44px; border-radius: var(--radius);
+  width: 44px; height: 44px; border-radius: var(--ds-radius-md);
   display: flex; align-items: center; justify-content: center;
   font-size: 18px; flex-shrink: 0; color: white;
 }
 .category-header h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
-.category-header .category-desc { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+.category-header .category-desc { font-size: 13px; color: var(--ds-text-secondary); margin-top: 2px; }
 
 /* ===== GUIDE CARDS ===== */
 .guide-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-lg);
   margin-bottom: 12px;
   overflow: hidden;
-  scroll-margin-top: calc(var(--header-height) + 24px);
+  scroll-margin-top: calc(var(--ds-header-height) + 24px);
 }
 .guide-card-header {
   display: flex;
@@ -825,7 +825,7 @@
   transition: background 0.15s;
   user-select: none;
 }
-.guide-card-header:hover { background: var(--surface-alt); }
+.guide-card-header:hover { background: var(--ds-surface-sunken); }
 .guide-card-header h3 {
   font-size: 15px;
   font-weight: 600;
@@ -847,7 +847,7 @@
 }
 .guide-arrow {
   font-size: 12px;
-  color: var(--text-secondary);
+  color: var(--ds-text-secondary);
   transition: transform 0.2s;
   flex-shrink: 0;
   margin-left: 8px;
@@ -858,7 +858,7 @@
   padding: 0 20px 20px;
   font-size: 14px;
   line-height: 1.7;
-  color: var(--text);
+  color: var(--ds-text-primary);
 }
 .guide-card.open .guide-card-body { display: block; }
 
@@ -869,15 +869,15 @@
   gap: 14px;
   margin-bottom: 14px;
   padding: 14px 16px;
-  background: var(--surface-alt);
-  border-radius: var(--radius);
-  border-left: 3px solid var(--accent);
+  background: var(--ds-surface-sunken);
+  border-radius: var(--ds-radius-md);
+  border-left: 3px solid var(--ds-primary-600);
 }
 .guide-step::before {
   counter-increment: guidestep;
   content: counter(guidestep);
   width: 28px; height: 28px; border-radius: 50%;
-  background: var(--accent); color: white;
+  background: var(--ds-primary-600); color: white;
   display: flex; align-items: center; justify-content: center;
   font-size: 13px; font-weight: 700; flex-shrink: 0;
 }
@@ -887,26 +887,26 @@
 /* Info boxes */
 .info-box {
   padding: 14px 16px;
-  border-radius: var(--radius);
+  border-radius: var(--ds-radius-md);
   margin: 12px 0;
   font-size: 13px;
   line-height: 1.6;
 }
 .info-box.tip {
-  background: var(--accent-light);
-  border-left: 3px solid var(--accent);
+  background: var(--ds-primary-50);
+  border-left: 3px solid var(--ds-primary-600);
 }
 .info-box.warning {
-  background: var(--warning-light);
-  border-left: 3px solid var(--warning);
+  background: var(--ds-warning-50);
+  border-left: 3px solid var(--ds-warning-600);
 }
 .info-box.crisis {
-  background: var(--danger-light);
-  border-left: 3px solid var(--danger);
+  background: var(--ds-danger-50);
+  border-left: 3px solid var(--ds-danger-600);
 }
 .info-box.success {
-  background: var(--success-light);
-  border-left: 3px solid var(--success);
+  background: var(--ds-success-50);
+  border-left: 3px solid var(--ds-success-600);
 }
 .info-box-title {
   font-weight: 700;
@@ -915,10 +915,10 @@
   letter-spacing: 0.3px;
   margin-bottom: 4px;
 }
-.info-box.tip .info-box-title { color: var(--accent); }
-.info-box.warning .info-box-title { color: var(--warning); }
-.info-box.crisis .info-box-title { color: var(--danger); }
-.info-box.success .info-box-title { color: var(--success); }
+.info-box.tip .info-box-title { color: var(--ds-primary-600); }
+.info-box.warning .info-box-title { color: var(--ds-warning-600); }
+.info-box.crisis .info-box-title { color: var(--ds-danger-600); }
+.info-box.success .info-box-title { color: var(--ds-success-600); }
 
 /* Phone callout */
 .phone-callout {
@@ -926,17 +926,17 @@
   align-items: center;
   gap: 6px;
   padding: 4px 12px;
-  background: var(--accent-light);
+  background: var(--ds-primary-50);
   border-radius: 16px;
   font-size: 14px;
   font-weight: 600;
-  color: var(--accent);
+  color: var(--ds-primary-600);
   margin: 2px 4px 2px 0;
   white-space: nowrap;
 }
 .phone-callout.crisis-phone {
-  background: var(--danger-light);
-  color: var(--danger);
+  background: var(--ds-danger-50);
+  color: var(--ds-danger-600);
 }
 
 /* Cross-links */
@@ -945,30 +945,30 @@
   align-items: center;
   gap: 4px;
   padding: 6px 12px;
-  background: var(--surface-alt);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  background: var(--ds-surface-sunken);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
   font-size: 13px;
   font-weight: 500;
-  color: var(--accent);
+  color: var(--ds-primary-600);
   text-decoration: none;
   margin: 4px 4px 4px 0;
   transition: all 0.15s;
 }
-.cross-link:hover { background: var(--accent-light); border-color: var(--accent); text-decoration: none; }
+.cross-link:hover { background: var(--ds-primary-50); border-color: var(--ds-primary-600); text-decoration: none; }
 
 /* Sub-sections in guides */
 .guide-subsection {
   margin: 16px 0 8px;
   font-size: 15px;
   font-weight: 700;
-  color: var(--text);
+  color: var(--ds-text-primary);
 }
 .guide-sub-subsection {
   margin: 12px 0 6px;
   font-size: 14px;
   font-weight: 600;
-  color: var(--text);
+  color: var(--ds-text-primary);
 }
 
 /* Compact list */
@@ -999,12 +999,12 @@
 .guide-stat-num {
   font-size: 28px;
   font-weight: 800;
-  color: var(--accent);
+  color: var(--ds-primary-600);
   line-height: 1;
 }
 .guide-stat-label {
   font-size: 12px;
-  color: var(--text-secondary);
+  color: var(--ds-text-secondary);
   margin-top: 4px;
 }
 
@@ -1018,17 +1018,17 @@
 .decision-table th {
   text-align: left;
   padding: 8px 12px;
-  background: var(--surface-alt);
+  background: var(--ds-surface-sunken);
   font-weight: 600;
   font-size: 12px;
-  border-bottom: 2px solid var(--border);
+  border-bottom: 2px solid var(--ds-border);
 }
 .decision-table td {
   padding: 8px 12px;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--ds-border);
   vertical-align: top;
 }
-.decision-table tr:hover { background: var(--surface-alt); }
+.decision-table tr:hover { background: var(--ds-surface-sunken); }
 
 /* Print */
 @media print {
@@ -1041,16 +1041,16 @@
 
 /* ===== CRISIS DECISION TREE ===== */
 .crisis-tree {
-  background: var(--surface);
-  border: 2px solid var(--danger);
-  border-radius: var(--radius-lg);
+  background: var(--ds-surface);
+  border: 2px solid var(--ds-danger-600);
+  border-radius: var(--ds-radius-lg);
   padding: 0;
   margin-bottom: 32px;
   overflow: hidden;
   box-shadow: 0 4px 24px rgba(220, 38, 38, 0.10);
 }
 .crisis-tree-header {
-  background: linear-gradient(135deg, var(--danger), #b91c1c);
+  background: linear-gradient(135deg, var(--ds-danger-600), #b91c1c);
   padding: 20px 24px;
   display: flex;
   align-items: center;
@@ -1081,17 +1081,17 @@
   padding: 24px;
 }
 .crisis-tree-disclaimer {
-  background: var(--warning-light);
-  border-left: 3px solid var(--warning);
+  background: var(--ds-warning-50);
+  border-left: 3px solid var(--ds-warning-600);
   padding: 10px 14px;
   font-size: 12px;
   line-height: 1.5;
-  color: var(--text-secondary);
-  border-radius: 0 var(--radius) var(--radius) 0;
+  color: var(--ds-text-secondary);
+  border-radius: 0 var(--ds-radius-md) var(--ds-radius-md) 0;
   margin-bottom: 20px;
 }
 .crisis-tree-disclaimer strong {
-  color: var(--warning);
+  color: var(--ds-warning-600);
   font-weight: 700;
   text-transform: uppercase;
   font-size: 11px;
@@ -1104,12 +1104,12 @@
 .crisis-tree-prompt h3 {
   font-size: 18px;
   font-weight: 700;
-  color: var(--text);
+  color: var(--ds-text-primary);
   margin: 0 0 4px;
 }
 .crisis-tree-prompt p {
   font-size: 13px;
-  color: var(--text-secondary);
+  color: var(--ds-text-secondary);
   margin: 0;
 }
 .crisis-tree-options {
@@ -1118,9 +1118,9 @@
   gap: 10px;
 }
 .crisis-tree-option {
-  background: var(--surface-alt);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  background: var(--ds-surface-sunken);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
   padding: 14px 16px;
   cursor: pointer;
   transition: all 0.15s;
@@ -1132,13 +1132,13 @@
   gap: 10px;
 }
 .crisis-tree-option:hover {
-  border-color: var(--danger);
-  background: var(--danger-light);
+  border-color: var(--ds-danger-600);
+  background: var(--ds-danger-50);
   transform: translateY(-1px);
   box-shadow: 0 2px 8px rgba(220, 38, 38, 0.10);
 }
 .crisis-tree-option:focus-visible {
-  outline: 2px solid var(--danger);
+  outline: 2px solid var(--ds-danger-600);
   outline-offset: 2px;
 }
 .crisis-tree-option-icon {
@@ -1156,21 +1156,21 @@
 .crisis-tree-option-title {
   font-size: 14px;
   font-weight: 600;
-  color: var(--text);
+  color: var(--ds-text-primary);
   margin: 0;
   line-height: 1.3;
 }
 .crisis-tree-option-desc {
   font-size: 12px;
-  color: var(--text-secondary);
+  color: var(--ds-text-secondary);
   margin: 3px 0 0;
   line-height: 1.4;
 }
 /* Severity badge colors on icons */
-.crisis-tree-option-icon.severity-critical { background: var(--danger); }
+.crisis-tree-option-icon.severity-critical { background: var(--ds-danger-600); }
 .crisis-tree-option-icon.severity-high { background: #dc2626; }
-.crisis-tree-option-icon.severity-moderate { background: var(--warning); }
-.crisis-tree-option-icon.severity-standard { background: var(--accent); }
+.crisis-tree-option-icon.severity-moderate { background: var(--ds-warning-600); }
+.crisis-tree-option-icon.severity-standard { background: var(--ds-primary-600); }
 
 /* Result panel */
 .crisis-tree-result {
@@ -1190,7 +1190,7 @@
   gap: 12px;
   margin-bottom: 16px;
   padding-bottom: 12px;
-  border-bottom: 2px solid var(--danger);
+  border-bottom: 2px solid var(--ds-danger-600);
 }
 .crisis-tree-result-badge {
   width: 40px; height: 40px;
@@ -1203,7 +1203,7 @@
 .crisis-tree-result-header h3 {
   font-size: 17px;
   font-weight: 700;
-  color: var(--text);
+  color: var(--ds-text-primary);
   margin: 0;
 }
 .crisis-tree-result-header .result-severity {
@@ -1216,10 +1216,10 @@
   margin-top: 3px;
   display: inline-block;
 }
-.result-severity.critical { background: var(--danger); color: white; }
+.result-severity.critical { background: var(--ds-danger-600); color: white; }
 .result-severity.high { background: #dc2626; color: white; }
-.result-severity.moderate { background: var(--warning); color: white; }
-.result-severity.standard { background: var(--accent); color: white; }
+.result-severity.moderate { background: var(--ds-warning-600); color: white; }
+.result-severity.standard { background: var(--ds-primary-600); color: white; }
 
 .crisis-tree-steps {
   counter-reset: crisisstep;
@@ -1230,9 +1230,9 @@
   gap: 12px;
   margin-bottom: 10px;
   padding: 12px 14px;
-  background: var(--surface-alt);
-  border-radius: var(--radius);
-  border-left: 3px solid var(--danger);
+  background: var(--ds-surface-sunken);
+  border-radius: var(--ds-radius-md);
+  border-left: 3px solid var(--ds-danger-600);
   font-size: 14px;
   line-height: 1.6;
 }
@@ -1240,7 +1240,7 @@
   counter-increment: crisisstep;
   content: counter(crisisstep);
   width: 26px; height: 26px; border-radius: 50%;
-  background: var(--danger); color: white;
+  background: var(--ds-danger-600); color: white;
   display: flex; align-items: center; justify-content: center;
   font-size: 12px; font-weight: 700; flex-shrink: 0;
 }
@@ -1266,20 +1266,20 @@
   align-items: center;
   gap: 6px;
   padding: 10px 20px;
-  background: var(--surface-alt);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  background: var(--ds-surface-sunken);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
   font-size: 14px;
   font-weight: 600;
-  color: var(--text);
+  color: var(--ds-text-primary);
   cursor: pointer;
   transition: all 0.15s;
   font-family: inherit;
 }
 .crisis-tree-start-over:hover {
-  background: var(--danger-light);
-  border-color: var(--danger);
-  color: var(--danger);
+  background: var(--ds-danger-50);
+  border-color: var(--ds-danger-600);
+  color: var(--ds-danger-600);
 }
 .crisis-tree-print-btn {
   display: inline-flex;
@@ -1287,18 +1287,18 @@
   gap: 6px;
   padding: 10px 20px;
   background: transparent;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
   font-size: 13px;
   font-weight: 500;
-  color: var(--text-secondary);
+  color: var(--ds-text-secondary);
   cursor: pointer;
   transition: all 0.15s;
   font-family: inherit;
 }
 .crisis-tree-print-btn:hover {
-  background: var(--surface-alt);
-  color: var(--text);
+  background: var(--ds-surface-sunken);
+  color: var(--ds-text-primary);
 }
 @media (max-width: 600px) {
   .crisis-tree-options { grid-template-columns: 1fr; }
@@ -1316,7 +1316,7 @@
   background: #0d9488;
   color: #fff;
   border: none;
-  border-radius: var(--radius);
+  border-radius: var(--ds-radius-md);
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -1332,7 +1332,7 @@
   background: #0d9488;
   color: #fff;
   border: none;
-  border-radius: var(--radius);
+  border-radius: var(--ds-radius-md);
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
@@ -1342,7 +1342,7 @@
 .handout-print-all-btn:hover { background: #0f766e; }
 .handout-content {
   line-height: 1.7;
-  color: var(--text);
+  color: var(--ds-text-primary);
 }
 .handout-content p {
   margin: 0 0 12px;
@@ -1369,11 +1369,11 @@
   vertical-align: middle;
 }
 .handout-worksheet {
-  border: 2px dashed var(--border);
-  border-radius: var(--radius);
+  border: 2px dashed var(--ds-border);
+  border-radius: var(--ds-radius-md);
   padding: 16px 20px;
   margin: 16px 0;
-  background: var(--surface-alt);
+  background: var(--ds-surface-sunken);
 }
 .handout-worksheet h4 {
   margin: 0 0 12px;
@@ -1382,14 +1382,14 @@
   color: #0d9488;
 }
 .handout-worksheet .worksheet-line {
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--ds-border);
   height: 28px;
   margin-bottom: 6px;
 }
 .handout-worksheet label {
   display: block;
   font-size: 13px;
-  color: var(--text-secondary);
+  color: var(--ds-text-secondary);
   margin-bottom: 2px;
 }
 .handout-checkbox-list {
@@ -1410,7 +1410,7 @@
   top: 3px;
   width: 16px;
   height: 16px;
-  border: 2px solid var(--border);
+  border: 2px solid var(--ds-border);
   border-radius: 3px;
   background: #fff;
 }
@@ -1432,7 +1432,7 @@
 .handout-emergency-box {
   background: #fef2f2;
   border: 2px solid #ef4444;
-  border-radius: var(--radius);
+  border-radius: var(--ds-radius-md);
   padding: 16px 20px;
   margin: 16px 0;
 }
@@ -1455,7 +1455,7 @@
   font-size: 13px;
 }
 .handout-planner-grid th, .handout-planner-grid td {
-  border: 1px solid var(--border);
+  border: 1px solid var(--ds-border);
   padding: 8px 6px;
   text-align: center;
   vertical-align: top;
@@ -1469,7 +1469,7 @@
 }
 .handout-planner-grid td {
   height: 36px;
-  background: var(--surface);
+  background: var(--ds-surface);
 }
 
 /* Print rules for handouts */
@@ -1507,11 +1507,11 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
 
 /* ===== MI TECHNIQUE LIBRARY ===== */
 .mi-example {
-  background: var(--surface-alt);
+  background: var(--ds-surface-sunken);
   border-left: 3px solid #7c3aed;
   padding: 10px 14px;
   margin: 8px 0;
-  border-radius: 0 var(--radius) var(--radius) 0;
+  border-radius: 0 var(--ds-radius-md) var(--ds-radius-md) 0;
   font-size: 13px;
   line-height: 1.6;
 }
@@ -1524,12 +1524,12 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
   display: block;
   margin-bottom: 2px;
 }
-.mi-example .mi-bad { color: var(--danger); }
-.mi-example .mi-good { color: var(--success); }
+.mi-example .mi-bad { color: var(--ds-danger-600); }
+.mi-example .mi-good { color: var(--ds-success-600); }
 .mi-stage-card {
-  background: var(--surface-alt);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  background: var(--ds-surface-sunken);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
   padding: 14px 16px;
   margin: 8px 0;
 }
@@ -1542,32 +1542,32 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
 .mi-stage-card p {
   font-size: 13px;
   margin: 0 0 6px;
-  color: var(--text-secondary);
+  color: var(--ds-text-secondary);
 }
 .mi-trap-card {
-  background: var(--danger-light);
-  border-left: 3px solid var(--danger);
+  background: var(--ds-danger-50);
+  border-left: 3px solid var(--ds-danger-600);
   padding: 10px 14px;
   margin: 8px 0;
-  border-radius: 0 var(--radius) var(--radius) 0;
+  border-radius: 0 var(--ds-radius-md) var(--ds-radius-md) 0;
   font-size: 13px;
 }
-.mi-trap-card strong { color: var(--danger); }
+.mi-trap-card strong { color: var(--ds-danger-600); }
 .mi-spirit-card {
-  background: var(--accent-light);
-  border: 1px solid var(--accent);
-  border-radius: var(--radius);
+  background: var(--ds-primary-50);
+  border: 1px solid var(--ds-primary-600);
+  border-radius: var(--ds-radius-md);
   padding: 12px 16px;
   margin: 8px 0;
   font-size: 13px;
 }
-.mi-spirit-card strong { color: var(--accent); }
+.mi-spirit-card strong { color: var(--ds-primary-600); }
 
 /* ===== CBT WORKSHEETS ===== */
 .worksheet-container {
-  background: var(--surface);
-  border: 2px solid var(--border);
-  border-radius: var(--radius-lg);
+  background: var(--ds-surface);
+  border: 2px solid var(--ds-border);
+  border-radius: var(--ds-radius-lg);
   padding: 20px;
   margin: 16px 0;
 }
@@ -1586,7 +1586,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
   display: block;
   font-size: 12px;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: var(--ds-text-secondary);
   margin-bottom: 4px;
   text-transform: uppercase;
   letter-spacing: 0.3px;
@@ -1596,12 +1596,12 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
 .worksheet-field input[type="number"] {
   width: 100%;
   padding: 8px 12px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
   font-size: 14px;
   font-family: inherit;
-  background: var(--surface-alt);
-  color: var(--text);
+  background: var(--ds-surface-sunken);
+  color: var(--ds-text-primary);
   resize: vertical;
   box-sizing: border-box;
 }
@@ -1631,17 +1631,17 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
   align-items: center;
   gap: 6px;
   padding: 8px 16px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   font-family: inherit;
   transition: all 0.15s;
-  background: var(--surface-alt);
-  color: var(--text);
+  background: var(--ds-surface-sunken);
+  color: var(--ds-text-primary);
 }
-.worksheet-btn:hover { border-color: #7c3aed; color: #7c3aed; background: var(--accent-light); }
+.worksheet-btn:hover { border-color: #7c3aed; color: #7c3aed; background: var(--ds-primary-50); }
 .worksheet-btn.primary {
   background: #7c3aed;
   color: white;
@@ -1655,9 +1655,9 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
   margin: 12px 0;
 }
 .distortion-card {
-  background: var(--surface-alt);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  background: var(--ds-surface-sunken);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
   padding: 12px 14px;
 }
 .distortion-card strong {
@@ -1669,14 +1669,14 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
 }
 .distortion-card p {
   font-size: 12px;
-  color: var(--text-secondary);
+  color: var(--ds-text-secondary);
   margin: 0 0 4px;
   line-height: 1.4;
 }
 .distortion-card .distortion-example {
   font-size: 12px;
   font-style: italic;
-  color: var(--text-muted);
+  color: var(--ds-text-muted);
 }
 .ba-schedule-grid {
   width: 100%;
@@ -1694,7 +1694,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
 }
 .ba-schedule-grid td {
   padding: 6px 8px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--ds-border);
   vertical-align: top;
 }
 .ba-schedule-grid input {
@@ -1703,25 +1703,25 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
   background: transparent;
   font-size: 13px;
   font-family: inherit;
-  color: var(--text);
+  color: var(--ds-text-primary);
   padding: 2px;
   box-sizing: border-box;
 }
-.ba-schedule-grid input:focus { outline: none; background: var(--accent-light); }
+.ba-schedule-grid input:focus { outline: none; background: var(--ds-primary-50); }
 .ba-schedule-grid select {
   width: 100%;
   border: none;
   background: transparent;
   font-size: 12px;
   font-family: inherit;
-  color: var(--text);
+  color: var(--ds-text-primary);
 }
 
 /* ===== DBT SKILLS REFERENCE ===== */
 .dbt-module {
   margin: 16px 0;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-lg);
   overflow: hidden;
 }
 .dbt-module-header {
@@ -1743,13 +1743,13 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
 .dbt-module-body {
   display: none;
   padding: 16px 18px;
-  background: var(--surface);
+  background: var(--ds-surface);
 }
 .dbt-module.open .dbt-module-body { display: block; }
 .dbt-skill {
-  background: var(--surface-alt);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  background: var(--ds-surface-sunken);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
   padding: 12px 14px;
   margin: 8px 0;
 }
@@ -1760,17 +1760,17 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
 }
 .dbt-skill p {
   font-size: 13px;
-  color: var(--text-secondary);
+  color: var(--ds-text-secondary);
   margin: 0 0 6px;
   line-height: 1.5;
 }
 .dbt-skill .dbt-example {
   font-size: 12px;
-  background: var(--surface);
-  border-left: 3px solid var(--border);
+  background: var(--ds-surface);
+  border-left: 3px solid var(--ds-border);
   padding: 6px 10px;
-  border-radius: 0 var(--radius) var(--radius) 0;
-  color: var(--text-secondary);
+  border-radius: 0 var(--ds-radius-md) var(--ds-radius-md) 0;
+  color: var(--ds-text-secondary);
   font-style: italic;
 }
 .dbt-acronym {
@@ -1784,13 +1784,13 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
   align-items: center;
   gap: 4px;
   padding: 4px 10px;
-  background: var(--surface-alt);
-  border: 1px solid var(--border);
+  background: var(--ds-surface-sunken);
+  border: 1px solid var(--ds-border);
   font-size: 13px;
   margin: 0 -1px -1px 0;
 }
-.dbt-acronym-letter:first-child { border-radius: var(--radius) 0 0 0; }
-.dbt-acronym-letter:last-child { border-radius: 0 0 var(--radius) 0; }
+.dbt-acronym-letter:first-child { border-radius: var(--ds-radius-md) 0 0 0; }
+.dbt-acronym-letter:last-child { border-radius: 0 0 var(--ds-radius-md) 0; }
 .dbt-acronym-letter strong {
   font-size: 15px;
   font-weight: 800;
@@ -1803,7 +1803,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
   background: #0891b2;
   color: white;
   border: none;
-  border-radius: var(--radius);
+  border-radius: var(--ds-radius-md);
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -1813,9 +1813,9 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
 
 /* ===== ACE SCORING TOOL ===== */
 .ace-tool {
-  background: var(--surface);
+  background: var(--ds-surface);
   border: 2px solid #dc2626;
-  border-radius: var(--radius-lg);
+  border-radius: var(--ds-radius-lg);
   padding: 20px;
   margin: 16px 0;
 }
@@ -1825,9 +1825,9 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
   gap: 12px;
   padding: 12px 14px;
   margin: 6px 0;
-  background: var(--surface-alt);
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
+  background: var(--ds-surface-sunken);
+  border-radius: var(--ds-radius-md);
+  border: 1px solid var(--ds-border);
   cursor: pointer;
   transition: all 0.15s;
   user-select: none;
@@ -1835,7 +1835,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
 .ace-question:hover { border-color: #dc2626; }
 .ace-question.selected {
   border-color: #dc2626;
-  background: var(--danger-light);
+  background: var(--ds-danger-50);
 }
 .ace-question input[type="checkbox"] {
   margin-top: 2px;
@@ -1862,9 +1862,9 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
   text-align: center;
   padding: 20px;
   margin: 16px 0;
-  border-radius: var(--radius-lg);
-  background: var(--surface-alt);
-  border: 2px solid var(--border);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-surface-sunken);
+  border: 2px solid var(--ds-border);
 }
 .ace-score-number {
   font-size: 48px;
@@ -1873,12 +1873,12 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
 }
 .ace-score-label {
   font-size: 14px;
-  color: var(--text-secondary);
+  color: var(--ds-text-secondary);
   margin-top: 4px;
 }
 .ace-interpretation {
   padding: 14px 16px;
-  border-radius: var(--radius);
+  border-radius: var(--ds-radius-md);
   margin: 12px 0;
   font-size: 13px;
   line-height: 1.6;
@@ -1886,9 +1886,9 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
 
 /* ===== CULTURAL COMPETENCY ===== */
 .cultural-card {
-  background: var(--surface-alt);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  background: var(--ds-surface-sunken);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
   padding: 14px 16px;
   margin: 10px 0;
 }
@@ -1909,25 +1909,25 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
 
 /* ===== INTAKE ASSESSMENT TEMPLATE ===== */
 .intake-section {
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
   margin: 12px 0;
   overflow: hidden;
 }
 .intake-section-header {
   padding: 12px 16px;
-  background: var(--surface-alt);
-  border-bottom: 1px solid var(--border);
+  background: var(--ds-surface-sunken);
+  border-bottom: 1px solid var(--ds-border);
   font-size: 15px;
   font-weight: 700;
-  color: var(--text);
+  color: var(--ds-text-primary);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
   user-select: none;
 }
-.intake-section-header:hover { background: var(--accent-light); }
+.intake-section-header:hover { background: var(--ds-primary-50); }
 .intake-section-body {
   padding: 16px;
   display: none;
@@ -1935,7 +1935,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
 .intake-section.open .intake-section-body { display: block; }
 .intake-section-header .intake-arrow {
   font-size: 12px;
-  color: var(--text-secondary);
+  color: var(--ds-text-secondary);
   transition: transform 0.2s;
 }
 .intake-section.open .intake-section-header .intake-arrow { transform: rotate(180deg); }
@@ -1946,7 +1946,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
   display: block;
   font-size: 12px;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: var(--ds-text-secondary);
   margin-bottom: 4px;
 }
 .intake-field textarea,
@@ -1954,12 +1954,12 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
 .intake-field select {
   width: 100%;
   padding: 8px 12px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
   font-size: 14px;
   font-family: inherit;
-  background: var(--surface);
-  color: var(--text);
+  background: var(--ds-surface);
+  color: var(--ds-text-primary);
   box-sizing: border-box;
 }
 .intake-field textarea { min-height: 60px; resize: vertical; }
@@ -1967,7 +1967,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
 .intake-field input:focus,
 .intake-field select:focus {
   outline: none;
-  border-color: var(--accent);
+  border-color: var(--ds-primary-600);
   box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
 }
 .intake-row {
@@ -1986,9 +1986,9 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
   align-items: center;
   gap: 4px;
   padding: 4px 10px;
-  background: var(--surface-alt);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  background: var(--ds-surface-sunken);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
@@ -1996,15 +1996,15 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
   text-transform: none;
   letter-spacing: 0;
 }
-.intake-checkbox-group label:hover { border-color: var(--accent); }
+.intake-checkbox-group label:hover { border-color: var(--ds-primary-600); }
 .intake-checkbox-group input[type="checkbox"]:checked + span,
 .intake-checkbox-group label:has(input:checked) {
-  background: var(--accent-light);
-  border-color: var(--accent);
-  color: var(--accent);
+  background: var(--ds-primary-50);
+  border-color: var(--ds-primary-600);
+  color: var(--ds-primary-600);
 }
 .intake-checkbox-group input[type="checkbox"] {
-  accent-color: var(--accent);
+  accent-color: var(--ds-primary-600);
 }
 .mse-grid {
   display: grid;
@@ -2013,9 +2013,9 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
   margin: 12px 0;
 }
 .mse-item {
-  background: var(--surface-alt);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  background: var(--ds-surface-sunken);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
   padding: 10px 12px;
 }
 .mse-item label {
@@ -2024,18 +2024,18 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.3px;
-  color: var(--text-secondary);
+  color: var(--ds-text-secondary);
   margin-bottom: 4px;
 }
 .mse-item select {
   width: 100%;
   padding: 6px 8px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
   font-size: 13px;
   font-family: inherit;
-  background: var(--surface);
-  color: var(--text);
+  background: var(--ds-surface);
+  color: var(--ds-text-primary);
 }
 .risk-indicator {
   display: inline-flex;
@@ -2046,10 +2046,10 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
   font-size: 11px;
   font-weight: 700;
 }
-.risk-indicator.none { background: var(--success-light); color: var(--success); }
+.risk-indicator.none { background: var(--ds-success-50); color: var(--ds-success-600); }
 .risk-indicator.low { background: #fef9c3; color: #a16207; }
-.risk-indicator.moderate { background: var(--warning-light); color: var(--warning); }
-.risk-indicator.high { background: var(--danger-light); color: var(--danger); }
+.risk-indicator.moderate { background: var(--ds-warning-50); color: var(--ds-warning-600); }
+.risk-indicator.high { background: var(--ds-danger-50); color: var(--ds-danger-600); }
 
 @media print {
   .worksheet-btn-row, .dbt-print-btn, .ace-tool button { display: none !important; }
@@ -2376,7 +2376,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
 
       <div class="crisis-tree-result" id="crisis-result-immediate-danger">
         <div class="crisis-tree-result-header">
-          <div class="crisis-tree-result-badge" style="background:var(--danger)">&#9888;</div>
+          <div class="crisis-tree-result-badge" style="background:var(--ds-danger-600)">&#9888;</div>
           <div>
             <h3>Immediate Danger</h3>
             <span class="result-severity critical">CRITICAL &mdash; Act Now</span>
@@ -2403,7 +2403,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
 
       <div class="crisis-tree-result" id="crisis-result-si-with-plan">
         <div class="crisis-tree-result-header">
-          <div class="crisis-tree-result-badge" style="background:var(--danger)">&#9888;</div>
+          <div class="crisis-tree-result-badge" style="background:var(--ds-danger-600)">&#9888;</div>
           <div>
             <h3>Suicidal Ideation with Plan/Means</h3>
             <span class="result-severity critical">CRITICAL &mdash; Immediate Intervention</span>
@@ -2460,7 +2460,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
 
       <div class="crisis-tree-result" id="crisis-result-homicidal-ideation">
         <div class="crisis-tree-result-header">
-          <div class="crisis-tree-result-badge" style="background:var(--danger)">&#9888;</div>
+          <div class="crisis-tree-result-badge" style="background:var(--ds-danger-600)">&#9888;</div>
           <div>
             <h3>Homicidal Ideation</h3>
             <span class="result-severity critical">CRITICAL &mdash; Duty to Warn Assessment</span>
@@ -2515,7 +2515,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
 
       <div class="crisis-tree-result" id="crisis-result-substance-overdose">
         <div class="crisis-tree-result-header">
-          <div class="crisis-tree-result-badge" style="background:var(--danger)">&#9888;</div>
+          <div class="crisis-tree-result-badge" style="background:var(--ds-danger-600)">&#9888;</div>
           <div>
             <h3>Substance Use Crisis / Overdose Risk</h3>
             <span class="result-severity critical">CRITICAL &mdash; Medical Emergency</span>
@@ -2596,7 +2596,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
 
       <div class="crisis-tree-result" id="crisis-result-domestic-violence">
         <div class="crisis-tree-result-header">
-          <div class="crisis-tree-result-badge" style="background:var(--warning)">&#9679;</div>
+          <div class="crisis-tree-result-badge" style="background:var(--ds-warning-600)">&#9679;</div>
           <div>
             <h3>Domestic Violence Disclosure</h3>
             <span class="result-severity moderate">MODERATE &mdash; Safety Planning + Resources</span>
@@ -2625,7 +2625,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
 
       <div class="crisis-tree-result" id="crisis-result-acute-distress">
         <div class="crisis-tree-result-header">
-          <div class="crisis-tree-result-badge" style="background:var(--accent)">&#9679;</div>
+          <div class="crisis-tree-result-badge" style="background:var(--ds-primary-600)">&#9679;</div>
           <div>
             <h3>Acute Distress (Not Crisis)</h3>
             <span class="result-severity standard">STANDARD &mdash; Clinical Support</span>
@@ -2965,7 +2965,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
       <!-- ============================================================ -->
       <section class="guide-category" id="cat-crisis">
         <div class="category-header">
-          <div class="category-badge" style="background:var(--danger)">!</div>
+          <div class="category-badge" style="background:var(--ds-danger-600)">!</div>
           <div>
             <h2>Crisis &amp; Safety</h2>
             <div class="category-desc">Emergency response, safety planning, mandated reporting, and domestic violence</div>
@@ -2975,7 +2975,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Guide 2: Crisis Services -->
         <div class="guide-card" id="guide-crisis" data-keywords="crisis emergency 988 rapid response mcrt suicide hospitalization iea involuntary">
           <div class="guide-card-header" onclick="toggleGuide(this)">
-            <h3><span class="guide-number" style="background:var(--danger)">1</span> How to Access Emergency/Crisis Services</h3>
+            <h3><span class="guide-number" style="background:var(--ds-danger-600)">1</span> How to Access Emergency/Crisis Services</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
@@ -3060,7 +3060,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Guide 20: Safety Plan -->
         <div class="guide-card" id="guide-safety-plan" data-keywords="safety plan suicide prevention stanley brown warning signs coping strategies means restriction">
           <div class="guide-card-header" onclick="toggleGuide(this)">
-            <h3><span class="guide-number" style="background:var(--danger)">2</span> How to Create a Safety Plan</h3>
+            <h3><span class="guide-number" style="background:var(--ds-danger-600)">2</span> How to Create a Safety Plan</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
@@ -3132,7 +3132,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Guide 8: DCYF Report -->
         <div class="guide-card" id="guide-dcyf" data-keywords="dcyf child abuse neglect mandated reporter reporting children youth families protective services">
           <div class="guide-card-header" onclick="toggleGuide(this)">
-            <h3><span class="guide-number" style="background:var(--danger)">3</span> How to File a DCYF Report (Child Abuse/Neglect)</h3>
+            <h3><span class="guide-number" style="background:var(--ds-danger-600)">3</span> How to File a DCYF Report (Child Abuse/Neglect)</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
@@ -3208,7 +3208,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Guide 12: DV Situation -->
         <div class="guide-card" id="guide-dv" data-keywords="domestic violence dv abuse safety planning protective order shelter bridges restraining order">
           <div class="guide-card-header" onclick="toggleGuide(this)">
-            <h3><span class="guide-number" style="background:var(--danger)">4</span> How to Help a Client in a Domestic Violence Situation</h3>
+            <h3><span class="guide-number" style="background:var(--ds-danger-600)">4</span> How to Help a Client in a Domestic Violence Situation</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
@@ -3292,7 +3292,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
       <!-- ============================================================ -->
       <section class="guide-category" id="cat-mh">
         <div class="category-header">
-          <div class="category-badge" style="background:var(--accent)">&#9829;</div>
+          <div class="category-badge" style="background:var(--ds-primary-600)">&#9829;</div>
           <div>
             <h2>Mental Health Services</h2>
             <div class="category-desc">Outpatient referrals and psychiatric evaluations</div>
@@ -3302,7 +3302,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Guide 1: Outpatient MH Referral -->
         <div class="guide-card" id="guide-outpatient" data-keywords="outpatient referral mental health therapy counseling gnmhc intake assessment psychiatrist therapist">
           <div class="guide-card-header" onclick="toggleGuide(this)">
-            <h3><span class="guide-number" style="background:var(--accent)">5</span> How to Refer a Client to Outpatient Mental Health Services</h3>
+            <h3><span class="guide-number" style="background:var(--ds-primary-600)">5</span> How to Refer a Client to Outpatient Mental Health Services</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
@@ -3384,7 +3384,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Guide 9: Psychiatric Evaluation -->
         <div class="guide-card" id="guide-psych-eval" data-keywords="psychiatric evaluation psychiatrist medication management psych eval telehealth emergency psychiatric">
           <div class="guide-card-header" onclick="toggleGuide(this)">
-            <h3><span class="guide-number" style="background:var(--accent)">6</span> How to Coordinate a Psychiatric Evaluation</h3>
+            <h3><span class="guide-number" style="background:var(--ds-primary-600)">6</span> How to Coordinate a Psychiatric Evaluation</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
@@ -3445,7 +3445,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
       <!-- ============================================================ -->
       <section class="guide-category" id="cat-sud">
         <div class="category-header">
-          <div class="category-badge" style="background:var(--purple)">&#9878;</div>
+          <div class="category-badge" style="background:var(--ds-info-600)">&#9878;</div>
           <div>
             <h2>Substance Use</h2>
             <div class="category-desc">Screening, treatment access, and levels of care</div>
@@ -3455,7 +3455,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Guide 3: SUD Treatment -->
         <div class="guide-card" id="guide-sud" data-keywords="substance use treatment detox residential iop outpatient mat suboxone methadone doorway keystone hall recovery sober living alcohol drug">
           <div class="guide-card-header" onclick="toggleGuide(this)">
-            <h3><span class="guide-number" style="background:var(--purple)">7</span> How to Connect a Client with Substance Use Treatment</h3>
+            <h3><span class="guide-number" style="background:var(--ds-info-600)">7</span> How to Connect a Client with Substance Use Treatment</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
@@ -3546,7 +3546,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
       <!-- ============================================================ -->
       <section class="guide-category" id="cat-housing">
         <div class="category-header">
-          <div class="category-badge" style="background:var(--warning)">&#9750;</div>
+          <div class="category-badge" style="background:var(--ds-warning-600)">&#9750;</div>
           <div>
             <h2>Housing &amp; Basic Needs</h2>
             <div class="category-desc">Shelter, housing, food resources, and transportation</div>
@@ -3556,7 +3556,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Guide 4: Housing -->
         <div class="guide-card" id="guide-housing" data-keywords="housing homeless shelter section 8 voucher rapid rehousing harbor homes coordinated entry transitional supportive">
           <div class="guide-card-header" onclick="toggleGuide(this)">
-            <h3><span class="guide-number" style="background:var(--warning)">8</span> How to Help a Client Find Housing</h3>
+            <h3><span class="guide-number" style="background:var(--ds-warning-600)">8</span> How to Help a Client Find Housing</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
@@ -3633,7 +3633,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Guide 5: Food Resources -->
         <div class="guide-card" id="guide-food" data-keywords="food snap ebt food stamps pantry meals wic nutrition hunger soup kitchen">
           <div class="guide-card-header" onclick="toggleGuide(this)">
-            <h3><span class="guide-number" style="background:var(--warning)">9</span> How to Connect a Client with Food Resources</h3>
+            <h3><span class="guide-number" style="background:var(--ds-warning-600)">9</span> How to Connect a Client with Food Resources</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
@@ -3695,7 +3695,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Guide 11: Transportation -->
         <div class="guide-card" id="guide-transport" data-keywords="transportation bus transit nts paratransit medicaid rides ada volunteer driver">
           <div class="guide-card-header" onclick="toggleGuide(this)">
-            <h3><span class="guide-number" style="background:var(--warning)">10</span> How to Set Up Transportation for a Client</h3>
+            <h3><span class="guide-number" style="background:var(--ds-warning-600)">10</span> How to Set Up Transportation for a Client</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
@@ -3769,7 +3769,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
       <!-- ============================================================ -->
       <section class="guide-category" id="cat-benefits">
         <div class="category-header">
-          <div class="category-badge" style="background:var(--teal)">$</div>
+          <div class="category-badge" style="background:var(--ds-primary-600)">$</div>
           <div>
             <h2>Benefits &amp; Insurance</h2>
             <div class="category-desc">Health insurance, disability benefits, and Medicaid navigation</div>
@@ -3779,7 +3779,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Guide 7: Health Insurance -->
         <div class="guide-card" id="guide-insurance" data-keywords="health insurance medicaid granite advantage marketplace uninsured enrollment mcO financial assistance free care">
           <div class="guide-card-header" onclick="toggleGuide(this)">
-            <h3><span class="guide-number" style="background:var(--teal)">11</span> How to Connect a Client with Health Insurance</h3>
+            <h3><span class="guide-number" style="background:var(--ds-primary-600)">11</span> How to Connect a Client with Health Insurance</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
@@ -3848,7 +3848,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Guide 6: SSI/SSDI -->
         <div class="guide-card" id="guide-disability" data-keywords="ssi ssdi disability social security application appeal functional capacity assessment supplemental income">
           <div class="guide-card-header" onclick="toggleGuide(this)">
-            <h3><span class="guide-number" style="background:var(--teal)">12</span> How to Help a Client Apply for Disability (SSI/SSDI)</h3>
+            <h3><span class="guide-number" style="background:var(--ds-primary-600)">12</span> How to Help a Client Apply for Disability (SSI/SSDI)</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
@@ -3927,7 +3927,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Guide 15: NH Medicaid System -->
         <div class="guide-card" id="guide-medicaid" data-keywords="medicaid managed care mco prior authorization appeal denied claim provider enrollment covered services">
           <div class="guide-card-header" onclick="toggleGuide(this)">
-            <h3><span class="guide-number" style="background:var(--teal)">13</span> How to Navigate the NH Medicaid System</h3>
+            <h3><span class="guide-number" style="background:var(--ds-primary-600)">13</span> How to Navigate the NH Medicaid System</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
@@ -4229,7 +4229,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
       <!-- ============================================================ -->
       <section class="guide-category" id="cat-clinical">
         <div class="category-header">
-          <div class="category-badge" style="background:var(--success)">&#9998;</div>
+          <div class="category-badge" style="background:var(--ds-success-600)">&#9998;</div>
           <div>
             <h2>Clinical Documentation</h2>
             <div class="category-desc">ANSA, CANS, ISP, session notes, and clinical processes</div>
@@ -4239,7 +4239,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Guide 16: ANSA -->
         <div class="guide-card" id="guide-ansa" data-keywords="ansa assessment adult needs strengths rating 0 1 2 3 domain scoring treatment planning functional">
           <div class="guide-card-header" onclick="toggleGuide(this)">
-            <h3><span class="guide-number" style="background:var(--success)">17</span> How to Complete an ANSA Assessment</h3>
+            <h3><span class="guide-number" style="background:var(--ds-success-600)">17</span> How to Complete an ANSA Assessment</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
@@ -4321,7 +4321,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Guide 17: CANS -->
         <div class="guide-card" id="guide-cans" data-keywords="cans child adolescent needs strengths assessment youth children school caregiver pediatric developmental">
           <div class="guide-card-header" onclick="toggleGuide(this)">
-            <h3><span class="guide-number" style="background:var(--success)">18</span> How to Complete a CANS Assessment</h3>
+            <h3><span class="guide-number" style="background:var(--ds-success-600)">18</span> How to Complete a CANS Assessment</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
@@ -4375,7 +4375,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Guide 18: ISP -->
         <div class="guide-card" id="guide-isp" data-keywords="isp individual service plan treatment plan goals objectives smart person centered planning interventions review">
           <div class="guide-card-header" onclick="toggleGuide(this)">
-            <h3><span class="guide-number" style="background:var(--success)">19</span> How to Write an Individual Service Plan (ISP)</h3>
+            <h3><span class="guide-number" style="background:var(--ds-success-600)">19</span> How to Write an Individual Service Plan (ISP)</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
@@ -4446,7 +4446,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Guide 19: Session Documentation -->
         <div class="guide-card" id="guide-documentation" data-keywords="documentation session notes soap progress note mse mental status exam clinical note intervention risk assessment">
           <div class="guide-card-header" onclick="toggleGuide(this)">
-            <h3><span class="guide-number" style="background:var(--success)">20</span> How to Document Clinical Sessions</h3>
+            <h3><span class="guide-number" style="background:var(--ds-success-600)">20</span> How to Document Clinical Sessions</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
@@ -5947,8 +5947,8 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
             <p>As a mandated reporter, you are required to identify yourself. However, your identity is kept <strong>confidential</strong> and is not disclosed to the alleged perpetrator.</p>
 
             <h4 class="guide-subsection">Mandated Reporting Decision Flowchart</h4>
-            <div style="background:var(--surface-alt);border:2px solid var(--border);border-radius:12px;padding:24px;margin:16px 0;">
-              <div style="text-align:center;font-weight:700;font-size:1.1em;margin-bottom:20px;color:var(--text);">Mandated Reporting Decision Flowchart</div>
+            <div style="background:var(--ds-surface-sunken);border:2px solid var(--ds-border);border-radius:12px;padding:24px;margin:16px 0;">
+              <div style="text-align:center;font-weight:700;font-size:1.1em;margin-bottom:20px;color:var(--ds-text-primary);">Mandated Reporting Decision Flowchart</div>
 
               <!-- Start Node -->
               <div style="background:#b91c1c;color:#fff;padding:14px 18px;border-radius:10px;text-align:center;font-weight:600;max-width:520px;margin:0 auto;">
@@ -5956,54 +5956,54 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
               </div>
               <div style="display:flex;justify-content:center;gap:60px;margin:8px 0;">
                 <div style="text-align:center;">
-                  <div style="font-size:1.5em;color:var(--success);font-weight:700;">&darr;</div>
-                  <div style="font-weight:700;color:var(--success);font-size:0.9em;">YES</div>
+                  <div style="font-size:1.5em;color:var(--ds-success-600);font-weight:700;">&darr;</div>
+                  <div style="font-weight:700;color:var(--ds-success-600);font-size:0.9em;">YES</div>
                 </div>
                 <div style="text-align:center;">
-                  <div style="font-size:1.5em;color:var(--danger);font-weight:700;">&darr;</div>
-                  <div style="font-weight:700;color:var(--danger);font-size:0.9em;">NO</div>
+                  <div style="font-size:1.5em;color:var(--ds-danger-600);font-weight:700;">&darr;</div>
+                  <div style="font-weight:700;color:var(--ds-danger-600);font-size:0.9em;">NO</div>
                 </div>
               </div>
 
               <div style="display:flex;gap:24px;flex-wrap:wrap;justify-content:center;">
                 <!-- YES Branch -->
                 <div style="flex:1;min-width:260px;max-width:340px;">
-                  <div style="background:var(--accent);color:#fff;padding:12px 16px;border-radius:8px;text-align:center;font-weight:600;">
+                  <div style="background:var(--ds-primary-600);color:#fff;padding:12px 16px;border-radius:8px;text-align:center;font-weight:600;">
                     Is the victim a child (under 18)?
                   </div>
                   <div style="display:flex;justify-content:center;gap:40px;margin:8px 0;">
                     <div style="text-align:center;">
-                      <div style="font-size:1.3em;color:var(--success);font-weight:700;">&darr;</div>
-                      <div style="font-weight:700;color:var(--success);font-size:0.85em;">YES</div>
+                      <div style="font-size:1.3em;color:var(--ds-success-600);font-weight:700;">&darr;</div>
+                      <div style="font-weight:700;color:var(--ds-success-600);font-size:0.85em;">YES</div>
                     </div>
                     <div style="text-align:center;">
-                      <div style="font-size:1.3em;color:var(--danger);font-weight:700;">&darr;</div>
-                      <div style="font-weight:700;color:var(--danger);font-size:0.85em;">NO</div>
+                      <div style="font-size:1.3em;color:var(--ds-danger-600);font-weight:700;">&darr;</div>
+                      <div style="font-weight:700;color:var(--ds-danger-600);font-size:0.85em;">NO</div>
                     </div>
                   </div>
                   <div style="display:flex;gap:12px;">
-                    <div style="flex:1;background:var(--success);color:#fff;padding:10px 12px;border-radius:8px;text-align:center;font-weight:600;font-size:0.9em;">
+                    <div style="flex:1;background:var(--ds-success-600);color:#fff;padding:10px 12px;border-radius:8px;text-align:center;font-weight:600;font-size:0.9em;">
                       Call DCYF:<br>1-800-894-5533<br><span style="font-weight:400;font-size:0.85em;">File written report within 48 hrs</span>
                     </div>
                     <div style="flex:1;">
-                      <div style="background:var(--warning);color:#000;padding:10px 12px;border-radius:8px;text-align:center;font-weight:600;font-size:0.9em;">
+                      <div style="background:var(--ds-warning-600);color:#000;padding:10px 12px;border-radius:8px;text-align:center;font-weight:600;font-size:0.9em;">
                         Is the victim elderly (60+) or an adult with a disability?
                       </div>
                       <div style="display:flex;justify-content:center;gap:20px;margin:6px 0;">
                         <div style="text-align:center;">
-                          <div style="font-size:1.1em;color:var(--success);font-weight:700;">&darr;</div>
-                          <div style="font-weight:700;color:var(--success);font-size:0.8em;">YES</div>
+                          <div style="font-size:1.1em;color:var(--ds-success-600);font-weight:700;">&darr;</div>
+                          <div style="font-weight:700;color:var(--ds-success-600);font-size:0.8em;">YES</div>
                         </div>
                         <div style="text-align:center;">
-                          <div style="font-size:1.1em;color:var(--danger);font-weight:700;">&darr;</div>
-                          <div style="font-weight:700;color:var(--danger);font-size:0.8em;">NO</div>
+                          <div style="font-size:1.1em;color:var(--ds-danger-600);font-weight:700;">&darr;</div>
+                          <div style="font-weight:700;color:var(--ds-danger-600);font-size:0.8em;">NO</div>
                         </div>
                       </div>
                       <div style="display:flex;gap:8px;">
-                        <div style="flex:1;background:var(--success);color:#fff;padding:8px 10px;border-radius:8px;text-align:center;font-weight:600;font-size:0.8em;">
+                        <div style="flex:1;background:var(--ds-success-600);color:#fff;padding:8px 10px;border-radius:8px;text-align:center;font-weight:600;font-size:0.8em;">
                           Call BEAS:<br>1-800-949-0470<br><span style="font-weight:400;font-size:0.85em;">After hrs: State Police 1-800-852-3345</span>
                         </div>
-                        <div style="flex:1;background:var(--accent);color:#fff;padding:8px 10px;border-radius:8px;text-align:center;font-weight:600;font-size:0.8em;">
+                        <div style="flex:1;background:var(--ds-primary-600);color:#fff;padding:8px 10px;border-radius:8px;text-align:center;font-weight:600;font-size:0.8em;">
                           Consult supervisor.<br><span style="font-weight:400;font-size:0.85em;">Consider other reporting obligations (e.g., law enforcement for DV).</span>
                         </div>
                       </div>
@@ -6013,24 +6013,24 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
 
                 <!-- NO Branch -->
                 <div style="flex:1;min-width:260px;max-width:340px;">
-                  <div style="background:var(--warning);color:#000;padding:12px 16px;border-radius:8px;text-align:center;font-weight:600;">
+                  <div style="background:var(--ds-warning-600);color:#000;padding:12px 16px;border-radius:8px;text-align:center;font-weight:600;">
                     Do you have reasonable suspicion based on behavioral indicators, third-party disclosures, or other information?
                   </div>
                   <div style="display:flex;justify-content:center;gap:40px;margin:8px 0;">
                     <div style="text-align:center;">
-                      <div style="font-size:1.3em;color:var(--success);font-weight:700;">&darr;</div>
-                      <div style="font-weight:700;color:var(--success);font-size:0.85em;">YES</div>
+                      <div style="font-size:1.3em;color:var(--ds-success-600);font-weight:700;">&darr;</div>
+                      <div style="font-weight:700;color:var(--ds-success-600);font-size:0.85em;">YES</div>
                     </div>
                     <div style="text-align:center;">
-                      <div style="font-size:1.3em;color:var(--danger);font-weight:700;">&darr;</div>
-                      <div style="font-weight:700;color:var(--danger);font-size:0.85em;">NO</div>
+                      <div style="font-size:1.3em;color:var(--ds-danger-600);font-weight:700;">&darr;</div>
+                      <div style="font-weight:700;color:var(--ds-danger-600);font-size:0.85em;">NO</div>
                     </div>
                   </div>
                   <div style="display:flex;gap:12px;">
-                    <div style="flex:1;background:var(--accent);color:#fff;padding:10px 12px;border-radius:8px;text-align:center;font-weight:600;font-size:0.9em;">
+                    <div style="flex:1;background:var(--ds-primary-600);color:#fff;padding:10px 12px;border-radius:8px;text-align:center;font-weight:600;font-size:0.9em;">
                       Follow the YES path above &uarr;<br><span style="font-weight:400;font-size:0.85em;">Determine if victim is child or adult and report accordingly.</span>
                     </div>
-                    <div style="flex:1;background:var(--surface-alt);border:2px solid var(--border);padding:10px 12px;border-radius:8px;text-align:center;font-weight:600;font-size:0.9em;color:var(--text);">
+                    <div style="flex:1;background:var(--ds-surface-sunken);border:2px solid var(--ds-border);padding:10px 12px;border-radius:8px;text-align:center;font-weight:600;font-size:0.9em;color:var(--ds-text-primary);">
                       Continue monitoring.<br><span style="font-weight:400;font-size:0.85em;">Document any concerns. Consult your supervisor if uncertain.</span>
                     </div>
                   </div>
@@ -6494,17 +6494,17 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
               </thead>
               <tbody>
                 <tr>
-                  <td><strong style="color:var(--accent)">Low</strong></td>
+                  <td><strong style="color:var(--ds-primary-600)">Low</strong></td>
                   <td>Passive ideation only (wishes they were dead), no plan, no intent, no recent attempt, protective factors present, willing to engage in safety planning</td>
                   <td>Develop or review safety plan; address modifiable risk factors; schedule follow-up within 1 week; document assessment and rationale</td>
                 </tr>
                 <tr>
-                  <td><strong style="color:var(--warning)">Moderate</strong></td>
+                  <td><strong style="color:var(--ds-warning-600)">Moderate</strong></td>
                   <td>Active ideation with some method consideration, no specific plan or intent, some risk factors present, ambivalence about living, prior attempt history possible</td>
                   <td>Develop or update safety plan with specific means restriction; increase session frequency; consider involving family/supports; consult with supervisor; schedule follow-up within 48&ndash;72 hours; document assessment, plan, and consultation</td>
                 </tr>
                 <tr>
-                  <td><strong style="color:var(--danger)">High / Imminent</strong></td>
+                  <td><strong style="color:var(--ds-danger-600)">High / Imminent</strong></td>
                   <td>Active ideation with plan and intent, access to means, recent preparations (giving away possessions, writing notes), unable or unwilling to safety plan, severe hopelessness, command hallucinations to self-harm</td>
                   <td>Do not leave client alone; contact supervisor immediately; initiate emergency protocol (911, ER referral, or IEA as appropriate); means restriction (remove access now if possible); if discharged, follow up within 24 hours; comprehensive documentation of assessment, actions, and rationale</td>
                 </tr>
@@ -6632,17 +6632,17 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
                     </thead>
                     <tbody>
                       <tr>
-                        <td><strong style="color:var(--danger)">Emergency Room</strong></td>
+                        <td><strong style="color:var(--ds-danger-600)">Emergency Room</strong></td>
                         <td>Imminent risk, medical needs, client unable to safety plan, IEA criteria met, psychosis requiring medication stabilization</td>
                         <td>Arrange transport (see Step 7). Call ahead to the ER to give report. Send clinical summary with the client if possible.</td>
                       </tr>
                       <tr>
-                        <td><strong style="color:var(--warning)">Crisis Stabilization</strong></td>
+                        <td><strong style="color:var(--ds-warning-600)">Crisis Stabilization</strong></td>
                         <td>High risk but not imminent, client cooperative, no medical emergency, voluntary admission to crisis stabilization unit</td>
                         <td>Contact NH Rapid Response at 1-833-710-6477 to arrange crisis stabilization placement. Stay with the client until transport/placement is arranged.</td>
                       </tr>
                       <tr>
-                        <td><strong style="color:var(--accent)">Safety Plan + Discharge</strong></td>
+                        <td><strong style="color:var(--ds-primary-600)">Safety Plan + Discharge</strong></td>
                         <td>Risk reduced through de-escalation, client cooperative and can safety plan, protective factors present, supports available, client willing to restrict means</td>
                         <td>Complete a written safety plan with the client. Conduct means restriction counseling. Contact a support person. Schedule follow-up within 24&ndash;48 hours. Provide crisis numbers.</td>
                       </tr>
@@ -6696,19 +6696,19 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
             </div>
 
             <h4 class="guide-subsection">Printable Quick-Reference Card</h4>
-            <div style="background:var(--surface-alt);border:2px dashed var(--border);border-radius:var(--radius-lg);padding:20px;margin:12px 0;font-size:13px;line-height:1.6">
+            <div style="background:var(--ds-surface-sunken);border:2px dashed var(--ds-border);border-radius:var(--ds-radius-lg);padding:20px;margin:12px 0;font-size:13px;line-height:1.6">
               <div style="text-align:center;margin-bottom:12px">
-                <strong style="font-size:16px;color:var(--danger)">PSYCHIATRIC EMERGENCY QUICK REFERENCE</strong><br>
-                <span style="font-size:11px;color:var(--text-secondary)">Print this card and keep it accessible at all times</span>
+                <strong style="font-size:16px;color:var(--ds-danger-600)">PSYCHIATRIC EMERGENCY QUICK REFERENCE</strong><br>
+                <span style="font-size:11px;color:var(--ds-text-secondary)">Print this card and keep it accessible at all times</span>
               </div>
               <table class="decision-table" style="margin:0">
                 <tbody>
-                  <tr><td style="width:30%;font-weight:700;color:var(--danger)">1. SAFE?</td><td>Weapons? Elopement risk? Medical emergency? &rarr; If YES to any, call 911</td></tr>
-                  <tr><td style="font-weight:700;color:var(--danger)">2. 911?</td><td>Weapon, injury, overdose, fled and dangerous &rarr; Call 911, request CIT officer</td></tr>
-                  <tr><td style="font-weight:700;color:var(--warning)">3. DE-ESCALATE</td><td>Empathy, space, nonverbals, feelings first, silence, limits, choices, debrief</td></tr>
-                  <tr><td style="font-weight:700;color:var(--warning)">4. SUPERVISOR</td><td>Notify immediately. Do not manage alone. If unavailable: GNMHC (603) 889-6147</td></tr>
-                  <tr><td style="font-weight:700;color:var(--accent)">5. DISPOSITION</td><td>ER (imminent) | Crisis stabilization (high, voluntary) | Safety plan + discharge (reduced)</td></tr>
-                  <tr><td style="font-weight:700;color:var(--accent)">6. NUMBERS</td><td>911 | 988 | NH Rapid Response 1-833-710-6477 | GNMHC (603) 889-6147</td></tr>
+                  <tr><td style="width:30%;font-weight:700;color:var(--ds-danger-600)">1. SAFE?</td><td>Weapons? Elopement risk? Medical emergency? &rarr; If YES to any, call 911</td></tr>
+                  <tr><td style="font-weight:700;color:var(--ds-danger-600)">2. 911?</td><td>Weapon, injury, overdose, fled and dangerous &rarr; Call 911, request CIT officer</td></tr>
+                  <tr><td style="font-weight:700;color:var(--ds-warning-600)">3. DE-ESCALATE</td><td>Empathy, space, nonverbals, feelings first, silence, limits, choices, debrief</td></tr>
+                  <tr><td style="font-weight:700;color:var(--ds-warning-600)">4. SUPERVISOR</td><td>Notify immediately. Do not manage alone. If unavailable: GNMHC (603) 889-6147</td></tr>
+                  <tr><td style="font-weight:700;color:var(--ds-primary-600)">5. DISPOSITION</td><td>ER (imminent) | Crisis stabilization (high, voluntary) | Safety plan + discharge (reduced)</td></tr>
+                  <tr><td style="font-weight:700;color:var(--ds-primary-600)">6. NUMBERS</td><td>911 | 988 | NH Rapid Response 1-833-710-6477 | GNMHC (603) 889-6147</td></tr>
                   <tr><td style="font-weight:700">7. TRANSPORT</td><td>Police (IEA) | Ambulance (medical) | Family (voluntary only) | MCRT</td></tr>
                   <tr><td style="font-weight:700">8. DOCUMENT</td><td>What happened, what you assessed, what you did, who you called, disposition, rationale</td></tr>
                   <tr><td style="font-weight:700">9. FOLLOW UP</td><td>Contact within 24 hours. Document.</td></tr>
@@ -6860,28 +6860,28 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
             <p>The following scenarios illustrate when the duty to warn does and does not apply. These are composite clinical examples, not actual cases.</p>
 
             <h4 class="guide-sub-subsection">Scenario 1: Duty Applies</h4>
-            <div style="background:var(--danger-light);padding:14px 16px;border-radius:var(--radius);border-left:3px solid var(--danger);margin:8px 0;font-size:13px;line-height:1.6">
+            <div style="background:var(--ds-danger-50);padding:14px 16px;border-radius:var(--ds-radius-md);border-left:3px solid var(--ds-danger-600);margin:8px 0;font-size:13px;line-height:1.6">
               <strong>Situation:</strong> During a session, your client states: &ldquo;I bought a gun last week. I&rsquo;m going to my ex-wife&rsquo;s house on Friday and I&rsquo;m going to shoot her. She ruined my life.&rdquo; The client has a history of domestic violence and recently violated a protective order.<br><br>
               <strong>Analysis:</strong> All three conditions are met &mdash; specific threat of physical violence, credible (means, history, plan with a date), identifiable victim (ex-wife). <strong>Duty is triggered.</strong><br><br>
               <strong>Action:</strong> Consult supervisor immediately. Warn the ex-wife. Notify law enforcement. Consider IEA if the client meets criteria. Document everything.
             </div>
 
             <h4 class="guide-sub-subsection">Scenario 2: Duty Likely Applies</h4>
-            <div style="background:var(--warning-light);padding:14px 16px;border-radius:var(--radius);border-left:3px solid var(--warning);margin:8px 0;font-size:13px;line-height:1.6">
+            <div style="background:var(--ds-warning-50);padding:14px 16px;border-radius:var(--ds-radius-md);border-left:3px solid var(--ds-warning-600);margin:8px 0;font-size:13px;line-height:1.6">
               <strong>Situation:</strong> Your client, who has a history of assaultive behavior and is currently off his psychiatric medications, says: &ldquo;If my neighbor doesn&rsquo;t stop playing that music, I&rsquo;m going to go over there and beat him until he can&rsquo;t walk.&rdquo; He identifies the neighbor by name and apartment number.<br><br>
               <strong>Analysis:</strong> Specific threat of physical violence against an identifiable person. Credibility factors: history of assaultive behavior, off medications, escalating agitation. Consult with supervisor to assess credibility. <strong>Duty likely applies.</strong><br><br>
               <strong>Action:</strong> Consult supervisor. If determined credible, warn the neighbor and/or notify police. Pursue medication reinstatement. Increase session frequency. Document assessment and actions.
             </div>
 
             <h4 class="guide-sub-subsection">Scenario 3: Duty Does NOT Apply</h4>
-            <div style="background:var(--accent-light);padding:14px 16px;border-radius:var(--radius);border-left:3px solid var(--accent);margin:8px 0;font-size:13px;line-height:1.6">
+            <div style="background:var(--ds-primary-50);padding:14px 16px;border-radius:var(--ds-radius-md);border-left:3px solid var(--ds-primary-600);margin:8px 0;font-size:13px;line-height:1.6">
               <strong>Situation:</strong> During group therapy, a client vents: &ldquo;My boss is such a jerk. Someday I&rsquo;m going to lose it on him.&rdquo; The client has no history of violence, laughs after saying it, and when asked to clarify, says: &ldquo;I don&rsquo;t mean it literally. I just mean I&rsquo;m frustrated.&rdquo;<br><br>
               <strong>Analysis:</strong> This is a general expression of frustration, not a credible threat of physical violence. The client clarified when asked. No history of violence. <strong>Duty does NOT apply.</strong><br><br>
               <strong>Action:</strong> Explore the frustration therapeutically. Document the statement, the follow-up clarification, and your clinical assessment that this was venting rather than a threat. No warning or notification required.
             </div>
 
             <h4 class="guide-sub-subsection">Scenario 4: Requires Clinical Judgment</h4>
-            <div style="background:var(--surface-alt);padding:14px 16px;border-radius:var(--radius);border-left:3px solid var(--border);margin:8px 0;font-size:13px;line-height:1.6">
+            <div style="background:var(--ds-surface-sunken);padding:14px 16px;border-radius:var(--ds-radius-md);border-left:3px solid var(--ds-border);margin:8px 0;font-size:13px;line-height:1.6">
               <strong>Situation:</strong> Your client, who was recently served with a custody modification petition, says in session: &ldquo;If she takes my kids, she&rsquo;ll regret it. She has no idea what I&rsquo;m capable of.&rdquo; When you ask what he means, he says: &ldquo;I&rsquo;m just saying she better watch out.&rdquo; He does not clarify further and becomes guarded.<br><br>
               <strong>Analysis:</strong> The threat is ambiguous. There is a potentially identifiable victim (the ex-partner). Credibility is uncertain &mdash; the language is vague but concerning, and the refusal to clarify raises the concern level. This is a gray area that requires clinical judgment and immediate supervisor consultation.<br><br>
               <strong>Action:</strong> Consult supervisor immediately. Explore further with the client if possible. Assess risk factors (history of violence, access to weapons, substance use, escalation patterns). Document your assessment, consultation, and the basis for your decision whether or not to warn. Increase session frequency and monitor closely. You may decide to warn, to monitor, or to take other clinical action &mdash; whatever you decide, document the reasoning.
@@ -7438,7 +7438,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
 
             <div class="worksheet-container" id="baWorksheet">
               <h4>Weekly Activity Schedule</h4>
-              <p style="font-size:13px;color:var(--text-secondary);margin:0 0 12px">Plan one activity per day. Rate each activity for Mastery (M: 0-10, how much accomplishment?) and Pleasure (P: 0-10, how much enjoyment?).</p>
+              <p style="font-size:13px;color:var(--ds-text-secondary);margin:0 0 12px">Plan one activity per day. Rate each activity for Mastery (M: 0-10, how much accomplishment?) and Pleasure (P: 0-10, how much enjoyment?).</p>
               <table class="ba-schedule-grid">
                 <thead>
                   <tr><th>Day</th><th>Planned Activity</th><th>Time</th><th>M (0-10)</th><th>P (0-10)</th><th>Completed?</th></tr>
@@ -8172,7 +8172,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
 
             <h4 class="guide-subsection">Interactive ACE Scoring Tool</h4>
             <div class="ace-tool" id="aceToolContainer">
-              <p style="font-size:13px;color:var(--text-secondary);margin:0 0 12px"><strong>Instructions:</strong> For each question, check &ldquo;Yes&rdquo; if the experience occurred before age 18. Each &ldquo;Yes&rdquo; = 1 point.</p>
+              <p style="font-size:13px;color:var(--ds-text-secondary);margin:0 0 12px"><strong>Instructions:</strong> For each question, check &ldquo;Yes&rdquo; if the experience occurred before age 18. Each &ldquo;Yes&rdquo; = 1 point.</p>
 
               <div class="ace-question" onclick="this.querySelector('input').click()">
                 <input type="checkbox" class="ace-check" onchange="updateAceScore()">
@@ -8255,7 +8255,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
               </div>
 
               <div class="ace-score-display" id="aceScoreDisplay">
-                <div class="ace-score-number" id="aceScoreNumber" style="color:var(--success)">0</div>
+                <div class="ace-score-number" id="aceScoreNumber" style="color:var(--ds-success-600)">0</div>
                 <div class="ace-score-label">ACE Score (out of 10)</div>
               </div>
 
@@ -8620,7 +8620,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
                   </div>
 
                   <h4 class="guide-sub-subsection">CAGE Screening</h4>
-                  <p style="font-size:13px;color:var(--text-secondary)">2+ &ldquo;Yes&rdquo; answers suggest further assessment is warranted.</p>
+                  <p style="font-size:13px;color:var(--ds-text-secondary)">2+ &ldquo;Yes&rdquo; answers suggest further assessment is warranted.</p>
                   <div class="intake-checkbox-group" style="flex-direction:column;gap:6px">
                     <label style="display:flex;align-items:flex-start;gap:8px;padding:8px 12px">
                       <input type="checkbox" class="cage-check" onchange="updateCageScore()">
@@ -8639,7 +8639,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
                       <span><strong>E</strong> &mdash; Have you ever had a drink/used first thing in the morning as an <strong>Eye-opener</strong>?</span>
                     </label>
                   </div>
-                  <div id="cageResult" style="font-size:13px;font-weight:600;margin-top:8px;color:var(--text-secondary)">CAGE Score: 0/4</div>
+                  <div id="cageResult" style="font-size:13px;font-weight:600;margin-top:8px;color:var(--ds-text-secondary)">CAGE Score: 0/4</div>
                 </div>
               </div>
 
@@ -8924,7 +8924,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
                     </select>
                   </div>
 
-                  <div id="overallRiskDisplay" style="margin-top:12px;padding:10px 14px;background:var(--surface-alt);border-radius:var(--radius);font-size:14px;font-weight:600">
+                  <div id="overallRiskDisplay" style="margin-top:12px;padding:10px 14px;background:var(--ds-surface-sunken);border-radius:var(--ds-radius-md);font-size:14px;font-weight:600">
                     Overall Risk Level: <span id="overallRiskBadge" class="risk-indicator none">Not Assessed</span>
                   </div>
                 </div>
@@ -10789,7 +10789,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
       <!-- ============================================================ -->
       <section class="guide-category" id="guide-oncall-reference" data-category="cat-oncall">
         <div class="category-header">
-          <div class="category-badge" style="background:var(--danger)">&#128222;</div>
+          <div class="category-badge" style="background:var(--ds-danger-600)">&#128222;</div>
           <div>
             <h2>On-Call Reference Guide</h2>
             <div class="category-desc">Comprehensive reference for after-hours on-call clinicians</div>
@@ -10799,7 +10799,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Card 1: On-Call Responsibilities & Scope -->
         <div class="guide-card" id="guide-oncall-responsibilities">
           <div class="guide-card-header" onclick="this.parentElement.classList.toggle('open')">
-            <h3><span class="guide-number" style="background:var(--danger)">1</span> On-Call Responsibilities &amp; Scope</h3>
+            <h3><span class="guide-number" style="background:var(--ds-danger-600)">1</span> On-Call Responsibilities &amp; Scope</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
@@ -10836,7 +10836,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Card 2: Decision Tree - Client Reporting Suicidal Ideation -->
         <div class="guide-card" id="guide-oncall-si">
           <div class="guide-card-header" onclick="this.parentElement.classList.toggle('open')">
-            <h3><span class="guide-number" style="background:var(--danger)">2</span> Decision Tree: Client Reporting Suicidal Ideation</h3>
+            <h3><span class="guide-number" style="background:var(--ds-danger-600)">2</span> Decision Tree: Client Reporting Suicidal Ideation</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
@@ -10890,7 +10890,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Card 3: Decision Tree - Client in Crisis (Not Suicidal) -->
         <div class="guide-card" id="guide-oncall-crisis-nonsi">
           <div class="guide-card-header" onclick="this.parentElement.classList.toggle('open')">
-            <h3><span class="guide-number" style="background:var(--danger)">3</span> Decision Tree: Client in Crisis (Not Suicidal)</h3>
+            <h3><span class="guide-number" style="background:var(--ds-danger-600)">3</span> Decision Tree: Client in Crisis (Not Suicidal)</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
@@ -10936,7 +10936,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Card 4: Decision Tree - Family Member Calling About Client -->
         <div class="guide-card" id="guide-oncall-family">
           <div class="guide-card-header" onclick="this.parentElement.classList.toggle('open')">
-            <h3><span class="guide-number" style="background:var(--danger)">4</span> Decision Tree: Family Member Calling About Client</h3>
+            <h3><span class="guide-number" style="background:var(--ds-danger-600)">4</span> Decision Tree: Family Member Calling About Client</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
@@ -10979,7 +10979,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Card 5: Decision Tree - Unknown/New Caller in Distress -->
         <div class="guide-card" id="guide-oncall-unknown">
           <div class="guide-card-header" onclick="this.parentElement.classList.toggle('open')">
-            <h3><span class="guide-number" style="background:var(--danger)">5</span> Decision Tree: Unknown / New Caller in Distress</h3>
+            <h3><span class="guide-number" style="background:var(--ds-danger-600)">5</span> Decision Tree: Unknown / New Caller in Distress</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
@@ -11028,7 +11028,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Card 6: Decision Tree - Medication Requests -->
         <div class="guide-card" id="guide-oncall-meds">
           <div class="guide-card-header" onclick="this.parentElement.classList.toggle('open')">
-            <h3><span class="guide-number" style="background:var(--danger)">6</span> Decision Tree: Medication Requests</h3>
+            <h3><span class="guide-number" style="background:var(--ds-danger-600)">6</span> Decision Tree: Medication Requests</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
@@ -11071,7 +11071,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Card 7: Decision Tree - Welfare Check Needed -->
         <div class="guide-card" id="guide-oncall-welfare">
           <div class="guide-card-header" onclick="this.parentElement.classList.toggle('open')">
-            <h3><span class="guide-number" style="background:var(--danger)">7</span> Decision Tree: Welfare Check Needed</h3>
+            <h3><span class="guide-number" style="background:var(--ds-danger-600)">7</span> Decision Tree: Welfare Check Needed</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
@@ -11107,55 +11107,55 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Card 8: After-Hours Contact Directory -->
         <div class="guide-card" id="guide-oncall-directory">
           <div class="guide-card-header" onclick="this.parentElement.classList.toggle('open')">
-            <h3><span class="guide-number" style="background:var(--danger)">8</span> After-Hours Contact Directory</h3>
+            <h3><span class="guide-number" style="background:var(--ds-danger-600)">8</span> After-Hours Contact Directory</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
             <table style="width:100%; border-collapse:collapse; margin:1rem 0;">
               <thead>
-                <tr style="border-bottom:2px solid var(--danger);">
+                <tr style="border-bottom:2px solid var(--ds-danger-600);">
                   <th style="text-align:left; padding:0.5rem;">Resource</th>
                   <th style="text-align:left; padding:0.5rem;">Contact</th>
                 </tr>
               </thead>
               <tbody>
-                <tr style="border-bottom:1px solid var(--border-color);">
+                <tr style="border-bottom:1px solid var(--ds-border);">
                   <td style="padding:0.5rem;">Supervisor On-Call</td>
                   <td style="padding:0.5rem;"><em>Check on-call schedule (program-specific)</em></td>
                 </tr>
-                <tr style="border-bottom:1px solid var(--border-color);">
+                <tr style="border-bottom:1px solid var(--ds-border);">
                   <td style="padding:0.5rem;">Psychiatrist On-Call</td>
                   <td style="padding:0.5rem;"><em>Check on-call schedule</em></td>
                 </tr>
-                <tr style="border-bottom:1px solid var(--border-color);">
+                <tr style="border-bottom:1px solid var(--ds-border);">
                   <td style="padding:0.5rem;"><strong>988 Suicide &amp; Crisis Lifeline</strong></td>
                   <td style="padding:0.5rem;"><strong>Call or text 988</strong></td>
                 </tr>
-                <tr style="border-bottom:1px solid var(--border-color);">
+                <tr style="border-bottom:1px solid var(--ds-border);">
                   <td style="padding:0.5rem;">NH Rapid Response</td>
                   <td style="padding:0.5rem;"><strong>1-833-710-6477</strong></td>
                 </tr>
-                <tr style="border-bottom:1px solid var(--border-color);">
+                <tr style="border-bottom:1px solid var(--ds-border);">
                   <td style="padding:0.5rem;">GNMHC Crisis Team</td>
                   <td style="padding:0.5rem;"><strong>603-889-6147</strong></td>
                 </tr>
-                <tr style="border-bottom:1px solid var(--border-color);">
+                <tr style="border-bottom:1px solid var(--ds-border);">
                   <td style="padding:0.5rem;">Southern NH Medical Center (ER)</td>
                   <td style="padding:0.5rem;"><strong>603-577-2000</strong></td>
                 </tr>
-                <tr style="border-bottom:1px solid var(--border-color);">
+                <tr style="border-bottom:1px solid var(--ds-border);">
                   <td style="padding:0.5rem;">St. Joseph Hospital (ER)</td>
                   <td style="padding:0.5rem;"><strong>603-882-3000</strong></td>
                 </tr>
-                <tr style="border-bottom:1px solid var(--border-color);">
+                <tr style="border-bottom:1px solid var(--ds-border);">
                   <td style="padding:0.5rem;">Police Non-Emergency (Nashua)</td>
                   <td style="padding:0.5rem;"><strong>603-594-3500</strong></td>
                 </tr>
-                <tr style="border-bottom:1px solid var(--border-color);">
+                <tr style="border-bottom:1px solid var(--ds-border);">
                   <td style="padding:0.5rem;">Poison Control</td>
                   <td style="padding:0.5rem;"><strong>1-800-222-1222</strong></td>
                 </tr>
-                <tr style="border-bottom:1px solid var(--border-color);">
+                <tr style="border-bottom:1px solid var(--ds-border);">
                   <td style="padding:0.5rem;">NH DCYF (after-hours)</td>
                   <td style="padding:0.5rem;"><strong>1-800-894-5533</strong></td>
                 </tr>
@@ -11175,7 +11175,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Card 9: Documentation Requirements -->
         <div class="guide-card" id="guide-oncall-documentation">
           <div class="guide-card-header" onclick="this.parentElement.classList.toggle('open')">
-            <h3><span class="guide-number" style="background:var(--danger)">9</span> Documentation Requirements</h3>
+            <h3><span class="guide-number" style="background:var(--ds-danger-600)">9</span> Documentation Requirements</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
@@ -11209,7 +11209,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Card 10: When to Escalate vs Phone Support -->
         <div class="guide-card" id="guide-oncall-escalation">
           <div class="guide-card-header" onclick="this.parentElement.classList.toggle('open')">
-            <h3><span class="guide-number" style="background:var(--danger)">10</span> When to Escalate vs. Phone Support</h3>
+            <h3><span class="guide-number" style="background:var(--ds-danger-600)">10</span> When to Escalate vs. Phone Support</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
@@ -11242,7 +11242,7 @@ body.printing-handout .guide-card[data-print-handout] .handout-footer { display:
         <!-- Card 11: Self-Care for On-Call Clinicians -->
         <div class="guide-card" id="guide-oncall-selfcare">
           <div class="guide-card-header" onclick="this.parentElement.classList.toggle('open')">
-            <h3><span class="guide-number" style="background:var(--danger)">11</span> Self-Care for On-Call Clinicians</h3>
+            <h3><span class="guide-number" style="background:var(--ds-danger-600)">11</span> Self-Care for On-Call Clinicians</h3>
             <span class="guide-arrow">&#9660;</span>
           </div>
           <div class="guide-card-body">
@@ -11721,7 +11721,7 @@ function copyWorksheet(type) {
 function showCopyFeedback(msg) {
   var toast = document.createElement('div');
   toast.textContent = msg;
-  toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--success);color:#fff;padding:10px 24px;border-radius:var(--radius);font-size:14px;font-weight:600;z-index:9999;box-shadow:0 4px 12px rgba(0,0,0,.2);transition:opacity .3s';
+  toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ds-success-600);color:#fff;padding:10px 24px;border-radius:var(--ds-radius-md);font-size:14px;font-weight:600;z-index:9999;box-shadow:0 4px 12px rgba(0,0,0,.2);transition:opacity .3s';
   document.body.appendChild(toast);
   setTimeout(function() { toast.style.opacity = '0'; setTimeout(function() { toast.remove(); }, 300); }, 2000);
 }
@@ -11780,22 +11780,22 @@ function updateAceScore() {
   var scoreNum = document.getElementById('aceScoreNumber');
   if (scoreNum) {
     scoreNum.textContent = score;
-    if (score === 0) scoreNum.style.color = 'var(--success)';
-    else if (score <= 3) scoreNum.style.color = 'var(--warning)';
-    else scoreNum.style.color = 'var(--danger)';
+    if (score === 0) scoreNum.style.color = 'var(--ds-success-600)';
+    else if (score <= 3) scoreNum.style.color = 'var(--ds-warning-600)';
+    else scoreNum.style.color = 'var(--ds-danger-600)';
   }
   var interp = document.getElementById('aceInterpretation');
   if (interp) {
     interp.style.display = 'block';
     if (score === 0) {
       interp.innerHTML = '<strong>Score: 0</strong> — Baseline risk level. Approximately 36% of the population has an ACE score of 0.';
-      interp.style.borderColor = 'var(--success)';
+      interp.style.borderColor = 'var(--ds-success-600)';
     } else if (score <= 3) {
       interp.innerHTML = '<strong>Score: ' + score + '</strong> — Research shows increased population-level risk for depression, smoking, and heavy alcohol use. Individual outcomes vary widely. Protective factors and resilience significantly buffer impact.';
-      interp.style.borderColor = 'var(--warning)';
+      interp.style.borderColor = 'var(--ds-warning-600)';
     } else {
       interp.innerHTML = '<strong>Score: ' + score + '</strong> — At the population level, scores of 4+ are associated with significantly increased health risks. However, many individuals with high ACE scores lead healthy lives. Always assess resilience factors alongside ACE scores.';
-      interp.style.borderColor = 'var(--danger)';
+      interp.style.borderColor = 'var(--ds-danger-600)';
     }
   }
 }
@@ -11807,7 +11807,7 @@ function resetAceScore() {
     if (q) q.classList.remove('selected');
   });
   var scoreNum = document.getElementById('aceScoreNumber');
-  if (scoreNum) { scoreNum.textContent = '0'; scoreNum.style.color = 'var(--success)'; }
+  if (scoreNum) { scoreNum.textContent = '0'; scoreNum.style.color = 'var(--ds-success-600)'; }
   var interp = document.getElementById('aceInterpretation');
   if (interp) interp.style.display = 'none';
 }
@@ -11824,10 +11824,10 @@ function updateCageScore() {
   if (result) {
     result.textContent = 'CAGE Score: ' + score + '/4';
     if (score >= 2) {
-      result.style.color = 'var(--danger)';
+      result.style.color = 'var(--ds-danger-600)';
       result.textContent += ' — Further assessment recommended';
     } else {
-      result.style.color = 'var(--text-secondary)';
+      result.style.color = 'var(--ds-text-secondary)';
     }
   }
 }

@@ -1,7 +1,7 @@
 // Service Worker — Greater Nashua Community MH Resources
 // Caches all pages for offline access at air-gapped facilities
 
-const CACHE_NAME = 'mh-resources-v13';
+const CACHE_NAME = 'mh-resources-v14';
 const ASSETS = [
   './',
   './index.html',

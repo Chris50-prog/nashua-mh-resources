@@ -631,6 +631,73 @@
     gap: var(--ds-space-2);
   }
 }
+
+/* ---- Print ---- */
+@media print {
+  .site-nav,
+  .site-nav__mobile-panel,
+  .site-nav__controls,
+  .site-nav__font-controls,
+  .hero,
+  .site-footer,
+  .toast,
+  .ds-toast {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  main,
+  .ds-container {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .ds-section {
+    break-inside: auto;
+    margin-bottom: var(--ds-space-6);
+  }
+  .section-header {
+    break-after: avoid;
+  }
+  .worksheets-grid,
+  .ws-grid,
+  .guidance-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: var(--ds-space-4) !important;
+  }
+  .ws-card {
+    break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+    background: #fff !important;
+  }
+  .ws-card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  .ws-card__download {
+    border: 1px solid #999 !important;
+    background: none !important;
+    color: #000 !important;
+  }
+  /* Surface the PDF path so a printed copy stays actionable */
+  .ws-card__download[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 10px;
+    color: #555;
+    word-break: break-all;
+  }
+  a {
+    color: #000 !important;
+    text-decoration: none !important;
+  }
+  @page {
+    margin: 0.75in;
+  }
+}
 </style>
 </head>
 <body>
