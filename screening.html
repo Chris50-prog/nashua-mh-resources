@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Screening Tools | Greater Nashua Community Mental Health Resources</title>
+<title>Screening Tools | Meridian Mental Health Resources</title>
 <meta name="description" content="Standardized clinical screening instruments including PHQ-9, GAD-7, AUDIT, DAST-10, and C-SSRS in an interactive step-by-step format.">
-<meta property="og:title" content="Screening Tools | Greater Nashua Community Mental Health Resources">
+<meta property="og:title" content="Screening Tools | Meridian Mental Health Resources">
 <meta property="og:description" content="Standardized clinical screening instruments including PHQ-9, GAD-7, AUDIT, DAST-10, and C-SSRS in an interactive step-by-step format.">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -336,6 +336,26 @@
   background: var(--ds-status-danger-bg);
   color: var(--ds-danger-600);
 }
+.tool-card__icon--pcl5 { background: #ffe4e6; color: #be123c; }
+[data-theme="dark"] .tool-card__icon--pcl5 { background: rgba(190, 18, 60, 0.15); }
+.tool-card__icon--whodas { background: #e0f2fe; color: #0284c7; }
+[data-theme="dark"] .tool-card__icon--whodas { background: rgba(2, 132, 199, 0.15); }
+.tool-card__icon--k10 { background: #ede9fe; color: #7c3aed; }
+[data-theme="dark"] .tool-card__icon--k10 { background: rgba(124, 58, 237, 0.15); }
+.tool-card__icon--cageaid { background: #fef3c7; color: #d97706; }
+[data-theme="dark"] .tool-card__icon--cageaid { background: rgba(217, 119, 6, 0.15); }
+.tool-card__icon--epds { background: #fce7f3; color: #db2777; }
+[data-theme="dark"] .tool-card__icon--epds { background: rgba(219, 39, 119, 0.15); }
+.tool-card__icon--zarit { background: #dcfce7; color: #16a34a; }
+[data-theme="dark"] .tool-card__icon--zarit { background: rgba(22, 163, 74, 0.15); }
+.tool-card__icon--cdrisc { background: #d1fae5; color: #059669; }
+[data-theme="dark"] .tool-card__icon--cdrisc { background: rgba(5, 150, 105, 0.15); }
+.tool-card__icon--ors { background: #cffafe; color: #0891b2; }
+[data-theme="dark"] .tool-card__icon--ors { background: rgba(8, 145, 178, 0.15); }
+.tool-card__icon--srs { background: #e0e7ff; color: #4f46e5; }
+[data-theme="dark"] .tool-card__icon--srs { background: rgba(79, 70, 229, 0.15); }
+.tool-card__icon--wemwbs { background: #fef9c3; color: #ca8a04; }
+[data-theme="dark"] .tool-card__icon--wemwbs { background: rgba(202, 138, 4, 0.15); }
 .tool-card__name {
   font-family: var(--ds-font-sans);
   font-size: var(--ds-text-lg);
@@ -1207,8 +1227,8 @@
   <div class="site-nav__inner">
 
     <a href="index.html" class="site-nav__logo" id="siteLogo">
-      <div class="site-nav__logo-mark">NH</div>
-      <span class="site-nav__logo-text">MH Resources</span>
+      <div class="site-nav__logo-mark">M</div>
+      <span class="site-nav__logo-text">Meridian MH</span>
     </a>
 
     <div class="site-nav__links">
@@ -1348,6 +1368,136 @@
       </div>
     </div>
 
+    <div class="tool-card" onclick="startTool('pcl5')" tabindex="0" role="button" aria-label="Start PCL-5 PTSD Screening">
+      <div class="tool-card__icon tool-card__icon--pcl5">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      </div>
+      <div class="tool-card__name">PCL-5</div>
+      <div class="tool-card__full-name">PTSD Checklist for DSM-5</div>
+      <div class="tool-card__desc">Screens for PTSD symptom severity. 20 questions about how much you were bothered by trauma-related symptoms over the past month.</div>
+      <div class="tool-card__meta">
+        <span class="tool-card__badge">20 questions</span>
+        <span class="tool-card__badge">~5 min</span>
+      </div>
+    </div>
+
+    <div class="tool-card" onclick="startTool('whodas')" tabindex="0" role="button" aria-label="Start WHODAS 2.0 Disability Screening">
+      <div class="tool-card__icon tool-card__icon--whodas">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+      <div class="tool-card__name">WHODAS 2.0</div>
+      <div class="tool-card__full-name">WHO Disability Assessment Schedule</div>
+      <div class="tool-card__desc">Measures functioning and disability across six life domains. 12-item short form covering the past 30 days.</div>
+      <div class="tool-card__meta">
+        <span class="tool-card__badge">12 questions</span>
+        <span class="tool-card__badge">~3 min</span>
+      </div>
+    </div>
+
+    <div class="tool-card" onclick="startTool('k10')" tabindex="0" role="button" aria-label="Start K10 Psychological Distress Screening">
+      <div class="tool-card__icon tool-card__icon--k10">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+      </div>
+      <div class="tool-card__name">K10</div>
+      <div class="tool-card__full-name">Kessler Psychological Distress Scale</div>
+      <div class="tool-card__desc">Screens for non-specific psychological distress. 10 questions about anxiety and depressive feelings over the past 30 days.</div>
+      <div class="tool-card__meta">
+        <span class="tool-card__badge">10 questions</span>
+        <span class="tool-card__badge">~3 min</span>
+      </div>
+    </div>
+
+    <div class="tool-card" onclick="startTool('cageaid')" tabindex="0" role="button" aria-label="Start CAGE-AID Substance Use Screening">
+      <div class="tool-card__icon tool-card__icon--cageaid">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l4 10H4L8 2z"/><path d="M12 12v6"/><path d="M8 22h8"/></svg>
+      </div>
+      <div class="tool-card__name">CAGE-AID</div>
+      <div class="tool-card__full-name">CAGE Adapted to Include Drugs</div>
+      <div class="tool-card__desc">Brief screen for alcohol and drug problems. 4 yes/no questions. A score of 2 or more is clinically significant.</div>
+      <div class="tool-card__meta">
+        <span class="tool-card__badge">4 questions</span>
+        <span class="tool-card__badge">~1 min</span>
+      </div>
+    </div>
+
+    <div class="tool-card" onclick="startTool('epds')" tabindex="0" role="button" aria-label="Start Edinburgh Postnatal Depression Scale">
+      <div class="tool-card__icon tool-card__icon--epds">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+      </div>
+      <div class="tool-card__name">EPDS</div>
+      <div class="tool-card__full-name">Edinburgh Postnatal Depression Scale</div>
+      <div class="tool-card__desc">Screens for perinatal depression and anxiety. 10 questions about feelings over the past 7 days, including a self-harm item.</div>
+      <div class="tool-card__meta">
+        <span class="tool-card__badge">10 questions</span>
+        <span class="tool-card__badge">~3 min</span>
+      </div>
+    </div>
+
+    <div class="tool-card" onclick="startTool('zarit')" tabindex="0" role="button" aria-label="Start Zarit Burden Interview Screening">
+      <div class="tool-card__icon tool-card__icon--zarit">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div class="tool-card__name">Zarit (Short)</div>
+      <div class="tool-card__full-name">Zarit Burden Interview — 12-Item</div>
+      <div class="tool-card__desc">Measures caregiver burden. 12 questions about the strain of caring for a person with illness or disability.</div>
+      <div class="tool-card__meta">
+        <span class="tool-card__badge">12 questions</span>
+        <span class="tool-card__badge">~3 min</span>
+      </div>
+    </div>
+
+    <div class="tool-card" onclick="startTool('cdrisc')" tabindex="0" role="button" aria-label="Start CD-RISC-10 Resilience Screening">
+      <div class="tool-card__icon tool-card__icon--cdrisc">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+      </div>
+      <div class="tool-card__name">CD-RISC-10</div>
+      <div class="tool-card__full-name">Connor-Davidson Resilience Scale</div>
+      <div class="tool-card__desc">Measures psychological resilience. 10 statements about adapting to change and bouncing back. Higher scores indicate more resilience.</div>
+      <div class="tool-card__meta">
+        <span class="tool-card__badge">10 questions</span>
+        <span class="tool-card__badge">~3 min</span>
+      </div>
+    </div>
+
+    <div class="tool-card" onclick="startTool('ors')" tabindex="0" role="button" aria-label="Start Outcome Rating Scale">
+      <div class="tool-card__icon tool-card__icon--ors">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><circle cx="9" cy="12" r="3"/></svg>
+      </div>
+      <div class="tool-card__name">ORS</div>
+      <div class="tool-card__full-name">Outcome Rating Scale</div>
+      <div class="tool-card__desc">Brief session-by-session measure of well-being across four areas. Rate each 0–10 looking back over the past week.</div>
+      <div class="tool-card__meta">
+        <span class="tool-card__badge">4 items</span>
+        <span class="tool-card__badge">~1 min</span>
+      </div>
+    </div>
+
+    <div class="tool-card" onclick="startTool('srs')" tabindex="0" role="button" aria-label="Start Session Rating Scale">
+      <div class="tool-card__icon tool-card__icon--srs">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <div class="tool-card__name">SRS</div>
+      <div class="tool-card__full-name">Session Rating Scale</div>
+      <div class="tool-card__desc">Measures the therapeutic alliance at the end of a session. Rate the relationship, goals, approach, and overall fit 0–10.</div>
+      <div class="tool-card__meta">
+        <span class="tool-card__badge">4 items</span>
+        <span class="tool-card__badge">~1 min</span>
+      </div>
+    </div>
+
+    <div class="tool-card" onclick="startTool('wemwbs')" tabindex="0" role="button" aria-label="Start Warwick-Edinburgh Mental Well-Being Scale">
+      <div class="tool-card__icon tool-card__icon--wemwbs">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+      </div>
+      <div class="tool-card__name">WEMWBS</div>
+      <div class="tool-card__full-name">Warwick-Edinburgh Mental Well-Being Scale</div>
+      <div class="tool-card__desc">Measures positive mental well-being. 14 statements about feelings and thoughts over the past 2 weeks. Higher scores indicate greater well-being.</div>
+      <div class="tool-card__meta">
+        <span class="tool-card__badge">14 questions</span>
+        <span class="tool-card__badge">~4 min</span>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1404,10 +1554,10 @@
       <!-- Brand column -->
       <div>
         <a href="index.html" class="site-nav__logo" style="text-decoration:none">
-          <div class="site-nav__logo-mark">NH</div>
-          <span class="site-nav__logo-text">MH Resources</span>
+          <div class="site-nav__logo-mark">M</div>
+          <span class="site-nav__logo-text">Meridian MH</span>
         </a>
-        <p class="footer__brand-desc">A comprehensive resource hub for clinicians, case managers, and community members in the Greater Nashua area.</p>
+        <p class="footer__brand-desc">Meridian is an independent resource hub for clinicians, case managers, and community members serving the Greater Nashua, NH area.</p>
 
         <div class="footer__crisis-box">
           <div class="footer__crisis-title">Crisis? Get help now.</div>
@@ -1465,6 +1615,9 @@
     <div class="footer__bottom">
       <div class="footer__disclaimer">
         This resource does not replace clinical judgment. Always follow your organization's policies and consult supervisors for complex cases. Some content is AI-assisted and should be verified by a licensed professional before clinical use.
+      </div>
+      <div class="footer__disclaimer footer__disclaimer--legal" style="margin-top:10px">
+        Meridian Mental Health Resources is an independent educational resource hub. It is not affiliated with any mental health agency, hospital, or government organization. Content is provided for informational and clinical reference purposes only and does not constitute medical advice, diagnosis, or treatment. Always seek the advice of a qualified mental health professional.
       </div>
       <div class="footer__meta">
         <span><span class="footer__status-dot"></span> Updated Jun 25, 2026</span>
@@ -1731,8 +1884,394 @@ var TOOLS = {
     ],
     attribution: 'The Columbia Suicide Severity Rating Scale (C-SSRS) was developed at Columbia University. These are the triage screening questions. For full administration, use the complete validated instrument.',
     disclaimer: null
+  },
+
+  /* ---- PCL-5 (PTSD Checklist for DSM-5) ---- */
+  pcl5: {
+    id: 'pcl5',
+    name: 'PCL-5',
+    fullName: 'PTSD Checklist for DSM-5',
+    timeframe: 'In the past month, how much were you bothered by:',
+    maxScore: 80,
+    type: 'likert',
+    questions: [
+      'Repeated, disturbing, and unwanted memories of the stressful experience',
+      'Repeated, disturbing dreams of the stressful experience',
+      'Suddenly feeling or acting as if the stressful experience were actually happening again (as if you were back there reliving it)',
+      'Feeling very upset when something reminded you of the stressful experience',
+      'Having strong physical reactions when something reminded you of the stressful experience (e.g., heart pounding, trouble breathing, sweating)',
+      'Avoiding memories, thoughts, or feelings related to the stressful experience',
+      'Avoiding external reminders of the stressful experience (e.g., people, places, conversations, activities, objects, or situations)',
+      'Trouble remembering important parts of the stressful experience',
+      'Having strong negative beliefs about yourself, other people, or the world (e.g., "I am bad," "there is something seriously wrong with me," "no one can be trusted")',
+      'Blaming yourself or someone else for the stressful experience or what happened after it',
+      'Having strong negative feelings such as fear, horror, anger, guilt, or shame',
+      'Loss of interest in activities that you used to enjoy',
+      'Feeling distant or cut off from other people',
+      'Trouble experiencing positive feelings (e.g., being unable to feel happiness or have loving feelings for people close to you)',
+      'Irritable behavior, angry outbursts, or acting aggressively',
+      'Taking too many risks or doing things that could cause you harm',
+      'Being "super-alert" or watchful or on guard',
+      'Feeling jumpy or easily startled',
+      'Having difficulty concentrating',
+      'Trouble falling or staying asleep'
+    ],
+    options: [
+      { label: 'Not at all', value: 0 },
+      { label: 'A little bit', value: 1 },
+      { label: 'Moderately', value: 2 },
+      { label: 'Quite a bit', value: 3 },
+      { label: 'Extremely', value: 4 }
+    ],
+    scoring: [
+      { min: 0,  max: 30, label: 'Below Provisional Threshold', color: 'green', recs: 'Total below the provisional PTSD cutoff. Continue to monitor. A trauma history may still warrant clinical attention even when the score is low.' },
+      { min: 31, max: 44, label: 'Probable PTSD (Provisional)', color: 'orange', recs: 'A score of 31–33 or higher suggests probable PTSD. Recommend a full diagnostic assessment with a structured interview (e.g., CAPS-5) and consideration of trauma-focused treatment.' },
+      { min: 45, max: 80, label: 'High Symptom Severity', color: 'red', recs: 'High symptom burden. Prioritize comprehensive trauma assessment, safety review, and evidence-based trauma-focused care (e.g., PE, CPT, EMDR). Coordinate level of care to symptom severity and functional impairment.' }
+    ],
+    attribution: 'The PCL-5 was developed by the National Center for PTSD (Weathers, Litz, Keane, Palmieri, Marx, & Schnurr). It is in the public domain. To establish a probable diagnosis, a Criterion A trauma and the DSM-5 symptom-cluster rule should also be reviewed.',
+    disclaimer: 'The PCL-5 is a provisional screening measure, not a diagnostic instrument, and should be anchored to a specific traumatic event. A score of roughly 31–33 or higher warrants further assessment. This screening tool is for clinical reference only. Results should be interpreted by a qualified mental health professional.'
+  },
+
+  /* ---- WHODAS 2.0 (12-item) ---- */
+  whodas: {
+    id: 'whodas',
+    name: 'WHODAS 2.0',
+    fullName: 'WHO Disability Assessment Schedule 2.0 (12-item)',
+    timeframe: 'In the past 30 days, how much difficulty did you have in:',
+    maxScore: 48,
+    type: 'likert',
+    questions: [
+      'Standing for long periods, such as 30 minutes',
+      'Taking care of your household responsibilities',
+      'Learning a new task, for example, learning how to get to a new place',
+      'Joining in community activities (for example, festivities, religious, or other activities) in the same way as anyone else can',
+      'Being emotionally affected by your health problems',
+      'Concentrating on doing something for ten minutes',
+      'Walking a long distance, such as a kilometre (or equivalent)',
+      'Washing your whole body',
+      'Getting dressed',
+      'Dealing with people you do not know',
+      'Maintaining a friendship',
+      'Your day-to-day work or school'
+    ],
+    options: [
+      { label: 'None', value: 0 },
+      { label: 'Mild', value: 1 },
+      { label: 'Moderate', value: 2 },
+      { label: 'Severe', value: 3 },
+      { label: 'Extreme / cannot do', value: 4 }
+    ],
+    scoring: [
+      { min: 0,  max: 4,  label: 'No to Minimal Disability', color: 'green', recs: 'Little or no difficulty with functioning across domains over the past 30 days.' },
+      { min: 5,  max: 12, label: 'Mild Disability', color: 'yellow', recs: 'Some difficulty in one or more life domains. Note which domains are affected and revisit at follow-up.' },
+      { min: 13, max: 24, label: 'Moderate Disability', color: 'orange', recs: 'Moderate functional impairment. Consider how disability is affecting treatment goals; coordinate supports as appropriate.' },
+      { min: 25, max: 36, label: 'Severe Disability', color: 'redorange', recs: 'Substantial functional impairment across domains. Assess need for additional services, accommodations, or higher level of care.' },
+      { min: 37, max: 48, label: 'Extreme Disability', color: 'red', recs: 'Profound difficulty across most domains. Prioritize functional supports, care coordination, and a thorough biopsychosocial assessment.' }
+    ],
+    attribution: 'WHODAS 2.0 was developed by the World Health Organization. This is the 12-item self-administered short form. Simple summing is used here; WHO also publishes an item-response-theory (complex) scoring algorithm.',
+    disclaimer: 'WHODAS 2.0 measures functioning and disability, not a specific diagnosis. This screening tool is for clinical reference only. Results should be interpreted by a qualified mental health professional.'
+  },
+
+  /* ---- K10 (Kessler Psychological Distress Scale) ---- */
+  k10: {
+    id: 'k10',
+    name: 'K10',
+    fullName: 'Kessler Psychological Distress Scale (K10)',
+    timeframe: 'In the past 30 days, about how often did you feel:',
+    maxScore: 50,
+    type: 'likert',
+    questions: [
+      'Tired out for no good reason',
+      'Nervous',
+      'So nervous that nothing could calm you down',
+      'Hopeless',
+      'Restless or fidgety',
+      'So restless that you could not sit still',
+      'Depressed',
+      'That everything was an effort',
+      'So sad that nothing could cheer you up',
+      'Worthless'
+    ],
+    options: [
+      { label: 'None of the time', value: 1 },
+      { label: 'A little of the time', value: 2 },
+      { label: 'Some of the time', value: 3 },
+      { label: 'Most of the time', value: 4 },
+      { label: 'All of the time', value: 5 }
+    ],
+    scoring: [
+      { min: 10, max: 19, label: 'Likely to be Well', color: 'green', recs: 'Distress in the range typically seen in people who are well. Continue routine monitoring.' },
+      { min: 20, max: 24, label: 'Mild Disorder', color: 'yellow', recs: 'Distress consistent with a mild mental disorder. Psychoeducation and brief support may be appropriate; reassess.' },
+      { min: 25, max: 29, label: 'Moderate Disorder', color: 'orange', recs: 'Distress consistent with a moderate mental disorder. Consider further assessment and active treatment planning.' },
+      { min: 30, max: 50, label: 'Severe Disorder', color: 'red', recs: 'Distress consistent with a severe mental disorder. Prioritize comprehensive assessment, treatment, and a safety review.' }
+    ],
+    attribution: 'The K10 was developed by Professors Ronald Kessler and Dan Mroczek. It is freely available for clinical and research use. (The 6-item K6 is a shorter variant of the same scale.)',
+    disclaimer: 'The K10 measures non-specific psychological distress and is not diagnosis-specific. This screening tool is for clinical reference only. Results should be interpreted by a qualified mental health professional.'
+  },
+
+  /* ---- CAGE-AID ---- */
+  cageaid: {
+    id: 'cageaid',
+    name: 'CAGE-AID',
+    fullName: 'CAGE Adapted to Include Drugs',
+    timeframe: 'Considering your use of alcohol and drugs:',
+    maxScore: 4,
+    type: 'likert',
+    questions: [
+      'Have you ever felt you ought to Cut down on your drinking or drug use?',
+      'Have people Annoyed you by criticizing your drinking or drug use?',
+      'Have you ever felt bad or Guilty about your drinking or drug use?',
+      'Have you ever had a drink or used drugs first thing in the morning to steady your nerves or to get rid of a hangover (Eye-opener)?'
+    ],
+    options: [
+      { label: 'No', value: 0 },
+      { label: 'Yes', value: 1 }
+    ],
+    scoring: [
+      { min: 0, max: 0, label: 'No Items Endorsed', color: 'green', recs: 'No items endorsed. Provide general prevention guidance as appropriate.' },
+      { min: 1, max: 1, label: 'One Item Endorsed', color: 'yellow', recs: 'One positive response. Below the standard cutoff, but warrants a brief conversation about use; consider re-screening.' },
+      { min: 2, max: 4, label: 'Clinically Significant', color: 'red', recs: 'Two or more positive responses is considered clinically significant and indicates a need for further assessment of a substance use disorder (e.g., AUDIT, DAST-10, or a full diagnostic interview).' }
+    ],
+    attribution: 'The CAGE questionnaire was developed by Dr. John Ewing; the CAGE-AID adaptation (Brown & Rounds) extends it to drug use. It is in the public domain.',
+    disclaimer: 'A score of 2 or more is clinically significant, but even one positive response may merit follow-up. This screening tool is for clinical reference only. Results should be interpreted by a qualified mental health professional.'
+  },
+
+  /* ---- EPDS (Edinburgh Postnatal Depression Scale) ---- */
+  epds: {
+    id: 'epds',
+    name: 'EPDS',
+    fullName: 'Edinburgh Postnatal Depression Scale',
+    timeframe: 'In the past 7 days — not just how you feel today:',
+    maxScore: 30,
+    type: 'custom',
+    questions: [
+      { text: 'I have been able to laugh and see the funny side of things', options: [
+        { label: 'As much as I always could', value: 0 },
+        { label: 'Not quite so much now', value: 1 },
+        { label: 'Definitely not so much now', value: 2 },
+        { label: 'Not at all', value: 3 } ] },
+      { text: 'I have looked forward with enjoyment to things', options: [
+        { label: 'As much as I ever did', value: 0 },
+        { label: 'Rather less than I used to', value: 1 },
+        { label: 'Definitely less than I used to', value: 2 },
+        { label: 'Hardly at all', value: 3 } ] },
+      { text: 'I have blamed myself unnecessarily when things went wrong', options: [
+        { label: 'Yes, most of the time', value: 3 },
+        { label: 'Yes, some of the time', value: 2 },
+        { label: 'Not very often', value: 1 },
+        { label: 'No, never', value: 0 } ] },
+      { text: 'I have been anxious or worried for no good reason', options: [
+        { label: 'No, not at all', value: 0 },
+        { label: 'Hardly ever', value: 1 },
+        { label: 'Yes, sometimes', value: 2 },
+        { label: 'Yes, very often', value: 3 } ] },
+      { text: 'I have felt scared or panicky for no very good reason', options: [
+        { label: 'Yes, quite a lot', value: 3 },
+        { label: 'Yes, sometimes', value: 2 },
+        { label: 'No, not much', value: 1 },
+        { label: 'No, not at all', value: 0 } ] },
+      { text: 'Things have been getting on top of me', options: [
+        { label: "Yes, most of the time I haven't been able to cope at all", value: 3 },
+        { label: "Yes, sometimes I haven't been coping as well as usual", value: 2 },
+        { label: 'No, most of the time I have coped quite well', value: 1 },
+        { label: 'No, I have been coping as well as ever', value: 0 } ] },
+      { text: 'I have been so unhappy that I have had difficulty sleeping', options: [
+        { label: 'Yes, most of the time', value: 3 },
+        { label: 'Yes, sometimes', value: 2 },
+        { label: 'Not very often', value: 1 },
+        { label: 'No, not at all', value: 0 } ] },
+      { text: 'I have felt sad or miserable', options: [
+        { label: 'Yes, most of the time', value: 3 },
+        { label: 'Yes, quite often', value: 2 },
+        { label: 'Not very often', value: 1 },
+        { label: 'No, not at all', value: 0 } ] },
+      { text: 'I have been so unhappy that I have been crying', options: [
+        { label: 'Yes, most of the time', value: 3 },
+        { label: 'Yes, quite often', value: 2 },
+        { label: 'Only occasionally', value: 1 },
+        { label: 'No, never', value: 0 } ] },
+      { text: 'The thought of harming myself has occurred to me', options: [
+        { label: 'Yes, quite often', value: 3 },
+        { label: 'Sometimes', value: 2 },
+        { label: 'Hardly ever', value: 1 },
+        { label: 'Never', value: 0 } ] }
+    ],
+    scoring: [
+      { min: 0,  max: 9,  label: 'Lower Likelihood of Depression', color: 'green', recs: 'Below the common screening threshold. Continue routine perinatal monitoring. Note: any non-zero response on item 10 (self-harm) requires an immediate safety assessment regardless of total.' },
+      { min: 10, max: 12, label: 'Possible Depression', color: 'orange', recs: 'A score of 10 or more suggests possible depression. Recommend further clinical assessment and repeat screening; review item 10.' },
+      { min: 13, max: 30, label: 'Likely Depression', color: 'red', recs: 'A score of 13 or more indicates likely depression of varying severity. Recommend diagnostic assessment, treatment planning, and a safety review. Always review item 10 directly.' }
+    ],
+    attribution: 'The EPDS was developed by Cox, Holden, and Sagovsky (1987). It is freely reproducible provided it is cited. Item 10 screens for self-harm and must be reviewed individually.',
+    disclaimer: 'Any score above 0 on item 10 (self-harm) warrants an immediate risk assessment regardless of the total score. The EPDS is a screening tool, not a diagnosis. This screening tool is for clinical reference only. Results should be interpreted by a qualified mental health professional.'
+  },
+
+  /* ---- Zarit Burden Interview (12-item short form) ---- */
+  zarit: {
+    id: 'zarit',
+    name: 'Zarit (Short)',
+    fullName: 'Zarit Burden Interview — 12-Item Short Form',
+    timeframe: 'Thinking about caring for the person, how often do you feel:',
+    maxScore: 48,
+    type: 'likert',
+    questions: [
+      "That you don't have enough time for yourself",
+      'Stressed between caring for the person and trying to meet other responsibilities for your family or work',
+      'Angry when you are around the person',
+      'That the person affects your relationships with other family members in a negative way',
+      'Strained when you are around the person',
+      'That your health has suffered because of your involvement with the person',
+      "That you don't have as much privacy as you would like because of the person",
+      'That your social life has suffered because you are caring for the person',
+      "That you have lost control of your life since the person's illness",
+      'Uncertain about what to do about the person',
+      'That you should be doing more for the person',
+      'That you could do a better job in caring for the person'
+    ],
+    options: [
+      { label: 'Never', value: 0 },
+      { label: 'Rarely', value: 1 },
+      { label: 'Sometimes', value: 2 },
+      { label: 'Quite frequently', value: 3 },
+      { label: 'Nearly always', value: 4 }
+    ],
+    scoring: [
+      { min: 0,  max: 10, label: 'Little or No Burden', color: 'green', recs: 'Low caregiver burden reported. Reinforce self-care and check in periodically as caregiving demands change.' },
+      { min: 11, max: 20, label: 'Mild to Moderate Burden', color: 'yellow', recs: 'Some caregiver strain. Explore respite options, support groups, and practical supports; reassess.' },
+      { min: 21, max: 40, label: 'Moderate to Severe Burden', color: 'orange', recs: 'Significant burden. Prioritize respite, caregiver support services, and screening the caregiver for depression and anxiety.' },
+      { min: 41, max: 48, label: 'Severe Burden', color: 'red', recs: 'High burden with elevated risk to caregiver well-being. Arrange active support, evaluate caregiver mental health, and consider care-plan changes.' }
+    ],
+    attribution: 'Derived from the Zarit Burden Interview (Zarit, Reever, & Bach-Peterson). This is the 12-item short form, used here for educational and clinical reference. Formal/commercial use may require permission from the publisher.',
+    disclaimer: 'The Zarit Burden Interview measures the caregiver’s experience, not the care recipient’s condition. This screening tool is for clinical reference only. Results should be interpreted by a qualified mental health professional.'
+  },
+
+  /* ---- CD-RISC-10 (Connor-Davidson Resilience Scale) ---- */
+  cdrisc: {
+    id: 'cdrisc',
+    name: 'CD-RISC-10',
+    fullName: 'Connor-Davidson Resilience Scale (10-item)',
+    timeframe: 'Over the past month, how true has each statement been for you:',
+    maxScore: 40,
+    type: 'likert',
+    questions: [
+      'I am able to adapt when changes occur',
+      'I can deal with whatever comes my way',
+      'I try to see the humorous side of things when I am faced with problems',
+      'Having to cope with stress can make me stronger',
+      'I tend to bounce back after illness, injury, or other hardships',
+      'I believe I can achieve my goals, even if there are obstacles',
+      'Under pressure, I stay focused and think clearly',
+      'I am not easily discouraged by failure',
+      "I think of myself as a strong person when dealing with life's challenges and difficulties",
+      'I am able to handle unpleasant or painful feelings like sadness, fear, and anger'
+    ],
+    options: [
+      { label: 'Not true at all', value: 0 },
+      { label: 'Rarely true', value: 1 },
+      { label: 'Sometimes true', value: 2 },
+      { label: 'Often true', value: 3 },
+      { label: 'True nearly all the time', value: 4 }
+    ],
+    scoring: [
+      { min: 0,  max: 20, label: 'Lower Resilience', color: 'orange', recs: 'Higher scores reflect greater resilience; this range is below the general-population average (mean ≈ 32). Resilience can be strengthened — consider coping-skills work, social support, and strengths-based approaches.' },
+      { min: 21, max: 29, label: 'Below-Average Resilience', color: 'yellow', recs: 'Somewhat below the general-population average. Identify existing strengths and build on them.' },
+      { min: 30, max: 35, label: 'Average Resilience', color: 'green', recs: 'Around the general-population average. Note protective factors already in place.' },
+      { min: 36, max: 40, label: 'High Resilience', color: 'green', recs: 'Strong self-reported resilience. A meaningful protective factor; reinforce and draw on it in treatment.' }
+    ],
+    attribution: 'The CD-RISC-10 (Campbell-Sills & Stein, derived from Connor & Davidson) is a copyrighted instrument reproduced here for educational and clinical reference. Higher scores indicate greater resilience. Formal use requires permission from the copyright holders (www.cd-risc.com).',
+    disclaimer: 'The CD-RISC-10 measures a strength (resilience); higher scores are more favorable. This screening tool is for clinical reference only. Results should be interpreted by a qualified mental health professional.'
+  },
+
+  /* ---- ORS (Outcome Rating Scale) ---- */
+  ors: {
+    id: 'ors',
+    name: 'ORS',
+    fullName: 'Outcome Rating Scale',
+    timeframe: 'Looking back over the past week, rate each area from 0 (low) to 10 (high):',
+    maxScore: 40,
+    type: 'custom',
+    questions: [
+      { text: 'Individually (personal well-being)', options: ORS_SCALE() },
+      { text: 'Interpersonally (family, close relationships)', options: ORS_SCALE() },
+      { text: 'Socially (work, school, friendships)', options: ORS_SCALE() },
+      { text: 'Overall (general sense of well-being)', options: ORS_SCALE() }
+    ],
+    scoring: [
+      { min: 0,  max: 24, label: 'Clinical Range', color: 'orange', recs: 'A total below 25 falls in the clinical range, consistent with people who seek services. Use the four sub-scores to focus the conversation and track change session by session.' },
+      { min: 25, max: 40, label: 'Non-Clinical Range', color: 'green', recs: 'A total of 25 or above falls in the non-clinical range. Continue to monitor; a notable drop over time is clinically meaningful.' }
+    ],
+    attribution: 'The Outcome Rating Scale (ORS) was developed by Scott D. Miller and Barry L. Duncan. It is free for individual clinician use via the International Center for Clinical Excellence. The standard adult clinical cutoff is 25.',
+    disclaimer: 'The ORS is a brief, session-by-session feedback measure; trends over time matter more than any single score. This screening tool is for clinical reference only. Results should be interpreted by a qualified mental health professional.'
+  },
+
+  /* ---- SRS (Session Rating Scale) ---- */
+  srs: {
+    id: 'srs',
+    name: 'SRS',
+    fullName: 'Session Rating Scale',
+    timeframe: "Thinking about today's session, rate each area from 0 (low) to 10 (high):",
+    maxScore: 40,
+    type: 'custom',
+    questions: [
+      { text: 'Relationship — I felt heard, understood, and respected', options: ORS_SCALE() },
+      { text: 'Goals and Topics — we worked on and talked about what I wanted to', options: ORS_SCALE() },
+      { text: 'Approach or Method — the therapist’s approach is a good fit for me', options: ORS_SCALE() },
+      { text: 'Overall — today’s session was right for me', options: ORS_SCALE() }
+    ],
+    scoring: [
+      { min: 0,  max: 35, label: 'Discuss the Alliance', color: 'orange', recs: 'A total below 36 (or any single item below 9) is worth discussing openly. Invite feedback about what could fit better — addressing alliance concerns predicts better outcomes.' },
+      { min: 36, max: 40, label: 'Strong Alliance', color: 'green', recs: 'A total of 36 or above suggests a strong working alliance. Keep checking in, since a drop over time is an early signal worth exploring.' }
+    ],
+    attribution: 'The Session Rating Scale (SRS) was developed by Scott D. Miller, Barry L. Duncan, and Lynn Johnson. It is free for individual clinician use via the International Center for Clinical Excellence. Scores below 36 typically warrant discussion.',
+    disclaimer: 'The SRS measures the therapeutic alliance from the client’s perspective; it is a conversation starter, not a verdict. This screening tool is for clinical reference only. Results should be interpreted by a qualified mental health professional.'
+  },
+
+  /* ---- WEMWBS (Warwick-Edinburgh Mental Well-Being Scale) ---- */
+  wemwbs: {
+    id: 'wemwbs',
+    name: 'WEMWBS',
+    fullName: 'Warwick-Edinburgh Mental Well-Being Scale',
+    timeframe: 'Over the past 2 weeks, how often have you felt or thought this way:',
+    maxScore: 70,
+    type: 'likert',
+    questions: [
+      "I've been feeling optimistic about the future",
+      "I've been feeling useful",
+      "I've been feeling relaxed",
+      "I've been feeling interested in other people",
+      "I've had energy to spare",
+      "I've been dealing with problems well",
+      "I've been thinking clearly",
+      "I've been feeling good about myself",
+      "I've been feeling close to other people",
+      "I've been feeling confident",
+      "I've been able to make up my own mind about things",
+      "I've been feeling loved",
+      "I've been interested in new things",
+      "I've been feeling cheerful"
+    ],
+    options: [
+      { label: 'None of the time', value: 1 },
+      { label: 'Rarely', value: 2 },
+      { label: 'Some of the time', value: 3 },
+      { label: 'Often', value: 4 },
+      { label: 'All of the time', value: 5 }
+    ],
+    scoring: [
+      { min: 14, max: 40, label: 'Lower Well-Being', color: 'orange', recs: 'Higher scores reflect greater positive well-being; this range is below the population average (mean ≈ 51). Consider well-being-focused supports and screening for depression/anxiety where indicated.' },
+      { min: 41, max: 59, label: 'Average Well-Being', color: 'yellow', recs: 'Around the typical population range. Reinforce protective routines and meaningful activity.' },
+      { min: 60, max: 70, label: 'High Well-Being', color: 'green', recs: 'High self-reported positive well-being. Note the strengths and supports contributing to it.' }
+    ],
+    attribution: 'WEMWBS was developed by the Universities of Warwick and Edinburgh, funded by NHS Health Scotland. © NHS Health Scotland, University of Warwick and University of Edinburgh, 2006. Free to use for non-commercial purposes with registration; higher scores indicate greater well-being.',
+    disclaimer: 'WEMWBS measures positive mental well-being, not the absence of illness; higher scores are more favorable. This screening tool is for clinical reference only. Results should be interpreted by a qualified mental health professional.'
   }
 };
+
+/* Helper: 0–10 visual-analog scale rendered as discrete options for ORS/SRS */
+function ORS_SCALE() {
+  var opts = [];
+  for (var i = 0; i <= 10; i++) { opts.push({ label: String(i), value: i }); }
+  return opts;
+}
 
 
 /* ================================================================

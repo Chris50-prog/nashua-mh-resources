@@ -1,6 +1,6 @@
 {
-  "name": "Greater Nashua Community MH Resources",
-  "short_name": "MH Resources",
+  "name": "Meridian Mental Health Resources",
+  "short_name": "Meridian MH",
   "description": "Comprehensive mental health resources, clinical tools, how-to guides, and community service directory for the Greater Nashua, NH region. Includes screening instruments, documentation builders, crisis protocols, and offline-capable PWA support.",
   "start_url": "./index.html",
   "display": "standalone",

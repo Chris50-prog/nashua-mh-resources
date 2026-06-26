@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Therapeutic Games | Greater Nashua Community Mental Health Resources</title>
+<title>Therapeutic Games | Meridian Mental Health Resources</title>
 <meta name="description" content="Interactive browser-based therapeutic games for emotional learning, coping skills practice, and therapeutic engagement. No internet required.">
-<meta property="og:title" content="Therapeutic Games | Greater Nashua Community Mental Health Resources">
+<meta property="og:title" content="Therapeutic Games | Meridian Mental Health Resources">
 <meta property="og:description" content="Interactive browser-based therapeutic games for emotional learning, coping skills practice, and therapeutic engagement.">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -345,6 +345,10 @@
 .game-card__icon--flexibility { background: rgba(42, 157, 143, 0.15); }
 .game-card__icon--socialscenarios { background: rgba(244, 162, 97, 0.15); }
 .game-card__icon--calmcountdown { background: rgba(229, 115, 115, 0.15); }
+.game-card__icon--copingmatch { background: rgba(124, 179, 66, 0.15); }
+.game-card__icon--selfcarebingo { background: rgba(76, 145, 200, 0.15); }
+.game-card__icon--boundaries { background: rgba(244, 162, 97, 0.15); }
+.game-card__icon--emovocab { background: rgba(128, 113, 181, 0.15); }
 
 /* ---- Shared new-game UI utilities ---- */
 .gx-btn {
@@ -445,6 +449,39 @@
 .gx-progress-track { height: 8px; border-radius: var(--ds-radius-full); background: var(--ds-border); overflow: hidden; margin: var(--ds-space-3) 0; }
 .gx-progress-fill { height: 100%; background: var(--ds-primary-600); width: 0%; transition: width 0.4s ease; }
 .gx-range { width: 100%; }
+/* Coping Skills Match board */
+.cm-board { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--ds-space-2); margin: var(--ds-space-3) 0; }
+.cm-card {
+  position: relative; min-height: 84px; border-radius: var(--ds-radius-md);
+  border: 1px solid var(--ds-border); background: var(--ds-surface); color: var(--ds-text-primary);
+  font-family: var(--ds-font-sans); font-size: var(--ds-text-xs); cursor: pointer;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  padding: var(--ds-space-2); line-height: var(--ds-leading-snug);
+  transition: all var(--ds-duration-fast) var(--ds-ease-default);
+}
+.cm-card .cm-face { display: none; }
+.cm-card .cm-back { font-size: 24px; color: var(--ds-text-secondary); }
+.cm-card.flipped, .cm-card.matched { background: var(--ds-primary-50); border-color: var(--ds-primary-400); }
+[data-theme="dark"] .cm-card.flipped, [data-theme="dark"] .cm-card.matched { background: var(--ds-interactive-subtle); }
+.cm-card.flipped .cm-face, .cm-card.matched .cm-face { display: block; }
+.cm-card.flipped .cm-back, .cm-card.matched .cm-back { display: none; }
+.cm-card.matched { border-color: rgba(124, 179, 66, 0.6); cursor: default; opacity: 0.92; }
+.cm-card:hover:not(.flipped):not(.matched) { border-color: var(--ds-primary-400); }
+.cm-card:disabled { cursor: default; }
+.cm-stats { display: flex; gap: var(--ds-space-4); justify-content: center; font-family: var(--ds-font-sans); font-size: var(--ds-text-sm); color: var(--ds-text-secondary); margin-bottom: var(--ds-space-2); }
+/* Self-Care Bingo card */
+.bingo-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--ds-space-2); margin: var(--ds-space-3) 0; }
+.bingo-cell {
+  aspect-ratio: 1 / 1; border-radius: var(--ds-radius-md);
+  border: 1px solid var(--ds-border); background: var(--ds-surface); color: var(--ds-text-primary);
+  font-family: var(--ds-font-sans); font-size: 11px; line-height: 1.2; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  padding: 4px; transition: all var(--ds-duration-fast) var(--ds-ease-default);
+}
+.bingo-cell:hover:not(.free) { border-color: var(--ds-primary-400); }
+.bingo-cell.marked { background: var(--ds-primary-600); color: var(--ds-text-inverse); border-color: var(--ds-primary-600); }
+.bingo-cell.free { background: var(--ds-primary-50); border-color: var(--ds-primary-400); font-weight: var(--ds-weight-semibold); cursor: default; }
+[data-theme="dark"] .bingo-cell.free { background: var(--ds-interactive-subtle); }
 .gx-emotion-core { display: flex; flex-wrap: wrap; gap: var(--ds-space-2); justify-content: center; }
 .gx-jar {
   width: 160px; height: 200px; margin: 0 auto var(--ds-space-3); border-radius: 0 0 60px 60px;
@@ -1531,8 +1568,8 @@
   <div class="site-nav__inner">
 
     <a href="index.html" class="site-nav__logo" id="siteLogo">
-      <div class="site-nav__logo-mark">NH</div>
-      <span class="site-nav__logo-text">MH Resources</span>
+      <div class="site-nav__logo-mark">M</div>
+      <span class="site-nav__logo-text">Meridian MH</span>
     </a>
 
     <div class="site-nav__links">
@@ -1900,6 +1937,66 @@
       <span class="game-card__badge game-card__badge--purpose">Anger Management</span>
     </div>
     <button class="game-card__play-btn" onclick="openGame('calmcountdown')" aria-label="Play Cool-Down Countdown">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Play
+    </button>
+  </div>
+
+  <!-- Card 20: Coping Skills Match -->
+  <div class="game-card">
+    <div class="game-card__icon game-card__icon--copingmatch">&#129513;</div>
+    <h3 class="game-card__title">Coping Skills Match</h3>
+    <p class="game-card__desc">A memory matching game that pairs each stressful situation with a coping skill that fits it &mdash; with a quick note on why it works.</p>
+    <div class="game-card__meta">
+      <span class="game-card__badge game-card__badge--age">Ages 10+</span>
+      <span class="game-card__badge game-card__badge--purpose">Coping Skills Practice</span>
+    </div>
+    <button class="game-card__play-btn" onclick="openGame('copingmatch')" aria-label="Play Coping Skills Match">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Play
+    </button>
+  </div>
+
+  <!-- Card 21: Self-Care Bingo -->
+  <div class="game-card">
+    <div class="game-card__icon game-card__icon--selfcarebingo">&#127919;</div>
+    <h3 class="game-card__title">Self-Care Bingo</h3>
+    <p class="game-card__desc">A 5&times;5 card of small self-care actions. Tap each one you complete; fill a row, column, or diagonal for BINGO. Saves your progress.</p>
+    <div class="game-card__meta">
+      <span class="game-card__badge game-card__badge--age">Ages 13+</span>
+      <span class="game-card__badge game-card__badge--purpose">Self-Care &amp; Behavioral Activation</span>
+    </div>
+    <button class="game-card__play-btn" onclick="openGame('selfcarebingo')" aria-label="Play Self-Care Bingo">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Play
+    </button>
+  </div>
+
+  <!-- Card 22: Boundaries Quiz -->
+  <div class="game-card">
+    <div class="game-card__icon game-card__icon--boundaries">&#128679;</div>
+    <h3 class="game-card__title">Boundaries Quiz</h3>
+    <p class="game-card__desc">Scenario by scenario, decide whether a response reflects a healthy or unhealthy boundary &mdash; with feedback, a tip, and a final score.</p>
+    <div class="game-card__meta">
+      <span class="game-card__badge game-card__badge--age">Ages 16+</span>
+      <span class="game-card__badge game-card__badge--purpose">Healthy Boundaries</span>
+    </div>
+    <button class="game-card__play-btn" onclick="openGame('boundaries')" aria-label="Play Boundaries Quiz">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Play
+    </button>
+  </div>
+
+  <!-- Card 23: Emotional Vocabulary Builder -->
+  <div class="game-card">
+    <div class="game-card__icon game-card__icon--emovocab">&#128172;</div>
+    <h3 class="game-card__title">Emotional Vocabulary Builder</h3>
+    <p class="game-card__desc">Start with a broad feeling, then drill down to the precise word that fits &mdash; with a plain-language meaning. Build emotional granularity.</p>
+    <div class="game-card__meta">
+      <span class="game-card__badge game-card__badge--age">Ages 10+</span>
+      <span class="game-card__badge game-card__badge--purpose">Emotional Granularity</span>
+    </div>
+    <button class="game-card__play-btn" onclick="openGame('emovocab')" aria-label="Play Emotional Vocabulary Builder">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
       Play
     </button>
@@ -2334,6 +2431,75 @@
 </div>
 
 
+<!-- ---- Coping Skills Match Modal ---- -->
+<div class="game-modal-overlay" id="modal-copingmatch" role="dialog" aria-modal="true" aria-label="Coping Skills Match">
+  <div class="game-modal">
+    <div class="game-modal__header">
+      <h2 class="game-modal__title">Coping Skills Match</h2>
+      <button class="game-modal__close" onclick="closeGame('copingmatch')" aria-label="Close">&times;</button>
+    </div>
+    <div class="game-modal__body">
+      <p class="gx-help">Flip two cards to match a stressful situation with a coping skill that fits it. When you find a pair, you'll learn why it works.</p>
+      <div class="cm-stats">
+        <span>Moves: <strong id="cmMoves">0</strong></span>
+        <span>Pairs: <strong id="cmPairs">0</strong> / <strong id="cmTotal">8</strong></span>
+      </div>
+      <div class="cm-board" id="cmBoard"></div>
+      <div id="cmNote" aria-live="polite"></div>
+      <div class="gx-actions">
+        <button class="gx-btn" onclick="initCopingMatch()">New Game</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ---- Self-Care Bingo Modal ---- -->
+<div class="game-modal-overlay" id="modal-selfcarebingo" role="dialog" aria-modal="true" aria-label="Self-Care Bingo">
+  <div class="game-modal">
+    <div class="game-modal__header">
+      <h2 class="game-modal__title">Self-Care Bingo</h2>
+      <button class="game-modal__close" onclick="closeGame('selfcarebingo')" aria-label="Close">&times;</button>
+    </div>
+    <div class="game-modal__body">
+      <p class="gx-help">Tap each square as you do it this week. Complete any row, column, or diagonal for BINGO. Your progress is saved on this device.</p>
+      <div id="bingoStatus" aria-live="polite"></div>
+      <div class="bingo-grid" id="bingoGrid"></div>
+      <div class="gx-actions" style="justify-content:center">
+        <button class="gx-btn gx-btn--ghost" onclick="bingoNewCard()" aria-label="Shuffle a new bingo card">New Card</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ---- Boundaries Quiz Modal ---- -->
+<div class="game-modal-overlay" id="modal-boundaries" role="dialog" aria-modal="true" aria-label="Boundaries Quiz">
+  <div class="game-modal">
+    <div class="game-modal__header">
+      <h2 class="game-modal__title">Boundaries Quiz</h2>
+      <button class="game-modal__close" onclick="closeGame('boundaries')" aria-label="Close">&times;</button>
+    </div>
+    <div class="game-modal__body">
+      <p class="gx-help">Boundaries protect your time, energy, and self-respect. For each scenario, decide whether the response is a healthy or unhealthy boundary.</p>
+      <div id="boundariesStage"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ---- Emotional Vocabulary Builder Modal ---- -->
+<div class="game-modal-overlay" id="modal-emovocab" role="dialog" aria-modal="true" aria-label="Emotional Vocabulary Builder">
+  <div class="game-modal">
+    <div class="game-modal__header">
+      <h2 class="game-modal__title">Emotional Vocabulary Builder</h2>
+      <button class="game-modal__close" onclick="closeGame('emovocab')" aria-label="Close">&times;</button>
+    </div>
+    <div class="game-modal__body">
+      <p class="gx-help">Naming a feeling precisely helps you understand and soothe it &mdash; &ldquo;name it to tame it.&rdquo; Start broad, then find the word that fits best.</p>
+      <div id="emovocabStage"></div>
+    </div>
+  </div>
+</div>
+
+
 <!-- ============================================================
      FOOTER
      ============================================================ -->
@@ -2345,10 +2511,10 @@
       <!-- Brand column -->
       <div>
         <a href="index.html" class="site-nav__logo" style="text-decoration:none">
-          <div class="site-nav__logo-mark">NH</div>
-          <span class="site-nav__logo-text">MH Resources</span>
+          <div class="site-nav__logo-mark">M</div>
+          <span class="site-nav__logo-text">Meridian MH</span>
         </a>
-        <p class="footer__brand-desc">A comprehensive resource hub for clinicians, case managers, and community members in the Greater Nashua area.</p>
+        <p class="footer__brand-desc">Meridian is an independent resource hub for clinicians, case managers, and community members serving the Greater Nashua, NH area.</p>
 
         <div class="footer__crisis-box">
           <div class="footer__crisis-title">Crisis? Get help now.</div>
@@ -2406,6 +2572,9 @@
     <div class="footer__bottom">
       <div class="footer__disclaimer">
         This resource does not replace clinical judgment. Always follow your organization's policies and consult supervisors for complex cases. Some content is AI-assisted and should be verified by a licensed professional before clinical use.
+      </div>
+      <div class="footer__disclaimer footer__disclaimer--legal" style="margin-top:10px">
+        Meridian Mental Health Resources is an independent educational resource hub. It is not affiliated with any mental health agency, hospital, or government organization. Content is provided for informational and clinical reference purposes only and does not constitute medical advice, diagnosis, or treatment. Always seek the advice of a qualified mental health professional.
       </div>
       <div class="footer__meta">
         <span><span class="footer__status-dot"></span> Updated Jun 25, 2026</span>
@@ -2484,6 +2653,10 @@ function openGame(id) {
   if (id === 'flexibility') initFlexibility();
   if (id === 'socialscenarios') initSocial();
   if (id === 'calmcountdown') initCalm();
+  if (id === 'copingmatch') initCopingMatch();
+  if (id === 'selfcarebingo') initSelfCareBingo();
+  if (id === 'boundaries') initBoundaries();
+  if (id === 'emovocab') initEmoVocab();
   // Trap focus
   modal.querySelector('.game-modal__close').focus();
 }
@@ -3967,6 +4140,370 @@ function toggleCalm() {
     var t2 = gxEl('calmTimer'); if (t2) t2.textContent = fmtCalm(calmLeft);
   }, 1000);
 }
+
+// ============================================================
+// GAME 20: COPING SKILLS MATCH
+// ============================================================
+var copingPairs = [
+  { stress: 'Racing, anxious thoughts', skill: '5-4-3-2-1 Grounding', why: 'Grounding pulls attention back to your senses, interrupting the thought spiral.' },
+  { stress: 'Anger building up', skill: 'Take a timeout + deep breaths', why: 'A brief pause lets the body settle so the thinking brain comes back online.' },
+  { stress: "Can't sleep, mind won't stop", skill: 'Worry time + wind-down routine', why: 'Scheduling worry earlier and a calming routine signal the body it is safe to rest.' },
+  { stress: 'Overwhelmed by a big task', skill: 'Break it into small steps', why: 'One small next step shrinks the task to something your brain can actually start.' },
+  { stress: 'Lonely / isolated', skill: 'Reach out to one person', why: 'Connection is a basic need; a single message can break the isolation loop.' },
+  { stress: 'Urge to use / craving', skill: 'Urge surfing + HALT check', why: 'Urges peak and pass like waves; checking Hungry-Angry-Lonely-Tired finds the real need.' },
+  { stress: 'Low mood, no motivation', skill: 'One small pleasant activity', why: 'Behavioral activation: action comes first, and motivation often follows.' },
+  { stress: 'Panic / physical tension', skill: 'Box breathing', why: 'Slow, even breaths (in 4, hold 4, out 4, hold 4) calm the nervous system.' }
+];
+var cmCards = [], cmFlipped = [], cmMatches = 0, cmMoves = 0, cmLocked = false;
+function cmShuffle(arr) {
+  for (var i = arr.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+  }
+  return arr;
+}
+function initCopingMatch() {
+  cmFlipped = []; cmMatches = 0; cmMoves = 0; cmLocked = false;
+  var total = copingPairs.length;
+  var mv = gxEl('cmMoves'); if (mv) mv.textContent = '0';
+  var pr = gxEl('cmPairs'); if (pr) pr.textContent = '0';
+  var tl = gxEl('cmTotal'); if (tl) tl.textContent = String(total);
+  var note = gxEl('cmNote'); if (note) note.innerHTML = '';
+  cmCards = [];
+  copingPairs.forEach(function(p, i) {
+    cmCards.push({ id: i, role: 'stress', label: p.stress });
+    cmCards.push({ id: i, role: 'skill', label: p.skill });
+  });
+  cmShuffle(cmCards);
+  var board = gxEl('cmBoard');
+  if (!board) return;
+  board.innerHTML = '';
+  cmCards.forEach(function(card, index) {
+    var el = document.createElement('button');
+    el.className = 'cm-card';
+    el.setAttribute('data-index', String(index));
+    el.setAttribute('data-id', String(card.id));
+    el.setAttribute('aria-label', 'Card ' + (index + 1));
+    el.innerHTML = '<span class="cm-back">?</span><span class="cm-face">' + gxEscape(card.label) + '</span>';
+    el.addEventListener('click', function() { cmFlip(el); });
+    board.appendChild(el);
+  });
+}
+function cmFlip(el) {
+  if (cmLocked) return;
+  if (el.classList.contains('flipped') || el.classList.contains('matched')) return;
+  el.classList.add('flipped');
+  cmFlipped.push(el);
+  if (cmFlipped.length === 2) {
+    cmMoves++;
+    var mv = gxEl('cmMoves'); if (mv) mv.textContent = String(cmMoves);
+    cmLocked = true;
+    var a = cmFlipped[0], b = cmFlipped[1];
+    var match = a.getAttribute('data-id') === b.getAttribute('data-id');
+    if (match) {
+      a.classList.add('matched'); b.classList.add('matched');
+      a.disabled = true; b.disabled = true;
+      cmMatches++;
+      var pr = gxEl('cmPairs'); if (pr) pr.textContent = String(cmMatches);
+      var pair = copingPairs[parseInt(a.getAttribute('data-id'), 10)];
+      var note = gxEl('cmNote');
+      if (note) note.innerHTML = '<div class="gx-feedback gx-feedback--good"><strong>' +
+        gxEscape(pair.stress) + ' &rarr; ' + gxEscape(pair.skill) + '.</strong> ' + gxEscape(pair.why) + '</div>';
+      cmFlipped = []; cmLocked = false;
+      if (cmMatches === copingPairs.length) {
+        var n2 = gxEl('cmNote');
+        if (n2) n2.innerHTML = '<div class="gx-result gx-center"><h4>All matched in ' + cmMoves + ' moves! \u{1F389}</h4>' +
+          '<p>You\'ve paired each stressor with a skill that fits. The more you rehearse these matches, the faster the right tool comes to mind in the moment.</p>' +
+          '<div class="gx-actions" style="justify-content:center"><button class="gx-btn" onclick="initCopingMatch()">Play again</button></div></div>';
+      }
+    } else {
+      setTimeout(function() {
+        a.classList.remove('flipped'); b.classList.remove('flipped');
+        cmFlipped = []; cmLocked = false;
+      }, 1000);
+    }
+  }
+}
+
+// ============================================================
+// GAME 21: SELF-CARE BINGO
+// ============================================================
+var bingoPool = [
+  'Drink a glass of water', 'Step outside for 5 min', 'Text a friend', 'Stretch for 2 min',
+  'Write down 3 good things', 'Take 5 slow breaths', 'Tidy one small area', 'Listen to a favorite song',
+  'Go to bed on time', 'Say no to one thing', 'Eat a vegetable', 'Take a short walk',
+  'Unplug for 30 min', 'Do something creative', 'Compliment yourself', 'Make your bed',
+  'Wash your face', 'Open a window', 'Read a few pages', 'Sit in the sun',
+  'Have a healthy snack', 'Write in a journal', 'Pet an animal', 'Take a warm shower',
+  'Do a 1-min meditation', 'Plan one fun thing', 'Ask for help with something', 'Put your phone away at a meal',
+  'Stand up and move', 'Drink a warm drink', 'Forgive yourself a mistake', 'Laugh at something'
+];
+var BINGO_KEY = 'selfcarebingo.v1';
+var bingoCells = [], bingoMarks = [];
+function initSelfCareBingo() {
+  var loaded = bingoLoad();
+  if (loaded && loaded.cells && loaded.cells.length === 25) {
+    bingoCells = loaded.cells;
+    bingoMarks = loaded.marks && loaded.marks.length === 25 ? loaded.marks : bingoFreshMarks();
+  } else {
+    bingoBuildCard();
+  }
+  bingoRender();
+}
+function bingoFreshMarks() {
+  var m = [];
+  for (var i = 0; i < 25; i++) m.push(i === 12);
+  return m;
+}
+function bingoBuildCard() {
+  var pool = bingoPool.slice();
+  cmShuffle(pool);
+  var picks = pool.slice(0, 24);
+  bingoCells = [];
+  var p = 0;
+  for (var i = 0; i < 25; i++) {
+    if (i === 12) { bingoCells.push('FREE'); }
+    else { bingoCells.push(picks[p++]); }
+  }
+  bingoMarks = bingoFreshMarks();
+  bingoSave();
+}
+function bingoNewCard() {
+  try { localStorage.removeItem(BINGO_KEY); } catch (e) {}
+  bingoBuildCard();
+  bingoRender();
+}
+function bingoSave() {
+  try { localStorage.setItem(BINGO_KEY, JSON.stringify({ cells: bingoCells, marks: bingoMarks })); } catch (e) {}
+}
+function bingoLoad() {
+  try {
+    var raw = localStorage.getItem(BINGO_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch (e) { return null; }
+}
+function bingoRender() {
+  var grid = gxEl('bingoGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  bingoCells.forEach(function(text, i) {
+    var el = document.createElement('button');
+    var isFree = (i === 12);
+    el.className = 'bingo-cell' + (isFree ? ' free marked' : '') + (!isFree && bingoMarks[i] ? ' marked' : '');
+    el.setAttribute('aria-label', isFree ? 'Free space' : text + (bingoMarks[i] ? ', completed' : ', not yet'));
+    if (!isFree) el.setAttribute('aria-pressed', bingoMarks[i] ? 'true' : 'false');
+    el.textContent = isFree ? 'FREE' : text;
+    if (!isFree) {
+      el.addEventListener('click', function() {
+        bingoMarks[i] = !bingoMarks[i];
+        bingoSave();
+        bingoRender();
+      });
+    } else {
+      el.disabled = true;
+    }
+    grid.appendChild(el);
+  });
+  bingoCheck();
+}
+function bingoCheck() {
+  var status = gxEl('bingoStatus');
+  if (!status) return;
+  var lines = 0;
+  // rows
+  for (var r = 0; r < 5; r++) {
+    var full = true;
+    for (var c = 0; c < 5; c++) { if (!bingoMarks[r * 5 + c]) { full = false; break; } }
+    if (full) lines++;
+  }
+  // cols
+  for (var c2 = 0; c2 < 5; c2++) {
+    var full2 = true;
+    for (var r2 = 0; r2 < 5; r2++) { if (!bingoMarks[r2 * 5 + c2]) { full2 = false; break; } }
+    if (full2) lines++;
+  }
+  // diagonals
+  var d1 = true, d2 = true;
+  for (var k = 0; k < 5; k++) {
+    if (!bingoMarks[k * 5 + k]) d1 = false;
+    if (!bingoMarks[k * 5 + (4 - k)]) d2 = false;
+  }
+  if (d1) lines++;
+  if (d2) lines++;
+  if (lines > 0) {
+    status.innerHTML = '<div class="gx-feedback gx-feedback--good gx-center"><strong>BINGO! \u{1F389}</strong> ' +
+      'You completed ' + lines + ' line' + (lines === 1 ? '' : 's') + '. Every square is a small act of caring for yourself &mdash; nicely done.</div>';
+  } else {
+    status.innerHTML = '';
+  }
+}
+
+// ============================================================
+// GAME 22: BOUNDARIES QUIZ
+// ============================================================
+var boundariesItems = [
+  { text: 'A friend keeps texting after you said you need to sleep; you mute notifications and respond in the morning.', healthy: true,
+    fb: 'You honored your stated limit without anger or drama. Protecting rest is a reasonable, healthy boundary.',
+    tip: 'A boundary is about what you will do, not about controlling the other person.' },
+  { text: 'You cancel your own plans every time a family member asks for help, even when you are exhausted.', healthy: false,
+    fb: 'Always overriding your own needs leads to burnout and resentment. Helping is good; abandoning yourself every time is not.',
+    tip: 'You can care about someone and still say "not this time."' },
+  { text: 'You tell a coworker, "I can\'t take that on this week, but I can help next week."', healthy: true,
+    fb: 'Clear, kind, and specific. You declined the immediate ask while offering a realistic alternative.',
+    tip: '"No" is a complete sentence, but an honest alternative can keep relationships warm.' },
+  { text: 'You say yes to a favor while silently resenting it.', healthy: false,
+    fb: 'A resentful yes erodes the relationship and your own wellbeing. Silent compliance isn\'t a real boundary.',
+    tip: 'Notice resentment as a signal that a boundary wants to be set.' },
+  { text: 'You let someone know which topics you\'re not ready to discuss yet, and ask to change the subject.', healthy: true,
+    fb: 'You named a limit about your own emotional space directly and respectfully. That\'s a healthy boundary.',
+    tip: 'You get to decide what you share and when.' },
+  { text: 'You read your partner\'s private messages because you "have a right to know everything."', healthy: false,
+    fb: 'Everyone is entitled to some privacy. Overriding it treats a boundary as something to breach rather than respect.',
+    tip: 'Trust is built by respecting limits, not by removing them.' },
+  { text: 'After a hard day, you tell a friend, "I\'d love to vent for a bit &mdash; is that okay right now?"', healthy: true,
+    fb: 'You checked their capacity before leaning on them. Healthy boundaries go both ways &mdash; including respecting others\'.',
+    tip: 'Asking consent for support honors both people\'s limits.' },
+  { text: 'You give someone the silent treatment for days instead of telling them what bothered you.', healthy: false,
+    fb: 'Withdrawing to punish isn\'t a boundary &mdash; it\'s a wall. Boundaries are stated, not enforced through cold shoulders.',
+    tip: 'A boundary is communicated; punishment is not.' },
+  { text: 'You decline an extra shift because you already feel stretched thin, even though it would please your boss.', healthy: true,
+    fb: 'You weighed your own limits against approval and chose your wellbeing. That self-respect is a healthy boundary.',
+    tip: 'Your worth isn\'t measured by how much you can absorb.' },
+  { text: 'You apologize repeatedly for having needs at all, hoping the other person won\'t be upset.', healthy: false,
+    fb: 'Over-apologizing for normal needs signals that your needs don\'t count. Needs are not something to be sorry for.',
+    tip: 'You\'re allowed to take up space and ask for what you need.' }
+];
+var boundariesIdx = 0, boundariesScore = 0, boundariesAnswered = false;
+function initBoundaries() {
+  boundariesIdx = 0; boundariesScore = 0; boundariesAnswered = false;
+  renderBoundaries();
+}
+function renderBoundaries() {
+  var s = gxEl('boundariesStage');
+  if (!s) return;
+  if (boundariesIdx >= boundariesItems.length) {
+    s.innerHTML = '<div class="gx-result gx-center"><h4>You scored ' + boundariesScore + ' / ' + boundariesItems.length + '</h4>' +
+      '<p>Healthy boundaries are about limits, not walls. They mean saying no without guilt, protecting your time and energy, and respecting the same in others. Setting them is a skill that grows with practice &mdash; and it\'s an act of self-respect, not selfishness.</p>' +
+      '<div class="gx-actions" style="justify-content:center"><button class="gx-btn" onclick="initBoundaries()">Play again</button></div></div>';
+    return;
+  }
+  boundariesAnswered = false;
+  var item = boundariesItems[boundariesIdx];
+  s.innerHTML = '<p class="gx-help" style="margin-bottom:8px">Scenario ' + (boundariesIdx + 1) + ' of ' + boundariesItems.length + '</p>' +
+    '<div class="gx-card"><p style="margin:0;font-family:var(--ds-font-sans);font-size:var(--ds-text-base);color:var(--ds-text-primary)">' + gxEscape(item.text) + '</p></div>' +
+    '<p class="gx-label">Is this a healthy or unhealthy boundary?</p>' +
+    '<div id="boundariesOptions" style="display:flex;gap:8px;flex-wrap:wrap">' +
+      '<button class="gx-btn gx-btn--ghost" style="flex:1;min-width:120px" onclick="answerBoundaries(true)">Healthy</button>' +
+      '<button class="gx-btn gx-btn--ghost" style="flex:1;min-width:120px" onclick="answerBoundaries(false)">Unhealthy</button>' +
+    '</div><div id="boundariesFeedback"></div>';
+}
+function answerBoundaries(choice) {
+  if (boundariesAnswered) return;
+  boundariesAnswered = true;
+  var item = boundariesItems[boundariesIdx];
+  var correct = (choice === item.healthy);
+  if (correct) boundariesScore++;
+  document.querySelectorAll('#boundariesOptions button').forEach(function(b) { b.disabled = true; });
+  var fb = gxEl('boundariesFeedback');
+  if (fb) {
+    fb.innerHTML = '<div class="gx-feedback ' + (correct ? 'gx-feedback--good' : 'gx-feedback--warn') + '">' +
+      '<strong>' + (correct ? 'You got it &mdash; this is ' : 'Actually, this is ') + (item.healthy ? 'a healthy' : 'an unhealthy') + ' boundary.</strong><br>' +
+      gxEscape(item.fb) + '<br><em>Tip: ' + gxEscape(item.tip) + '</em></div>' +
+      '<div class="gx-actions"><button class="gx-btn" onclick="boundariesNext()">' +
+      (boundariesIdx === boundariesItems.length - 1 ? 'See results' : 'Next scenario') + '</button></div>';
+  }
+}
+function boundariesNext() { boundariesIdx++; renderBoundaries(); }
+
+// ============================================================
+// GAME 23: EMOTIONAL VOCABULARY BUILDER
+// ============================================================
+var emovocabScenarios = [
+  { text: 'You worked hard on something, but it didn\'t turn out the way you hoped.', family: 'Sad',
+    words: [
+      { w: 'Disappointed', def: 'Let down because reality fell short of what you expected or hoped for.' },
+      { w: 'Discouraged', def: 'Losing confidence or motivation to keep trying.' },
+      { w: 'Deflated', def: 'Drained of energy and enthusiasm, like the wind left your sails.' }
+    ] },
+  { text: 'A friend made plans without you and you only found out afterward.', family: 'Sad',
+    words: [
+      { w: 'Hurt', def: 'Emotional pain from feeling wronged or rejected by someone you care about.' },
+      { w: 'Left out', def: 'Excluded from a group or activity you wanted to be part of.' },
+      { w: 'Lonely', def: 'Feeling disconnected, even when others are around.' }
+    ] },
+  { text: 'Someone interrupted you repeatedly and took credit for your idea.', family: 'Mad',
+    words: [
+      { w: 'Frustrated', def: 'Blocked or thwarted from doing or getting what you want.' },
+      { w: 'Resentful', def: 'A lingering bitterness over feeling treated unfairly.' },
+      { w: 'Indignant', def: 'Angry at something that feels clearly unjust or undeserved.' }
+    ] },
+  { text: 'Your plans for the weekend just fell perfectly into place.', family: 'Glad',
+    words: [
+      { w: 'Content', def: 'A calm, settled satisfaction with how things are.' },
+      { w: 'Excited', def: 'Energized and eager for something you\'re looking forward to.' },
+      { w: 'Grateful', def: 'Warmly appreciative of something good in your life.' }
+    ] },
+  { text: 'You have to give a presentation in front of a large group tomorrow.', family: 'Scared',
+    words: [
+      { w: 'Nervous', def: 'Uneasy anticipation before something uncertain or important.' },
+      { w: 'Anxious', def: 'A persistent worry or dread about what might happen.' },
+      { w: 'Apprehensive', def: 'A cautious sense that something could go wrong.' }
+    ] },
+  { text: 'You finally finished a project you\'d been avoiding for weeks.', family: 'Glad',
+    words: [
+      { w: 'Relieved', def: 'Eased of tension now that a worry or burden has lifted.' },
+      { w: 'Proud', def: 'A warm sense of accomplishment in what you achieved.' },
+      { w: 'Accomplished', def: 'Capable and effective, having met a meaningful goal.' }
+    ] },
+  { text: 'Someone close to you is going through a serious illness.', family: 'Sad',
+    words: [
+      { w: 'Worried', def: 'Preoccupied with concern about someone\'s wellbeing.' },
+      { w: 'Heartbroken', def: 'Deep grief or sorrow over something painful.' },
+      { w: 'Helpless', def: 'Unable to change or fix a situation you wish you could.' }
+    ] },
+  { text: 'You tried something new and it went better than you ever expected.', family: 'Glad',
+    words: [
+      { w: 'Delighted', def: 'A bright, pleasant surprise of joy.' },
+      { w: 'Encouraged', def: 'Hopeful and motivated to keep going.' },
+      { w: 'Confident', def: 'A trust in your own ability to handle what comes.' }
+    ] }
+];
+var emovocabIdx = 0;
+function initEmoVocab() {
+  emovocabIdx = 0;
+  renderEmoVocab();
+}
+function renderEmoVocab() {
+  var s = gxEl('emovocabStage');
+  if (!s) return;
+  if (emovocabIdx >= emovocabScenarios.length) {
+    s.innerHTML = '<div class="gx-result gx-center"><h4>Beautifully done \u{1F3AD}</h4>' +
+      '<p>The more precise your emotional vocabulary, the better you can understand and care for yourself. Researchers call this emotional granularity &mdash; and "name it to tame it" really works: putting a specific word to a feeling helps calm the brain\'s alarm system. There\'s no wrong answer here, only practice.</p>' +
+      '<div class="gx-actions" style="justify-content:center"><button class="gx-btn" onclick="initEmoVocab()">Explore again</button></div></div>';
+    return;
+  }
+  var sc = emovocabScenarios[emovocabIdx];
+  var words = sc.words.map(function(o, i) {
+    return '<button class="gx-btn gx-btn--ghost" style="width:100%;text-align:left;margin-bottom:8px" onclick="emovocabPick(' + i + ')">' + gxEscape(o.w) + '</button>';
+  }).join('');
+  s.innerHTML = '<p class="gx-help" style="margin-bottom:8px">Scenario ' + (emovocabIdx + 1) + ' of ' + emovocabScenarios.length + '</p>' +
+    '<div class="gx-card"><p style="margin:0;font-family:var(--ds-font-sans);font-size:var(--ds-text-base);color:var(--ds-text-primary)">' + gxEscape(sc.text) + '</p></div>' +
+    '<p class="gx-label">This sits in the <strong>' + gxEscape(sc.family) + '</strong> family. Which more precise word fits best for you?</p>' +
+    '<div id="emovocabWords">' + words + '</div><div id="emovocabFeedback"></div>';
+}
+function emovocabPick(i) {
+  var sc = emovocabScenarios[emovocabIdx];
+  var word = sc.words[i];
+  document.querySelectorAll('#emovocabWords button').forEach(function(b) { b.disabled = true; });
+  var fb = gxEl('emovocabFeedback');
+  if (fb) {
+    fb.innerHTML = '<div class="gx-feedback gx-feedback--info"><strong>' + gxEscape(word.w) + '.</strong> ' + gxEscape(word.def) +
+      '<br><em>Whatever you chose is valid &mdash; naming it this precisely is the whole point.</em></div>' +
+      '<div class="gx-actions"><button class="gx-btn" onclick="emovocabNext()">' +
+      (emovocabIdx === emovocabScenarios.length - 1 ? 'Finish' : 'Next scenario') + '</button></div>';
+  }
+}
+function emovocabNext() { emovocabIdx++; renderEmoVocab(); }
 </script>
 
 <script src="js/search.js"></script>

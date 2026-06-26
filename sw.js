@@ -1,7 +1,7 @@
-// Service Worker — Greater Nashua Community MH Resources
+// Service Worker — Meridian Mental Health Resources
 // Caches all pages for offline access at air-gapped facilities
 
-const CACHE_NAME = 'mh-resources-v16';
+const CACHE_NAME = 'meridian-resources-v17';
 const ASSETS = [
   './',
   './index.html',

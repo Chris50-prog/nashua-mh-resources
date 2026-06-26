@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clinical Tools | Greater Nashua Community Mental Health Resources</title>
+<title>Clinical Tools | Meridian Mental Health Resources</title>
 <meta name="description" content="Interactive clinical worksheets for CBT, DBT, TF-CBT, MI, SFBT, and standardized screening tools (PHQ-9, GAD-7, AUDIT, DAST-10, C-SSRS).">
-<meta property="og:title" content="Clinical Tools | Greater Nashua Community Mental Health Resources">
+<meta property="og:title" content="Clinical Tools | Meridian Mental Health Resources">
 <meta property="og:description" content="Interactive clinical worksheets for CBT, DBT, TF-CBT, MI, SFBT, and standardized screening tools (PHQ-9, GAD-7, AUDIT, DAST-10, C-SSRS).">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -1980,8 +1980,8 @@
   <div class="site-nav__inner">
 
     <a href="index.html" class="site-nav__logo" id="siteLogo">
-      <div class="site-nav__logo-mark">NH</div>
-      <span class="site-nav__logo-text">MH Resources</span>
+      <div class="site-nav__logo-mark">M</div>
+      <span class="site-nav__logo-text">Meridian MH</span>
     </a>
 
     <div class="site-nav__links">
@@ -2158,6 +2158,8 @@
     <a href="#anger-management" class="category-btn">Anger</a>
     <a href="#substance-use-tools" class="category-btn">Substance Use</a>
     <a href="#clinical-rating-scales" class="category-btn">Rating Scales</a>
+    <a href="#stress-inventory" class="category-btn">Stress Inventory</a>
+    <a href="#decision-matrix" class="category-btn">Decision Matrix</a>
     <a href="#emotion-regulation-reference" class="category-btn">Emotion Regulation</a>
     <a href="#psychoeducation-handouts-ref" class="category-btn">Psychoeducation</a>
   </div>
@@ -2253,6 +2255,8 @@
             <a href="#anger-management">Anger Management</a>
             <a href="#substance-use-tools">Substance Use &amp; Recovery</a>
             <a href="#clinical-rating-scales">Clinical Rating Scales</a>
+            <a href="#stress-inventory">Holmes-Rahe Stress Inventory</a>
+            <a href="#decision-matrix">Pros / Cons Decision Matrix</a>
             <a href="#emotion-regulation-reference">Emotion Regulation &amp; Distress Tolerance</a>
             <a href="#psychoeducation-handouts-ref">Psychoeducation Quick Facts</a>
           </div>
@@ -12657,6 +12661,486 @@ SAMHSA National Helpline: 1-800-662-4357</textarea>
 </section>
 
 <!-- ================================================================
+     Holmes-Rahe Stress Inventory (Social Readjustment Rating Scale)
+     ================================================================ -->
+<section class="modality-section" id="stress-inventory">
+  <div class="modality-header">
+    <div class="modality-badge" style="background:var(--ds-warning-600)">SRR</div>
+    <div>
+      <h2>Holmes-Rahe Stress Inventory</h2>
+      <div class="modality-desc">Social Readjustment Rating Scale &mdash; check the life events from the past 12 months for an auto-scored estimate of stress-related health risk</div>
+    </div>
+  </div>
+
+  <div class="worksheet" id="srr-worksheet">
+    <h3>Life Events Checklist (past 12 months)</h3>
+    <div class="ws-subtitle">Check each life event that has happened to you (or that you anticipate) in the last year. Each event carries a Life Change Unit (LCU) value; the total estimates your level of stress-related health risk.</div>
+
+    <div class="soap-disclaimer">
+      <strong>Disclaimer:</strong> The Social Readjustment Rating Scale is a self-reflection and screening aid, not a diagnostic instrument. LCU values are population averages and do not account for individual resilience, coping resources, or context. A high score is an invitation to attend to stress, not a prediction of illness.
+    </div>
+
+    <!-- Sticky running total -->
+    <div class="srr-total-bar" id="srrTotalBar">
+      <div class="srr-total-block">
+        <div class="srr-total-num" id="srrTotalNum">0</div>
+        <div class="srr-total-label">Total Life Change Units (LCU)</div>
+      </div>
+      <div class="srr-total-count" id="srrTotalCount">0 events selected</div>
+    </div>
+
+    <div class="srr-list" id="srrList"></div>
+
+    <div class="srr-result" id="srrResult" style="display:none">
+      <div class="srr-result-band" id="srrResultBand">&mdash;</div>
+      <div class="srr-result-guidance" id="srrResultGuidance"></div>
+      <div class="srr-disclaimer-line">For educational and self-reflection use. Not a substitute for professional clinical judgment.</div>
+    </div>
+
+    <div class="ws-actions">
+      <button class="btn btn-sm" onclick="srrReset()">Reset</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     Pros / Cons Weighted Decision Matrix
+     ================================================================ -->
+<section class="modality-section" id="decision-matrix">
+  <div class="modality-header">
+    <div class="modality-badge" style="background:var(--ds-info-600)">DM</div>
+    <div>
+      <h2>Pros / Cons Decision Matrix</h2>
+      <div class="modality-desc">A weighted decision aid &mdash; list reasons for and against, weight each by importance, and see where the balance leans</div>
+    </div>
+  </div>
+
+  <div class="worksheet" id="dm-worksheet">
+    <h3>Weighted Pros &amp; Cons</h3>
+    <div class="ws-subtitle">Name the decision you are weighing, then add reasons under each column. Rate each reason's importance from 1 (minor) to 5 (major). The tool sums the weighted totals and shows where things lean. No data is stored or transmitted.</div>
+
+    <div class="soap-disclaimer">
+      <strong>Disclaimer:</strong> This matrix organizes your own reasoning &mdash; it does not make the decision for you. The weighted totals are a thinking aid, not an answer. Some decisions hinge on a single value that no tally can outweigh.
+    </div>
+
+    <div class="ws-field" style="margin-bottom:18px">
+      <label for="dmDecision">Decision being considered</label>
+      <input type="text" id="dmDecision" placeholder="e.g., Should I take the new job offer?" style="width:100%;padding:9px 11px;border:1px solid var(--ds-border);border-radius:var(--ds-radius-md);font-size:14px;font-family:inherit;outline:none">
+    </div>
+
+    <div class="dm-columns">
+      <div class="dm-col dm-col-pros">
+        <div class="dm-col-header">
+          <span class="dm-col-title">Pros &mdash; reasons for</span>
+          <span class="dm-col-total" id="dmProsTotal">0</span>
+        </div>
+        <div id="dmProsRows"></div>
+        <button class="sp-add-btn" onclick="dmAddRow('pros')">+ Add a Pro</button>
+      </div>
+      <div class="dm-col dm-col-cons">
+        <div class="dm-col-header">
+          <span class="dm-col-title">Cons &mdash; reasons against</span>
+          <span class="dm-col-total" id="dmConsTotal">0</span>
+        </div>
+        <div id="dmConsRows"></div>
+        <button class="sp-add-btn" onclick="dmAddRow('cons')">+ Add a Con</button>
+      </div>
+    </div>
+
+    <div class="calc-results" style="display:grid">
+      <div class="calc-result-card calc-success">
+        <div class="calc-val" id="dmProsCard">0</div>
+        <div class="calc-label">Weighted Pros</div>
+      </div>
+      <div class="calc-result-card calc-danger">
+        <div class="calc-val" id="dmConsCard">0</div>
+        <div class="calc-label">Weighted Cons</div>
+      </div>
+      <div class="calc-result-card">
+        <div class="calc-val" id="dmNetCard">0</div>
+        <div class="calc-label">Net Difference</div>
+      </div>
+    </div>
+
+    <div class="dm-lean" id="dmLean">Add some reasons above to see where things lean.</div>
+    <div class="srr-disclaimer-line">For educational and self-reflection use. Not a substitute for professional clinical judgment.</div>
+
+    <div class="ws-actions">
+      <button class="btn btn-sm btn-primary" onclick="dmCopy()">Copy as Text</button>
+      <button class="btn btn-sm" onclick="dmReset()">Reset</button>
+    </div>
+  </div>
+</section>
+
+<!-- Holmes-Rahe + Decision Matrix scoped styles -->
+<style>
+/* Holmes-Rahe Stress Inventory */
+.srr-total-bar {
+  position: sticky; top: 8px; z-index: 5;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap;
+  background: var(--ds-surface-sunken); border: 1px solid var(--ds-border);
+  border-left: 4px solid var(--ds-primary-600);
+  border-radius: var(--ds-radius-md); padding: 12px 16px; margin-bottom: 18px;
+}
+.srr-total-block { display: flex; align-items: baseline; gap: 10px; }
+.srr-total-num { font-size: 30px; font-weight: 800; color: var(--ds-primary-600); line-height: 1; }
+.srr-total-label { font-size: 12px; font-weight: 600; color: var(--ds-text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.srr-total-count { font-size: 13px; color: var(--ds-text-secondary); font-weight: 600; }
+.srr-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-bottom: 18px; }
+.srr-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 12px; border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md); background: var(--ds-surface);
+  cursor: pointer; transition: border-color 0.12s, background 0.12s;
+}
+.srr-item:hover { border-color: var(--ds-primary-600); }
+.srr-item.srr-checked { border-color: var(--ds-primary-600); background: var(--ds-surface-sunken); }
+.srr-item input[type="checkbox"] { width: 17px; height: 17px; flex: 0 0 auto; accent-color: var(--ds-primary-600); cursor: pointer; }
+.srr-item-label { flex: 1; font-size: 13.5px; color: var(--ds-text-primary); line-height: 1.3; }
+.srr-item-lcu { flex: 0 0 auto; font-size: 13px; font-weight: 700; color: var(--ds-text-muted); min-width: 28px; text-align: right; }
+.srr-item.srr-checked .srr-item-lcu { color: var(--ds-primary-600); }
+.srr-result { border-radius: var(--ds-radius-lg); padding: 18px 20px; margin-bottom: 16px; border: 1px solid var(--ds-border); background: var(--ds-surface-sunken); }
+.srr-result-band { font-size: 17px; font-weight: 800; line-height: 1.3; margin-bottom: 6px; }
+.srr-result-guidance { font-size: 14px; color: var(--ds-text-secondary); line-height: 1.55; }
+.srr-disclaimer-line { font-size: 11.5px; color: var(--ds-text-muted); font-style: italic; margin-top: 10px; }
+.srr-result.srr-band-high { border-left: 4px solid var(--ds-danger-600); }
+.srr-result.srr-band-high .srr-result-band { color: var(--ds-danger-600); }
+.srr-result.srr-band-moderate { border-left: 4px solid var(--ds-warning-600); }
+.srr-result.srr-band-moderate .srr-result-band { color: var(--ds-warning-600); }
+.srr-result.srr-band-low { border-left: 4px solid var(--ds-success-600); }
+.srr-result.srr-band-low .srr-result-band { color: var(--ds-success-600); }
+
+/* Decision Matrix */
+.dm-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 8px; }
+@media (max-width: 640px) { .dm-columns { grid-template-columns: 1fr; } }
+.dm-col { border: 1px solid var(--ds-border); border-radius: var(--ds-radius-lg); padding: 14px; background: var(--ds-surface); }
+.dm-col-pros { border-top: 3px solid var(--ds-success-600); }
+.dm-col-cons { border-top: 3px solid var(--ds-danger-600); }
+.dm-col-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.dm-col-title { font-size: 13px; font-weight: 700; color: var(--ds-text-primary); text-transform: uppercase; letter-spacing: 0.5px; }
+.dm-col-total { font-size: 20px; font-weight: 800; }
+.dm-col-pros .dm-col-total { color: var(--ds-success-600); }
+.dm-col-cons .dm-col-total { color: var(--ds-danger-600); }
+.dm-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.dm-row input[type="text"] {
+  flex: 1; min-width: 0; padding: 8px 10px;
+  border: 1px solid var(--ds-border); border-radius: var(--ds-radius-md);
+  font-size: 13.5px; font-family: inherit; outline: none;
+  background: var(--ds-surface-sunken); color: var(--ds-text-primary);
+}
+.dm-row input[type="text"]:focus { border-color: var(--ds-primary-600); }
+.dm-weight-wrap { flex: 0 0 auto; display: flex; align-items: center; gap: 4px; }
+.dm-weight-wrap select {
+  padding: 7px 6px; border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md); font-size: 13px; font-family: inherit;
+  background: var(--ds-surface-sunken); color: var(--ds-text-primary); cursor: pointer; outline: none;
+}
+.dm-weight-wrap .dm-weight-x { font-size: 11px; color: var(--ds-text-muted); }
+.dm-row .sp-remove-btn {
+  flex: 0 0 auto; width: 28px; height: 28px;
+  border: 1px solid var(--ds-border); background: var(--ds-surface);
+  border-radius: var(--ds-radius-md); color: var(--ds-text-muted);
+  cursor: pointer; font-size: 16px; line-height: 1;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.dm-row .sp-remove-btn:hover { color: var(--ds-danger-600); border-color: var(--ds-danger-600); }
+.dm-lean {
+  font-size: 15px; font-weight: 700; text-align: center;
+  padding: 14px 16px; border-radius: var(--ds-radius-md);
+  background: var(--ds-surface-sunken); border: 1px solid var(--ds-border);
+  color: var(--ds-text-primary); margin: 4px 0 6px;
+}
+.dm-lean.dm-lean-for { border-left: 4px solid var(--ds-success-600); color: var(--ds-success-600); }
+.dm-lean.dm-lean-against { border-left: 4px solid var(--ds-danger-600); color: var(--ds-danger-600); }
+.dm-lean.dm-lean-balanced { border-left: 4px solid var(--ds-warning-600); color: var(--ds-warning-600); }
+</style>
+
+<script>
+// ========== HOLMES-RAHE STRESS INVENTORY ==========
+(function() {
+  var srrEvents = [
+    { t: 'Death of spouse', v: 100 },
+    { t: 'Divorce', v: 73 },
+    { t: 'Marital separation', v: 65 },
+    { t: 'Jail term', v: 63 },
+    { t: 'Death of close family member', v: 63 },
+    { t: 'Personal injury or illness', v: 53 },
+    { t: 'Marriage', v: 50 },
+    { t: 'Fired at work', v: 47 },
+    { t: 'Marital reconciliation', v: 45 },
+    { t: 'Retirement', v: 45 },
+    { t: 'Change in health of family member', v: 44 },
+    { t: 'Pregnancy', v: 40 },
+    { t: 'Sex difficulties', v: 39 },
+    { t: 'Gain of new family member', v: 39 },
+    { t: 'Business readjustment', v: 39 },
+    { t: 'Change in financial state', v: 38 },
+    { t: 'Death of close friend', v: 37 },
+    { t: 'Change to different line of work', v: 36 },
+    { t: 'Change in number of arguments with spouse', v: 35 },
+    { t: 'A large mortgage or loan', v: 31 },
+    { t: 'Foreclosure of mortgage or loan', v: 30 },
+    { t: 'Change in responsibilities at work', v: 29 },
+    { t: 'Son or daughter leaving home', v: 29 },
+    { t: 'Trouble with in-laws', v: 29 },
+    { t: 'Outstanding personal achievement', v: 28 },
+    { t: 'Spouse begins or stops work', v: 26 },
+    { t: 'Begin or end school', v: 26 },
+    { t: 'Change in living conditions', v: 25 },
+    { t: 'Revision of personal habits', v: 24 },
+    { t: 'Trouble with boss', v: 23 },
+    { t: 'Change in work hours or conditions', v: 20 },
+    { t: 'Change in residence', v: 20 },
+    { t: 'Change in schools', v: 20 },
+    { t: 'Change in recreation', v: 19 },
+    { t: 'Change in church activities', v: 19 },
+    { t: 'Change in social activities', v: 18 },
+    { t: 'A moderate loan or mortgage', v: 17 },
+    { t: 'Change in sleeping habits', v: 16 },
+    { t: 'Change in number of family get-togethers', v: 15 },
+    { t: 'Change in eating habits', v: 15 },
+    { t: 'Vacation', v: 13 },
+    { t: 'Christmas/major holiday', v: 12 },
+    { t: 'Minor violation of the law', v: 11 }
+  ];
+
+  var srrList = document.getElementById('srrList');
+  if (!srrList) return;
+
+  function srrEscape(str) {
+    var d = document.createElement('div');
+    d.textContent = str;
+    return d.innerHTML;
+  }
+
+  // Render items
+  var html = '';
+  srrEvents.forEach(function(ev, i) {
+    html += '<label class="srr-item" data-idx="' + i + '">';
+    html += '<input type="checkbox" data-lcu="' + ev.v + '" onchange="srrOnToggle(this)">';
+    html += '<span class="srr-item-label">' + srrEscape(ev.t) + '</span>';
+    html += '<span class="srr-item-lcu">' + ev.v + '</span>';
+    html += '</label>';
+  });
+  srrList.innerHTML = html;
+
+  function srrUpdate() {
+    var boxes = srrList.querySelectorAll('input[type="checkbox"]');
+    var total = 0, count = 0;
+    boxes.forEach(function(b) {
+      if (b.checked) { total += parseInt(b.getAttribute('data-lcu'), 10); count++; }
+    });
+
+    document.getElementById('srrTotalNum').textContent = total;
+    document.getElementById('srrTotalCount').textContent = count + (count === 1 ? ' event selected' : ' events selected');
+
+    var result = document.getElementById('srrResult');
+    var bandEl = document.getElementById('srrResultBand');
+    var guideEl = document.getElementById('srrResultGuidance');
+
+    if (count === 0) {
+      result.style.display = 'none';
+      return;
+    }
+    result.style.display = 'block';
+    result.classList.remove('srr-band-high', 'srr-band-moderate', 'srr-band-low');
+
+    if (total >= 300) {
+      result.classList.add('srr-band-high');
+      bandEl.textContent = 'High risk — ' + total + ' LCU';
+      guideEl.innerHTML = 'A total of 300 or more is associated with a <strong>high risk (~80%)</strong> of a stress-related illness or health breakdown in the near future. This is a strong cue to prioritize stress-management and self-care &mdash; sleep, support, pacing &mdash; and to discuss your current load with a clinician or trusted person.';
+    } else if (total >= 150) {
+      result.classList.add('srr-band-moderate');
+      bandEl.textContent = 'Moderate risk — ' + total + ' LCU';
+      guideEl.innerHTML = 'A total between 150 and 299 carries a <strong>moderate risk (~50%)</strong> of a stress-related illness. It is worth being intentional about stress-management and self-care now, and noticing early warning signs of strain before they build.';
+    } else {
+      result.classList.add('srr-band-low');
+      bandEl.textContent = 'Lower risk — ' + total + ' LCU';
+      guideEl.innerHTML = 'A total below 150 reflects a <strong>relatively low risk (~30%)</strong> of a stress-related illness. Even so, maintaining good self-care and stress-management habits helps keep your reserves steady as life changes accumulate.';
+    }
+  }
+
+  // Expose handlers
+  window.srrOnToggle = function(box) {
+    var item = box.closest('.srr-item');
+    if (item) item.classList.toggle('srr-checked', box.checked);
+    srrUpdate();
+  };
+
+  window.srrReset = function() {
+    srrList.querySelectorAll('input[type="checkbox"]').forEach(function(b) {
+      b.checked = false;
+      var item = b.closest('.srr-item');
+      if (item) item.classList.remove('srr-checked');
+    });
+    srrUpdate();
+  };
+
+  srrUpdate();
+})();
+
+// ========== PROS / CONS DECISION MATRIX ==========
+(function() {
+  var prosRoot = document.getElementById('dmProsRows');
+  var consRoot = document.getElementById('dmConsRows');
+  if (!prosRoot || !consRoot) return;
+
+  function dmEscape(str) {
+    var d = document.createElement('div');
+    d.textContent = str;
+    return d.innerHTML;
+  }
+
+  function dmWeightOptions() {
+    var labels = { 1: '1 (minor)', 2: '2', 3: '3 (moderate)', 4: '4', 5: '5 (major)' };
+    var o = '';
+    for (var w = 1; w <= 5; w++) {
+      o += '<option value="' + w + '"' + (w === 3 ? ' selected' : '') + '>' + labels[w] + '</option>';
+    }
+    return o;
+  }
+
+  function dmMakeRow(side, placeholder) {
+    var row = document.createElement('div');
+    row.className = 'dm-row';
+    row.innerHTML =
+      '<input type="text" placeholder="' + dmEscape(placeholder) + '" oninput="dmRecalc()">' +
+      '<span class="dm-weight-wrap"><span class="dm-weight-x">×</span>' +
+      '<select onchange="dmRecalc()" aria-label="Importance weight">' + dmWeightOptions() + '</select></span>' +
+      '<button class="sp-remove-btn" onclick="dmRemoveRow(this)" title="Remove" aria-label="Remove row">×</button>';
+    return row;
+  }
+
+  window.dmAddRow = function(side) {
+    var root = side === 'pros' ? prosRoot : consRoot;
+    var placeholder = side === 'pros' ? 'A reason in favor...' : 'A reason against...';
+    root.appendChild(dmMakeRow(side, placeholder));
+    dmRecalc();
+  };
+
+  window.dmRemoveRow = function(btn) {
+    var row = btn.closest('.dm-row');
+    var root = row.parentNode;
+    row.remove();
+    // Always keep at least one row per column
+    if (root.querySelectorAll('.dm-row').length === 0) {
+      var side = (root === prosRoot) ? 'pros' : 'cons';
+      var placeholder = side === 'pros' ? 'A reason in favor...' : 'A reason against...';
+      root.appendChild(dmMakeRow(side, placeholder));
+    }
+    dmRecalc();
+  };
+
+  function dmSumSide(root) {
+    var total = 0;
+    root.querySelectorAll('.dm-row').forEach(function(row) {
+      var text = row.querySelector('input[type="text"]').value.trim();
+      var weight = parseInt(row.querySelector('select').value, 10) || 0;
+      if (text) total += weight;
+    });
+    return total;
+  }
+
+  window.dmRecalc = function() {
+    var pros = dmSumSide(prosRoot);
+    var cons = dmSumSide(consRoot);
+    var net = pros - cons;
+
+    document.getElementById('dmProsTotal').textContent = pros;
+    document.getElementById('dmConsTotal').textContent = cons;
+    document.getElementById('dmProsCard').textContent = pros;
+    document.getElementById('dmConsCard').textContent = cons;
+    document.getElementById('dmNetCard').textContent = (net > 0 ? '+' : '') + net;
+
+    var lean = document.getElementById('dmLean');
+    lean.classList.remove('dm-lean-for', 'dm-lean-against', 'dm-lean-balanced');
+
+    if (pros === 0 && cons === 0) {
+      lean.textContent = 'Add some reasons above to see where things lean.';
+      return;
+    }
+
+    var denom = pros + cons;
+    var margin = denom > 0 ? Math.abs(net) / denom : 0;
+
+    // "Roughly balanced" when the difference is small relative to the total weight.
+    if (margin < 0.15) {
+      lean.classList.add('dm-lean-balanced');
+      lean.textContent = 'Roughly balanced — sit with it / gather more information.';
+    } else if (net > 0) {
+      lean.classList.add('dm-lean-for');
+      lean.textContent = 'Leans toward proceeding (net +' + net + ').';
+    } else {
+      lean.classList.add('dm-lean-against');
+      lean.textContent = 'Leans against (net ' + net + ').';
+    }
+  };
+
+  window.dmCopy = function() {
+    var decision = document.getElementById('dmDecision').value.trim();
+    var lines = [];
+    lines.push('PROS / CONS DECISION MATRIX');
+    lines.push('='.repeat(50));
+    lines.push('Decision: ' + (decision || '(not specified)'));
+    lines.push('');
+
+    function sideText(root, heading) {
+      var out = [heading + ':'];
+      var any = false;
+      root.querySelectorAll('.dm-row').forEach(function(row) {
+        var text = row.querySelector('input[type="text"]').value.trim();
+        var weight = parseInt(row.querySelector('select').value, 10) || 0;
+        if (text) { out.push('  - ' + text + '  (weight ' + weight + ')'); any = true; }
+      });
+      if (!any) out.push('  (none listed)');
+      return out;
+    }
+
+    lines = lines.concat(sideText(prosRoot, 'PROS (reasons for)'));
+    lines.push('');
+    lines = lines.concat(sideText(consRoot, 'CONS (reasons against)'));
+    lines.push('');
+    lines.push('-'.repeat(50));
+    lines.push('Weighted Pros:   ' + document.getElementById('dmProsCard').textContent);
+    lines.push('Weighted Cons:   ' + document.getElementById('dmConsCard').textContent);
+    lines.push('Net difference:  ' + document.getElementById('dmNetCard').textContent);
+    lines.push('Lean:            ' + document.getElementById('dmLean').textContent);
+    lines.push('');
+    lines.push('For educational and self-reflection use. Not a substitute for professional clinical judgment.');
+
+    var text = lines.join('\n');
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() {
+        alert('Decision matrix copied to clipboard!');
+      }).catch(function() { prompt('Copy this matrix:', text); });
+    } else {
+      prompt('Copy this matrix:', text);
+    }
+  };
+
+  window.dmReset = function() {
+    if (!confirm('Clear the whole decision matrix? This cannot be undone.')) return;
+    document.getElementById('dmDecision').value = '';
+    prosRoot.innerHTML = '';
+    consRoot.innerHTML = '';
+    dmAddRow('pros');
+    dmAddRow('pros');
+    consRoot.appendChild(dmMakeRow('cons', 'A reason against...'));
+    consRoot.appendChild(dmMakeRow('cons', 'A reason against...'));
+    dmRecalc();
+  };
+
+  // Seed two starter rows per column
+  dmAddRow('pros');
+  dmAddRow('pros');
+  consRoot.appendChild(dmMakeRow('cons', 'A reason against...'));
+  consRoot.appendChild(dmMakeRow('cons', 'A reason against...'));
+  dmRecalc();
+})();
+</script>
+
+<!-- ================================================================
      Emotion Regulation & Distress Tolerance Reference
      ================================================================ -->
 <section class="modality-section" id="emotion-regulation-reference">
@@ -12878,10 +13362,10 @@ SAMHSA National Helpline: 1-800-662-4357</textarea>
       <!-- Brand column -->
       <div>
         <a href="index.html" class="site-nav__logo" style="text-decoration:none">
-          <div class="site-nav__logo-mark">NH</div>
-          <span class="site-nav__logo-text">MH Resources</span>
+          <div class="site-nav__logo-mark">M</div>
+          <span class="site-nav__logo-text">Meridian MH</span>
         </a>
-        <p class="footer__brand-desc">A comprehensive resource hub for clinicians, case managers, and community members in the Greater Nashua area.</p>
+        <p class="footer__brand-desc">Meridian is an independent resource hub for clinicians, case managers, and community members serving the Greater Nashua, NH area.</p>
 
         <div class="footer__crisis-box">
           <div class="footer__crisis-title">Crisis? Get help now.</div>
@@ -12939,6 +13423,9 @@ SAMHSA National Helpline: 1-800-662-4357</textarea>
     <div class="footer__bottom">
       <div class="footer__disclaimer">
         This resource does not replace clinical judgment. Always follow your organization's policies and consult supervisors for complex cases. Some content is AI-assisted and should be verified by a licensed professional before clinical use.
+      </div>
+      <div class="footer__disclaimer footer__disclaimer--legal" style="margin-top:10px">
+        Meridian Mental Health Resources is an independent educational resource hub. It is not affiliated with any mental health agency, hospital, or government organization. Content is provided for informational and clinical reference purposes only and does not constitute medical advice, diagnosis, or treatment. Always seek the advice of a qualified mental health professional.
       </div>
       <div class="footer__meta">
         <span><span class="footer__status-dot"></span> Updated Jun 25, 2026</span>
