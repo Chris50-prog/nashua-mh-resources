@@ -23,7 +23,7 @@
     'display:flex;align-items:center;justify-content:center;margin:0 auto 20px;',
     'color:white;font-size:24px;font-weight:800;">MH</div>',
     '<h1 style="font-size:22px;font-weight:700;color:#1a1d2e;margin-bottom:6px;">',
-    'Greater Nashua MH Resources</h1>',
+    'Meridian MH Resources</h1>',
     '<p style="font-size:14px;color:#5c6178;margin-bottom:28px;">',
     'Authorized access only. Enter the site passphrase to continue.</p>',
     '<div id="auth-error" style="display:none;background:#fef2f2;border:1px solid #fca5a5;',
